@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends AdminAbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="admin.site.index")
      */
     public function index(): Response
     {

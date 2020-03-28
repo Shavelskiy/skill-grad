@@ -9,13 +9,16 @@
   {% endblock %}
 </head>
 <body>
-{% include 'admin/parts/sidebar.twig' %}
 
-<div class="main-content">
-  {% include 'admin/parts/navbar.twig' %}
+<div class="main">
+  {% include 'admin/parts/sidebar.twig' %}
 
-  <div class="container-fluid px-4">
-    {% block body %}{% endblock %}
+  <div class="main-content">
+    {% include 'admin/parts/navbar.twig' %}
+
+    <div class="container-fluid px-4">
+      {% block body %}{% endblock %}
+    </div>
   </div>
 </div>
 

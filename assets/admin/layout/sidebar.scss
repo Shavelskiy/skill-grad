@@ -120,19 +120,19 @@
     }
 
     &:hover span {
-      background: #ee733a;
+      background: #5d78ff;
     }
 
     &:hover span::before, &:hover span::after {
-      background: #ee733a;
+      background: #5d78ff;
     }
 
     &--active span {
-      background: #ee733a;
+      background: #5d78ff;
     }
 
     &--active span::before, &--active span::after {
-      background: #ee733a;
+      background: #5d78ff;
     }
   }
 }

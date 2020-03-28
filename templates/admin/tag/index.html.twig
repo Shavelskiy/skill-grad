@@ -1,0 +1,175 @@
+{% extends 'layouts/admin.base.html.twig' %}
+
+{% block body %}
+  {% include 'admin/parts/breadcrumbs.twig' with { items: [
+    { name: 'Главная', url: path('admin.site.index') },
+    { name: 'Список тегов', url: null },
+  ] } %}
+
+  <div class="row mx-0">
+    <div class="col-12 p-0">
+      <div class="kt-portlet">
+        <div class="kt-portlet__head">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+              <i class="fa fa-tags"></i>
+              &nbsp;Список тегов
+            </h3>
+          </div>
+        </div>
+        <div class="kt-portlet__body">
+          <div class="row">
+            <div class="col-sm-12">
+{#              {% if orderPayments is empty %}#}
+{#                <div class="alert alert-warning fade show mb-0" role="alert">#}
+{#                  <i class="fas fa-exclamation-triangle"></i>#}
+{#                  &nbsp;Спибок платежей пуст!#}
+{#                </div>#}
+{#              {% else %}#}
+{#                <table class="table table-bordered table-hover">#}
+{#                  <thead>#}
+{#                  <tr>#}
+{#                    <th>Id</th>#}
+{#                    <th>Заказ</th>#}
+{#                    <th>Статус</th>#}
+{#                    <th>Сумма оплаты</th>#}
+{#                    <th>Сумма возврата</th>#}
+{#                    <th>Сумма оплаты бонусами</th>#}
+{#                    <th>Дата оплаты</th>#}
+{#                    <th>Дата создания</th>#}
+{#                    <th>Дата обновления</th>#}
+{#                  </tr>#}
+{#                  </thead>#}
+{#                  <tbody>#}
+{#                  {% for orderPayment in orderPayments %}#}
+{#                    <tr onclick="document.location = '{{ path('admin.payment.view', {id: orderPayment.id}) }}'">#}
+{#                      <td>{{ orderPayment.id }}</td>#}
+{#                      <td>#}
+{#                        <a href="{{ getOrderLink(orderPayment.orderId) }}" target="_blank" onclick="event.stopPropagation()">#}
+{#                          {{ orderPayment.orderId }} (№ {{ getOrderNumber(orderPayment.orderId) }})#}
+{#                        </a>#}
+{#                      </td>#}
+{#                      <td>#}
+{#                        <span class="kt-badge kt-badge--{{ ('admin.payment.status.' ~ orderPayment.state ~ '.class') | trans }} kt-badge--inline kt-badge--pill">#}
+{#                          {{ ('admin.payment.status.' ~ orderPayment.state ~ '.title') | trans }}#}
+{#                        </span>#}
+{#                      </td>#}
+{#                      <td>{{ orderPayment.sum | number_format(2, '.', ' ') }} ₽</td>#}
+{#                      <td>{{ orderPayment.totalSumReturn | number_format(2, '.', ' ') }} ₽</td>#}
+{#                      <td>{{ (bonusSums[orderPayment.orderId] ?? 0) | number_format(2, '.', ' ') }} ₽</td>#}
+{#                      <td>{{ orderPayment.datePay | date('d.m.Y H:i:s') }}</td>#}
+{#                      <td>{{ orderPayment.createdAt | date('d.m.Y H:i:s') }}</td>#}
+{#                      <td>{{ orderPayment.updatedAt | date('d.m.Y H:i:s') }}</td>#}
+{#                    </tr>#}
+{#                  {% endfor %}#}
+{#                  </tbody>#}
+{#                </table>#}
+{#              {% endif %}#}
+{#            </div>#}
+{#          </div>#}
+
+{#          {% if pageCount > 1 %}#}
+{#            <div class="row">#}
+{#              <div class="col-sm-12 col-md-7">#}
+{#                <ul class="pagination">#}
+{#                  {% if page != 1 %}#}
+{#                    <li class="page-item">#}
+{#                      <a class="page-link" href="{{ path('admin.payment.index', {page: page - 1}) }}">&laquo;</a>#}
+{#                    </li>#}
+{#                  {% endif %}#}
+
+{#                  {% if pageCount > 7 %}#}
+{#                    {% if page < 5 or page > (pageCount - 4) %}#}
+{#                      {% if page == 3 %}#}
+{#                        {% set startOffset = 4 %}#}
+{#                      {% elseif page == 4 %}#}
+{#                        {% set startOffset = 5 %}#}
+{#                      {% else %}#}
+{#                        {% set startOffset = 3 %}#}
+{#                      {% endif %}#}
+
+{#                      {% if page == (pageCount - 2) %}#}
+{#                        {% set endOffset = 3 %}#}
+{#                      {% elseif page == (pageCount - 3) %}#}
+{#                        {% set endOffset = 4 %}#}
+{#                      {% else %}#}
+{#                        {% set endOffset = 2 %}#}
+{#                      {% endif %}#}
+{#                    {% else %}#}
+{#                      {% set startOffset = 2 %}#}
+{#                      {% set endOffset = 1 %}#}
+{#                    {% endif %}#}
+
+{#                    {% for i in 1..startOffset %}#}
+{#                      {% if i == page %}#}
+{#                        <li class="page-item active">#}
+{#                          <div class="page-link">{{ i }}</div>#}
+{#                        </li>#}
+{#                      {% else %}#}
+{#                        <li class="page-item">#}
+{#                          <a class="page-link" href="{{ path('admin.payment.index', {page: i}) }}">{{ i }}</a>#}
+{#                        </li>#}
+{#                      {% endif %}#}
+{#                    {% endfor %}#}
+
+{#                    <li class="page-item">#}
+{#                      <div class="page-link">...</div>#}
+{#                    </li>#}
+
+{#                    {% if page >= 5 and page <= (pageCount - 4) %}#}
+{#                      {% for i in page -1..page + 1 %}#}
+{#                        {% if i == page %}#}
+{#                          <li class="page-item active">#}
+{#                            <div class="page-link">{{ i }}</div>#}
+{#                          </li>#}
+{#                        {% else %}#}
+{#                          <li class="page-item">#}
+{#                            <a class="page-link" href="{{ path('admin.payment.index', {page: i}) }}">{{ i }}</a>#}
+{#                          </li>#}
+{#                        {% endif %}#}
+{#                      {% endfor %}#}
+
+{#                      <li class="page-item">#}
+{#                        <div class="page-link">...</div>#}
+{#                      </li>#}
+{#                    {% endif %}#}
+
+{#                    {% for i in pageCount - endOffset ..pageCount %}#}
+{#                      {% if i == page %}#}
+{#                        <li class="page-item active">#}
+{#                          <div class="page-link">{{ i }}</div>#}
+{#                        </li>#}
+{#                      {% else %}#}
+{#                        <li class="page-item">#}
+{#                          <a class="page-link" href="{{ path('admin.payment.index', {page: i}) }}">{{ i }}</a>#}
+{#                        </li>#}
+{#                      {% endif %}#}
+{#                    {% endfor %}#}
+{#                  {% else %}#}
+{#                    {% for i in 1..pageCount %}#}
+{#                      {% if i == page %}#}
+{#                        <li class="page-item active">#}
+{#                          <div class="page-link">{{ i }}</div>#}
+{#                        </li>#}
+{#                      {% else %}#}
+{#                        <li class="page-item">#}
+{#                          <a class="page-link" href="{{ path('admin.payment.index', {page: i}) }}">{{ i }}</a>#}
+{#                        </li>#}
+{#                      {% endif %}#}
+{#                    {% endfor %}#}
+{#                  {% endif %}#}
+
+{#                  {% if page < pageCount %}#}
+{#                    <li class="page-item">#}
+{#                      <a class="page-link" href="{{ path('admin.payment.index', {page: page + 1}) }}">&raquo;</a>#}
+{#                    </li>#}
+{#                  {% endif %}#}
+{#                </ul>#}
+{#              </div>#}
+{#            </div>#}
+{#          {% endif %}#}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -33,17 +33,17 @@
       }
 
       path {
-        color: #ee733a;
+        color: #5d78ff;
       }
     }
 
-    &:hover {
+    &:hover, &.active {
       background: #1f2433;
       color: #fff;
       text-decoration: none;
 
       .point span {
-        background-color: #ee733a;
+        background-color: #5d78ff;
       }
 
       .text {
@@ -51,15 +51,15 @@
       }
 
       .fas {
-        background-color: #ee733a;
+        background-color: #5d78ff;
       }
 
       .menu-arrow {
-        color: #ee733a;
+        color: #5d78ff;
       }
 
       path {
-        color: #ee733a;
+        color: #5d78ff;
       }
     }
   }
@@ -104,4 +104,10 @@
   content: "\25bc";
   transform: rotateZ(90deg);
   transition: all 0.3s ease;
+}
+
+.collapse-content {
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+  overflow: hidden;
 }

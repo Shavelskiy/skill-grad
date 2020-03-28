@@ -10,89 +10,20 @@ require('bootstrap-datepicker');
 
 library.add(fas, far, fab);
 
-dom.i2svg();
+dom.i2svg().then(r => {});
 
-// $(function () {
-//
-//   var classes = {
-//       cssActive: "active",
-//       iconCollapse: "fa-chevron-right",
-//       iconExpand: "fa-chevron-down",
-//       iconFont: "fas",
-//       container: "menu-container"
-//     },
-//     selectors = {},
-//     config = {
-//       animationSpeed: "fast"
-//     };
-//
-//   for (var className in classes) {
-//     selectors[className] = "." + classes[className];
-//   }
-//
-//   function slideDown($icon) {
-//     $icon.removeClass(classes.iconExpand).addClass(classes.iconCollapse);
-//     $icon.parent().next().slideDown(config.animationSpeed);
-//   }
-//
-//   function slideUp($icon) {
-//     $icon.removeClass(classes.iconCollapse).addClass(classes.iconExpand);
-//     $icon.parent().next().slideUp(config.animationSpeed);
-//   }
-//
-//   function scrollActiveMenuItemIntoView() {
-//     var $active = $(selectors.container + " " + selectors.cssActive);
-//
-//     $(selectors.container).animate({
-//       scrollTop: $active.offset().top
-//     });
-//   }
-//
-//   // toggle expand/collapse of menu item on icon click
-//   $(selectors.container).find(selectors.iconCollapse + "," + selectors.iconExpand).click(function (ev) {
-//     ev.preventDefault();
-//
-//     var $icon = $(this);
-//
-//     if ($icon.hasClass(classes.iconCollapse)) {
-//       slideUp($icon);
-//     } else if ($icon.hasClass(classes.iconExpand)) {
-//       slideDown($icon);
-//     }
-//   });
-//
-//   // collapse all menu items on page load
-//   $(selectors.container + " " + selectors.iconCollapse).each(function (index) {
-//     slideUp($(this));
-//   });
-//
-//   // expands the active menu item and any parents of the active menu item
-//   function expandMenuItems() {
-//
-//     function expandMenuItemsHelper($li) {
-//
-//       var $collapsedIcon = $li.children().find(selectors.iconFont).first();
-//
-//       if ($collapsedIcon.length) {
-//         slideDown($collapsedIcon);
-//       }
-//
-//       if ($li.parent().closest("li").length) {
-//         expandMenuItemsHelper($li.parent().closest("li").first());
-//       }
-//     }
-//
-//     expandMenuItemsHelper($(selectors.container + " " + selectors.cssActive));
-//   }
-//
-//   expandMenuItems();
-//
-//
-//   setTimeout(function () {
-//     $(selectors.container).show();
-//     scrollActiveMenuItemIntoView();
-//   }, 200);
-// });
+let coll = document.getElementsByClassName('collapsible');
+for (let i = 0; i < coll.length; i++) {
+  coll[i].addEventListener('click', function () {
+    this.classList.toggle('active');
+    let content = this.nextElementSibling;
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+    }
+  })
+}
 
 const userProfileButton = $('.user-profile');
 const userProfileMenu = $('.user-profile-card');
