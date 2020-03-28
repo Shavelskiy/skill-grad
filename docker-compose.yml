@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  php:
+    image: php
+    build: ./docker/php
+    networks:
+      - network_nginx
+      - network_php
+    volumes:
+      - ./:/application:rw,cached
+
+  nginx:
+    image: nginx
+    build: ./docker/nginx
+    networks:
+      - network_nginx
+    volumes:
+      - ./public:/application/public:ro
+    ports:
+      - 8080:80
+
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=api
+      - POSTGRES_USER=api-platform
+      - POSTGRES_PASSWORD=!ChangeMe!
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    ports:
+      - 5432:5432
+
+volumes:
+  db-data: {}
+
+networks:
+  network_nginx:
+    driver: bridge
+  network_php:
+    driver: bridge
