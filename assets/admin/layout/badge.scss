@@ -1,0 +1,273 @@
+.kt-badge {
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+
+  &--bold {
+    font-weight: 500;
+  }
+
+  &--bolder {
+    font-weight: 600;
+  }
+
+  &--boldest {
+    font-weight: 700;
+  }
+
+  &--brand {
+    color: #ffffff;
+    background: #5d78ff;
+  }
+
+  &--metal {
+    color: #586272;
+    background: #d3dae6;
+  }
+
+  &--light {
+    color: #282a3c;
+    background: #ffffff;
+  }
+
+  &--dark {
+    color: #ffffff;
+    background: #645ca1;
+  }
+
+  &--accent {
+    color: #ffffff;
+    background: #00c5dc;
+  }
+
+  &--focus {
+    color: #ffffff;
+    background: #9816f4;
+  }
+
+  &--primary {
+    color: #ffffff;
+    background: #5867dd;
+  }
+
+  &--danger {
+    color: #ffffff;
+    background: #fd397a;
+  }
+
+  &--inline {
+    height: 0;
+    width: auto;
+    padding: 0.75rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  &--pill {
+    border-radius: 2rem;
+  }
+
+  &--square {
+    border-radius: 0;
+  }
+
+  &--elevate {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &--info {
+    color: #ffffff;
+    background: #5578eb;
+  }
+
+  &--success {
+    color: #ffffff;
+    background: #1dc9b7;
+  }
+
+  &--warning {
+    color: #111111;
+    background: #ffb822;
+  }
+
+  &--outline {
+    .kt-badge--brand {
+      background: transparent;
+      color: #5d78ff;
+      border: 1px solid #5d78ff;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #5d78ff;
+      }
+    }
+
+    .kt-badge--metal {
+      background: transparent;
+      color: #d3dae6;
+      border: 1px solid #d3dae6;
+    }
+
+    .kt-badge--light {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #ffffff;
+      }
+    }
+
+    .kt-badge--dark {
+      background: transparent;
+      color: #645ca1;
+      border: 1px solid #645ca1;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #645ca1;
+      }
+    }
+
+    .kt-badge--accent {
+      background: transparent;
+      color: #00c5dc;
+      border: 1px solid #00c5dc;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #00c5dc;
+      }
+    }
+
+    .kt-badge--focus {
+      background: transparent;
+      color: #9816f4;
+      border: 1px solid #9816f4;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #9816f4;
+      }
+    }
+
+    .kt-badge--primary {
+      background: transparent;
+      color: #5867dd;
+      border: 1px solid #5867dd;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #5867dd;
+      }
+    }
+
+    .kt-badge--success {
+      background: transparent;
+      color: #1dc9b7;
+      border: 1px solid #1dc9b7;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #1dc9b7;
+      }
+    }
+
+    .kt-badge--info {
+      background: transparent;
+      color: #5578eb;
+      border: 1px solid #5578eb;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #5578eb;
+      }
+    }
+
+    .kt-badge--warning {
+      background: transparent;
+      color: #ffb822;
+      border: 1px solid #ffb822;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #ffb822;
+      }
+    }
+
+    .kt-badge--danger {
+      background: transparent;
+      color: #fd397a;
+      border: 1px solid #fd397a;
+
+      .kt-badge--outline-2x {
+        border: 2px solid #fd397a;
+      }
+    }
+  }
+
+  &--unified {
+    &-brand {
+      color: #5d78ff;
+      background: rgba(93, 120, 255, 0.1);
+    }
+
+    &-metal {
+      color: #d3dae6;
+      background: rgba(211, 218, 230, 0.1);
+    }
+
+    &-light {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &-dark {
+      color: #645ca1;
+      background: rgba(100, 92, 161, 0.1);
+    }
+
+    &-accent {
+      color: #00c5dc;
+      background: rgba(0, 197, 220, 0.1);
+    }
+
+    &-focus {
+      color: #9816f4;
+      background: rgba(152, 22, 244, 0.1);
+    }
+
+    &-primary {
+      color: #5867dd;
+      background: rgba(88, 103, 221, 0.1);
+    }
+
+    &-success {
+      color: #1dc9b7;
+      background: rgba(29, 201, 183, 0.1);
+    }
+
+    &-info {
+      color: #5578eb;
+      background: rgba(85, 120, 235, 0.1);
+    }
+
+    &-warning {
+      color: #ffb822;
+      background: rgba(255, 184, 34, 0.1);
+    }
+
+    &-danger {
+      color: #fd397a;
+      background: rgba(253, 57, 122, 0.1);
+    }
+  }
+}
+
+.kt-list.kt-list--badge:before {
+  position: absolute;
+  display: block;
+  content: '';
+  width: 1px;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+}

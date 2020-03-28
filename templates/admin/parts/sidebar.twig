@@ -1,0 +1,16 @@
+<div class="sidebar-container">
+  <div class="sidebar-header">
+    <div>
+      <a href="{{ path('site.index') }}">
+        <img alt="Logo" src="{{ asset('dist/admin/media/logos/logo.png') }}" style="width: 71px; margin-top: 10px"/>
+      </a>
+    </div>
+    <div class="sidebar-tools-wrapper">
+      <button class="sidebar-toggler"><span></span></button>
+    </div>
+  </div>
+
+  <div class="menu-container">
+    {% include 'admin/parts/menu.twig' %}
+  </div>
+</div>
