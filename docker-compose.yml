@@ -22,12 +22,12 @@ services:
 
   db:
     image: postgres:10-alpine
-    environment:
-      - POSTGRES_DB=api
-      - POSTGRES_USER=api-platform
-      - POSTGRES_PASSWORD=!ChangeMe!
+    env_file:
+      - .env
     volumes:
       - db-data:/var/lib/postgresql/data:rw
+    networks:
+      - network_php
     ports:
       - 5432:5432
 
