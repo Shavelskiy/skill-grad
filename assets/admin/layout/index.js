@@ -10,7 +10,8 @@ require('bootstrap-datepicker');
 
 library.add(fas, far, fab);
 
-dom.i2svg().then(r => {});
+dom.i2svg().then(r => {
+});
 
 let coll = document.getElementsByClassName('collapsible');
 for (let i = 0; i < coll.length; i++) {
@@ -22,8 +23,15 @@ for (let i = 0; i < coll.length; i++) {
     } else {
       content.style.maxHeight = content.scrollHeight + 'px';
     }
-  })
+  });
 }
+
+let sidebarToggler = document.getElementsByClassName('sidebar-toggler')[0];
+sidebarToggler.addEventListener('click', function () {
+  this.classList.toggle('sidebar-toggler--active');
+  let content = document.getElementsByClassName('main')[0];
+  content.classList.toggle('main--active');
+});
 
 const userProfileButton = $('.user-profile');
 const userProfileMenu = $('.user-profile-card');

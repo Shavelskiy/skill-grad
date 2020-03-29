@@ -65,11 +65,45 @@ body {
     display: flex;
     justify-content: space-between;
     height: 75px;
+    transition: left 0.2s ease-out;
   }
 
   &-content {
     padding-left: 260px;
+    transition: padding-left 0.2s ease-out;
   }
+}
+
+.main--active {
+  .sidebar-container {
+    max-width: 80px;
+  }
+
+  .menu-arrow-right,
+  .menu-container .text,
+  .sidebar-header__logo {
+    display: none;
+  }
+
+  .menu-container .item {
+    padding: 5px 27px;
+  }
+
+  .menu-container ul ul .item {
+    padding-left: 36px;
+  }
+
+  .main-header {
+    left: 80px;
+  }
+
+  .main-content {
+    padding-left: 80px;
+  }
+}
+
+a:hover body {
+  display: none;
 }
 
 .table-hr {

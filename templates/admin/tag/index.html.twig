@@ -27,7 +27,7 @@
         </div>
         <div class="portlet__body">
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               {% if tags is empty %}
                 <div class="alert alert-warning fade show mb-0" role="alert">
                   <i class="fas fa-exclamation-triangle"></i>
@@ -49,11 +49,11 @@
                       <td>{{ tag.id }}</td>
                       <td>{{ tag.name }}</td>
                       <td>{{ tag.sort }}</td>
-                      <td>
-                        <a href="{{ path('admin.tag.edit', {id: tag.id}) }}">
+                      <td class="text-center">
+                        <a href="{{ path('admin.tag.edit', {id: tag.id}) }}" class="pr-1">
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a href="{{ path('admin.tag.destroy', {id: tag.id}) }}" onclick="return confirm('Вы уверены?')">
+                        <a href="{{ path('admin.tag.destroy', {id: tag.id}) }}" onclick="return confirm('Вы уверены?')" class="pl-1">
                           <i class="far fa-trash-alt"></i>
                         </a>
                       </td>

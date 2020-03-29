@@ -7,6 +7,9 @@
     left: 0;
     z-index: 98;
     width: 260px;
+    max-width: 260px;
+    transition: max-width 0.2s ease-out;
+    overflow: hidden;
   }
 
   &-header {

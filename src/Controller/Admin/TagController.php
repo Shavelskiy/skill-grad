@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/tags")
+ * @Route("/admin/tag")
  */
 class TagController extends AdminAbstractController
 {
