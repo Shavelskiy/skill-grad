@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
+use App\Repository\TagRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,7 +23,9 @@ class TagController extends AdminAbstractController
      */
     public function index(): Response
     {
-        return $this->render('admin/tag/index.html.twig');
+        return $this->render('admin/tag/index.html.twig', [
+            'tags' => $this->getTagRepository()->findAll(),
+        ]);
     }
 
     /**
@@ -42,6 +46,9 @@ class TagController extends AdminAbstractController
     public function create(): Response
     {
         $tag = new Tag();
+
+        $maxSortTag = $this->getTagRepository()->getTagWithMaxSort();
+        $tag->setSort(($maxSortTag !== null) ? ($maxSortTag->getSort() + 100) : 100);
 
         return $this->render('admin/tag/create.html.twig', [
             'form' => $this->getForm($tag)->createView(),
@@ -110,5 +117,13 @@ class TagController extends AdminAbstractController
             ->add('sort', IntegerType::class, ['label' => 'Сортировка'])
             ->add('save', SubmitType::class, ['label' => 'Сохранить'])
             ->getForm();
+    }
+
+    /**
+     * @return TagRepository|ObjectRepository
+     */
+    protected function getTagRepository()
+    {
+        return $this->getDoctrine()->getRepository(Tag::class);
     }
 }
