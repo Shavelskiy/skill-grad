@@ -18,7 +18,8 @@
     "symfony/validator": "5.0.*",
     "symfony/webpack-encore-bundle": "^1.7",
     "symfony/yaml": "5.0.*",
-    "ext-sockets": "*"
+    "ext-sockets": "*",
+    "ext-memcached": "*"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",

@@ -20,6 +20,7 @@ RUN apt-get update \
              libonig-dev \
              graphviz \
              libcurl4-openssl-dev \
+             libmemcached-dev \
              pkg-config \
              libpq-dev
 
@@ -32,6 +33,9 @@ RUN docker-php-ext-install pgsql \
   && docker-php-ext-install sockets \
   && docker-php-source delete
 
+RUN apt-get update && apt-get install -y libz-dev libmemcached-dev
+RUN pecl install memcached
+RUN docker-php-ext-enable memcached
 
 #RUN pecl install xdebug-2.9.2 \
 #    && docker-php-ext-enable xdebug
