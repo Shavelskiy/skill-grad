@@ -1,6 +1,6 @@
 {% extends 'layouts/admin.base.html.twig' %}
 
-{% set title = 'Список тегов' %}
+{% set title = 'Список рубрик' %}
 
 {% block body %}
   {% include 'admin/parts/breadcrumbs.twig' with { items: [
@@ -20,7 +20,7 @@
                 </h3>
               </div>
               <div class="col-6">
-                <a class="btn btn-primary fa-pull-right" href="{{ path('admin.tag.create') }}">Создать</a>
+                <a class="btn btn-primary fa-pull-right" href="{{ path('admin.rubric.create') }}">Создать</a>
               </div>
             </div>
           </div>
@@ -28,10 +28,10 @@
         <div class="portlet__body">
           <div class="row">
             <div class="col-sm-6">
-              {% if tags is empty %}
+              {% if rubrics is empty %}
                 <div class="alert alert-warning fade show mb-0" role="alert">
                   <i class="fas fa-exclamation-triangle"></i>
-                  &nbsp;Спибок тегов пуст!
+                  &nbsp;Спибок рубрик пуст!
                 </div>
               {% else %}
                 <table class="table table-bordered table-hover">
@@ -44,16 +44,16 @@
                   </tr>
                   </thead>
                   <tbody>
-                  {% for tag in tags %}
+                  {% for rubric in rubrics %}
                     <tr>
-                      <td>{{ tag.id }}</td>
-                      <td>{{ tag.name }}</td>
-                      <td>{{ tag.sort }}</td>
+                      <td>{{ rubric.id }}</td>
+                      <td>{{ rubric.name }}</td>
+                      <td>{{ rubric.sort }}</td>
                       <td class="text-center">
-                        <a href="{{ path('admin.tag.edit', {id: tag.id}) }}" class="pr-1">
+                        <a href="{{ path('admin.rubric.edit', {id: rubric.id}) }}" class="pr-1">
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a href="{{ path('admin.tag.destroy', {id: tag.id}) }}" onclick="return confirm('Вы уверены?')" class="pl-1">
+                        <a href="{{ path('admin.rubric.destroy', {id: rubric.id}) }}" onclick="return confirm('Вы уверены?')" class="pl-1">
                           <i class="far fa-trash-alt"></i>
                         </a>
                       </td>
@@ -64,8 +64,6 @@
               {% endif %}
             </div>
           </div>
-
-          {# paginator#}
         </div>
       </div>
     </div>
