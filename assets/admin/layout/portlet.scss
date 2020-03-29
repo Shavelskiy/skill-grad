@@ -1,4 +1,4 @@
-.kt-portlet {
+.portlet {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -7,7 +7,7 @@
   margin-bottom: 20px;
   border-radius: 4px;
 
-  .kt-portlet__head {
+  .portlet__head {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -18,11 +18,11 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
-    .kt-portlet__head-label {
+    .portlet__head-label {
       display: flex;
       align-items: center;
 
-      .kt-portlet__head-title {
+      .portlet__head-title {
         margin: 0;
         padding: 0;
         font-size: 1.2rem;
@@ -37,7 +37,7 @@
         }
       }
 
-      .kt-portlet__head-icon {
+      .portlet__head-icon {
         padding-right: 0.75rem;
         font-size: 1.3rem;
         color: #74788d;
@@ -45,24 +45,29 @@
     }
   }
 
-  .kt-portlet__body {
+  .portlet__body {
     display: flex;
     flex-direction: column;
     padding: 25px;
     border-radius: 4px;
   }
+
+
+  .portlet__foot {
+    padding: 0 25px 25px;
+  }
 }
 
 
 @media (max-width: 1024px) {
-  .kt-portlet {
+  .portlet {
     margin-bottom: 10px;
   }
-  .kt-portlet .kt-portlet__head {
+  .portlet .portlet__head {
     padding: 0 15px;
     min-height: 50px;
   }
-  .kt-portlet .kt-portlet__body {
+  .portlet .portlet__body {
     padding: 15px;
   }
 }

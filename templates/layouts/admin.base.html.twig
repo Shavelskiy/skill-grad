@@ -1,8 +1,20 @@
+{% if form is defined %}
+  {% form_theme form 'admin/form/theme.html.twig' %}
+{% endif %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}Admin{% endblock %}</title>
+  <title>
+    {% block title %}
+      {% if title is defined %}
+        {{ title }}
+      {% else %}
+        Admin
+      {% endif %}
+    {% endblock %}
+  </title>
 
   {% block stylesheets %}
     {{ encore_entry_link_tags('admin.layout') }}

@@ -31,9 +31,8 @@ RUN docker-php-ext-install pgsql \
   && docker-php-ext-install opcache \
   && docker-php-source delete
 
-#RUN apk add --no-cache $PHPIZE_DEPS \
-#    && pecl install xdebug-2.9.2 \
-#    && docker-php-ext-enable xdebug
+RUN pecl install xdebug-2.9.2 \
+    && docker-php-ext-enable xdebug
 
 WORKDIR /application
 CMD ["php-fpm"]
