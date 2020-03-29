@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -26,18 +27,6 @@ class TagController extends AdminAbstractController
         return $this->render('admin/tag/index.html.twig', [
             'tags' => $this->getTagRepository()->findAll(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="admin.tag.show", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
-     *
-     * @param $id
-     * @return Response
-     */
-    public function show($id): Response
-    {
-        dump($id);
-        dd('show');
     }
 
     /**
@@ -79,19 +68,54 @@ class TagController extends AdminAbstractController
     }
 
     /**
-     * @Route("/{tag}/edit", name="admin.tag.edit", methods={"GET", "HEAD"})
+     * @Route("/{id}/edit", name="admin.tag.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
+     *
+     * @param $id
+     * @return Response
      */
-    public function edit(): Response
+    public function edit($id): Response
     {
-        dd('edit');
+        $tag = $this->getTagRepository()->find($id);
+
+        if ($tag === null) {
+            throw new NotFoundHttpException('tag not found');
+        }
+
+        return $this->render('admin/tag/edit.html.twig', [
+            'tag' => $tag,
+            'form' => $this->getForm($tag)->createView(),
+        ]);
     }
 
     /**
-     * @Route("/{tag}/edit", name="admin.tag.update", methods={"POST", "PUT"})
+     * @Route("/{id}/edit", name="admin.tag.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
+     *
+     * @param $id
+     * @param Request $request
+     * @return Response
      */
-    public function update(): Response
+    public function update($id, Request $request): Response
     {
-        dd('update');
+        $tag = $this->getTagRepository()->find($id);
+
+        if ($tag === null) {
+            throw new NotFoundHttpException('tag not found');
+        }
+
+        $form = $this->getForm($tag)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin.tag.index');
+        }
+
+        return $this->render('admin/tag/edit.html.twig', [
+            'tag' => $tag,
+            'form' => $this->getForm($tag)->createView(),
+        ]);
     }
 
     /**

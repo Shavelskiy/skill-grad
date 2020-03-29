@@ -49,7 +49,11 @@
                       <td>{{ tag.id }}</td>
                       <td>{{ tag.name }}</td>
                       <td>{{ tag.sort }}</td>
-                      <td></td>
+                      <td>
+                        <a href="{{ path('admin.tag.edit', {id: tag.id}) }}">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                      </td>
                     </tr>
                   {% endfor %}
                   </tbody>
