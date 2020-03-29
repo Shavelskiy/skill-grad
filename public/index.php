@@ -25,3 +25,18 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
+
+
+//$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+//
+//socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1);
+//socket_bind($socket, 0, 8090);
+//
+//socket_listen($socket);
+//
+////while (true) {
+//    $message = 'dsfsdf';
+//    socket_write($socket, $message, strlen($message));
+//
+////}
+//socket_close($socket);
