@@ -55,9 +55,9 @@ class TagController extends AdminAbstractController
         $form = $this->getForm()->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($form->getData());
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
 
             return $this->redirectToRoute('admin.tag.index');
         }
@@ -75,11 +75,7 @@ class TagController extends AdminAbstractController
      */
     public function edit($id): Response
     {
-        $tag = $this->getTagRepository()->find($id);
-
-        if ($tag === null) {
-            throw new NotFoundHttpException('tag not found');
-        }
+        $tag = $this->findTag($id);
 
         return $this->render('admin/tag/edit.html.twig', [
             'tag' => $tag,
@@ -96,18 +92,14 @@ class TagController extends AdminAbstractController
      */
     public function update($id, Request $request): Response
     {
-        $tag = $this->getTagRepository()->find($id);
-
-        if ($tag === null) {
-            throw new NotFoundHttpException('tag not found');
-        }
+        $tag = $this->findTag($id);
 
         $form = $this->getForm($tag)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($form->getData());
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
 
             return $this->redirectToRoute('admin.tag.index');
         }
@@ -119,11 +111,20 @@ class TagController extends AdminAbstractController
     }
 
     /**
-     * @Route("/{tag}", name="admin.tag.destroy", methods={"DELETE"})
+     * @Route("/{id}/destroy", name="admin.tag.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
+     *
+     * @param $id
+     * @return Response
      */
-    public function destroy(): Response
+    public function destroy($id): Response
     {
-        dd('destroy');
+        $tag = $this->findTag($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tag);
+        $em->flush();
+
+        return $this->redirectToRoute('admin.tag.index');
     }
 
     /**
@@ -141,6 +142,19 @@ class TagController extends AdminAbstractController
             ->add('sort', IntegerType::class, ['label' => 'Сортировка'])
             ->add('save', SubmitType::class, ['label' => 'Сохранить'])
             ->getForm();
+    }
+
+    /**
+     * @param $id
+     * @return object|null
+     */
+    protected function findTag($id)
+    {
+        if (($tag = $this->getTagRepository()->find($id)) === null) {
+            throw new NotFoundHttpException('tag not found');
+        }
+
+        return $tag;
     }
 
     /**

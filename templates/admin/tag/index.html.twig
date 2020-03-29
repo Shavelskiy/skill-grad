@@ -53,6 +53,9 @@
                         <a href="{{ path('admin.tag.edit', {id: tag.id}) }}">
                           <i class="fa fa-edit"></i>
                         </a>
+                        <a href="{{ path('admin.tag.destroy', {id: tag.id}) }}" onclick="return confirm('Вы уверены?')">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
                       </td>
                     </tr>
                   {% endfor %}
