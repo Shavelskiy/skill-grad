@@ -21,7 +21,6 @@ class SiteController extends AbstractController
      */
     public function index(): Response
     {
-        dd($this->getUser());
         return $this->render('site/index.html.twig');
     }
 
