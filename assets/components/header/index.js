@@ -1,17 +1,26 @@
+const axios = require('axios').default;
+
 import './index.scss';
 
-const modal = document.getElementById('auth-modal');
+const authModal = document.getElementById('auth-modal');
+const authModalBtn = document.getElementById('auth-modal-button');
 
-const btn = document.getElementById('auth-modal-button');
+if ((authModalBtn !== null) && (authModal !== null)) {
+  authModalBtn.onclick = function () {
+    authModal.classList.add('active');
+  };
 
+  window.onclick = function (event) {
+    if (event.target === authModal) {
+      authModal.classList.remove('active');
+    }
+  }
 
-btn.onclick = function () {
-  modal.classList.add('active');
-};
+  const authForm = authModal.querySelector('form');
+  authForm.onsubmit = function (e) {
+    e.preventDefault();
+    let formData = new FormData(this);
 
-window.onclick = function (event) {
-  console.log(event.target)
-  if (event.target === modal) {
-    modal.classList.remove('active');
+    axios.post('/ajax/login', formData).then(r => {});
   }
 }

@@ -37,8 +37,8 @@ RUN apt-get update && apt-get install -y libz-dev libmemcached-dev
 RUN pecl install memcached
 RUN docker-php-ext-enable memcached
 
-#RUN pecl install xdebug-2.9.2 \
-#    && docker-php-ext-enable xdebug
+RUN pecl install xdebug-2.9.2 \
+    && docker-php-ext-enable xdebug
 
 WORKDIR /application
 CMD ["php-fpm"]

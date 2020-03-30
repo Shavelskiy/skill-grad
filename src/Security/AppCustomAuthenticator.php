@@ -44,20 +44,20 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'site.login' === $request->attributes->get('_route') && $request->isMethod('POST');
+        return 'ajax.auth.login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'username' => $request->request->get('username'),
+            'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['username']
+            $credentials['email']
         );
 
         return $credentials;
@@ -67,10 +67,10 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException('');
+//            throw new InvalidCsrfTokenException('');
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -96,6 +96,6 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl(): string
     {
-        return $this->urlGenerator->generate('site.login');
+        return $this->urlGenerator->generate('ajax.auth.login');
     }
 }
