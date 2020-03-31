@@ -17,10 +17,18 @@ if ((authModalBtn !== null) && (authModal !== null)) {
   }
 
   const authForm = authModal.querySelector('form');
+  const loginCsrfInput = document.getElementById('login-csrf');
+
   authForm.onsubmit = function (e) {
     e.preventDefault();
     let formData = new FormData(this);
 
-    axios.post('/ajax/login', formData).then(r => {});
+    axios.post('/ajax/login', formData)
+      .then(response => {
+        authModal.classList.remove('active');
+      })
+      .catch(error => {
+        loginCsrfInput.value = error.response.data.csrf;
+      });
   }
 }

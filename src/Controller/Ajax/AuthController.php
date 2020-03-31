@@ -2,9 +2,9 @@
 
 namespace App\Controller\Ajax;
 
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * @Route("/ajax")
@@ -13,20 +13,17 @@ class AuthController extends AbstractController
 {
     /**
      * @Route("/login", name="ajax.auth.login")
-     *
-     * @param AuthenticationUtils $authenticationUtils
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(): void
     {
+        throw new LogicException('Метод должен быть для того, чтобы было имя и middleware смог перехватить его');
+    }
 
-        $this->getUser();
-
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        dump($this->getUser());
-        die;
+    /**
+     * @Route("/logout", name="ajax.auth.logout")
+     */
+    public function logout(): void
+    {
+        throw new LogicException('Метод должен быть для того, чтобы было имя и middleware смог перехватить его');
     }
 }

@@ -4,10 +4,13 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -22,24 +25,29 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    /** @var EntityManagerInterface  */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /** @var UrlGeneratorInterface  */
+    /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var CsrfTokenManagerInterface  */
+    /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
+
+    /** @var UserPasswordEncoderInterface */
+    private $passwordEncoder;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
-        CsrfTokenManagerInterface $csrfTokenManager
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserPasswordEncoderInterface $passwordEncoder
     )
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request): bool
@@ -55,10 +63,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
 
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['email']
-        );
+        $request->getSession()->set(Security::LAST_USERNAME, $credentials['email']);
 
         return $credentials;
     }
@@ -67,14 +72,13 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-//            throw new InvalidCsrfTokenException('');
+            throw new InvalidCsrfTokenException('');
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['email']]);
 
         if (!$user) {
-            // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Username could not be found.');
+            throw new CustomUserMessageAuthenticationException('Авторизаия не успешна');
         }
 
         return $user;
@@ -82,16 +86,22 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return true;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
+        return new JsonResponse('Вы успешно авторизованы');
+    }
 
-        return new RedirectResponse($this->urlGenerator->generate('site.index'));
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        $response = [
+            'message' => $exception->getMessage(),
+            'csrf' => $this->csrfTokenManager->getToken('authenticate')->getValue(),
+        ];
+
+        return new JsonResponse($response, Response::HTTP_BAD_REQUEST);
     }
 
     protected function getLoginUrl(): string

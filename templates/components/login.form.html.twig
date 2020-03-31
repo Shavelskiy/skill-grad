@@ -1,0 +1,22 @@
+<button id="auth-modal-button" type="button">Авторизация</button>
+
+<div id="auth-modal" class="modal">
+  <div class="modal-content">
+    <form method="post">
+      <div>
+        <label for="email">Email</label>
+        <input type="email" value="" name="email" id="email" required autofocus>
+      </div>
+      <div>
+        <label for="password">Пароль</label>
+        <input type="password" name="password" id="password" required>
+      </div>
+      <div>
+        <button type="submit">
+          Войти
+        </button>
+      </div>
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    </form>
+  </div>
+</div>
