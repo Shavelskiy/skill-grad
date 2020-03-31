@@ -19,12 +19,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
+class AppAuthenticator extends AbstractFormLoginAuthenticator
 {
-    use TargetPathTrait;
-
     /** @var EntityManagerInterface */
     private $entityManager;
 
@@ -55,7 +52,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
         return 'ajax.auth.login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'email' => $request->request->get('email'),

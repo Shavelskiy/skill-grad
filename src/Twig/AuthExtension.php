@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Social\SocialAuthFactory;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -30,6 +31,12 @@ class AuthExtension extends AbstractExtension
      */
     public function renderLoginForm(Environment $environment): string
     {
-        return $environment->render('components/login.form.html.twig');
+        $socialAuthFactory = new SocialAuthFactory();
+
+        $links = $socialAuthFactory->getLinks();
+
+        return $environment->render('components/login.form.html.twig', [
+            'socialLinks' => $links,
+        ]);
     }
 }

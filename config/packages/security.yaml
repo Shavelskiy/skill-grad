@@ -15,7 +15,9 @@ security:
       provider: users_in_memory
       guard:
         authenticators:
-          - App\Security\AppCustomAuthenticator
+          - App\Security\AppAuthenticator
+          - App\Security\SocServiceAuthenticator
+        entry_point: App\Security\AppAuthenticator
       logout:
         path: ajax.auth.logout
 

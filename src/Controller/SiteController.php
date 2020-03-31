@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\AppCustomAuthenticator;
+use App\Security\AppAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,8 +17,14 @@ class SiteController extends AbstractController
     /**
      * @Route("/", name="site.index")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        //a540ca85d9965a7040
+
+//        $code = $request->query->get('code');
+//        dd(urldecode($code));
+//        dd($request->query->all());
+//        'https://api.vk.com/method/users.get?v=5.8&fields=uid,first_name,last_name,nickname,screen_name,sex,bdate,city,country,timezone,photo,photo_medium,photo_max_orig,photo_rec,email&access_token=aa1bf2c4ca263c08f0';
         return $this->render('site/index.html.twig');
     }
 
@@ -27,10 +33,10 @@ class SiteController extends AbstractController
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
-     * @param AppCustomAuthenticator $authenticator
+     * @param AppAuthenticator $authenticator
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppCustomAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
