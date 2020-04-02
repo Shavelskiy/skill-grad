@@ -15,15 +15,22 @@ class VkAuth implements SocialAuthInterface
     protected const AUTH_URL = 'https://oauth.vk.com/authorize?';
     protected const ACCESS_TOKEN_URL = 'https://oauth.vk.com/access_token';
 
-    protected const CLIENT_ID = '7351839';
-    protected const SECRET_KEY = '0raiFV7o7ZRetkxUnzWJ';
-
     protected const AUTH_KEY = 'vk-auth';
+
+    protected $clientId;
+    protected $secretKey;
+
+    public function __construct()
+    {
+        $this->clientId = '7351839';
+        $this->secretKey = 'raiFV7o7ZRetkxUnzWJ';
+    }
 
     public function getAuthLink(): string
     {
+
         $params = [
-            'client_id' => self::CLIENT_ID,
+            'client_id' => $this->clientId,
             'redirect_uri' => 'http://localhost:8080',
             'scope' => 'friends,email',
             'response_type' => 'code',
@@ -59,8 +66,8 @@ class VkAuth implements SocialAuthInterface
 
         $response = $client->request('GET', self::ACCESS_TOKEN_URL, [
             'query' => [
-                'client_id' => self::CLIENT_ID,
-                'client_secret' => self::SECRET_KEY,
+                'client_id' => $this->clientId,
+                'client_secret' => $this->secretKey,
                 'redirect_uri' => 'http://localhost:8080',
                 'code' => $credentials['code']
             ],

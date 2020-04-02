@@ -17,14 +17,8 @@ class SiteController extends AbstractController
     /**
      * @Route("/", name="site.index")
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        //a540ca85d9965a7040
-
-//        $code = $request->query->get('code');
-//        dd(urldecode($code));
-//        dd($request->query->all());
-//        'https://api.vk.com/method/users.get?v=5.8&fields=uid,first_name,last_name,nickname,screen_name,sex,bdate,city,country,timezone,photo,photo_medium,photo_max_orig,photo_rec,email&access_token=aa1bf2c4ca263c08f0';
         return $this->render('site/index.html.twig');
     }
 
