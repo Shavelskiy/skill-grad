@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\ChatMessage;
+use App\Entity\User;
 use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,8 +36,47 @@ class ChatController extends AbstractController
         $em->persist($user);
         $em->flush();
 
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $chatMessageRepository = $this->getDoctrine()->getRepository(ChatMessage::class);
+
+        $users = [];
+        foreach ($userRepository->findAll() as $chatUser) {
+            if ($user->getId() === $chatUser->getId()) {
+                continue;
+            }
+
+            $users[] = [
+                'id' => $chatUser->getId(),
+                'username' => $chatUser->getUsername(),
+            ];
+        }
+
+        $messages = [];
+        /** @var ChatMessage $chatMessage */
+        foreach ($chatMessageRepository->findUserMessages($user) as $chatMessage) {
+            if ($chatMessage->getUser()->getId() === $user->getId()) {
+                $messageUserId = $chatMessage->getRecipient()->getId();
+            } else {
+                $messageUserId = $chatMessage->getUser()->getId();
+            }
+
+            if (!isset($messages[$messageUserId])) {
+                $messages[$messageUserId] = [];
+            }
+
+            $messages[$messageUserId][] =  [
+                'id' => $chatMessage->getId(),
+                'message' => $chatMessage->getMessage(),
+                'dateSend' => $chatMessage->getDateSend()->format('d.m.Y h:m:s'),
+                'senderUsername' => $chatMessage->getUser()->getUsername(),
+                'viewed' => $chatMessage->isViewed(),
+            ];
+        }
+
         return new JsonResponse([
             'token' => $token->getHex(),
+            'users' => $users,
+            'messages' => $messages,
         ]);
     }
 }
