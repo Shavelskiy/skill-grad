@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -35,6 +37,12 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @var UuidInterface
+     * @ORM\Column(type="uuid", unique=true, nullable=true)
+     */
+    private $chatToken;
 
     public function getId(): ?int
     {
@@ -107,5 +115,22 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return UuidInterface
+     */
+    public function getChatToken(): UuidInterface
+    {
+        return $this->chatToken;
+    }
+
+    /**
+     * @return User
+     */
+    public function generateChatToken(): self
+    {
+        $this->chatToken = Uuid::uuid4();
+        return $this;
     }
 }

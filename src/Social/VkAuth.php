@@ -23,7 +23,7 @@ class VkAuth implements SocialAuthInterface
     public function __construct()
     {
         $this->clientId = '7351839';
-        $this->secretKey = 'raiFV7o7ZRetkxUnzWJ';
+        $this->secretKey = '0raiFV7o7ZRetkxUnzWJ';
     }
 
     public function getAuthLink(): string

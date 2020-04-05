@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,5 +36,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    /**
+     * @param $token
+     * @return User
+     */
+    public function findByChatToken($token): User
+    {
+        try {
+            return $this->createQueryBuilder('u')
+                ->where('u.chatToken = :chatToken')
+                ->setParameter('chatToken', $token)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (Exception $e) {
+            throw new NotFoundHttpException('user not found');
+        }
     }
 }

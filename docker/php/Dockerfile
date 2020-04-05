@@ -20,9 +20,15 @@ RUN apt-get update \
              libonig-dev \
              graphviz \
              libcurl4-openssl-dev \
+             libz-dev \
              libmemcached-dev \
              pkg-config \
              libpq-dev
+
+RUN docker-php-source extract \
+  && mkdir -p /usr/src/php/ext/redis \
+  && curl -fsSL https://github.com/phpredis/phpredis/archive/4.3.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+  && docker-php-ext-configure redis
 
 RUN docker-php-ext-install pgsql \
   && docker-php-ext-install pdo_pgsql \
@@ -31,14 +37,15 @@ RUN docker-php-ext-install pgsql \
   && docker-php-ext-install exif \
   && docker-php-ext-install opcache \
   && docker-php-ext-install sockets \
-  && docker-php-source delete
+  && docker-php-ext-install redis
 
-RUN apt-get update && apt-get install -y libz-dev libmemcached-dev
 RUN pecl install memcached
 RUN docker-php-ext-enable memcached
 
 RUN pecl install xdebug-2.9.2 \
     && docker-php-ext-enable xdebug
+
+RUN docker-php-source delete
 
 WORKDIR /application
 CMD ["php-fpm"]
