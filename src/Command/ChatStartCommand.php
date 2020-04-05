@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Messenger\Chat;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
@@ -16,13 +15,11 @@ class ChatStartCommand extends Command
 {
     protected static $defaultName = 'app:chat:start';
 
-    protected $logger;
     protected $em;
 
-    public function __construct(LoggerInterface $logger, EntityManagerInterface $em, string $name = null)
+    public function __construct(EntityManagerInterface $em, string $name = null)
     {
         parent::__construct($name);
-        $this->logger = $logger;
         $this->em = $em;
     }
 
@@ -37,7 +34,7 @@ class ChatStartCommand extends Command
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
-                    new Chat($this->logger, $this->em)
+                    new Chat($$this->em)
                 )
             ),
             8080

@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Psr\Log\LoggerInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use RuntimeException;
@@ -18,7 +17,6 @@ class Chat implements MessageComponentInterface
 {
     protected $clients;
 
-    protected $logger;
     protected $em;
 
     protected $userRepository;
@@ -28,10 +26,9 @@ class Chat implements MessageComponentInterface
     protected const MSG_FOCUS_OUT = 'focusOut';
     protected const MSG_SEND_MESSAGE = 'sendMessage';
 
-    public function __construct(LoggerInterface $logger, EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->clients = new SplObjectStorage();
-        $this->logger = $logger;
         $this->em = $em;
     }
 
@@ -41,7 +38,6 @@ class Chat implements MessageComponentInterface
     public function onOpen(ConnectionInterface $conn): void
     {
         $this->clients->attach($conn);
-        $this->logger->alert(sprintf('new socket connection %s', $conn->resourceId));
     }
 
     /**
@@ -129,7 +125,6 @@ class Chat implements MessageComponentInterface
         $this->deleteUserFromStorage($conn->resourceId);
 
         $this->clients->detach($conn);
-        $this->logger->alert(sprintf('destroy socket connection %s', $conn->resourceId));
     }
 
     /**
@@ -140,7 +135,6 @@ class Chat implements MessageComponentInterface
     {
         $this->deleteUserFromStorage($conn->resourceId);
 
-        $this->logger->alert(sprintf('socket connection %s, error %s', $conn->resourceId, $e->getMessage()));
         $conn->close();
     }
 
