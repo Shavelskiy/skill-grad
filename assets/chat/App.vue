@@ -13,7 +13,7 @@
           </span>
         </button>
       </div>
-      <messages :messages="allMessages[activeUserId]"></messages>
+      <messages :messages="allMessages[activeUserId]" :key="messagesKey"></messages>
       <input type="text" class="chat-input" placeholder="Введите сообщение"
              @keyup.enter="sendMessage"
              v-model="message"
@@ -35,6 +35,7 @@
     },
     data: function () {
       return {
+        messagesKey: 1,
         userId: null,
         token: '',
         activeUserId: null,
@@ -113,6 +114,7 @@
                 }
 
                 this.allMessages[data.withId].push(data.message);
+                this.messagesKey++;
                 break;
             }
           };
