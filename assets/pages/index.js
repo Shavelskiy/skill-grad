@@ -1,1 +1,1 @@
-import './../components/header/index';
+import './../layout/index';
