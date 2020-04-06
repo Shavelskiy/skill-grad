@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * @Route("/admin")
@@ -19,12 +20,15 @@ class SiteController extends AdminAbstractController
     }
 
     /**
-     * @Route("/login")
+     * @Route("/login", name="admin.site.login")
      *
+     * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
-    public function login(): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('admin/site/login.html.twig');
+        return $this->render('admin/site/login.html.twig', [
+            'login' => $authenticationUtils->getLastUsername()
+        ]);
     }
 }

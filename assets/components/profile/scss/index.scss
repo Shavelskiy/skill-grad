@@ -1,0 +1,13 @@
+.profile {
+  display: flex;
+
+  &-menu {
+    width: 20%;
+    padding: 2vw;
+  }
+
+  &-content {
+    width: 80%;
+    padding: 2vw;
+  }
+}

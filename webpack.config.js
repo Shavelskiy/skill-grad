@@ -9,7 +9,11 @@ Encore
   .setPublicPath('/build')
 
   .addEntry('admin.layout', './assets/admin/layout/index.js')
+  .addEntry('admin.login', './assets/admin/pages/login/index.js')
+
+  .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index.js')
+  .addEntry('site.profile', './assets/pages/profile.js')
 
   .splitEntryChunks()
 

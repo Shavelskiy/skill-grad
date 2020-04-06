@@ -17,6 +17,7 @@ security:
         authenticators:
           - App\Security\AppAuthenticator
           - App\Security\SocServiceAuthenticator
+          - App\Security\AdminAuthenticator
         entry_point: App\Security\AppAuthenticator
       logout:
         path: ajax.auth.logout

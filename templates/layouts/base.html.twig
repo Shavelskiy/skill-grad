@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
   {% block stylesheets %}
+    {{ encore_entry_link_tags('site.layout') }}
   {% endblock %}
 </head>
 <body>
@@ -15,6 +16,7 @@
 {% include 'components/footer.html.twig' %}
 
 {% block javascripts %}
+  {{ encore_entry_script_tags('site.layout') }}
 {% endblock %}
 </body>
 </html>

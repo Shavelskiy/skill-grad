@@ -1,3 +1,9 @@
 <div class="header-container">
-  {{ renderLoginForm() }}
+  <div class="wrap">
+    {% if not app.user %}
+      {{ renderLoginForm() }}
+    {% else %}
+      <a href="{{ path('ajax.auth.logout') }}">Выход</a>
+    {% endif %}
+  </div>
 </div>
