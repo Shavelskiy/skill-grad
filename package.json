@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.13.0",
         "@symfony/webpack-encore": "^0.28.2",
         "core-js": "^3.0.0",
         "node-sass": "^4.13.1",
@@ -19,11 +20,6 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fortawesome/fontawesome": "^1.1.8",
-        "@fortawesome/fontawesome-svg-core": "^1.2.26",
-        "@fortawesome/free-brands-svg-icons": "^5.12.0",
-        "@fortawesome/free-regular-svg-icons": "^5.12.0",
-        "@fortawesome/free-solid-svg-icons": "^5.12.0",
         "axios": "^0.19.2"
     }
 }
