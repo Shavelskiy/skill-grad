@@ -9,8 +9,7 @@ Encore
   .setPublicPath('/build')
 
   .addEntry('admin.layout', './assets/admin/layout/index.js')
-  .addEntry('app', './assets/chat/main.js')
-  .addEntry('index', './assets/pages/index.js')
+  .addEntry('site.index', './assets/pages/index.js')
 
   .splitEntryChunks()
 

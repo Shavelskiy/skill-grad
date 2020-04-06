@@ -1,0 +1,33 @@
+.auth-form {
+  h6 {
+    font-size: 1.7vw;
+    margin: 0 0 20px;
+    font-weight: 100;
+  }
+
+  &-raw {
+    margin-bottom: 15px;
+    display: flex;
+
+    input {
+      width: 100%;
+      font-size: 0.8vw;
+      border-radius: 7px;
+      border: 1px solid #cbcbcb;
+      padding: 5px 10px;
+    }
+  }
+
+  button {
+    border-radius: 4px;
+    font-size: 0.8vw;
+    color: #cbcbcb;
+    background-color: #2199e8;
+    border: none;
+    padding: 9px 32px;
+  }
+
+  &-social {
+    margin-top: 20px;
+  }
+}

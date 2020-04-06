@@ -1,4 +1,4 @@
-import './index.scss';
+import './scss/index.scss';
 
 let coll = document.getElementsByClassName('collapsible');
 for (let i = 0; i < coll.length; i++) {
