@@ -18,7 +18,8 @@ security:
         authenticators:
           - App\Security\AdminAuthenticator
       logout:
-        path: ajax.auth.logout
+        path: admin.site.logout
+        target: admin.site.login
     main:
       pattern: ^/
       anonymous: lazy

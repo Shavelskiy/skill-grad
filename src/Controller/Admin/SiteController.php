@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
+use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -27,12 +29,20 @@ class SiteController extends AdminAbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser() !== null) {
+        if ($this->isGranted(User::ROLE_ADMIN)) {
             return $this->redirectToRoute('admin.site.index');
         }
 
         return $this->render('admin/site/login.html.twig', [
             'login' => $authenticationUtils->getLastUsername()
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="admin.site.logout")
+     */
+    public function logout(): void
+    {
+        throw new LogicException('Метод должен быть для того, чтобы было имя и middleware смог перехватить его');
     }
 }
