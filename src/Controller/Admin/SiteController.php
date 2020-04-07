@@ -27,6 +27,10 @@ class SiteController extends AdminAbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        if ($this->getUser() !== null) {
+            return $this->redirectToRoute('admin.site.index');
+        }
+
         return $this->render('admin/site/login.html.twig', [
             'login' => $authenticationUtils->getLastUsername()
         ]);
