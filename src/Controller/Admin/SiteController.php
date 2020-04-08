@@ -23,10 +23,15 @@ class SiteController extends AdminAbstractController
 
     /**
      * @Route("/login", name="admin.site.login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->isGranted(User::ROLE_ADMIN)) {
+        if ($this->isGranted(User::ROLE_ADMIN) ||
+            $this->isGranted(User::ROLE_REDACTOR) ||
+            $this->isGranted(User::ROLE_SEO_MANAGER)
+        ) {
             return $this->redirectToRoute('admin.site.index');
         }
 
