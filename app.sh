@@ -22,13 +22,13 @@ log() {
 if [[ $1 == "front" ]]; then
     case $2 in
         install)
-            docker-compose run front yarn install
+            docker-compose exec front yarn install
         ;;
         watch)
-            docker-compose run front yarn run watch
+            docker-compose exec front yarn run watch
         ;;
         build)
-            docker-compose run front yarn run build
+            docker-compose exec front yarn run build
         ;;
         esac
 
