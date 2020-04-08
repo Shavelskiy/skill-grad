@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/tag")
  */
-class TagController extends AdminAbstractController
+class TagController extends AbstractCrudController
 {
     /**
      * @Route("/", name="admin.tag.index", methods={"GET", "HEAD"})
@@ -25,7 +25,7 @@ class TagController extends AdminAbstractController
     public function index(): Response
     {
         return $this->render('admin/tag/index.html.twig', [
-            'tags' => $this->getTagRepository()->findAll(),
+            'tags' => $this->getRepository()->findAll(),
         ]);
     }
 
@@ -36,7 +36,7 @@ class TagController extends AdminAbstractController
     {
         $tag = new Tag();
 
-        $maxSortTag = $this->getTagRepository()->getTagWithMaxSort();
+        $maxSortTag = $this->getRepository()->getTagWithMaxSort();
         $tag->setSort(($maxSortTag !== null) ? ($maxSortTag->getSort() + 100) : 100);
 
         return $this->render('admin/tag/create.html.twig', [
@@ -46,6 +46,10 @@ class TagController extends AdminAbstractController
 
     /**
      * @Route("/create", name="admin.tag.store", methods={"POST", "PUT"})
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function store(Request $request): Response
     {
@@ -68,10 +72,12 @@ class TagController extends AdminAbstractController
      * @Route("/{id}/edit", name="admin.tag.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
+     *
+     * @return Response
      */
     public function edit($id): Response
     {
-        $tag = $this->findTag($id);
+        $tag = $this->findModel($id);
 
         return $this->render('admin/tag/edit.html.twig', [
             'tag' => $tag,
@@ -83,10 +89,13 @@ class TagController extends AdminAbstractController
      * @Route("/{id}/edit", name="admin.tag.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
+     * @param Request $request
+     *
+     * @return Response
      */
     public function update($id, Request $request): Response
     {
-        $tag = $this->findTag($id);
+        $tag = $this->findModel($id);
 
         $form = $this->getForm($tag)->handleRequest($request);
 
@@ -108,10 +117,12 @@ class TagController extends AdminAbstractController
      * @Route("/{id}/destroy", name="admin.tag.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
+     *
+     * @return Response
      */
     public function destroy($id): Response
     {
-        $tag = $this->findTag($id);
+        $tag = $this->findModel($id);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($tag);
@@ -122,6 +133,8 @@ class TagController extends AdminAbstractController
 
     /**
      * @param $tag
+     *
+     * @return FormInterface
      */
     protected function getForm($tag = null): FormInterface
     {
@@ -141,9 +154,9 @@ class TagController extends AdminAbstractController
      *
      * @return object|null
      */
-    protected function findTag($id)
+    protected function findModel($id)
     {
-        if (($tag = $this->getTagRepository()->find($id)) === null) {
+        if (($tag = $this->getRepository()->find($id)) === null) {
             throw new NotFoundHttpException('tag not found');
         }
 
@@ -153,7 +166,7 @@ class TagController extends AdminAbstractController
     /**
      * @return TagRepository|ObjectRepository
      */
-    protected function getTagRepository()
+    protected function getRepository()
     {
         return $this->getDoctrine()->getRepository(Tag::class);
     }

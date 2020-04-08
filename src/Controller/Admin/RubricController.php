@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/rubric")
  */
-class RubricController extends AdminAbstractController
+class RubricController extends AbstractCrudController
 {
     /**
      * @Route("/", name="admin.rubric.index", methods={"GET", "HEAD"})
@@ -25,7 +25,7 @@ class RubricController extends AdminAbstractController
     public function index(): Response
     {
         return $this->render('admin/rubric/index.html.twig', [
-            'rubrics' => $this->getRubricRepository()->findAll(),
+            'rubrics' => $this->getRepository()->findAll(),
         ]);
     }
 
@@ -36,7 +36,7 @@ class RubricController extends AdminAbstractController
     {
         $rubric = new Rubric();
 
-        $maxSortRubric = $this->getRubricRepository()->getRubricWithMaxSort();
+        $maxSortRubric = $this->getRepository()->getRubricWithMaxSort();
         $rubric->setSort(($maxSortRubric !== null) ? ($maxSortRubric->getSort() + 100) : 100);
 
         return $this->render('admin/rubric/create.html.twig', [
@@ -46,6 +46,10 @@ class RubricController extends AdminAbstractController
 
     /**
      * @Route("/create", name="admin.rubric.store", methods={"POST", "PUT"})
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function store(Request $request): Response
     {
@@ -68,10 +72,12 @@ class RubricController extends AdminAbstractController
      * @Route("/{id}/edit", name="admin.rubric.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
+     *
+     * @return Response
      */
     public function edit($id): Response
     {
-        $rubric = $this->findRubric($id);
+        $rubric = $this->findModel($id);
 
         return $this->render('admin/rubric/edit.html.twig', [
             'rubric' => $rubric,
@@ -83,10 +89,13 @@ class RubricController extends AdminAbstractController
      * @Route("/{id}/edit", name="admin.rubric.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
+     * @param Request $request
+     *
+     * @return Response
      */
     public function update($id, Request $request): Response
     {
-        $rubric = $this->findRubric($id);
+        $rubric = $this->findModel($id);
 
         $form = $this->getForm($rubric)->handleRequest($request);
 
@@ -108,10 +117,12 @@ class RubricController extends AdminAbstractController
      * @Route("/{id}/destroy", name="admin.rubric.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
+     *
+     * @return Response
      */
     public function destroy($id): Response
     {
-        $rubric = $this->findRubric($id);
+        $rubric = $this->findModel($id);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($rubric);
@@ -122,6 +133,8 @@ class RubricController extends AdminAbstractController
 
     /**
      * @param null $rubric
+     *
+     * @return FormInterface
      */
     protected function getForm($rubric = null): FormInterface
     {
@@ -141,9 +154,9 @@ class RubricController extends AdminAbstractController
      *
      * @return object|null
      */
-    protected function findRubric($id)
+    protected function findModel($id)
     {
-        if (($rubric = $this->getRubricRepository()->find($id)) === null) {
+        if (($rubric = $this->getRepository()->find($id)) === null) {
             throw new NotFoundHttpException('rubric not found');
         }
 
@@ -153,7 +166,7 @@ class RubricController extends AdminAbstractController
     /**
      * @return RubricRepository|ObjectRepository
      */
-    protected function getRubricRepository()
+    protected function getRepository()
     {
         return $this->getDoctrine()->getRepository(Rubric::class);
     }
