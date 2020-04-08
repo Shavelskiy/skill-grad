@@ -32,16 +32,12 @@ class Chat implements MessageComponentInterface
         $this->em = $em;
     }
 
-    /**
-     * @param ConnectionInterface $conn
-     */
     public function onOpen(ConnectionInterface $conn): void
     {
         $this->clients->attach($conn);
     }
 
     /**
-     * @param ConnectionInterface $from
      * @param string $msgStr
      */
     public function onMessage(ConnectionInterface $from, $msgStr): void
