@@ -3,15 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Rubric;
-use App\Repository\RubricRepository;
-use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -36,6 +33,7 @@ class RubricController extends AbstractCrudController
     {
         $rubric = new Rubric();
 
+        /** @var Rubric $maxSortRubric */
         $maxSortRubric = $this->getRepository()->getRubricWithMaxSort();
         $rubric->setSort(($maxSortRubric !== null) ? ($maxSortRubric->getSort() + 100) : 100);
 
@@ -147,27 +145,5 @@ class RubricController extends AbstractCrudController
             ->add('sort', IntegerType::class, ['label' => 'Сортировка'])
             ->add('save', SubmitType::class, ['label' => 'Сохранить'])
             ->getForm();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return object|null
-     */
-    protected function findModel($id)
-    {
-        if (($rubric = $this->getRepository()->find($id)) === null) {
-            throw new NotFoundHttpException('rubric not found');
-        }
-
-        return $rubric;
-    }
-
-    /**
-     * @return RubricRepository|ObjectRepository
-     */
-    protected function getRepository()
-    {
-        return $this->getDoctrine()->getRepository(Rubric::class);
     }
 }

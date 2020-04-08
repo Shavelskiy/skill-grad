@@ -3,15 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
-use App\Repository\TagRepository;
-use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -36,6 +33,7 @@ class TagController extends AbstractCrudController
     {
         $tag = new Tag();
 
+        /** @var Tag $maxSortTag */
         $maxSortTag = $this->getRepository()->getTagWithMaxSort();
         $tag->setSort(($maxSortTag !== null) ? ($maxSortTag->getSort() + 100) : 100);
 
@@ -147,27 +145,5 @@ class TagController extends AbstractCrudController
             ->add('sort', IntegerType::class, ['label' => 'Сортировка'])
             ->add('save', SubmitType::class, ['label' => 'Сохранить'])
             ->getForm();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return object|null
-     */
-    protected function findModel($id)
-    {
-        if (($tag = $this->getRepository()->find($id)) === null) {
-            throw new NotFoundHttpException('tag not found');
-        }
-
-        return $tag;
-    }
-
-    /**
-     * @return TagRepository|ObjectRepository
-     */
-    protected function getRepository()
-    {
-        return $this->getDoctrine()->getRepository(Tag::class);
     }
 }
