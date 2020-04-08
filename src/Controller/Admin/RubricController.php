@@ -46,9 +46,6 @@ class RubricController extends AdminAbstractController
 
     /**
      * @Route("/create", name="admin.rubric.store", methods={"POST", "PUT"})
-     *
-     * @param Request $request
-     * @return Response
      */
     public function store(Request $request): Response
     {
@@ -71,7 +68,6 @@ class RubricController extends AdminAbstractController
      * @Route("/{id}/edit", name="admin.rubric.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
-     * @return Response
      */
     public function edit($id): Response
     {
@@ -87,8 +83,6 @@ class RubricController extends AdminAbstractController
      * @Route("/{id}/edit", name="admin.rubric.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
-     * @param Request $request
-     * @return Response
      */
     public function update($id, Request $request): Response
     {
@@ -114,7 +108,6 @@ class RubricController extends AdminAbstractController
      * @Route("/{id}/destroy", name="admin.rubric.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
-     * @return Response
      */
     public function destroy($id): Response
     {
@@ -129,7 +122,6 @@ class RubricController extends AdminAbstractController
 
     /**
      * @param null $rubric
-     * @return FormInterface
      */
     protected function getForm($rubric = null): FormInterface
     {
@@ -146,6 +138,7 @@ class RubricController extends AdminAbstractController
 
     /**
      * @param $id
+     *
      * @return object|null
      */
     protected function findRubric($id)

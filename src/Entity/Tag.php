@@ -13,18 +13,21 @@ class Tag
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
      * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @var string
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     *
      * @var int
      */
     private $sort;
@@ -34,7 +37,6 @@ class Tag
         return $this->id;
     }
 
-
     public function getName(): ?string
     {
         return $this->name;
@@ -43,6 +45,7 @@ class Tag
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -54,6 +57,7 @@ class Tag
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
+
         return $this;
     }
 }

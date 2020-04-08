@@ -48,6 +48,13 @@ services:
     networks:
       - network_php
 
+  front:
+    image: node:13.6.0
+    tty: true
+    volumes:
+      - ./:/application
+    working_dir: /application
+
 volumes:
   db-data: {}
   redis-data: {}

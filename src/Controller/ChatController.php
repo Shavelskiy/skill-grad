@@ -17,7 +17,6 @@ class ChatController extends AbstractController
 {
     /**
      * @Route("/start", methods={"GET"})
-     * @return JsonResponse
      */
     public function getUserMessages(): JsonResponse
     {
@@ -64,7 +63,7 @@ class ChatController extends AbstractController
                 $messages[$messageUserId] = [];
             }
 
-            $messages[$messageUserId][] =  [
+            $messages[$messageUserId][] = [
                 'id' => $chatMessage->getId(),
                 'message' => $chatMessage->getMessage(),
                 'dateSend' => $chatMessage->getDateSend()->format('d.m.Y h:m:s'),

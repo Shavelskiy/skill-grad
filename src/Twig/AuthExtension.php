@@ -23,8 +23,6 @@ class AuthExtension extends AbstractExtension
     }
 
     /**
-     * @param Environment $environment
-     * @return string
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError

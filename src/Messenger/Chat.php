@@ -117,9 +117,6 @@ class Chat implements MessageComponentInterface
         }
     }
 
-    /**
-     * @param ConnectionInterface $conn
-     */
     public function onClose(ConnectionInterface $conn): void
     {
         $this->deleteUserFromStorage($conn->resourceId);
@@ -127,10 +124,6 @@ class Chat implements MessageComponentInterface
         $this->clients->detach($conn);
     }
 
-    /**
-     * @param ConnectionInterface $conn
-     * @param Exception $e
-     */
     public function onError(ConnectionInterface $conn, Exception $e): void
     {
         $this->deleteUserFromStorage($conn->resourceId);

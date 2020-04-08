@@ -34,8 +34,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         UserPasswordEncoderInterface $passwordEncoder
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->passwordEncoder = $passwordEncoder;
@@ -49,6 +48,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         foreach ($socialAuthFactory->getServices() as $service) {
             if ($service->support($request)) {
                 $this->socialAuthService = $service;
+
                 return true;
             }
         }
@@ -86,6 +86,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
         return true;
     }
 

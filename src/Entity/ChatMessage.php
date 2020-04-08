@@ -90,11 +90,13 @@ class ChatMessage
 
     /**
      * @param mixed $message
+     *
      * @return ChatMessage
      */
     public function setMessage($message): self
     {
         $this->message = $message;
+
         return $this;
     }
 

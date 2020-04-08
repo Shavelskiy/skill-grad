@@ -13,7 +13,6 @@ class ProfileController extends AbstractController
 {
     /**
      * @Route("/{path}", methods={"GET"})
-     * @return Response
      */
     public function index(): Response
     {

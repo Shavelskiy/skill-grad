@@ -8,9 +8,6 @@ class RedisClient
 {
     protected static $connection;
 
-    /**
-     * @return Redis
-     */
     public static function getConnection(): Redis
     {
         if (static::$connection === null) {

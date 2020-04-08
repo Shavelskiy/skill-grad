@@ -24,7 +24,7 @@ class AdminAccessDeniedListener
 
         if ($exception instanceof AccessDeniedHttpException) {
             [$controller, $method] = explode('::', $event->getRequest()->attributes->get('_controller'));
-            $controllerClass = new $controller;
+            $controllerClass = new $controller();
 
             if ($controllerClass instanceof AdminAbstractController) {
                 $event->setResponse(

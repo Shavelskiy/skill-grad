@@ -28,7 +28,6 @@ class VkAuth implements SocialAuthInterface
 
     public function getAuthLink(): string
     {
-
         $params = [
             'client_id' => $this->clientId,
             'redirect_uri' => 'http://localhost:8080',
@@ -42,7 +41,7 @@ class VkAuth implements SocialAuthInterface
 
     public function support(Request $request): bool
     {
-        return ($request->query->get('state') === self::AUTH_KEY);
+        return $request->query->get('state') === self::AUTH_KEY;
     }
 
     public function getCredentials(Request $request): array
@@ -54,7 +53,7 @@ class VkAuth implements SocialAuthInterface
 
     /**
      * @param $credentials
-     * @return string
+     *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
@@ -69,7 +68,7 @@ class VkAuth implements SocialAuthInterface
                 'client_id' => $this->clientId,
                 'client_secret' => $this->secretKey,
                 'redirect_uri' => 'http://localhost:8080',
-                'code' => $credentials['code']
+                'code' => $credentials['code'],
             ],
         ]);
 

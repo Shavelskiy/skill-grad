@@ -119,9 +119,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return UuidInterface
-     */
     public function getChatToken(): UuidInterface
     {
         return $this->chatToken;
@@ -133,6 +130,7 @@ class User implements UserInterface
     public function generateChatToken(): self
     {
         $this->chatToken = Uuid::uuid4();
+
         return $this;
     }
 }
