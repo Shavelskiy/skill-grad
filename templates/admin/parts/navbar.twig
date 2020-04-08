@@ -3,20 +3,20 @@
     <div class="row h-100">
       <div class="col-2 offset-10 h-100 profile-container">
         <div class="user-profile">
-{#          <span>{{ app.user.username }}</span>#}
+          <span>{{ app.user.username }}</span>
         </div>
 
         <div class="user-profile-card user-profile-card-hidden">
           <ul>
             <li class="list">
-              <a href="/admin" target="_blank">
+              <a href="/admin">
                 <i class="fas fa-user"></i>
-                <span>Профиль в битриксе</span>
+                <span>Редактировать профиль</span>
               </a>
             </li>
             <li class="line"></li>
             <li class="logout" >
-              <a href="{{ path('ajax.auth.logout') }}">Выход</a>
+              <a href="{{ path('admin.site.logout') }}">Выход</a>
             </li>
           </ul>
         </div>
