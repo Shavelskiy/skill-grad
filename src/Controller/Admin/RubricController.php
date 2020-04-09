@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RubricController extends AbstractCrudController
 {
+    protected function getModelClass()
+    {
+        return Rubric::class;
+    }
+
     /**
      * @Route("/", name="admin.rubric.index", methods={"GET", "HEAD"})
      */

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,8 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractCrudController
 {
+    protected function getModelClass()
+    {
+        return User::class;
+    }
+
     /**
-     * @Route("/", name="admin.rubric.index", methods={"GET", "HEAD"})
+     * @Route("/", name="admin.user.index", methods={"GET", "HEAD"})
      */
     public function index(): Response
     {
@@ -21,7 +27,7 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @Route("/create", name="admin.rubric.create", methods={"GET", "HEAD"})
+     * @Route("/create", name="admin.user.create", methods={"GET", "HEAD"})
      */
     public function create(): Response
     {
@@ -29,7 +35,7 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @Route("/create", name="admin.rubric.store", methods={"POST", "PUT"})
+     * @Route("/create", name="admin.user.store", methods={"POST", "PUT"})
      *
      * @param Request $request
      *
@@ -41,7 +47,7 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @Route("/{id}/edit", name="admin.rubric.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
+     * @Route("/{id}/edit", name="admin.user.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
      *
@@ -53,7 +59,7 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @Route("/{id}/edit", name="admin.rubric.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
+     * @Route("/{id}/edit", name="admin.user.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
      * @param Request $request
@@ -66,7 +72,7 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @Route("/{id}/destroy", name="admin.rubric.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
+     * @Route("/{id}/destroy", name="admin.user.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
      *
      * @param $id
      *

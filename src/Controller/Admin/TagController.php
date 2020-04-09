@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TagController extends AbstractCrudController
 {
+    protected function getModelClass()
+    {
+        return Tag::class;
+    }
+
     /**
      * @Route("/", name="admin.tag.index", methods={"GET", "HEAD"})
      */

@@ -2,8 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,6 +14,8 @@ abstract class AbstractCrudController extends AdminAbstractController implements
      * @return FormInterface
      */
     abstract protected function getForm($model = null): FormInterface;
+
+    abstract protected function getModelClass();
 
     /**
      * {@inheritdoc}
@@ -30,10 +30,10 @@ abstract class AbstractCrudController extends AdminAbstractController implements
     }
 
     /**
-     * @return UserRepository|ObjectRepository
+     * @return ObjectRepository
      */
-    protected function getRepository()
+    protected function getRepository(): ObjectRepository
     {
-        return $this->getDoctrine()->getRepository(User::class);
+        return $this->getDoctrine()->getRepository($this->getModelClass());
     }
 }
