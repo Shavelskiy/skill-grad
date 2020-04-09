@@ -34,3 +34,7 @@ services:
     arguments: ['@router']
     tags:
       - { name: kernel.event_listener, event: kernel.exception }
+
+  App\Security\LogoutSuccessHandler:
+    class: App\Security\LogoutSuccessHandler
+    arguments: ['@security.http_utils', '@router']

@@ -12,9 +12,11 @@ abstract class AbstractCrudController extends AdminAbstractController implements
 {
     /**
      * @param null $model
+     *
      * @return FormInterface
      */
     abstract protected function getForm($model = null): FormInterface;
+
 //
 //    /**
 //     * @param $id
@@ -26,7 +28,7 @@ abstract class AbstractCrudController extends AdminAbstractController implements
 //    abstract protected function getRepository();
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function findModel($id)
     {

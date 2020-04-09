@@ -10,16 +10,6 @@ security:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
-    admin:
-      pattern: ^/admin
-      anonymous: lazy
-      provider: users_in_memory
-      guard:
-        authenticators:
-          - App\Security\AdminAuthenticator
-      logout:
-        path: admin.site.logout
-        target: admin.site.login
     main:
       pattern: ^/
       anonymous: lazy
@@ -28,9 +18,13 @@ security:
         authenticators:
           - App\Security\AppAuthenticator
           - App\Security\SocServiceAuthenticator
+          - App\Security\AdminAuthenticator
         entry_point: App\Security\AppAuthenticator
       logout:
         path: ajax.auth.logout
+        success_handler: App\Security\LogoutSuccessHandler
+
+
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication

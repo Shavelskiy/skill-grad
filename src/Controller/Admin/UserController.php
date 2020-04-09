@@ -76,8 +76,9 @@ class UserController extends AbstractCrudController
     {
         // TODO: Implement destroy() method.
     }
+
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function getForm($model = null): FormInterface
     {
