@@ -15,11 +15,9 @@ use SplObjectStorage;
 
 class Chat implements MessageComponentInterface
 {
-    protected $clients;
-
-    protected $em;
-
-    protected $userRepository;
+    protected SplObjectStorage $clients;
+    protected EntityManagerInterface $em;
+    protected UserRepository $userRepository;
 
     protected const MSG_INIT = 'init';
     protected const MSG_FOCUS_IN = 'focusIn';
@@ -38,13 +36,14 @@ class Chat implements MessageComponentInterface
     }
 
     /**
-     * @param string $msgStr
+     * @param ConnectionInterface $from
+     * @param string              $msgStr
      */
     public function onMessage(ConnectionInterface $from, $msgStr): void
     {
         $redis = RedisClient::getConnection();
 
-        $msg = json_decode($msgStr, true);
+        $msg = json_decode($msgStr, true, 512, JSON_THROW_ON_ERROR);
 
         switch ($msg['type']) {
             case self::MSG_INIT:
@@ -72,7 +71,7 @@ class Chat implements MessageComponentInterface
                 $from->send(json_encode([
                     'type' => $msg['type'],
                     'status' => $status,
-                ]));
+                ], JSON_THROW_ON_ERROR, 512));
                 break;
             case self::MSG_FOCUS_IN:
             case self::MSG_FOCUS_OUT:

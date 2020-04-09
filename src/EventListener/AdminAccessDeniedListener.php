@@ -10,8 +10,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AdminAccessDeniedListener
 {
-    /** @var Router */
-    protected $urlGenerator;
+    protected Router $urlGenerator;
 
     public function __construct(Router $urlGenerator)
     {

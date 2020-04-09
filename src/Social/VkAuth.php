@@ -17,8 +17,8 @@ class VkAuth implements SocialAuthInterface
 
     protected const AUTH_KEY = 'vk-auth';
 
-    protected $clientId;
-    protected $secretKey;
+    protected string $clientId;
+    protected string $secretKey;
 
     public function __construct()
     {
@@ -53,6 +53,8 @@ class VkAuth implements SocialAuthInterface
 
     /**
      * @param $credentials
+     *
+     * @return string
      *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface

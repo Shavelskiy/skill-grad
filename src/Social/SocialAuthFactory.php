@@ -5,7 +5,7 @@ namespace App\Social;
 class SocialAuthFactory
 {
     /** @var SocialAuthInterface[] */
-    protected $services;
+    protected array $services;
 
     public function __construct()
     {

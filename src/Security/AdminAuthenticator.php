@@ -10,7 +10,7 @@ class AdminAuthenticator extends AbstractAuthenticator
 {
     protected function getLoginRoute(): string
     {
-        return 'admin.site.login';
+        return self::ADMIN_LOGIN_URL;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

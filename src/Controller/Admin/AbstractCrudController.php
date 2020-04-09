@@ -17,16 +17,6 @@ abstract class AbstractCrudController extends AdminAbstractController implements
      */
     abstract protected function getForm($model = null): FormInterface;
 
-//
-//    /**
-//     * @param $id
-//     *
-//     * @return object|null
-//     */
-//    abstract protected function findModel($id);
-//
-//    abstract protected function getRepository();
-
     /**
      * {@inheritdoc}
      */

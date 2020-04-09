@@ -4,9 +4,11 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -18,17 +20,13 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 
 abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
 {
-    /** @var EntityManagerInterface */
-    protected $entityManager;
+    protected const APP_LOGIN_URL = 'ajax.auth.login';
+    protected const ADMIN_LOGIN_URL = 'admin.site.login';
 
-    /** @var UrlGeneratorInterface */
-    protected $urlGenerator;
-
-    /** @var CsrfTokenManagerInterface */
-    protected $csrfTokenManager;
-
-    /** @var UserPasswordEncoderInterface */
-    protected $passwordEncoder;
+    protected EntityManagerInterface $entityManager;
+    protected UrlGeneratorInterface $urlGenerator;
+    protected CsrfTokenManagerInterface $csrfTokenManager;
+    protected UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -86,5 +84,19 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
     protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate($this->getLoginRoute());
+    }
+
+    /**
+     * @param Request                      $request
+     * @param AuthenticationException|null $authException
+     *
+     * @return RedirectResponse
+     */
+    public function start(Request $request, AuthenticationException $authException = null): ?RedirectResponse
+    {
+        $route = (stripos($request->attributes->get('_route'), 'admin.') === 0)
+            ? self::ADMIN_LOGIN_URL : self::APP_LOGIN_URL;
+
+        return new RedirectResponse($this->urlGenerator->generate($route));
     }
 }

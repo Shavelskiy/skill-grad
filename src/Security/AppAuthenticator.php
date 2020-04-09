@@ -12,7 +12,7 @@ class AppAuthenticator extends AbstractAuthenticator
 {
     protected function getLoginRoute(): string
     {
-        return 'ajax.auth.login';
+        return self::APP_LOGIN_URL;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

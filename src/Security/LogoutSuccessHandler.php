@@ -11,11 +11,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
     protected const ADMIN_KEY = 'from_admin';
 
-    /** @var HttpUtils */
-    protected $httpUtils;
+    protected HttpUtils $httpUtils;
 
-    /** @var Router */
-    protected $router;
+    protected Router $router;
 
     public function __construct(HttpUtils $httpUtils, Router $router)
     {

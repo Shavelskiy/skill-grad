@@ -6,7 +6,7 @@ use Redis;
 
 class RedisClient
 {
-    protected static $connection;
+    protected static Redis $connection;
 
     public static function getConnection(): Redis
     {

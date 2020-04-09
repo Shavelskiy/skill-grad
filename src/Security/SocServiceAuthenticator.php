@@ -18,17 +18,10 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 
 class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
 {
-    /** @var EntityManagerInterface */
-    protected $entityManager;
-
-    /** @var UrlGeneratorInterface */
-    protected $urlGenerator;
-
-    /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
-
-    /** @var SocialAuthInterface */
-    protected $socialAuthService;
+    protected EntityManagerInterface $entityManager;
+    protected UrlGeneratorInterface $urlGenerator;
+    private UserPasswordEncoderInterface $passwordEncoder;
+    protected SocialAuthInterface $socialAuthService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
