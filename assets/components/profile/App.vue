@@ -4,10 +4,22 @@
       <div class="profile-menu">
         <ul>
           <li>
-            <router-link :to="{ name: 'kek'}">kek</router-link>
+            <router-link :to="{ name: 'settings'}">Настройки профиля</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'lol'}">lol</router-link>
+            <router-link :to="{ name: 'programs'}">Программы обучения</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'publications'}">Публикации</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'messages'}">Сообщения</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'services'}">Платные услуги, документы</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'training'}">Мое обучение</router-link>
           </li>
         </ul>
       </div>
@@ -32,13 +44,7 @@
 
     },
     created: function () {
-      // axios.get('/chat/start')
-      //   .then(response => {
-      //
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+
     }
   }
 </script>

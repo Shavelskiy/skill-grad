@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'messages',
+    name: 'chat',
     props: ['messages'],
   }
 </script>

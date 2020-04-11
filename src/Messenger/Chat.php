@@ -48,8 +48,7 @@ class Chat implements MessageComponentInterface
         switch ($msg['type']) {
             case self::MSG_INIT:
                 try {
-                    $userRepository = $this->em->getRepository(User::class);
-                    $user = $userRepository->findByChatToken($msg['token']);
+                    $user = $this->getUserRepository()->findByChatToken($msg['token']);
 
                     $idKey = $this->getUserIdKey($user->getId());
                     $pIdKey = $this->getUserPIdKey($from->resourceId);
@@ -214,7 +213,7 @@ class Chat implements MessageComponentInterface
 
     protected function getUserRepository(): UserRepository
     {
-        if ($this->userRepository === null) {
+        if (!isset($this->userRepository)) {
             $this->userRepository = $this->em->getRepository(User::class);
         }
 

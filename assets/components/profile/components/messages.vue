@@ -1,37 +1,35 @@
 <template>
-  <div id="app">
-    <div class="chat">
-      <div class="chat-tabs">
-        <button
-                v-for="user in users"
-                v-on:click="activeUserId = user.id"
-                :class="`chat-btn ${(user.id === activeUserId) ? 'chat-btn__active' : ''}`"
-        >
-          {{ user.username }}
-          <span class="chat-tabs-type" v-if="typingUserIds.includes(user.id)">
+  <div class="chat">
+    <div class="chat-tabs">
+      <button
+              v-for="user in users"
+              v-on:click="activeUserId = user.id"
+              :class="`chat-btn ${(user.id === activeUserId) ? 'chat-btn__active' : ''}`"
+      >
+        {{ user.username }}
+        <span class="chat-tabs-type" v-if="typingUserIds.includes(user.id)">
             ...печатает
           </span>
-        </button>
-      </div>
-      <messages :messages="allMessages[activeUserId]" :key="messagesKey"></messages>
-      <input type="text" class="chat-input" placeholder="Введите сообщение"
-             @keyup.enter="sendMessage"
-             v-model="message"
-             v-on:focusin="focusIn"
-             v-on:focusout="focusOut">
-      <span v-if="typingUserIds.includes(activeUserId)">...печатает</span>
+      </button>
     </div>
+    <chat :messages="allMessages[activeUserId]" :key="messagesKey"></chat>
+    <input type="text" class="chat-input" placeholder="Введите сообщение"
+           @keyup.enter="sendMessage"
+           v-model="message"
+           v-on:focusin="focusIn"
+           v-on:focusout="focusOut">
+    <span v-if="typingUserIds.includes(activeUserId)">...печатает</span>
   </div>
 </template>
 
 <script>
   const axios = require('axios').default;
-  import messages from './messages';
+  import chat from './include/chat';
 
   export default {
-    name: 'app',
+    name: 'messages',
     components: {
-      messages,
+      chat,
     },
     data: function () {
       return {
@@ -122,10 +120,6 @@
         .catch(error => {
           console.log(error);
         });
-    }
+    },
   }
 </script>
-
-<style>
-
-</style>

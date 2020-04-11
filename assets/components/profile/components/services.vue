@@ -1,11 +1,11 @@
 <template>
   <div>
-    kek
+    services
   </div>
 </template>
 
 <script>
   export default {
-    name: 'kek',
+    name: 'services',
   }
 </script>

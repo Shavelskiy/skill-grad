@@ -10,7 +10,7 @@ class RedisClient
 
     public static function getConnection(): Redis
     {
-        if (static::$connection === null) {
+        if (!isset(static::$connection)) {
             $redis = new Redis();
             $redis->connect('redis', 6379);
             static::$connection = $redis;
