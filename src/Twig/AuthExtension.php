@@ -37,7 +37,7 @@ class AuthExtension extends AbstractExtension
 
         $links = $socialAuthFactory->getLinks();
 
-        return $environment->render('components/login.form.html.twig', [
+        return $environment->render('components/modals/login.form.html.twig', [
             'socialLinks' => $links,
         ]);
     }

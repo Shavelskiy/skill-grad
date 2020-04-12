@@ -19,12 +19,12 @@
   }
 
   button {
-    border-radius: 4px;
     font-size: 0.8vw;
     color: #cbcbcb;
-    background-color: #2199e8;
+    background: linear-gradient(180deg, rgb(230, 87, 68), rgb(232, 96, 51));
+    border-radius: 100px;
     border: none;
-    padding: 9px 32px;
+    padding: 14px 32px;
   }
 
   &-social {

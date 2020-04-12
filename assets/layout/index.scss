@@ -1,9 +1,17 @@
 body {
   margin: 0;
   overflow-x: hidden;
+  font-family: "Roboto Light", sans-serif;
 }
 
 .wrap {
   max-width: 1200px;
   margin: auto;
+}
+
+@font-face {
+  font-family: "Roboto Light";
+  src: url("./fonts/Roboto/Roboto-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
 }
