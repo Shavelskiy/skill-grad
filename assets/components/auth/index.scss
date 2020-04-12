@@ -1,43 +1,9 @@
-.auth-form {
-  h6 {
-    font-size: 1.7vw;
-    margin: 0 0 20px;
-    font-weight: 600;
-  }
-
-  &-raw {
-    margin-bottom: 15px;
-    display: flex;
-
-    input {
-      width: 100%;
-      font-size: 0.8vw;
-      border-radius: 7px;
-      border: 1px solid #cbcbcb;
-      padding: 5px 10px;
-    }
-  }
-
+.login {
   &-social {
     margin-bottom: 10px;
   }
-}
 
-.profile-info {
-  display: none;
-}
-
-.auth {
-  .login-form {
-    display: none;
-  }
-
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &-remember {
+  &-forgot-password {
     &-container {
       display: flex;
       flex-direction: column;
@@ -74,13 +40,3 @@
   }
 }
 
-.profile-dropdown {
-  position: absolute;
-  top: 74px;
-  background-color: #fff;
-  left: 0;
-  box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
-  transition: visibility 0s, opacity 0.1s ease-out;
-  opacity: 1;
-  visibility: visible;
-}

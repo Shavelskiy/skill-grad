@@ -9,6 +9,26 @@ body {
   margin: auto;
 }
 
+.profile {
+  &-info {
+    display: none;
+    //  display: flex;
+    //  flex-direction: column;
+  }
+
+  &-dropdown {
+    position: absolute;
+    top: 74px;
+    background-color: #fff;
+    left: 0;
+    box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
+    transition: visibility 0s, opacity 0.1s ease-out;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
 @font-face {
   font-family: "Roboto Light";
   src: url("./fonts/Roboto/Roboto-Light.ttf") format("truetype");

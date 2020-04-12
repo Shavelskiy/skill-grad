@@ -2,36 +2,48 @@ const axios = require('axios').default;
 
 import './index.scss';
 
-const authModal = document.getElementById('auth-modal');
-const authModalBtn = document.getElementById('auth-modal-button');
+const loginModal = document.getElementById('login-modal');
+const loginModalBtn = document.getElementById('login-modal-button');
 
-if ((authModalBtn !== null) && (authModal !== null)) {
-  authModalBtn.onclick = function () {
-    authModal.classList.add('modal-active');
-  };
+const forgotPasswordModal = document.getElementById('forgot-password-modal');
+const forgotPasswordBtn = loginModal.querySelector('.login-forgot-password-link');
 
-  window.onclick = function (event) {
-    if (event.target === authModal) {
-      authModal.classList.remove('modal-active');
-    }
-  }
+loginModalBtn.onclick = function () {
+  loginModal.classList.add('modal-active');
+};
 
-  const authForm = authModal.querySelector('form');
-  const loginCsrfInput = authForm.querySelector('input[name="_csrf_token"]');
-  const authButton = authForm.querySelector('button');
+forgotPasswordBtn.onclick = function () {
+  loginModal.classList.remove('modal-active');
+  forgotPasswordModal.classList.add('modal-active');
+};
 
-  authForm.onsubmit = function (e) {
-    e.preventDefault();
-    authButton.disabled = true;
-
-    axios.post('/ajax/login', new FormData(this))
-      .then(response => {
-        authModal.classList.remove('modal-active');
-        authButton.disabled = false;
-      })
-      .catch(error => {
-        loginCsrfInput.value = error.response.data.csrf;
-        authButton.disabled = false;
-      });
+window.onclick = function (event) {
+  switch (event.target) {
+    case loginModal:
+      loginModal.classList.remove('modal-active');
+      break;
+    case forgotPasswordModal:
+      forgotPasswordModal.classList.remove('modal-active');
+      break;
   }
 }
+
+const loginForm = loginModal.querySelector('form');
+const loginCsrfInput = loginForm.querySelector('input[name="_csrf_token"]');
+const loginButton = loginForm.querySelector('button');
+
+loginForm.onsubmit = function (e) {
+  e.preventDefault();
+  loginButton.disabled = true;
+
+  axios.post('/ajax/login', new FormData(this))
+    .then(response => {
+      loginModal.classList.remove('modal-active');
+      loginButton.disabled = false;
+    })
+    .catch(error => {
+      loginCsrfInput.value = error.response.data.csrf;
+      loginButton.disabled = false;
+    });
+}
+

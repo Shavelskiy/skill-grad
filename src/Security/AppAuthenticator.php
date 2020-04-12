@@ -24,7 +24,7 @@ class AppAuthenticator extends AbstractAuthenticator
     {
         $response = [
             'message' => $exception->getMessage(),
-            'csrf' => $this->csrfTokenManager->getToken('authenticate')->getValue(),
+            'csrf' => $this->csrfTokenManager->getToken('login')->getValue(),
         ];
 
         return new JsonResponse($response, Response::HTTP_BAD_REQUEST);

@@ -1,29 +1,29 @@
-<div id="auth-modal" class="modal">
+<div id="login-modal" class="modal login">
   <div class="modal-content">
-    <div class="modal-body auth-form">
+    <div class="modal-body">
       <h6>Вход на сайт</h6>
       <form method="post" class="modal-form">
-        <div class="auth-form-raw">
-          <input type="email" value="" name="email" id="email" required autofocus placeholder="E-mail">
+        <div class="modal-form-raw">
+          <input type="email" value="" name="email" id="login-email" required autofocus placeholder="E-mail">
         </div>
-        <div class="auth-form-raw">
-          <input type="password" name="password" id="password" required placeholder="Пароль">
+        <div class="modal-form-raw">
+          <input type="password" name="password" id="login-password" required placeholder="Пароль">
         </div>
         <button type="submit">Войти</button>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}">
       </form>
-      <div class="auth-register-container">
+      <div class="login-register-container">
         <span>или&nbsp;</span>
-        <span class="auth-register-link">Зарегистрироваться</span>
+        <span class="login-register-link">Зарегистрироваться</span>
       </div>
-      <div class="auth-remember-container">
+      <div class="login-forgot-password-container">
         <span>Если вы забыли пароль, то можете</span>
-        <span class="auth-remember-link">восстановить его</span>
+        <span class="login-forgot-password-link">восстановить его</span>
       </div>
     </div>
     <div class="modal-footer">
       <span>Войти через социальные сети:</span>
-      <div class="auth-form-social">
+      <div class="login-social">
         {% for link in socialLinks %}
           <a href="{{ link }}">Social auth</a>
         {% endfor %}
@@ -31,3 +31,5 @@
     </div>
   </div>
 </div>
+
+{% include 'components/modals/forgot.passorder.html.twig' %}
