@@ -17,8 +17,15 @@ class SiteController extends AbstractController
     /**
      * @Route("/", name="site.index")
      */
-    public function index(): Response
+    public function index(\Swift_Mailer $mailer): Response
     {
+//        $message = (new \Swift_Message('test'))
+//            ->setFormat('v.shavelsky@gmail.com')
+//            ->setTo('v.shavelskiy@articul.ru')
+//            ->setBody('kekek');
+//
+//        $res = $mailer->send($message);
+//        dd($res);
         return $this->render('site/index.html.twig');
     }
 

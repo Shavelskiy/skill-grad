@@ -26,29 +26,53 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $username;
+    private ?string $email;
+
+    /**
+     * @ORM\Column(type="string", length=11, nullable=true)
+     */
+    private ?string $phone;
+
+    /**
+     * @ORM\Column(type="string", length=180, nullable=true)
+     */
+    private ?string $fullName;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private ?string $about;
+
+    /**
+     * @ORM\Column(type="string", length=180, nullable=true)
+     */
+    private ?string $specialization;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private ?string $password;
 
     /**
-     * @var UuidInterface
+     * @ORM\OneToOne(targetEntity="App\Entity\Upload")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private ?string $avatar;
+
+    /**
      * @ORM\Column(type="uuid", unique=true, nullable=true)
      */
-    private $chatToken;
+    private ?UuidInterface $chatToken;
 
     public function getId(): ?int
     {
@@ -62,13 +86,31 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string)$this->username;
+        return (string)$this->email;
     }
 
     public function setUsername(string $username): self
     {
-        $this->username = $username;
+        $this->email = $username;
 
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     * @return User
+     */
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
         return $this;
     }
 

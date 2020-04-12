@@ -62,7 +62,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
             return null;
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $userEmail]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $userEmail]);
 
         if (!$user) {
             $user = (new User())->setUsername($userEmail);
