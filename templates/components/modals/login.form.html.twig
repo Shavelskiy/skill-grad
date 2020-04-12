@@ -1,20 +1,33 @@
 <div id="auth-modal" class="modal">
-  <div class="modal-content auth-form">
-    <h6>Вход на сайт</h6>
-    <form method="post" class="modal-form">
-      <div class="auth-form-raw">
-        <input type="email" value="" name="email" id="email" required autofocus placeholder="E-mail">
+  <div class="modal-content">
+    <div class="modal-body auth-form">
+      <h6>Вход на сайт</h6>
+      <form method="post" class="modal-form">
+        <div class="auth-form-raw">
+          <input type="email" value="" name="email" id="email" required autofocus placeholder="E-mail">
+        </div>
+        <div class="auth-form-raw">
+          <input type="password" name="password" id="password" required placeholder="Пароль">
+        </div>
+        <button type="submit">Войти</button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+      </form>
+      <div class="auth-register-container">
+        <span>или&nbsp;</span>
+        <span class="auth-register-link">Зарегистрироваться</span>
       </div>
-      <div class="auth-form-raw">
-        <input type="password" name="password" id="password" required placeholder="Пароль">
+      <div class="auth-remember-container">
+        <span>Если вы забыли пароль, то можете</span>
+        <span class="auth-remember-link">восстановить его</span>
       </div>
-      <button type="submit">Войти</button>
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    </form>
-    <div class="auth-form-social">
-      {% for link in socialLinks %}
-        <a href="{{ link }}">Social auth</a>
-      {% endfor %}
+    </div>
+    <div class="modal-footer">
+      <span>Войти через социальные сети:</span>
+      <div class="auth-form-social">
+        {% for link in socialLinks %}
+          <a href="{{ link }}">Social auth</a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>

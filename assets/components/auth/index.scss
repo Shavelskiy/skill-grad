@@ -2,7 +2,7 @@
   h6 {
     font-size: 1.7vw;
     margin: 0 0 20px;
-    font-weight: 100;
+    font-weight: 600;
   }
 
   &-raw {
@@ -18,17 +18,8 @@
     }
   }
 
-  button {
-    font-size: 0.8vw;
-    color: #cbcbcb;
-    background: linear-gradient(180deg, rgb(230, 87, 68), rgb(232, 96, 51));
-    border-radius: 100px;
-    border: none;
-    padding: 14px 32px;
-  }
-
   &-social {
-    margin-top: 20px;
+    margin-bottom: 10px;
   }
 }
 
@@ -44,6 +35,42 @@
   .profile-info {
     display: flex;
     flex-direction: column;
+  }
+
+  &-remember {
+    &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      color: rgb(144, 145, 146);
+    }
+
+    &-link {
+      color: rgb(229, 97, 61);
+      font-weight: 900;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-register {
+    &-container {
+      margin-top: 10px;
+    }
+
+    &-link {
+      color: rgb(53, 113, 173);
+      font-weight: 900;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
