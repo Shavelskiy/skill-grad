@@ -30,6 +30,9 @@ if [[ $1 == "front" ]]; then
         build)
             docker-compose exec front yarn run build
         ;;
+        *)
+          docker-compose exec front yarn ${@:2}
+        ;;
         esac
 
     exit

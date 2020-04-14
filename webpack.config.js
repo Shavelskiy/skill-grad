@@ -1,8 +1,21 @@
 const Encore = require('@symfony/webpack-encore');
+const dotenv = require('dotenv');
+const path = require('path');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
+
+Encore
+  .configureDefinePlugin(options => {
+    const env = dotenv.config({ path:  path.join(__dirname, '.env.local') });
+
+    if (env.error) {
+      throw env.error;
+    }
+
+    options['process.env'].RECAPTCHA_SITE_KEY = JSON.stringify(env.parsed.RECAPTCHA_SITE_KEY);
+  })
 
 Encore
   .setOutputPath('public/build/')
