@@ -1,0 +1,55 @@
+<div id="register-role-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h6>Выберите тип аккаунта</h6>
+      <div class="modal-form">
+        <div class="modal-form-raw">
+          <button id="register-user-button" type="submit" class="blue">Обучающийся</button>
+        </div>
+        <div class="modal-form-raw">
+          <button id="register-provider-button" type="submit" class="red">Образовательное учреждение</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="register-modal" class="modal register">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h6>Регистрация на сайте</h6>
+      <form method="post" action="{{ path('ajax.auth.login') }}" class="modal-form">
+        <span class="error"></span>
+        <div class="modal-form-raw">
+          <input type="email" value="" name="email" id="register-email" required autofocus placeholder="E-mail">
+        </div>
+        <div class="modal-form-raw">
+          <input type="password" name="password" minlength="6" id="register-password" required placeholder="Пароль">
+        </div>
+        <div class="modal-form-raw">
+          <input type="password" name="confirm-password" id="register-confirm-password" required placeholder="Повторите пароль">
+        </div>
+        <button type="submit" class="red">Зарегистрироваться</button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+        <input type="hidden" name="role">
+      </form>
+      <div class="register-text-container">
+        <span>
+          Нажимая на кнопку "Зарегистрироваться"
+          Вы соглашаетесь в "<a href="/">Пользовательским соглашением</a>",
+          "<a href="/">Политикой платных услуг</a>" и обработкой персональных данных
+          в соответствии с "<a href="/">Политикой конфиденциальности</a>"
+        </span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span>Регистрация через социальные сети:</span>
+      <div class="register-social">
+        {% for link in socialLinks %}
+          <a href="{{ link }}">Social auth</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+

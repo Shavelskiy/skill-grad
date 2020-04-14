@@ -112,7 +112,6 @@
     button {
       font-size: 0.8vw;
       color: #ffffff;
-      background: linear-gradient(180deg, rgb(230, 87, 68), rgb(232, 96, 51));
       border-radius: 100px;
       border: none;
       padding: 14px 32px;
@@ -129,10 +128,18 @@
         box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
     }
+
+    button.red {
+      background: linear-gradient(180deg, rgb(230, 87, 68), rgb(232, 96, 51));
+    }
+
+    button.blue {
+      background: linear-gradient(180deg, rgb(47, 102, 166), rgb(59, 125, 178));
+    }
   }
 
   h6 {
-    font-size: 1.7vw;
+    font-size: 1.3vw;
     margin: 0 0 20px;
     font-weight: 600;
   }

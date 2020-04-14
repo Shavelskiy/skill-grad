@@ -8,13 +8,13 @@
           <input type="email" value="" name="email" id="login-email" required autofocus placeholder="E-mail">
         </div>
         <div class="modal-form-raw">
-          <input type="password" name="password" id="login-password" required placeholder="Пароль">
+          <input type="password" name="password" minlength="6" id="login-password" required placeholder="Пароль">
         </div>
         <div class="modal-form-raw">
           <input type="checkbox" name="remember" id="login-remember">
           <label for="login-remember" class="checkbox">Запомнить пароль</label>
         </div>
-        <button type="submit">Войти</button>
+        <button type="submit" class="red">Войти</button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}">
       </form>
       <div class="login-register-container">

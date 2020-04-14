@@ -8,19 +8,42 @@ import {load} from 'recaptcha-v3';
 const loginModal = document.getElementById('login-modal');
 const resetPasswordModal = document.getElementById('forgot-password-modal');
 const newPasswordModal = document.getElementById('new-password-modal');
+const registerRoleModal = document.getElementById('register-role-modal');
+const registerModal = document.getElementById('register-modal');
 
 /* кнопки, вызывающие попапы и открытие их */
-const loginModalBtn = document.getElementById('login-modal-button');
-const resetPasswordBtn = loginModal.querySelector('.login-forgot-password-link');
+const showModal = function (modal) {
+  modal.classList.add('modal-active');
+}
 
-loginModalBtn.onclick = function () {
-  loginModal.classList.add('modal-active');
-};
+/* кнопки в хедере */
+document.getElementById('login-modal-button').onclick = () => showModal(loginModal);
+document.getElementById('register-modal-button').onclick = () => showModal(registerRoleModal);
 
-resetPasswordBtn.onclick = function () {
+/* кнопки в попапе авторизации */
+loginModal.querySelector('.login-forgot-password-link').onclick = () => {
+  showModal(resetPasswordModal);
   loginModal.classList.remove('modal-active');
-  resetPasswordModal.classList.add('modal-active');
-};
+}
+loginModal.querySelector('.login-register-link').onclick = () => {
+  showModal(registerRoleModal);
+  loginModal.classList.remove('modal-active');
+}
+
+/* переход с выбора типа аккаунта на форму регистрации */
+const registerFormRoleInput = registerModal.querySelector('input[name="role"]')
+
+document.getElementById('register-user-button').onclick = () => {
+  showModal(registerModal);
+  registerRoleModal.classList.remove('modal-active');
+  registerFormRoleInput.value='user';
+}
+document.getElementById('register-provider-button').onclick = () => {
+  showModal(registerModal);
+  registerRoleModal.classList.remove('modal-active');
+  registerFormRoleInput.value='provider';
+}
+
 
 const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
   const form = modal.querySelector('form');
@@ -82,6 +105,12 @@ window.onclick = function (event) {
       break;
     case newPasswordModal:
       newPasswordModal.classList.remove('modal-active');
+      break;
+    case registerRoleModal:
+      registerRoleModal.classList.remove('modal-active');
+      break;
+    case registerModal:
+      registerModal.classList.remove('modal-active');
       break;
   }
 }

@@ -40,3 +40,31 @@
   }
 }
 
+.register {
+  &-social {
+    margin-bottom: 10px;
+  }
+
+  &-text {
+    &-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: rgb(144, 145, 146);
+
+      span {
+        text-align: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: rgb(53, 113, 173);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
