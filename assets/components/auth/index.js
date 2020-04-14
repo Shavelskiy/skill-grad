@@ -46,6 +46,7 @@ const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
     const formData = new FormData(this);
 
     load(process.env.RECAPTCHA_SITE_KEY).then((recaptcha) => {
+      recaptcha.hideBadge();
       recaptcha.execute(recaptchaAction).then((token) => {
         formData.append('g_recaptcha_response', token);
 
