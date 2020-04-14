@@ -12,8 +12,6 @@ body {
 .profile {
   &-info {
     display: none;
-    //  display: flex;
-    //  flex-direction: column;
   }
 
   &-dropdown {
@@ -28,6 +26,16 @@ body {
   }
 }
 
+.logged {
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .auth-form {
+    display: none;
+  }
+}
 
 @font-face {
   font-family: "Roboto Light";

@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private ?UuidInterface $chatToken;
 
+    /**
+     * @ORM\Column(type="uuid", unique=true, nullable=true)
+     */
+    private ?UuidInterface $resetPasswordToken;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -177,6 +182,29 @@ class User implements UserInterface
     {
         $this->chatToken = Uuid::uuid4();
 
+        return $this;
+    }
+
+    /**
+     * @return UuidInterface
+     */
+    public function getResetPasswordToken(): UuidInterface
+    {
+        return $this->resetPasswordToken;
+    }
+
+    /**
+     * @return User
+     */
+    public function generateResetPasswordToken(): self
+    {
+        $this->resetPasswordToken =  Uuid::uuid4();
+        return $this;
+    }
+
+    public function resetResetPasswordToken(): self
+    {
+        $this->resetPasswordToken = null;
         return $this;
     }
 }

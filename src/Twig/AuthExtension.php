@@ -15,30 +15,15 @@ class AuthExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('renderLoginForm', [$this, 'renderLoginForm'], [
-                'needs_environment' => true,
-                'is_safe' => ['html'],
-            ]),
+            new TwigFunction('getSocialAuthLinks', [$this, 'getSocialAuthLinks']),
         ];
     }
 
     /**
-     * @param Environment $environment
-     *
-     * @return string
-     *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
+     * @return array
      */
-    public function renderLoginForm(Environment $environment): string
+    public function getSocialAuthLinks(): array
     {
-        $socialAuthFactory = new SocialAuthFactory();
-
-        $links = $socialAuthFactory->getLinks();
-
-        return $environment->render('components/modals/login.form.html.twig', [
-            'socialLinks' => $links,
-        ]);
+        return (new SocialAuthFactory())->getLinks();
     }
 }

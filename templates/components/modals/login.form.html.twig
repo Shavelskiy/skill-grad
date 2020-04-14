@@ -2,12 +2,17 @@
   <div class="modal-content">
     <div class="modal-body">
       <h6>Вход на сайт</h6>
-      <form method="post" class="modal-form">
+      <form method="post" action="{{ path('ajax.auth.login') }}" class="modal-form">
+        <span class="error"></span>
         <div class="modal-form-raw">
           <input type="email" value="" name="email" id="login-email" required autofocus placeholder="E-mail">
         </div>
         <div class="modal-form-raw">
           <input type="password" name="password" id="login-password" required placeholder="Пароль">
+        </div>
+        <div class="modal-form-raw">
+          <input type="checkbox" name="remember" id="login-remember">
+          <label for="login-remember" class="checkbox">Запомнить пароль</label>
         </div>
         <button type="submit">Войти</button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}">
@@ -31,5 +36,3 @@
     </div>
   </div>
 </div>
-
-{% include 'components/modals/forgot.passorder.html.twig' %}

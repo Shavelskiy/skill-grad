@@ -2,12 +2,13 @@
   <div class="modal-content">
     <div class="modal-body">
       <h6>Восстановление пароля</h6>
-      <form method="post" class="modal-form">
+      <form method="post" action="{{ path('ajax.auth.reset.password') }}" class="modal-form">
+        <span class="error"></span>
         <div class="modal-form-raw">
           <input type="email" value="" name="email" id="forgot-password-email" required autofocus placeholder="E-mail">
         </div>
         <button type="submit">Восстановить пароль</button>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('forgot-password') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('reset-password') }}">
       </form>
     </div>
   </div>
