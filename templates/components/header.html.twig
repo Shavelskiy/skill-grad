@@ -1,13 +1,15 @@
 <div class="header-container">
   <div class="wrap {{ app.user ? 'logged' : '' }}">
-    <button id="login-modal-button" type="button">Авторизация</button>
-    <button id="register-modal-button" type="button">Регистрация</button>
+    <div class="auth-forms">
+      <button id="login-modal-button" type="button">Авторизация</button>
+      <button id="register-modal-button" type="button">Регистрация</button>
 
-    {% include 'components/modals/login.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
-    {% include 'components/modals/register.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
-    {% include 'components/modals/reset.passorder.html.twig' %}
-    {% include 'components/modals/new.password.html.twig' %}
-    {% include 'components/modals/alert.html.twig' %}
+      {% include 'components/modals/login.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
+      {% include 'components/modals/register.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
+      {% include 'components/modals/reset.passorder.html.twig' %}
+      {% include 'components/modals/new.password.html.twig' %}
+      {% include 'components/modals/alert.html.twig' %}
+    </div>
 
     <div class="profile-info">
       <span>Добро пожаловать,</span>

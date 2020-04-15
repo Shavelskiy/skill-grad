@@ -104,7 +104,6 @@ class AuthController extends AbstractController
         } catch (Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage(),
-                'csrf' => $this->csrfTokenManager->getToken('reset-password')->getValue(),
             ], 400);
         }
     }
@@ -147,7 +146,6 @@ class AuthController extends AbstractController
         } catch (Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage(),
-                'csrf' => $this->csrfTokenManager->getToken('new-password')->getValue(),
             ], 400);
         }
     }

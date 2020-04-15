@@ -47,7 +47,6 @@ document.getElementById('register-provider-button').onclick = () => {
 
 const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
   const form = modal.querySelector('form');
-  const csrfInput = form.querySelector('input[name="_csrf_token"]');
   const formButton = form.querySelector('button');
 
   form.onsubmit = function (e) {
@@ -80,7 +79,6 @@ const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
           })
           .catch(error => {
             if (!isNewPasswordModal) {
-              csrfInput.value = error.response.data.csrf;
               formButton.disabled = false;
             }
             showModalFormError(form, error.response.data.message);
