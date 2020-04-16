@@ -41,9 +41,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function findUserByEmail($email): User
+    {
+        try {
+            $user = $this->createQueryBuilder('u')
+                ->where('u.email = :email')
+                ->setParameter('email', $email)
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if ($user !== null) {
+                return $user;
+            }
+        } catch (Exception $e) {
+        }
+
+        throw new NotFoundHttpException('Пользователь не найден');
+    }
+
     /**
      * @param $token
-     *
      * @return User
      */
     public function findByChatToken($token): User
@@ -69,6 +86,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
+    /**
+     * @param $token
+     * @return User
+     */
     public function findByResetPasswordToken($token): User
     {
         try {
@@ -79,6 +100,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $user = $this->createQueryBuilder('u')
                 ->where('u.resetPasswordToken = :resetPasswordToken')
                 ->setParameter('resetPasswordToken', $token)
+                ->getQuery()
+                ->getResult();
+
+            if (empty($user)) {
+                throw new RuntimeException('user not found');
+            }
+
+            return current($user);
+        } catch (Exception $e) {
+            throw new NotFoundHttpException('Пользователь не найден');
+        }
+    }
+
+    /**
+     * @param $token
+     * @return User
+     */
+    public function findByRegisterToken($token): User
+    {
+        try {
+            if (empty($token)) {
+                throw new RuntimeException('token is empty');
+            }
+
+            $user = $this->createQueryBuilder('u')
+                ->where('u.registerToken = :registerToken')
+                ->setParameter('registerToken', $token)
                 ->getQuery()
                 ->getResult();
 

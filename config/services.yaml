@@ -38,3 +38,4 @@ services:
   App\Security\LogoutSuccessHandler:
     class: App\Security\LogoutSuccessHandler
     arguments: ['@security.http_utils', '@router']
+

@@ -1,7 +1,7 @@
-<div id="alert-modal" class="modal alert">
+<div id="alert-modal" class="modal alert {{ app.session.flashBag.has('alert.message') ? 'modal-active' : '' }}">
   <div class="modal-content">
     <div class="modal-body alert-body">
-      <p class="message"></p>
+      <p class="message">{{ app.session.flashBag.get('alert.message') | last }}</p>
     </div>
   </div>
 </div>

@@ -39,6 +39,11 @@ class User implements UserInterface
     private ?string $phone;
 
     /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private bool $active = false;
+
+    /**
      * @ORM\Column(type="string", length=180, nullable=true)
      */
     private ?string $fullName;
@@ -78,6 +83,11 @@ class User implements UserInterface
      * @ORM\Column(type="uuid", unique=true, nullable=true)
      */
     private ?UuidInterface $resetPasswordToken;
+
+    /**
+     * @ORM\Column(type="uuid", unique=true, nullable=true)
+     */
+    protected ?UuidInterface $registerToken;
 
     public function getId(): ?int
     {
@@ -120,13 +130,47 @@ class User implements UserInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string|null $phone
+     * @return User
+     */
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     * @return User
+     */
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -198,13 +242,36 @@ class User implements UserInterface
      */
     public function generateResetPasswordToken(): self
     {
-        $this->resetPasswordToken =  Uuid::uuid4();
+        $this->resetPasswordToken = Uuid::uuid4();
         return $this;
     }
 
     public function resetResetPasswordToken(): self
     {
         $this->resetPasswordToken = null;
+        return $this;
+    }
+
+    /**
+     * @return UuidInterface
+     */
+    public function getRegisterToken(): UuidInterface
+    {
+        return $this->registerToken;
+    }
+
+    /**
+     * @return User
+     */
+    public function generateRegisterToken(): self
+    {
+        $this->registerToken = Uuid::uuid4();
+        return $this;
+    }
+
+    public function resetRegisterToken(): self
+    {
+        $this->registerToken = null;
         return $this;
     }
 }

@@ -12,7 +12,7 @@ const registerRoleModal = document.getElementById('register-role-modal');
 const registerModal = document.getElementById('register-modal');
 
 /* кнопки, вызывающие попапы и открытие их */
-const showModal = function (modal) {
+const showModal = (modal) => {
   modal.classList.add('modal-active');
 }
 
@@ -36,23 +36,23 @@ const registerFormRoleInput = registerModal.querySelector('input[name="role"]')
 document.getElementById('register-user-button').onclick = () => {
   showModal(registerModal);
   registerRoleModal.classList.remove('modal-active');
-  registerFormRoleInput.value='user';
+  registerFormRoleInput.value = 'user';
 }
 document.getElementById('register-provider-button').onclick = () => {
   showModal(registerModal);
   registerRoleModal.classList.remove('modal-active');
-  registerFormRoleInput.value='provider';
+  registerFormRoleInput.value = 'provider';
 }
 
 
-const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
+const initModalForm = (modal, checkPasswords, closeFormIfError, recaptchaAction) => {
   const form = modal.querySelector('form');
   const formButton = form.querySelector('button');
 
   form.onsubmit = function (e) {
     e.preventDefault();
 
-    if (isNewPasswordModal) {
+    if (checkPasswords) {
       const passwordInput = form.querySelector('input[name="password"]');
       const confirmPasswordInput = form.querySelector('input[name="confirm-password"]');
 
@@ -66,7 +66,6 @@ const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
     hideModalFormError(form);
 
     const formData = new FormData(this);
-
     load(process.env.RECAPTCHA_SITE_KEY).then((recaptcha) => {
       recaptcha.hideBadge();
       recaptcha.execute(recaptchaAction).then((token) => {
@@ -75,25 +74,28 @@ const initModalForm = function (modal, isNewPasswordModal, recaptchaAction) {
         axios.post(form.action, formData)
           .then(response => {
             modal.classList.remove('modal-active');
-            showAlert(response.data);
+            showAlert(response.data.message);
           })
           .catch(error => {
-            if (!isNewPasswordModal) {
+            if (closeFormIfError) {
+              showAlert(error.response.data.message);
+            } else {
               formButton.disabled = false;
+              showModalFormError(form, error.response.data.message);
             }
-            showModalFormError(form, error.response.data.message);
           });
       })
     });
   }
 }
 
-initModalForm(loginModal, false, 'login');
-initModalForm(resetPasswordModal, false, 'reset-password');
-initModalForm(newPasswordModal, true, 'new-password')
+initModalForm(loginModal, false, false, 'login');
+initModalForm(resetPasswordModal, false, false, 'reset-password');
+initModalForm(newPasswordModal, true, true, 'new-password');
+initModalForm(registerModal, true, false, 'register');
 
 /* закрытие попапов */
-window.onclick = function (event) {
+window.onclick = (event) => {
   switch (event.target) {
     case loginModal:
       loginModal.classList.remove('modal-active');

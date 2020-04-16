@@ -17,7 +17,7 @@ class AppAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new JsonResponse('Вы успешно авторизованы');
+        return new JsonResponse(['message' => 'Вы успешно авторизованы']);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
