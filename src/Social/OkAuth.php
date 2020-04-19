@@ -10,20 +10,20 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class VkAuth implements SocialAuthInterface
+class OkAuth implements SocialAuthInterface
 {
-    protected const AUTH_URL = 'https://oauth.vk.com/authorize?';
+    protected const AUTH_URL = 'https://connect.ok.ru/oauth/authorize?';
     protected const ACCESS_TOKEN_URL = 'https://oauth.vk.com/access_token';
 
-    protected const SOCIAL_KEY = 'vk-auth';
+    protected const SOCIAL_KEY = 'ok-auth';
 
     protected string $clientId;
     protected string $secretKey;
 
     public function __construct()
     {
-        $this->clientId = '7351839';
-        $this->secretKey = '0raiFV7o7ZRetkxUnzWJ';
+        $this->clientId = '512000359268';
+        $this->secretKey = '43EB8875CCEF2F10D38AC5AB';
     }
 
     public function getAuthLink(bool $create = false): string

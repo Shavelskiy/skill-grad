@@ -5,7 +5,7 @@
       <button id="register-modal-button" type="button">Регистрация</button>
 
       {% include 'components/modals/login.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
-      {% include 'components/modals/register.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
+      {% include 'components/modals/register.form.html.twig' with { 'socialLinks': getSocialAuthLinks(true) } %}
       {% include 'components/modals/reset.passorder.html.twig' %}
       {% include 'components/modals/new.password.html.twig' %}
     </div>

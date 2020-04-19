@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -27,7 +28,8 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         UserPasswordEncoderInterface $passwordEncoder
-    ) {
+    )
+    {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->passwordEncoder = $passwordEncoder;
@@ -62,14 +64,26 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
             return null;
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $userEmail]);
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['email' => $userEmail, 'socialKey' => $credentials['socialKey']]);
 
         if (!$user) {
-            $user = (new User())->setUsername($userEmail);
+            if (!$credentials['create']) {
+                return null;
+            }
+
+            $user = (new User())
+                ->setUsername($userEmail)
+                ->setRoles([User::ROLE_USER])
+                ->setSocialKey($credentials['socialKey']);
+
             $user->setPassword(
-                $this->passwordEncoder->encodePassword(
-                    $user, '123456')
+                $this->passwordEncoder->encodePassword($user, '123456')
             );
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
         }
 
         return $user;
@@ -77,9 +91,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
         return true;
     }
 

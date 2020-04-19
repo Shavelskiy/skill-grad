@@ -75,6 +75,11 @@ class User implements UserInterface
     private ?string $avatar;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $socialKey;
+
+    /**
      * @ORM\Column(type="uuid", unique=true, nullable=true)
      */
     private ?UuidInterface $chatToken;
@@ -272,6 +277,24 @@ class User implements UserInterface
     public function resetRegisterToken(): self
     {
         $this->registerToken = null;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSocialKey(): ?string
+    {
+        return $this->socialKey;
+    }
+
+    /**
+     * @param string|null $socialKey
+     * @return User
+     */
+    public function setSocialKey(?string $socialKey): self
+    {
+        $this->socialKey = $socialKey;
         return $this;
     }
 }

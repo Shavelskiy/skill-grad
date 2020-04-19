@@ -11,15 +11,16 @@ class SocialAuthFactory
     {
         $this->services = [
             new VkAuth(),
+            new OkAuth(),
         ];
     }
 
-    public function getLinks(): array
+    public function getLinks(bool $create = false): array
     {
         $result = [];
 
         foreach ($this->services as $service) {
-            $result[] = $service->getAuthLink();
+            $result[] = $service->getAuthLink($create);
         }
 
         return $result;

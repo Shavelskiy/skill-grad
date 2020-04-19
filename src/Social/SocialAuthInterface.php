@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface SocialAuthInterface
 {
-    public function getAuthLink(): string;
+    public function getAuthLink(bool $create): string;
 
     public function support(Request $request): bool;
 
