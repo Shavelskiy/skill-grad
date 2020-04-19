@@ -3,14 +3,14 @@
 namespace App\EventListener;
 
 use App\Entity\User;
-use App\Security\AbstractAuthenticator;
-use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
 use Throwable;
 
 class ConfirmRegisterListener implements EventSubscriberInterface
@@ -19,20 +19,20 @@ class ConfirmRegisterListener implements EventSubscriberInterface
 
     protected EntityManagerInterface $em;
     protected GuardAuthenticatorHandler $guardHandler;
-    protected AbstractAuthenticator $authenticator;
     protected FlashBagInterface $flashBag;
+    protected SessionInterface $session;
 
     public function __construct(
         EntityManagerInterface $em,
         GuardAuthenticatorHandler $guardHandler,
-        AppAuthenticator $authenticator,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        SessionInterface $session
     )
     {
         $this->em = $em;
         $this->guardHandler = $guardHandler;
-        $this->authenticator = $authenticator;
         $this->flashBag = $flashBag;
+        $this->session = $session;
     }
 
     public static function getSubscribedEvents(): array
@@ -42,6 +42,10 @@ class ConfirmRegisterListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     *
+     * @param RequestEvent $event
+     */
     public function onKernelRequest(RequestEvent $event): void
     {
         $this->flashBag->get('alert.message');
@@ -62,7 +66,12 @@ class ConfirmRegisterListener implements EventSubscriberInterface
             $this->em->persist($user);
             $this->em->flush();
 
-            $this->guardHandler->authenticateUserAndHandleSuccess($user, $request, $this->authenticator, 'main');
+            $token = new PostAuthenticationGuardToken($user, 'main', $user->getRoles());
+
+            $this->guardHandler->authenticateWithToken($token, $request);
+            $this->session->set('_security_main', serialize($token));
+
+
         } catch (Throwable $e) {
             return;
         }
