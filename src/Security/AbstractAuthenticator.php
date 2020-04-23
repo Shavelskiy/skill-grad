@@ -76,9 +76,14 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
         return $user;
     }
 
+    /**
+     * @param mixed $credentials
+     * @param UserInterface $user
+     * @return bool
+     */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        return $user->isActive() && $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     protected function getLoginUrl(): string

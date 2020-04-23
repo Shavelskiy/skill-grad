@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -60,7 +59,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     {
         try {
             $userEmail = $this->socialAuthService->getUserEmail($credentials);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return null;
         }
 
@@ -76,6 +75,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
             $user = (new User())
                 ->setUsername($userEmail)
                 ->setRoles([User::ROLE_USER])
+                ->setActive(true)
                 ->setSocialKey($credentials['socialKey']);
 
             $user->setPassword(

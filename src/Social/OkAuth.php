@@ -13,17 +13,23 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 class OkAuth implements SocialAuthInterface
 {
     protected const AUTH_URL = 'https://connect.ok.ru/oauth/authorize?';
-    protected const ACCESS_TOKEN_URL = 'https://oauth.vk.com/access_token';
+
+    protected const API_BASE_URL = 'https://api.ok.ru';
+    protected const ACCESS_TOKEN_URL = '/oauth/token.do';
+    protected const API_REST_URL = '/fb.do';
+    protected const GET_USER_METHOD = 'users.getCurrentUser';
 
     protected const SOCIAL_KEY = 'ok-auth';
 
     protected string $clientId;
     protected string $secretKey;
+    protected string $publicKey;
 
     public function __construct()
     {
         $this->clientId = '512000359268';
         $this->secretKey = '43EB8875CCEF2F10D38AC5AB';
+        $this->publicKey = 'CFGMHKJGDIHBABABA';
     }
 
     public function getAuthLink(bool $create = false): string
@@ -31,7 +37,7 @@ class OkAuth implements SocialAuthInterface
         $params = [
             'client_id' => $this->clientId,
             'redirect_uri' => 'http://localhost:8080',
-            'scope' => 'friends,email',
+            'scope' => 'GET_EMAIL',
             'response_type' => 'code',
             'state' => serialize([
                 'socialKey' => self::SOCIAL_KEY,
@@ -77,15 +83,29 @@ class OkAuth implements SocialAuthInterface
     public function getUserEmail($credentials): string
     {
         $client = HttpClient::create();
+        $accessToken = $this->getUserAccessToken($credentials['code']);
 
-        $response = $client->request('GET', self::ACCESS_TOKEN_URL, [
-            'query' => [
-                'client_id' => $this->clientId,
-                'client_secret' => $this->secretKey,
-                'redirect_uri' => 'http://localhost:8080',
-                'code' => $credentials['code'],
-            ],
-        ]);
+        $params = [
+            'application_key' => $this->publicKey,
+            'fields' => 'EMAIL',
+            'method' => self::GET_USER_METHOD,
+        ];
+
+        ksort($params);
+
+        $sign = '';
+
+        foreach ($params as $key => $value) {
+            $sign .= "$key=$value";
+        }
+
+        $sign .= md5($accessToken . $this->secretKey);
+        $sign = md5($sign);
+
+        $params['sig'] = $sign;
+        $params['access_token'] = $accessToken;
+
+        $response = $client->request('POST', self::API_BASE_URL . self::API_REST_URL, ['query' => $params,]);
 
         $content = json_decode($response->getContent(), true);
 
@@ -94,5 +114,36 @@ class OkAuth implements SocialAuthInterface
         }
 
         return $content['email'];
+    }
+
+    /**
+     * @param $code
+     * @return string
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    protected function getUserAccessToken($code): string
+    {
+        $client = HttpClient::create();
+
+        $response = $client->request('POST', self::API_BASE_URL . self::ACCESS_TOKEN_URL, [
+            'query' => [
+                'code' => $code,
+                'client_id' => $this->clientId,
+                'client_secret' => $this->secretKey,
+                'redirect_uri' => 'http://localhost:8080',
+                'grant_type' => 'authorization_code',
+            ],
+        ]);
+
+        $content = json_decode($response->getContent(), true);
+
+        if (!isset($content['access_token'])) {
+            throw new RuntimeException('access_token not found');
+        }
+
+        return $content['access_token'];
     }
 }
