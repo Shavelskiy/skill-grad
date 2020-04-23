@@ -4,7 +4,7 @@ namespace App\Controller\Ajax;
 
 use App\Entity\User;
 use App\EventListener\ConfirmRegisterListener;
-use App\Form\RegistrationFormType;
+use App\Service\ResetUserPasswordInterface;
 use Exception;
 use LogicException;
 use RuntimeException;
@@ -18,7 +18,6 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
@@ -27,16 +26,18 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 class AuthController extends AbstractController
 {
     protected CsrfTokenManagerInterface $csrfTokenManager;
-
     protected UserPasswordEncoderInterface $userPasswordEncoder;
+    protected ResetUserPasswordInterface $resetUserPasswordService;
 
     public function __construct(
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        ResetUserPasswordInterface $resetUserPasswordService
     )
     {
         $this->csrfTokenManager = $csrfTokenManager;
         $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->resetUserPasswordService = $resetUserPasswordService;
     }
 
     /**
@@ -58,53 +59,26 @@ class AuthController extends AbstractController
     /**
      * @Route("/reset-password", name="ajax.auth.reset.password")
      * @param Request $request
-     * @param MailerInterface $mailer
      * @return JsonResponse
-     * @throws TransportExceptionInterface
      */
-    public function resetPassword(Request $request, MailerInterface $mailer): JsonResponse
+    public function resetPassword(Request $request): JsonResponse
     {
         try {
             if (!$this->isCsrfTokenValid('reset-password', $request->get('_csrf_token'))) {
                 throw new RuntimeException('Ошбика безопастности');
             }
 
-            /** @var User $user */
-            $user = $this->getDoctrine()
-                ->getRepository(User::class)
-                ->findOneBy(['email' => $request->get('email')]);
+            $email = $request->get('email', '');
 
-            if ($user === null) {
-                throw new RuntimeException('Пользователь с таким E-mail не найден');
+            if (empty($email)) {
+                throw new RuntimeException('Заполните email');
             }
 
-            $user->generateResetPasswordToken();
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($user);
-            $em->flush();
-
-            try {
-                $email = (new Email())
-                    ->from('v.shavelsky@gmail.com')
-                    ->to($user->getEmail())
-                    ->subject('Восстановление пароля')
-                    ->html($this->renderView('emails/forgot.password.html.twig', [
-                        'link' => 'http://localhost:8080' . $this->generateUrl('site.index', [
-                                'reset_password' => 1,
-                                'token' => $user->getResetPasswordToken()->getHex()->toString(),
-                            ])
-                    ]));
-
-                $mailer->send($email);
-            } catch (Exception $e) {
-                throw new RuntimeException('Произошла ошибка');
-            }
+            $this->resetUserPasswordService->initResetUserPassword($email);
 
             return new JsonResponse(['message' => 'На ваш email отправлено письмо']);
         } catch (Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage(),], 400);
+            return new JsonResponse(['message' => $e->getMessage()], 400);
         }
     }
 
@@ -120,26 +94,19 @@ class AuthController extends AbstractController
                 throw new RuntimeException('Ошбика безопастности');
             }
 
-            $password = $request->get('password');
+            $password = $request->get('password', '');
 
-            if ($password !== $request->get('confirm-password')) {
+            if ($password !== $request->get('confirm-password', '')) {
                 throw new RuntimeException('Пароли должны совпадать');
             }
 
-            /** @var User $user */
-            $user = $this->getDoctrine()->getRepository(User::class)
-                ->findByResetPasswordToken($request->get('token'));
+            $token = $request->get('token', '');
 
-            if ($user === null) {
-                throw new RuntimeException('Ошибка безопастности');
+            if (empty($password) || empty($token)) {
+                throw new RuntimeException('Ошибка валидации входных данных');
             }
 
-            $user
-                ->setPassword($this->userPasswordEncoder->encodePassword($user, $password))
-                ->resetResetPasswordToken();
-
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
+            $this->resetUserPasswordService->resetUserPassword($token, $password);
 
             return new JsonResponse(['message' => 'Ваш пароль успешно сменен']);
         } catch (Exception $e) {

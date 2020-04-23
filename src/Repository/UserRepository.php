@@ -45,7 +45,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         try {
             $user = $this->createQueryBuilder('u')
-                ->where('u.email = :email')
+                ->where('u.email = :email and u.socialKey is null')
                 ->setParameter('email', $email)
                 ->getQuery()
                 ->getOneOrNullResult();
@@ -56,7 +56,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         } catch (Exception $e) {
         }
 
-        throw new NotFoundHttpException('Пользователь не найден');
+        throw new NotFoundHttpException('Пользователь с таким E-mail не найден');
     }
 
     /**

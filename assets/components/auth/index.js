@@ -90,8 +90,8 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, recaptchaAction)
 }
 
 initModalForm(loginModal, false, false, 'login');
-initModalForm(resetPasswordModal, false, false, 'reset-password');
-initModalForm(newPasswordModal, true, true, 'new-password');
+initModalForm(resetPasswordModal, false, false, 'resetPassword');
+initModalForm(newPasswordModal, true, true, 'newPassword');
 initModalForm(registerModal, true, false, 'register');
 
 /* закрытие попапов */
