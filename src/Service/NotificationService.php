@@ -2,13 +2,13 @@
 
 namespace App\Service;
 
+use App\EventListener\ConfirmRegisterListener;
 use RuntimeException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Throwable;
 use Twig\Environment;
-use Twig\TemplateWrapper;
 
 class NotificationService implements AuthMailerInterface
 {
@@ -31,7 +31,7 @@ class NotificationService implements AuthMailerInterface
      * @param $toEmail
      * @param $token
      */
-    public function sendResetPasswordEmail($toEmail, $token): void
+    public function sendResetPasswordEmail(string $toEmail, string $token): void
     {
         try {
             $email = (new Email())
@@ -42,6 +42,26 @@ class NotificationService implements AuthMailerInterface
                     'link' => 'http://localhost:8080' . $this->urlGenerator->generate('site.index', [
                             'reset_password' => 1,
                             'token' => $token
+                        ])
+                ]));
+
+            $this->mailer->send($email);
+        } catch (Throwable $e) {
+            throw new RuntimeException('Произошла ошибка');
+        }
+    }
+
+    public function sendRegisterEmail(string $toEmail, string $token): void
+    {
+        try {
+            $email = (new Email())
+                ->from('v.shavelsky@gmail.com')
+                ->to($toEmail)
+                ->subject('Потверждение регистрации')
+                ->html($this->templating->render('emails/forgot.password.html.twig', [
+                    'link' => 'http://localhost:8080' . $this->urlGenerator->generate('site.index', [
+                            ConfirmRegisterListener::CONFIRM_REGISTRATION_KEY => 1,
+                            'token' => $token,
                         ])
                 ]));
 

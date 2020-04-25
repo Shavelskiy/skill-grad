@@ -4,5 +4,7 @@ namespace App\Service;
 
 interface AuthMailerInterface
 {
-    public function sendResetPasswordEmail($toEmail, $token);
+    public function sendResetPasswordEmail(string $toEmail, string $token);
+
+    public function sendRegisterEmail(string $toEmail, string $token);
 }

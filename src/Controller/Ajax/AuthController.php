@@ -2,8 +2,7 @@
 
 namespace App\Controller\Ajax;
 
-use App\Entity\User;
-use App\EventListener\ConfirmRegisterListener;
+use App\Service\RegisterUserInterface;
 use App\Service\ResetUserPasswordInterface;
 use Exception;
 use LogicException;
@@ -12,10 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -28,16 +24,19 @@ class AuthController extends AbstractController
     protected CsrfTokenManagerInterface $csrfTokenManager;
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected ResetUserPasswordInterface $resetUserPasswordService;
+    protected RegisterUserInterface $registerUserService;
 
     public function __construct(
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $userPasswordEncoder,
-        ResetUserPasswordInterface $resetUserPasswordService
+        ResetUserPasswordInterface $resetUserPasswordService,
+        RegisterUserInterface $registerUserService
     )
     {
         $this->csrfTokenManager = $csrfTokenManager;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->resetUserPasswordService = $resetUserPasswordService;
+        $this->registerUserService = $registerUserService;
     }
 
     /**
@@ -119,7 +118,6 @@ class AuthController extends AbstractController
      * @param Request $request
      * @param MailerInterface $mailer
      * @return JsonResponse
-     * @throws TransportExceptionInterface
      */
     public function registerAction(Request $request, MailerInterface $mailer): JsonResponse
     {
@@ -134,47 +132,13 @@ class AuthController extends AbstractController
                 throw new RuntimeException('Пароли должны совпадать');
             }
 
-            try {
-                $user = $this->getDoctrine()->getRepository(User::class)
-                    ->findUserByEmail($request->get('email'));
+            $email = $request->get('email', '');
 
-                if ($user->isActive()) {
-                    throw new RuntimeException('Пользователь с такие E-mail уже зарегистрирован');
-                }
-            } catch (NotFoundHttpException $e) {
-                $user = new User();
-                $user->setEmail($request->get('email'));
-            } finally {
-                $user->generateRegisterToken();
-                $user->setPassword($this->userPasswordEncoder->encodePassword($user, $password));
-
-                if ($request->get('role') === 'provider') {
-                    $user->setRoles([User::ROLE_USER, User::ROLE_PROVIDER]);
-                } else {
-                    $user->setRoles([User::ROLE_USER]);
-                }
+            if (empty($email)) {
+                throw new RuntimeException('Ошибка валидации входных данных');
             }
 
-            try {
-                $email = (new Email())
-                    ->from('v.shavelsky@gmail.com')
-                    ->to($user->getUsername())
-                    ->subject('Потверждение регистрации')
-                    ->html($this->renderView('emails/forgot.password.html.twig', [
-                        'link' => 'http://localhost:8080' . $this->generateUrl('site.index', [
-                                ConfirmRegisterListener::CONFIRM_REGISTRATION_KEY => 1,
-                                'token' => $user->getRegisterToken()->getHex()->toString(),
-                            ])
-                    ]));
-
-                $mailer->send($email);
-            } catch (Exception $e) {
-                throw new RuntimeException('Произошла ошибка');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $this->registerUserService->registerUser($request->get('email'), $password, $request->get('role') === 'provider');
 
             return new JsonResponse(['message' => 'На ваш email отправлено письмо с подтверждением']);
         } catch (Exception $e) {

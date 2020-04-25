@@ -5,9 +5,12 @@ namespace App\Service;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Throwable;
 
-class UserService implements ResetUserPasswordInterface
+class UserService implements ResetUserPasswordInterface, RegisterUserInterface
 {
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected UserRepository $userRepository;
@@ -58,5 +61,33 @@ class UserService implements ResetUserPasswordInterface
 
         $this->em->persist($user);
         $this->em->flush();
+    }
+
+    public function registerUser(string $email, string $password, bool $isProvider): void
+    {
+        try {
+            $user = $this->userRepository ->findUserByEmail($email);
+
+            if ($user->isActive()) {
+                throw new RuntimeException('Пользователь с такие E-mail уже зарегистрирован');
+            }
+        } catch (NotFoundHttpException $e) {
+            $user = new User();
+            $user->setEmail($email);
+        } finally {
+            $user->generateRegisterToken();
+            $user->setPassword($this->userPasswordEncoder->encodePassword($user, $password));
+
+            if ($isProvider) {
+                $user->setRoles([User::ROLE_USER, User::ROLE_PROVIDER]);
+            } else {
+                $user->setRoles([User::ROLE_USER]);
+            }
+        }
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        $this->authMailer->sendRegisterEmail($user->getEmail(), $user->getRegisterToken()->getHex()->toString());
     }
 }
