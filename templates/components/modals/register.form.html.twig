@@ -45,8 +45,8 @@
     <div class="modal-footer">
       <span>Регистрация через социальные сети:</span>
       <div class="register-social">
-        {% for link in socialLinks %}
-          <a href="{{ link }}">Social auth</a>
+        {% for key, link in socialLinks %}
+          <a href="{{ link }}">{{ key }}</a>
         {% endfor %}
       </div>
     </div>

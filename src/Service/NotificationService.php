@@ -51,6 +51,10 @@ class NotificationService implements AuthMailerInterface
         }
     }
 
+    /**
+     * @param string $toEmail
+     * @param string $token
+     */
     public function sendRegisterEmail(string $toEmail, string $token): void
     {
         try {

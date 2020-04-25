@@ -60,6 +60,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @param $email
+     * @param $socialKey
+     * @return User
+     */
+    public function findUserByEmailAndSocialKey($email, $socialKey): User
+    {
+        /** @var User|null $user */
+        $user = $this->findOneBy(['email' => $email, 'socialKey' => $socialKey]);
+
+        if ($user === null) {
+            throw new NotFoundHttpException('user not found');
+        }
+
+        return $user;
+    }
+
+    /**
      * @param $token
      * @return User
      */

@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -116,10 +115,9 @@ class AuthController extends AbstractController
     /**
      * @Route("/register", name="ajax.auth.register")
      * @param Request $request
-     * @param MailerInterface $mailer
      * @return JsonResponse
      */
-    public function registerAction(Request $request, MailerInterface $mailer): JsonResponse
+    public function registerAction(Request $request): JsonResponse
     {
         try {
             if (!$this->isCsrfTokenValid('register', $request->get('_csrf_token'))) {

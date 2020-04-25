@@ -63,6 +63,11 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface
         $this->em->flush();
     }
 
+    /**
+     * @param string $email
+     * @param string $password
+     * @param bool $isProvider
+     */
     public function registerUser(string $email, string $password, bool $isProvider): void
     {
         try {
@@ -89,5 +94,28 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface
         $this->em->flush();
 
         $this->authMailer->sendRegisterEmail($user->getEmail(), $user->getRegisterToken()->getHex()->toString());
+    }
+
+    /**
+     * @param string $userEmail
+     * @param string $socialKey
+     * @return User
+     */
+    public function createSocialUser(string $userEmail, string $socialKey): User
+    {
+        $user = (new User())
+            ->setUsername($userEmail)
+            ->setRoles([User::ROLE_USER])
+            ->setActive(true)
+            ->setSocialKey($socialKey);
+
+        $user->setPassword(
+            $this->userPasswordEncoder->encodePassword($user, '123456')
+        );
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $user;
     }
 }

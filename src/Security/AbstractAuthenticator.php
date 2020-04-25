@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,17 +28,21 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
     protected UrlGeneratorInterface $urlGenerator;
     protected CsrfTokenManagerInterface $csrfTokenManager;
     protected UserPasswordEncoderInterface $passwordEncoder;
+    protected UserRepository $userRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
-    ) {
+        UserPasswordEncoderInterface $passwordEncoder,
+        UserRepository $userRepository
+    )
+    {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->userRepository = $userRepository;
     }
 
     abstract protected function getLoginRoute();
@@ -62,18 +67,11 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('login', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('login', $credentials['csrf_token']))) {
             throw new InvalidCsrfTokenException('');
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-
-        if (!$user) {
-            throw new CustomUserMessageAuthenticationException('Авторизаия не успешна');
-        }
-
-        return $user;
+        return $this->userRepository->findUserByEmail($credentials['email']);
     }
 
     /**
@@ -92,7 +90,7 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param Request                      $request
+     * @param Request $request
      * @param AuthenticationException|null $authException
      *
      * @return RedirectResponse
