@@ -1,0 +1,75 @@
+{% extends 'layouts/admin.base.html.twig' %}
+
+{% set title = 'Просмотр местоположений' %}
+
+{% block body %}
+  {% include 'admin/parts/breadcrumbs.twig' with { items: [
+    { name: 'Главная', url: path('admin.site.index') },
+    { name: 'Список местоположений', url: path('admin.location.index') },
+  ] } %}
+
+  <div class="row mx-0">
+    <div class="col-6 p-0">
+      <div class="portlet">
+        <div class="portlet__head">
+          <div class="portlet__head-label w-100">
+            <div class="row w-100">
+              <div class="col-6 my-auto">
+                <h3 class="portlet__head-title">
+                  <i class="fa fa-eye"></i>
+                  &nbsp;{{ title }}
+                </h3>
+              </div>
+              <div class="col-6">
+                <a class="btn btn-primary fa-pull-right" href="{{ path('admin.rubric.create') }}">Создать</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="portlet__body">
+          <ol class="breadcrumb float-sm-right mb-0">
+            {% for parentLocation in parentLocations %}
+              <li class="breadcrumb-item">
+                <span>{{ parentLocation.name }}</span>
+              </li>
+            {% endfor %}
+            <li class="breadcrumb-item">
+              <span>{{ location.name }}</span>
+            </li>
+          </ol>
+
+          <table class="table table-striped mt-5">
+            <tbody>
+            <tr>
+              <td>ID</td>
+              <td>{{ location.id }}</td>
+            </tr>
+            <tr>
+              <td>Название</td>
+              <td>{{ location.name }}</td>
+            </tr>
+            <tr>
+              <td>Тип</td>
+              <td>{{ ('location.type.' ~ location.type) | trans }}</td>
+            </tr>
+            <tr>
+              <td>Сортировка</td>
+              <td>{{ location.sort }}</td>
+            </tr>
+            {% if location.parentLocation is not null %}
+              <tr>
+                <td>Родительское местороложение</td>
+                <td>
+                  <a href="{{ path('admin.location.view', {id: location.parentLocation.id}) }}">
+                    {{ location.parentLocation.name }}
+                  </a>
+                </td>
+              </tr>
+            {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
