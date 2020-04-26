@@ -1,7 +1,5 @@
-<template>
-  <div>
-    404 not found
-  </div>
+<template lang="pug">
+  div 404 not found
 </template>
 
 <script>

@@ -171,6 +171,24 @@ class User implements UserInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @param string|null $fullName
+     * @return User
+     */
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
+        return $this;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array

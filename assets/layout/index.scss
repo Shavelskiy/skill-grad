@@ -43,3 +43,54 @@ body {
   font-style: normal;
   font-weight: normal;
 }
+
+.btn {
+  font-size: 0.8vw;
+  color: #ffffff;
+  border-radius: 100px;
+  border: none;
+  padding: 14px 32px;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+
+  &:disabled {
+    opacity: .7;
+  }
+
+  &:hover {
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+.btn-red {
+  background: linear-gradient(180deg, rgb(230, 87, 68), rgb(232, 96, 51));
+}
+
+.btn-blue {
+  background: linear-gradient(180deg, rgb(47, 102, 166), rgb(59, 125, 178));
+}
+
+.input {
+  border: none;
+  background: rgb(242, 243, 244);
+  padding: 14px 32px;
+  border-radius: 100px;
+  outline: none;
+  width: 100%;
+  font-size: 0.8vw;
+  box-sizing: border-box;
+}
+
+.textarea {
+  border: none;
+  background: rgb(242, 243, 244);
+  padding: 14px 32px;
+  border-radius: 26px;
+  outline: none;
+  width: 100%;
+  font-size: 0.8vw;
+  box-sizing: border-box;
+  resize: none;
+}

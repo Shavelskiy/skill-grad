@@ -1,7 +1,5 @@
-<template>
-  <div>
-    publications
-  </div>
+<template lang="pug">
+  div publications
 </template>
 
 <script>

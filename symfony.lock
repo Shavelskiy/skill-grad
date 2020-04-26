@@ -265,9 +265,6 @@
             ".env"
         ]
     },
-    "symfony/form": {
-        "version": "v5.0.7"
-    },
     "symfony/framework-bundle": {
         "version": "4.4",
         "recipe": {
@@ -301,9 +298,6 @@
         "version": "v5.0.7"
     },
     "symfony/inflector": {
-        "version": "v5.0.7"
-    },
-    "symfony/intl": {
         "version": "v5.0.7"
     },
     "symfony/mailer": {
@@ -352,9 +346,6 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.8"
-    },
-    "symfony/polyfill-intl-icu": {
-        "version": "v1.15.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.15.0"

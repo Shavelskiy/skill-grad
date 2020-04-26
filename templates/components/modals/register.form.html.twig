@@ -4,10 +4,10 @@
       <h6>Выберите тип аккаунта</h6>
       <div class="modal-form">
         <div class="modal-form-raw">
-          <button id="register-user-button" type="submit" class="blue">Обучающийся</button>
+          <button id="register-user-button" type="submit" class="btn btn-blue">Обучающийся</button>
         </div>
         <div class="modal-form-raw">
-          <button id="register-provider-button" type="submit" class="red">Образовательное учреждение</button>
+          <button id="register-provider-button" type="submit" class="btn btn-red">Образовательное учреждение</button>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="modal-form-raw">
           <input type="password" name="confirm-password" id="register-confirm-password" required placeholder="Повторите пароль">
         </div>
-        <button type="submit" class="red">Зарегистрироваться</button>
+        <button type="submit" class="btn btn-red">Зарегистрироваться</button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
         <input type="hidden" name="role">
       </form>

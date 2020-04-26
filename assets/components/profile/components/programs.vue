@@ -1,7 +1,6 @@
-<template>
-  <div>
-    programs
-  </div>
+<template lang="pug">
+  div
+    input
 </template>
 
 <script>

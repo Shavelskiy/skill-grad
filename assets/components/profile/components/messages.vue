@@ -1,25 +1,23 @@
-<template>
-  <div class="chat">
-    <div class="chat-tabs">
-      <button
-              v-for="user in users"
-              v-on:click="activeUserId = user.id"
-              :class="`chat-btn ${(user.id === activeUserId) ? 'chat-btn__active' : ''}`"
-      >
-        {{ user.username }}
-        <span class="chat-tabs-type" v-if="typingUserIds.includes(user.id)">
-            ...печатает
-          </span>
-      </button>
-    </div>
-    <chat :messages="allMessages[activeUserId]" :key="messagesKey"></chat>
-    <input type="text" class="chat-input" placeholder="Введите сообщение"
-           @keyup.enter="sendMessage"
-           v-model="message"
-           v-on:focusin="focusIn"
-           v-on:focusout="focusOut">
-    <span v-if="typingUserIds.includes(activeUserId)">...печатает</span>
-  </div>
+<template lang="pug">
+  .chat
+    .chat-tabs
+      button(
+        v-for="user in users"
+        v-on:click="activeUserId = user.id"
+        :class="`chat-btn ${(user.id === activeUserId) ? 'chat-btn__active' : ''}`"
+      ) {{ user.username }}
+        span.chat-tabs-type(v-if="typingUserIds.includes(user.id)") ...печатает
+
+    chat(:messages="allMessages[activeUserId]" :key="messagesKey")
+    input.chat-input(
+      type="text"
+      placeholder="Введите сообщение"
+      @keyup.enter="sendMessage"
+      v-model="message"
+      v-on:focusin="focusIn"
+      v-on:focusout="focusOut"
+    )
+    span(v-if="typingUserIds.includes(activeUserId)") ...печатает
 </template>
 
 <script>

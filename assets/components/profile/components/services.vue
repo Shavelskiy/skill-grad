@@ -1,7 +1,5 @@
-<template>
-  <div>
-    services
-  </div>
+<template lang="pug">
+  div services
 </template>
 
 <script>

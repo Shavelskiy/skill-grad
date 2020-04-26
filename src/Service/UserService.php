@@ -2,15 +2,15 @@
 
 namespace App\Service;
 
+use App\Dto\UpdateUserData;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Throwable;
 
-class UserService implements ResetUserPasswordInterface, RegisterUserInterface
+class UserService implements ResetUserPasswordInterface, RegisterUserInterface, UpdateUserInterface
 {
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected UserRepository $userRepository;
@@ -117,5 +117,37 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface
         $this->em->flush();
 
         return $user;
+    }
+
+    /**
+     * @param User $user
+     * @param UpdateUserData $updateUserData
+     */
+    public function updateUser(User $user, UpdateUserData $updateUserData)
+    {
+        $user
+            ->setFullName($updateUserData->getFullName())
+            ->setEmail($updateUserData->getEmail())
+            ->setPhone($updateUserData->getPhone());
+
+        if (!empty($updateUserData->getOldPassword())) {
+            $this->checkPasswordCorrect($user, $updateUserData->getOldPassword());
+            $this->updateUserPassword($user, $updateUserData->getNewPassword());
+        }
+
+        $this->em->persist($user);
+        $this->em->flush();
+    }
+
+    protected function checkPasswordCorrect(User $user, string $oldPassword): void
+    {
+        if (!$this->userPasswordEncoder->isPasswordValid($user, $oldPassword)) {
+            throw new RuntimeException('Старый пароль неверный');
+        }
+    }
+
+    protected function updateUserPassword(User $user, string $password)
+    {
+        $user->setPassword($this->userPasswordEncoder->encodePassword($user, $password));
     }
 }

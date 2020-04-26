@@ -1,33 +1,33 @@
-<template>
-  <div id="profile-app">
-    <div class="profile">
-      <div class="profile-menu">
-        <ul>
-          <li>
-            <router-link :to="{ name: 'settings'}">Настройки профиля</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'programs'}">Программы обучения</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'publications'}">Публикации</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'messages'}">Сообщения</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'services'}">Платные услуги, документы</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'training'}">Мое обучение</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="profile-content">
-        <router-view></router-view>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  #profile-app
+    .profile
+      h1 Личный кабинет провайдера
+      .profile-menu
+        router-link(:to="{ name: 'settings'}" v-slot="{ href, navigate, isActive }")
+          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
+            a(:href="href" @click="navigate") Настройки профиля
+
+        router-link(:to="{ name: 'programs'}" v-slot="{ href, navigate, isActive }")
+          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
+            a(:href="href" @click="navigate") Программы обучения
+
+
+        router-link(:to="{ name: 'publications'}" v-slot="{ href, navigate, isActive }")
+          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
+            a(:href="href" @click="navigate") Публикации
+
+
+        router-link(:to="{ name: 'messages'}" v-slot="{ href, navigate, isActive }")
+          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
+            a(:href="href" @click="navigate") Сообщения
+
+
+        router-link(:to="{ name: 'services'}" v-slot="{ href, navigate, isActive }")
+          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
+            a(:href="href" @click="navigate") Платные услуги, документы
+
+      .profile-content
+        router-view
 </template>
 
 <script>
@@ -36,13 +36,9 @@
   export default {
     name: 'app',
     data: function () {
-      return {
-
-      }
+      return {}
     },
-    methods: {
-
-    },
+    methods: {},
     created: function () {
 
     }

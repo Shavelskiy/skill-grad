@@ -1,7 +1,5 @@
-<template>
-  <div>
-    training
-  </div>
+<template lang="pug">
+  div training
 </template>
 
 <script>

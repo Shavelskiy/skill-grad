@@ -43,6 +43,18 @@ Encore
 
   .enableSassLoader()
   .enableVueLoader()
+  .addLoader({
+    test: /\.pug$/,
+    oneOf: [
+      {
+        resourceQuery: /^\?vue/,
+        use: ['pug-plain-loader']
+      },
+      {
+        use: ['raw-loader', 'pug-plain-loader']
+      }
+    ]
+  })
 
   .copyFiles({
     from: './assets/admin/images',

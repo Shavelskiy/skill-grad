@@ -1,5 +1,4 @@
 import './../components/profile/scss/index.scss';
-import './../components/profile/scss/chat.scss';
 
 import Vue from 'vue';
 import Router from 'vue-router'
