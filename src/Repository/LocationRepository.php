@@ -9,12 +9,24 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LocationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Location::class);
+    }
+
+    public function findById($id): Location
+    {
+        $location = $this->findOneBy(['id' => $id]);
+
+        if ($location === null) {
+            throw new NotFoundHttpException('location not found');
+        }
+
+        return $location;
     }
 
     /**

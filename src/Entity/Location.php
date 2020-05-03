@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RubricRepository")
@@ -108,5 +109,30 @@ class Location
     {
         $this->parentLocation = $parentLocation;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasChildType(): bool
+    {
+        return (isset($this->type)) && $this->type !== self::TYPE_CITY;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChildType(): string
+    {
+        switch ($this->getType()) {
+            case self::TYPE_COUNTRY:
+                return self::TYPE_REGION;
+                break;
+            case self::TYPE_REGION:
+                return self::TYPE_CITY;
+                break;
+        }
+
+        throw new RuntimeException('Location could not has child location');
     }
 }

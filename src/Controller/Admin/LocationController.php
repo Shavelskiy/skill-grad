@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use RuntimeException;
+use Exception;
 
 /**
  * @Route("/admin/location")
@@ -58,7 +60,7 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="admin.location.view")
+     * @Route("/{id}", methods={"GET"}, name="admin.location.view", requirements={"id"="[0-9]+"})
      * @param Request $request
      * @return Response
      */
@@ -83,5 +85,40 @@ class LocationController extends AbstractController
             'location' => $location,
             'parentLocations' => $parentLocations,
         ]);
+    }
+
+    /**
+     * @Route("/create", methods={"GET"}, name="admin.location.create")
+     * @param Request $request
+     * @return Response
+     */
+    public function create(Request $request): Response
+    {
+        $location = (new Location())
+            ->setSort(100);
+
+        try {
+            $parentLocation = $this->getParentLocationFromRequest($request);
+            $location
+                ->setParentLocation($parentLocation)
+                ->setType();
+        } catch (Exception $e) {
+        }
+
+    }
+
+    protected function getParentLocationFromRequest(Request $request): Location
+    {
+        $parentLocationId = $request->get('parentLocation', null);
+
+        try {
+            if ($parentLocationId === null) {
+                throw new RuntimeException('')
+            } 
+
+            return $this->locationRepository->findById($parentLocationId);
+        } catch (Exception $e) {
+            throw new RuntimeException('parent location not found in request');
+        }
     }
 }

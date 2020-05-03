@@ -21,7 +21,12 @@
                 </h3>
               </div>
               <div class="col-6">
-                <a class="btn btn-primary fa-pull-right" href="{{ path('admin.rubric.create') }}">Создать</a>
+                 <a 
+                    class="btn btn-primary fa-pull-right"
+                    href="{{ path('admin.location.create', {parentLocation: location.id}) }}"
+                 >
+                   Добавить метоположение
+                 </a>
               </div>
             </div>
           </div>
