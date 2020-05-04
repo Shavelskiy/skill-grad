@@ -94,17 +94,17 @@ class LocationController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        $location = (new Location())
-            ->setSort(100);
+        $location = new Location();
 
         try {
             $parentLocation = $this->getParentLocationFromRequest($request);
             $location
                 ->setParentLocation($parentLocation)
-                ->setType();
+                ->setType($parentLocation->getChildType());
         } catch (Exception $e) {
         }
 
+        die;
     }
 
     protected function getParentLocationFromRequest(Request $request): Location
@@ -113,7 +113,7 @@ class LocationController extends AbstractController
 
         try {
             if ($parentLocationId === null) {
-                throw new RuntimeException('')
+                throw new RuntimeException('');
             } 
 
             return $this->locationRepository->findById($parentLocationId);

@@ -35,7 +35,7 @@ class Location
     /**
      * @ORM\Column(type="integer")
      */
-    private int $sort;
+    private int $sort = 100;
 
     /**
      * @ORM\Column(type="string")

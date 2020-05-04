@@ -1,5 +1,5 @@
 import settings from '../components/settings';
-import programs from '../components/programs';
+import programs from '../components/programs/programs';
 import publications from '../components/publications';
 import messages from '../components/messages';
 import services from '../components/services';
