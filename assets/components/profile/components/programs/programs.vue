@@ -26,24 +26,33 @@
         program-item(
           v-for="program in programs"
           :key="program.id"
+          v-bind:program="program"
         )
-    .paginator
-      .paginator-arrow
+    .paginator(v-if="paginator")
+      div(
+        v-on:click="changeCurrentPage(currentPage - 1)" 
+        :class="(currentPage > 1) ? 'paginator-arrow active' : 'paginator-arrow'"
+      )
         img(src="./../../images/left-arrow.svg")
-      .paginator-item
-        span 11
-      .paginator-item
-        span 12
-      .paginator-item
-        span 13
-      .paginator-item
-        span 14
-      .paginator-arrow
+      div(
+        v-for="page in paginator" 
+        v-on:click="changeCurrentPage(page)"
+        :key="page.id" 
+        :class="`paginator-item ${(page === currentPage) ? 'active' : ''}`"
+      )
+        span {{ page }}
+      .paginator-item.next(v-if="(totalPages > 4) && ((totalPages - currentPage) > 1)")
+        span ...
+      div(
+        v-on:click="changeCurrentPage(currentPage + 1)"
+        :class="(currentPage < totalPages) ? 'paginator-arrow active' : 'paginator-arrow'"
+      )
         img(src="./../../images/right-arrow.svg")
 </template>
 
 <script>
   import programItem from './program-item';
+  import axios from 'axios';
 
 export default {
   name: 'programs',
@@ -53,122 +62,56 @@ export default {
   data: function () {
     return {
       showActive: true,
-      programs: [
-        {
-          id: 1,
-          active: true,
-          name: '',
-          categories: [],
-          requests: {
-            total: 234,
-            new: 45,
-          },
-          questions: {
-            total: 433,
-            new: 23,
-          },
-          answers: {
-            total: 433,
-            new: 54,
-          },
-        },  
-        {
-          id: 1,
-          active: true,
-          name: '',
-          categories: [],
-          requests: {
-            total: 234,
-            new: 45,
-          },
-          questions: {
-            total: 433,
-            new: 23,
-          },
-          answers: {
-            total: 433,
-            new: 54,
-          },
-        },  
-        {
-          id: 1,
-          active: true,
-          name: '',
-          categories: [],
-          requests: {
-            total: 234,
-            new: 45,
-          },
-          questions: {
-            total: 433,
-            new: 23,
-          },
-          answers: {
-            total: 433,
-            new: 54,
-          },
-        },  
-        {
-          id: 1,
-          active: true,
-          name: '',
-          categories: [],
-          requests: {
-            total: 234,
-            new: 45,
-          },
-          questions: {
-            total: 433,
-            new: 23,
-          },
-          answers: {
-            total: 433,
-            new: 54,
-          },
-        },  
-        {
-          id: 1,
-          active: true,
-          name: '',
-          categories: [],
-          requests: {
-            total: 234,
-            new: 45,
-          },
-          questions: {
-            total: 433,
-            new: 23,
-          },
-          answers: {
-            total: 433,
-            new: 54,
-          },
-        },  
-        {
-          id: 1,
-          active: true,
-          name: '',
-          categories: [],
-          requests: {
-            total: 234,
-            new: 45,
-          },
-          questions: {
-            total: 433,
-            new: 23,
-          },
-          answers: {
-            total: 433,
-            new: 54,
-          },
-        },  
-      ],
+      totalPages: 1,
+      currentPage: 1,
+      programs: [],
     };
   },
   methods: {
     setTabsActive: function (active) {
       this.showActive = active;
-    }
-  }
+    },
+    changeCurrentPage(page) {
+      if (page < 1 || page > this.totalPages) {
+        return;
+      }
+
+      this.currentPage = page;
+      this.loadPrograms();
+    },
+    loadPrograms: function () {
+      axios.get('/api/profile/programs/', {
+        params: {
+          page: this.currentPage,
+        },        
+      }) 
+        .then(response => {
+          this.currentPage = response.data.currentPage;
+          this.totalPages = response.data.totalPages;
+          this.programs = response.data.items;
+        });
+    },
+  },
+  computed: {
+    paginator: function () {
+      let result = [];
+      let iterator = this.currentPage - ((this.currentPage !== this.totalPages) ? 3 : 4);
+
+      while (result.length < 4 && iterator < this.totalPages) {
+        iterator++;
+
+        if (iterator < 1) {
+          continue;
+        }
+
+        result.push(iterator);
+      }
+
+      return result;
+    },
+  },
+  created() {
+    this.loadPrograms();
+  },
 }
-</script>
+  </script>

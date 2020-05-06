@@ -107,7 +107,7 @@
         },
       };
     },
-    methods: {
+  methods: {
       updateProfileSettings: function () {
         this.disableButton = true;
 

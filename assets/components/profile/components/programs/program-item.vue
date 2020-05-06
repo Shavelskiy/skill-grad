@@ -1,25 +1,23 @@
 <template lang="pug">
   .item
-    .name.text Маркетинг (многопрофильный бакалавариат "Маркетинг и управление продажами")
+    .name.text {{ program.name }}
     .categories.text 
-      a(href="#") Маркетинг
-      a(href="#") Оффиское дело
-      a(href="#") Управление и бизнес
+      a(href="#" v-for="category in program.categories" :key="category.id") {{ category }}
     .mail.logo
       img.mail-logo(src="./../../images/mail.svg")
-      .mail-tooltip 23
+      .mail-tooltip {{ program.requests.new }}
       br
-      span.mail-total Всего: 234
+      span.mail-total Всего: {{ program.requests.total }}
     .mail.logo
       img.mail-logo(src="./../../images/mail.svg")
-      .mail-tooltip 23
+      .mail-tooltip {{ program.questions.new }}
       br
-      span.mail-total Всего: 234
+      span.mail-total Всего: {{ program.questions.total }}
     .mail.logo
       img.mail-logo(src="./../../images/mail.svg")
-      .mail-tooltip 23
+      .mail-tooltip {{ program.answers.new }}
       br
-      span.mail-total Всего: 234
+      span.mail-total Всего: {{ program.answers.total }}
     .logo
       img(src="./../../images/goal.svg")
     .logo
@@ -33,5 +31,6 @@
 <script>
   export default {
     name: 'program-item',
+    props: ['program'],
   }
 </script>
