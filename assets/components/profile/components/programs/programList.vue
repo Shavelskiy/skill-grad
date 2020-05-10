@@ -1,27 +1,27 @@
 <template lang="pug">
   .programs
-    .programs-menu
+    .programs-menu.programs
       .programs-menu-tabs
         div(
           v-on:click="setTabsActive(true)"
-          :class="`programs-menu-tab ${(showActive) ? 'programs-menu-tab-active' : ''}`"
+          :class="`programs-menu-tab ${(showActive) ? 'active' : ''}`"
         )
           span Активные
         div(
           v-on:click="setTabsActive(false)"
-          :class="`programs-menu-tab ${(showActive) ? '' : 'programs-menu-tab-active'}`"
+          :class="`programs-menu-tab ${(showActive) ? '' : 'active'}`"
         )
           span Неактивные
       div
       .programs-menu-btn
         button.btn.btn-blue Добавить программу обучения
-    .programs-table
-      .programs-table-header
+    div(:class="`programs-table ${(disabledTable) ? 'disabled' : ''}`")
+      .programs-table-header.programs
         span Название программы
         span Категории
         span Заявки
         span Вопросы
-        span Ответы
+        span Оценки
       .programs-table-body
         program-item(
           v-for="program in programs"
@@ -31,7 +31,7 @@
     .paginator(v-if="paginator")
       div(
         v-on:click="changeCurrentPage(currentPage - 1)" 
-        :class="(currentPage > 1) ? 'paginator-arrow active' : 'paginator-arrow'"
+        :class="`paginator-arrow ${(currentPage > 1) ? 'active' : ''}`"
       )
         img(src="./../../images/left-arrow.svg")
       div(
@@ -45,17 +45,17 @@
         span ...
       div(
         v-on:click="changeCurrentPage(currentPage + 1)"
-        :class="(currentPage < totalPages) ? 'paginator-arrow active' : 'paginator-arrow'"
+        :class="`paginator-arrow ${(currentPage < totalPages) ? 'active' : ''}`"
       )
         img(src="./../../images/right-arrow.svg")
 </template>
 
 <script>
-  import programItem from './program-item';
-  import axios from 'axios';
+import programItem from './programItem';
+import axios from 'axios';
 
 export default {
-  name: 'programs',
+  name: 'programList',
   components: {
     programItem,
   },
@@ -64,6 +64,8 @@ export default {
       showActive: true,
       totalPages: 1,
       currentPage: 1,
+      paginatorRequest: null,
+      disabledTable: false,
       programs: [],
     };
   },
@@ -72,7 +74,7 @@ export default {
       this.showActive = active;
     },
     changeCurrentPage(page) {
-      if (page < 1 || page > this.totalPages) {
+      if (page < 1 || page > this.totalPages || page === this.currentPage) {
         return;
       }
 
@@ -80,7 +82,16 @@ export default {
       this.loadPrograms();
     },
     loadPrograms: function () {
+      this.disabledTable = true;
+      if (this.paginatorRequest) {
+        this.paginatorRequest.cancel();
+      }
+
+      const axiosSource = axios.CancelToken.source();
+      this.paginatorRequest = { cancel: axiosSource.cancel };
+
       axios.get('/api/profile/programs/', {
+        cancelToken: axiosSource.token,
         params: {
           page: this.currentPage,
         },        
@@ -89,6 +100,7 @@ export default {
           this.currentPage = response.data.currentPage;
           this.totalPages = response.data.totalPages;
           this.programs = response.data.items;
+          this.disabledTable = false;
         });
     },
   },
@@ -114,4 +126,4 @@ export default {
     this.loadPrograms();
   },
 }
-  </script>
+</script>

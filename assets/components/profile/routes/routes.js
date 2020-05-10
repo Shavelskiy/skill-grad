@@ -1,11 +1,11 @@
 import settings from '../components/settings';
-import programs from '../components/programs/programs';
+import programsList from '../components/programs/programList';
+import requestList from '../components/programs/requestList';
 import publications from '../components/publications';
 import messages from '../components/messages';
 import services from '../components/services';
 import training from '../components/training';
 import componentNotFound from './../components/componentNotFound';
-
 
 export const routes = [
   {
@@ -16,7 +16,13 @@ export const routes = [
   {
     name: 'programs',
     path: '/profile/programs/',
-    component: programs,
+    component: programsList,
+  },
+  {
+    name: 'programs-requests',
+    path: '/profile/programs/request/:id',
+    component: requestList,
+    props: true,
   },
   {
     name: 'publications',

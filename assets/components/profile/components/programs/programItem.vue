@@ -1,9 +1,9 @@
 <template lang="pug">
-  .item
+  .item.program
     .name.text {{ program.name }}
-    .categories.text 
+    .categories.text
       a(href="#" v-for="category in program.categories" :key="category.id") {{ category }}
-    .mail.logo
+    router-link.mail.logo(:to="{ name: 'programs-requests', params: { id: program.id } }")
       img.mail-logo(src="./../../images/mail.svg")
       .mail-tooltip {{ program.requests.new }}
       br
