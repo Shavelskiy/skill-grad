@@ -17,6 +17,7 @@ class AuthExtension extends AbstractExtension
 
     /**
      * @param bool $create
+     *
      * @return array
      */
     public function getSocialAuthLinks(bool $create = false): array

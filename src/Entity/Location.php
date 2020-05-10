@@ -61,6 +61,7 @@ class Location
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -72,6 +73,7 @@ class Location
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
+
         return $this;
     }
 
@@ -85,16 +87,18 @@ class Location
 
     /**
      * @param string $type
+     *
      * @return Location
      */
     public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 
     /**
-     * @return null|Location
+     * @return Location|null
      */
     public function getParentLocation(): ?Location
     {
@@ -103,11 +107,13 @@ class Location
 
     /**
      * @param Location $parentLocation
+     *
      * @return Location
      */
     public function setParentLocation(Location $parentLocation): self
     {
         $this->parentLocation = $parentLocation;
+
         return $this;
     }
 

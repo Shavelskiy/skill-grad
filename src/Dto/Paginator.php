@@ -16,6 +16,7 @@ class Paginator
     public function setItems(array $items): self
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -27,6 +28,7 @@ class Paginator
     public function setCurrentPage(int $currentPage): self
     {
         $this->currentPage = $currentPage;
+
         return $this;
     }
 
@@ -38,6 +40,7 @@ class Paginator
     public function setTotalPageCount(int $totalPageCount): self
     {
         $this->totalPageCount = $totalPageCount;
+
         return $this;
     }
 }

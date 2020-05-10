@@ -30,8 +30,7 @@ class AuthController extends AbstractController
         UserPasswordEncoderInterface $userPasswordEncoder,
         ResetUserPasswordInterface $resetUserPasswordService,
         RegisterUserInterface $registerUserService
-    )
-    {
+    ) {
         $this->csrfTokenManager = $csrfTokenManager;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->resetUserPasswordService = $resetUserPasswordService;
@@ -56,7 +55,9 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/reset-password", name="ajax.auth.reset.password")
+     *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function resetPassword(Request $request): JsonResponse
@@ -82,7 +83,9 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/new-password", name="ajax.auth.new.password")
+     *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function newPassword(Request $request): JsonResponse
@@ -108,13 +111,15 @@ class AuthController extends AbstractController
 
             return new JsonResponse(['message' => 'Ваш пароль успешно сменен']);
         } catch (Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage(),], 400);
+            return new JsonResponse(['message' => $e->getMessage()], 400);
         }
     }
 
     /**
      * @Route("/register", name="ajax.auth.register")
+     *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function registerAction(Request $request): JsonResponse
@@ -140,7 +145,7 @@ class AuthController extends AbstractController
 
             return new JsonResponse(['message' => 'На ваш email отправлено письмо с подтверждением']);
         } catch (Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage(),], 400);
+            return new JsonResponse(['message' => $e->getMessage()], 400);
         }
     }
 }

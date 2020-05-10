@@ -7,12 +7,12 @@ use App\Entity\Location;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Exception;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use RuntimeException;
-use Exception;
 
 /**
  * @Route("/admin/location")
@@ -30,8 +30,11 @@ class LocationController extends AbstractController
 
     /**
      * @Route("/", methods={"GET"}, name="admin.location.index")
+     *
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -61,7 +64,9 @@ class LocationController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"GET"}, name="admin.location.view", requirements={"id"="[0-9]+"})
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function view(Request $request): Response
@@ -89,7 +94,9 @@ class LocationController extends AbstractController
 
     /**
      * @Route("/create", methods={"GET"}, name="admin.location.create")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function create(Request $request): Response
@@ -114,7 +121,7 @@ class LocationController extends AbstractController
         try {
             if ($parentLocationId === null) {
                 throw new RuntimeException('');
-            } 
+            }
 
             return $this->locationRepository->findById($parentLocationId);
         } catch (Exception $e) {

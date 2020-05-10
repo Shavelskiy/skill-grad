@@ -17,7 +17,6 @@ class JsonRequestTransformerListener implements EventSubscriberInterface
     }
 
     /**
-     *
      * @param RequestEvent $event
      */
     public function onKernelRequest(RequestEvent $event): void
@@ -38,12 +37,10 @@ class JsonRequestTransformerListener implements EventSubscriberInterface
         }
     }
 
-
     protected function isJsonRequest(Request $request): bool
     {
-        return $request->getContentType() ===  'json';
+        return $request->getContentType() === 'json';
     }
-
 
     protected function transformJsonBody(Request $request): bool
     {
@@ -57,6 +54,7 @@ class JsonRequestTransformerListener implements EventSubscriberInterface
         }
 
         $request->request->replace($data);
+
         return true;
     }
 }

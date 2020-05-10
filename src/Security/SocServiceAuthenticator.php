@@ -31,8 +31,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         UrlGeneratorInterface $urlGenerator,
         UserRepository $userRepository,
         RegisterUserInterface $registerUserService
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->userRepository = $userRepository;
@@ -41,12 +40,14 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     public function supports(Request $request): bool
     {
         try {
             $this->socialAuthService = (new SocialAuthFactory())->getSocialAuthForRequest($request);
+
             return true;
         } catch (Exception $e) {
             return false;
@@ -55,6 +56,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param Request $request
+     *
      * @return array
      */
     public function getCredentials(Request $request): array
@@ -63,8 +65,9 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed $credentials
+     * @param mixed                 $credentials
      * @param UserProviderInterface $userProvider
+     *
      * @return User|UserInterface|null
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -89,8 +92,9 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed $credentials
+     * @param mixed         $credentials
      * @param UserInterface $user
+     *
      * @return bool
      */
     public function checkCredentials($credentials, UserInterface $user): bool
@@ -99,9 +103,10 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param Request $request
+     * @param Request        $request
      * @param TokenInterface $token
-     * @param string $providerKey
+     * @param string         $providerKey
+     *
      * @return RedirectResponse|Response|null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

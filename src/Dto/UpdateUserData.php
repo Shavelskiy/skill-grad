@@ -36,11 +36,13 @@ class UpdateUserData
 
     /**
      * @param string $fullName
+     *
      * @return UpdateUserData
      */
     public function setFullName(string $fullName): self
     {
         $this->fullName = $fullName;
+
         return $this;
     }
 
@@ -54,11 +56,13 @@ class UpdateUserData
 
     /**
      * @param string $email
+     *
      * @return UpdateUserData
      */
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -72,11 +76,13 @@ class UpdateUserData
 
     /**
      * @param string $phone
+     *
      * @return UpdateUserData
      */
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -90,11 +96,13 @@ class UpdateUserData
 
     /**
      * @param string $oldPassword
+     *
      * @return UpdateUserData
      */
     public function setOldPassword(string $oldPassword): self
     {
         $this->oldPassword = $oldPassword;
+
         return $this;
     }
 
@@ -108,11 +116,13 @@ class UpdateUserData
 
     /**
      * @param string $newPassword
+     *
      * @return UpdateUserData
      */
     public function setNewPassword(string $newPassword): self
     {
         $this->newPassword = $newPassword;
+
         return $this;
     }
 
@@ -126,12 +136,13 @@ class UpdateUserData
 
     /**
      * @param string $confirmNewPassword
+     *
      * @return UpdateUserData
      */
     public function setConfirmNewPassword(string $confirmNewPassword): self
     {
         $this->confirmNewPassword = $confirmNewPassword;
+
         return $this;
     }
-
 }

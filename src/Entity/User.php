@@ -126,11 +126,13 @@ class User implements UserInterface
 
     /**
      * @param string|null $email
+     *
      * @return User
      */
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -144,11 +146,13 @@ class User implements UserInterface
 
     /**
      * @param string|null $phone
+     *
      * @return User
      */
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -162,11 +166,13 @@ class User implements UserInterface
 
     /**
      * @param bool $active
+     *
      * @return User
      */
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
         return $this;
     }
 
@@ -180,11 +186,13 @@ class User implements UserInterface
 
     /**
      * @param string|null $fullName
+     *
      * @return User
      */
     public function setFullName(?string $fullName): self
     {
         $this->fullName = $fullName;
+
         return $this;
     }
 
@@ -266,12 +274,14 @@ class User implements UserInterface
     public function generateResetPasswordToken(): self
     {
         $this->resetPasswordToken = Uuid::uuid4();
+
         return $this;
     }
 
     public function resetResetPasswordToken(): self
     {
         $this->resetPasswordToken = null;
+
         return $this;
     }
 
@@ -289,12 +299,14 @@ class User implements UserInterface
     public function generateRegisterToken(): self
     {
         $this->registerToken = Uuid::uuid4();
+
         return $this;
     }
 
     public function resetRegisterToken(): self
     {
         $this->registerToken = null;
+
         return $this;
     }
 
@@ -308,11 +320,13 @@ class User implements UserInterface
 
     /**
      * @param string|null $socialKey
+     *
      * @return User
      */
     public function setSocialKey(?string $socialKey): self
     {
         $this->socialKey = $socialKey;
+
         return $this;
     }
 }

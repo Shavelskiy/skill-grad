@@ -105,7 +105,7 @@ class OkAuth implements SocialAuthInterface
         $params['sig'] = $sign;
         $params['access_token'] = $accessToken;
 
-        $response = $client->request('POST', self::API_BASE_URL . self::API_REST_URL, ['query' => $params,]);
+        $response = $client->request('POST', self::API_BASE_URL . self::API_REST_URL, ['query' => $params]);
 
         $content = json_decode($response->getContent(), true);
 
@@ -118,7 +118,9 @@ class OkAuth implements SocialAuthInterface
 
     /**
      * @param $code
+     *
      * @return string
+     *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface

@@ -31,6 +31,7 @@ class LocationRepository extends ServiceEntityRepository
 
     /**
      * @param LocationFilter $locationFilter
+     *
      * @return QueryBuilder
      */
     public function getQueryFromFilter(LocationFilter $locationFilter): QueryBuilder
@@ -60,15 +61,17 @@ class LocationRepository extends ServiceEntityRepository
 
     /**
      * @param QueryBuilder $query
+     *
      * @return int
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function getCountFromQuery(QueryBuilder $query): int
     {
-        return ((clone $query)
+        return (clone $query)
             ->select('COUNT(location.id)')
             ->getQuery()
-            ->getSingleScalarResult());
+            ->getSingleScalarResult();
     }
 }

@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Dto\Paginator;
 use App\Entity\Program;
 use App\Entity\ProgramRequest;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,7 +17,9 @@ class ProgramRequestRepository extends ServiceEntityRepository
 
     /**
      * @param Program $program
+     *
      * @return int
+     *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -34,7 +35,9 @@ class ProgramRequestRepository extends ServiceEntityRepository
 
     /**
      * @param Program $program
+     *
      * @return int
+     *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -54,9 +57,11 @@ class ProgramRequestRepository extends ServiceEntityRepository
 
     /**
      * @param Program $program
-     * @param int $page
-     * @param int $pageItems
+     * @param int     $page
+     * @param int     $pageItems
+     *
      * @return Paginator
+     *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

@@ -20,8 +20,7 @@ class NotificationService implements AuthMailerInterface
         MailerInterface $mailer,
         UrlGeneratorInterface $urlGenerator,
         Environment $templating
-    )
-    {
+    ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
         $this->templating = $templating;
@@ -41,8 +40,8 @@ class NotificationService implements AuthMailerInterface
                 ->html($this->templating->render('emails/forgot.password.html.twig', [
                     'link' => 'http://localhost:8080' . $this->urlGenerator->generate('site.index', [
                             'reset_password' => 1,
-                            'token' => $token
-                        ])
+                            'token' => $token,
+                        ]),
                 ]));
 
             $this->mailer->send($email);
@@ -66,7 +65,7 @@ class NotificationService implements AuthMailerInterface
                     'link' => 'http://localhost:8080' . $this->urlGenerator->generate('site.index', [
                             ConfirmRegisterListener::CONFIRM_REGISTRATION_KEY => 1,
                             'token' => $token,
-                        ])
+                        ]),
                 ]));
 
             $this->mailer->send($email);

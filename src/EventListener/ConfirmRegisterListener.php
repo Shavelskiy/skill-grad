@@ -27,8 +27,7 @@ class ConfirmRegisterListener implements EventSubscriberInterface
         GuardAuthenticatorHandler $guardHandler,
         FlashBagInterface $flashBag,
         SessionInterface $session
-    )
-    {
+    ) {
         $this->em = $em;
         $this->guardHandler = $guardHandler;
         $this->flashBag = $flashBag;
@@ -43,7 +42,6 @@ class ConfirmRegisterListener implements EventSubscriberInterface
     }
 
     /**
-     *
      * @param RequestEvent $event
      */
     public function onKernelRequest(RequestEvent $event): void
@@ -70,8 +68,6 @@ class ConfirmRegisterListener implements EventSubscriberInterface
 
             $this->guardHandler->authenticateWithToken($token, $request);
             $this->session->set('_security_main', serialize($token));
-
-
         } catch (Throwable $e) {
             return;
         }

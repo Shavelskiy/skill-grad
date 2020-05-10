@@ -6,7 +6,6 @@ use App\Dto\Paginator;
 use App\Entity\Program;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProgramRepository extends ServiceEntityRepository

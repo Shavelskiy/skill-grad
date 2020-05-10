@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Program;
 use App\Entity\ProgramQuestion;
-use App\Entity\ProgramRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,7 +26,9 @@ class ProgramQuestionRepository extends ServiceEntityRepository
 
     /**
      * @param Program $program
+     *
      * @return int
+     *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

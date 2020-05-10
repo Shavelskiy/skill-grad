@@ -22,8 +22,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         UserPasswordEncoderInterface $userPasswordEncoder,
         EntityManagerInterface $em,
         AuthMailerInterface $authMailer
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->em = $em;
@@ -53,7 +52,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     public function resetUserPassword(string $token, string $newPassword): void
     {
         /** @var User $user */
-        $user = $this->userRepository ->findByResetPasswordToken($token);
+        $user = $this->userRepository->findByResetPasswordToken($token);
 
         $user
             ->setPassword($this->userPasswordEncoder->encodePassword($user, $newPassword))
@@ -66,12 +65,12 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     /**
      * @param string $email
      * @param string $password
-     * @param bool $isProvider
+     * @param bool   $isProvider
      */
     public function registerUser(string $email, string $password, bool $isProvider): void
     {
         try {
-            $user = $this->userRepository ->findUserByEmail($email);
+            $user = $this->userRepository->findUserByEmail($email);
 
             if ($user->isActive()) {
                 throw new RuntimeException('Пользователь с такие E-mail уже зарегистрирован');
@@ -99,6 +98,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     /**
      * @param string $userEmail
      * @param string $socialKey
+     *
      * @return User
      */
     public function createSocialUser(string $userEmail, string $socialKey): User
@@ -120,7 +120,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     }
 
     /**
-     * @param User $user
+     * @param User           $user
      * @param UpdateUserData $updateUserData
      */
     public function updateUser(User $user, UpdateUserData $updateUserData)

@@ -12,7 +12,6 @@ use App\Repository\ProgramRequestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,8 +28,7 @@ class ProgramController extends AbstractController
         ProgramRepository $programRepository,
         ProgramRequestRepository $programRequestRepository,
         ProgramQuestionRepository $programQuestionRepository
-    )
-    {
+    ) {
         $this->programRepository = $programRepository;
         $this->programRequestRepository = $programRequestRepository;
         $this->programQuestionRepository = $programQuestionRepository;
@@ -50,6 +48,7 @@ class ProgramController extends AbstractController
     /**
      * @param $page
      * @param $active
+     *
      * @return array
      */
     protected function getProgramData($page, $active): array
@@ -62,7 +61,9 @@ class ProgramController extends AbstractController
 
     /**
      * @param Paginator $paginator
+     *
      * @return array
+     *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -83,7 +84,9 @@ class ProgramController extends AbstractController
 
     /**
      * @param Program $program
+     *
      * @return array
+     *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -115,7 +118,6 @@ class ProgramController extends AbstractController
         ];
     }
 
-
     /**
      * @Route("/requests", methods={"GET"}, name="api.profile.programs.requests")
      */
@@ -133,7 +135,8 @@ class ProgramController extends AbstractController
 
     /**
      * @param int|null $programId
-     * @param int $page
+     * @param int      $page
+     *
      * @return array
      */
     protected function getProgramRequestData(int $programId = null, int $page = 1): array
@@ -159,6 +162,7 @@ class ProgramController extends AbstractController
 
     /**
      * @param Paginator $paginator
+     *
      * @return array
      */
     protected function getRequestDataFromPaginator(Paginator $paginator): array
@@ -178,6 +182,7 @@ class ProgramController extends AbstractController
 
     /**
      * @param ProgramRequest $programRequest
+     *
      * @return array
      */
     protected function prepareProgramRequestItem(ProgramRequest $programRequest): array

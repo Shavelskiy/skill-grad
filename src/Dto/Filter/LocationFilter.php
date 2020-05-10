@@ -30,11 +30,13 @@ class LocationFilter
 
     /**
      * @param int|null $id
+     *
      * @return LocationFilter
      */
     public function setId(?int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -48,11 +50,13 @@ class LocationFilter
 
     /**
      * @param string|null $name
+     *
      * @return LocationFilter
      */
     public function setName(?string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -66,11 +70,13 @@ class LocationFilter
 
     /**
      * @param string|null $type
+     *
      * @return LocationFilter
      */
     public function setType(?string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 }
