@@ -72,6 +72,8 @@ export default {
   methods: {
     setTabsActive: function (active) {
       this.showActive = active;
+      this.currentPage = 1;
+      this.loadPrograms();
     },
     changeCurrentPage(page) {
       if (page < 1 || page > this.totalPages || page === this.currentPage) {
@@ -94,6 +96,7 @@ export default {
         cancelToken: axiosSource.token,
         params: {
           page: this.currentPage,
+          active: Number(this.showActive),
         },        
       }) 
         .then(response => {

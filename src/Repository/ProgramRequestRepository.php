@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Dto\PaginatorResult;
 use App\Entity\Program;
 use App\Entity\ProgramRequest;
 use App\Helpers\Paginator;
@@ -65,7 +66,7 @@ class ProgramRequestRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getPaginatorProgramItems(Program $program, int $page = 1, int $pageItems = 10): Paginator
+    public function getPaginatorProgramItems(Program $program, int $page = 1, int $pageItems = 10): PaginatorResult
     {
         $query = $this->createQueryBuilder('pr')
             ->andWhere('pr.program = :program')

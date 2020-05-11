@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/api/profile/programs")
@@ -149,6 +150,10 @@ class ProgramController extends AbstractController
 
         if ($program === null) {
             throw new NotFoundHttpException('Программа не найдена');
+        }
+
+        if ($program->getUser()->getId() !== $this->getUser()->getId()) {
+            throw new AccessDeniedException('У вас нет доступа для просмотра');
         }
 
         $paginator = $this->programRequestRepository
