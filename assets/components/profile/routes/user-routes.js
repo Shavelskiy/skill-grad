@@ -1,5 +1,6 @@
 import settings from '../components/settings/userSettings';
 import messages from '../components/messages/messages';
+import training from '../components/trainig/training';
 import componentNotFound from './../components/componentNotFound';
 
 export const routes = [
@@ -14,7 +15,12 @@ export const routes = [
     component: messages,
   },
   {
+    name: 'training',
+    path: '/profile/training',
+    component: training,
+  },
+  {
     path: '*',
-    component: componentNotFound
+    redirect: '/profile/settings/'
   }
 ];

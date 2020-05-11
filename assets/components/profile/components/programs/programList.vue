@@ -30,14 +30,14 @@
         )
     .paginator(v-if="paginator")
       div(
-        v-on:click="changeCurrentPage(currentPage - 1)" 
+        v-on:click="changeCurrentPage(currentPage - 1)"
         :class="`paginator-arrow ${(currentPage > 1) ? 'active' : ''}`"
       )
         img(src="./../../images/left-arrow.svg")
       div(
-        v-for="page in paginator" 
+        v-for="page in paginator"
         v-on:click="changeCurrentPage(page)"
-        :key="page.id" 
+        :key="page.id"
         :class="`paginator-item ${(page === currentPage) ? 'active' : ''}`"
       )
         span {{ page }}
@@ -51,82 +51,83 @@
 </template>
 
 <script>
-import programItem from './programItem';
-import axios from 'axios';
+  import {endpoints} from '../../store/endpoints';
+  import axios from 'axios';
+  import programItem from './programItem';
 
-export default {
-  name: 'programList',
-  components: {
-    programItem,
-  },
-  data: function () {
-    return {
-      showActive: true,
-      totalPages: 1,
-      currentPage: 1,
-      paginatorRequest: null,
-      disabledTable: false,
-      programs: [],
-    };
-  },
-  methods: {
-    setTabsActive: function (active) {
-      this.showActive = active;
-      this.currentPage = 1;
-      this.loadPrograms();
+  export default {
+    name: 'programList',
+    components: {
+      programItem,
     },
-    changeCurrentPage(page) {
-      if (page < 1 || page > this.totalPages || page === this.currentPage) {
-        return;
-      }
-
-      this.currentPage = page;
-      this.loadPrograms();
+    data: function () {
+      return {
+        showActive: true,
+        totalPages: 1,
+        currentPage: 1,
+        paginatorRequest: null,
+        disabledTable: false,
+        programs: [],
+      };
     },
-    loadPrograms: function () {
-      this.disabledTable = true;
-      if (this.paginatorRequest) {
-        this.paginatorRequest.cancel();
-      }
-
-      const axiosSource = axios.CancelToken.source();
-      this.paginatorRequest = { cancel: axiosSource.cancel };
-
-      axios.get('/api/profile/programs/', {
-        cancelToken: axiosSource.token,
-        params: {
-          page: this.currentPage,
-          active: Number(this.showActive),
-        },        
-      }) 
-        .then(response => {
-          this.currentPage = response.data.currentPage;
-          this.totalPages = response.data.totalPages;
-          this.programs = response.data.items;
-          this.disabledTable = false;
-        });
-    },
-  },
-  computed: {
-    paginator: function () {
-      let result = [];
-      let iterator = this.currentPage - ((this.currentPage !== this.totalPages) ? 3 : 4);
-
-      while (result.length < 4 && iterator < this.totalPages) {
-        iterator++;
-
-        if (iterator < 1) {
-          continue;
+    methods: {
+      setTabsActive: function (active) {
+        this.showActive = active;
+        this.currentPage = 1;
+        this.loadPrograms();
+      },
+      changeCurrentPage(page) {
+        if (page < 1 || page > this.totalPages || page === this.currentPage) {
+          return;
         }
 
-        result.push(iterator);
-      }
+        this.currentPage = page;
+        this.loadPrograms();
+      },
+      loadPrograms: function () {
+        this.disabledTable = true;
+        if (this.paginatorRequest) {
+          this.paginatorRequest.cancel();
+        }
 
-      return result;
+        const axiosSource = axios.CancelToken.source();
+        this.paginatorRequest = {cancel: axiosSource.cancel};
+
+        axios.get(endpoints.GET_PROGRAM_LIST, {
+          cancelToken: axiosSource.token,
+          params: {
+            page: this.currentPage,
+            active: Number(this.showActive),
+          },
+        })
+          .then(response => {
+            this.currentPage = response.data.currentPage;
+            this.totalPages = response.data.totalPages;
+            this.programs = response.data.items;
+            this.disabledTable = false;
+          });
+      },
     },
-  },
-  created() {
-    this.loadPrograms();
-  },
-}
+    computed: {
+      paginator: function () {
+        let result = [];
+        let iterator = this.currentPage - ((this.currentPage !== this.totalPages) ? 3 : 4);
+
+        while (result.length < 4 && iterator < this.totalPages) {
+          iterator++;
+
+          if (iterator < 1) {
+            continue;
+          }
+
+          result.push(iterator);
+        }
+
+        return result;
+      },
+    },
+    created() {
+      this.loadPrograms();
+    },
+  }
 </script>

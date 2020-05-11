@@ -3,48 +3,22 @@
     .profile
       h1 Личный кабинет провайдера
       .profile-menu
-        router-link(:to="{ name: 'settings'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Настройки профиля
-
-        router-link(:to="{ name: 'programs'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Программы обучения
-
-
-        router-link(:to="{ name: 'publications'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Публикации
-
-
-        router-link(:to="{ name: 'messages'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Сообщения
-
-
-        router-link(:to="{ name: 'services'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Платные услуги, документы
-
+        menu-item(v-bind:route="'settings'" v-bind:text="'Настройки профиля'")
+        menu-item(v-bind:route="'programs'" v-bind:text="'Программы обучения'")
+        menu-item(v-bind:route="'publications'" v-bind:text="'Публикации'")
+        menu-item(v-bind:route="'messages'" v-bind:text="'Сообщения'")
+        menu-item(v-bind:route="'services'" v-bind:text="'Платные услуги, документы'")
       .profile-content
         router-view
 </template>
 
 <script>
-  const axios = require('axios').default;
+  import menuItem from './components/menuItem';
 
   export default {
-    name: 'app',
-    data: function () {
-      return {}
+    name: 'providerApp',
+    components: {
+      menuItem,
     },
-    methods: {},
-    created: function () {
-
-    }
   }
 </script>
-
-<style>
-
-</style>

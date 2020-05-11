@@ -1,10 +1,9 @@
-import settings from '../components/settings/profileSettings';
+import settings from '../components/settings/providerSettings';
 import programsList from '../components/programs/programList';
 import requestList from '../components/programs/requestList';
-import publications from '../components/publications';
+import publications from '../components/publications/publications';
 import messages from '../components/messages/messages';
-import services from '../components/services';
-import training from '../components/training';
+import services from '../components/services/services';
 import componentNotFound from './../components/componentNotFound';
 
 export const routes = [
@@ -40,12 +39,7 @@ export const routes = [
     component: services,
   },
   {
-    name: 'training',
-    path: '/profile/training/',
-    component: training,
-  },
-  {
     path: '*',
-    component: componentNotFound
+    redirect: '/profile/settings/'
   }
 ];

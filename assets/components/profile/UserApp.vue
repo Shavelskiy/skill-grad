@@ -1,35 +1,22 @@
 <template lang="pug">
   #profile-app
     .profile
-      h1 Личный кабинет провайдера
+      h1 Личный кабинет обучающегося
       .profile-menu
-        router-link(:to="{ name: 'settings'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Настройки профиля
-
-        router-link(:to="{ name: 'messages'}" v-slot="{ href, navigate, isActive }")
-          div(:class="isActive ? 'profile-menu-item profile-menu-item-active' : 'profile-menu-item'")
-            a(:href="href" @click="navigate") Сообщения
-
+        menu-item(v-bind:route="'settings'" v-bind:text="'Настройки профиля'")
+        menu-item(v-bind:route="'messages'" v-bind:text="'Сообщения'")
+        menu-item(v-bind:route="'training'" v-bind:text="'Мое обучение'")
       .profile-content
         router-view
 </template>
 
 <script>
-  const axios = require('axios').default;
+  import menuItem from './components/menuItem';
 
   export default {
-    name: 'app',
-    data: function () {
-      return {}
+    name: 'userApp',
+    components: {
+      menuItem,
     },
-    methods: {},
-    created: function () {
-
-    }
   }
 </script>
-
-<style>
-
-</style>

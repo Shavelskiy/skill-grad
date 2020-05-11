@@ -39,6 +39,7 @@
 </template>
 
 <script>
+  import {endpoints} from '../../store/endpoints';
   import axios from 'axios';
   import requestItem from './requestItem';
 
@@ -76,7 +77,7 @@
         const axiosSource = axios.CancelToken.source();
         this.paginatorRequest = {cancel: axiosSource.cancel};
 
-        axios.get('/api/profile/programs/requests', {
+        axios.get(endpoints.GET_PROGRAM_REQUEST_LIST, {
           cancelToken: axiosSource.token,
           params: {
             page: this.currentPage,

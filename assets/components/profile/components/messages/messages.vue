@@ -21,7 +21,8 @@
 </template>
 
 <script>
-  const axios = require('axios').default;
+  import {endpoints} from './../../store/endpoints';
+  import axios from 'axios';
   import chat from './chat';
 
   export default {
@@ -68,7 +69,7 @@
       },
     },
     created: function () {
-      axios.get('/chat/start')
+      axios.get(endpoints.START_CHAT)
         .then(response => {
           this.userId = response.data.userId;
           this.token = response.data.token;

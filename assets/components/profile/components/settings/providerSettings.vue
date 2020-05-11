@@ -80,13 +80,13 @@
 </template>
 
 <script>
+  import {endpoints} from '../../store/endpoints';
+  import axios from 'axios';
   import {TheMask} from 'vue-the-mask';
   import categorySelect from './categorySelect';
 
-  const axios = require('axios').default;
-
   export default {
-    name: 'settings',
+    name: 'providerSettings',
     components: {
       TheMask,
       categorySelect,
@@ -111,7 +111,7 @@
       updateProfileSettings: function () {
         this.disableButton = true;
 
-        axios.post('/api/profile/settings/', this.profileSettings)
+        axios.post(endpoints.UPDATE_PEOVIDER_SETTINGS, this.profileSettings)
           .then(response => {
             this.fillUserData(response.data);
             this.disableButton = false;
@@ -144,7 +144,7 @@
       }
     },
     created() {
-      axios.get('/api/profile/settings/')
+      axios.get(endpoints.GET_PROVIDER_SETTINGS)
         .then(response => {
           this.fillUserData(response.data);
           this.disableButton = false;
