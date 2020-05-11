@@ -1,7 +1,6 @@
 import settings from '../components/settings/userSettings';
 import messages from '../components/messages/messages';
 import training from '../components/trainig/training';
-import componentNotFound from './../components/componentNotFound';
 
 export const routes = [
   {
