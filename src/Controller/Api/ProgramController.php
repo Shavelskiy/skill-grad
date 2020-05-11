@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api;
 
-use App\Dto\Paginator;
+use App\Dto\PaginatorResult;
 use App\Entity\Category;
 use App\Entity\Program;
 use App\Entity\ProgramRequest;
@@ -60,14 +60,14 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @param Paginator $paginator
+     * @param PaginatorResult $paginator
      *
      * @return array
      *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    protected function getProgramDataFromPaginator(Paginator $paginator): array
+    protected function getProgramDataFromPaginator(PaginatorResult $paginator): array
     {
         $data = [
             'currentPage' => $paginator->getCurrentPage(),
@@ -165,7 +165,7 @@ class ProgramController extends AbstractController
      *
      * @return array
      */
-    protected function getRequestDataFromPaginator(Paginator $paginator): array
+    protected function getRequestDataFromPaginator(PaginatorResult $paginator): array
     {
         $data = [
             'currentPage' => $paginator->getCurrentPage(),

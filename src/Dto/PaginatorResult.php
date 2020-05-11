@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-class Paginator
+class PaginatorResult
 {
     protected array $items;
     protected int $currentPage;

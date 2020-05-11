@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
-use App\Dto\Paginator;
 use App\Entity\Program;
 use App\Entity\ProgramRequest;
+use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -71,20 +71,9 @@ class ProgramRequestRepository extends ServiceEntityRepository
             ->andWhere('pr.program = :program')
             ->setParameter('program', $program);
 
-        $programs = (clone $query)
-            ->setFirstResult(($page - 1) * 10)
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
-
-        $totalCount = (clone $query)
-            ->select('count(pr.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
         return (new Paginator())
-            ->setItems($programs)
-            ->setCurrentPage($page)
-            ->setTotalPageCount(ceil($totalCount / $pageItems));
+            ->setQuery($query)
+            ->setPage($page)
+            ->getResult();
     }
 }
