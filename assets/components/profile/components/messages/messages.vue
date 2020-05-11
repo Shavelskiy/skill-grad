@@ -22,7 +22,7 @@
 
 <script>
   const axios = require('axios').default;
-  import chat from './include/chat';
+  import chat from './chat';
 
   export default {
     name: 'messages',

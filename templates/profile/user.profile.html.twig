@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  {{ encore_entry_link_tags('site.profile') }}
+  {{ encore_entry_link_tags('site.user.profile') }}
 {% endblock %}
 
 {% block title %}Личный кабинет{% endblock %}
@@ -15,5 +15,5 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {{ encore_entry_script_tags('site.profile') }}
+  {{ encore_entry_script_tags('site.user.profile') }}
 {% endblock %}

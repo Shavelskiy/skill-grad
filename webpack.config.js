@@ -8,7 +8,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
   .configureDefinePlugin(options => {
-    const env = dotenv.config({ path:  path.join(__dirname, '.env.local') });
+    const env = dotenv.config({path: path.join(__dirname, '.env.local')});
 
     if (env.error) {
       throw env.error;
@@ -26,7 +26,8 @@ Encore
 
   .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index.js')
-  .addEntry('site.profile', './assets/pages/profile.js')
+  .addEntry('site.user.profile', './assets/pages/user-profile.js')
+  .addEntry('site.provider.profile', './assets/pages/provider-profile.js')
 
   .splitEntryChunks()
 

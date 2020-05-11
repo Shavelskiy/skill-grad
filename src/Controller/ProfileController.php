@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +17,10 @@ class ProfileController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('profile/index.html.twig');
+        if ($this->isGranted(User::ROLE_PROVIDER)) {
+            return $this->render('profile/provider.profile.html.twig');
+        }
+
+        return $this->render('profile/user.profile.html.twig');
     }
 }

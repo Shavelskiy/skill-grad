@@ -53,7 +53,7 @@
     .settings-organization
       .settings-organization-logo
         img(:src="organizationSettings.image" v-if="hasLogoImage()")
-        img(src="../images/organization-logo.png" v-else)
+        img(src="../../images/organization-logo.png" v-else)
         .settings-organization-logo-buttons
           label.upload-btn(for="organization-logo") {{ !hasLogoImage() ? 'Загрузить' : 'Изменить' }}
           input(type="file" id="organization-logo" style="display: none" v-on:change="loadImage")
@@ -81,7 +81,7 @@
 
 <script>
   import {TheMask} from 'vue-the-mask';
-  import categorySelect from './include/categorySelect';
+  import categorySelect from './categorySelect';
 
   const axios = require('axios').default;
 
@@ -107,7 +107,7 @@
         },
       };
     },
-  methods: {
+    methods: {
       updateProfileSettings: function () {
         this.disableButton = true;
 
