@@ -42,7 +42,10 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         $this->em->persist($user);
         $this->em->flush();
 
-        $this->authMailer->sendResetPasswordEmail($user->getEmail(), $user->getResetPasswordToken()->getHex()->toString());
+        $this->authMailer->sendResetPasswordEmail(
+            $user->getEmail(), 
+            $user->getResetPasswordToken()->getHex()->toString()
+        );
     }
 
     /**
@@ -92,7 +95,10 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         $this->em->persist($user);
         $this->em->flush();
 
-        $this->authMailer->sendRegisterEmail($user->getEmail(), $user->getRegisterToken()->getHex()->toString());
+        $this->authMailer->sendRegisterEmail(
+            $user->getEmail(),
+            $user->getRegisterToken()->getHex()->toString()
+        );
     }
 
     /**

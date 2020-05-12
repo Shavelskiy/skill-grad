@@ -3,7 +3,9 @@
     .name.text {{ program.name }}
     .categories.text
       a(href="#" v-for="category in program.categories" :key="category.id") {{ category }}
-    router-link.mail.logo(:to="{ name: 'programs-requests', params: { id: program.id } }")
+    router-link.mail.logo(
+      :to="{ name: 'programs-requests', params: { id: program.id, programName: program.name } }"
+    )
       img.mail-logo(src="./../../images/mail.svg")
       .mail-tooltip {{ program.requests.new }}
       br

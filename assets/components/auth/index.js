@@ -45,7 +45,7 @@ document.getElementById('register-provider-button').onclick = () => {
 }
 
 
-const initModalForm = (modal, checkPasswords, closeFormIfError, recaptchaAction) => {
+const initModalForm = (modal, checkPasswords, closeFormIfError, reloadPageIfSuccess, recaptchaAction) => {
   const form = modal.querySelector('form');
   const formButton = form.querySelector('button');
 
@@ -75,6 +75,10 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, recaptchaAction)
           .then(response => {
             modal.classList.remove('modal-active');
             showAlert(response.data.message);
+
+            if (reloadPageIfSuccess) {
+              document.location.reload();
+            }
           })
           .catch(error => {
             if (closeFormIfError) {
@@ -89,10 +93,10 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, recaptchaAction)
   }
 }
 
-initModalForm(loginModal, false, false, 'login');
-initModalForm(resetPasswordModal, false, false, 'resetPassword');
-initModalForm(newPasswordModal, true, true, 'newPassword');
-initModalForm(registerModal, true, false, 'register');
+initModalForm(loginModal, false, false, true, 'login');
+initModalForm(resetPasswordModal, false, false, false, 'resetPassword');
+initModalForm(newPasswordModal, true, true, false, 'newPassword');
+initModalForm(registerModal, true, false, false, 'register');
 
 /* закрытие попапов */
 window.onclick = (event) => {

@@ -1,0 +1,28 @@
+<div class="header-container">
+  <div class="wrap {{ app.user ? 'logged' : '' }}">
+    <div class="auth-forms">
+      <button id="login-modal-button" type="button">Авторизация</button>
+      <button id="register-modal-button" type="button">Регистрация</button>
+
+      {% include 'components/modals/login.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
+      {% include 'components/modals/register.form.html.twig' with { 'socialLinks': getSocialAuthLinks(true) } %}
+      {% include 'components/modals/reset.passorder.html.twig' %}
+      {% include 'components/modals/new.password.html.twig' %}
+    </div>
+    {% include 'components/modals/alert.html.twig' %}
+
+    <div class="profile-info">
+      <span>Добро пожаловать,</span>
+      <span>{{ app.user ? app.user.username : '' }}</span>
+      {% if app.user is defined %}
+        <div class="profile-dropdown ">
+          {% if is_granted('ROLE_PROVIDER') %}
+            {% include 'components/header/provider.dropdown.html.twig' %}
+          {% else %}
+            {% include 'components/header/user.dropdown.html.twig' %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,7 +1,9 @@
+@import "./fonts/index";
+
 body {
   margin: 0;
   overflow-x: hidden;
-  font-family: "Roboto Light", sans-serif;
+  font-family: "Lato Light", sans-serif;
 }
 
 .wrap {
@@ -35,13 +37,6 @@ body {
   .auth-forms {
     display: none;
   }
-}
-
-@font-face {
-  font-family: "Roboto Light";
-  src: url("./fonts/Roboto/Roboto-Light.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
 }
 
 .btn {
