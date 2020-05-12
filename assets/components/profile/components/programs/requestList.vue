@@ -14,6 +14,7 @@
         :itemComponent="paginatorItem"
         :endpoint="endpoint"
         :additionalParams="{programId: id}"
+        @fillExternalData="fillExternalData"
       )
 </template>
 
@@ -24,7 +25,7 @@
 
   export default {
     name: 'requestList',
-    props: ['id', 'programName'],
+    props: ['id'],
     components: {
       requestItem,
       paginator,
@@ -32,9 +33,15 @@
     data: function () {
       return {
         paginatorItem: requestItem,
+        programName: null,
         showActive: true,
         endpoint: endpoints.GET_PROGRAM_REQUEST_LIST,
       };
+    },
+    methods: {
+      fillExternalData: function (data) {
+        this.programName = data.programName;
+      }
     },
   }
 </script>

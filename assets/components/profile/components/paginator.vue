@@ -7,7 +7,7 @@
       :program="item"
     )
 
-    .paginator-pages(v-if="paginator")
+    .paginator-pages(v-if="paginator.length > 0")
       div(
         v-on:click="changeCurrentPage(currentPage - 1)"
         :class="`arrow ${(currentPage > 1) ? 'active' : ''}`"
@@ -37,7 +37,7 @@
     props: ['itemComponent', 'additionalParams', 'endpoint'],
     data: function () {
       return {
-        totalPages: 1,
+        totalPages: 0,
         currentPage: 1,
         paginatorRequest: null,
         disabledTable: false,
@@ -74,8 +74,14 @@
             this.currentPage = response.data.currentPage;
             this.totalPages = response.data.totalPages;
             this.items = response.data.items;
+            this.emitExternalData(response.data);
             this.disabledTable = false;
           });
+      },
+      emitExternalData: function (data) {
+        this.$emit('fillExternalData', {
+          programName: data.programName,
+        });
       },
     },
     computed: {
