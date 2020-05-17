@@ -21,9 +21,7 @@ class App extends React.Component {
         <Sidebar/>
         <div className="main-content">
           <Header/>
-          <div className="container-fluid px-4">
-            <LocationsIndex/>
-          </div>
+          <LocationsIndex/>
         </div>
       </div>
     );

@@ -1,9 +1,9 @@
 import React from 'react';
-import Breadcrumbs from "../../components/breadcrumbs/breacrumbs";
-import Table from "../../components/table/table";
-import Paginator from "../../components/paginator/paginator";
+import Breadcrumbs from '../../components/breadcrumbs/breacrumbs';
+import Table from '../../components/table/table';
+import Paginator from '../../components/paginator/paginator';
 import Search from '../../components/search/search';
-import PanelTitle from "../../components/panel/panel-title";
+import PanelTitle from '../../components/panel/panel-title';
 
 class LocationsIndex extends React.Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class LocationsIndex extends React.Component {
           />
 
           <div className="body">
-            <Search/>
+            {/*<Search/>*/}
             <Table
               header={this.state.tableHeader}
               body={this.state.body}

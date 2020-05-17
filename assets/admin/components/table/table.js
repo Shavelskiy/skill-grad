@@ -28,7 +28,7 @@ class Table extends React.Component {
     });
 
     return (
-      <table className="table table-bordered table-hover">
+      <table className="table">
         <thead>
         <tr>{header}</tr>
         </thead>

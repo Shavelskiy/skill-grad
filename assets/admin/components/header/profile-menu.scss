@@ -1,0 +1,95 @@
+.user-profile {
+  padding: 13px;
+  border-radius: 200px;
+
+  &:hover {
+    background-color: #f0f3ff;
+  }
+
+  &-card {
+    position: absolute;
+    top: 74px;
+    background-color: #fff;
+    right: 25px;
+    box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
+    transition: visibility 0s, opacity 0.1s ease-out;
+    opacity: 1;
+    visibility: visible;
+
+    ul {
+      display: block;
+      padding: 0.5rem 0 0 0;
+      list-style: none;
+      border: 0;
+      margin: 1rem 0 0;
+    }
+
+    svg {
+      color: #a2a5b9;
+    }
+
+    .line {
+      margin: 0.7rem 0;
+      height: 0;
+      display: block;
+      border-bottom: 1px solid #ebedf2;
+    }
+
+    .list {
+      padding: 3px 42px 3px 2rem;
+      margin-bottom: 1.5rem;
+
+      &:hover {
+        background-color: #f7f8fa;
+        transition: all 0.3s;
+
+        svg, span {
+          color: #5d78ff;
+        }
+
+      }
+
+      span {
+        color: #595d6e;
+        font-weight: 400;
+        margin-left: 4px;
+      }
+    }
+
+    .logout {
+      margin: 2rem 0 2rem 2rem;
+
+      a {
+        background-color: rgba(93, 120, 255, 0.1);
+        color: #5d78ff;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+        font-weight: 600;
+        transition: all 0.3s;
+
+        &:hover {
+          background-color: #5d78ff;
+          color: #ffffff;
+        }
+      }
+    }
+
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  color: #6c7293;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: Poppins, Helvetica, sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}

@@ -4,14 +4,16 @@ import css from './breadcrumbs.scss';
 class Breadcrumbs extends React.Component {
   render() {
     return (
-      <ol className="breadcrumb">
-        <li className="breadcrumb-item">
-          <a href="/admin/">Главная</a>
-        </li>
-        <li className="breadcrumb-item active">
-          Список местоположений
-        </li>
-      </ol>
+      <div className="breadcrumb-wrap">
+        <ol className="breadcrumb">
+          <li className="item">
+            <a href="/admin/">Главная</a>
+          </li>
+          <li className="item active">
+            Список местоположений
+          </li>
+        </ol>
+      </div>
     );
   }
 }
