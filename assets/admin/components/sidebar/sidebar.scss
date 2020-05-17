@@ -1,0 +1,41 @@
+.sidebar {
+  &-container {
+    background-color: #242939;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 98;
+    width: 260px;
+    max-width: 260px;
+    transition: max-width 0.2s ease-out;
+    overflow: hidden;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 25px;
+    height: 75px;
+  }
+
+  &-tools-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.menu-container {
+  margin-top: 30px;
+  margin: 0;
+  padding: 0;
+  color: #989eb3;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+}

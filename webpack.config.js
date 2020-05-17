@@ -21,8 +21,7 @@ Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
 
-  .addEntry('admin.layout', './assets/admin/layout/index.js')
-  .addEntry('admin.login', './assets/admin/pages/login/index.js')
+  .addEntry('admin', './assets/admin/index.js')
 
   .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index.js')
@@ -44,6 +43,7 @@ Encore
 
   .enableSassLoader()
   .enableVueLoader()
+  .enableReactPreset()
   .addLoader({
     test: /\.pug$/,
     oneOf: [

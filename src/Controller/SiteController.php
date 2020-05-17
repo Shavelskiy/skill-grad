@@ -15,4 +15,12 @@ class SiteController extends AbstractController
     {
         return $this->render('site/index.html.twig');
     }
+
+    /**
+     * @Route("/kek", name="site.kek")
+     */
+    public function kek(): Response
+    {
+        return $this->render('site/kek.html.twig');
+    }
 }
