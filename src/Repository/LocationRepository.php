@@ -3,7 +3,11 @@
 namespace App\Repository;
 
 use App\Dto\Filter\LocationFilter;
+use App\Dto\PaginatorResult;
 use App\Entity\Location;
+use App\Entity\Program;
+use App\Entity\ProgramRequest;
+use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -17,6 +21,8 @@ class LocationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Location::class);
     }
+
+    protected const ORDABLE_FIELDS = ['id', 'sort', 'type', 'name'];
 
     public function findById($id): Location
     {
@@ -60,18 +66,37 @@ class LocationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param QueryBuilder $query
-     *
-     * @return int
-     *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @param Program $program
+     * @param int $page
+     * @param int $pageItems
+     * @return PaginatorResult
      */
-    public function getCountFromQuery(QueryBuilder $query): int
+    public function getPaginatorLocations(int $page, ?array $order, int $pageItems = 5): PaginatorResult
     {
-        return (clone $query)
-            ->select('COUNT(location.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $query = $this->createQueryBuilder('l');
+
+        if ($order !== null) {
+            foreach ($order as $field => $order) {
+                if (!in_array($field, self::ORDABLE_FIELDS, true)) {
+                    continue;
+                }
+
+                if ($order === null || !in_array($order, ['asc', 'desc'], true)) {
+                    continue;
+                }
+
+                $query->addOrderBy("l.$field", $order);
+            }
+        }
+
+        $query
+            ->addOrderBy('l.sort', 'asc')
+            ->addOrderBy('l.id', 'asc');
+
+        return (new Paginator())
+            ->setQuery($query)
+            ->setPageItems($pageItems)
+            ->setPage($page)
+            ->getResult();
     }
 }

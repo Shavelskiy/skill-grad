@@ -1,0 +1,36 @@
+.link {
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #5d78ff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+
+  &.active {
+    color: #fff;
+    background-color: #5d78ff;
+    border-color: #5d78ff;
+  }
+
+  &.disabled {
+    cursor: default;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+  }
+
+  &:hover &:not(.active) {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+  }
+
+  &:first-child {
+    margin-left: 0;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+  }
+
+  &:last-child {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+  }
+}

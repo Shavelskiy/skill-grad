@@ -20,7 +20,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
 {
     protected const APP_LOGIN_URL = 'ajax.auth.login';
-    protected const ADMIN_LOGIN_URL = 'admin.site.login';
+    protected const ADMIN_LOGIN_URL = 'admin.login';
 
     protected EntityManagerInterface $entityManager;
     protected UrlGeneratorInterface $urlGenerator;
@@ -34,7 +34,8 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository
-    ) {
+    )
+    {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -72,7 +73,7 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed         $credentials
+     * @param mixed $credentials
      * @param UserInterface $user
      *
      * @return bool
@@ -88,7 +89,7 @@ abstract class AbstractAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param Request                      $request
+     * @param Request $request
      * @param AuthenticationException|null $authException
      *
      * @return RedirectResponse

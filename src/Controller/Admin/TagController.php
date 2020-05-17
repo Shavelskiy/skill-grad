@@ -3,152 +3,139 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormInterface;
+use App\Repository\TagRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/tag")
+ * @Route("/api/admin/tag")
  */
-class TagController extends AbstractCrudController
+class TagController extends AbstractController
 {
-    protected function getModelClass()
-    {
-        return Tag::class;
+    protected TagRepository $tagRepository;
+
+    public function __construct(
+        TagRepository $tagRepository
+    ) {
+        $this->tagRepository = $tagRepository;
     }
 
     /**
      * @Route("/", name="admin.tag.index", methods={"GET", "HEAD"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return $this->render('admin/tag/index.html.twig', [
-            'tags' => $this->getRepository()->findAll(),
-        ]);
-    }
+        $page = (int)$request->get('page', 1);
+        $order = json_decode($request->get('order', ''), true);
 
-    /**
-     * @Route("/create", name="admin.tag.create", methods={"GET", "HEAD"})
-     */
-    public function create(): Response
-    {
-        $tag = new Tag();
+        $paginator = $this->tagRepository
+            ->getPaginatorItems($page, is_array($order) ? $order : null);
 
-        /** @var Tag $maxSortTag */
-        $maxSortTag = $this->getRepository()->getTagWithMaxSort();
-        $tag->setSort(($maxSortTag !== null) ? ($maxSortTag->getSort() + 100) : 100);
+        $items = [];
 
-        return $this->render('admin/tag/create.html.twig', [
-            'form' => $this->getForm($tag)->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/create", name="admin.tag.store", methods={"POST", "PUT"})
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function store(Request $request): Response
-    {
-        $form = $this->getForm()->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
-            $em->flush();
-
-            return $this->redirectToRoute('admin.tag.index');
+        foreach ($paginator->getItems() as $item) {
+            $items[] = [
+                'id' => $item->getId(),
+                'name' => $item->getName(),
+                'sort' => $item->getSort(),
+            ];
         }
 
-        return $this->render('admin/tag/create.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $data = [
+            'total_pages' => $paginator->getTotalPageCount(),
+            'current_page' => $paginator->getCurrentPage(),
+            'items' => $items,
+        ];
+
+        return new JsonResponse($data);
     }
 
     /**
-     * @Route("/{id}/edit", name="admin.tag.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
+     * @Route("/{id}", name="admin.tag.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      *
-     * @param $id
-     *
+     * @param int $id
      * @return Response
      */
-    public function edit($id): Response
+    public function view(int $id): Response
     {
-        $tag = $this->findModel($id);
+        try {
+            if ($id < 1) {
+                throw new \RuntimeException('');
+            }
 
-        return $this->render('admin/tag/edit.html.twig', [
-            'tag' => $tag,
-            'form' => $this->getForm($tag)->createView(),
-        ]);
-    }
+            /** @var Tag $tag */
+            $tag = $this->tagRepository->find($id);
 
-    /**
-     * @Route("/{id}/edit", name="admin.tag.update", methods={"POST", "PUT"}, requirements={"id"="[0-9]+"})
-     *
-     * @param $id
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function update($id, Request $request): Response
-    {
-        $tag = $this->findModel($id);
+            if ($tag === null) {
+                throw new \RuntimeException('');
+            }
 
-        $form = $this->getForm($tag)->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
-            $em->flush();
-
-            return $this->redirectToRoute('admin.tag.index');
+            return new JsonResponse([
+                'id' => $tag->getId(),
+                'name' => $tag->getName(),
+                'sort' => $tag->getSort(),
+            ]);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException('');
         }
-
-        return $this->render('admin/tag/edit.html.twig', [
-            'tag' => $tag,
-            'form' => $this->getForm($tag)->createView(),
-        ]);
     }
 
     /**
-     * @Route("/{id}/destroy", name="admin.tag.destroy", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
-     *
-     * @param $id
-     *
-     * @return Response
+     * @Route("/", name="admin.tag.create", methods={"POST"})
      */
-    public function destroy($id): Response
+    public function create(Request $request): Response
     {
-        $tag = $this->findModel($id);
+        $tag = (new Tag())
+            ->setName($request->get('name'))
+            ->setSort($request->get('sort'));
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($tag);
-        $em->flush();
+        $this->getDoctrine()->getManager()->persist($tag);
+        $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('admin.tag.index');
+        return new JsonResponse();
     }
 
     /**
-     * @param $tag
-     *
-     * @return FormInterface
+     * @Route("/", name="admin.tag.update", methods={"PUT"})
      */
-    protected function getForm($tag = null): FormInterface
+    public function update(Request $request): Response
     {
+        /** @var Tag $tag */
+        $tag = $this->tagRepository->find($request->get('id'));
+
         if ($tag === null) {
-            $tag = new Tag();
+            return new JsonResponse([], 404);
         }
 
-        return $this->createFormBuilder($tag)
-            ->add('name', TextType::class, ['label' => 'Название'])
-            ->add('sort', IntegerType::class, ['label' => 'Сортировка'])
-            ->add('save', SubmitType::class, ['label' => 'Сохранить'])
-            ->getForm();
+        $tag
+            ->setName($request->get('name'))
+            ->setSort($request->get('sort'));
+
+        $this->getDoctrine()->getManager()->persist($tag);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/", name="admin.tag.delete", methods={"DELETE"})
+     */
+    public function delete(Request $request): Response
+    {
+        /** @var Tag $tag */
+        $tag = $this->tagRepository->find($request->get('id'));
+
+        if ($tag === null) {
+            return new JsonResponse([], 404);
+        }
+
+        $this->getDoctrine()->getManager()->remove($tag);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
     }
 }

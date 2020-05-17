@@ -1,0 +1,99 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  color: #646c9a;
+  background-color: #f2f3f8;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.15;
+  text-align: left;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: Poppins, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+form {
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 13px;
+  font-weight: 300;
+
+  & th, & td {
+    padding: .75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+
+/////////
+
+.btn {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: .25rem;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &.create {
+    background: transparent;
+    color: #74788d;
+    border: 1px solid #e8ecfa;
+
+    &:hover {
+      background-color: #5d78ff;
+      color: #fff;
+    }
+  }
+
+  &.primary {
+    background-color: #007bff;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &.success {
+    background-color: #1dc9b7;
+
+    &:hover {
+      background-color: rgb(24, 168, 153);
+    }
+  }
+}

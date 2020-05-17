@@ -31,7 +31,8 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         UrlGeneratorInterface $urlGenerator,
         UserRepository $userRepository,
         RegisterUserInterface $registerUserService
-    ) {
+    )
+    {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->userRepository = $userRepository;
@@ -65,7 +66,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed                 $credentials
+     * @param mixed $credentials
      * @param UserProviderInterface $userProvider
      *
      * @return User|UserInterface|null
@@ -92,7 +93,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed         $credentials
+     * @param mixed $credentials
      * @param UserInterface $user
      *
      * @return bool
@@ -103,9 +104,9 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param Request        $request
+     * @param Request $request
      * @param TokenInterface $token
-     * @param string         $providerKey
+     * @param string $providerKey
      *
      * @return RedirectResponse|Response|null
      */

@@ -1,0 +1,10 @@
+.main {
+  .container {
+    padding-left: 260px;
+    transition: padding-left 0.2s ease-out;
+
+    &.active {
+      padding-left: 80px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 0 40px 0 rgba(82, 63, 105, .1);
+  background-color: #fff;
+  border-bottom: 1px solid #eff0f6;
+  height: 75px;
+  transition: left 0.2s ease-out;
+  padding: 0 25px;
+}
+
+.main-header {
+  left: 80px;
+}

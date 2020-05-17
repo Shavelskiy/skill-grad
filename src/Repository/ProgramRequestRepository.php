@@ -58,8 +58,8 @@ class ProgramRequestRepository extends ServiceEntityRepository
 
     /**
      * @param Program $program
-     * @param int     $page
-     * @param int     $pageItems
+     * @param int $page
+     * @param int $pageItems
      *
      * @return Paginator
      *

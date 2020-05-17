@@ -23,5 +23,5 @@ yarn-error.log
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
 
-tags
+/tags
 *.swp

@@ -1,0 +1,11 @@
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,17 @@
+td.actions {
+  width: 1%;
+  min-width: 118px;
+
+  .wrap {
+    display: flex;
+
+    .item {
+      margin-right: 10px;
+
+      i {
+        color: #5d78ff;
+        float: right;
+      }
+    }
+  }
+}

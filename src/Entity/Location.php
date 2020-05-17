@@ -77,19 +77,11 @@ class Location
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return Location
-     */
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -97,19 +89,11 @@ class Location
         return $this;
     }
 
-    /**
-     * @return Location|null
-     */
     public function getParentLocation(): ?Location
     {
         return $this->parentLocation;
     }
 
-    /**
-     * @param Location $parentLocation
-     *
-     * @return Location
-     */
     public function setParentLocation(Location $parentLocation): self
     {
         $this->parentLocation = $parentLocation;
@@ -117,17 +101,11 @@ class Location
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function hasChildType(): bool
     {
         return (isset($this->type)) && $this->type !== self::TYPE_CITY;
     }
 
-    /**
-     * @return string
-     */
     public function getChildType(): string
     {
         switch ($this->getType()) {

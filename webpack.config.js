@@ -21,8 +21,7 @@ Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
 
-  .addEntry('admin.layout', './assets/admin/layout/index.js')
-  .addEntry('admin.login', './assets/admin/pages/login/index.js')
+  .addEntry('admin', './admin/index.js')
 
   .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index.js')
@@ -41,9 +40,13 @@ Encore
     config.useBuiltIns = 'usage';
     config.corejs = 3;
   })
+  .configureCssLoader((options) => {
+    options.camelCase = true;
+  })
 
-  .enableSassLoader()
   .enableVueLoader()
+  .enableReactPreset()
+  .enableSassLoader()
   .addLoader({
     test: /\.pug$/,
     oneOf: [
@@ -58,7 +61,7 @@ Encore
   })
 
   .copyFiles({
-    from: './assets/admin/images',
+    from: './admin/images',
     to: 'images/[path][name].[ext]',
     pattern: /\.(png|jpg|jpeg)$/
   })

@@ -1,0 +1,14 @@
+tbody {
+  & tr:hover {
+    color: #212529;
+    background-color: rgb(250, 251, 252);
+  }
+
+  td.numbering {
+    width: 1px;
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+    font-size: 11px;
+    opacity: 0.6;
+  }
+}
