@@ -37,7 +37,16 @@ class LocationsIndex extends React.Component {
           sort: 1,
         },
       ],
+      totalPages: 5,
+      currentPage: 2,
     }
+  }
+
+  changePage(page) {
+    this.setState({
+      body: [],
+      currentPage: page,
+    })
   }
 
   render() {
@@ -61,7 +70,11 @@ class LocationsIndex extends React.Component {
               body={this.state.body}
               bodyKeys={this.state.bodyKeys}
             />
-            <Paginator/>
+            <Paginator
+              totalPages={this.state.totalPages}
+              currentPage={this.state.currentPage}
+              click={(page) => this.changePage(page)}
+            />
           </div>
         </div>
       </div>

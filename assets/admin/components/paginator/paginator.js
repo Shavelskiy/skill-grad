@@ -3,18 +3,23 @@ import css from './paginator.scss';
 
 class Paginator extends React.Component {
   render() {
+    let items = [];
+
+    for (let i = 1; i <= this.props.totalPages; i++) {
+      items.push(
+        <li
+          key={i}
+          className={`item ${(i === this.props.currentPage) ? 'active' : ''}`}
+          onClick={() => this.props.click(i)}
+        >
+          <div className="link">{i}</div>
+        </li>
+      );
+    }
+
     return (
       <ul className="pagination">
-        <li className="item active">
-          <div className="link">1</div>
-        </li>
-        <li className="item">
-          <a className="link" href="/admin/location/?page=2">2</a>
-        </li>
-
-        <li className="item">
-          <a className="link" href="/admin/location/?page=2">»</a>
-        </li>
+        {items}
       </ul>
     );
   }
