@@ -37,14 +37,13 @@ class LocationsIndex extends React.Component {
           sort: 1,
         },
       ],
-      totalPages: 5,
+      totalPages: 10,
       currentPage: 2,
     }
   }
 
   changePage(page) {
     this.setState({
-      body: [],
       currentPage: page,
     })
   }
