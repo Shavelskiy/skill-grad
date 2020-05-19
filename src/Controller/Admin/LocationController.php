@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/api/admin/location")
@@ -24,10 +25,14 @@ class LocationController extends AbstractController
     protected const DEFAULT_PAGE_ITEMS = 5;
 
     protected LocationRepository $locationRepository;
+    protected TranslatorInterface $translator;
 
-    public function __construct(LocationRepository $locationRepository)
-    {
+    public function __construct(
+        LocationRepository $locationRepository,
+        TranslatorInterface $translator
+    ) {
         $this->locationRepository = $locationRepository;
+        $this->translator = $translator;
     }
 
     /**
@@ -72,7 +77,7 @@ class LocationController extends AbstractController
         return [
             'id' => $location->getId(),
             'name' => $location->getName(),
-            'type' => $location->getType(),
+            'type' => $this->translator->trans('location.type.' . $location->getType()),
             'sort' => $location->getSort(),
         ];
     }

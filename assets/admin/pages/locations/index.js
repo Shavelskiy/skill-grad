@@ -102,7 +102,7 @@ class LocationsIndex extends React.Component {
         order[propName] = 'desc';
         break;
       case 'desc':
-        order[propName] = null;
+        delete order[propName];
         break;
     }
 

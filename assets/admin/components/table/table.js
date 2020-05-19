@@ -38,6 +38,7 @@ class Table extends React.Component {
 
       return (
         <tr key={key}>
+          <td className="numbering">{key + 1}</td>
           {row}
         </tr>
       );
@@ -46,7 +47,10 @@ class Table extends React.Component {
     return (
       <table className={`table ${this.props.disabled ? 'disabled' : ''}`}>
         <thead>
-        <tr>{header}</tr>
+        <tr>
+          <th></th>
+          {header}
+        </tr>
         </thead>
         <tbody>
         {body}
