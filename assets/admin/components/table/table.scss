@@ -9,6 +9,18 @@ table {
   background-color: null;
   border: 1px solid #dee2e6;
 
+  &.disabled {
+    opacity: 0.5;
+  }
+
+  i {
+    float: right;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
   & th, & td {
     padding: .75rem;
     vertical-align: top;

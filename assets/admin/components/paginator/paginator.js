@@ -51,6 +51,10 @@ class Paginator extends React.Component {
     const currentPage = this.props.currentPage;
     const totalPages = this.props.totalPages;
 
+    if (totalPages <= 1) {
+      return '';
+    }
+
     let items = [];
 
     if (currentPage !== 1) {

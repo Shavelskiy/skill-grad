@@ -4,48 +4,111 @@ import Table from '../../components/table/table';
 import Paginator from '../../components/paginator/paginator';
 import Search from '../../components/search/search';
 import PanelTitle from '../../components/panel/panel-title';
+import axios from 'axios';
+
+const table = [
+  {
+    title: 'Id',
+    name: 'id',
+  },
+  {
+    title: 'Название',
+    name: 'name',
+  },
+  {
+    title: 'Тип',
+    name: 'type',
+  },
+  {
+    title: 'Сортировка',
+    name: 'sort',
+  }
+];
 
 class LocationsIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableHeader: ['Id', 'Название', 'Тип', 'Сортировка'],
-      bodyKeys: ['id', 'name', 'type', 'sort'],
-      body: [
-        {
-          id: 1,
-          name: 'Россия',
-          type: 'Страна',
-          sort: 1,
-        },
-        {
-          id: 2,
-          name: 'Россия',
-          type: 'Страна',
-          sort: 1,
-        },
-        {
-          id: 3,
-          name: 'Россия',
-          type: 'Страна',
-          sort: 1,
-        },
-        {
-          id: 4,
-          name: 'Россия',
-          type: 'Страна',
-          sort: 1,
-        },
-      ],
-      totalPages: 10,
-      currentPage: 2,
+      body: [],
+      paginatorRequest: null,
+      disabledTable: false,
+      totalPages: 0,
+      currentPage: 1,
+      order: {},
     }
   }
 
-  changePage(page) {
+  componentDidMount() {
+    this.loadItems();
+  }
+
+  loadItems() {
     this.setState({
-      currentPage: page,
+      disabledTable: true,
+    });
+
+    const paginatorRequest = this.state.paginatorRequest;
+
+    if (paginatorRequest) {
+      paginatorRequest.cancel();
+    }
+
+    const axiosSource = axios.CancelToken.source();
+    this.setState({
+      paginatorRequest: {cancel: axiosSource.cancel}
+    });
+
+    const params = {
+      page: this.state.currentPage,
+      order: this.state.order,
+    };
+
+    axios.get('/api/admin/location', {
+      cancelToken: axiosSource.token,
+      params: params,
     })
+      .then(response => {
+        this.setState({
+          body: response.data.items,
+          totalPages: response.data.total_pages,
+          currentPage: response.data.current_page,
+          disabledTable: false,
+        });
+      });
+  }
+
+  changePage(page) {
+    if (page === this.state.currentPage) {
+      return;
+    }
+
+    this.setState({
+      currentPage: page
+    }, () => this.loadItems());
+  }
+
+  changeOrder(propName) {
+    let order = this.state.order;
+
+    if (!order[propName]) {
+      order[propName] = null;
+    }
+
+    switch (order[propName]) {
+      case null:
+        order[propName] = 'asc';
+        break;
+      case 'asc':
+        order[propName] = 'desc';
+        break;
+      case 'desc':
+        order[propName] = null;
+        break;
+    }
+
+    this.setState({
+      order: order
+    }, () => this.loadItems());
   }
 
   render() {
@@ -65,9 +128,11 @@ class LocationsIndex extends React.Component {
           <div className="body">
             {/*<Search/>*/}
             <Table
-              header={this.state.tableHeader}
+              table={table}
               body={this.state.body}
-              bodyKeys={this.state.bodyKeys}
+              order={this.state.order}
+              disabled={this.state.disabledTable}
+              changeOrder={(propName) => this.changeOrder(propName)}
             />
             <Paginator
               totalPages={this.state.totalPages}
