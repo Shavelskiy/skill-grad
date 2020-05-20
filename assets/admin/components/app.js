@@ -13,21 +13,27 @@ import Sidebar from './sidebar/sidebar';
 import Header from './header/header';
 import Table from './table/table';
 import LocationsIndex from '../pages/locations';
+import LocationView from '../pages/locations/view';
 import {NotFound} from '../pages/notFound/notFound';
 
-export function App(props) {
-  return (
-    <BrowserRouter basename={'/admin'}>
-      <div className="main">
-        <Sidebar/>
-        <div className="main-content">
-          <Header/>
-          <Switch>
-            <Route path='/locations' component={LocationsIndex}/>
-            <Route path='/' component={NotFound}/>
-          </Switch>
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter basename={'/admin'}>
+        <div className="main">
+          <Sidebar/>
+          <div className="main-content">
+            <Header/>
+            <Switch>
+              <Route path={/\/location\/([0-9]+)\/$/} component={LocationView}/>
+              <Route path={/\/location\/$/} component={LocationsIndex}/>
+              <Route path={/.*/} component={NotFound}/>
+            </Switch>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+    );
+  }
 }
+
+export default App;

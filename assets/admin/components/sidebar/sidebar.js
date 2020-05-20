@@ -13,15 +13,15 @@ class Sidebar extends React.Component {
         items: [
           {
             title: 'Статьи',
-            link: '/articles',
+            link: '/article/',
           },
           {
             title: 'Теги',
-            link: '/tags',
+            link: '/tag/',
           },
           {
             title: 'Рубрики',
-            link: '/rubrics',
+            link: '/rubric/',
           },
         ],
       },
@@ -31,7 +31,7 @@ class Sidebar extends React.Component {
         items: [
           {
             title: 'Все пользователи',
-            link: '/users',
+            link: '/user/',
           },
         ],
       },
@@ -41,7 +41,7 @@ class Sidebar extends React.Component {
         items: [
           {
             title: 'Список всех местоположений',
-            link: '/locations',
+            link: '/location/',
           },
         ],
       },
