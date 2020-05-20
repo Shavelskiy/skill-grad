@@ -13,11 +13,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SiteController extends AdminAbstractController
 {
     /**
-     * @Route("/", name="admin.site.index")
+     * @Route("/{path}/", methods={"GET"}, requirements={"path"=".*"}, name="admin.index")
      */
     public function index(): Response
     {
-        return $this->render('admin/site/index.html.twig');
+        return $this->render('admin/index.html.twig');
     }
 
     /**

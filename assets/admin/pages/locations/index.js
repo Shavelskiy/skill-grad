@@ -43,19 +43,16 @@ class LocationsIndex extends React.Component {
   }
 
   loadItems() {
-    this.setState({
-      disabledTable: true,
-    });
-
     const paginatorRequest = this.state.paginatorRequest;
+    const axiosSource = axios.CancelToken.source();
 
     if (paginatorRequest) {
       paginatorRequest.cancel();
     }
 
-    const axiosSource = axios.CancelToken.source();
     this.setState({
-      paginatorRequest: {cancel: axiosSource.cancel}
+      paginatorRequest: {cancel: axiosSource.cancel},
+      disabledTable: true,
     });
 
     const params = {

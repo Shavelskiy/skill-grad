@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
   Link,
@@ -13,19 +13,21 @@ import Sidebar from './sidebar/sidebar';
 import Header from './header/header';
 import Table from './table/table';
 import LocationsIndex from '../pages/locations';
+import {NotFound} from '../pages/notFound/notFound';
 
-class App extends React.Component {
-  render() {
-    return (
+export function App(props) {
+  return (
+    <BrowserRouter basename={'/admin'}>
       <div className="main">
         <Sidebar/>
         <div className="main-content">
           <Header/>
-          <LocationsIndex/>
+          <Switch>
+            <Route path='/locations' component={LocationsIndex}/>
+            <Route path='/' component={NotFound}/>
+          </Switch>
         </div>
       </div>
-    );
-  }
+    </BrowserRouter>
+  );
 }
-
-export default App;

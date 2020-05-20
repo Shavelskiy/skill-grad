@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './menuItem.scss';
+import {Link} from 'react-router-dom';
 
 class MenuItem extends React.Component {
   constructor(props) {
@@ -20,10 +21,10 @@ class MenuItem extends React.Component {
     const items = this.props.rootItem.items.map((childItems, key) => {
       return (
         <li key={key}>
-          <div className="item">
+          <Link className="item" to={childItems.link}>
             <i className="point"><span></span></i>
-            <a className="text" href={childItems.link}>{childItems.title}</a>
-          </div>
+            <span className="text">{childItems.title}</span>
+          </Link>
         </li>
       );
     });

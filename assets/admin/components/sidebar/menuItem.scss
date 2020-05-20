@@ -3,6 +3,10 @@
     color: #434d6b;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .item {
     display: flex;
     justify-content: flex-start;
@@ -34,6 +38,16 @@
       path {
         color: #5d78ff;
       }
+    }
+
+    .point {
+      margin-left: 30px;
+      margin-right: 10px;
+    }
+
+    .text {
+      font-weight: 300;
+      color: #989eb3;
     }
 
     &:hover, &.active {
