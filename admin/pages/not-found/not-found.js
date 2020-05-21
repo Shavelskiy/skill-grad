@@ -1,4 +1,5 @@
 import React from 'react';
+import css from './not-found.scss';
 
 export function NotFound(props) {
   return (

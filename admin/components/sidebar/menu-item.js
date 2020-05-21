@@ -1,5 +1,5 @@
 import React from 'react';
-import css from './menuItem.scss';
+import css from './menu-item.scss';
 import {Link} from 'react-router-dom';
 
 class MenuItem extends React.Component {

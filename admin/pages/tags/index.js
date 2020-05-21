@@ -21,6 +21,13 @@ const table = [
   }
 ];
 
+const actions = [
+  {
+    type: 'view',
+    link: '/tag',
+  }
+];
+
 class TagsIndex extends React.Component {
   constructor(props) {
     super(props);
@@ -126,6 +133,7 @@ class TagsIndex extends React.Component {
               order={this.state.order}
               disabled={this.state.disabledTable}
               changeOrder={(propName) => this.changeOrder(propName)}
+              actions={actions}
             />
             <Paginator
               totalPages={this.state.totalPages}

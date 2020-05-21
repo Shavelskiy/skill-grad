@@ -1,17 +1,39 @@
 import React from 'react';
 import css from './table.scss';
+import ActionItem from './action-item';
+import {Link} from 'react-router-dom';
 
 class Table extends React.Component {
+  hasActions() {
+    return this.props.actions && this.props.actions.length >= 0;
+  }
+
+  renderActions(item) {
+    if (!this.hasActions()) {
+      return null;
+    }
+
+    const actions = this.props.actions.map((action, key) => {
+      return (
+        <ActionItem
+          key={key}
+          action={action}
+          item={item}
+        />
+      )
+    });
+
+    return (
+      <td>
+        <div className="actions">
+          {actions}
+        </div>
+      </td>
+    );
+  }
+
   render() {
     const header = this.props.table.map((item, key) => {
-      let orderClass = 'fa fa-arrow-up hidden';
-
-      if (this.props.order[item.name] === 'asc') {
-        orderClass = 'fa fa-arrow-up';
-      } else if (this.props.order[item.name] === 'desc') {
-        orderClass = 'fa fa-arrow-down';
-      }
-
       return (
         <th
           key={key}
@@ -21,7 +43,11 @@ class Table extends React.Component {
         >
           <div>
             <span>{item.title}</span>
-            <i className={orderClass}></i>
+            <i className={
+              (this.props.order[item.name] === 'asc') ? 'fa fa-arrow-up' :
+                ((this.props.order[item.name] === 'desc') ? 'fa fa-arrow-down' : 'fa fa-arrow-up hidden')
+            }
+            ></i>
           </div>
         </th>
       );
@@ -40,16 +66,18 @@ class Table extends React.Component {
         <tr key={key}>
           <td className="numbering">{key + 1}</td>
           {row}
+          {this.renderActions(bodyItem)}
         </tr>
       );
     });
 
     return (
-      <table className={`table ${this.props.disabled ? 'disabled' : ''}`}>
+      <table className={ `table ${this.props.disabled ? 'disabled' : ''}` }>
         <thead>
         <tr>
           <th></th>
-          {header}
+          { header }
+          { this.hasActions() ? (<th></th>) : null }
         </tr>
         </thead>
         <tbody>

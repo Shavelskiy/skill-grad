@@ -15,7 +15,7 @@ import Table from './table/table';
 import LocationsIndex from '../pages/locations';
 import LocationView from '../pages/locations/view';
 import TagsIndex from "../pages/tags";
-import {NotFound} from '../pages/notFound/notFound';
+import {NotFound} from '../pages/not-found/not-found';
 
 class App extends React.Component {
   constructor(props) {
@@ -43,9 +43,10 @@ class App extends React.Component {
           <div className="main-content">
             <Header/>
             <Switch>
-              <Route exact path="/tag" component={TagsIndex} />
-              <Route exact path="/location/:id" component={LocationView} />
-              <Route exact path="/location" component={LocationsIndex} />
+              <Route exact name="tag.index" path="/tag" component={TagsIndex} />
+              <Route exact name="tag.view" path="/tag/:id" component={LocationView} />
+              <Route exact name="location.index" path="/location/:id" component={LocationView} />
+              <Route exact name="location.view" path="/location" component={LocationsIndex} />
               <Route path="/" component={NotFound} />
             </Switch>
           </div>
@@ -56,11 +57,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-// let sidebarToggler = document.querySelector('.sidebar-toggler');
-// sidebarToggler.addEventListener('click', function () {
-//   this.classList.toggle('sidebar-toggler--active');
-//   let content = document.getElementsByClassName('main')[0];
-//   content.classList.toggle('main--active');
-// });

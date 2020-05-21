@@ -1,8 +1,8 @@
 import React from 'react';
 import css from './sidebar.scss';
-import logo from "../../images/logo.png";
+import logo from '../../images/logo.png';
 import Toggler from './toggler';
-import MenuItem from "./menuItem";
+import MenuItem from './menu-item';
 
 class Sidebar extends React.Component {
   render() {
