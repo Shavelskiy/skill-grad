@@ -21,7 +21,7 @@ Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
 
-  .addEntry('admin', './assets/admin/index.js')
+  .addEntry('admin', './admin/index.js')
 
   .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index.js')
@@ -58,7 +58,7 @@ Encore
   })
 
   .copyFiles({
-    from: './assets/admin/images',
+    from: './admin/images',
     to: 'images/[path][name].[ext]',
     pattern: /\.(png|jpg|jpeg)$/
   })

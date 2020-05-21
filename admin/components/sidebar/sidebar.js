@@ -13,15 +13,15 @@ class Sidebar extends React.Component {
         items: [
           {
             title: 'Статьи',
-            link: '/article/',
+            link: '/article',
           },
           {
             title: 'Теги',
-            link: '/tag/',
+            link: '/tag',
           },
           {
             title: 'Рубрики',
-            link: '/rubric/',
+            link: '/rubric',
           },
         ],
       },
@@ -31,7 +31,7 @@ class Sidebar extends React.Component {
         items: [
           {
             title: 'Все пользователи',
-            link: '/user/',
+            link: '/user',
           },
         ],
       },
@@ -41,7 +41,7 @@ class Sidebar extends React.Component {
         items: [
           {
             title: 'Список всех местоположений',
-            link: '/location/',
+            link: '/location',
           },
         ],
       },
@@ -62,7 +62,10 @@ class Sidebar extends React.Component {
             </a>
           </div>
           <div className="sidebar-tools-wrapper">
-            <Toggler />
+            <Toggler
+              active={!this.props.opened}
+              click={() => this.props.toggle()}
+            />
           </div>
         </div>
 
@@ -76,9 +79,3 @@ class Sidebar extends React.Component {
 
 export default Sidebar;
 
-// let sidebarToggler = document.querySelector('.sidebar-toggler');
-// sidebarToggler.addEventListener('click', function () {
-//   this.classList.toggle('sidebar-toggler--active');
-//   let content = document.getElementsByClassName('main')[0];
-//   content.classList.toggle('main--active');
-// });

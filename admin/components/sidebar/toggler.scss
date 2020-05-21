@@ -72,14 +72,14 @@
     transition: all 0.4s ease;
   }
 
-  &--active span:before {
+  &.active span:before {
     transition: all 0.4s ease;
     left: 0;
     right: auto;
     width: 50%;
   }
 
-  &--active span:after {
+  &.active span:after {
     transition: all 0.4s ease;
     left: 0;
     right: auto;
@@ -102,11 +102,11 @@
     background: #5d78ff;
   }
 
-  &--active span {
+  &.active span {
     background: #5d78ff;
   }
 
-  &--active span::before, &--active span::after {
+  &.active span::before, &.active span::after {
     background: #5d78ff;
   }
 }
