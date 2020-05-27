@@ -121,7 +121,7 @@ class LocationsIndex extends React.Component {
 
   render() {
     return (
-      <div className="page">
+      <div>
         <Breadcrumbs items={breadcrumbs} />
 
         <div className="portlet">

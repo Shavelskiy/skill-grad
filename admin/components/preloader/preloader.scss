@@ -1,9 +1,44 @@
-.preloader {
-  position: absolute;
-  width: 100%;
-  z-index: 999999;
+@keyframes preloader-spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 
-  &.hide {
-   display: none;
+.preloader {
+  width: 100%;
+  height: calc(100vh - 75px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: none;
+
+  &.active {
+    display: flex;
+  }
+
+  .spinner {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+
+    & div {
+      box-sizing: content-box;
+      position: absolute;
+      width: 106px;
+      height: 106px;
+      border: 12px solid #007bff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: preloader-spin 1s linear infinite;
+      top: 100px;
+      left: 100px
+    }
   }
 }

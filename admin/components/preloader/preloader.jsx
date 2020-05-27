@@ -1,11 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import css from './preloader.scss';
-import loader from '../../images/loader.gif';
 
 const Preloader = () => {
+  const loading = useSelector(state => state.loading);
+
   return (
-    <div className="preloader hide">
-      <img src={loader}/>
+    <div className={`preloader ${loading ? 'active' : ''}`}>
+      <div className="spinner">
+        <div></div>
+      </div>
     </div>
   );
 };

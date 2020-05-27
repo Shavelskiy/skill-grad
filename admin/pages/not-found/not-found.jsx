@@ -1,10 +1,12 @@
 import React from 'react';
 import css from './not-found.scss';
 
-export default function NotFound(props) {
+const NotFound = (props) => {
   return (
-    <div className="page">
+    <div>
       <h1>Not found 404!!!</h1>
     </div>
   );
 };
+
+export default NotFound;

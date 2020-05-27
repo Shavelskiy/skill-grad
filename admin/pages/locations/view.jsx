@@ -27,7 +27,7 @@ class LocationView extends React.Component {
 
   render() {
     return (
-      <div className="page">
+      <div>
         <Breadcrumbs/>
 
         <div className="portlet">

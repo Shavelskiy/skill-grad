@@ -19,7 +19,7 @@ const breadcrumbs = [
   }
 ];
 
-export default function TagCreate() {
+const TagCreate = () => {
   const [name, setName] = useState('');
   const [sort, setSort] = useState(0);
   const [redirect, setRedirect] = useState(false);
@@ -35,7 +35,7 @@ export default function TagCreate() {
   }
 
   return (
-    <div className="page">
+    <div>
       <Breadcrumbs items={breadcrumbs}/>
 
       <div className="portlet w-50">
@@ -61,3 +61,5 @@ export default function TagCreate() {
     </div>
   );
 };
+
+export default TagCreate;

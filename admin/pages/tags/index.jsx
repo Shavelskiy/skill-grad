@@ -39,7 +39,7 @@ const actions = [
   }
 ];
 
-export default function TagsIndex() {
+const TagsIndex = () => {
   const [body, setBody] = useState([]);
   const [paginatorRequest, setPaginatorRequest] = useState(null);
   const [disabledTable, setDisabledTable] = useState(false);
@@ -107,7 +107,7 @@ export default function TagsIndex() {
   }
 
   return (
-    <div className="page">
+    <div>
       <Breadcrumbs items={breadcrumbs}/>
 
       <div className="portlet">
@@ -139,3 +139,5 @@ export default function TagsIndex() {
     </div>
   );
 };
+
+export default TagsIndex;
