@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Item(props) {
+export const Item = (props) => {
   return (
     <li
       className={`item ${props.active ? 'active' : ''}`}
@@ -9,17 +9,17 @@ export function Item(props) {
       <div className="link">{props.page}</div>
     </li>
   );
-}
+};
 
-export function EmptyItem(props) {
+export const EmptyItem = (props) => {
   return (
     <li className="item">
       <div className="link">...</div>
     </li>
   );
-}
+};
 
-export function Arrow(props) {
+export const Arrow = (props) => {
   let content = '';
   if (props.left) {
     content = (<div className="link">&laquo;</div>);
@@ -35,4 +35,4 @@ export function Arrow(props) {
       {content}
     </li>
   );
-}
+};

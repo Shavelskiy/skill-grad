@@ -80,19 +80,11 @@ class ChatMessage
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getMessage()
     {
         return $this->message;
     }
 
-    /**
-     * @param mixed $message
-     *
-     * @return ChatMessage
-     */
     public function setMessage($message): self
     {
         $this->message = $message;

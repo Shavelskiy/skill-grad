@@ -72,6 +72,31 @@ body {
     padding: 25px;
     border-radius: 4px;
   }
+
+  &.w-50 {
+    width: 50%;
+  }
+}
+
+.btn {
+  text-decoration: none;
+  padding: 8px 20px;
+  color: #fff;
+  border-radius: .25rem;
+
+  &.primary {
+    background-color: #007bff;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &.success {
+    background-color: #28a745;
+    &:hover {
+      background-color: #438542;
+    }
+  }
 }
 
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";

@@ -250,31 +250,20 @@ class User implements UserInterface
         return $this->chatToken;
     }
 
-    /**
-     * @return User
-     */
     public function generateChatToken(): self
     {
         $this->chatToken = Uuid::uuid4();
-
         return $this;
     }
 
-    /**
-     * @return UuidInterface
-     */
     public function getResetPasswordToken(): UuidInterface
     {
         return $this->resetPasswordToken;
     }
 
-    /**
-     * @return User
-     */
     public function generateResetPasswordToken(): self
     {
         $this->resetPasswordToken = Uuid::uuid4();
-
         return $this;
     }
 
@@ -285,48 +274,31 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return UuidInterface
-     */
     public function getRegisterToken(): UuidInterface
     {
         return $this->registerToken;
     }
 
-    /**
-     * @return User
-     */
     public function generateRegisterToken(): self
     {
         $this->registerToken = Uuid::uuid4();
-
         return $this;
     }
 
     public function resetRegisterToken(): self
     {
         $this->registerToken = null;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSocialKey(): ?string
     {
         return $this->socialKey;
     }
 
-    /**
-     * @param string|null $socialKey
-     *
-     * @return User
-     */
     public function setSocialKey(?string $socialKey): self
     {
         $this->socialKey = $socialKey;
-
         return $this;
     }
 }

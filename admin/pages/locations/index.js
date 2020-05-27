@@ -6,6 +6,17 @@ import Search from '../../components/search/search';
 import PanelTitle from '../../components/panel/panel-title';
 import axios from 'axios';
 
+const breadcrumbs = [
+  {
+    title: 'Главная',
+    link: '/',
+  },
+  {
+    title: 'Список местоположений',
+    link: null,
+  },
+];
+
 const table = [
   {
     title: 'Id',
@@ -111,7 +122,7 @@ class LocationsIndex extends React.Component {
   render() {
     return (
       <div className="page">
-        <Breadcrumbs/>
+        <Breadcrumbs items={breadcrumbs} />
 
         <div className="portlet">
           <PanelTitle

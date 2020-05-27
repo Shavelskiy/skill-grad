@@ -47,113 +47,71 @@ class ProgramQuestion
      */
     private DateTime $updated;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     */
     public function setUser(User $user): void
     {
         $this->user = $user;
     }
 
-    /**
-     * @return Program
-     */
     public function getProgram(): Program
     {
         return $this->program;
     }
 
-    /**
-     * @param Program $program
-     */
     public function setProgram(Program $program): void
     {
         $this->program = $program;
     }
 
-    /**
-     * @return string
-     */
     public function getQuestion(): string
     {
         return $this->question;
     }
 
-    /**
-     * @param string $question
-     */
     public function setQuestion(string $question): void
     {
         $this->question = $question;
     }
 
-    /**
-     * @return string
-     */
     public function getAnswer(): string
     {
         return $this->answer;
     }
 
-    /**
-     * @param string $answer
-     */
     public function setAnswer(string $answer): void
     {
         $this->answer = $answer;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreated(): DateTime
     {
         return $this->created;
     }
 
-    /**
-     * @param DateTime $created
-     */
     public function setCreated(DateTime $created): void
     {
         $this->created = $created;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdated(): DateTime
     {
         return $this->updated;
     }
 
-    /**
-     * @param DateTime $updated
-     */
     public function setUpdated(DateTime $updated): void
     {
         $this->updated = $updated;

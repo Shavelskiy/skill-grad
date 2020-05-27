@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -65,6 +66,32 @@ class TagController extends AbstractController
             'name' => $item->getName(),
             'sort' => $item->getSort(),
         ];
+    }
+
+    /**
+     * @Route("/{id}", name="admin.tag.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function view(int $id): Response
+    {
+        try {
+            if ($id < 1) {
+                throw new \RuntimeException('');
+            }
+
+            /** @var Tag $tag */
+            $tag = $this->tagRepository->find($id);
+
+            return new JsonResponse([
+                'id' => $tag->getId(),
+                'name' => $tag->getName(),
+                'sort' => $tag->getSort(),
+            ]);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException('');
+        }
     }
 
     /**

@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Breadcrumbs from '../../components/breadcrumbs/breacrumbs';
 import Table from '../../components/table/table';
 import Paginator from '../../components/paginator/paginator';
 import Search from '../../components/search/search';
 import PanelTitle from '../../components/panel/panel-title';
 import axios from 'axios';
+
+const breadcrumbs = [
+  {
+    title: 'Главная',
+    link: '/',
+  },
+  {
+    title: 'Список тегов',
+    link: null,
+  },
+];
 
 const table = [
   {
@@ -28,68 +39,53 @@ const actions = [
   }
 ];
 
-class TagsIndex extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      body: [],
-      paginatorRequest: null,
-      disabledTable: false,
-      totalPages: 0,
-      currentPage: 1,
-      order: {},
-    }
-  }
+export default function TagsIndex() {
+  const [body, setBody] = useState([]);
+  const [paginatorRequest, setPaginatorRequest] = useState(null);
+  const [disabledTable, setDisabledTable] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [order, setOrder] = useState({});
 
-  componentDidMount() {
-    this.loadItems();
-  }
+  useEffect(() => loadItems(), []);
 
-  loadItems() {
-    const paginatorRequest = this.state.paginatorRequest;
+  const loadItems = () => {
     const axiosSource = axios.CancelToken.source();
 
     if (paginatorRequest) {
       paginatorRequest.cancel();
     }
 
-    this.setState({
-      paginatorRequest: {cancel: axiosSource.cancel},
-      disabledTable: true,
-    });
+    setPaginatorRequest({cancel: axiosSource.cancel});
+    setDisabledTable(true);
 
     const params = {
-      page: this.state.currentPage,
-      order: this.state.order,
+      page: currentPage,
+      order: order,
     };
 
     axios.get('/api/admin/tag', {
       cancelToken: axiosSource.token,
       params: params,
     })
-      .then(response => {
-        this.setState({
-          body: response.data.items,
-          totalPages: response.data.total_pages,
-          currentPage: response.data.current_page,
-          disabledTable: false,
-        });
+      .then(({data}) => {
+        setBody(data.items);
+        setTotalPages(data.total_pages);
+        setCurrentPage(data.current_page);
+        setDisabledTable(false);
       });
   }
 
-  changePage(page) {
-    if (page === this.state.currentPage) {
+  const changePage = (page) => {
+    if (page === currentPage) {
       return;
     }
 
-    this.setState({
-      currentPage: page
-    }, () => this.loadItems());
+    setCurrentPage(page);
+    loadItems();
   }
 
-  changeOrder(propName) {
-    let order = this.state.order;
-
+  const changeOrder = (propName) => {
     if (!order[propName]) {
       order[propName] = null;
     }
@@ -106,45 +102,40 @@ class TagsIndex extends React.Component {
         break;
     }
 
-    this.setState({
-      order: order
-    }, () => this.loadItems());
+    setOrder(order);
+    loadItems();
   }
 
-  render() {
-    return (
-      <div className="page">
-        <Breadcrumbs/>
+  return (
+    <div className="page">
+      <Breadcrumbs items={breadcrumbs}/>
 
-        <div className="portlet">
-          <PanelTitle
-            title={'Список тегов'}
-            icon={'fa fa-globe'}
-            withButton={true}
-            buttonText={'Создать'}
-            buttonLink={'/admin/tag/create'}
+      <div className="portlet">
+        <PanelTitle
+          title={'Список тегов'}
+          icon={'fa fa-tags'}
+          withButton={true}
+          buttonText={'Создать'}
+          buttonLink={'/tag/create'}
+        />
+
+        <div className="body">
+          {/*<Search/>*/}
+          <Table
+            table={table}
+            body={body}
+            order={order}
+            disabled={disabledTable}
+            changeOrder={(propName) => changeOrder(propName)}
+            actions={actions}
           />
-
-          <div className="body">
-            {/*<Search/>*/}
-            <Table
-              table={table}
-              body={this.state.body}
-              order={this.state.order}
-              disabled={this.state.disabledTable}
-              changeOrder={(propName) => this.changeOrder(propName)}
-              actions={actions}
-            />
-            <Paginator
-              totalPages={this.state.totalPages}
-              currentPage={this.state.currentPage}
-              click={(page) => this.changePage(page)}
-            />
-          </div>
+          <Paginator
+            totalPages={totalPages}
+            currentPage={currentPage}
+            click={(page) => changePage(page)}
+          />
         </div>
       </div>
-    );
-  }
-}
-
-export default TagsIndex;
+    </div>
+  );
+};

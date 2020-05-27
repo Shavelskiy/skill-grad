@@ -21,15 +21,19 @@ class AdminAccessDeniedListener
     {
         $exception = $event->getThrowable();
 
-        if ($exception instanceof AccessDeniedHttpException) {
-            [$controller, $method] = explode('::', $event->getRequest()->attributes->get('_controller'));
-            $controllerClass = new $controller();
-
-            if ($controllerClass instanceof AdminAbstractController) {
-                $event->setResponse(
-                    new RedirectResponse($this->urlGenerator->generate('admin.site.login'))
-                );
-            }
+        if (!$exception instanceof AccessDeniedHttpException) {
+            return;
         }
+
+        [$controller, $method] = explode('::', $event->getRequest()->attributes->get('_controller'));
+        $controllerClass = new $controller();
+
+        if (!$controllerClass instanceof AdminAbstractController) {
+            return;
+        }
+
+        $event->setResponse(
+            new RedirectResponse($this->urlGenerator->generate('admin.site.login'))
+        );
     }
 }
