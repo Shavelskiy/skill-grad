@@ -8,7 +8,7 @@ import LocationView from '../pages/locations/view'
 import TagsIndex from '../pages/tags/index'
 import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
-import NotFound from '../pages/not-found/not-found'
+import NotFoundPage from '../pages/not-found/not-found'
 import TagUpdate from './tags/update'
 
 const PageSwitcher = () => {
@@ -23,7 +23,7 @@ const PageSwitcher = () => {
         <Route exact name="tag.update" path="/tag/update/:id" component={TagUpdate}/>
         <Route exact name="location.index" path="/location/:id" component={LocationView}/>
         <Route exact name="location.view" path="/location" component={LocationsIndex}/>
-        <Route path="/" component={NotFound}/>
+        <Route path="/" component={NotFoundPage}/>
       </Switch>
     </div>
   )

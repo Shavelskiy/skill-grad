@@ -20,22 +20,6 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return mixed
-     */
-    public function findTagWithMaxSort()
-    {
-        try {
-            return $this->createQueryBuilder('t')
-                ->orderBy('t.sort', 'desc')
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getOneOrNullResult();
-        } catch (Exception $e) {
-            return null;
-        }
-    }
-
-    /**
      * @param Program $program
      * @param int $page
      * @param int $pageItems

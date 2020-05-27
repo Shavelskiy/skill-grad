@@ -1,12 +1,10 @@
-import React from 'react';
-import css from './not-found.scss';
+import React from 'react'
+import NotFound from '../../components/not-found/not-found'
 
-const NotFound = (props) => {
+const NotFoundPage = (props) => {
   return (
-    <div>
-      <h1>Not found 404!!!</h1>
-    </div>
-  );
-};
+    <NotFound/>
+  )
+}
 
-export default NotFound;
+export default NotFoundPage

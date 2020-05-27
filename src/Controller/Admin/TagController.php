@@ -79,6 +79,10 @@ class TagController extends AbstractController
             /** @var Tag $tag */
             $tag = $this->tagRepository->find($id);
 
+            if ($tag === null) {
+                throw new \RuntimeException('');
+            }
+
             return new JsonResponse([
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
@@ -104,5 +108,26 @@ class TagController extends AbstractController
         return new JsonResponse();
     }
 
+    /**
+     * @Route("/", name="admin.tag.update", methods={"PUT"})
+     */
+    public function update(Request $request): Response
+    {
+        /** @var Tag $tag */
+        $tag = $this->tagRepository->find($request->get('id'));
+
+        if ($tag === null) {
+            return new JsonResponse([], 404);
+        }
+
+        $tag
+            ->setName($request->get('name'))
+            ->setSort($request->get('sort'));
+
+        $this->getDoctrine()->getManager()->persist($tag);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
 
 }

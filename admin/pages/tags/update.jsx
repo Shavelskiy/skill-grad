@@ -4,13 +4,15 @@ import { hideLoader, showLoader } from '../../redux/actions'
 import Breadcrumbs from '../../components/breadcrumbs/breacrumbs'
 import PanelTitle from '../../components/panel/panel-title'
 import TagForm from './form'
-import {TextInput, NumberInput, SaveButton} from '../../components/ui/inputs'
-import {Redirect} from 'react-router'
+import NotFound from '../../components/not-found/not-found'
+import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
+import { Redirect } from 'react-router'
 import axios from 'axios'
 
 const TagUpdate = ({match}) => {
   const dispatch = useDispatch()
 
+  const [notFound, setNotFound] = useState(false)
   const [name, setName] = useState('')
   const [sort, setSort] = useState(0)
   const [redirect, setRedirect] = useState(false)
@@ -41,6 +43,14 @@ const TagUpdate = ({match}) => {
         setSort(data.sort)
         dispatch(hideLoader())
       })
+      .catch((error) => {
+        if (error.response && error.response.status === 404) {
+          setNotFound(true)
+          dispatch(hideLoader())
+        }
+
+        setRedirect(true)
+      })
   }, [])
 
   const save = () => {
@@ -52,13 +62,17 @@ const TagUpdate = ({match}) => {
 
     setDisableButton(true)
 
-    axios.put(`/api/admin/tag`, tag)
+    axios.put('/api/admin/tag/', tag)
       .then(() => setRedirect(true))
+  }
+
+  if (notFound) {
+    return <NotFound/>
   }
 
   if (redirect) {
     return (
-      <Redirect to="/tag" />
+      <Redirect to="/tag"/>
     )
   }
 
@@ -68,7 +82,7 @@ const TagUpdate = ({match}) => {
 
       <div className="portlet w-50">
         <PanelTitle
-          title={'Создание тега'}
+          title={'Редактирование тега'}
           icon={'fa fa-info'}
           withButton={false}
         />
