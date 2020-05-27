@@ -2,14 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Location;
 use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,7 +66,7 @@ class TagController extends AbstractController
     /**
      * @Route("/{id}", name="admin.tag.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      *
-     * @param Request $request
+     * @param int $id
      * @return Response
      */
     public function view(int $id): Response
@@ -95,60 +90,18 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="admin.tag.create", methods={"GET", "HEAD"})
+     * @Route("/", name="admin.tag.create", methods={"POST"})
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        $tag = new Tag();
+        $tag = (new Tag())
+            ->setName($request->get('name'))
+            ->setSort($request->get('sort'));
 
-        /** @var Tag $maxSortTag */
-        $maxSortTag = $this->getRepository()->getTagWithMaxSort();
-        $tag->setSort(($maxSortTag !== null) ? ($maxSortTag->getSort() + 100) : 100);
+        $this->getDoctrine()->getManager()->persist($tag);
+        $this->getDoctrine()->getManager()->flush();
 
-        return $this->render('admin/tag/create.html.twig', [
-            'form' => $this->getForm($tag)->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/create", name="admin.tag.store", methods={"POST", "PUT"})
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function store(Request $request): Response
-    {
-        $form = $this->getForm()->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
-            $em->flush();
-
-            return $this->redirectToRoute('admin.tag.index');
-        }
-
-        return $this->render('admin/tag/create.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="admin.tag.edit", methods={"GET", "HEAD"}, requirements={"id"="[0-9]+"})
-     *
-     * @param $id
-     *
-     * @return Response
-     */
-    public function edit($id): Response
-    {
-        $tag = $this->findModel($id);
-
-        return $this->render('admin/tag/edit.html.twig', [
-            'tag' => $tag,
-            'form' => $this->getForm($tag)->createView(),
-        ]);
+        return new JsonResponse();
     }
 
 

@@ -2,7 +2,6 @@
 
 namespace App\EventListener;
 
-use App\Controller\Admin\AdminAbstractController;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -28,9 +27,9 @@ class AdminAccessDeniedListener
         [$controller, $method] = explode('::', $event->getRequest()->attributes->get('_controller'));
         $controllerClass = new $controller();
 
-        if (!$controllerClass instanceof AdminAbstractController) {
+//        if (!$controllerClass instanceof AdminAbstractController) {
             return;
-        }
+//        }
 
         $event->setResponse(
             new RedirectResponse($this->urlGenerator->generate('admin.site.login'))

@@ -27,11 +27,12 @@ export function NumberInput({label, value, setValue}) {
   );
 }
 
-export function SaveButton({handler}) {
+export function SaveButton({handler, disable}) {
   return (
     <div className="save-btn">
       <button
         className="btn success"
+        disabled={disable}
         onClick={() => handler()}
       >
         Сохранить

@@ -1,21 +1,21 @@
-import React from 'react';
-import css from './table.scss';
-import ActionItem from './action-item';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import css from './table.scss'
+import ActionItem from './action-item'
+import { Link } from 'react-router-dom'
 
 const Table = ({table, body, order, hasActions, actions, disabled, changeOrder}) => {
   const isHasActions = () => {
-    return actions && actions !== undefined && actions.length >= 0;
+    return actions && actions !== undefined && actions.length >= 0
   }
 
   const renderActions = (item) => {
     if (!isHasActions()) {
-      return null;
+      return null
     }
 
     return (
-      <td>
-        <div className="actions">
+      <td className="actions">
+        <div className="wrap">
           {
             actions.map((action, key) => {
               return (
@@ -29,7 +29,7 @@ const Table = ({table, body, order, hasActions, actions, disabled, changeOrder})
           }
         </div>
       </td>
-    );
+    )
   }
 
   return (
@@ -53,7 +53,7 @@ const Table = ({table, body, order, hasActions, actions, disabled, changeOrder})
                   ></i>
                 </div>
               </th>
-            );
+            )
           })
         }
         {isHasActions() ? (<th></th>) : null}
@@ -67,8 +67,8 @@ const Table = ({table, body, order, hasActions, actions, disabled, changeOrder})
               <td key={key}>
                 {bodyItem[item.name]}
               </td>
-            );
-          });
+            )
+          })
 
           return (
             <tr key={key}>
@@ -76,12 +76,12 @@ const Table = ({table, body, order, hasActions, actions, disabled, changeOrder})
               {row}
               {renderActions(bodyItem)}
             </tr>
-          );
+          )
         })
       }
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

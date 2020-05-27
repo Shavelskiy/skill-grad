@@ -22,7 +22,7 @@ class TagRepository extends ServiceEntityRepository
     /**
      * @return mixed
      */
-    public function getTagWithMaxSort()
+    public function findTagWithMaxSort()
     {
         try {
             return $this->createQueryBuilder('t')
@@ -41,12 +41,12 @@ class TagRepository extends ServiceEntityRepository
      * @param int $pageItems
      * @return PaginatorResult
      */
-    public function getPaginatorItems(int $page, ?array $order, int $pageItems = 5): PaginatorResult
+    public function getPaginatorItems(int $page, ?array $orders, int $pageItems = 5): PaginatorResult
     {
         $query = $this->createQueryBuilder('t');
 
-        if ($order !== null) {
-            foreach ($order as $field => $order) {
+        if ($orders !== null) {
+            foreach ($orders as $field => $order) {
                 if (!in_array($field, self::ORDABLE_FIELDS, true)) {
                     continue;
                 }

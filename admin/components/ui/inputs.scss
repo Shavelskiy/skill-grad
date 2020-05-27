@@ -16,4 +16,8 @@
 
 .save-btn {
   max-width: 200px;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

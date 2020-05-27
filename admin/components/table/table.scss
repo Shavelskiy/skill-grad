@@ -22,10 +22,19 @@ table {
   }
 
   .actions {
-    float: left;
+    width: 1%;
+    min-width: 118px;
 
-    i {
-      color: #5d78ff;
+    .wrap {
+      display: flex;
+
+      i {
+        color: #5d78ff;
+      }
+
+      a {
+        margin-right: 10px;
+      }
     }
   }
 

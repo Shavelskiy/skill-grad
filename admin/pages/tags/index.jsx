@@ -36,6 +36,10 @@ const actions = [
   {
     type: 'view',
     link: '/tag',
+  },
+  {
+    type: 'update',
+    link: '/tag',
   }
 ];
 

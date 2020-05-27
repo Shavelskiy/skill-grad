@@ -46,7 +46,6 @@ const TagView = ({match}) => {
       })
   }, [])
 
-
   return (
     <div>
       <Breadcrumbs items={getBreadcrumbs()}/>

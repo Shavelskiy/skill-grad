@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ActionItem = ({action, item}) => {
   const renderViewAction = () => {
@@ -10,12 +10,22 @@ const ActionItem = ({action, item}) => {
     )
   }
 
+  const renderUpdateAction = () => {
+    return (
+      <Link to={`${action.link}/update/${item.id}`}>
+        <i className="fa fa-edit"></i>
+      </Link>
+    )
+  }
+
   switch (action.type) {
     case 'view':
-      return renderViewAction();
+      return renderViewAction()
+    case 'update':
+      return renderUpdateAction()
     default:
-      return (null);
+      return (null)
   }
 }
 
-export default ActionItem;
+export default ActionItem
