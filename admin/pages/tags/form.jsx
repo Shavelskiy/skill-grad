@@ -3,7 +3,7 @@ import { NumberInput, SaveButton, TextInput } from '../../components/ui/inputs'
 
 const TagForm = ({name, setName, sort, setSort, disable, save}) => {
   return (
-    <div>
+    <form>
       <TextInput
         value={name}
         setValue={setName}
@@ -15,7 +15,7 @@ const TagForm = ({name, setName, sort, setSort, disable, save}) => {
       />
 
       <SaveButton handler={save} disable={disable}/>
-    </div>
+    </form>
   )
 }
 

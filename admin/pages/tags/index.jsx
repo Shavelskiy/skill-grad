@@ -35,11 +35,15 @@ const table = [
 const actions = [
   {
     type: 'view',
-    link: '/tag',
+    link: '/tag/',
   },
   {
     type: 'update',
-    link: '/tag',
+    link: '/tag/',
+  },
+  {
+    type: 'delete',
+    link: '/api/admin/tag/',
   }
 ];
 
@@ -129,6 +133,7 @@ const TagsIndex = () => {
             table={table}
             body={body}
             order={order}
+            reload={() => loadItems()}
             disabled={disabledTable}
             changeOrder={(propName) => changeOrder(propName)}
             actions={actions}

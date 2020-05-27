@@ -3,7 +3,7 @@ import css from './table.scss'
 import ActionItem from './action-item'
 import { Link } from 'react-router-dom'
 
-const Table = ({table, body, order, hasActions, actions, disabled, changeOrder}) => {
+const Table = ({table, body, order, hasActions, actions, disabled, changeOrder, reload}) => {
   const isHasActions = () => {
     return actions && actions !== undefined && actions.length >= 0
   }
@@ -23,6 +23,7 @@ const Table = ({table, body, order, hasActions, actions, disabled, changeOrder})
                   key={key}
                   action={action}
                   item={item}
+                  reload={reload}
                 />
               )
             })

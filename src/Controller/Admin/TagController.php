@@ -38,7 +38,11 @@ class TagController extends AbstractController
         $items = [];
 
         foreach ($paginator->getItems() as $item) {
-            $items[] = $this->prepareItem($item);
+            $items[] = [
+                'id' => $item->getId(),
+                'name' => $item->getName(),
+                'sort' => $item->getSort(),
+            ];
         }
 
         $data = [
@@ -48,19 +52,6 @@ class TagController extends AbstractController
         ];
 
         return new JsonResponse($data);
-    }
-
-    /**
-     * @param Tag $item
-     * @return array
-     */
-    protected function prepareItem(Tag $item): array
-    {
-        return [
-            'id' => $item->getId(),
-            'name' => $item->getName(),
-            'sort' => $item->getSort(),
-        ];
     }
 
     /**
@@ -130,4 +121,21 @@ class TagController extends AbstractController
         return new JsonResponse();
     }
 
+    /**
+     * @Route("/", name="admin.tag.delete", methods={"DELETE"})
+     */
+    public function delete(Request $request): Response
+    {
+        /** @var Tag $tag */
+        $tag = $this->tagRepository->find($request->get('id'));
+
+        if ($tag === null) {
+            return new JsonResponse([], 404);
+        }
+
+        $this->getDoctrine()->getManager()->remove($tag);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
 }
