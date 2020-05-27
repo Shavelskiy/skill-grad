@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { hideLoader, showLoader } from '../../redux/actions'
-import Breadcrumbs from '../../components/breadcrumbs/breacrumbs'
+import { useDispatch, useSelector } from 'react-redux'
+import { hideLoader, showLoader, setTitle, setBreacrumbs } from '../../redux/actions'
 import PanelTitle from '../../components/panel/panel-title'
 import TagForm from './form'
 import NotFound from '../../components/not-found/not-found'
@@ -12,28 +11,23 @@ import axios from 'axios'
 const TagUpdate = ({match}) => {
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(setBreacrumbs([
+      {
+        title: 'Список тегов',
+        link: '/tag',
+      }
+    ]))
+  }, [])
+
+
+  const title = useSelector(state => state.title)
+
   const [notFound, setNotFound] = useState(false)
   const [name, setName] = useState('')
   const [sort, setSort] = useState(0)
   const [redirect, setRedirect] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
-
-  const getBreadcrumbs = () => {
-    return [
-      {
-        title: 'Главная',
-        link: '/',
-      },
-      {
-        title: 'Список тегов',
-        link: '/tag',
-      },
-      {
-        title: `Редактирование тега ${name}`,
-        link: null,
-      }
-    ]
-  }
 
   useEffect(() => {
     dispatch(showLoader())
@@ -41,6 +35,7 @@ const TagUpdate = ({match}) => {
       .then(({data}) => {
         setName(data.name)
         setSort(data.sort)
+        dispatch(setTitle(`Редактирование тега "${data.name}"`))
         dispatch(hideLoader())
       })
       .catch((error) => {
@@ -77,26 +72,22 @@ const TagUpdate = ({match}) => {
   }
 
   return (
-    <div>
-      <Breadcrumbs items={getBreadcrumbs()}/>
+    <div className="portlet w-50">
+      <PanelTitle
+        title={title}
+        icon={'fa fa-info'}
+        withButton={false}
+      />
 
-      <div className="portlet w-50">
-        <PanelTitle
-          title={'Редактирование тега'}
-          icon={'fa fa-info'}
-          withButton={false}
+      <div className="body">
+        <TagForm
+          name={name}
+          setName={setName}
+          sort={sort}
+          setSort={setSort}
+          save={save}
+          disable={disableButton}
         />
-
-        <div className="body">
-          <TagForm
-            name={name}
-            setName={setName}
-            sort={sort}
-            setSort={setSort}
-            save={save}
-            disable={disableButton}
-          />
-        </div>
       </div>
     </div>
   )

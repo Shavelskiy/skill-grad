@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import css from './panel-title.scss';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import css from './panel-title.scss'
 
 const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
-  let buttonTemplate = '';
+  let buttonTemplate = ''
   if (withButton === true) {
     buttonTemplate = (
       <div className="button-wrap">
@@ -11,10 +11,10 @@ const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
           to={buttonLink}
           className="btn primary"
         >
-          {buttonText}
+          Создать
         </Link>
       </div>
-    );
+    )
   }
 
   return (
@@ -25,7 +25,7 @@ const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
       </h3>
       {buttonTemplate}
     </div>
-  );
+  )
 }
 
-export default PanelTitle;
+export default PanelTitle

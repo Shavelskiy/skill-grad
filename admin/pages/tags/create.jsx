@@ -1,27 +1,27 @@
-import React, {useState} from 'react'
-import Breadcrumbs from '../../components/breadcrumbs/breacrumbs'
+import React, { useState, useEffect } from 'react'
 import PanelTitle from '../../components/panel/panel-title'
 import TagForm from './form'
-import {TextInput, NumberInput, SaveButton} from '../../components/ui/inputs'
-import {Redirect} from 'react-router'
+import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
+import { Redirect } from 'react-router'
 import axios from 'axios'
-
-const breadcrumbs = [
-  {
-    title: 'Главная',
-    link: '/',
-  },
-  {
-    title: 'Список тегов',
-    link: '/tag',
-  },
-  {
-    title: 'Создание тега',
-    link: null,
-  }
-]
+import { useDispatch, useSelector } from 'react-redux';
+import { setTitle, setBreacrumbs } from '../../redux/actions';
 
 const TagCreate = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setTitle('Создание тега'))
+    dispatch(setBreacrumbs([
+      {
+        title: 'Список тегов',
+        link: '/tag',
+      }
+    ]))
+  }, [])
+
+  const title = useSelector(state => state.title)
+
   const [name, setName] = useState('')
   const [sort, setSort] = useState(0)
   const [redirect, setRedirect] = useState(false)
@@ -41,31 +41,27 @@ const TagCreate = () => {
 
   if (redirect) {
     return (
-      <Redirect to="/tag" />
+      <Redirect to="/tag"/>
     )
   }
 
   return (
-    <div>
-      <Breadcrumbs items={breadcrumbs}/>
+    <div className="portlet w-50">
+      <PanelTitle
+        title={title}
+        icon={'fa fa-info'}
+        withButton={false}
+      />
 
-      <div className="portlet w-50">
-        <PanelTitle
-          title={'Создание тега'}
-          icon={'fa fa-info'}
-          withButton={false}
+      <div className="body">
+        <TagForm
+          name={name}
+          setName={setName}
+          sort={sort}
+          setSort={setSort}
+          save={save}
+          disable={disableButton}
         />
-
-        <div className="body">
-          <TagForm
-            name={name}
-            setName={setName}
-            sort={sort}
-            setSort={setSort}
-            save={save}
-            disable={disableButton}
-          />
-        </div>
       </div>
     </div>
   )

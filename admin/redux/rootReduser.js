@@ -1,8 +1,15 @@
-import { HIDE_LOADER, SHOW_LOADER } from './types'
+import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS } from './types'
+
+const rootBreadcrumb = {
+  title: 'Главная',
+  link: '/',
+}
 
 const initialState = {
   loading: false,
-};
+  title: 'Skill Grad Admin',
+  breadcrumbs: [rootBreadcrumb]
+}
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,7 +17,16 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, loading: true}
     case HIDE_LOADER:
       return {...state, loading: false}
+    case SET_TITLE:
+      document.title = action.payload
+      return {...state, title: action.payload}
+    case SET_BREADCRUMBS:
+      if (action.payload.withRoot) {
+        return {...state, breadcrumbs: [rootBreadcrumb, ...action.payload.items]}
+      } else {
+        return {...state, breadcrumbs: action.payload.items}
+      }
     default:
-      return state;
+      return state
   }
-};
+}
