@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Switch, Route, useHistory } from 'react-router-dom'
 
-import './app.scss'
-import Sidebar from './sidebar/sidebar';
-import Header from './header/header';
-import Preloader from './preloader/preloader';
-import PageSwitcher from '../pages/page-switcher';
+import { useDispatch } from 'react-redux'
+import { hideLoader, setTitle, showLoader, setCurrentUser, loadApp } from '../redux/actions'
+
+import axios from 'axios'
+import { INFO_URL } from '../utils/api/endpoints'
+
+import Main from './main/main'
+import Preloader from './preloader/preloader'
+import Login from './../pages/login/login'
+
+import css from './app.scss'
+
 
 const App = () => {
-  const [sidebarOpened, setSidebarOpened] = useState(true);
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const [loadingApp, setLoadingApp] = useState(true)
+
+  useEffect(() => {
+    axios.get(INFO_URL)
+      .then(({data}) => {
+        dispatch(setCurrentUser(data.current_user))
+      })
+      .catch(() => {
+        history.push('/login')
+      })
+      .finally(() => {
+        setLoadingApp(false)
+      })
+  }, [])
+
+  if (loadingApp) {
+    return <Preloader active={loadingApp}/>
+  }
 
   return (
-    <BrowserRouter basename={'/admin'}>
-      <div className={`main ${!sidebarOpened ? 'active' : ''}`}>
-        <Sidebar
-          toggle={() => setSidebarOpened(!sidebarOpened)}
-          opened={sidebarOpened}
-        />
-        <div className="main-content">
-          <Header/>
-          <Preloader/>
-          <PageSwitcher/>
-        </div>
-      </div>
-    </BrowserRouter>
-  );
+    <Switch>
+      <Route exact path="/login" component={Login}/>
+      <Route path="/" component={Main}/>
+    </Switch>
+  )
 }
 
-export default App;
+export default App

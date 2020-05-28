@@ -1,4 +1,4 @@
-import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS } from './types'
+import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS, SET_CURRENT_USER, LOAD_APP } from './types'
 
 const rootBreadcrumb = {
   title: 'Главная',
@@ -8,7 +8,8 @@ const rootBreadcrumb = {
 const initialState = {
   loading: false,
   title: 'Skill Grad Admin',
-  breadcrumbs: [rootBreadcrumb]
+  breadcrumbs: [rootBreadcrumb],
+  currentUser: null,
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -26,6 +27,8 @@ export const rootReducer = (state = initialState, action) => {
       } else {
         return {...state, breadcrumbs: action.payload.items}
       }
+    case SET_CURRENT_USER:
+      return {...state, currentUser: action.payload}
     default:
       return state
   }

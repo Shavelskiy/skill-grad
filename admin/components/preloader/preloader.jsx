@@ -1,17 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import css from './preloader.scss';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import css from './preloader.scss'
 
-const Preloader = () => {
-  const loading = useSelector(state => state.loading);
-
+const Preloader = ({active}) => {
   return (
-    <div className={`preloader ${loading ? 'active' : ''}`}>
+    <div className={`preloader ${active ? 'active' : ''}`}>
       <div className="spinner">
         <div></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Preloader;
+export default Preloader

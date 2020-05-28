@@ -1,4 +1,4 @@
-import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS } from './types'
+import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS, SET_CURRENT_USER } from './types'
 
 export function showLoader() {
   return {
@@ -26,5 +26,12 @@ export function setBreacrumbs(breadcrumbs, withRoot = true) {
       items: breadcrumbs,
       withRoot: withRoot
     }
+  }
+}
+
+export function setCurrentUser(currentUser) {
+  return {
+    type: SET_CURRENT_USER,
+    payload: currentUser
   }
 }

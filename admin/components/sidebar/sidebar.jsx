@@ -1,8 +1,9 @@
-import React from 'react';
-import css from './sidebar.scss';
-import logo from '../../images/logo.png';
-import Toggler from './toggler';
-import MenuItem from './menu-item';
+import React from 'react'
+import css from './sidebar.scss'
+import logo from '../../images/logo.png'
+import Toggler from './toggler'
+import MenuItem from './menu-item'
+import { Link } from 'react-router-dom'
 
 const Sidebar = ({opened, toggle}) => {
   const menuItems = [
@@ -44,21 +45,21 @@ const Sidebar = ({opened, toggle}) => {
         },
       ],
     },
-  ];
+  ]
 
   const menu = menuItems.map((rootItem, key) => {
     return (
       <MenuItem rootItem={rootItem} key={key}/>
-    );
+    )
   })
 
   return (
     <div className="sidebar-container">
       <div className="sidebar-header">
         <div className="sidebar-header__logo">
-          <a href="/">
+          <Link to="/">
             <img alt="Logo" src={logo}/>
-          </a>
+          </Link>
         </div>
         <div className="sidebar-tools-wrapper">
           <Toggler
@@ -72,7 +73,7 @@ const Sidebar = ({opened, toggle}) => {
         <ul>{menu}</ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

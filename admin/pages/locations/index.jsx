@@ -1,5 +1,4 @@
 import React from 'react';
-import Breadcrumbs from '../../components/breadcrumbs/breacrumbs';
 import Table from '../../components/table/table';
 import Paginator from '../../components/paginator/paginator';
 import Search from '../../components/search/search';
@@ -121,33 +120,29 @@ class LocationsIndex extends React.Component {
 
   render() {
     return (
-      <div>
-        <Breadcrumbs items={breadcrumbs} />
+      <div className="portlet">
+        <PanelTitle
+          title={'Список местоположений'}
+          icon={'fa fa-globe'}
+          withButton={true}
+          buttonText={'Создать'}
+          buttonLink={'/admin/rubric/create'}
+        />
 
-        <div className="portlet">
-          <PanelTitle
-            title={'Список местоположений'}
-            icon={'fa fa-globe'}
-            withButton={true}
-            buttonText={'Создать'}
-            buttonLink={'/admin/rubric/create'}
+        <div className="body">
+          {/*<Search/>*/}
+          <Table
+            table={table}
+            body={this.state.body}
+            order={this.state.order}
+            disabled={this.state.disabledTable}
+            changeOrder={(propName) => this.changeOrder(propName)}
           />
-
-          <div className="body">
-            {/*<Search/>*/}
-            <Table
-              table={table}
-              body={this.state.body}
-              order={this.state.order}
-              disabled={this.state.disabledTable}
-              changeOrder={(propName) => this.changeOrder(propName)}
-            />
-            <Paginator
-              totalPages={this.state.totalPages}
-              currentPage={this.state.currentPage}
-              click={(page) => this.changePage(page)}
-            />
-          </div>
+          <Paginator
+            totalPages={this.state.totalPages}
+            currentPage={this.state.currentPage}
+            click={(page) => this.changePage(page)}
+          />
         </div>
       </div>
     );

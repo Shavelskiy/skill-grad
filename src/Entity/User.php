@@ -49,16 +49,6 @@ class User implements UserInterface
     private ?string $fullName;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $about;
-
-    /**
-     * @ORM\Column(type="string", length=180, nullable=true)
-     */
-    private ?string $specialization;
-
-    /**
      * @ORM\Column(type="json")
      */
     private array $roles = [];
@@ -67,12 +57,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private ?string $password;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Upload")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private ?string $avatar;
 
     /**
      * @ORM\Column(type="string", nullable=true)

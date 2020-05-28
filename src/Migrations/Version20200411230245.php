@@ -22,11 +22,8 @@ final class Version20200411230245 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('ALTER TABLE users ALTER avatar_id DROP NOT NULL');
         $this->addSql('ALTER TABLE users ALTER phone DROP NOT NULL');
         $this->addSql('ALTER TABLE users ALTER full_name DROP NOT NULL');
-        $this->addSql('ALTER TABLE users ALTER about DROP NOT NULL');
-        $this->addSql('ALTER TABLE users ALTER specialization DROP NOT NULL');
     }
 
     public function down(Schema $schema): void
@@ -35,10 +32,7 @@ final class Version20200411230245 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE users ALTER avatar_id SET NOT NULL');
         $this->addSql('ALTER TABLE users ALTER phone SET NOT NULL');
         $this->addSql('ALTER TABLE users ALTER full_name SET NOT NULL');
-        $this->addSql('ALTER TABLE users ALTER about SET NOT NULL');
-        $this->addSql('ALTER TABLE users ALTER specialization SET NOT NULL');
     }
 }

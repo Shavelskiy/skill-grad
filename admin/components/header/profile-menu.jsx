@@ -1,35 +1,56 @@
-import React, { useState, useEffect, useRef } from 'react';
-import css from './profile-menu.scss';
+import React, { useState, useEffect, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentUser } from '../../redux/actions'
+
+import axios from 'axios'
+
+import css from './profile-menu.scss'
+
 
 const ProfileMenu = () => {
-  const [hideMenu, setHideMenu] = useState(true);
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const ref = useRef()
 
-  const ref = useRef();
+  const currentUser = useSelector(state => state.currentUser)
+  const [hideMenu, setHideMenu] = useState(true)
 
   useEffect(() => {
-      const listener = event => {
-        if (!ref.current || ref.current.contains(event.target)) {
-          return;
-        }
+    const listener = event => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return
+      }
 
-        setHideMenu(true)
-      };
+      setHideMenu(true)
+    }
 
-      document.addEventListener('mousedown', listener);
-      document.addEventListener('touchstart', listener);
+    document.addEventListener('mousedown', listener)
+    document.addEventListener('touchstart', listener)
 
-      return () => {
-        document.removeEventListener('mousedown', listener);
-        document.removeEventListener('touchstart', listener);
-      };
-    },
-    [ref, setHideMenu]
-  );
+    return () => {
+      document.removeEventListener('mousedown', listener)
+      document.removeEventListener('touchstart', listener)
+    }
+  }, [ref, setHideMenu])
+
+  const logout = () => {
+    axios.get('/ajax/logout')
+      .then(({data}) => {
+        dispatch(setCurrentUser(null))
+        history.push('/login')
+      })
+  }
+
+  if (currentUser === null) {
+    return <></>;
+  }
 
   return (
     <div className="profile-container" ref={ref}>
       <div className="user-profile" onClick={() => setHideMenu(!hideMenu)}>
-        <span>Admin admin</span>
+        <span>{currentUser.username}</span>
       </div>
 
       <div className={`user-profile-card ${hideMenu ? 'hidden' : ''}`}>
@@ -42,12 +63,16 @@ const ProfileMenu = () => {
           </li>
           <li className="line"></li>
           <li className="logout">
-            <a href="/">Выход</a>
+            <button
+              onClick={() => logout()}
+            >
+              Выход
+            </button>
           </li>
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProfileMenu;
+export default ProfileMenu

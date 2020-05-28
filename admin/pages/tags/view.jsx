@@ -10,15 +10,6 @@ import axios from 'axios'
 const TagView = ({match}) => {
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(setBreacrumbs([
-      {
-        title: 'Список тегов',
-        link: '/tag',
-      }
-    ]))
-  }, [])
-
   const title = useSelector(state => state.title)
 
   const [item, setItem] = useState({
@@ -29,6 +20,14 @@ const TagView = ({match}) => {
 
   useEffect(() => {
     dispatch(showLoader())
+
+    dispatch(setBreacrumbs([
+      {
+        title: 'Список тегов',
+        link: '/tag',
+      }
+    ]))
+
     axios.get(`/api/admin/tag/${item.id}`)
       .then(({data}) => {
         setItem({

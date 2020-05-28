@@ -16,12 +16,20 @@
     opacity: 1;
     visibility: visible;
 
+    a {
+      text-decoration: none;
+    }
+
+    i {
+      color: #5d78ff;
+    }
+
     ul {
       display: block;
-      padding: 0.5rem 0 0 0;
+      padding: 0;
       list-style: none;
       border: 0;
-      margin: 1rem 0 0;
+      margin: 15px 0 0;
     }
 
     svg {
@@ -29,15 +37,15 @@
     }
 
     .line {
-      margin: 0.7rem 0;
+      margin: 0;
       height: 0;
       display: block;
       border-bottom: 1px solid #ebedf2;
     }
 
     .list {
-      padding: 3px 42px 3px 2rem;
-      margin-bottom: 1.5rem;
+      padding: 10px 42px 10px 30px;
+      margin-bottom: 15px;
 
       &:hover {
         background-color: #f7f8fa;
@@ -52,14 +60,14 @@
       span {
         color: #595d6e;
         font-weight: 400;
-        margin-left: 4px;
+        margin-left: 15px;
       }
     }
 
     .logout {
-      margin: 2rem 0 2rem 2rem;
+      margin: 14px 0 14px 30px;
 
-      a {
+      button {
         background-color: rgba(93, 120, 255, 0.1);
         color: #5d78ff;
         padding: 0.5rem 1rem;
