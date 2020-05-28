@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 const BreadcrumbItem = ({item}) => {
   const renderContent = () => {
@@ -8,13 +9,13 @@ const BreadcrumbItem = ({item}) => {
     } else {
       return <Link to={item.link}>{item.title}</Link>
     }
-  };
+  }
 
   return (
     <li className={`item ${(item.link === null) ? 'active' : ''}`}>
       {renderContent()}
     </li>
-  );
+  )
 }
 
-export default BreadcrumbItem;
+export default BreadcrumbItem

@@ -1,7 +1,11 @@
 import React from 'react'
+
 import {useSelector} from 'react-redux'
-import css from './breadcrumbs.scss'
+
 import BreadcrumbItem from './item'
+
+import css from './breadcrumbs.scss'
+
 
 const Breadcrumbs = ({items}) => {
   const title = useSelector(state => state.title)

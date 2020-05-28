@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import {INDEX} from '../../utils/routes'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoader, setCurrentUser, setTitle } from '../../redux/actions'
@@ -23,7 +24,7 @@ const Login = () => {
 
   useEffect(() => {
     if (currentUser !== null) {
-      history.push('/')
+      history.push(INDEX)
     }
 
     dispatch(setTitle('Авторизация'))

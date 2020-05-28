@@ -47,11 +47,15 @@
       padding: 10px 42px 10px 30px;
       margin-bottom: 15px;
 
+      i {
+        color: #595d6e;
+      }
+
       &:hover {
         background-color: #f7f8fa;
         transition: all 0.3s;
 
-        svg, span {
+        i, span {
           color: #5d78ff;
         }
 

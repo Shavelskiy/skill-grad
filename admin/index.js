@@ -8,6 +8,8 @@ import { rootReducer } from './redux/rootReduser'
 import App from './components/app'
 import { BrowserRouter } from 'react-router-dom'
 
+import css from './index.scss'
+
 
 const store = createStore(rootReducer)
 

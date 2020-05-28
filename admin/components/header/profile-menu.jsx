@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
+import { LOGIN } from '../../utils/routes'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUser } from '../../redux/actions'
 
 import axios from 'axios'
+import { LOGOUT_URL } from '../../utils/api/endpoints'
 
 import css from './profile-menu.scss'
 
@@ -36,10 +38,10 @@ const ProfileMenu = () => {
   }, [ref, setHideMenu])
 
   const logout = () => {
-    axios.get('/ajax/logout')
+    axios.get(LOGOUT_URL)
       .then(({data}) => {
         dispatch(setCurrentUser(null))
-        history.push('/login')
+        history.push(LOGIN)
       })
   }
 

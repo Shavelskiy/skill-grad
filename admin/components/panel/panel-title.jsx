@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import css from './panel-title.scss'
+
 
 const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
   let buttonTemplate = ''
