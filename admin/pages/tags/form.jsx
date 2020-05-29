@@ -7,11 +7,13 @@ const TagForm = ({name, setName, sort, setSort, disable, save}) => {
       <TextInput
         value={name}
         setValue={setName}
+        label="Название"
       />
 
       <NumberInput
         value={sort}
         setValue={setSort}
+        label="Сортировка"
       />
 
       <SaveButton handler={save} disable={disable}/>

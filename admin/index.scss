@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  color: #212529;
+  color: #646c9a;
   background-color: #f2f3f8;
   font-size: 13px;
   font-weight: 300;
@@ -23,6 +23,14 @@ body {
 button {
   border: none;
   outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+form {
+  margin: 0;
 }
 
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";

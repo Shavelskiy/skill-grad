@@ -55,22 +55,39 @@
 }
 
 .btn {
-  text-decoration: none;
   padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: #fff;
   border-radius: .25rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+
+  &.create {
+    background: transparent;
+    color: #74788d;
+    border: 1px solid #e8ecfa;
+
+    &:hover {
+      background-color: #5d78ff;
+      color: #fff;
+    }
+  }
 
   &.primary {
     background-color: #007bff;
+
     &:hover {
       background-color: #0056b3;
     }
   }
 
   &.success {
-    background-color: #28a745;
+    background-color: #1dc9b7;
+
     &:hover {
-      background-color: #438542;
+      background-color: rgb(24, 168, 153);
     }
   }
 }

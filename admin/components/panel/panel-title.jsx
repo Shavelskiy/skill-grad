@@ -11,7 +11,7 @@ const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
       <div className="button-wrap">
         <Link
           to={buttonLink}
-          className="btn primary"
+          className="btn create"
         >
           Создать
         </Link>

@@ -1,7 +1,10 @@
 import React from 'react'
-import css from './table.scss'
-import ActionItem from './action-item'
 import { Link } from 'react-router-dom'
+
+import ActionItem from './action-item'
+
+import css from './table.scss'
+
 
 const Table = ({table, body, order, hasActions, actions, disabled, changeOrder, reload}) => {
   const isHasActions = () => {
@@ -57,7 +60,7 @@ const Table = ({table, body, order, hasActions, actions, disabled, changeOrder, 
             )
           })
         }
-        {isHasActions() ? (<th></th>) : null}
+        {isHasActions() ? (<th>Действия</th>) : null}
       </tr>
       </thead>
       <tbody>

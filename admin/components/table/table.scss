@@ -1,5 +1,7 @@
 table {
   border-collapse: collapse;
+  font-size: 13px;
+  font-weight: 300;
 }
 
 .table {
@@ -55,7 +57,7 @@ table {
 
   & thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid #ebedf2;
     border-bottom-width: 2px;
   }
 
@@ -65,6 +67,6 @@ table {
 
   & tbody tr:hover {
     color: #212529;
-    background-color: rgba(0, 0, 0, 0.075);
+    background-color: rgb(250, 251, 252);
   }
 }

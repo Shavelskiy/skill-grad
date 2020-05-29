@@ -63,6 +63,11 @@
         display: block;
         width: 100%;
         outline: none;
+        border-bottom: 1px solid #e2e5ec;
+
+        &:focus {
+          border-bottom: 1px solid #5d78ff;
+        }
       }
 
       .actions {
