@@ -1,89 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import ActionItem from './action-item'
+import TableHeader from './header'
+import TableBody from './body'
 
 import css from './table.scss'
 
 
 const Table = ({table, body, order, hasActions, actions, disabled, changeOrder, reload}) => {
-  const isHasActions = () => {
-    return actions && actions !== undefined && actions.length >= 0
-  }
-
-  const renderActions = (item) => {
-    if (!isHasActions()) {
-      return null
-    }
-
-    return (
-      <td className="actions">
-        <div className="wrap">
-          {
-            actions.map((action, key) => {
-              return (
-                <ActionItem
-                  key={key}
-                  action={action}
-                  item={item}
-                  reload={reload}
-                />
-              )
-            })
-          }
-        </div>
-      </td>
-    )
-  }
-
   return (
     <table className={`table ${disabled ? 'disabled' : ''}`}>
-      <thead>
-      <tr>
-        <th></th>
-        {
-          table.map((item, key) => {
-            return (
-              <th
-                key={key}
-                onClick={() => changeOrder(item.name)}
-              >
-                <div>
-                  <span>{item.title}</span>
-                  <i className={
-                    (order[item.name] === 'asc') ? 'fa fa-arrow-up' :
-                      ((order[item.name] === 'desc') ? 'fa fa-arrow-down' : 'fa fa-arrow-up hidden')
-                  }
-                  ></i>
-                </div>
-              </th>
-            )
-          })
-        }
-        {isHasActions() ? (<th>Действия</th>) : null}
-      </tr>
-      </thead>
-      <tbody>
-      {
-        body.map((bodyItem, key) => {
-          const row = table.map((item, key) => {
-            return (
-              <td key={key}>
-                {bodyItem[item.name]}
-              </td>
-            )
-          })
-
-          return (
-            <tr key={key}>
-              <td className="numbering">{key + 1}</td>
-              {row}
-              {renderActions(bodyItem)}
-            </tr>
-          )
-        })
-      }
-      </tbody>
+      <TableHeader
+        table={table}
+        order={order}
+        changeOrder={changeOrder}
+        hasActions={actions.length >= 1}
+      />
+      <TableBody
+        body={body}
+        table={table}
+        actions={actions}
+        reload={reload}
+      />
     </table>
   )
 }

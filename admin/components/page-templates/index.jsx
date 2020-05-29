@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setTitle, setBreacrumbs } from '../../redux/actions'
+import { setTitle } from '../../redux/actions'
 
 import axios from 'axios'
 
@@ -10,21 +11,48 @@ import Paginator from '../../components/paginator/paginator'
 import Search from '../../components/search/search'
 import PanelTitle from '../../components/panel/panel-title'
 
+import querystring from 'querystring';
+
+
+const getInitStateFromUrl = (query) => {
+  let initState = {
+    page: 1,
+    order: {}
+  }
+
+  try {
+    const queryParams = querystring.parse(query)
+
+    if (typeof queryParams.page !== 'undefined') {
+      initState.page = queryParams.page
+    }
+
+    if (typeof queryParams.order !== 'undefined') {
+      initState.order = JSON.parse(queryParams.order)
+    }
+  } catch (error) {
+  }
+
+  return initState
+}
 
 const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLink}) => {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
 
-  useEffect(() => {
-    dispatch(setTitle(title))
-    dispatch(setBreacrumbs([]))
-  }, [])
+  const initState = getInitStateFromUrl(location.search.substr(1))
 
   const [body, setBody] = useState([])
   const [paginatorRequest, setPaginatorRequest] = useState(null)
   const [disabledTable, setDisabledTable] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [order, setOrder] = useState({})
+  const [currentPage, setCurrentPage] = useState(initState.page)
+  const [order, setOrder] = useState(initState.order)
+
+  useEffect(() => {
+    dispatch(setTitle(title))
+  }, [])
 
   useEffect(() => loadItems(), [currentPage, order])
 
@@ -40,8 +68,13 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
 
     const params = {
       page: currentPage,
-      order: order,
+      order: JSON.stringify(order),
     }
+
+    history.push({
+      pathname: history.pathname,
+      search: `?${querystring.stringify(params)}`
+    })
 
     axios.get(fetchUrl, {
       cancelToken: axiosSource.token,

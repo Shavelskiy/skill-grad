@@ -8,7 +8,6 @@ const NotFoundPage = (props) => {
 
   useEffect(() => {
     dispatch(setTitle('Ошибка 404'))
-    dispatch(setBreacrumbs([]))
   }, [])
 
   return (

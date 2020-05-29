@@ -4,37 +4,8 @@ import { TAG_CREATE } from '../../utils/routes'
 import { FETCH_TAGS_URL } from '../../utils/api/endpoints'
 
 import IndexPageTemplate from '../../components/page-templates'
+import { actions, table } from './table'
 
-
-const table = [
-  {
-    title: 'Id',
-    name: 'id',
-  },
-  {
-    title: 'Название',
-    name: 'name',
-  },
-  {
-    title: 'Сортировка',
-    name: 'sort',
-  }
-]
-
-const actions = [
-  {
-    type: 'view',
-    link: '/tag',
-  },
-  {
-    type: 'update',
-    link: '/tag',
-  },
-  {
-    type: 'delete',
-    link: '/api/admin/tag/',
-  }
-]
 
 const TagsIndex = () => {
   return (

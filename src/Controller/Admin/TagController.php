@@ -33,7 +33,7 @@ class TagController extends AbstractController
         $order = json_decode($request->get('order', ''), true);
 
         $paginator = $this->tagRepository
-            ->getPaginatorItems($page, $order);
+            ->getPaginatorItems($page, is_array($order) ? $order : null);
 
         $items = [];
 

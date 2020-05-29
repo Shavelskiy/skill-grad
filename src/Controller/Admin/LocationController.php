@@ -51,7 +51,7 @@ class LocationController extends AbstractController
         $order = json_decode($request->get('order', ''), true);
 
         $paginator = $this->locationRepository
-            ->getPaginatorLocations($page, $order);
+            ->getPaginatorLocations($page, is_array($order) ? $order : null);
 
         $items = [];
 

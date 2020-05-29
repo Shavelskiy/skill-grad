@@ -4,41 +4,8 @@ import { LOCATION_CREATE } from '../../utils/routes'
 import { FETCH_LOCATIONS_URL } from '../../utils/api/endpoints'
 
 import IndexPageTemplate from '../../components/page-templates'
+import { table, actions } from './table'
 
-
-const table = [
-  {
-    title: 'Id',
-    name: 'id',
-  },
-  {
-    title: 'Название',
-    name: 'name',
-  },
-  {
-    title: 'Тип',
-    name: 'type',
-  },
-  {
-    title: 'Сортировка',
-    name: 'sort',
-  }
-]
-
-const actions = [
-  {
-    type: 'view',
-    link: '/tag',
-  },
-  {
-    type: 'update',
-    link: '/tag',
-  },
-  {
-    type: 'delete',
-    link: '/api/admin/location/',
-  }
-]
 
 const LocationsIndex = () => {
   return (
