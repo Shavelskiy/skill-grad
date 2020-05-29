@@ -26,7 +26,7 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
   const [currentPage, setCurrentPage] = useState(1)
   const [order, setOrder] = useState({})
 
-  useEffect(() => loadItems(), [])
+  useEffect(() => loadItems(), [currentPage, order])
 
   const loadItems = () => {
     const axiosSource = axios.CancelToken.source()
@@ -61,28 +61,16 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
     }
 
     setCurrentPage(page)
-    loadItems()
   }
 
-  const changeOrder = (propName) => {
-    if (!order[propName]) {
-      order[propName] = null
+  const changeOrder = (field) => {
+    if (order[field] === 'desc') {
+      setOrder({})
+    } else if (order[field] === 'asc') {
+      setOrder({[field]: 'desc'})
+    } else {
+      setOrder({[field]: 'asc'})
     }
-
-    switch (order[propName]) {
-      case null:
-        order[propName] = 'asc'
-        break
-      case 'asc':
-        order[propName] = 'desc'
-        break
-      case 'desc':
-        delete order[propName]
-        break
-    }
-
-    setOrder(order)
-    loadItems()
   }
 
   return (

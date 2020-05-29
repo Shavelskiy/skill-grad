@@ -25,21 +25,17 @@ class TagRepository extends ServiceEntityRepository
      * @param int $pageItems
      * @return PaginatorResult
      */
-    public function getPaginatorItems(int $page, ?array $orders, int $pageItems = 5): PaginatorResult
+    public function getPaginatorItems(int $page, ?array $order, int $pageItems = 5): PaginatorResult
     {
         $query = $this->createQueryBuilder('t');
 
-        if ($orders !== null) {
-            foreach ($orders as $field => $order) {
-                if (!in_array($field, self::ORDABLE_FIELDS, true)) {
-                    continue;
-                }
+        if (!empty($order)) {
+            $orderField = array_key_first($order);
 
-                if ($order === null || !in_array($order, ['asc', 'desc'], true)) {
-                    continue;
-                }
+            if (in_array($orderField, self::ORDABLE_FIELDS, true)) {
+                $orderType = $order[$orderField];
 
-                $query->addOrderBy("t.$field", $order);
+                $query->addOrderBy("t.$orderField", ($orderType === 'asc') ? 'asc' : 'desc');
             }
         }
 
