@@ -12,8 +12,7 @@
 
   .item {
     a {
-      text-decoration: none;
-      color: #007bff;
+      color: #5d78ff;
     }
   }
 
@@ -34,9 +33,5 @@
 
   .item + .item:hover::before {
     text-decoration: underline;
-  }
-
-  .item + .item:hover::before {
-    text-decoration: none;
   }
 }

@@ -41,9 +41,9 @@ Encore
     config.corejs = 3;
   })
 
-  .enableSassLoader()
   .enableVueLoader()
   .enableReactPreset()
+  .enableSassLoader()
   .addLoader({
     test: /\.pug$/,
     oneOf: [

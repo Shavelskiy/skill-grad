@@ -1,38 +1,46 @@
-import React from 'react';
+import React from 'react'
 
-export const Item = (props) => {
+export const Item = ({active, page, click}) => {
   return (
     <li
-      className={`item ${props.active ? 'active' : ''}`}
-      onClick={() => props.click(props.page)}
+      className={`link ${active ? 'active' : ''}`}
+      onClick={() => click(page)}
     >
-      <div className="link">{props.page}</div>
+      <span>{page}</span>
     </li>
-  );
-};
+  )
+}
 
-export const EmptyItem = (props) => {
+export const EmptyItem = () => {
   return (
-    <li className="item">
-      <div className="link">...</div>
+    <li className="link">
+      <span>...</span>
     </li>
-  );
-};
+  )
+}
 
-export const Arrow = (props) => {
-  let content = '';
-  if (props.left) {
-    content = (<div className="link">&laquo;</div>);
+export const Arrow = ({left, click, active, page}) => {
+  const onClick = () => {
+    if (!active) {
+      return
+    }
+
+    click(page)
+  }
+
+  let arrow = ''
+  if (left) {
+    arrow = (<span>&laquo;</span>)
   } else {
-    content = (<div className="link">&raquo;</div>);
+    arrow = (<span>&raquo;</span>)
   }
 
   return (
     <li
-      className="item"
-      onClick={() => props.click(props.page)}
+      className={`link ${!active ? 'disabled' : ''}`}
+      onClick={() => onClick()}
     >
-      {content}
+      {arrow}
     </li>
-  );
-};
+  )
+}
