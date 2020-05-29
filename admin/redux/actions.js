@@ -1,4 +1,4 @@
-import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS, SET_CURRENT_USER } from './types'
+import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS, SET_CURRENT_USER, SET_REDIRECT_LINK } from './types'
 
 export function showLoader() {
   return {
@@ -33,5 +33,12 @@ export function setCurrentUser(currentUser) {
   return {
     type: SET_CURRENT_USER,
     payload: currentUser
+  }
+}
+
+export function setRedirectLink(redirectLink) {
+  return {
+    type: SET_REDIRECT_LINK,
+    payload: redirectLink,
   }
 }
