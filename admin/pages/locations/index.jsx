@@ -1,20 +1,10 @@
-import React from 'react';
-import Table from '../../components/table/table';
-import Paginator from '../../components/paginator/paginator';
-import Search from '../../components/search/search';
-import PanelTitle from '../../components/panel/panel-title';
-import axios from 'axios';
+import React from 'react'
+import { LOCATION_CREATE } from '../../utils/routes'
 
-const breadcrumbs = [
-  {
-    title: 'Главная',
-    link: '/',
-  },
-  {
-    title: 'Список местоположений',
-    link: null,
-  },
-];
+import { FETCH_LOCATIONS_URL } from '../../utils/api/endpoints'
+
+import IndexPageTemplate from '../../components/page-templates'
+
 
 const table = [
   {
@@ -33,120 +23,34 @@ const table = [
     title: 'Сортировка',
     name: 'sort',
   }
-];
+]
 
-class LocationsIndex extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      body: [],
-      paginatorRequest: null,
-      disabledTable: false,
-      totalPages: 0,
-      currentPage: 1,
-      order: {},
-    }
+const actions = [
+  {
+    type: 'view',
+    link: '/tag',
+  },
+  {
+    type: 'update',
+    link: '/tag',
+  },
+  {
+    type: 'delete',
+    link: '/api/admin/location/',
   }
+]
 
-  componentDidMount() {
-    this.loadItems();
-  }
-
-  loadItems() {
-    const paginatorRequest = this.state.paginatorRequest;
-    const axiosSource = axios.CancelToken.source();
-
-    if (paginatorRequest) {
-      paginatorRequest.cancel();
-    }
-
-    this.setState({
-      paginatorRequest: {cancel: axiosSource.cancel},
-      disabledTable: true,
-    });
-
-    const params = {
-      page: this.state.currentPage,
-      order: this.state.order,
-    };
-
-    axios.get('/api/admin/location', {
-      cancelToken: axiosSource.token,
-      params: params,
-    })
-      .then(response => {
-        this.setState({
-          body: response.data.items,
-          totalPages: response.data.total_pages,
-          currentPage: response.data.current_page,
-          disabledTable: false,
-        });
-      });
-  }
-
-  changePage(page) {
-    if (page === this.state.currentPage) {
-      return;
-    }
-
-    this.setState({
-      currentPage: page
-    }, () => this.loadItems());
-  }
-
-  changeOrder(propName) {
-    let order = this.state.order;
-
-    if (!order[propName]) {
-      order[propName] = null;
-    }
-
-    switch (order[propName]) {
-      case null:
-        order[propName] = 'asc';
-        break;
-      case 'asc':
-        order[propName] = 'desc';
-        break;
-      case 'desc':
-        delete order[propName];
-        break;
-    }
-
-    this.setState({
-      order: order
-    }, () => this.loadItems());
-  }
-
-  render() {
-    return (
-      <div className="portlet">
-        <PanelTitle
-          title={'Список местоположений'}
-          icon={'fa fa-globe'}
-          withButton={true}
-          buttonText={'Создать'}
-          buttonLink={'/admin/rubric/create'}
-        />
-
-        <div className="body">
-          {/*<Search/>*/}
-          <Table
-            table={table}
-            body={this.state.body}
-            order={this.state.order}
-            disabled={this.state.disabledTable}
-            changeOrder={(propName) => this.changeOrder(propName)}
-          />
-          <Paginator
-            totalPages={this.state.totalPages}
-            currentPage={this.state.currentPage}
-            click={(page) => this.changePage(page)}
-          />
-        </div>
-      </div>
-    );
-  }
+const LocationsIndex = () => {
+  return (
+    <IndexPageTemplate
+      title={'Список всех местоположений'}
+      table={table}
+      actions={actions}
+      fetchUrl={FETCH_LOCATIONS_URL}
+      canCreate={true}
+      createLink={LOCATION_CREATE}
+    />
+  )
 }
 
-export default LocationsIndex;
+export default LocationsIndex

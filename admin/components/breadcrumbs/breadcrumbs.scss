@@ -30,8 +30,4 @@
     color: #6c757d;
     content: "/";
   }
-
-  .item + .item:hover::before {
-    text-decoration: underline;
-  }
 }

@@ -7,13 +7,8 @@ import BreadcrumbItem from './item'
 import css from './breadcrumbs.scss'
 
 
-const Breadcrumbs = ({items}) => {
+const Breadcrumbs = ({items = []}) => {
   const title = useSelector(state => state.title)
-
-  const lastItem = {
-    title: title,
-    link: null,
-  }
 
   return (
     <div className="breadcrumb-wrap">
@@ -23,7 +18,10 @@ const Breadcrumbs = ({items}) => {
             return (<BreadcrumbItem key={key} item={item}/>)
           })
         }
-        <BreadcrumbItem item={lastItem}/>
+        <BreadcrumbItem item={{
+          title: title,
+          link: null,
+        }}/>
       </ol>
     </div>
   )
