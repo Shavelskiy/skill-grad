@@ -8,7 +8,7 @@ import Header from './../header/header'
 import Preloader from './../preloader/preloader'
 
 import css from './main.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const Main = () => {
@@ -21,7 +21,7 @@ const Main = () => {
         toggle={() => setSidebarOpened(!sidebarOpened)}
         opened={sidebarOpened}
       />
-      <div className={cx(css.container, {[css.active]: !sidebarOpened})}>
+      <div className={cn(css.container, {[css.active]: !sidebarOpened})}>
         <Header/>
         <Preloader active={loading}/>
         <PageSwitcher active={!loading}/>

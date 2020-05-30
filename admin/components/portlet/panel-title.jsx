@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import Button from '../ui/button'
 
 import css from './panel-title.scss?module'
 
@@ -9,12 +10,11 @@ const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
   if (withButton === true) {
     buttonTemplate = (
       <div className={css.buttonWrap}>
-        <Link
-          to={buttonLink}
-          className="btn create"
-        >
-          Создать
-        </Link>
+        <Button
+          link={buttonLink}
+          create={true}
+          text={'Создать'}
+        />
       </div>
     )
   }

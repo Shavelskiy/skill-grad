@@ -1,13 +1,13 @@
 import React from 'react'
 
 import css from './items.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 export const Item = ({active, page, click}) => {
   return (
     <li
-      className={cx(css.link, {[css.active]: active})}
+      className={cn(css.link, {[css.active]: active})}
       onClick={() => click(page)}
     >
       <span>{page}</span>
@@ -41,7 +41,7 @@ export const Arrow = ({left, click, active, page}) => {
 
   return (
     <li
-      className={cx(css.link, {[css.disabled]: !active})}
+      className={cn(css.link, {[css.disabled]: !active})}
       onClick={() => onClick()}
     >
       {arrow}

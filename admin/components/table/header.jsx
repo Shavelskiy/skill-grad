@@ -1,7 +1,7 @@
 import React from 'react'
 
 import css from './head.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const TableHeader = ({table, order, changeOrder, hasActions}) => {
@@ -17,7 +17,7 @@ const TableHeader = ({table, order, changeOrder, hasActions}) => {
           return (
             <th
               key={key}
-              className={cx(css.orderable, orderClass)}
+              className={cn(css.orderable, orderClass)}
               onClick={() => changeOrder(item.name)}
             >
               {item.title}

@@ -3,7 +3,7 @@ import React from 'react'
 import PanelTitle from './panel-title'
 
 import css from './portlet.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const Portlet = ({children, width, title, titleIcon, withButton, buttonLink}) => {
@@ -16,7 +16,7 @@ const Portlet = ({children, width, title, titleIcon, withButton, buttonLink}) =>
   }
 
   return (
-    <div className={cx(css.portlet, widthClass)}>
+    <div className={cn(css.portlet, widthClass)}>
       <PanelTitle
         title={title}
         icon={`fa fa-${titleIcon}`}

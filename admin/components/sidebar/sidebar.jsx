@@ -5,14 +5,14 @@ import Toggler from './toggler'
 import Menu from '../menu/menu'
 
 import css from './sidebar.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 import logo from '../../images/logo.png'
 
 
 const Sidebar = ({opened, toggle}) => {
   return (
-    <div className={cx(css.container, {[css.closed]: !opened})}>
+    <div className={cn(css.container, {[css.closed]: !opened})}>
       <div className={css.header}>
         <div className={css.logo}>
           <Link to="/">

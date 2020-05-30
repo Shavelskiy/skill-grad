@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import css from './item.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const BreadcrumbItem = ({item}) => {
@@ -15,7 +15,7 @@ const BreadcrumbItem = ({item}) => {
   }
 
   return (
-    <li className={cx(css.item, {[css.active]: item.link === null})}>
+    <li className={cn(css.item, {[css.active]: item.link === null})}>
       {renderContent()}
     </li>
   )

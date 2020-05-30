@@ -6,12 +6,12 @@ import TableSearch from './search'
 import TableBody from './body'
 
 import css from './table.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const Table = ({table, body, order, hasActions, actions, disabled, changeOrder, reload}) => {
   return (
-    <table className={cx(css.table, {[css.disabled]: disabled })}>
+    <table className={cn(css.table, {[css.disabled]: disabled })}>
       <TableHeader
         table={table}
         order={order}

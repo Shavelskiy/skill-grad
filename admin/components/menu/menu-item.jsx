@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import css from './menu-item.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const MenuItem = ({rootItem, closed}) => {
@@ -20,15 +20,15 @@ const MenuItem = ({rootItem, closed}) => {
   })
 
   return (
-    <li onClick={() => setCollapse(!collapse)} className={cx({[css.closed]: closed})}>
-      <div className={cx(css.item, {[css.active]: collapse})}>
+    <li onClick={() => setCollapse(!collapse)} className={cn({[css.closed]: closed})}>
+      <div className={cn(css.item, {[css.active]: collapse})}>
         <i className={rootItem.icon}></i>
         <div className={css.text}>
           {rootItem.title}
         </div>
         <i className={css.arrow}></i>
       </div>
-      <ul className={cx(css.childItems, {[css.active]: collapse},)}>
+      <ul className={cn(css.childItems, {[css.active]: collapse},)}>
         {items}
       </ul>
     </li>

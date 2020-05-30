@@ -9,7 +9,7 @@ import axios from 'axios'
 import { LOGIN_URL } from '../../utils/api/endpoints'
 
 import css from './login.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const Login = () => {
@@ -56,12 +56,12 @@ const Login = () => {
 
   return (
     <div className={css.page}>
-      <div className={cx(css.container, {[css.lock]: lock})}>
+      <div className={cn(css.container, {[css.lock]: lock})}>
         <div className={css.title}>
           <h3>Авторизация</h3>
         </div>
         <div className={css.form}>
-          <div className={cx(css.error, {[css.active]: error !== null})}>
+          <div className={cn(css.error, {[css.active]: error !== null})}>
             <span>{error}</span>
           </div>
           <div className={css.group}>

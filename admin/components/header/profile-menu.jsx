@@ -9,7 +9,7 @@ import axios from 'axios'
 import { LOGOUT_URL } from '../../utils/api/endpoints'
 
 import css from './profile-menu.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const ProfileMenu = () => {
@@ -58,7 +58,7 @@ const ProfileMenu = () => {
         <span>{currentUser.username}</span>
       </div>
 
-      <div className={cx(css.card, {[css.hidden]: hideMenu})}>
+      <div className={cn(css.card, {[css.hidden]: hideMenu})}>
         <ul>
           <li className={css.list}>
             <Link to={INDEX}>

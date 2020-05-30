@@ -15,14 +15,14 @@ import TagUpdate from './tags/update'
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs';
 
 import css from './page-switcher.scss?module'
-import cx from 'classnames'
+import cn from 'classnames'
 
 
 const PageSwitcher = ({active}) => {
   const breadcrumbs = useSelector(state => state.breadcrumbs)
 
   return (
-    <div className={cx(css.page, {[css.hidden]: !active})}>
+    <div className={cn(css.page, {[css.hidden]: !active})}>
       <Breadcrumbs items={breadcrumbs}/>
 
       <Switch>

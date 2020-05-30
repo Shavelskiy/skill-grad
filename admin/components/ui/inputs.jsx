@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Button from './button'
+
 import css from './inputs.scss?module'
 
 
@@ -31,14 +33,13 @@ export function NumberInput({label, value, setValue}) {
 
 export function SaveButton({handler, disable}) {
   return (
-    <div className={css.saveBtn}>
-      <button
-        className="btn success"
+    <div className={css.saveWrap}>
+      <Button
+        text={'Сохранить'}
+        success={true}
         disabled={disable}
-        onClick={() => handler()}
-      >
-        Сохранить
-      </button>
+        click={handler}
+      />
     </div>
   )
 }
