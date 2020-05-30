@@ -91,7 +91,7 @@
           vertical-align: middle;
           cursor: pointer;
 
-          &:hover {
+          &:hover:enabled {
             box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25) !important;
             background-color: #3758ff;
             border-color: #2a4eff;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { LOGIN } from '../../utils/routes'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentUser } from '../../redux/actions'
+import { setCurrentUser, setRedirectLink } from '../../redux/actions'
 
 import axios from 'axios'
 import { LOGOUT_URL } from '../../utils/api/endpoints'
@@ -14,6 +14,7 @@ import css from './profile-menu.scss'
 const ProfileMenu = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const location = useLocation()
   const ref = useRef()
 
   const currentUser = useSelector(state => state.currentUser)
@@ -41,6 +42,7 @@ const ProfileMenu = () => {
     axios.get(LOGOUT_URL)
       .then(({data}) => {
         dispatch(setCurrentUser(null))
+        dispatch(setRedirectLink(location))
         history.push(LOGIN)
       })
   }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import {INDEX} from '../../utils/routes'
+import { INDEX, LOGIN } from '../../utils/routes'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoader, setCurrentUser, setTitle } from '../../redux/actions'
@@ -16,6 +16,7 @@ const Login = () => {
   const history = useHistory()
 
   const currentUser = useSelector(state => state.currentUser)
+  const redirectLink = useSelector(state => state.redirectLink)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -39,12 +40,15 @@ const Login = () => {
     })
       .then(({data}) => {
         dispatch(setCurrentUser(data.current_user))
-        history.goBack()
+
+        if (redirectLink === null || redirectLink.pathname === LOGIN) {
+          history.push(INDEX)
+        } else {
+          history.push(redirectLink)
+        }
       })
       .catch(({response}) => {
         setError(response.data.message)
-      })
-      .finally(() => {
         setLock(false)
       })
   }
