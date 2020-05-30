@@ -8,7 +8,7 @@ import axios from 'axios'
 
 import Table from '../../components/table/table'
 import Paginator from '../../components/paginator/paginator'
-import PanelTitle from '../../components/panel/panel-title'
+import Portlet from '../portlet/portlet'
 
 import querystring from 'querystring';
 
@@ -48,44 +48,57 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(initState.page)
   const [order, setOrder] = useState(initState.order)
+  const [reloadTable, setReloadTable] = useState(true)
 
   useEffect(() => {
     dispatch(setTitle(title))
   }, [])
 
-  useEffect(() => loadItems(), [currentPage, order])
+  useEffect(() => {
+    let mounted = true
+    const loadItems = async () => {
+      const axiosSource = axios.CancelToken.source()
 
-  const loadItems = () => {
-    const axiosSource = axios.CancelToken.source()
+      if (paginatorRequest) {
+        paginatorRequest.cancel()
+      }
 
-    if (paginatorRequest) {
-      paginatorRequest.cancel()
-    }
+      setPaginatorRequest({cancel: axiosSource.cancel})
+      setDisabledTable(true)
 
-    setPaginatorRequest({cancel: axiosSource.cancel})
-    setDisabledTable(true)
+      const params = {
+        page: currentPage,
+        order: JSON.stringify(order),
+      }
 
-    const params = {
-      page: currentPage,
-      order: JSON.stringify(order),
-    }
-
-    history.push({
-      pathname: history.pathname,
-      search: `?${querystring.stringify(params)}`
-    })
-
-    axios.get(fetchUrl, {
-      cancelToken: axiosSource.token,
-      params: params,
-    })
-      .then(({data}) => {
-        setBody(data.items)
-        setTotalPages(data.total_pages)
-        setCurrentPage(data.current_page)
-        setDisabledTable(false)
+      history.push({
+        pathname: history.pathname,
+        search: `?${querystring.stringify(params)}`
       })
-  }
+
+      axios.get(fetchUrl, {
+        cancelToken: axiosSource.token,
+        params: params,
+      })
+        .then(({data}) => {
+          if (!mounted) {
+            return
+          }
+
+          if (data.items.length > 0) {
+            setBody(data.items)
+            setTotalPages(data.total_pages)
+            setCurrentPage(data.current_page)
+            setDisabledTable(false)
+          } else {
+            setCurrentPage(1)
+          }
+        })
+    }
+    loadItems()
+
+    return () => mounted = false
+  }, [currentPage, order, reloadTable])
 
   const changePage = (page) => {
     if (page === currentPage) {
@@ -106,31 +119,27 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
   }
 
   return (
-    <div className="portlet">
-      <PanelTitle
-        title={title}
-        icon={'fa fa-tags'}
-        withButton={canCreate}
-        buttonLink={createLink}
+    <Portlet
+      title={title}
+      titleIcon={'tags'}
+      withButton={canCreate}
+      buttonLink={createLink}
+    >
+      <Table
+        table={table}
+        body={body}
+        order={order}
+        reload={() => setReloadTable(!reloadTable)}
+        disabled={disabledTable}
+        changeOrder={(propName) => changeOrder(propName)}
+        actions={actions}
       />
-
-      <div className="body">
-        <Table
-          table={table}
-          body={body}
-          order={order}
-          reload={() => loadItems()}
-          disabled={disabledTable}
-          changeOrder={(propName) => changeOrder(propName)}
-          actions={actions}
-        />
-        <Paginator
-          totalPages={totalPages}
-          currentPage={currentPage}
-          click={(page) => changePage(page)}
-        />
-      </div>
-    </div>
+      <Paginator
+        totalPages={totalPages}
+        currentPage={currentPage}
+        click={(page) => changePage(page)}
+      />
+    </Portlet>
   )
 }
 

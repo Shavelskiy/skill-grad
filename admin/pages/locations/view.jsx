@@ -1,79 +1,71 @@
-import React from 'react';
-import Breadcrumbs from "../../components/breadcrumbs/breacrumbs";
-import PanelTitle from "../../components/panel/panel-title";
-import Table from "../../components/table/table";
-import Paginator from "../../components/paginator/paginator";
+import React, { useState, useEffect } from 'react'
 
-class LocationView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'dsf'
-    };
-  }
+import axios from 'axios'
 
-  componentDidMount() {
-    const {
-      match: {params}
-    } = this.props;
-    console.log(params)
-    // axios.get(`/api/users/${params.userId}`)
-    //   .then(({data: user}) => {
-    //     console.log('user', user);
-    //
-    //     this.setState({user});
-    //   });
-  }
+import { useDispatch, useSelector } from 'react-redux'
+import { showLoader, hideLoader, setTitle, setBreacrumbs } from '../../redux/actions'
 
-  render() {
-    return (
-      <div>
-        <Breadcrumbs/>
+import Portlet from '../../components/portlet/portlet'
 
-        <div className="portlet">
-          <PanelTitle
-            title={'Просмотр местоположения'}
-            icon={'fa fa-eye'}
-            withButton={false}
-          />
 
-          <div className="body">
+const LocationView = ({match}) => {
+  const dispatch = useDispatch()
 
-            <table className="table table-striped mt-5">
-              <tbody>
-              <tr>
-                <td>ID</td>
-                <td>43243</td>
-              </tr>
-              <tr>
-                <td>Название</td>
-                <td>dfsdfsdf</td>
-              </tr>
-              <tr>
-                <td>Тип</td>
-                <td>fsdfdsf</td>
-              </tr>
-              <tr>
-                <td>Сортировка</td>
-                <td>4234</td>
-              </tr>
-              {/*{% if location.parentLocation is not null %}*/}
-              <tr>
-                <td>Родительское местороложение</td>
-                <td>
-                  <a href="{{ path('admin.location.view', {id: location.parentLocation.id}) }}">
-                    dsfsdf
-                  </a>
-                </td>
-              </tr>
-              {/*{% endif %}*/}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  const title = useSelector(state => state.title)
+
+  const [item, setItem] = useState({
+    id: match.params.id,
+    name: '',
+    sort: 0
+  })
+
+  useEffect(() => {
+    dispatch(showLoader())
+
+    dispatch(setBreacrumbs([
+      {
+        title: 'Список местополжений',
+        link: '/location',
+      }
+    ]))
+
+    axios.get(`/api/admin/location/${item.id}`)
+      .then(({data}) => {
+        setItem({
+          id: data.id,
+          name: data.name,
+          sort: data.sort,
+        })
+        dispatch(setTitle(`Просмотр местоположения "${data.name}"`))
+        dispatch(hideLoader())
+      })
+  }, [])
+
+  return (
+    <Portlet
+      width={50}
+      title={title}
+      titleIcon={'eye'}
+      withButton={false}
+    >
+      <table>
+        <tbody>
+        <tr>
+          <td>ID</td>
+          <td>{item.id}</td>
+        </tr>
+        <tr>
+          <td>Название</td>
+          <td>{item.name}</td>
+        </tr>
+        <tr>
+          <td>Сортировка</td>
+          <td>{item.sort}</td>
+        </tr>
+        </tbody>
+      </table>
+    </Portlet>
+  )
 }
 
-export default LocationView;
+export default LocationView

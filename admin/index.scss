@@ -41,6 +41,12 @@ table {
   border-collapse: collapse;
   font-size: 13px;
   font-weight: 300;
+
+  & th, & td {
+    padding: .75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+  }
 }
 
 ul {
@@ -54,27 +60,6 @@ ul {
 
 
 /////////
-
-.portlet {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05);
-  background-color: #ffffff;
-  margin-bottom: 20px;
-  border-radius: 4px;
-
-  .body {
-    display: flex;
-    flex-direction: column;
-    padding: 25px;
-    border-radius: 4px;
-  }
-
-  &.w-50 {
-    width: 50%;
-  }
-}
 
 .btn {
   padding: 8px 20px;

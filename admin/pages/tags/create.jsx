@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import PanelTitle from '../../components/panel/panel-title'
-import TagForm from './form'
-import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
-import { Redirect } from 'react-router'
+import { useHistory } from 'react-router-dom'
+import { TAG_INDEX } from '../../utils/routes'
+
 import axios from 'axios'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { setTitle, setBreacrumbs } from '../../redux/actions'
 
+import TagForm from './form'
+import Portlet from '../../components/portlet/portlet'
+import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
+
+
 const TagCreate = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(setTitle('Создание тега'))
@@ -24,7 +30,6 @@ const TagCreate = () => {
 
   const [name, setName] = useState('')
   const [sort, setSort] = useState(0)
-  const [redirect, setRedirect] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
 
   const save = () => {
@@ -36,34 +41,25 @@ const TagCreate = () => {
     setDisableButton(true)
 
     axios.post('/api/admin/tag/', tag)
-      .then(() => setRedirect(true))
-  }
-
-  if (redirect) {
-    return (
-      <Redirect to="/tag"/>
-    )
+      .then(() => history.push(TAG_INDEX))
   }
 
   return (
-    <div className="portlet w-50">
-      <PanelTitle
-        title={title}
-        icon={'fa fa-info'}
-        withButton={false}
+    <Portlet
+      width={50}
+      title={title}
+      titleIcon={'info'}
+      withButton={false}
+    >
+      <TagForm
+        name={name}
+        setName={setName}
+        sort={sort}
+        setSort={setSort}
+        save={save}
+        disable={disableButton}
       />
-
-      <div className="body">
-        <TagForm
-          name={name}
-          setName={setName}
-          sort={sort}
-          setSort={setSort}
-          save={save}
-          disable={disableButton}
-        />
-      </div>
-    </div>
+    </Portlet>
   )
 }
 

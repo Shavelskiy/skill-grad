@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import {TAG_INDEX} from '../../utils/routes'
+
+import axios from 'axios'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoader, showLoader, setTitle, setBreacrumbs } from '../../redux/actions'
-import PanelTitle from '../../components/panel/panel-title'
+
 import TagForm from './form'
 import NotFound from '../../components/not-found/not-found'
 import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
-import { Redirect } from 'react-router'
-import axios from 'axios'
+import Portlet from '../../components/portlet/portlet'
+
 
 const TagUpdate = ({match}) => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(setBreacrumbs([
@@ -20,13 +26,11 @@ const TagUpdate = ({match}) => {
     ]))
   }, [])
 
-
   const title = useSelector(state => state.title)
 
   const [notFound, setNotFound] = useState(false)
   const [name, setName] = useState('')
   const [sort, setSort] = useState(0)
-  const [redirect, setRedirect] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
@@ -44,7 +48,7 @@ const TagUpdate = ({match}) => {
           dispatch(hideLoader())
         }
 
-        setRedirect(true)
+        history.push(TAG_INDEX)
       })
   }, [])
 
@@ -58,38 +62,29 @@ const TagUpdate = ({match}) => {
     setDisableButton(true)
 
     axios.put('/api/admin/tag/', tag)
-      .then(() => setRedirect(true))
+      .then(() => history.push(TAG_INDEX))
   }
 
   if (notFound) {
     return <NotFound/>
   }
 
-  if (redirect) {
-    return (
-      <Redirect to="/tag"/>
-    )
-  }
-
   return (
-    <div className="portlet w-50">
-      <PanelTitle
-        title={title}
-        icon={'fa fa-info'}
-        withButton={false}
+    <Portlet
+      width={50}
+      title={title}
+      titleIcon={'info'}
+      withButton={false}
+    >
+      <TagForm
+        name={name}
+        setName={setName}
+        sort={sort}
+        setSort={setSort}
+        save={save}
+        disable={disableButton}
       />
-
-      <div className="body">
-        <TagForm
-          name={name}
-          setName={setName}
-          sort={sort}
-          setSort={setSort}
-          save={save}
-          disable={disableButton}
-        />
-      </div>
-    </div>
+    </Portlet>
   )
 }
 
