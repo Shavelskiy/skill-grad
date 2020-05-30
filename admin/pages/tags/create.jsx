@@ -4,8 +4,8 @@ import TagForm from './form'
 import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
 import { Redirect } from 'react-router'
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux';
-import { setTitle, setBreacrumbs } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux'
+import { setTitle, setBreacrumbs } from '../../redux/actions'
 
 const TagCreate = () => {
   const dispatch = useDispatch()

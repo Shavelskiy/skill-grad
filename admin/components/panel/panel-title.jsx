@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import css from './panel-title.scss'
+import css from './panel-title.scss?module'
 
 
 const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
   let buttonTemplate = ''
   if (withButton === true) {
     buttonTemplate = (
-      <div className="button-wrap">
+      <div className={css.buttonWrap}>
         <Link
           to={buttonLink}
           className="btn create"
@@ -20,7 +20,7 @@ const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
   }
 
   return (
-    <div className="panel-title">
+    <div className={css.panelTitle}>
       <h3>
         <i className={icon}></i>
         {title}

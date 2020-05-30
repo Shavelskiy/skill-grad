@@ -8,7 +8,6 @@ import axios from 'axios'
 
 import Table from '../../components/table/table'
 import Paginator from '../../components/paginator/paginator'
-import Search from '../../components/search/search'
 import PanelTitle from '../../components/panel/panel-title'
 
 import querystring from 'querystring';
@@ -116,7 +115,6 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
       />
 
       <div className="body">
-        {/*<Search/>*/}
         <Table
           table={table}
           body={body}

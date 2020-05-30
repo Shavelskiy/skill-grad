@@ -1,9 +1,11 @@
-import React from 'react';
-import css from './inputs.scss';
+import React from 'react'
+
+import css from './inputs.scss?module'
+
 
 export function TextInput({label, value, setValue}) {
   return (
-    <div className="input">
+    <div className={css.input}>
       <label>{label}</label>
       <input
         type="text"
@@ -11,12 +13,12 @@ export function TextInput({label, value, setValue}) {
         onChange={(event) => setValue(event.target.value)}
       />
     </div>
-  );
+  )
 }
 
 export function NumberInput({label, value, setValue}) {
   return (
-    <div className="input">
+    <div className={css.input}>
       <label>{label}</label>
       <input
         type="number"
@@ -24,12 +26,12 @@ export function NumberInput({label, value, setValue}) {
         onChange={(event) => setValue(event.target.value)}
       />
     </div>
-  );
+  )
 }
 
 export function SaveButton({handler, disable}) {
   return (
-    <div className="save-btn">
+    <div className={css.saveBtn}>
       <button
         className="btn success"
         disabled={disable}
@@ -38,5 +40,5 @@ export function SaveButton({handler, disable}) {
         Сохранить
       </button>
     </div>
-  );
+  )
 }

@@ -1,13 +1,16 @@
-import React from 'react';
-import css from './header.scss';
-import ProfileMenu from './profile-menu';
+import React from 'react'
+
+import ProfileMenu from './profile-menu'
+
+import css from './header.scss?module'
+
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className={css.header}>
       <ProfileMenu/>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,15 +1,18 @@
-import React from 'react';
-import css from './toggler.scss';
+import React from 'react'
+
+import css from './toggler.scss?module'
+import cx from 'classnames'
+
 
 const Toggler = ({active, click}) => {
   return (
     <button
-      className={`toggler ${active ? 'active' : ''}`}
+      className={cx(css.toggler, {[css.active]: active})}
       onClick={() => click()}
     >
       <span></span>
     </button>
-  );
-};
+  )
+}
 
-export default Toggler;
+export default Toggler

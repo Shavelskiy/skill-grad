@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Item, EmptyItem, Arrow } from './items'
 
-import css from './paginator.scss'
+import css from './paginator.scss?module'
 
 
 const Paginator = ({currentPage, totalPages, click}) => {
@@ -97,7 +97,7 @@ const Paginator = ({currentPage, totalPages, click}) => {
   )
 
   return (
-    <ul className="pagination">
+    <ul className={css.pagination}>
       {items}
     </ul>
   )

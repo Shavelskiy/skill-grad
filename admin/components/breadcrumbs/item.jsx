@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import css from './item.scss?module'
+import cx from 'classnames'
+
 
 const BreadcrumbItem = ({item}) => {
   const renderContent = () => {
@@ -12,7 +15,7 @@ const BreadcrumbItem = ({item}) => {
   }
 
   return (
-    <li className={`item ${(item.link === null) ? 'active' : ''}`}>
+    <li className={cx(css.item, {[css.active]: item.link === null})}>
       {renderContent()}
     </li>
   )

@@ -8,7 +8,8 @@ import { hideLoader, setCurrentUser, setTitle } from '../../redux/actions'
 import axios from 'axios'
 import { LOGIN_URL } from '../../utils/api/endpoints'
 
-import css from './login.scss'
+import css from './login.scss?module'
+import cx from 'classnames'
 
 
 const Login = () => {
@@ -54,16 +55,16 @@ const Login = () => {
   }
 
   return (
-    <div className="login-page">
-      <div className={`login-container ${lock ? 'lock' : ''}`}>
-        <div className="title">
+    <div className={css.page}>
+      <div className={cx(css.container, {[css.lock]: lock})}>
+        <div className={css.title}>
           <h3>Авторизация</h3>
         </div>
-        <div className="form">
-          <div className={`error ${(error !== null) ? 'active' : ''}`}>
+        <div className={css.form}>
+          <div className={cx(css.error, {[css.active]: error !== null})}>
             <span>{error}</span>
           </div>
-          <div className="group">
+          <div className={css.group}>
             <input
               type="text"
               placeholder="Логин"
@@ -72,7 +73,7 @@ const Login = () => {
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
-          <div className="group">
+          <div className={css.group}>
             <input
               type="password"
               placeholder="Пароль"
@@ -82,7 +83,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="actions">
+          <div className={css.actions}>
             <button
               onClick={() => loginAction()}
               disabled={lock}

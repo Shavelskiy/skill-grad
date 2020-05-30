@@ -1,9 +1,3 @@
-table {
-  border-collapse: collapse;
-  font-size: 13px;
-  font-weight: 300;
-}
-
 .table {
   width: 100%;
   margin-bottom: 1rem;
@@ -15,83 +9,9 @@ table {
     opacity: 0.5;
   }
 
-  .numbering {
-    width: 1px;
-    color: #212529;
-    background-color: rgba(0, 0, 0, 0.075);
-    font-size: 11px;
-    opacity: 0.6;
-  }
-
-  .actions {
-    width: 1%;
-    min-width: 118px;
-
-    .wrap {
-      display: flex;
-
-      i {
-        color: #5d78ff;
-      }
-
-      .item {
-        margin-right: 10px;
-      }
-    }
-  }
-
-  i {
-    float: right;
-  }
-
   & th, & td {
     padding: .75rem;
     vertical-align: top;
     border: 1px solid #dee2e6;
-  }
-
-  & thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #ebedf2;
-    position: relative;
-
-    &.orderable {
-      cursor: pointer;
-
-      &::before, &::after {
-        bottom: .75rem;
-        content: "\2191";
-        position: absolute;
-        display: block;
-        opacity: 0.3;
-      }
-
-      &::before {
-        right: 1em;
-        content: "\2191";
-      }
-
-      &::after {
-        right: 0.5em;
-        content: "\2193";
-      }
-
-      &.asc::before {
-        opacity: 1;
-      }
-
-      &.desc::after {
-        opacity: 1;
-      }
-    }
-  }
-
-  & tbody + tbody {
-    border-top: 2px solid #dee2e6;
-  }
-
-  & tbody tr:hover {
-    color: #212529;
-    background-color: rgb(250, 251, 252);
   }
 }

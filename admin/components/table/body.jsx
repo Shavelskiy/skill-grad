@@ -1,32 +1,11 @@
 import React from 'react'
-import ActionItem from './action-item'
+
+import TableActions from './actions'
+
+import css from './body.scss?module'
+
 
 const TableBody = ({body, table, actions, reload}) => {
-  const renderActions = (item) => {
-    if (actions.length < 1) {
-      return <></>
-    }
-
-    return (
-      <td className="actions">
-        <div className="wrap">
-          {
-            actions.map((action, key) => {
-              return (
-                <ActionItem
-                  key={key}
-                  action={action}
-                  item={item}
-                  reload={reload}
-                />
-              )
-            })
-          }
-        </div>
-      </td>
-    )
-  }
-
   return (
     <tbody>
     {
@@ -41,9 +20,13 @@ const TableBody = ({body, table, actions, reload}) => {
 
         return (
           <tr key={key}>
-            <td className="numbering">{key + 1}</td>
+            <td className={css.numbering}>{key + 1}</td>
             {row}
-            {renderActions(bodyItem)}
+            <TableActions
+              actions={actions}
+              item={bodyItem}
+              reload={reload}
+            />
           </tr>
         )
       })

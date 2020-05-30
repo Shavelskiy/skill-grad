@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { LOGIN } from '../../utils/routes'
+import { Link, useHistory, useLocation } from 'react-router-dom'
+import { INDEX, LOGIN } from '../../utils/routes'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUser, setRedirectLink } from '../../redux/actions'
@@ -8,7 +8,8 @@ import { setCurrentUser, setRedirectLink } from '../../redux/actions'
 import axios from 'axios'
 import { LOGOUT_URL } from '../../utils/api/endpoints'
 
-import css from './profile-menu.scss'
+import css from './profile-menu.scss?module'
+import cx from 'classnames'
 
 
 const ProfileMenu = () => {
@@ -52,21 +53,21 @@ const ProfileMenu = () => {
   }
 
   return (
-    <div className="profile-container" ref={ref}>
-      <div className="user-profile" onClick={() => setHideMenu(!hideMenu)}>
+    <div className={css.container} ref={ref}>
+      <div className={css.userProfile} onClick={() => setHideMenu(!hideMenu)}>
         <span>{currentUser.username}</span>
       </div>
 
-      <div className={`user-profile-card ${hideMenu ? 'hidden' : ''}`}>
+      <div className={cx(css.card, {[css.hidden]: hideMenu})}>
         <ul>
-          <li className="list">
-            <a href="/admin">
+          <li className={css.list}>
+            <Link to={INDEX}>
               <i className="fas fa-user"></i>
               <span>Редактировать профиль</span>
-            </a>
+            </Link>
           </li>
-          <li className="line"></li>
-          <li className="logout">
+          <li className={css.line}></li>
+          <li className={css.logout}>
             <button
               onClick={() => logout()}
             >

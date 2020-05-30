@@ -40,6 +40,9 @@ Encore
     config.useBuiltIns = 'usage';
     config.corejs = 3;
   })
+  .configureCssLoader((options) => {
+    options.camelCase = true;
+  })
 
   .enableVueLoader()
   .enableReactPreset()

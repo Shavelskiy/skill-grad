@@ -1,12 +1,23 @@
-.user-profile {
-  padding: 13px;
-  border-radius: 200px;
+.container {
+  display: flex;
+  align-items: center;
+  color: #6c7293;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: Poppins, Helvetica, sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
 
-  &:hover {
-    background-color: #f0f3ff;
+  .user-profile {
+    padding: 13px;
+    border-radius: 200px;
+
+    &:hover {
+      background-color: #f0f3ff;
+    }
   }
 
-  &-card {
+  .card {
     position: absolute;
     top: 74px;
     background-color: #fff;
@@ -89,15 +100,4 @@
       visibility: hidden;
     }
   }
-}
-
-.profile-container {
-  display: flex;
-  align-items: center;
-  color: #6c7293;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: Poppins, Helvetica, sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
 }

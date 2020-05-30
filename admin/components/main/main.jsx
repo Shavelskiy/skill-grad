@@ -1,28 +1,30 @@
 import React, { useState } from 'react'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import PageSwitcher from '../../pages/page-switcher'
 import Sidebar from './../sidebar/sidebar'
 import Header from './../header/header'
 import Preloader from './../preloader/preloader'
 
-import './main.scss'
+import css from './main.scss?module'
+import cx from 'classnames'
+
 
 const Main = () => {
   const [sidebarOpened, setSidebarOpened] = useState(true)
   const loading = useSelector(state => state.loading)
 
   return (
-    <div className={`main ${!sidebarOpened ? 'active' : ''}`}>
+    <div className={css.main}>
       <Sidebar
         toggle={() => setSidebarOpened(!sidebarOpened)}
         opened={sidebarOpened}
       />
-      <div className="main-content">
+      <div className={cx(css.container, {[css.active]: !sidebarOpened})}>
         <Header/>
         <Preloader active={loading}/>
-        <PageSwitcher/>
+        <PageSwitcher active={!loading}/>
       </div>
     </div>
   )

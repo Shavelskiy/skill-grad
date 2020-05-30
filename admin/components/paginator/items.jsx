@@ -1,9 +1,13 @@
 import React from 'react'
 
+import css from './items.scss?module'
+import cx from 'classnames'
+
+
 export const Item = ({active, page, click}) => {
   return (
     <li
-      className={`link ${active ? 'active' : ''}`}
+      className={cx(css.link, {[css.active]: active})}
       onClick={() => click(page)}
     >
       <span>{page}</span>
@@ -13,7 +17,7 @@ export const Item = ({active, page, click}) => {
 
 export const EmptyItem = () => {
   return (
-    <li className="link">
+    <li className={css.link}>
       <span>...</span>
     </li>
   )
@@ -37,7 +41,7 @@ export const Arrow = ({left, click, active, page}) => {
 
   return (
     <li
-      className={`link ${!active ? 'disabled' : ''}`}
+      className={cx(css.link, {[css.disabled]: !active})}
       onClick={() => onClick()}
     >
       {arrow}

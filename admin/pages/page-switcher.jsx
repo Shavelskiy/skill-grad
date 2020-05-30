@@ -14,15 +14,15 @@ import NotFoundPage from '../pages/not-found/not-found'
 import TagUpdate from './tags/update'
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs';
 
-import css from './page-switcher.scss'
+import css from './page-switcher.scss?module'
+import cx from 'classnames'
 
 
-const PageSwitcher = () => {
-  const loading = useSelector(state => state.loading)
+const PageSwitcher = ({active}) => {
   const breadcrumbs = useSelector(state => state.breadcrumbs)
 
   return (
-    <div className={`page ${loading ? 'hidden' : ''}`}>
+    <div className={cx(css.page, {[css.hidden]: !active})}>
       <Breadcrumbs items={breadcrumbs}/>
 
       <Switch>

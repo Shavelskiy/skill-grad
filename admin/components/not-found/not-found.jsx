@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './not-found.scss'
+import css from './not-found.scss?module'
 
 const NotFound = ({message = ''}) => {
   const msg = message ? message : 'Not found 404!!!'
