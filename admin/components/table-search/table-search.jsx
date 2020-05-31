@@ -4,14 +4,18 @@ import SerachItem from './inputs'
 
 
 const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
-  const [search, setSearch] = useState({
-    query: tableSearch,
-    isNew: false,
-    submit: false,
-  })
+  const [search, setSearch] = useState(null)
 
   useEffect(() => {
-    if (!search.submit || !search.isNew) {
+    setSearch({
+      query: tableSearch,
+      isNew: false,
+      submit: false,
+    })
+  }, [tableSearch])
+
+  useEffect(() => {
+    if (search === null || !search.submit || !search.isNew) {
       return
     }
 
@@ -19,7 +23,7 @@ const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
     changeSearch(search.query)
   }, [search])
 
-  const changeValue = (submit, field = null , value = null) => {
+  const changeValue = (submit, field = null, value = null) => {
     let newQuery = search.query
     let isNew = search.isNew
 
@@ -50,7 +54,7 @@ const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
               key={key}
               options={item.search}
               field={item.name}
-              search={search.query}
+              search={(search !== null) ? search.query : {}}
               changeSearch={changeValue}
             />
           )

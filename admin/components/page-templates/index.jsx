@@ -105,7 +105,7 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
       return
     }
 
-    setQuery({...query, search: {}})
+    setQuery({...query, search: {}, order: {}})
   }
 
   return (
