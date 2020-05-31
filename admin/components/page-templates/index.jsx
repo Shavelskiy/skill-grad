@@ -9,31 +9,14 @@ import axios from 'axios'
 import Table from '../../components/table/table'
 import Paginator from '../../components/paginator/paginator'
 import Portlet from '../portlet/portlet'
+import Button from '../ui/button'
+import PageCountSelect from './page-count-select'
 
 import querystring from 'querystring';
+import { getInitStateFromUrl, DEFAULT_PAGE_ITEMS } from './helpers'
 
+import css from './index.scss?module'
 
-const getInitStateFromUrl = (query) => {
-  let initState = {
-    page: 1,
-    order: {}
-  }
-
-  try {
-    const queryParams = querystring.parse(query)
-
-    if (typeof queryParams.page !== 'undefined') {
-      initState.page = queryParams.page
-    }
-
-    if (typeof queryParams.order !== 'undefined') {
-      initState.order = JSON.parse(queryParams.order)
-    }
-  } catch (error) {
-  }
-
-  return initState
-}
 
 const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLink}) => {
   const dispatch = useDispatch()
@@ -46,8 +29,10 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
   const [paginatorRequest, setPaginatorRequest] = useState(null)
   const [disabledTable, setDisabledTable] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
+  const [pageItemCount, setPageItemCount] = useState(initState.pageItemCount)
   const [currentPage, setCurrentPage] = useState(initState.page)
   const [order, setOrder] = useState(initState.order)
+  const [search, setSearch] = useState(initState.search)
   const [reloadTable, setReloadTable] = useState(true)
 
   useEffect(() => {
@@ -66,9 +51,22 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
       setPaginatorRequest({cancel: axiosSource.cancel})
       setDisabledTable(true)
 
-      const params = {
-        page: currentPage,
-        order: JSON.stringify(order),
+      const params = {}
+
+      if (currentPage !== 1) {
+        params.page = currentPage
+      }
+
+      if (JSON.stringify(order) !== JSON.stringify({})) {
+        params.order = JSON.stringify(order)
+      }
+
+      if (JSON.stringify(search) !== JSON.stringify({})) {
+        params.search = JSON.stringify(search)
+      }
+
+      if (pageItemCount !== DEFAULT_PAGE_ITEMS) {
+        params.pageItemCount = pageItemCount
       }
 
       history.push({
@@ -85,37 +83,24 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
             return
           }
 
-          if (data.items.length > 0) {
-            setBody(data.items)
-            setTotalPages(data.total_pages)
-            setCurrentPage(data.current_page)
-            setDisabledTable(false)
-          } else {
-            setCurrentPage(1)
-          }
+          setBody(data.items)
+          setTotalPages(data.total_pages)
+          setCurrentPage(data.current_page)
+          setDisabledTable(false)
         })
     }
     loadItems()
 
     return () => mounted = false
-  }, [currentPage, order, reloadTable])
+  }, [currentPage, order, pageItemCount, reloadTable])
 
-  const changePage = (page) => {
-    if (page === currentPage) {
+  const clearSerach = () => {
+    if (JSON.stringify(search) === JSON.stringify({})) {
       return
     }
 
-    setCurrentPage(page)
-  }
-
-  const changeOrder = (field) => {
-    if (order[field] === 'desc') {
-      setOrder({})
-    } else if (order[field] === 'asc') {
-      setOrder({[field]: 'desc'})
-    } else {
-      setOrder({[field]: 'asc'})
-    }
+    setSearch({})
+    setReloadTable(!reloadTable)
   }
 
   return (
@@ -125,19 +110,31 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
       withButton={canCreate}
       buttonLink={createLink}
     >
+      <div className={css.settingsWrap}>
+        <PageCountSelect value={pageItemCount} setValue={setPageItemCount}/>
+        <Button
+          text="очистить поиск"
+          primary={true}
+          click={() => clearSerach()}
+        />
+      </div>
       <Table
         table={table}
+        disabled={disabledTable}
         body={body}
         order={order}
-        reload={() => setReloadTable(!reloadTable)}
-        disabled={disabledTable}
-        changeOrder={(propName) => changeOrder(propName)}
+        search={search}
         actions={actions}
+        reload={() => setReloadTable(!reloadTable)}
+        changeSearch={(search) => setSearch(search)}
+        changeOrder={(order) => setOrder(order)}
       />
       <Paginator
         totalPages={totalPages}
         currentPage={currentPage}
-        click={(page) => changePage(page)}
+        click={(page) => {
+          (page !== currentPage) ? setCurrentPage(page) : {}
+        }}
       />
     </Portlet>
   )

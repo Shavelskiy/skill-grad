@@ -25,7 +25,7 @@ class TagRepository extends ServiceEntityRepository
      * @param int $pageItems
      * @return PaginatorResult
      */
-    public function getPaginatorItems(int $page, ?array $order, int $pageItems = 5): PaginatorResult
+    public function getPaginatorItems(int $page, ?array $order, int $pageItems): PaginatorResult
     {
         $query = $this->createQueryBuilder('t');
 

@@ -16,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TagController extends AbstractController
 {
+    protected const DEFAULT_PAGE_ITEMS = 10;
+
     protected TagRepository $tagRepository;
 
     public function __construct(
@@ -33,7 +35,7 @@ class TagController extends AbstractController
         $order = json_decode($request->get('order', ''), true);
 
         $paginator = $this->tagRepository
-            ->getPaginatorItems($page, is_array($order) ? $order : null);
+            ->getPaginatorItems($page, is_array($order) ? $order : null, self::DEFAULT_PAGE_ITEMS);
 
         $items = [];
 

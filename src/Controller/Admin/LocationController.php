@@ -22,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class LocationController extends AbstractController
 {
-    protected const DEFAULT_PAGE_ITEMS = 5;
+    protected const DEFAULT_PAGE_ITEMS = 10;
 
     protected LocationRepository $locationRepository;
     protected TranslatorInterface $translator;
@@ -49,9 +49,15 @@ class LocationController extends AbstractController
     {
         $page = (int)$request->get('page', 1);
         $order = json_decode($request->get('order', ''), true);
+        $search = json_decode($request->get('search', ''), true);
+        $pageItemCount = (int)$request->get('pageItemCount', 0);
+
+        if ($pageItemCount < 1) {
+            $pageItemCount = self::DEFAULT_PAGE_ITEMS;
+        }
 
         $paginator = $this->locationRepository
-            ->getPaginatorLocations($page, is_array($order) ? $order : null);
+            ->getPaginatorLocations($page, is_array($order) ? $order : null, $pageItemCount, is_array($search) ? $search : null);
 
         $items = [];
 

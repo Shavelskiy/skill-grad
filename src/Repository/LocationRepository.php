@@ -71,21 +71,42 @@ class LocationRepository extends ServiceEntityRepository
      * @param int $pageItems
      * @return PaginatorResult
      */
-    public function getPaginatorLocations(int $page, ?array $order, int $pageItems = 5): PaginatorResult
+    public function getPaginatorLocations(int $page, ?array $order, int $pageItems, ?array $serach): PaginatorResult
     {
         $query = $this->createQueryBuilder('l');
 
-        if ($order !== null) {
-            foreach ($order as $field => $order) {
-                if (!in_array($field, self::ORDABLE_FIELDS, true)) {
-                    continue;
-                }
+        if (!empty($order)) {
+            $orderField = array_key_first($order);
 
-                if ($order === null || !in_array($order, ['asc', 'desc'], true)) {
-                    continue;
-                }
+            if (in_array($orderField, self::ORDABLE_FIELDS, true)) {
+                $orderType = $order[$orderField];
 
-                $query->addOrderBy("l.$field", $order);
+                $query->addOrderBy("l.$orderField", ($orderType === 'asc') ? 'asc' : 'desc');
+            }
+        }
+
+        if (!empty($serach)) {
+            foreach ($serach as $field => $value) {
+                switch ($field) {
+                    case 'id':
+                        $query
+                            ->andWhere('l.id = :id')
+                            ->setParameter('id', (int)$value);
+                        break;
+                    case 'name':
+                        if (empty($value)) {
+                            continue;
+                        }
+                        $query
+                            ->andWhere('upper(l.name) like :name')
+                            ->setParameter('name', '%' . mb_strtoupper($value) . '%');
+                        break;
+                    case 'sort':
+                        $query
+                            ->andWhere('l.sort = :sort')
+                            ->setParameter('sort', (int)$value);
+                        break;
+                }
             }
         }
 

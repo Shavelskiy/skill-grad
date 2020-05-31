@@ -1,10 +1,20 @@
 import React from 'react'
 
-import css from './head.scss?module'
+import css from './header.scss?module'
 import cn from 'classnames'
 
 
-const TableHeader = ({table, order, changeOrder, hasActions}) => {
+const TableHeader = ({table, order, setOrder, hasActions}) => {
+  const changeOrder = (field) => {
+    if (order[field] === 'desc') {
+      setOrder({})
+    } else if (order[field] === 'asc') {
+      setOrder({[field]: 'desc'})
+    } else {
+      setOrder({[field]: 'asc'})
+    }
+  }
+
   return (
     <thead>
     <tr>
