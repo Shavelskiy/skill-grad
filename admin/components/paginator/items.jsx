@@ -32,19 +32,12 @@ export const Arrow = ({left, click, active, page}) => {
     click(page)
   }
 
-  let arrow = ''
-  if (left) {
-    arrow = (<span>&laquo;</span>)
-  } else {
-    arrow = (<span>&raquo;</span>)
-  }
-
   return (
     <li
       className={cn(css.link, {[css.disabled]: !active})}
       onClick={() => onClick()}
     >
-      {arrow}
+      <span>{ (left) ? (<>&laquo;</>) : (<>&raquo;</>)}</span>
     </li>
   )
 }

@@ -101,6 +101,14 @@ class LocationRepository extends ServiceEntityRepository
                             ->andWhere('upper(l.name) like :name')
                             ->setParameter('name', '%' . mb_strtoupper($value) . '%');
                         break;
+                    case 'type':
+                        if (empty($value) || !in_array($value, Location::TYPES, true)) {
+                            continue;
+                        }
+                        $query
+                            ->andWhere('l.type = :type')
+                            ->setParameter('type', $value);
+                        break;
                     case 'sort':
                         $query
                             ->andWhere('l.sort = :sort')
@@ -111,8 +119,8 @@ class LocationRepository extends ServiceEntityRepository
         }
 
         $query
-            ->addOrderBy('l.sort', 'asc')
-            ->addOrderBy('l.id', 'asc');
+            ->addOrderBy('l.id', 'asc')
+            ->addOrderBy('l.sort', 'asc');
 
         return (new Paginator())
             ->setQuery($query)

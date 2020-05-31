@@ -1,27 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import TableHeader from './header'
-import TableSearch from './search'
+import TableSearch from '../table-search/table-search'
 import TableBody from './body'
 
 import css from './table.scss?module'
 import cn from 'classnames'
 
 
-const Table = ({table, body, order, search, hasActions, actions, disabled, changeSearch, changeOrder, reload}) => {
+const Table = ({table, body, query, actions, disabled, changeSearch, changeOrder, reload}) => {
   return (
     <table className={cn(css.table, {[css.disabled]: disabled})}>
       <TableHeader
         table={table}
-        order={order}
-        changeOrder={changeOrder}
+        order={query.order}
+        setOrder={changeOrder}
         hasActions={actions.length >= 1}
       />
       <TableSearch
         table={table}
-        search={search}
-        reload={reload}
+        tableSearch={query.search}
         changeSearch={changeSearch}
         hasActions={actions.length >= 1}
       />

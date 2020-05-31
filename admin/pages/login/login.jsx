@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { INDEX, LOGIN } from '../../utils/routes'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { hideLoader, setCurrentUser, setTitle } from '../../redux/actions'
+import { setCurrentUser, setTitle } from '../../redux/actions'
 
 import axios from 'axios'
 import { LOGIN_URL } from '../../utils/api/endpoints'

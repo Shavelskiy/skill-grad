@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Select from '../ui/select'
 
 import css from './page-count-select.scss?module'
-
 
 const options = [
   {
@@ -28,15 +27,28 @@ const options = [
   },
 ]
 
+export const DEFAULT_PAGE_ITEMS = 10
+
 const PageCountSelect = ({value, setValue}) => {
+  useEffect(() => {
+    const valueInOptions = options.filter((item) => {
+      return item.value === value
+    }).length > 0
+
+    if (!valueInOptions) {
+      setValue(DEFAULT_PAGE_ITEMS)
+    }
+  }, [])
+
   return (
     <div className={css.select}>
-      <label>На странице</label>
+      <label>На странице:</label>
       <Select
         options={options}
         value={value}
         setValue={setValue}
         small={true}
+        high={false}
       />
     </div>
   )

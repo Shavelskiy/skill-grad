@@ -1,6 +1,7 @@
 import querystring from 'querystring'
 
-export const DEFAULT_PAGE_ITEMS = 10
+import { DEFAULT_PAGE_ITEMS } from './page-count-select'
+
 
 export const getInitStateFromUrl = (query) => {
   let initState = {

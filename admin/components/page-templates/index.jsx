@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setTitle } from '../../redux/actions'
 
 import axios from 'axios'
@@ -10,10 +10,10 @@ import Table from '../../components/table/table'
 import Paginator from '../../components/paginator/paginator'
 import Portlet from '../portlet/portlet'
 import Button from '../ui/button'
-import PageCountSelect from './page-count-select'
+import PageCountSelect, { DEFAULT_PAGE_ITEMS } from './page-count-select'
 
 import querystring from 'querystring';
-import { getInitStateFromUrl, DEFAULT_PAGE_ITEMS } from './helpers'
+import { getInitStateFromUrl } from './helpers'
 
 import css from './index.scss?module'
 
@@ -28,11 +28,17 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
   const [body, setBody] = useState([])
   const [paginatorRequest, setPaginatorRequest] = useState(null)
   const [disabledTable, setDisabledTable] = useState(false)
+
   const [totalPages, setTotalPages] = useState(0)
-  const [pageItemCount, setPageItemCount] = useState(initState.pageItemCount)
   const [currentPage, setCurrentPage] = useState(initState.page)
-  const [order, setOrder] = useState(initState.order)
-  const [search, setSearch] = useState(initState.search)
+
+  const [query, setQuery] = useState({
+    pageItemCount: initState.pageItemCount,
+    currentPage: initState.page,
+    order: initState.order,
+    search: initState.search
+  })
+
   const [reloadTable, setReloadTable] = useState(true)
 
   useEffect(() => {
@@ -53,20 +59,20 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
 
       const params = {}
 
-      if (currentPage !== 1) {
-        params.page = currentPage
+      if (query.currentPage !== 1) {
+        params.page = query.currentPage
       }
 
-      if (JSON.stringify(order) !== JSON.stringify({})) {
-        params.order = JSON.stringify(order)
+      if (JSON.stringify(query.order) !== JSON.stringify({})) {
+        params.order = JSON.stringify(query.order)
       }
 
-      if (JSON.stringify(search) !== JSON.stringify({})) {
-        params.search = JSON.stringify(search)
+      if (JSON.stringify(query.search) !== JSON.stringify({})) {
+        params.search = JSON.stringify(query.search)
       }
 
-      if (pageItemCount !== DEFAULT_PAGE_ITEMS) {
-        params.pageItemCount = pageItemCount
+      if (query.pageItemCount !== DEFAULT_PAGE_ITEMS) {
+        params.pageItemCount = query.pageItemCount
       }
 
       history.push({
@@ -92,15 +98,14 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
     loadItems()
 
     return () => mounted = false
-  }, [currentPage, order, pageItemCount, reloadTable])
+  }, [query, currentPage, reloadTable])
 
   const clearSerach = () => {
-    if (JSON.stringify(search) === JSON.stringify({})) {
+    if (JSON.stringify(query.search) === JSON.stringify({})) {
       return
     }
 
-    setSearch({})
-    setReloadTable(!reloadTable)
+    setQuery({...query, search: {}})
   }
 
   return (
@@ -111,7 +116,10 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
       buttonLink={createLink}
     >
       <div className={css.settingsWrap}>
-        <PageCountSelect value={pageItemCount} setValue={setPageItemCount}/>
+        <PageCountSelect
+          value={query.pageItemCount}
+          setValue={(pageItemCount) => setQuery({...query, pageItemCount: pageItemCount, currentPage: 1})}
+        />
         <Button
           text="очистить поиск"
           primary={true}
@@ -122,12 +130,11 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
         table={table}
         disabled={disabledTable}
         body={body}
-        order={order}
-        search={search}
+        query={query}
         actions={actions}
         reload={() => setReloadTable(!reloadTable)}
-        changeSearch={(search) => setSearch(search)}
-        changeOrder={(order) => setOrder(order)}
+        changeSearch={(search) => setQuery({...query, search: search})}
+        changeOrder={(order) => setQuery({...query, order: order})}
       />
       <Paginator
         totalPages={totalPages}

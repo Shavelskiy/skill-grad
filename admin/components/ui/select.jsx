@@ -6,7 +6,7 @@ import cn from 'classnames'
 import arrow from './../../images/select-arrow.svg'
 
 
-const Select = ({options, value, setValue, small = false, medium = false, large = false}) => {
+const Select = ({options, value, setValue, small = false, medium = false, large = false, high = true}) => {
   const ref = useRef()
   const [opened, setOpened] = useState(false)
 
@@ -52,6 +52,7 @@ const Select = ({options, value, setValue, small = false, medium = false, large 
         {[css.small]: small},
         {[css.medium]: medium},
         {[css.large]: large},
+        {[css.high]: high},
       )}
     >
       <div className={css.selectedOption} onClick={() => setOpened(!opened)}>

@@ -1,4 +1,4 @@
-import { NUMBER, STRING } from '../../components/table/searchTypes'
+import { LIST, NUMBER, STRING }from './../../components/table-search/types'
 
 export const table = [
   {
@@ -21,7 +21,26 @@ export const table = [
     title: 'Тип',
     name: 'type',
     search: {
-      enable: false,
+      enable: true,
+      type: LIST,
+      enum: [
+        {
+          title: 'Не выбрано',
+          value: null,
+        },
+        {
+          title: 'Страна',
+          value: 'country',
+        },
+        {
+          title: 'Регион',
+          value: 'region',
+        },
+        {
+          title: 'Город',
+          value: 'city',
+        },
+      ]
     },
   },
   {

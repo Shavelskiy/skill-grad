@@ -1,4 +1,4 @@
-import { NUMBER, STRING } from '../../components/table/searchTypes'
+import { NUMBER, STRING } from '../../components/table-search/types'
 
 export const table = [
   {
