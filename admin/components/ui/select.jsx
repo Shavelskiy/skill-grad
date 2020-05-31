@@ -57,9 +57,7 @@ const Select = ({options, value, setValue, small = false, medium = false, large 
     >
       <div className={css.selectedOption} onClick={() => setOpened(!opened)}>
         <span> {getTitle()}</span>
-        <span className={css.icon}>
-        <img src={arrow}/>
-      </span>
+        <img src={arrow} className={css.icon}/>
       </div>
       <div className={css.optionContainer}>
         <ul>

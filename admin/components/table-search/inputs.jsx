@@ -3,43 +3,41 @@ import React from 'react'
 import Select from '../ui/select'
 
 import { LIST, NUMBER, STRING } from './types'
+import close from './../../images/close.svg'
 
 import css from './inputs.scss?module'
 
 
-const TextInput = ({value, field, changeSearch}) => {
-  return (
-    <input
-      type="text"
-      onBlur={() => changeSearch(true)}
-      onKeyUp={(event) => event.keyCode === 13 ? changeSearch(true) : {}}
-      value={(value !== null) ? value : ''}
-      onChange={(event) => changeSearch(false, field, event.target.value)}
-    />
-  )
-}
-
-const NumberInput = ({value, field, changeSearch}) => {
+const Input = ({value, field, changeSearch, isNumber = false}) => {
   const changeValue = (inputValue) => {
-    if (inputValue > 99999999) {
-      inputValue = 99999999
-    }
+    if (isNumber) {
+      if (inputValue > 99999999) {
+        inputValue = 99999999
+      }
 
-    if (inputValue < -999999) {
-      inputValue = -999999
+      if (inputValue < -999999) {
+        inputValue = -999999
+      }
     }
 
     changeSearch(false, field, inputValue)
   }
-
+  
   return (
-    <input
-      type="number"
-      onBlur={() => changeSearch(true)}
-      onKeyUp={(event) => event.keyCode === 13 ? changeSearch(true) : {}}
-      value={(value !== null) ? value : ''}
-      onChange={(event) => changeValue(event.target.value)}
-    />
+    <div className={css.input}>
+      <input
+        type={isNumber ? 'number' : 'text'}
+        onBlur={() => changeSearch(true)}
+        onKeyUp={(event) => event.keyCode === 13 ? changeSearch(true) : {}}
+        value={(value !== null) ? value : ''}
+        onChange={(event) => changeValue(event.target.value)}
+      />
+      <img
+        src={close}
+        className={css.close}
+        onClick={() => (value !== null && value !== '') ? changeSearch(true, field, null) : {}}
+      />
+    </div>
   )
 }
 
@@ -63,19 +61,13 @@ const SerachItem = ({options, field, search, changeSearch}) => {
   const renderInput = () => {
     switch (options.type) {
       case STRING:
-        return (
-          <TextInput
-            field={field}
-            value={value}
-            changeSearch={changeSearch}
-          />
-        )
       case NUMBER:
         return (
-          <NumberInput
+          <Input
             field={field}
             value={value}
             changeSearch={changeSearch}
+            isNumber={options.type === NUMBER}
           />
         )
       case LIST:
