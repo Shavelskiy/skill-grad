@@ -22,7 +22,7 @@ const Input = ({value, field, changeSearch, isNumber = false}) => {
 
     changeSearch(false, field, inputValue)
   }
-  
+
   return (
     <div className={css.input}>
       <input

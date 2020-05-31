@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import css from './menu-item.scss?module'
 import cn from 'classnames'
@@ -7,13 +7,27 @@ import cn from 'classnames'
 
 const MenuItem = ({rootItem, closed}) => {
   const [collapse, setCollapse] = useState(false)
+  const location = useLocation()
 
-  const items = rootItem.items.map((childItems, key) => {
+  useEffect(() => {
+    const isActive = rootItem.items.filter(item => {
+      return location.pathname === item.link
+    }).length > 0
+
+    if (isActive) {
+      setCollapse(true)
+    }
+  }, [])
+
+  const items = rootItem.items.map((childItem, key) => {
     return (
       <li key={key}>
-        <Link className={css.item} to={childItems.link}>
+        <Link
+          to={childItem.link}
+          className={cn(css.item, {[css.active]: location.pathname === childItem.link})}
+        >
           <i className={css.point}><span></span></i>
-          <span className={css.text}>{childItems.title}</span>
+          <span className={css.text}>{childItem.title}</span>
         </Link>
       </li>
     )
@@ -26,9 +40,9 @@ const MenuItem = ({rootItem, closed}) => {
         <div className={css.text}>
           {rootItem.title}
         </div>
-        <i className={css.arrow}></i>
+        <div className={css.arrow}/>
       </div>
-      <ul className={cn(css.childItems, {[css.active]: collapse},)}>
+      <ul className={cn(css.childItems, {[css.active]: collapse})}>
         {items}
       </ul>
     </li>

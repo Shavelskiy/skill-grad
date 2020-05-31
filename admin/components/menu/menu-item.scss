@@ -27,14 +27,18 @@ li {
     }
 
     .arrow {
-      margin-left: auto;
-      font-size: 0.7rem;
-      line-height: 0;
+      height: 7px;
+      width: 7px;
+      position: absolute;
+      right: 14px;
+      transition: all .15s ease-out;
+      background: url('./../../images/menu-arrow.svg');
+      background-size: 100%;
+    }
 
-      &:before {
-        content: "\25bc";
-        transform: rotateZ(90deg);
-        transition: all 0.3s ease;
+    &.active {
+      .arrow {
+        transform: rotate(90deg);
       }
     }
 
@@ -51,7 +55,8 @@ li {
       }
 
       .arrow {
-        color: #5d78ff;
+        background: url('./../../images/menu-arrow-hover.svg');
+        background-size: 100%;
       }
     }
   }
