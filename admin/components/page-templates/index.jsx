@@ -34,7 +34,6 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
 
   const [query, setQuery] = useState({
     pageItemCount: initState.pageItemCount,
-    currentPage: initState.page,
     order: initState.order,
     search: initState.search
   })
@@ -59,8 +58,8 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
 
       const params = {}
 
-      if (query.currentPage !== 1) {
-        params.page = query.currentPage
+      if (currentPage !== 1) {
+        params.page = currentPage
       }
 
       if (JSON.stringify(query.order) !== JSON.stringify({})) {
