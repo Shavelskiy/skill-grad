@@ -36,17 +36,17 @@ class Program
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      */
-    private $categories;
+    private array $categories;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProgramRequest", mappedBy="program")
      */
-    private $requests;
+    private array $requests;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProgramQuestion", mappedBy="program")
      */
-    private $questions;
+    private array $questions;
 
     /**
      * @ORM\Column(type="datetime")

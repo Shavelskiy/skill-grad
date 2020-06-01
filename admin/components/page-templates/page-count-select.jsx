@@ -45,6 +45,7 @@ const PageCountSelect = ({value, setValue}) => {
       <label>На странице:</label>
       <Select
         options={options}
+        canUncheck={false}
         value={value}
         setValue={setValue}
         small={true}

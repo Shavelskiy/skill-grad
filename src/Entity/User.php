@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -63,31 +61,12 @@ class User implements UserInterface
      */
     private ?string $socialKey;
 
-    /**
-     * @ORM\Column(type="uuid", unique=true, nullable=true)
-     */
-    private ?UuidInterface $chatToken;
-
-    /**
-     * @ORM\Column(type="uuid", unique=true, nullable=true)
-     */
-    private ?UuidInterface $resetPasswordToken;
-
-    /**
-     * @ORM\Column(type="uuid", unique=true, nullable=true)
-     */
-    protected ?UuidInterface $registerToken;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUsername(): string
     {
         return (string)$this->email;
@@ -96,110 +75,65 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->email = $username;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string|null $email
-     *
-     * @return User
-     */
     public function setEmail(?string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string|null $phone
-     *
-     * @return User
-     */
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
-
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @param bool $active
-     *
-     * @return User
-     */
     public function setActive(bool $active): self
     {
         $this->active = $active;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFullName(): ?string
     {
         return $this->fullName;
     }
 
-    /**
-     * @param string|null $fullName
-     *
-     * @return User
-     */
     public function setFullName(?string $fullName): self
     {
         $this->fullName = $fullName;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getPassword(): string
     {
         return (string)$this->password;
@@ -212,67 +146,16 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getChatToken(): UuidInterface
-    {
-        return $this->chatToken;
-    }
-
-    public function generateChatToken(): self
-    {
-        $this->chatToken = Uuid::uuid4();
-        return $this;
-    }
-
-    public function getResetPasswordToken(): UuidInterface
-    {
-        return $this->resetPasswordToken;
-    }
-
-    public function generateResetPasswordToken(): self
-    {
-        $this->resetPasswordToken = Uuid::uuid4();
-        return $this;
-    }
-
-    public function resetResetPasswordToken(): self
-    {
-        $this->resetPasswordToken = null;
-
-        return $this;
-    }
-
-    public function getRegisterToken(): UuidInterface
-    {
-        return $this->registerToken;
-    }
-
-    public function generateRegisterToken(): self
-    {
-        $this->registerToken = Uuid::uuid4();
-        return $this;
-    }
-
-    public function resetRegisterToken(): self
-    {
-        $this->registerToken = null;
-        return $this;
     }
 
     public function getSocialKey(): ?string

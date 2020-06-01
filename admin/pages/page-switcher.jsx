@@ -4,6 +4,7 @@ import { INDEX, LOCATION_INDEX, LOCATION_VIEW, TAG_CREATE, TAG_INDEX, TAG_UPDATE
 
 import { useSelector } from 'react-redux'
 
+import Breadcrumbs from '../components/breadcrumbs/breacrumbs';
 import IndexPage from './index'
 import LocationsIndex from '../pages/locations'
 import LocationView from '../pages/locations/view'
@@ -12,7 +13,6 @@ import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
 import NotFoundPage from '../pages/not-found/not-found'
 import TagUpdate from './tags/update'
-import Breadcrumbs from '../components/breadcrumbs/breacrumbs';
 
 import css from './page-switcher.scss?module'
 import cn from 'classnames'

@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
-use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -75,89 +74,5 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         return $user;
-    }
-
-    /**
-     * @param $token
-     *
-     * @return User
-     */
-    public function findByChatToken($token): User
-    {
-        try {
-            if (empty($token)) {
-                throw new RuntimeException('token is empty');
-            }
-
-            $user = $this->createQueryBuilder('u')
-                ->where('u.chatToken = :chatToken')
-                ->setParameter('chatToken', $token)
-                ->getQuery()
-                ->getResult();
-
-            if (empty($user)) {
-                throw new RuntimeException('user not found');
-            }
-
-            return current($user);
-        } catch (Exception $e) {
-            throw new NotFoundHttpException('Пользователь не найден');
-        }
-    }
-
-    /**
-     * @param $token
-     *
-     * @return User
-     */
-    public function findByResetPasswordToken($token): User
-    {
-        try {
-            if (empty($token)) {
-                throw new RuntimeException('token is empty');
-            }
-
-            $user = $this->createQueryBuilder('u')
-                ->where('u.resetPasswordToken = :resetPasswordToken')
-                ->setParameter('resetPasswordToken', $token)
-                ->getQuery()
-                ->getResult();
-
-            if (empty($user)) {
-                throw new RuntimeException('user not found');
-            }
-
-            return current($user);
-        } catch (Exception $e) {
-            throw new NotFoundHttpException('Пользователь не найден');
-        }
-    }
-
-    /**
-     * @param $token
-     *
-     * @return User
-     */
-    public function findByRegisterToken($token): User
-    {
-        try {
-            if (empty($token)) {
-                throw new RuntimeException('token is empty');
-            }
-
-            $user = $this->createQueryBuilder('u')
-                ->where('u.registerToken = :registerToken')
-                ->setParameter('registerToken', $token)
-                ->getQuery()
-                ->getResult();
-
-            if (empty($user)) {
-                throw new RuntimeException('user not found');
-            }
-
-            return current($user);
-        } catch (Exception $e) {
-            throw new NotFoundHttpException('Пользователь не найден');
-        }
     }
 }

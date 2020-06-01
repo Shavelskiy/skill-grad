@@ -2,7 +2,7 @@
 
 namespace App\EventListener;
 
-use App\Entity\User;
+use App\Entity\UserToken;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -55,13 +55,16 @@ class ConfirmRegisterListener implements EventSubscriberInterface
                 throw new RuntimeException('event not available');
             }
 
-            $user = $this->em->getRepository(User::class)->findByRegisterToken($request->get('token'));
+            /** @var UserToken $userToken */
+            $userToken = $this->em->getRepository(UserToken::class)
+                ->findByTokenAndType($request->get('token'), UserToken::TYPE_REGISTER);
 
-            $user
-                ->setActive(true)
-                ->resetRegisterToken();
+            $user = $userToken->getUser();
+
+            $user->setActive(true);
 
             $this->em->persist($user);
+            $this->em->remove($userToken);
             $this->em->flush();
 
             $token = new PostAuthenticationGuardToken($user, 'main', $user->getRoles());

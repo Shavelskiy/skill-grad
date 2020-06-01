@@ -6,7 +6,7 @@ import cn from 'classnames'
 import arrow from './../../images/select-arrow.svg'
 
 
-const Select = ({options, value, setValue, small = false, medium = false, large = false, high = true}) => {
+const Select = ({options, value, setValue, canUncheck = false, small = false, medium = false, large = false, high = true}) => {
   const ref = useRef()
   const [opened, setOpened] = useState(false)
 
@@ -28,6 +28,9 @@ const Select = ({options, value, setValue, small = false, medium = false, large 
 
   const selectValue = (item) => {
     if (value !== null && value === item.value) {
+      if (!canUncheck) {
+        return
+      }
       setValue(null)
     } else {
       setValue(item.value)

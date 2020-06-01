@@ -5,7 +5,9 @@ namespace App\Messenger;
 use App\Adapter\RedisClient;
 use App\Entity\ChatMessage;
 use App\Entity\User;
+use App\Entity\UserToken;
 use App\Repository\UserRepository;
+use App\Repository\UserTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Ratchet\ConnectionInterface;
@@ -18,16 +20,22 @@ class Chat implements MessageComponentInterface
     protected SplObjectStorage $clients;
     protected EntityManagerInterface $em;
     protected UserRepository $userRepository;
+    protected UserTokenRepository $userTokenRepository;
 
     protected const MSG_INIT = 'init';
     protected const MSG_FOCUS_IN = 'focusIn';
     protected const MSG_FOCUS_OUT = 'focusOut';
     protected const MSG_SEND_MESSAGE = 'sendMessage';
 
-    public function __construct(EntityManagerInterface $em)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        UserRepository $userRepository,
+        UserTokenRepository $userTokenRepository
+    ) {
         $this->clients = new SplObjectStorage();
         $this->em = $em;
+        $this->userRepository = $userRepository;
+        $this->userTokenRepository = $userTokenRepository;
     }
 
     public function onOpen(ConnectionInterface $conn): void
@@ -37,7 +45,7 @@ class Chat implements MessageComponentInterface
 
     /**
      * @param ConnectionInterface $from
-     * @param string              $msgStr
+     * @param string $msgStr
      */
     public function onMessage(ConnectionInterface $from, $msgStr): void
     {
@@ -48,7 +56,8 @@ class Chat implements MessageComponentInterface
         switch ($msg['type']) {
             case self::MSG_INIT:
                 try {
-                    $user = $this->getUserRepository()->findByChatToken($msg['token']);
+                    $chatToken = $this->userTokenRepository->findByTokenAndType($msg['token'], UserToken::TYPE_CHAT);
+                    $user = $chatToken->getUser();
 
                     $idKey = $this->getUserIdKey($user->getId());
                     $pIdKey = $this->getUserPIdKey($from->resourceId);
@@ -202,21 +211,12 @@ class Chat implements MessageComponentInterface
 
     public function getUserById($userId): User
     {
-        $user = $this->getUserRepository()->find($userId);
+        $user = $this->userRepository->find($userId);
 
         if ($user instanceof User) {
             return $user;
         }
 
         throw new RuntimeException('user is not found');
-    }
-
-    protected function getUserRepository(): UserRepository
-    {
-        if (!isset($this->userRepository)) {
-            $this->userRepository = $this->em->getRepository(User::class);
-        }
-
-        return $this->userRepository;
     }
 }

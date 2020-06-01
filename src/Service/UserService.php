@@ -4,7 +4,9 @@ namespace App\Service;
 
 use App\Dto\UpdateUserData;
 use App\Entity\User;
+use App\Entity\UserToken;
 use App\Repository\UserRepository;
+use App\Repository\UserTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,16 +16,19 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
 {
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected UserRepository $userRepository;
+    protected UserTokenRepository $userTokenRepository;
     protected EntityManagerInterface $em;
     protected AuthMailerInterface $authMailer;
 
     public function __construct(
         UserRepository $userRepository,
+        UserTokenRepository $userTokenRepository,
         UserPasswordEncoderInterface $userPasswordEncoder,
         EntityManagerInterface $em,
         AuthMailerInterface $authMailer
     ) {
         $this->userRepository = $userRepository;
+        $this->userTokenRepository = $userTokenRepository;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->em = $em;
         $this->authMailer = $authMailer;
@@ -37,14 +42,14 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         /** @var User $user */
         $user = $this->userRepository->findUserByEmail($email);
 
-        $user->generateResetPasswordToken();
+        $token = (new UserToken(UserToken::TYPE_RESET_PASSWORD))->setUser($user);
 
-        $this->em->persist($user);
+        $this->em->persist($token);
         $this->em->flush();
 
         $this->authMailer->sendResetPasswordEmail(
             $user->getEmail(), 
-            $user->getResetPasswordToken()->getHex()->toString()
+            $token->getToken()->getHex()->toString()
         );
     }
 
@@ -54,14 +59,13 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
      */
     public function resetUserPassword(string $token, string $newPassword): void
     {
-        /** @var User $user */
-        $user = $this->userRepository->findByResetPasswordToken($token);
+        $userToken = $this->userTokenRepository->findByTokenAndType($token, UserToken::TYPE_RESET_PASSWORD);
 
-        $user
-            ->setPassword($this->userPasswordEncoder->encodePassword($user, $newPassword))
-            ->resetResetPasswordToken();
+        $user = $userToken->getUser();
+        $user->setPassword($this->userPasswordEncoder->encodePassword($user, $newPassword));
 
         $this->em->persist($user);
+        $this->em->remove($userToken);
         $this->em->flush();
     }
 
@@ -82,7 +86,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             $user = new User();
             $user->setEmail($email);
         } finally {
-            $user->generateRegisterToken();
+            $registerToken = (new UserToken(UserToken::TYPE_REGISTER))->setUser($user);
             $user->setPassword($this->userPasswordEncoder->encodePassword($user, $password));
 
             if ($isProvider) {
@@ -93,11 +97,12 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         }
 
         $this->em->persist($user);
+        $this->em->persist($registerToken);
         $this->em->flush();
 
         $this->authMailer->sendRegisterEmail(
             $user->getEmail(),
-            $user->getRegisterToken()->getHex()->toString()
+            $registerToken->getToken()->getHex()->toString()
         );
     }
 
