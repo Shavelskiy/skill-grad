@@ -3,7 +3,10 @@
         "@babel/preset-react": "^7.9.4",
         "@fortawesome/fontawesome-free": "^5.13.0",
         "@symfony/webpack-encore": "^0.28.2",
+        "babel-eslint": "^10.0.1",
         "core-js": "^3.0.0",
+        "eslint": "^7.1.0",
+        "eslint-loader": "^2.1.2",
         "node-sass": "^4.13.1",
         "pug": "^2.0.4",
         "pug-plain-loader": "^1.0.0",
@@ -17,7 +20,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
+        "dev-server": "encore dev-server --host 0.0.0.0 --disable-host-check --port 8082",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"

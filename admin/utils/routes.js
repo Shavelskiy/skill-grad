@@ -6,6 +6,8 @@ export const TAG_CREATE = '/tag/create'
 export const TAG_VIEW = '/tag/:id'
 export const TAG_UPDATE = '/tag/update/:id'
 
+export const USER_INDEX = '/user'
+
 export const LOCATION_INDEX = '/location'
 export const LOCATION_CREATE = '/location/create'
 export const LOCATION_VIEW = '/location/:id'

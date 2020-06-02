@@ -1,3 +1,5 @@
+import { LOCATION_INDEX, TAG_INDEX, USER_INDEX } from '../../utils/routes'
+
 export const menuItems = [
   {
     title: 'Блог',
@@ -9,7 +11,7 @@ export const menuItems = [
       },
       {
         title: 'Теги',
-        link: '/tag',
+        link: TAG_INDEX,
       },
       {
         title: 'Рубрики',
@@ -23,7 +25,7 @@ export const menuItems = [
     items: [
       {
         title: 'Все пользователи',
-        link: '/user',
+        link: USER_INDEX,
       },
     ],
   },
@@ -33,7 +35,7 @@ export const menuItems = [
     items: [
       {
         title: 'Список всех местоположений',
-        link: '/location',
+        link: LOCATION_INDEX,
       },
     ],
   },

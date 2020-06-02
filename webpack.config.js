@@ -65,6 +65,8 @@ Encore
     to: 'images/[path][name].[ext]',
     pattern: /\.(png|jpg|jpeg)$/
   })
+
+  .enableEslintLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();

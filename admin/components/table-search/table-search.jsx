@@ -19,6 +19,10 @@ const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
       return
     }
 
+    if (JSON.stringify(search.query) === JSON.stringify(tableSearch)) {
+      // return
+    }
+
     setSearch({...search, isNew: false})
     changeSearch(search.query)
   }, [search])
@@ -29,7 +33,7 @@ const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
 
     if (field !== null) {
       isNew = true
-      if (value !== null && value.length > 0) {
+      if (value !== null && (typeof value === 'boolean' || value.length > 0)) {
         newQuery[field] = value
       } else {
         delete newQuery[field]

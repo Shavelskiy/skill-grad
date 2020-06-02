@@ -47,7 +47,7 @@ const ProfileMenu = () => {
   }
 
   if (currentUser === null) {
-    return <></>;
+    return <></>
   }
 
   return (

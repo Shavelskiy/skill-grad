@@ -84,12 +84,23 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        /** @var User $user */
         $user = $token->getUser();
 
         return new JsonResponse(['current_user' => [
             'id' => $user->getId(),
-            'username' => !empty($user->getFullName()) ? $user->getFullName() : $user->getUsername(),
+            'username' => $this->getUserUsername($user),
         ]]);
+    }
+
+    protected function getUserUsername(User $user): string
+    {
+        $userInfo = $user->getUserInfo();
+        if ($userInfo !== null && $userInfo->getFullName() !== null && !empty($userInfo->getFullName())) {
+            return $userInfo->getFullName();
+        }
+
+        return  $user->getUsername();
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

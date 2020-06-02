@@ -7,12 +7,10 @@ use Doctrine\ORM\QueryBuilder;
 
 class Paginator
 {
-    private const DEFAULT_PAGE_ITEMS = 10;
-
     private QueryBuilder $query;
     private QueryBuilder $countQuery;
     private int $page = 1;
-    private int $pageItems = self::DEFAULT_PAGE_ITEMS;
+    private int $pageItems;
     private PaginatorResult $result;
 
     public function setQuery(QueryBuilder $query): self
@@ -43,23 +41,17 @@ class Paginator
         return $this->pageItems;
     }
 
-    public function getCountField(): string
-    {
-        return $this->countField;
-    }
-
-    public function setCountField(string $countField): self
-    {
-        $this->countField = $countField;
-        return $this;
-    }
-
     public function setPageItems(int $pageItems): self
     {
         $this->pageItems = $pageItems;
         return $this;
     }
 
+    /**
+     * @return PaginatorResult
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getResult(): PaginatorResult
     {
         if (!isset($this->result)) {

@@ -11,4 +11,22 @@ tbody {
     font-size: 11px;
     opacity: 0.6;
   }
+
+  .boolean {
+    text-align: center;
+    span {
+      padding: 5px 15px;
+      border-radius: 100px;
+      color: #fafbfc;
+      font-weight: 400;
+
+      &.true {
+        background-color: #1dc9b7;
+      }
+
+      &.false {
+        background-color: #fd397a;
+      }
+    }
+  }
 }

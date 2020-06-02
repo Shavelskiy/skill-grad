@@ -11,6 +11,7 @@ const LocationsIndex = () => {
   return (
     <IndexPageTemplate
       title={'Список всех местоположений'}
+      icon={'globe'}
       table={table}
       actions={actions}
       fetchUrl={FETCH_LOCATIONS_URL}

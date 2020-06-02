@@ -12,13 +12,13 @@ import Portlet from '../portlet/portlet'
 import Button from '../ui/button'
 import PageCountSelect, { DEFAULT_PAGE_ITEMS } from './page-count-select'
 
-import querystring from 'querystring';
+import querystring from 'querystring'
 import { getInitStateFromUrl } from './helpers'
 
 import css from './index.scss?module'
 
 
-const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLink}) => {
+const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, createLink}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
@@ -110,7 +110,7 @@ const IndexPageTemplate = ({title, table, actions, fetchUrl, canCreate, createLi
   return (
     <Portlet
       title={title}
-      titleIcon={'tags'}
+      titleIcon={icon}
       withButton={canCreate}
       buttonLink={createLink}
     >

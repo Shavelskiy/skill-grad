@@ -2,7 +2,7 @@ import React from 'react'
 
 import Select from '../ui/select'
 
-import { LIST, NUMBER, STRING } from './types'
+import { BOOL, LIST, NUMBER, STRING } from './types'
 import close from './../../images/close.svg'
 
 import css from './inputs.scss?module'
@@ -41,14 +41,30 @@ const Input = ({value, field, changeSearch, isNumber = false}) => {
   )
 }
 
-const ListInput = ({value, filed, options, changeSearch}) => {
+const ListInput = ({value, field, options, changeSearch}) => {
   return (
     <Select
       options={options.enum}
       value={value}
-      setValue={(inputValue) => changeSearch(true, filed, inputValue)}
+      setValue={(inputValue) => changeSearch(true, field, inputValue)}
     />
-  );
+  )
+}
+
+const BoolInput = ({value, field, changeSearch}) => {
+  const options = [
+    {title: 'Да', value: true},
+    {title: 'Нет', value: false},
+  ]
+
+  return (
+    <Select
+      options={options}
+      value={value}
+      canUncheck={true}
+      setValue={(inputValue) => changeSearch(true, field, inputValue)}
+    />
+  )
 }
 
 const SerachItem = ({options, field, search, changeSearch}) => {
@@ -56,7 +72,7 @@ const SerachItem = ({options, field, search, changeSearch}) => {
     return <th></th>
   }
 
-  const value = (search[field]) ? search[field] : null
+  const value = (typeof search[field] !== 'undefined') ? search[field] : null
 
   const renderInput = () => {
     switch (options.type) {
@@ -73,9 +89,17 @@ const SerachItem = ({options, field, search, changeSearch}) => {
       case LIST:
         return (
           <ListInput
-            filed={field}
+            field={field}
             value={value}
             options={options}
+            changeSearch={changeSearch}
+          />
+        )
+      case BOOL:
+        return (
+          <BoolInput
+            field={field}
+            value={value}
             changeSearch={changeSearch}
           />
         )

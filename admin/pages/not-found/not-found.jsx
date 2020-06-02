@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import NotFound from '../../components/not-found/not-found'
-import { useDispatch } from 'react-redux';
-import { setBreacrumbs, setTitle } from '../../redux/actions';
+import { useDispatch } from 'react-redux'
+import { setBreacrumbs, setTitle } from '../../redux/actions'
 
 const NotFoundPage = (props) => {
   const dispatch = useDispatch()

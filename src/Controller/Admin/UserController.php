@@ -3,10 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Location;
+use App\Entity\User;
+use App\Entity\UserInfo;
 use App\Helpers\SearchHelper;
-use App\Repository\LocationRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,36 +15,34 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/api/admin/location")
+ * @Route("/api/admin/user")
  */
-class LocationController extends AbstractController
+class UserController extends AbstractController
 {
-    protected LocationRepository $locationRepository;
+    protected UserRepository $userRepository;
     protected TranslatorInterface $translator;
 
     public function __construct(
-        LocationRepository $locationRepository,
+        UserRepository $userRepository,
         TranslatorInterface $translator
     ) {
-        $this->locationRepository = $locationRepository;
+        $this->userRepository = $userRepository;
         $this->translator = $translator;
     }
 
     /**
-     * @Route("/", name="admin.location.index", methods={"GET"})
+     * @Route("/", name="admin.user.index", methods={"GET"})
      *
      * @param Request $request
-     *
      * @return Response
-     *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function index(Request $request): Response
     {
-        $searchQuery = SearchHelper::createFromRequest($request, [Location::class]);
+        $searchQuery = SearchHelper::createFromRequest($request, [User::class, UserInfo::class]);
 
-        $paginator = $this->locationRepository->getPaginatorResult($searchQuery);
+        $paginator = $this->userRepository->getPaginatorResult($searchQuery);
 
         $items = [];
         foreach ($paginator->getItems() as $item) {
@@ -64,13 +62,16 @@ class LocationController extends AbstractController
      * @param Location $location
      * @return array
      */
-    protected function prepareItem(Location $location): array
+    protected function prepareItem(User $user): array
     {
+        $userInfo = $user->getUserInfo();
+
         return [
-            'id' => $location->getId(),
-            'name' => $location->getName(),
-            'type' => $this->translator->trans('location.type.' . $location->getType()),
-            'sort' => $location->getSort(),
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'phone' => ($userInfo !== null) ? $userInfo->getPhone() : '',
+            'fullName' => ($userInfo !== null) ? $userInfo->getFullName() : '',
+            'active' => $user->isActive(),
         ];
     }
 }

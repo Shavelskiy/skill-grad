@@ -24,7 +24,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=180)
@@ -32,19 +32,9 @@ class User implements UserInterface
     private ?string $email;
 
     /**
-     * @ORM\Column(type="string", length=11, nullable=true)
-     */
-    private ?string $phone;
-
-    /**
      * @ORM\Column(type="boolean", options={"default": false})
      */
     private bool $active = false;
-
-    /**
-     * @ORM\Column(type="string", length=180, nullable=true)
-     */
-    private ?string $fullName;
 
     /**
      * @ORM\Column(type="json")
@@ -60,6 +50,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $socialKey;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserInfo", mappedBy="user")
+     */
+    private UserInfo $userInfo;
 
 
     public function getId(): ?int
@@ -89,17 +84,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-        return $this;
-    }
-
     public function isActive(): bool
     {
         return $this->active;
@@ -108,17 +92,6 @@ class User implements UserInterface
     public function setActive(bool $active): self
     {
         $this->active = $active;
-        return $this;
-    }
-
-    public function getFullName(): ?string
-    {
-        return $this->fullName;
-    }
-
-    public function setFullName(?string $fullName): self
-    {
-        $this->fullName = $fullName;
         return $this;
     }
 
@@ -142,7 +115,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -150,7 +122,6 @@ class User implements UserInterface
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
-
 
     public function eraseCredentials(): void
     {
@@ -166,6 +137,17 @@ class User implements UserInterface
     public function setSocialKey(?string $socialKey): self
     {
         $this->socialKey = $socialKey;
+        return $this;
+    }
+
+    public function getUserInfo(): ?UserInfo
+    {
+        return $this->userInfo ?? null;
+    }
+
+    public function setUserInfo(UserInfo $userInfo): self
+    {
+        $this->userInfo = $userInfo;
         return $this;
     }
 }
