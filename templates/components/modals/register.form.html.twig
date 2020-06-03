@@ -1,55 +1,48 @@
-<div id="register-role-modal" class="modal">
-  <div class="modal-content">
-    <div class="modal-body">
-      <h6>Выберите тип аккаунта</h6>
-      <div class="modal-form">
-        <div class="modal-form-raw">
-          <button id="register-user-button" type="submit" class="btn btn-blue">Обучающийся</button>
+<div class="modal modal_4" id="register-role-modal">
+  <div class="modal-dialog">
+    <button class="close-modal"></button>
+    <div class="modal-content">
+      <div class="modal-content__title"> Выберите тип аккаунта</div>
+      <div class="modal-content__fields">
+        <div class="modal-content__field">
+          <input id="register-user-button" class="btn__style-blue" type="submit" value="Обучающийся"/>
         </div>
-        <div class="modal-form-raw">
-          <button id="register-provider-button" type="submit" class="btn btn-red">Образовательное учреждение</button>
+        <div class="modal-content__field">
+          <input id="register-provider-button" class="btn__style" type="submit" value="Образовательное учреждение"/>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div id="register-modal" class="modal register">
-  <div class="modal-content">
-    <div class="modal-body">
-      <h6>Регистрация на сайте</h6>
+<div class="modal" id="register-modal">
+  <div class="modal-dialog">
+    <button class="close-modal"></button>
+    <div class="modal-content">
+      <div class="modal-content__title"> Регистрация на сайте</div>
       <form method="post" action="{{ path('ajax.auth.register') }}" class="modal-form">
-        <span class="error"></span>
-        <div class="modal-form-raw">
-          <input type="email" value="" name="email" id="register-email" required autofocus placeholder="E-mail">
+        <div class="modal-content__fields">
+          <div class="modal-content__field">
+            <input type="email" name="email" placeholder="E-mail" required="required"/>
+          </div>
+          <div class="modal-content__field">
+            <input type="password" name="password" placeholder="Пароль" required="required"/>
+          </div>
+          <div class="modal-content__field">
+            <input type="password" name="confirm-password" placeholder="Повторите пароль" required="required"/>
+          </div>
+          <div class="modal-content__field">
+            <input class="btn__style" type="submit" value="Зарегистрироваться"/>
+          </div>
+          <div class="modal-content__field modal-content__descr">Нажимая на кнопку «Зарегистрироваться» Вы
+            соглашаетесь с « <a href="#">Пользовательским соглашением</a>»,«<a href="#">Политикой платных услуг</a>»,и
+            обработкой персональных данных в соответствии c «<a href="#">Политикой конфиденциальности</a>»
+          </div>
         </div>
-        <div class="modal-form-raw">
-          <input type="password" name="password" minlength="6" id="register-password" required placeholder="Пароль">
-        </div>
-        <div class="modal-form-raw">
-          <input type="password" name="confirm-password" id="register-confirm-password" required placeholder="Повторите пароль">
-        </div>
-        <button type="submit" class="btn btn-red">Зарегистрироваться</button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
         <input type="hidden" name="role">
       </form>
-      <div class="register-text-container">
-        <span>
-          Нажимая на кнопку "Зарегистрироваться"
-          Вы соглашаетесь в "<a href="/">Пользовательским соглашением</a>",
-          "<a href="/">Политикой платных услуг</a>" и обработкой персональных данных
-          в соответствии с "<a href="/">Политикой конфиденциальности</a>"
-        </span>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <span>Регистрация через социальные сети:</span>
-      <div class="register-social">
-        {% for key, link in socialLinks %}
-          <a href="{{ link }}">{{ key }}</a>
-        {% endfor %}
-      </div>
+      {% include 'components/modals/social.auth.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
     </div>
   </div>
 </div>
-

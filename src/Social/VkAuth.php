@@ -26,7 +26,7 @@ class VkAuth implements SocialAuthInterface
         $this->secretKey = '0raiFV7o7ZRetkxUnzWJ';
     }
 
-    public function getAuthLink(bool $create = false): string
+    public function getAuthLink(): string
     {
         $params = [
             'client_id' => $this->clientId,
@@ -35,11 +35,15 @@ class VkAuth implements SocialAuthInterface
             'response_type' => 'code',
             'state' => serialize([
                 'socialKey' => self::SOCIAL_KEY,
-                'create' => $create,
             ]),
         ];
 
         return self::AUTH_URL . http_build_query($params);
+    }
+
+    public function getAlias(): string
+    {
+        return 'vk';
     }
 
     public function support(Request $request): bool
@@ -55,11 +59,8 @@ class VkAuth implements SocialAuthInterface
 
     public function getCredentials(Request $request): array
     {
-        $state = unserialize($request->get('state'));
-
         return [
             'code' => $request->query->get('code'),
-            'create' => ($state !== false && ((bool)$state['create'])),
             'socialKey' => self::SOCIAL_KEY,
         ];
     }

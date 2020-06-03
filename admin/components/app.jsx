@@ -3,7 +3,7 @@ import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import { INDEX, LOGIN } from '../utils/routes'
 
 import { useDispatch } from 'react-redux'
-import { hideLoader, setTitle, showLoader, setCurrentUser, setRedirectLink } from '../redux/actions'
+import { setCurrentUser, setRedirectLink } from '../redux/actions'
 
 import axios from 'axios'
 import { INFO_URL } from '../utils/api/endpoints'

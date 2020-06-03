@@ -1,23 +1,34 @@
-<ul class="">
-    <li class="">
-        <a href="{{ path('site.profile', { path: 'settings' }) }}">Настройки профиля</a>
-    </li>
-    <li class="">
-        <a href="{{ path('site.profile', { path: 'programs' }) }}">Программы обучения</a>
-    </li>
-    <li class="">
-        <a href="{{ path('site.profile', { path: 'publications' }) }}">Публикации</a>
-    </li>
-    <li class="">
-        <a href="{{ path('site.profile', { path: 'messages' }) }}">Сообщения</a>
-    </li>
-    <li class="">
-        <a href="{{ path('site.profile', { path: 'services' }) }}">Платные услуги, документы</a>
-    </li>
-    <li class="">
-        <a href="{{ path('site.profile', { path: 'training' }) }}">Мое обучение</a>
-    </li>
-    <li class="">
-        <a href="{{ path('ajax.auth.logout') }}">Выйти</a>
-    </li>
+<ul class="header-lc__nav">
+  <div class="scrollbar" id="style-1">
+    <div class="force-overflow"></div>
+  </div>
+  <li class="header-lc__nav-item">
+    <a class="header-lc__nav-link header-lc__nav-link1" href="{{ path('site.profile', { path: 'settings' }) }}">
+      Настройки профиля
+    </a>
+  </li>
+  <li class="header-lc__nav-item">
+    <a class="header-lc__nav-link header-lc__nav-link2" href="{{ path('site.profile', { path: 'programs' }) }}">
+      Программы обучения
+    </a>
+  </li>
+  <li class="header-lc__nav-item">
+    <a class="header-lc__nav-link header-lc__nav-link3" href="{{ path('site.profile', { path: 'publications' }) }}">
+      Публикации
+    </a>
+  </li>
+  <li class="header-lc__nav-item">
+    <a class="header-lc__nav-link header-lc__nav-link4" href="{{ path('site.profile', { path: 'messages' }) }}">
+      Сообщения
+    </a>
+    <div class="header-lc__message-count">10</div>
+  </li>
+  <li class="header-lc__nav-item">
+    <a class="header-lc__nav-link header-lc__nav-link5" href="{{ path('site.profile', { path: 'services' }) }}">
+      Платные услуги, документы
+    </a>
+  </li>
+  <li class="header-lc__nav-item">
+    <div class="header-lc__nav-link header-lc__nav-link6 logout-link">Выйти</div>
+  </li>
 </ul>

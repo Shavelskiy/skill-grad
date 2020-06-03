@@ -82,10 +82,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         try {
             $user = $this->userRepository->findUserByEmailAndSocialKey($userEmail, $credentials['socialKey']);
         } catch (Exception $e) {
-            if (!$credentials['create']) {
-                return null;
-            }
-
             $user = $this->registerUserService->createSocialUser($userEmail, $credentials['socialKey']);
         }
 

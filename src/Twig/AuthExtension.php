@@ -20,8 +20,8 @@ class AuthExtension extends AbstractExtension
      *
      * @return array
      */
-    public function getSocialAuthLinks(bool $create = false): array
+    public function getSocialAuthLinks(): array
     {
-        return (new SocialAuthFactory())->getLinks($create);
+        return (new SocialAuthFactory())->getLinks();
     }
 }

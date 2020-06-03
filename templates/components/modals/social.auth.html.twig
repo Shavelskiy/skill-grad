@@ -1,0 +1,10 @@
+<div class="modal-content__field modal-content__body">
+  <div class="modal-content__social-title">Войти через социальные сети:</div>
+  <div class="ul modal-content__social-items">
+    {% for alias, link in socialLinks %}
+      <li class="modal-content__social-item">
+        <a class="modal-content__social-link modal-content__social-{{ alias }}" href="{{ link }}"></a>
+      </li>
+    {% endfor %}
+  </div>
+</div>

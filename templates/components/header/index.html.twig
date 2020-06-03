@@ -1,28 +1,57 @@
-<div class="header-container">
-  <div class="wrap {{ app.user ? 'logged' : '' }}">
-    <div class="auth-forms">
-      <button id="login-modal-button" type="button">Авторизация</button>
-      <button id="register-modal-button" type="button">Регистрация</button>
+{% include 'components/header/modals.html.twig' %}
+<header class="header">
+  <div class="container">
+    <div class="header-wrap {{ app.user ? 'header-autorization' : '' }}">
+      <div class="logo">
+        <img src="/img/LogoSkillGrad-b.svg" alt="logo"/>
+      </div>
+      <div class="logo__mobile">
+        <img src="/img/logo_mobile.png" alt="logo"/>
+      </div>
+      {% include 'components/header/menu.html.twig' %}
 
-      {% include 'components/modals/login.form.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
-      {% include 'components/modals/register.form.html.twig' with { 'socialLinks': getSocialAuthLinks(true) } %}
-      {% include 'components/modals/reset.passorder.html.twig' %}
-      {% include 'components/modals/new.password.html.twig' %}
-    </div>
-    {% include 'components/modals/alert.html.twig' %}
 
-    <div class="profile-info">
-      <span>Добро пожаловать,</span>
-      <span>{{ app.user ? app.user.username : '' }}</span>
-      {% if app.user is defined %}
-        <div class="profile-dropdown ">
+      <div class="header__btns">
+        <div class="location open-modal">
+          <div class="header__btns-link "></div>
+          <span class="location__text">Ваш город:</span>
+          <a class="location-city open-city-selector-modal-btn">Нижний Новгород</a>
+        </div>
+
+
+        <div class="header__btns-item">
+          {% if app.user is not null %}
+            <a class="header__btns-link header__btn-favourite" href="#">
+              <span class="add__favourite">5</span>
+            </a>
+          {% endif %}
+          <a class="header__add-icon header__btns-link" href="#">
+            <span class="add__qty">12</span>
+          </a>
+        </div>
+
+        {% if app.user is not null %}
+        <div class="header__btns-item header__btns-autorization header-lc">
+          <a class="header__btns-link header-lc__profile" href="#"></a>
+          <span class="header-lc__descr">Добро пожаловать,<br/>
+            <a href="#">{{ app.user ? app.user.username : '' }}</a>
+          </span>
           {% if is_granted('ROLE_PROVIDER') %}
             {% include 'components/header/provider.dropdown.html.twig' %}
           {% else %}
             {% include 'components/header/user.dropdown.html.twig' %}
           {% endif %}
         </div>
-      {% endif %}
+        {% else %}
+          <div class="header__btns-item header__btns-autorization">
+            <a class="header__btns-link icon-profile" href="/cabinet"></a>
+            <span class="header__btns-desc header-profile__name">
+            <a class="header__login open-login-modal-btn">Вход</a>
+            <a class="header__login open-register-modal-btn">Регистрация</a></span>
+          </div>
+        {% endif %}
+      </div>
+
     </div>
   </div>
-</div>
+</header>

@@ -10,6 +10,10 @@
   transition: max-width 0.2s ease-out;
   overflow: hidden;
 
+  .logo img {
+    height: 50%;
+  }
+
   &.closed {
     max-width: 80px;
 

@@ -1,0 +1,38 @@
+<div class="study">
+  <div class="container">
+    <div class="title-main">Новые программы обучения</div>
+    <div class="study-tabs">
+      <div class="study-tabs__nav tabs-nav">
+        <div class="tabs-nav__item is-active" data-tab-name="tab-1">Архитектура и строительство</div>
+        <div class="tabs-nav__item" data-tab-name="tab-2">Безопасность и военное дело</div>
+        <div class="tabs-nav__item" data-tab-name="tab-3">Гуманитарные науки</div>
+        <div class="tabs-nav__item" data-tab-name="tab-4">Дизайн</div>
+        <div class="tabs-nav__item" data-tab-name="tab-5">Информационные технологии</div>
+      </div>
+      <div class="study-tabs__nav circle">
+        <div class="study-content__item-circle is-active" data-tab-name="tab-1"></div>
+        <div class="study-content__item-circle" data-tab-name="tab-2"></div>
+        <div class="study-content__item-circle" data-tab-name="tab-3"></div>
+        <div class="study-content__item-circle" data-tab-name="tab-4"></div>
+        <div class="study-content__item-circle" data-tab-name="tab-5"></div>
+      </div>
+      <div class="study-tabs__content study-content">
+        <div class="study-content__item slider is-active tab-1">
+          {% include 'site/blocks/slider.html.twig' with {id: 1} %}
+        </div>
+        <div class="study-content__item slider tab-2">
+          {% include 'site/blocks/slider.html.twig'  with {id: 2} %}
+        </div>
+        <div class="study-content__item slider tab-3">
+          {% include 'site/blocks/slider.html.twig'  with {id: 3} %}
+        </div>
+        <div class="study-content__item slider tab-4">
+          {% include 'site/blocks/slider.html.twig'  with {id: 4} %}
+        </div>
+        <div class="study-content__item slider tab-5">
+          {% include 'site/blocks/slider.html.twig'  with {id: 5} %}
+        </div>
+      </div>
+    </div>
+    <a class="btn btn__link btn__center" href="#">Перейти в каталог </a></div>
+</div>

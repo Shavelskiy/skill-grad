@@ -1,6 +1,6 @@
-import './../components/auth/index';
-import './../components/header/index';
-import './../components/footer/index';
-import './../components/modal/index';
+import './../components/header'
+import './../components/footer'
+import './../components/auth'
 
-import './index.scss';
+import './index.scss'
+import './adaptiv.scss'

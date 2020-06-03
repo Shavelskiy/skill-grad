@@ -5,10 +5,13 @@
   {{ encore_entry_link_tags('site.index') }}
 {% endblock %}
 
-{% block title %}Main page{% endblock %}
+{% block title %}Главная{% endblock %}
 
 {% block body %}
-  <div id="app"></div>
+  {% include 'site/blocks/banner.html.twig' %}
+  {% include 'site/blocks/study.html.twig' %}
+  {% include 'site/blocks/how-work.html.twig' %}
+  {% include 'site/blocks/blog.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}

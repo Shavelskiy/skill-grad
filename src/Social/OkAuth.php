@@ -32,7 +32,7 @@ class OkAuth implements SocialAuthInterface
         $this->publicKey = 'CFGMHKJGDIHBABABA';
     }
 
-    public function getAuthLink(bool $create = false): string
+    public function getAuthLink(): string
     {
         $params = [
             'client_id' => $this->clientId,
@@ -41,11 +41,15 @@ class OkAuth implements SocialAuthInterface
             'response_type' => 'code',
             'state' => serialize([
                 'socialKey' => self::SOCIAL_KEY,
-                'create' => $create,
             ]),
         ];
 
         return self::AUTH_URL . http_build_query($params);
+    }
+
+    public function getAlias(): string
+    {
+        return 'ok';
     }
 
     public function support(Request $request): bool
@@ -61,11 +65,8 @@ class OkAuth implements SocialAuthInterface
 
     public function getCredentials(Request $request): array
     {
-        $state = unserialize($request->get('state'));
-
         return [
             'code' => $request->query->get('code'),
-            'create' => ($state !== false && ((bool)$state['create'])),
             'socialKey' => self::SOCIAL_KEY,
         ];
     }
