@@ -1,10 +1,10 @@
 {% include 'components/header/modals.html.twig' %}
 <header class="header">
   <div class="container">
-    <div class="header-wrap {{ app.user ? 'header-autorization' : '' }}">
-      <div class="logo">
+    <div class="wrap {{ app.user ? 'header-autorization' : '' }}">
+      <a class="logo" href="{{ path('site.index') }}">
         <img src="/img/LogoSkillGrad-b.svg" alt="logo"/>
-      </div>
+      </a>
       <div class="logo__mobile">
         <img src="/img/logo_mobile.png" alt="logo"/>
       </div>

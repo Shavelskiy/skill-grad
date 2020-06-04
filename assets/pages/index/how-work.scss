@@ -1,0 +1,155 @@
+// В этом файле должны быть стили для БЭМ-блока how-work, его элементов, 
+// модификаторов, псевдоселекторов, псевдоэлементов, @media-условий...
+// Очередность: http://nicothin.github.io/idiomatic-pre-CSS/#priority
+
+.how-work {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background-image: linear-gradient(to right top, rgba(#234674,0.9), rgba(#2b8dbc,0.9)),url(../../img/how-work__bg.png);
+  background-size: cover;
+  background-position: 100% 100%;
+  position: relative;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  padding: 35px 0px 60px 0px;
+  &__title{
+    font-size: 44px;
+    font-family: 'Lato',sans-serif;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    line-height: 18px;
+    color: #fff;
+  }
+  &__list{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .how-work__info-mobile{
+    display: none;
+  }
+  &__list:first-of-type{
+    border-left: 1px dashed #6884ad;
+  }
+  &__info{
+    border-right: 1px dashed #6884ad;
+  }
+
+  &__info-title{
+    text-align: left;
+    font-size: 22px;
+    line-height: 30px;
+    color: #fff;
+    font-family:'Lato',sans-serif;
+    width: 50%;
+    margin-left: 75px;
+    position: relative;
+
+  }
+  &__info-school{
+    position: relative;
+  }
+  &__info-school::before{
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: -80px;
+    bottom: 10px;
+    background: url(../../img/knowledge.png) no-repeat;
+    background-size: cover;
+  }
+  &__info-provaider{
+    position: relative;
+  }
+  &__info-provaider::before{
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: -80px;
+    bottom: 10px;
+    background: url(../../img/school.png) no-repeat;
+    background-size: cover;
+  }
+  &__info-items{
+    display: flex;
+    flex-flow: column wrap;
+    list-style: none;
+    width: 400px;
+    padding-left: 25px;
+    height: 200px;
+
+  }
+
+  &__info-item{
+    width: 90%;
+    color: #fff;
+    font-size: 17px;
+    font-family: 'Lato',sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+  }
+  &__info-item::before{
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: -30px;
+    background: url(../../img/tick.png) no-repeat;
+    background-size: cover;
+    
+  }
+  .btn__popup{
+    background-image: linear-gradient(0deg, #fb5519 0%, #f9453f 100%);
+  }
+  
+
+}
+@media(max-width: 767px){
+  .how-work__title{
+    font-size: 26px;
+    text-align: center;
+  }
+  .how-work__info{
+    width: 100%;
+  }
+  .how-work .how-work__info-mobile{
+    display: flex;
+  }
+}
+@media(min-width: 768px){
+  .how-work .how-work__info-mobile{
+    display: none;
+  }
+ 
+
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+
+  .how-work__list{
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .how-work__info{
+    border-right: 1px dashed transparent;
+  }
+  .how-work__list:first-of-type{
+    border-right: 1px dashed transparent;
+  }
+  .how-work__info-title{
+    font-size: 19px;
+  }
+  .how-work__info-items{
+    width: 300px;
+  }
+}

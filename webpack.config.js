@@ -24,7 +24,7 @@ Encore
   .addEntry('admin', './admin/index.js')
 
   .addEntry('site.layout', './assets/layout/index.js')
-  .addEntry('site.index', './assets/pages/index.js')
+  .addEntry('site.index', './assets/pages/index/index.js')
   .addEntry('site.user.profile', './assets/pages/user-profile.js')
   .addEntry('site.provider.profile', './assets/pages/provider-profile.js')
 

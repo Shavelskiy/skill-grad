@@ -1,6 +1,20 @@
 @font-face {
-  font-family: "Lato Light";
-  src: url("./Lato/Lato-Light.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
+  font-family: 'Lato-Black';
+  src: url('./lato/Lato-Black.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato-BlackItalic';
+  src: url('./lato/Lato-BlackItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato-Heavy';
+  src: url('./lato/Lato-Heavy.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  src: url('./lato/Lato-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato-SemiBold';
+  src: url('./lato/Lato-SemiBold.ttf') format('truetype');
 }

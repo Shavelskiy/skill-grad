@@ -1,7 +1,8 @@
 import 'swiper/swiper.scss'
 import Swiper from 'swiper'
-import showRegisterForm from '../components/modal/choose-role-modal'
-import { ROLE_PROVIDER, ROLE_USER } from '../utils/user-roles'
+import showRegisterForm from '../../components/modal/choose-role-modal'
+import { ROLE_PROVIDER, ROLE_USER } from '../../utils/user-roles'
+import './index.scss'
 
 
 const initTabs = (navSelector, contentSelector) => {
