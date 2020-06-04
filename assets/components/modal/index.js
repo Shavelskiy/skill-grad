@@ -1,5 +1,6 @@
 import './scss/index.scss'
 import './choose-role-modal'
+import './alert'
 
 export const loginModal = document.getElementById('login-modal')
 export const resetPasswordModal = document.getElementById('forgot-password-modal')
@@ -9,7 +10,7 @@ export const newPasswordModal = document.getElementById('new-password-modal')
 export const citySelectorModal = document.getElementById('city-selector-modal')
 export const feedbackModal =  document.getElementById('feedback-modal')
 
-window.onclick = (event) => {
+window.addEventListener('click', (event) => {
   switch (event.target) {
     case loginModal:
       loginModal.classList.remove('is-visible')
@@ -33,7 +34,7 @@ window.onclick = (event) => {
       feedbackModal.classList.remove('is-visible')
       break
   }
-}
+})
 
 const initModalFormCloseBtn = (modal) => {
   if (modal === null) {

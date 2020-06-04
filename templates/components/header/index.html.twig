@@ -12,8 +12,10 @@
 
 
       <div class="header__btns">
-        <div class="location open-modal">
-          <div class="header__btns-link "></div>
+        <div class="location">
+          <div class="header__btns-link open-city-selector-modal-btn">
+            <img src="/img/005-place.svg"/>
+          </div>
           <span class="location__text">Ваш город:</span>
           <a class="location-city open-city-selector-modal-btn">Нижний Новгород</a>
         </div>
@@ -44,7 +46,9 @@
         </div>
         {% else %}
           <div class="header__btns-item header__btns-autorization">
-            <a class="header__btns-link icon-profile" href="/cabinet"></a>
+            <div class="header__btns-link icon-profile open-login-modal-btn">
+              <img src="/img/008-arrow.svg"/>
+            </div>
             <span class="header__btns-desc header-profile__name">
             <a class="header__login open-login-modal-btn">Вход</a>
             <a class="header__login open-register-modal-btn">Регистрация</a></span>

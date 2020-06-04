@@ -2,14 +2,16 @@ import { loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, f
 import './logout'
 import './index.scss'
 
-const openLoginModalBtn = document.querySelector('.open-login-modal-btn')
+const openLoginModalBtns = document.querySelectorAll('.open-login-modal-btn')
 const openRegisterModalBtn = document.querySelector('.open-register-modal-btn')
-const openCitySelectorModalBtn = document.querySelector('.open-city-selector-modal-btn')
+const openCitySelectorModalBtns = document.querySelectorAll('.open-city-selector-modal-btn')
 
-if (openLoginModalBtn !== null) {
-  openLoginModalBtn.onclick = () => {
-    loginModal.classList.add('is-visible')
-  }
+if (openLoginModalBtns.length > 0) {
+  openLoginModalBtns.forEach((item) => {
+    item.onclick = () => {
+      loginModal.classList.add('is-visible')
+    }
+  })
 }
 
 if (openRegisterModalBtn !== null) {
@@ -18,9 +20,11 @@ if (openRegisterModalBtn !== null) {
   }
 }
 
-openCitySelectorModalBtn.onclick = () => {
-  citySelectorModal.classList.add('is-visible')
-}
+openCitySelectorModalBtns.forEach((item) => {
+  item.onclick = () => {
+    citySelectorModal.classList.add('is-visible')
+  }
+})
 
 loginModal.querySelector('.login-forgot-password-link').onclick = () => {
   resetPasswordModal.classList.add('is-visible')
