@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CatogoryRepository")
+ * @ORM\Entity()
  */
 class Category
 {
@@ -23,28 +23,30 @@ class Category
     private string $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Program")
+     * @ORM\Column(type="integer")
      */
-    private $programs;
+    private int $sort;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="id")
      */
-    private DateTime $created;
+    private ?Category $parentCategory;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory")
      */
-    private DateTime $updated;
+    private PersistentCollection $childCategories;
+
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -52,38 +54,42 @@ class Category
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 
-    public function getPrograms()
+    public function getSort(): int
     {
-        return $this->programs;
+        return $this->sort;
     }
 
-    public function setPrograms($programs): void
+    public function setSort(int $sort): self
     {
-        $this->programs = $programs;
+        $this->sort = $sort;
+        return $this;
     }
 
-    public function getCreated(): DateTime
+    public function getParentCategory(): ?Category
     {
-        return $this->created;
+        return $this->parentCategory;
     }
 
-    public function setCreated(DateTime $created): void
+    public function setParentCategory(?Category $parentCategory): self
     {
-        $this->created = $created;
+        $this->parentCategory = $parentCategory;
+        return $this;
     }
 
-    public function getUpdated(): DateTime
+    public function getChildCategories(): PersistentCollection
     {
-        return $this->updated;
+        return $this->childCategories;
     }
 
-    public function setUpdated(DateTime $updated): void
+    public function setChildCategories(PersistentCollection $childCategories): self
     {
-        $this->updated = $updated;
+        $this->childCategories = $childCategories;
+        return $this;
     }
 }

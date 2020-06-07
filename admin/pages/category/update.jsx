@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import {TAG_INDEX} from '../../utils/routes'
+import { CATEGORY_INDEX } from '../../utils/routes'
 
 import axios from 'axios'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoader, showLoader, setTitle, setBreacrumbs } from '../../redux/actions'
 
-import TagForm from './form'
 import NotFound from '../../components/not-found/not-found'
 import Portlet from '../../components/portlet/portlet'
+import CategoryForm from './form'
+import { FETCH_CATEGORY_URL, UPDATE_CATEGORY_URL } from '../../utils/api/endpoints'
 
 
-const TagUpdate = ({match}) => {
+const CategoryUpdate = ({match}) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
   useEffect(() => {
     dispatch(setBreacrumbs([
       {
-        title: 'Список тегов',
-        link: '/tag',
+        title: 'Список категорий',
+        link: CATEGORY_INDEX,
       }
     ]))
   }, [])
@@ -34,11 +35,11 @@ const TagUpdate = ({match}) => {
 
   useEffect(() => {
     dispatch(showLoader())
-    axios.get(`/api/admin/tag/${match.params.id}`)
+    axios.get(FETCH_CATEGORY_URL.replace(':id', match.params.id))
       .then(({data}) => {
         setName(data.name)
         setSort(data.sort)
-        dispatch(setTitle(`Редактирование тега "${data.name}"`))
+        dispatch(setTitle(`Редактирование категории "${data.name}"`))
         dispatch(hideLoader())
       })
       .catch((error) => {
@@ -47,12 +48,12 @@ const TagUpdate = ({match}) => {
           dispatch(hideLoader())
         }
 
-        history.push(TAG_INDEX)
+        history.push(CATEGORY_INDEX)
       })
   }, [])
 
   const save = () => {
-    const tag = {
+    const item = {
       id: match.params.id,
       name: name,
       sort: sort
@@ -60,8 +61,8 @@ const TagUpdate = ({match}) => {
 
     setDisableButton(true)
 
-    axios.put('/api/admin/tag/', tag)
-      .then(() => history.push(TAG_INDEX))
+    axios.put(UPDATE_CATEGORY_URL, item)
+      .then(() => history.push(CATEGORY_INDEX))
   }
 
   if (notFound) {
@@ -75,7 +76,7 @@ const TagUpdate = ({match}) => {
       titleIcon={'info'}
       withButton={false}
     >
-      <TagForm
+      <CategoryForm
         name={name}
         setName={setName}
         sort={sort}
@@ -87,4 +88,4 @@ const TagUpdate = ({match}) => {
   )
 }
 
-export default TagUpdate
+export default CategoryUpdate

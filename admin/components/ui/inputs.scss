@@ -25,6 +25,10 @@
     &:focus {
       border: 1px solid #5d78ff;
     }
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 }
 

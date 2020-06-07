@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use App\Dto\PaginatorResult;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
 class Paginator
@@ -49,8 +51,8 @@ class Paginator
 
     /**
      * @return PaginatorResult
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getResult(): PaginatorResult
     {

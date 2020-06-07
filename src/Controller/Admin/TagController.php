@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
+use Exception;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,14 +68,14 @@ class TagController extends AbstractController
     {
         try {
             if ($id < 1) {
-                throw new \RuntimeException('');
+                throw new RuntimeException('');
             }
 
             /** @var Tag $tag */
             $tag = $this->tagRepository->find($id);
 
             if ($tag === null) {
-                throw new \RuntimeException('');
+                throw new RuntimeException('');
             }
 
             return new JsonResponse([
@@ -81,7 +83,7 @@ class TagController extends AbstractController
                 'name' => $tag->getName(),
                 'sort' => $tag->getSort(),
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new NotFoundHttpException('');
         }
     }

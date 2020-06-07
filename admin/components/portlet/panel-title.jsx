@@ -13,7 +13,7 @@ const PanelTitle = ({icon, title, withButton, buttonLink, buttonText}) => {
         <Button
           link={buttonLink}
           create={true}
-          text={'Создать'}
+          text={buttonText}
         />
       </div>
     )

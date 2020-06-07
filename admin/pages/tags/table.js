@@ -1,4 +1,5 @@
 import { NUMBER, STRING } from '../../components/table-search/types'
+import { TAG_VIEW } from '../../utils/routes'
 
 export const table = [
   {
@@ -30,7 +31,7 @@ export const table = [
 export const actions = [
   {
     type: 'view',
-    link: '/tag',
+    link: TAG_VIEW,
   },
   {
     type: 'update',

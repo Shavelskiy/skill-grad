@@ -9,7 +9,6 @@ import { setTitle, setBreacrumbs } from '../../redux/actions'
 
 import TagForm from './form'
 import Portlet from '../../components/portlet/portlet'
-import { TextInput, NumberInput, SaveButton } from '../../components/ui/inputs'
 
 
 const TagCreate = () => {

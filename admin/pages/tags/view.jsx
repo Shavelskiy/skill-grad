@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import axios from 'axios'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { showLoader, hideLoader, setTitle, setBreacrumbs } from '../../redux/actions'
+import { setTitle, setBreacrumbs } from '../../redux/actions'
 
 import Portlet from '../../components/portlet/portlet'
+import ViewPageTemplate from '../../components/page-templates/view'
+import { TAG_INDEX } from '../../utils/routes'
+import { FETCH_TAG_URL } from '../../utils/api/endpoints'
 
 
 const TagView = ({match}) => {
@@ -20,51 +21,47 @@ const TagView = ({match}) => {
   })
 
   useEffect(() => {
-    dispatch(showLoader())
-
     dispatch(setBreacrumbs([
       {
         title: 'Список тегов',
-        link: '/tag',
+        link: TAG_INDEX,
       }
     ]))
-
-    axios.get(`/api/admin/tag/${item.id}`)
-      .then(({data}) => {
-        setItem({
-          id: data.id,
-          name: data.name,
-          sort: data.sort,
-        })
-        dispatch(setTitle(`Просмотр тега "${data.name}"`))
-        dispatch(hideLoader())
-      })
   }, [])
 
+  useEffect(() => {
+    dispatch(setTitle(`Просмотр тега "${item.name}"`))
+  }, [item])
+
   return (
-    <Portlet
-      width={50}
-      title={title}
-      titleIcon={'eye'}
-      withButton={false}
+    <ViewPageTemplate
+      fetchUrl={FETCH_TAG_URL.replace(':id', item.id)}
+      setItem={setItem}
     >
-      <table>
-        <tbody>
-        <tr>
-          <td>ID</td>
-          <td>{item.id}</td>
-        </tr>
-        <tr>
-          <td>Название</td>
-          <td>{item.name}</td>
-        </tr>
-        <tr>
-          <td>Сортировка</td>
-          <td>{item.sort}</td>
-        </tr>
-        </tbody>
-      </table>
-    </Portlet>
+      <Portlet
+        width={50}
+        title={title}
+        titleIcon={'eye'}
+        withButton={false}
+      >
+        <table>
+          <tbody>
+          <tr>
+            <td>ID</td>
+            <td>{item.id}</td>
+          </tr>
+          <tr>
+            <td>Название</td>
+            <td>{item.name}</td>
+          </tr>
+          <tr>
+            <td>Сортировка</td>
+            <td>{item.sort}</td>
+          </tr>
+          </tbody>
+        </table>
+      </Portlet>
+    </ViewPageTemplate>
   )
 }
 

@@ -2,21 +2,22 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import {
   INDEX,
-  LOCATION_INDEX,
-  LOCATION_VIEW,
-  TAG_CREATE,
-  TAG_INDEX,
-  TAG_UPDATE,
-  TAG_VIEW,
-  USER_INDEX
+  CATEGORY_INDEX, CATEGORY_VIEW, CATEGORY_UPDATE,
+  TAG_CREATE, TAG_INDEX, TAG_UPDATE, TAG_VIEW,
+  USER_INDEX,
+  LOCATION_INDEX, LOCATION_VIEW, CATEGORY_CREATE,
 } from './../utils/routes'
 
 import { useSelector } from 'react-redux'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
 import NotFoundPage from '../pages/not-found/not-found'
-import IndexPage from './index'
-import TagsIndex from '../pages/tags/index'
+import IndexPage from './'
+import CategroyIndex from './category'
+import CategoryView from './category/view'
+import CategoryCreate from './category/create'
+import CategoryUpdate from './category/update'
+import TagsIndex from '../pages/tags'
 import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
 import TagUpdate from './tags/update'
@@ -36,6 +37,11 @@ const PageSwitcher = ({active}) => {
       <Breadcrumbs items={breadcrumbs}/>
 
       <Switch>
+        <Route exact name="categroy.index" path={CATEGORY_INDEX} component={CategroyIndex}/>
+        <Route exact name="categroy.create" path={CATEGORY_CREATE} component={CategoryCreate}/>
+        <Route exact name="categroy.view" path={CATEGORY_VIEW} component={CategoryView}/>
+        <Route exact name="categroy.update" path={CATEGORY_UPDATE} component={CategoryUpdate}/>
+
         <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
         <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>
         <Route exact name="tag.view" path={TAG_VIEW} component={TagView}/>

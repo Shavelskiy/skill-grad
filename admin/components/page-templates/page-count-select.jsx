@@ -27,7 +27,7 @@ const options = [
   },
 ]
 
-export const DEFAULT_PAGE_ITEMS = 10
+export const DEFAULT_PAGE_ITEMS = 20
 
 const PageCountSelect = ({value, setValue}) => {
   useEffect(() => {

@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 import css from './actions.scss?module'
+import { ACTION_DELETE, ACTION_UPDATE, ACTION_VIEW } from '../../utils/table-actions'
 
 
 const ViewAction = ({action, item}) => {
   return (
-    <Link to={`${action.link}/${item.id}`} className={css.item}>
+    <Link to={action.link.replace(':id', item.id)} className={css.item}>
       <i className="fa fa-eye"></i>
     </Link>
   )
@@ -15,7 +16,7 @@ const ViewAction = ({action, item}) => {
 
 const UpdateAction = ({action, item}) => {
   return (
-    <Link to={`${action.link}/update/${item.id}`} className={css.item}>
+    <Link to={action.link.replace(':id', item.id)} className={css.item}>
       <i className="fa fa-edit"></i>
     </Link>
   )
@@ -49,11 +50,11 @@ const TableActions = ({actions, item, reload}) => {
 
   const tableActions = actions.map((action, key) => {
     switch (action.type) {
-      case 'view':
+      case ACTION_VIEW:
         return <ViewAction key={key} action={action} item={item}/>
-      case 'update':
+      case ACTION_UPDATE:
         return <UpdateAction key={key} action={action} item={item}/>
-      case 'delete':
+      case ACTION_DELETE:
         return <DeleteAction key={key} action={action} item={item} reload={reload}/>
       default:
         return <></>

@@ -6,7 +6,7 @@ import css from './portlet.scss?module'
 import cn from 'classnames'
 
 
-const Portlet = ({children, width, title, titleIcon, withButton, buttonLink}) => {
+const Portlet = ({children, width, title, titleIcon, withButton, buttonLink, buttonText = 'Создать'}) => {
   let widthClass = ''
 
   switch (width) {
@@ -22,6 +22,7 @@ const Portlet = ({children, width, title, titleIcon, withButton, buttonLink}) =>
         icon={`fa fa-${titleIcon}`}
         withButton={withButton}
         buttonLink={buttonLink}
+        buttonText={buttonText}
       />
       <div className={css.body}>
         {children}

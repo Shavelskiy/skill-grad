@@ -1,0 +1,198 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Entity\Category;
+use App\Helpers\SearchHelper;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Exception;
+use RuntimeException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+
+
+/**
+ * @Route("/api/admin/category")
+ */
+class CategoryController extends AbstractController
+{
+    protected CategoryRepository $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * @Route("", name="admin.category.index", methods={"GET"})
+     *
+     * @param Request $request
+     * @return Response
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function index(Request $request): Response
+    {
+        $searchQuery = SearchHelper::createFromRequest($request, [Category::class]);
+
+        $paginator = $this->categoryRepository->getPaginatorResult($searchQuery);
+
+        $items = [];
+        foreach ($paginator->getItems() as $item) {
+            $items[] = $this->prepareItem($item);
+        }
+
+        $data = [
+            'total_pages' => $paginator->getTotalPageCount(),
+            'current_page' => $paginator->getCurrentPage(),
+            'items' => $items,
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    protected function prepareItem(Category $item): array
+    {
+        return [
+            'id' => $item->getId(),
+            'name' => $item->getName(),
+            'is_parent' => $item->getParentCategory() === null,
+            'sort' => $item->getSort(),
+        ];
+    }
+
+    /**
+     * @Route("/{id}", name="admin.category.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @param Request $request
+     * @return Response
+     */
+    public function view(int $id): Response
+    {
+        try {
+            if ($id < 1) {
+                throw new RuntimeException('');
+            }
+
+            /** @var Category $category */
+            $category = $this->categoryRepository->find($id);
+
+            if ($category === null) {
+                throw new RuntimeException('');
+            }
+
+            return new JsonResponse([
+                'id' => $category->getId(),
+                'name' => $category->getName(),
+                'sort' => $category->getSort(),
+                'parent_category' => $this->prepareParentCateroy($category),
+                'child_categories' => $this->prepareChildCategories($category),
+            ]);
+        } catch (Exception $e) {
+            throw new NotFoundHttpException('');
+        }
+    }
+
+    protected function prepareParentCateroy(Category $category): ?array
+    {
+        if (($parentCategory = $category->getParentCategory()) === null) {
+            return null;
+        }
+
+        return [
+            'id' => $parentCategory->getId(),
+            'name' => $parentCategory->getName(),
+            'sort' => $parentCategory->getSort(),
+        ];
+    }
+
+    protected function prepareChildCategories(Category $category): array
+    {
+        $result = [];
+
+        /** @var Category $childCategory */
+        foreach ($category->getChildCategories() as $childCategory) {
+            $result[] = [
+                'id' => $childCategory->getId(),
+                'name' => $childCategory->getName(),
+                'sort' => $childCategory->getSort(),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @Route("/{id}", name="admin.category.create", methods={"POST"}, requirements={"id"="[0-9]*"})
+     * @param Request $request
+     * @return Response
+     */
+    public function create(Request $request): Response
+    {
+        $category = (new Category())
+            ->setName($request->get('name'))
+            ->setSort((int)($request->get('sort')));
+
+        $parentCategoryId = (int)($request->get('id'));
+        if ($parentCategoryId > 0) {
+            /** @var Category $parentCategory */
+            $parentCategory = $this->categoryRepository->find($parentCategoryId);
+
+            if ($parentCategory === null) {
+                return new JsonResponse([], 404);
+            }
+
+            $category->setParentCategory($parentCategory);
+        }
+
+        $this->getDoctrine()->getManager()->persist($category);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("", name="admin.category.update", methods={"PUT"})
+     */
+    public function update(Request $request): Response
+    {
+        /** @var Category $category */
+        $category = $this->categoryRepository->find($request->get('id'));
+
+        if ($category === null) {
+            return new JsonResponse([], 404);
+        }
+
+        $category
+            ->setName($request->get('name'))
+            ->setSort($request->get('sort'));
+
+        $this->getDoctrine()->getManager()->persist($category);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("", name="admin.category.delete", methods={"DELETE"})
+     */
+    public function delete(Request $request): Response
+    {
+        /** @var Category $category */
+        $category = $this->categoryRepository->find($request->get('id'));
+
+        if ($category === null) {
+            return new JsonResponse([], 404);
+        }
+
+        $this->getDoctrine()->getManager()->remove($category);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
+}

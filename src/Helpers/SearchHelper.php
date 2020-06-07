@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SearchHelper
 {
-    protected const DEFAULT_PAGE_ITEMS = 10;
+    protected const DEFAULT_PAGE_ITEMS = 20;
 
     public static function createFromRequest(Request $request, array $entityClasses): SearchQuery
     {

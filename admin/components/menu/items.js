@@ -1,6 +1,16 @@
-import { LOCATION_INDEX, TAG_INDEX, USER_INDEX } from '../../utils/routes'
+import { CATEGORY_INDEX, LOCATION_INDEX, TAG_INDEX, USER_INDEX } from '../../utils/routes'
 
 export const menuItems = [
+  {
+    title: 'Программы обучения',
+    icon: 'fa fa-university',
+    items: [
+      {
+        title: 'Категории',
+        link: CATEGORY_INDEX,
+      },
+    ],
+  },
   {
     title: 'Блог',
     icon: 'fa fa-rss-square',

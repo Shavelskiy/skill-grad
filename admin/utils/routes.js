@@ -1,6 +1,11 @@
 export const INDEX = '/'
 export const LOGIN = '/login'
 
+export const CATEGORY_INDEX = '/category'
+export const CATEGORY_VIEW = '/category/:id'
+export const CATEGORY_CREATE = '/category/create/:id?'
+export const CATEGORY_UPDATE = '/category/update/:id'
+
 export const TAG_INDEX = '/tag'
 export const TAG_CREATE = '/tag/create'
 export const TAG_VIEW = '/tag/:id'
