@@ -1,5 +1,3 @@
-@import "category-menu";
-
 .header__btns-link {
   position: relative;
   text-decoration: none;
@@ -17,7 +15,6 @@
   width: 100%;
 
   .wrap {
-    margin-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;

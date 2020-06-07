@@ -1,5 +1,6 @@
 import { loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, feedbackModal } from '../modal'
 import './logout'
+import './category-menu'
 import './index.scss'
 
 const openLoginModalBtns = document.querySelectorAll('.open-login-modal-btn')

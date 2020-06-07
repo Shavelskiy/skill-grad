@@ -1,49 +1,50 @@
-// В этом файле должны быть стили для БЭМ-блока blog, его элементов, 
-// модификаторов, псевдоселекторов, псевдоэлементов, @media-условий...
-// Очередность: http://nicothin.github.io/idiomatic-pre-CSS/#priority
-
 .blog {
   padding: 50px 0px;
   width: 100%;
-  .title-main{
+
+  .title-main {
     font-size: 44px;
-    font-family: 'Lato',sans-serif;
     font-weight: 700;
     color: #3c3c3c;
     text-align: center;
     padding-bottom: 40px;
   }
-  .blog-items{
+
+  .blog-items {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     margin-bottom: 50px;
   }
-  &-item{
+
+  &-item {
     position: relative;
     flex: 0 0 30%;
     width: 30%;
     background: #f5f5f7;
   }
-  &-item__photo{
+
+  &-item__photo {
     display: block;
     height: 180px;
     overflow: hidden;
-      img{
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        transition: all 1s ease-out;
-        &:hover{
-          cursor: pointer;
-          transform: scale(1.05);
-        }
 
-      }    
+    img {
+      width: 100%;
+      height: auto;
+      transition: all 1s ease-out;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
   }
-  &-item__main{
+
+  &-item__main {
     padding: 20px 30px;
-    &-date{
+
+    &-date {
       position: absolute;
       right: 0;
       top: 0;
@@ -51,21 +52,20 @@
       background-color: #f7562e;
       color: #fff;
     }
-    .date{
+
+    .date {
       font-size: 24px;
       font-weight: 500;
-      font-family: 'Lato',sans-serif;
       line-height: 18px;
       display: block;
       text-align: center;
     }
   }
-  
-  &-item__title{
+
+  &-item__title {
     font-size: 18px;
     line-height: 24px;
     color: #000;
-    font-family: 'Lato',sans-serif;
     font-weight: 700;
     text-decoration: none;
     margin-bottom: 20px;
@@ -73,14 +73,15 @@
     height: 80px;
 
   }
-  &-item__desc{
+
+  &-item__desc {
     font-size: 15px;
     color: #3c3c3c;
-    font-family: 'Lato',sans-serif;
     line-height: 22px;
     font-weight: 500;
     position: relative;
-    &::before{
+
+    &::before {
       content: " ";
       position: absolute;
       width: 40px;
@@ -89,29 +90,31 @@
       background-color: #f7562e;
     }
   }
-  .btn__link{
+
+  .btn__link {
     background-image: linear-gradient(0deg, #1f81b9 0%, #195da7 100%);
   }
-
-
 }
-@media(max-width: 991px){
-  .blog-item{
-    flex:  0 0 48.5%;
+
+@media(max-width: 991px) {
+  .blog-item {
+    flex: 0 0 48.5%;
     width: 48.5%;
     margin-bottom: 30px;
   }
 }
-@media(max-width: 768px){
-  .blog-item{
-    flex:  0 0 48%;
+
+@media(max-width: 768px) {
+  .blog-item {
+    flex: 0 0 48%;
     width: 48%;
     margin-bottom: 30px;
   }
 }
-@media(max-width: 600px){
-  .blog-item{
-    flex:  0 0 100%;
+
+@media(max-width: 600px) {
+  .blog-item {
+    flex: 0 0 100%;
     width: 100%;
     margin-bottom: 30px;
   }

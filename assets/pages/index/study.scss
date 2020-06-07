@@ -1,30 +1,34 @@
 .study {
-    padding: 50px 0px;
-    width: 100%;
-  .tabs-nav{
+  padding: 50px 0px;
+  width: 100%;
+
+  .tabs-nav {
     display: flex;
     justify-content: space-around;
     width: 100%;
     margin-bottom: 10px;
-    border-bottom: 2px solid  rgba(#838383, 0.4);
-    &__item{
+    border-bottom: 2px solid rgba(#838383, 0.4);
+
+    &__item {
       font-size: 15px;
       font-weight: bold;
-      font-family: 'Lato',sans-serif;
       text-align: center;
       line-height: 18px;
       color: #3c3c3c;
       padding-bottom: 10px;
     }
-    &__item.is-active{
+
+    &__item.is-active {
       color: #f7562e;
       position: relative;
-    
+
     }
-    .is-active{
+
+    .is-active {
       position: relative;
     }
-    .is-active::before{
+
+    .is-active::before {
       content: "";
       position: absolute;
       bottom: -2px;
@@ -32,40 +36,46 @@
       height: 3px;
       background-color: #f7562e;
     }
-    &:hover{
+
+    &:hover {
       cursor: pointer;
     }
   }
-  .study-content__item{
+
+  .study-content__item {
     display: none;
   }
-  .study-content__item.is-active{
+
+  .study-content__item.is-active {
     display: block;
   }
-  &-content__cards{
+
+  &-content__cards {
     display: flex;
     padding: 40px 0px;
 
   }
-  .study-content__card{
+
+  .study-content__card {
     // flex: 0 0 32%;
     // max-width: 32%;
     position: relative;
   }
-  .study-content__card-head{
+
+  .study-content__card-head {
     height: 60px;
     padding: 15px 25px 15px 60px;
     background-color: #e9f1f7;
     position: relative;
-    &-title{
+
+    &-title {
       font-size: 12px;
-      font-family: "Lato",sans-serif;
       line-height: 16px;
       color: #3c3c3c;
       font-weight: 400;
-      line-height: 16px;
     }
-    &-title::before{
+
+    &-title::before {
       content: " ";
       position: absolute;
       width: 30px;
@@ -75,7 +85,8 @@
       background: url(../../img/head__icon.png) no-repeat;
     }
   }
-  .card-discount{
+
+  .card-discount {
     width: 40px;
     height: 40px;
     position: absolute;
@@ -83,54 +94,58 @@
     right: 0;
     background: url(../../img/012-discount.svg) no-repeat;
   }
-  .study-content__card-body{
+
+  .study-content__card-body {
     padding: 15px 25px 35px;
     margin-bottom: 20px;
-    filter: drop-shadow(0px 10px 20px rgba(10,43,74,0.07));
+    filter: drop-shadow(0px 10px 20px rgba(10, 43, 74, 0.07));
     background-color: #ffffff;
   }
-  .study-content__card-title{
+
+  .study-content__card-title {
     display: block;
     font-size: 18px;
     line-height: 24px;
     color: #3c3c3c;
-    font-family: "Lato",sans-serif;
     font-weight: 700;
     padding-bottom: 20px;
     text-decoration: none;
 
   }
-  .study-content__card-title:hover{
+
+  .study-content__card-title:hover {
     cursor: pointer;
     color: #1d71b1;
   }
-  .study-content__card-desc{
+
+  .study-content__card-desc {
     border-top: 1px solid #cccccc;
     padding-top: 15px;
     font-size: 14px;
     line-height: 18px;
     color: #3c3c3c;
-    font-family: "Lato",sans-serif;
     font-weight: 400;
   }
-  .study-content__card-info{
+
+  .study-content__card-info {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 100%;
     padding: 10px 0px;
   }
-  .study-content__card-form{
+
+  .study-content__card-form {
     flex: 0 1 40%;
     width: 40%;
     padding-left: 25px;
     font-size: 12px;
     line-height: 14px;
     color: #1d71b1;
-    font-family: "Lato",sans-serif;
     font-weight: 400;
     position: relative;
-    &::before{
+
+    &::before {
       content: "";
       position: absolute;
       width: 20px;
@@ -139,17 +154,18 @@
       background: url(../../img/013-book.svg) no-repeat;
     }
   }
-  .study-content__card-length{
+
+  .study-content__card-length {
     flex: 0 1 30%;
     width: 30%;
     font-size: 12px;
     line-height: 14px;
     color: #1d71b1;
-    font-family: "Lato",sans-serif;
     font-weight: 400;
     padding-left: 20px;
     position: relative;
-    &::before{
+
+    &::before {
       content: "";
       position: absolute;
       width: 20px;
@@ -158,17 +174,18 @@
       background: url(../../img/015-wall-clock.svg) no-repeat;
     }
   }
-  .study-content__card-rating{
+
+  .study-content__card-rating {
     flex: 0 1 15%;
     width: 15%;
     font-size: 12px;
     line-height: 14px;
     color: #1d71b1;
-    font-family: "Lato",sans-serif;
     font-weight: 400;
     padding-left: 20px;
     position: relative;
-    &::before{
+
+    &::before {
       content: "";
       position: absolute;
       width: 20px;
@@ -177,38 +194,42 @@
       background: url(../../img/016-star.svg) no-repeat;
     }
   }
-  .study-content__card-buy{
+
+  .study-content__card-buy {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 100%;
     position: relative;
   }
-  .study-content__card-price{
+
+  .study-content__card-price {
     display: block;
     flex: 0 1 30%;
     width: 30%;
     white-space: nowrap;
-    &-old{
+
+    &-old {
       text-decoration: line-through;
       color: #f92e25;
-      span{
+
+      span {
         font-size: 13px;
         line-height: 18px;
         color: #3d3d3d;
-        font-family: "Lato",sans-serif;
         font-weight: 700;
       }
     }
-    &-current{
+
+    &-current {
       font-size: 18px;
       line-height: 20px;
       color: #f92e25;
-      font-family: "Lato",sans-serif;
       font-weight: 600;
     }
   }
-  .tooltiptext{
+
+  .tooltiptext {
     visibility: hidden;
     width: 90px;
     box-sizing: border-box;
@@ -216,16 +237,16 @@
     font-size: 12px;
     line-height: 14px;
     color: #3d3d3d;
-    font-family: "Lato",sans-serif;
     font-weight: 600;
     text-align: center;
     padding: 10px;
     position: absolute;
-    filter: drop-shadow(0px 10px 10px rgba(251,85,25,0.3));
+    filter: drop-shadow(0px 10px 10px rgba(251, 85, 25, 0.3));
     top: -60px;
     z-index: 5;
     right: -30px;
-    &::after{
+
+    &::after {
       content: '';
       width: 0;
       position: absolute;
@@ -238,15 +259,16 @@
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
       border-top: 8px solid #fff;
-      filter: drop-shadow(0px 10px 10px rgba(251,85,25,0.3));
+      filter: drop-shadow(0px 10px 10px rgba(251, 85, 25, 0.3));
     }
-      }
-  .study-content__card-compare:hover .tooltiptext{
+  }
+
+  .study-content__card-compare:hover .tooltiptext {
     visibility: visible;
     cursor: pointer;
   }
 
-  .study-content__card-button{
+  .study-content__card-button {
     width: 120px;
     height: 38px;
     font-size: 15px;
@@ -257,52 +279,59 @@
     background-image: linear-gradient(0deg, #1f81b9 0%, #195da7 100%);
 
   }
-  .study-content__card-compare{
+
+  .study-content__card-compare {
     position: relative;
     padding-left: 40px;
-    &::before{
+
+    &::before {
       content: "";
       position: absolute;
       width: 38px;
       height: 38px;
       border-radius: 19px;
       left: 0;
-      background: url(../../img/compare__add.svg) 10px 10px #f5f6f8 no-repeat ;
-    }
-  }
-  .study-content__card-compare.is-active{
-    position: relative;
-    padding-left: 40px;
-    &::before{
-      content: "";
-      position: absolute;
-      width: 38px;
-      height: 38px;
-      border-radius: 19px;
-      left: 0;
-      background: url(../../img/014-insurance.svg) 10px 10px #f5f6f8 no-repeat ;
+      background: url(../../img/compare__add.svg) 10px 10px #f5f6f8 no-repeat;
     }
   }
 
-  .btn__link{
+  .study-content__card-compare.is-active {
+    position: relative;
+    padding-left: 40px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      border-radius: 19px;
+      left: 0;
+      background: url(../../img/014-insurance.svg) 10px 10px #f5f6f8 no-repeat;
+    }
+  }
+
+  .btn__link {
     height: 52px;
     border-radius: 26px;
     background-image: linear-gradient(0deg, #fb5519 0%, #f9453f 100%);
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       opacity: .8;
     }
   }
 
 }
+
 .owl-stage {
   display: flex;
-  flex-flow: row;    
+  flex-flow: row;
 }
-.slider__item {    
-  flex: 0 0 100%; 
+
+.slider__item {
+  flex: 0 0 100%;
   max-width: 90%;
-  width: 90%;   
+  width: 90%;
 }
 
 .owl-prev {

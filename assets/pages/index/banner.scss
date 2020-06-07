@@ -14,7 +14,6 @@
     margin-top: 90px;
 
     h1 {
-      font-family: 'Lato', sans-serif;
       color: #fff;
       font-size: 38px;
       line-height: 120%;
@@ -41,21 +40,18 @@
 
     ::-webkit-input-placeholder {
       color: #1d71b1;
-      font-family: 'Lato', sans-serif;
       font-size: 18px;
       font-weight: 400;
     }
 
     :-ms-input-placeholder {
       color: #1d71b1;
-      font-family: 'Lato', sans-serif;
       font-size: 18px;
       font-weight: 400;
     }
 
     ::placeholder {
       color: #1d71b1;
-      font-family: 'Lato', sans-serif;
       font-size: 18px;
       font-weight: 400;
     }
@@ -121,7 +117,6 @@
       }
 
       .home__adv-descr {
-        font-family: 'Lato', sans-serif;
         font-size: 15px;
         color: #fff;
         line-height: 20px;
@@ -148,13 +143,11 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 75%;
-    list-style: none;
     margin-left: -30px;
   }
 
   &-link {
     color: #fff;
-    font-family: 'Lato', sans-serif;
     font-size: 15px;
     line-height: 100%;
     text-decoration: none;
@@ -176,7 +169,6 @@
   .btn__add-popup {
     padding: 20px 30px 20px 60px;
     background: rgba(#27456a, 0.7);
-    font-family: 'Lato', sans-serif;
     font-weight: bold;
     font-size: 15px;
     color: #fff;
@@ -264,7 +256,6 @@
     font-size: 16px;
     line-height: 36px;
     color: #ffffff;
-    font-family: "Lato", sans-serif;
     font-weight: 700;
   }
   span.main__mnu-icon {
@@ -305,7 +296,6 @@
     font-size: 16px;
     line-height: 36px;
     color: #b2dbff;
-    font-family: "Lato", sans-serif;
     font-weight: 400;
   }
   button.main__mnu-mobile:hover .main__mnu-list {
@@ -313,7 +303,6 @@
 
   }
   .main__mnu-mobile {
-    padding-left: 15px;
     position: relative;
     display: flex;
     align-items: center;
@@ -324,7 +313,6 @@
     font-size: 16px;
     line-height: 36px;
     color: #ffffff;
-    font-family: "Lato", sans-serif;
     font-weight: 700;
   }
   span.main__mnu-icon {
