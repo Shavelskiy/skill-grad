@@ -117,7 +117,10 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
       <div className={css.settingsWrap}>
         <PageCountSelect
           value={query.pageItemCount}
-          setValue={(pageItemCount) => setQuery({...query, pageItemCount: pageItemCount, currentPage: 1})}
+          setValue={(pageItemCount) => {
+            setQuery({...query, pageItemCount: pageItemCount})
+            setCurrentPage(1)
+          }}
         />
         <Button
           text="очистить поиск"

@@ -19,6 +19,7 @@ const CategoryView = ({match}) => {
     id: match.params.id,
     name: '',
     sort: 0,
+    slug: '',
     parentCategory: null,
     childCategories: [],
   })
@@ -44,6 +45,7 @@ const CategoryView = ({match}) => {
     setItem({
       id: data.id,
       name: data.name,
+      slug: data.slug,
       sort: data.sort,
       parentCategory: data.parent_category,
       childCategories: data.child_categories,
@@ -89,7 +91,7 @@ const CategoryView = ({match}) => {
       </Portlet>
     )
   }
-
+console.log(item)
   return (
     <ViewPageTemplate
       key={item.id}

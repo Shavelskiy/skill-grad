@@ -110,6 +110,7 @@ class CategoryController extends AbstractController
         return [
             'id' => $parentCategory->getId(),
             'name' => $parentCategory->getName(),
+            'slug' => $parentCategory->getSlug(),
             'sort' => $parentCategory->getSort(),
         ];
     }
