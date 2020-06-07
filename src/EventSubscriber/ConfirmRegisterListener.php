@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace App\EventSubscriber;
 
 use App\Entity\UserToken;
 use Doctrine\ORM\EntityManagerInterface;

@@ -2,7 +2,7 @@
 
 namespace App\Messenger;
 
-use App\Adapter\RedisClient;
+use App\Cache\RedisClient;
 use App\Entity\ChatMessage;
 use App\Entity\User;
 use App\Entity\UserToken;

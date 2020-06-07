@@ -15,11 +15,6 @@ class AuthExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param bool $create
-     *
-     * @return array
-     */
     public function getSocialAuthLinks(): array
     {
         return (new SocialAuthFactory())->getLinks();

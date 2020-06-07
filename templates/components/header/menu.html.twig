@@ -2,60 +2,18 @@
   <button class="categories-menu-btn">Категории</button>
   <div class="categories-container">
     <ul class="categories-list">
-      {% for i in 1..20 %}
+      {% for menuItem in getMenuItems() %}
         <li class="categories-item">
-          <a class="categories-root-link" href="#">Архитектура и
-            строительство
-          </a>
+          <a class="categories-root-link" href="#">{{ menuItem.name }}</a>
           <div class="categories-submenu">
             <ul class="categories-submenu-col">
+              {% for childCategory in menuItem.childCategories %}
               <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Антропология и этнология
+                <a class="categories-submenu-link" href="{{ path('catalog.view', {slug: childCategory.slug }) }}">
+                  {{ childCategory.name }}
                 </a>
               </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Искусствоведение
-                </a>
-              </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  История
-                </a>
-              </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Культурология
-                </a>
-              </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Лингвистика
-                </a>
-              </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Литература
-                </a>
-              </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Обществознание
-                </a>
-              </li>
-            </ul>
-            <ul class="categories-submenu-col">
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Антропология и этнология
-                </a>
-              </li>
-              <li class="categories-submenu-item">
-                <a class="categories-submenu-link" href="#">
-                  Искусствоведение
-                </a>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </li>

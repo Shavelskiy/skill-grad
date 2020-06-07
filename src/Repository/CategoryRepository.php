@@ -18,6 +18,15 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function findRootCategories(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.parentCategory is null')
+            ->orderBy('c.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @param SearchQuery $searchQuery
      * @return PaginatorResult

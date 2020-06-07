@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\EventListener\ConfirmRegisterListener;
+use App\EventSubscriber\ConfirmRegisterListener;
 use RuntimeException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
