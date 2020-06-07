@@ -1,4 +1,5 @@
 .header {
+  position: relative;
   display: flex;
   justify-content: flex-end;
   box-shadow: 0 0 40px 0 rgba(82, 63, 105, .1);
@@ -7,6 +8,7 @@
   height: 75px;
   transition: left 0.2s ease-out;
   padding: 0 25px;
+  z-index: 999;
 }
 
 .main-header {

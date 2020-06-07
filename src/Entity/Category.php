@@ -23,6 +23,11 @@ class Category
     private string $name;
 
     /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private string $slug;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private int $sort;
@@ -57,6 +62,17 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 

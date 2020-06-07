@@ -6,6 +6,7 @@ import PageSwitcher from '../../pages/page-switcher'
 import Sidebar from './../sidebar/sidebar'
 import Header from './../header/header'
 import Preloader from './../preloader/preloader'
+import Alert from './../alert/alert'
 
 import css from './main.scss?module'
 import cn from 'classnames'
@@ -24,6 +25,7 @@ const Main = () => {
       <div className={cn(css.container, {[css.active]: !sidebarOpened})}>
         <Header/>
         <Preloader active={loading}/>
+        <Alert/>
         <PageSwitcher active={!loading}/>
       </div>
     </div>

@@ -4,7 +4,7 @@ import {
   SET_TITLE,
   SET_BREADCRUMBS,
   SET_CURRENT_USER,
-  SET_REDIRECT_LINK
+  SET_REDIRECT_LINK, SHOW_ALERT
 } from './types'
 
 const rootBreadcrumb = {
@@ -14,6 +14,7 @@ const rootBreadcrumb = {
 
 const initialState = {
   loading: false,
+  alertMessage: null,
   title: 'Skill Grad Admin',
   breadcrumbs: [rootBreadcrumb],
   currentUser: null,
@@ -39,6 +40,8 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, currentUser: action.payload}
     case SET_REDIRECT_LINK:
       return {...state, redirectLink: action.payload}
+    case SHOW_ALERT:
+      return {...state, alertMessage: action.payload}
     default:
       return state
   }

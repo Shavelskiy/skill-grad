@@ -22,6 +22,14 @@ export const table = [
     },
   },
   {
+    title: 'Символьный код',
+    name: 'slug',
+    search: {
+      enable: true,
+      type: STRING,
+    },
+  },
+  {
     title: 'Является родительской категорией',
     name: 'is_parent',
     search: {

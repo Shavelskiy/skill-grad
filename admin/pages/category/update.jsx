@@ -28,17 +28,21 @@ const CategoryUpdate = ({match}) => {
 
   const title = useSelector(state => state.title)
 
+  const [item, setItem] = useState({
+    id: match.params.id,
+    name: '',
+    slug: '',
+    sort: 0,
+  })
+
   const [notFound, setNotFound] = useState(false)
-  const [name, setName] = useState('')
-  const [sort, setSort] = useState(0)
   const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
     dispatch(showLoader())
     axios.get(FETCH_CATEGORY_URL.replace(':id', match.params.id))
       .then(({data}) => {
-        setName(data.name)
-        setSort(data.sort)
+        setItem(data)
         dispatch(setTitle(`Редактирование категории "${data.name}"`))
         dispatch(hideLoader())
       })
@@ -53,12 +57,6 @@ const CategoryUpdate = ({match}) => {
   }, [])
 
   const save = () => {
-    const item = {
-      id: match.params.id,
-      name: name,
-      sort: sort
-    }
-
     setDisableButton(true)
 
     axios.put(UPDATE_CATEGORY_URL, item)
@@ -77,10 +75,8 @@ const CategoryUpdate = ({match}) => {
       withButton={false}
     >
       <CategoryForm
-        name={name}
-        setName={setName}
-        sort={sort}
-        setSort={setSort}
+        item={item}
+        setItem={setItem}
         save={save}
         disable={disableButton}
       />

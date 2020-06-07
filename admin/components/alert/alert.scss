@@ -1,0 +1,21 @@
+.alert {
+  position: absolute;
+  display: flex;
+  background-color: #fff;
+  padding: 23px 90px;
+  left: 50%;
+  bottom: 100%;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  box-shadow: 0 0 40px 0 rgba(82, 63, 105, 0.1);
+
+  &.active {
+    opacity: 1;
+    bottom: 80%;
+  }
+
+  span {
+    max-width: 500px;
+    text-align: center;
+  }
+}

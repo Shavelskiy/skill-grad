@@ -6,7 +6,7 @@ import axios from 'axios'
 import { CREATE_CATEGORY_URL, FETCH_CATEGORY_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTitle, setBreacrumbs, showLoader, hideLoader } from '../../redux/actions'
+import { setTitle, setBreacrumbs, showLoader, hideLoader, showAlert } from '../../redux/actions'
 
 import CategoryForm from './form'
 import Portlet from '../../components/portlet/portlet'
@@ -39,20 +39,23 @@ const CategoryCreate = ({match}) => {
 
   const title = useSelector(state => state.title)
 
-  const [name, setName] = useState('')
-  const [sort, setSort] = useState(0)
+  const [item, setItem] = useState({
+    name: '',
+    slug: '',
+    sort: 0,
+  })
+
   const [disableButton, setDisableButton] = useState(false)
 
   const save = () => {
-    const item = {
-      name: name,
-      sort: sort
-    }
-
     setDisableButton(true)
 
     axios.post(CREATE_CATEGORY_URL.replace(':id', (parentCategory !== null) ? parentCategory.id : ''), item)
       .then(() => history.push(CATEGORY_INDEX))
+      .catch((error) => {
+        dispatch(showAlert(error.response.data.message))
+        setDisableButton(false)
+      })
   }
 
   return (
@@ -63,10 +66,8 @@ const CategoryCreate = ({match}) => {
       withButton={false}
     >
       <CategoryForm
-        name={name}
-        setName={setName}
-        sort={sort}
-        setSort={setSort}
+        item={item}
+        setItem={setItem}
         save={save}
         disable={disableButton}
         parentCategory={parentCategory}

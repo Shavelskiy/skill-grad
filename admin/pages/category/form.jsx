@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NumberInput, SaveButton, TextInput } from '../../components/ui/inputs'
+import translate from '../../helpers/translate'
 
-const CategoryForm = ({name, setName, sort, setSort, disable, parentCategory = null, save}) => {
+const CategoryForm = ({item, setItem, disable, parentCategory = null, save}) => {
+  const [enableTranslate, setEnableTranslate] = useState(true)
+
+  const setName = (name) => {
+    if (enableTranslate) {
+      setItem({...item, slug: translate(name), name: name})
+    } else {
+      setItem({...item, name: name})
+    }
+  }
+
+  const setSlug = (slug) => {
+    setEnableTranslate(translate(item.name) === slug)
+    setItem({...item, slug: slug})
+  }
+
   const renderParentCategoryInput = () => {
     if (parentCategory === null) {
       return <></>
@@ -23,14 +39,20 @@ const CategoryForm = ({name, setName, sort, setSort, disable, parentCategory = n
       {renderParentCategoryInput()}
 
       <TextInput
-        value={name}
-        setValue={setName}
+        value={item.name}
+        setValue={(name) => setName(name)}
         label="Название"
       />
 
+      <TextInput
+        value={item.slug}
+        setValue={(slug) => setSlug(slug)}
+        label="Символьный код"
+      />
+
       <NumberInput
-        value={sort}
-        setValue={setSort}
+        value={item.sort}
+        setValue={(sort) => setItem({...item, sort: sort})}
         label="Сортировка"
       />
 

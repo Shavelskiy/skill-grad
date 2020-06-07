@@ -115,6 +115,10 @@ const CategoryView = ({match}) => {
             <td>{item.name}</td>
           </tr>
           <tr>
+            <td>Символьный код</td>
+            <td>{item.slug}</td>
+          </tr>
+          <tr>
             <td>Сортировка</td>
             <td>{item.sort}</td>
           </tr>

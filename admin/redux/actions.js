@@ -1,4 +1,12 @@
-import { HIDE_LOADER, SHOW_LOADER, SET_TITLE, SET_BREADCRUMBS, SET_CURRENT_USER, SET_REDIRECT_LINK } from './types'
+import {
+  HIDE_LOADER,
+  SHOW_LOADER,
+  SET_TITLE,
+  SET_BREADCRUMBS,
+  SET_CURRENT_USER,
+  SET_REDIRECT_LINK,
+  SHOW_ALERT
+} from './types'
 
 export function showLoader() {
   return {
@@ -40,5 +48,12 @@ export function setRedirectLink(redirectLink) {
   return {
     type: SET_REDIRECT_LINK,
     payload: redirectLink,
+  }
+}
+
+export function showAlert(message) {
+  return {
+    type: SHOW_ALERT,
+    payload: message,
   }
 }

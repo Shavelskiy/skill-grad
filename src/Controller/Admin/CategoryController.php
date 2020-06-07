@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Helpers\SearchHelper;
 use App\Repository\CategoryRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
@@ -62,6 +63,7 @@ class CategoryController extends AbstractController
         return [
             'id' => $item->getId(),
             'name' => $item->getName(),
+            'slug' => $item->getSlug(),
             'is_parent' => $item->getParentCategory() === null,
             'sort' => $item->getSort(),
         ];
@@ -89,6 +91,7 @@ class CategoryController extends AbstractController
             return new JsonResponse([
                 'id' => $category->getId(),
                 'name' => $category->getName(),
+                'slug' => $category->getSlug(),
                 'sort' => $category->getSort(),
                 'parent_category' => $this->prepareParentCateroy($category),
                 'child_categories' => $this->prepareChildCategories($category),
@@ -120,6 +123,7 @@ class CategoryController extends AbstractController
             $result[] = [
                 'id' => $childCategory->getId(),
                 'name' => $childCategory->getName(),
+                'slug' => $category->getSlug(),
                 'sort' => $childCategory->getSort(),
             ];
         }
@@ -136,7 +140,8 @@ class CategoryController extends AbstractController
     {
         $category = (new Category())
             ->setName($request->get('name'))
-            ->setSort((int)($request->get('sort')));
+            ->setSlug($request->get('slug'))
+            ->setSort($request->get('sort'));
 
         $parentCategoryId = (int)($request->get('id'));
         if ($parentCategoryId > 0) {
@@ -151,7 +156,12 @@ class CategoryController extends AbstractController
         }
 
         $this->getDoctrine()->getManager()->persist($category);
-        $this->getDoctrine()->getManager()->flush();
+
+        try {
+            $this->getDoctrine()->getManager()->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            return new JsonResponse(['message' => 'Элемент с таким slug уже существует'], 400);
+        }
 
         return new JsonResponse();
     }
@@ -170,6 +180,7 @@ class CategoryController extends AbstractController
 
         $category
             ->setName($request->get('name'))
+            ->setSlug($request->get('slug'))
             ->setSort($request->get('sort'));
 
         $this->getDoctrine()->getManager()->persist($category);
