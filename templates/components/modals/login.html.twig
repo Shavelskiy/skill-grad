@@ -1,34 +1,36 @@
 <div class="modal" id="login-modal">
-  <div class="modal-dialog">
-    <button class="close-modal"></button>
-    <div class="modal-content">
-      <div class="modal-content__title">Вход на сайт</div>
-      <div class="modal-content__fields">
-        <form action="{{ path('ajax.auth.login') }}">
-          <div class="modal-content__field">
-            <input type="email" name="email" placeholder="E-mail" required="required"/>
-          </div>
-          <div class="modal-content__field">
-            <input type="password" name="password" placeholder="Пароль" required="required"/>
-            <div class="modal-content__checkbox checkbox-style">
-              <label for="remember_me">Запомнить пароль
-                <input type="checkbox" value="on" checked="checked" name="remember" id="remember_me"/>
-                <span class="checkmark"></span>
-              </label>
-            </div>
-          </div>
-          <div class="modal-content__field">
-            <input class="btn__style submit" type="submit"/>
-            <br/>или
-            <a class="modal__registr login-register-link">Зарегистрироваться</a>
-          </div>
-          <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}">
-        </form>
-        <div class="modal-content__field modal-content__forget">Если вы забыли пароль, то можете
-          <a class="login-forgot-password-link">восстановить его</a>
+  <div class="modal-content">
+    <div class="modal-body">
+      <button class="close-modal"></button>
+      <h2>Вход на сайт</h2>
+      <form action="{{ path('ajax.auth.login') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}">
+        <div class="modal-form-field">
+          <input type="email" name="email" placeholder="E-mail" required="required"/>
+        </div>
+        <div class="modal-form-field">
+          <input type="password" name="password" placeholder="Пароль" required="required"/>
+        </div>
+        <div class="modal-field-checkbox">
+          <label for="remember">Запомнить пароль
+            <input type="checkbox" value="on" checked="checked" name="remember" id="remember"/>
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <button class="btn btn-red" type="submit">Войти</button>
+      </form>
+      <div class="modal-additional-content">
+        <div class="modal-additional-row dark">
+          или&nbsp;
+          <span class="modal-link modal-link-blue login-register-link">Зарегистрироваться</span>
+        </div>
+        <div class="modal-additional-row">
+          Если вы забыли пароль, то можете&nbsp;
+          <span class="modal-link modal-link-red login-forgot-password-link">восстановить его</span>
         </div>
       </div>
-      {% include 'components/modals/social.auth.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
     </div>
+
+    {% include 'components/modals/social.auth.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
   </div>
 </div>

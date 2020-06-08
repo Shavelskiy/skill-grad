@@ -32,7 +32,7 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, reloadPageIfSucc
 
         axios.post(form.action, formData)
           .then(response => {
-            modal.classList.remove('is-visible')
+            modal.classList.remove('active')
             showAlert(response.data.message)
 
             if (reloadPageIfSuccess) {

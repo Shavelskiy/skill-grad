@@ -12,34 +12,34 @@ const openCitySelectorModalBtns = document.querySelectorAll('.open-city-selector
 if (openLoginModalBtns.length > 0) {
   openLoginModalBtns.forEach((item) => {
     item.onclick = () => {
-      loginModal.classList.add('is-visible')
+      loginModal.classList.add('active')
     }
   })
 }
 
 if (openRegisterModalBtn !== null) {
   openRegisterModalBtn.onclick = () => {
-    registerRoleModal.classList.add('is-visible')
+    registerRoleModal.classList.add('active')
   }
 }
 
 openCitySelectorModalBtns.forEach((item) => {
   item.onclick = () => {
-    citySelectorModal.classList.add('is-visible')
+    citySelectorModal.classList.add('active')
   }
 })
 
 loginModal.querySelector('.login-forgot-password-link').onclick = () => {
-  resetPasswordModal.classList.add('is-visible')
-  loginModal.classList.remove('is-visible')
+  resetPasswordModal.classList.add('active')
+  loginModal.classList.remove('active')
 }
 
 loginModal.querySelector('.login-register-link').onclick = () => {
-  registerRoleModal.classList.add('is-visible')
-  loginModal.classList.remove('is-visible')
+  registerRoleModal.classList.add('active')
+  loginModal.classList.remove('active')
 }
 
 citySelectorModal.querySelector('.open-feedback-modal-btn').onclick = () => {
-  feedbackModal.classList.add('is-visible')
-  citySelectorModal.classList.remove('is-visible')
+  feedbackModal.classList.add('active')
+  citySelectorModal.classList.remove('active')
 }

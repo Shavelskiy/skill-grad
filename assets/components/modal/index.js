@@ -1,5 +1,6 @@
-import './scss/index.scss'
+import './index.scss'
 import './choose-role-modal'
+import './city-selector'
 import './alert'
 
 export const loginModal = document.getElementById('login-modal')
@@ -13,25 +14,25 @@ export const feedbackModal =  document.getElementById('feedback-modal')
 window.addEventListener('click', (event) => {
   switch (event.target) {
     case loginModal:
-      loginModal.classList.remove('is-visible')
+      loginModal.classList.remove('active')
       break
     case resetPasswordModal:
-      resetPasswordModal.classList.remove('is-visible')
+      resetPasswordModal.classList.remove('active')
       break
     case newPasswordModal:
-      newPasswordModal.classList.remove('is-visible')
+      newPasswordModal.classList.remove('active')
       break
     case registerRoleModal:
-      registerRoleModal.classList.remove('is-visible')
+      registerRoleModal.classList.remove('active')
       break
     case registerModal:
-      registerModal.classList.remove('is-visible')
+      registerModal.classList.remove('active')
       break
     case citySelectorModal:
-      citySelectorModal.classList.remove('is-visible')
+      citySelectorModal.classList.remove('active')
       break
     case feedbackModal:
-      feedbackModal.classList.remove('is-visible')
+      feedbackModal.classList.remove('active')
       break
   }
 })
@@ -45,7 +46,7 @@ const initModalFormCloseBtn = (modal) => {
 
   if (closeButton !== null) {
     closeButton.onclick = () => {
-      modal.classList.remove('is-visible')
+      modal.classList.remove('active')
     }
   }
 }

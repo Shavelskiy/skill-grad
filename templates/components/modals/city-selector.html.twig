@@ -1,231 +1,87 @@
-<div class="modal modal_6" id="city-selector-modal">
-  <div class="modal-dialog">
-    <button class="close-modal"></button>
-    <div class="modal-content">
-      <div class="modal-content__title">Выбор города</div>
-      <form class="form__modal" action="#" method="post">
-        <div class="modal-content__fields">
-          <div class="modal-content__field">
-            <div class="header__search-field"><input type="text" name="search" value=""
-                                                     placeholder="Поиск по названию города"><input
-                class="header__search-input_submit" type="submit" value=""></div>
+<div class="modal active city-selector-modal" id="city-selector-modal">
+  <div class="modal-content">
+    <div class="modal-body city-selector-body">
+      <button class="close-modal"></button>
+      <h2>Выбор города</h2>
+      <div class="modal-search">
+        <input type="text" name="search" value="" placeholder="Поиск по названию города">
+        <input class="modal-search-submit" type="submit" value="">
+      </div>
+
+      <div class="city-list-container">
+        <div class="city-list-wrap">
+          <div class="city-list-select">
+            <a href="#" class="city-list-item city">Москва</a>
+            <a href="#" class="city-list-item city">Санк-Петербург</a>
+            <a href="#" class="city-list-item city">Екатеринбург</a>
+            <a href="#" class="city-list-item city">Новосибирск</a>
+            <a href="#" class="city-list-item city">Нижний Новгород</a>
+            <a href="#" class="city-list-item city">Казань</a>
+            <a href="#" class="city-list-item city">Челябинск</a>
+            <a href="#" class="city-list-item city">Омск</a>
+            <a href="#" class="city-list-item city">Самара</a>
+            <div class="city-list-item city-list-separator"><div></div></div>
+            <a href="#" class="city-list-item">Адыгея</a>
+            <a href="#" class="city-list-item">Алтай</a>
+            <a href="#" class="city-list-item">Алтайский край</a>
+            <a href="#" class="city-list-item">Амурская область</a>
+            <a href="#" class="city-list-item">Архангельская область</a>
+            <a href="#" class="city-list-item">Астраханская область</a>
+            <a href="#" class="city-list-item">Башкортостан</a>
+            <a href="#" class="city-list-item">Белгородская область</a>
+            <a href="#" class="city-list-item">Брянская область</a>
+            <a href="#" class="city-list-item">Бурятия</a>
+            <a href="#" class="city-list-item">Владимирская область</a>
+            <a href="#" class="city-list-item">Волгоградская область</a>
+            <a href="#" class="city-list-item">Вологодская область</a>
+            <a href="#" class="city-list-item">Воронежская область</a>
+            <a href="#" class="city-list-item">Воронежская область</a>
+            <a href="#" class="city-list-item">Дагестан</a>
+            <a href="#" class="city-list-item">Еврейская АО</a>
+            <a href="#" class="city-list-item">Забайкальский край</a>
+            <a href="#" class="city-list-item">Ивановская область</a>
+            <a href="#" class="city-list-item">Ингушетия</a>
+            <a href="#" class="city-list-item">Иркутская область</a>
+            <a href="#" class="city-list-item">Кабардино-Балкария</a>
+            <a href="#" class="city-list-item">Калининградская область</a>
+            <a href="#" class="city-list-item">Калмыкия</a>
+            <a href="#" class="city-list-item">Калужская область</a>
+            <a href="#" class="city-list-item">Камчатский край</a>
+            <a href="#" class="city-list-item">Карачаево-Черкесия</a>
+            <a href="#" class="city-list-item">Карелия</a>
+            <a href="#" class="city-list-item">Кемеровская область</a>
+            <a href="#" class="city-list-item">Кировская область</a>
+            <a href="#" class="city-list-item">Коми</a>
+            <a href="#" class="city-list-item">Костромская область</a>
+            <a href="#" class="city-list-item">Краснодарский край</a>
+            <a href="#" class="city-list-item">Красноярский край</a>
+            <a href="#" class="city-list-item">Крым</a>
+            <a href="#" class="city-list-item">Курганская область</a>
+            <a href="#" class="city-list-item">Курская область</a>
+            <a href="#" class="city-list-item">Ленинградская область</a>
+            <a href="#" class="city-list-item">Липецкая область</a>
+            <a href="#" class="city-list-item">Магаданская область</a>
+            <a href="#" class="city-list-item">Марий Эл</a>
+            <a href="#" class="city-list-item">Мордовия</a>
+            <a href="#" class="city-list-item">Московская область</a>
+            <a href="#" class="city-list-item">Мурманская область</a>
+            <a href="#" class="city-list-item">Ненецкий АО</a>
+            <a href="#" class="city-list-item">Нижегородская область</a>
+            <a href="#" class="city-list-item">Новгородская область</a>
+            <a href="#" class="city-list-item">Новосибирская область</a>
+            <a href="#" class="city-list-item">Омская область</a>
+            <a href="#" class="city-list-item">Оренбургская область</a>
+            <a href="#" class="city-list-item">Орловская область</a>
           </div>
         </div>
-        <div class="modal-content__field ">
-          <div class="modal-content__wrap">
-            <div class="modal-content__col">
-              <div class="modal-content__cities">
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Москва</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Санк-Петербург</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Екатеринбург</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Новосибирск</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Нижний Новгород</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Казань</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Челябинск</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Омск</a>
-                </div>
-                <div class="modal-content__city">
-                  <a href="#" class="modal-content__city-select">Самара</a>
-                </div>
-              </div>
-              <div class="modal-content__regiones">
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Адыгея</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Алтай</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Алтайский край</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Амурская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Архангельская область</a>
-                </div>
-              </div>
+      </div>
+    </div>
 
-            </div>
-            <div class="modal-content__col">
-              <div class="modal-content__regiones">
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Астраханская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Башкортостан</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Белгородская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Брянская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Бурятия</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Владимирская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Волгоградская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Вологодская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Воронежская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Воронежская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Дагестан</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Еврейская АО</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Забайкальский край</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Ивановская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Ингушетия</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Иркутская область</a>
-                </div>
-              </div>
-
-            </div>
-            <div class="modal-content__col">
-              <div class="modal-content__regiones">
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Кабардино-Балкария</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Калининградская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Калмыкия</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Калужская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Камчатский край</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Карачаево-Черкесия</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Карелия</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Кемеровская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Кировская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Коми</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Костромская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Краснодарский край</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Красноярский край</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Крым</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Курганская область</a>
-                </div>
-
-              </div>
-
-            </div>
-            <div class="modal-content__col">
-              <div class="modal-content__regiones">
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Курская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Ленинградская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Липецкая область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Магаданская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Марий Эл</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Мордовия</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Московская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Мурманская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Ненецкий АО</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Нижегородская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Новгородская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Новосибирская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Омская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Оренбургская область</a>
-                </div>
-                <div class="modal-content__region">
-                  <a href="#" class="modal-content__region-select">Орловская область</a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-content__body">
-          <div class="modal-content__field modal-content__descr"> Если Вы не нашли Вашего города, свяжитесь с нами с
-            помощью<a class="open-feedback-modal-btn"> формы обратной связи</a>
-          </div>
-        </div>
-      </form>
+    <div class="modal-footer">
+      <div class="modal-additional-row dark">
+        Если Вы не нашли Вашего города, свяжитесь с нами с помощью
+        <span class="modal-link modal-link-blue open-feedback-modal-btn"> формы обратной связи</span>
+      </div>
     </div>
   </div>
 </div>

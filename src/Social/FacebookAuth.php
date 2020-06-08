@@ -23,7 +23,7 @@ class FacebookAuth implements SocialAuthInterface
 
     public function getAlias(): string
     {
-        return 'fc';
+        return 'fb';
     }
 
     public function support(Request $request): bool

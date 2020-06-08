@@ -38,11 +38,11 @@
           <div class="header-button-container">
             <div class="header-button open-header-dropdown-btn">
               <img src="/img/009-login.svg"/>
-{#              {% if is_granted('ROLE_PROVIDER') %}#}
+              {% if is_granted('ROLE_PROVIDER') %}
                 {% include 'components/header/provider.dropdown.html.twig' %}
-{#              {% else %}#}
-{#                {% include 'components/header/user.dropdown.html.twig' %}#}
-{#              {% endif %}#}
+              {% else %}
+                {% include 'components/header/user.dropdown.html.twig' %}
+              {% endif %}
             </div>
             <div class="header-button-info">
               <span class="header-button-text">Добро пожаловать,</span>
