@@ -9,12 +9,11 @@
   overflow: hidden;
   padding: 35px 0px 60px 0px;
 
-  &__title {
+  .how-work-title {
     font-size: 44px;
     font-weight: 700;
     text-align: center;
     width: 100%;
-    line-height: 18px;
     color: #fff;
   }
 
@@ -109,43 +108,5 @@
 
   .btn__popup {
     background-image: linear-gradient(0deg, #fb5519 0%, #f9453f 100%);
-  }
-}
-
-@media(max-width: 767px) {
-  .how-work__title {
-    font-size: 26px;
-    text-align: center;
-  }
-  .how-work__info {
-    width: 100%;
-  }
-  .how-work .how-work__info-mobile {
-    display: flex;
-  }
-}
-
-@media(min-width: 768px) {
-  .how-work .how-work__info-mobile {
-    display: none;
-  }
-}
-
-@media(min-width: 768px) and (max-width: 991px) {
-  .how-work__list {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-  .how-work__info {
-    border-right: 1px dashed transparent;
-  }
-  .how-work__list:first-of-type {
-    border-right: 1px dashed transparent;
-  }
-  .how-work__info-title {
-    font-size: 19px;
-  }
-  .how-work__info-items {
-    width: 300px;
   }
 }

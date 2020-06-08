@@ -16,23 +16,24 @@ const initTabs = (navSelector, contentSelector) => {
 
 const handleTabClick = (event, tabNav, tabContent) => {
   tabNav.forEach(item => {
-    item.classList.remove('is-active')
+    item.classList.remove('active')
   })
 
-  event.target.classList.add('is-active')
+  event.target.classList.add('active')
 
   selectTabContent(event.target.getAttribute('data-tab-name'), tabContent)
 }
 
 const selectTabContent = (tabName, tabContent) => {
   tabContent.forEach(item => {
-    item.classList.contains(tabName) ? item.classList.add('is-active') : item.classList.remove('is-active')
+    console.log(tabName, item)
+    item.classList.contains(tabName) ? item.classList.add('active') : item.classList.remove('active')
   })
 }
 
-initTabs('.tabs-nav__item', '.study-content__item')
-initTabs('.study-content__item-circle', '.study-content__item')
-initTabs('.how-work__info-mobile .how-work__info-title', '.how-work__info')
+initTabs('.study-tabs-nav-item', '.study-content-item')
+// initTabs('.study-content__item-circle', '.study-tab-content')
+// initTabs('.how-work__info-mobile .how-work__info-title', '.how-work__info')
 
 const sliders = document.querySelectorAll('.study-slider')
 
@@ -50,18 +51,22 @@ sliders.forEach((item) => {
         slidesPerView: 3,
       },
     },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
   })
 })
 
 document.querySelector('.how-work-register-user-btn').onclick = () => showRegisterForm(ROLE_USER)
 document.querySelector('.how-work-register-provider-btn').onclick = () => showRegisterForm(ROLE_PROVIDER)
 
-document.querySelector('.main__mnu-mobile').onclick = () => {
-  const mobileMenu = document.getElementById('mobile__list-mnu')
-
-  if (mobileMenu.style.display === 'none') {
-    mobileMenu.style.display = 'block'
-  } else {
-    mobileMenu.style.display = 'none'
-  }
-}
+// document.querySelector('.main__mnu-mobile').onclick = () => {
+//   const mobileMenu = document.getElementById('mobile__list-mnu')
+//
+//   if (mobileMenu.style.display === 'none') {
+//     mobileMenu.style.display = 'block'
+//   } else {
+//     mobileMenu.style.display = 'none'
+//   }
+// }

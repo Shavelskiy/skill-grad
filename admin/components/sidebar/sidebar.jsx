@@ -7,7 +7,7 @@ import Menu from '../menu/menu'
 import css from './sidebar.scss?module'
 import cn from 'classnames'
 
-import logo from '../../images/logo.svg'
+import logo from '../../images/logo.png'
 
 
 const Sidebar = ({opened, toggle}) => {

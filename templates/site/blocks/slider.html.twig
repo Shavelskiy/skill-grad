@@ -1,203 +1,41 @@
-<div class="study-content__cards slider__wrapper study-slider" id="slider-{{ id }}">
+<div class="study-slider" id="slider-{{ id }}">
   <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
+    {% for i in 1..5 %}
+      <div class="swiper-slide">
+        <div class="study-slider-item">
+          <div class="study-slider-item-header">
+            <div class="study-slider-item-title">
+              {{ id }}{{ i }}Центр компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана
+              <span class="card-discount"></span>
             </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
+          </div>
+          <div class="study-slider-item-body">
+            <a class="study-slider-item-title" href="#">Правовое обеспечение национальной безопасности</a>
+            <div class="study-slider-description">Как провести анализ и выявить проблемы существующей системы
+              вознаграждения персонала (проблемы в управлении, мотив....
+            </div>
+            <div class="study-slider-item-info">
+              <div class="study-slider-info-form">Очная,заочная, дистанционная</div>
+              <div class="study-slider-info-length">5 месяцев</div>
+              <div class="study-slider-info-rating">0</div>
+            </div>
+            <div class="study-slider-buy">
+              <div class="study-content__card-price">
+                <div class="study-slider-buy-price old"><span>140 000 p.</span></div>
+                <div class="study-slider-buy-price current">124 000 p.</div>
+              </div>
+              <a class="btn btn-blue study-slider-buy-btn" href="#">Заказать</a>
+              <div class="study-slider-buy-compare">
+                <span class="study-slider-buy-tooltip">Добавить в сравнение</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
-            </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
-            </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
-            </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
-            </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
-            </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="study-content__card slider__item ">
-        <div class="study-content__card-head">
-          <div class="study-content__card-head-title"><span class="study-content__card-head-icon"></span>Центр
-            компьютерного обучения «Специалист» при МГТУ им. Н.Э. Баумана<span class="card-discount"></span>
-          </div>
-        </div>
-        <div class="study-content__card-body"><a class="study-content__card-title" href="#">Правовое обеспечение
-            национальной безопасности</a>
-          <div class="study-content__card-desc">Как провести анализ и выявить проблемы существующей системы
-            вознаграждения персонала (проблемы в управлении, мотив....
-          </div>
-          <div class="study-content__card-info">
-            <div class="study-content__card-form">Очная,заочная, дистанционная</div>
-            <div class="study-content__card-length">5 месяцев</div>
-            <div class="study-content__card-rating">0</div>
-          </div>
-          <div class="study-content__card-buy">
-            <div class="study-content__card-price">
-              <div class="study-content__card-price-old"><span>140 000 p.</span></div>
-              <div class="study-content__card-price-current">124 000 p.</div>
-            </div>
-            <a class="study-content__card-button btn" href="#">Заказать</a>
-            <div class="study-content__card-compare"><span class="tooltiptext">Добавить в сравнение</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <div class="swiper-button swiper-button-prev"></div>
+  <div class="swiper-button swiper-button-next"></div>
 </div>
+
