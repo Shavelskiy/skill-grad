@@ -5,6 +5,7 @@ namespace App\Security;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,17 +59,21 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $user =  $this->userRepository->findUserByEmail($credentials['email']);
+        try {
+            $user = $this->userRepository->findUserByEmail($credentials['email']);
 
-        if ($user === null || !$user->isActive()) {
+            if ($user === null || !$user->isActive()) {
+                return null;
+            }
+
+            if (in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
+                return $user;
+            }
+
+            throw new AccessDeniedException('');
+        } catch (Exception $e) {
             return null;
         }
-
-        if (in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
-            return $user;
-        }
-
-        throw new AccessDeniedException('');
     }
 
     /**
@@ -100,7 +105,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
             return $userInfo->getFullName();
         }
 
-        return  $user->getUsername();
+        return $user->getUsername();
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
