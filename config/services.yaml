@@ -1,4 +1,6 @@
 parameters:
+  site:
+    host: '%env(resolve:SITE_HOST)%'
   social.services:
     vk:
       client_id: '%env(resolve:VK_CLIENT_ID)%'

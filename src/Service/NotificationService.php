@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\EventSubscriber\ConfirmRegisterListener;
 use RuntimeException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -15,15 +16,19 @@ class NotificationService implements AuthMailerInterface
     protected MailerInterface $mailer;
     protected UrlGeneratorInterface $urlGenerator;
     protected Environment $templating;
+    protected string $host;
 
     public function __construct(
         MailerInterface $mailer,
         UrlGeneratorInterface $urlGenerator,
-        Environment $templating
+        Environment $templating,
+        ParameterBagInterface $params
     ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
         $this->templating = $templating;
+
+        $this->host = ($params->get('site'))['host'];
     }
 
     /**
@@ -38,7 +43,7 @@ class NotificationService implements AuthMailerInterface
                 ->to($toEmail)
                 ->subject('Восстановление пароля')
                 ->html($this->templating->render('emails/forgot.password.html.twig', [
-                    'link' => 'http://localhost:8080' . $this->urlGenerator->generate('site.index', [
+                    'link' => $this->host . $this->urlGenerator->generate('site.index', [
                             'reset_password' => 1,
                             'token' => $token,
                         ]),
@@ -62,7 +67,7 @@ class NotificationService implements AuthMailerInterface
                 ->to($toEmail)
                 ->subject('Потверждение регистрации')
                 ->html($this->templating->render('emails/forgot.password.html.twig', [
-                    'link' => 'http://localhost:8080' . $this->urlGenerator->generate('site.index', [
+                    'link' => $this->host . $this->urlGenerator->generate('site.index', [
                             ConfirmRegisterListener::CONFIRM_REGISTRATION_KEY => 1,
                             'token' => $token,
                         ]),
