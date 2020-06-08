@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const initModalForm = (modal, checkPasswords, closeFormIfError, reloadPageIfSuccess, recaptchaAction) => {
   const form = modal.querySelector('form')
-  const formButton = form.querySelector('.submit')
+  const formButton = form.querySelector('button[type="submit"]')
 
   form.onsubmit = function (e) {
     e.preventDefault()

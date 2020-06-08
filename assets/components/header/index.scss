@@ -3,6 +3,10 @@
   padding: 12px 0;
   width: 100%;
 
+  .container {
+    overflow: visible;
+  }
+
   .header-wrap {
     display: flex;
     align-items: center;
@@ -17,7 +21,7 @@
 
     .header-wrap-right {
       display: flex;
-      width: 11%;
+      width: 14%;
       justify-content: space-between;
 
       &.header-wrap-right-auth {
