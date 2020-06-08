@@ -137,7 +137,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     public function updateUser(User $user, UpdateUserData $updateUserData)
     {
         $user
-            ->setFullName($updateUserData->getFullName())
+//            ->setFullName($updateUserData->getFullName())
             ->setEmail($updateUserData->getEmail())
             ->setPhone($updateUserData->getPhone());
 

@@ -29,7 +29,7 @@ class UserTokenRepository extends ServiceEntityRepository
             }
 
             $token = $this->createQueryBuilder('u')
-                ->where('u.token = :token')
+                ->andWhere('u.token = :token')
                 ->andWhere('u.type = :type')
                 ->setParameters([
                     'token' => $token,

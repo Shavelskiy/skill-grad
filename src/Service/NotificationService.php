@@ -70,7 +70,7 @@ class NotificationService implements AuthMailerInterface
 
             $this->mailer->send($email);
         } catch (Throwable $e) {
-            throw new RuntimeException('Произошла ошибка');
+            throw new RuntimeException('Произошла ошибка при отправке письма.');
         }
     }
 }
