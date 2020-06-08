@@ -65,6 +65,7 @@
       line-height: 16px;
       color: #888888;
       font-weight: 400;
+      overflow: hidden;
 
       &:not(:last-child) {
         margin-bottom: 20px;
@@ -85,6 +86,25 @@
 
       &::placeholder {
         color: #3d3d3d;
+      }
+    }
+
+    textarea {
+      width: 100% !important;
+      border: none;
+      min-height: 80px !important;
+      max-height: 600px !important;
+      border-radius: 24px;
+      background-color: #f3f3f3;
+      padding-left: 25px;
+      padding-top: 20px;
+      font-size: 15px;
+      line-height: 16px;
+      color: #3d3d3d;
+      font-weight: 400;
+
+      &:focus {
+        outline: none;
       }
     }
 
@@ -333,27 +353,3 @@
     }
   }
 }
-
-
-//.modal_4 .form__modal {
-//  padding: 25px;
-//}
-//
-//.modal_4 .modal-dialog {
-//  max-width: 370px;
-//}
-
-
-//textarea {
-//  width: 280px;
-//  border: none;
-//  height: 120px;
-//  border-radius: 24px;
-//  background-color: #f3f3f3;
-//  padding-left: 25px;
-//  padding-top: 20px;
-//  font-size: 15px;
-//  line-height: 16px;
-//  color: #3d3d3d;
-//  font-weight: 400;
-//}

@@ -1,20 +1,29 @@
 <div class="modal" id="feedback-modal">
-  <div class="modal-dialog">
-    <button class="close-modal"></button>
-    <div class="modal-content">
-      <div class="modal-content__title"> Написать нам</div>
-      <form class="form__modal" action="#" method="post">
-        <div class="modal-content__fields">
-          <div class="modal-content__field"><input type="text" placeholder="Имя" required="required"/></div>
-          <div class="modal-content__field"><input type="email" placeholder="E-mail" required="required"/></div>
-          <div class="modal-content__field"><textarea placeholder="Вопрос"></textarea></div>
-          <div class="modal-content__field"><input class="btn__style" type="submit" value="Отправить"/></div>
-          <div class="modal-content__field modal-content__descr">Отправляя запрос Вы соглашаетесь с « <a href="#">Пользовательским
-              соглашением</a>»,«<a href="#">Политикой платных услуг</a>»,и обработкой персональных данных в
-            соответствии c «<a href="#">Политикой конфиденциальности</a>»
-          </div>
+  <div class="modal-content">
+    <div class="modal-body">
+      <button class="close-modal"></button>
+      <h2>Написать нам</h2>
+      <form action="{{ path('site.index') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('feedback') }}">
+        <div class="modal-form-field">
+          <input type="text" name="name" placeholder="Имя" required="required"/>
         </div>
+        <div class="modal-form-field">
+          <input type="email" name="email" placeholder="E-mail" required="required"/>
+        </div>
+        <div class="modal-form-field">
+          <textarea name="question" placeholder="Вопрос" cols="40" rows="5"></textarea>
+        </div>
+        <button class="btn btn-red" type="submit">Отправить</button>
       </form>
+      <div class="modal-additional-content">
+        <div class="modal-additional-row">
+          Отправляя запрос Вы соглашаетесь с « <a class="modal-link modal-link-blue" href="#">Пользовательским
+            соглашением</a>»,«<a class="modal-link modal-link-blue" href="#">Политикой платных услуг</a>»,и обработкой
+          персональных данных в
+          соответствии c «<a class="modal-link modal-link-blue" href="#">Политикой конфиденциальности</a>»
+        </div>
+      </div>
     </div>
   </div>
 </div>
