@@ -38,6 +38,7 @@ button {
   min-height: 100%;
   min-width: 320px;
 }
+
 r
 .header {
   flex: 0 0 auto;
@@ -56,9 +57,6 @@ r
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-
 
   @media (min-width: 480px) {
     width: 100%;
@@ -193,9 +191,6 @@ r
     margin-right: 20px;
   }
 
-  .header-wrap .header__btns .header__btns-autorization {
-    margin-left: 15px;
-  }
 
   .banner__home {
     background-position: 0% 100%;

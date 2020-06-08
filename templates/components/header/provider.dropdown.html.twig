@@ -1,34 +1,37 @@
-<ul class="header-lc__nav">
-  <div class="scrollbar" id="style-1">
-    <div class="force-overflow"></div>
-  </div>
-  <li class="header-lc__nav-item">
-    <a class="header-lc__nav-link header-lc__nav-link1" href="{{ path('site.profile', { path: 'settings' }) }}">
+<ul class="header-dropdown">
+  <li class="header-dropdown-item">
+    <img src="/img/028-gear.svg"/>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'settings' }) }}">
       Настройки профиля
     </a>
   </li>
-  <li class="header-lc__nav-item">
-    <a class="header-lc__nav-link header-lc__nav-link2" href="{{ path('site.profile', { path: 'programs' }) }}">
+  <li class="header-dropdown-item">
+    <img src="/img/032-google.svg"/>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'programs' }) }}">
       Программы обучения
     </a>
   </li>
-  <li class="header-lc__nav-item">
-    <a class="header-lc__nav-link header-lc__nav-link3" href="{{ path('site.profile', { path: 'publications' }) }}">
+  <li class="header-dropdown-item">
+    <img src="/img/030-contract.svg"/>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'publications' }) }}">
       Публикации
     </a>
   </li>
-  <li class="header-lc__nav-item">
-    <a class="header-lc__nav-link header-lc__nav-link4" href="{{ path('site.profile', { path: 'messages' }) }}">
+  <li class="header-dropdown-item">
+    <img src="/img/031-email.svg"/>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'messages' }) }}">
       Сообщения
     </a>
-    <div class="header-lc__message-count">10</div>
+    <div class="header-dropdown-item-tooltip">10</div>
   </li>
-  <li class="header-lc__nav-item">
-    <a class="header-lc__nav-link header-lc__nav-link5" href="{{ path('site.profile', { path: 'services' }) }}">
+  <li class="header-dropdown-item">
+    <img src="/img/032-google.svg"/>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'services' }) }}">
       Платные услуги, документы
     </a>
   </li>
-  <li class="header-lc__nav-item">
-    <div class="header-lc__nav-link header-lc__nav-link6 logout-link">Выйти</div>
+  <li class="header-dropdown-item">
+    <img src="/img/033-out.svg"/>
+    <div class="header-dropdown-link logout-link">Выйти</div>
   </li>
 </ul>

@@ -1,34 +1,11 @@
 .categories-menu {
-  margin-right: 40px;
-  position: relative;
-  flex: 0 0 10%;
-  width: 10%;
-  height: 60px;
-
-  button {
-    position: relative;
-    padding: 0 20px 0 50px;
-    background-color: #ededed;
-    border-radius: 10px;
-    height: 46px;
-    line-height: 46px;
-    color: #3d3d3d;
-    font-size: 15px;
-    font-weight: 700;
-  }
-
-  button::before {
-    content: "";
-    position: absolute;
-    width: 45px;
-    height: 45px;
-    left: 18px;
-    top: 13px;
-    background: url(../../img/menu.svg) no-repeat;
-  }
+  position: absolute;
+  top: 77%;
+  left: 27%;
 
   .categories-container {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
     position: relative;
     min-width: 380px;
     margin: 10px 0 0 -25px;
@@ -36,9 +13,11 @@
     z-index: 999;
     padding: 20px 0 20px 20px;
     filter: drop-shadow(0px 7px 10px rgba(22, 58, 86, 0.1));
+    transition: opacity .2s ease-out;
 
     &.active {
-      display: block;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .categories-list {
@@ -110,19 +89,20 @@
       }
 
       .categories-submenu {
-        direction: ltr;
         display: none;
-        content: " ";
-        padding: 20px 30px;
+        flex-flow: row nowrap;
+        justify-content: space-between;
         position: fixed;
         width: 490px;
         height: 100%;
         left: 100%;
         top: 0;
-        filter: drop-shadow(0px 7px 10px rgba(16, 42, 63, 0.1));
+        padding: 20px 30px;
+        direction: ltr;
         background-color: #e9f1f7;
-        flex-flow: row nowrap;
-        justify-content: space-between;
+        content: " ";
+        filter: drop-shadow(0px 7px 10px rgba(16, 42, 63, 0.1));
+
 
         .categories-submenu-col {
           flex: 0 1 49%;
