@@ -1,196 +1,124 @@
 .footer {
   width: 100%;
-  //position: fixed;
-  //left: 0;
-  //bottom: 0;
 
-
-  &-bg__elem {
+  .footer-content {
     background-color: #f3f3f3;
-  }
+    padding: 50px 0 35px;
 
-  &-bg__gray {
-    background-color: #ededed;
-    width: 100%;
-  }
-
-  &-cont {
-    padding: 30px 0px 20px 0px;
-  }
-
-  &-row {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    width: 100%;
-
-    .footer-col {
-      flex: 0 0 31%;
-      width: 31%;
-
-      .footer-mnu__items {
-        list-style: none;
-        padding-left: 0px;
-
-        .footer-mnu__link {
-          text-decoration: none;
-          color: #999;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 26px;
-
-          &:hover {
-            text-decoration: underline;
-            transition: all .3s ease-out;
-          }
-        }
-      }
-
-      .footer-nav__items {
-        padding-left: 0px;
-
-        .footer-nav__link {
-          text-decoration: none;
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 36px;
-          color: #436c8d;
-
-          &:hover {
-            text-decoration: underline;
-            transition: all .3s ease-out;
-          }
-
-        }
-      }
-
-      .footer-social {
-        text-align: center;
-        width: 50%;
-
-        &__title {
-          font-size: 16px;
-          line-height: 36px;
-          color: #3c3c3c;
-          font-weight: 700;
-        }
-      }
-
-      .footer-social__items {
-        display: flex;
-        padding-left: 15px;
-        margin-top: 0px;
-
-        .footer-social__link {
-          padding-left: 5px;
-        }
-
-        .footer-social__link-vk {
-          width: 50px;
-          height: 50px;
-          background: url(../../img/024-vk.svg) no-repeat;
-        }
-
-        .footer-social__link-ok {
-          width: 50px;
-          height: 50px;
-          background: url(../../img/021-odnoklassniki.svg) no-repeat;
-        }
-
-        .footer-social__link-fc {
-          width: 50px;
-          height: 50px;
-          background: url(../../img/022-facebook.svg) no-repeat;
-        }
-      }
-
-      .btn {
-        width: 200px;
-        height: 48px;
-        line-height: 48px;
-        margin-bottom: 10px;;
-      }
-    }
-
-    .footer-col3 {
+    .footer-row {
       display: flex;
-      flex-flow: column wrap;
-      align-items: flex-end;
-      padding-top: 20px;
-    }
+      flex-flow: row wrap;
+      justify-content: space-between;
+      width: 100%;
 
+      .footer-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &:last-child {
+          flex: 0.3;
+          padding-top: 20px;
+        }
+
+        .footer-menu {
+          list-style: none;
+          margin-top: 10px;
+          padding-left: 0px;
+          display: flex;
+          flex-direction: column;
+
+          .footer-menu-link {
+            text-decoration: none;
+            color: #999;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 26px;
+            padding: 5px 0;
+
+            &:hover {
+              text-decoration: underline;
+              transition: all .3s ease-out;
+            }
+          }
+        }
+
+        .footer-nav {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          padding: 10px 0;
+
+          .footer-nav-link {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 36px;
+            color: #436c8d;
+
+            &:hover {
+              text-decoration: underline;
+              transition: all .3s ease-out;
+            }
+
+          }
+        }
+
+        .footer-social {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .footer-social-title {
+            font-size: 16px;
+            line-height: 36px;
+            color: #3c3c3c;
+            font-weight: 700;
+          }
+        }
+
+        .footer-social-items {
+          display: flex;
+          margin-top: 0px;
+
+          .footer-social-link {
+            padding-left: 5px;
+            width: 50px;
+            height: 50px;
+
+            &.footer-social-link-vk {
+              background: url(../../img/024-vk.svg) no-repeat;
+            }
+
+            &.footer-social-link-ok {
+              background: url(../../img/021-odnoklassniki.svg) no-repeat;
+            }
+
+            &.footer-social-link-fb {
+              background: url(../../img/022-facebook.svg) no-repeat;
+            }
+          }
+        }
+      }
+    }
   }
 
-  .footer-info {
-    padding: 25px 20px;
+  .footer-copyright {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ededed;
+    padding: 17px 0;
 
-    &__row {
-      display: block;
-      text-align: center;
-    }
-
-    .footer-info__desc {
+    span {
       font-size: 14px;
       line-height: 20px;
       color: #999;
       font-weight: 500;
     }
-
   }
 }
-
-@media all and (max-width: 991px) and (min-width: 768px) {
-  .footer .container {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .footer-row {
-    justify-content: space-around;
-  }
-
-  .footer-row .footer-col3 {
-    align-items: center;
-    padding-top: 20px;
-  }
-
-  .footer-row .footer-col .footer-social {
-    text-align: center;
-    width: unset;
-  }
-}
-
-@media (min-width: 992px) {
-  .footer-row .footer-col3 {
-    align-items: center;
-  }
-}
-
-//@media(max-width: 767px) {
-//  .footer {
-//    @include row(
-//            $xs-grid-gutter: $grid-gutter-width, // отступ по умолчанию
-//            $sm-grid-gutter: 0, // нет отступа
-//            $md-grid-gutter: $grid-gutter-width // отступ по умолчанию
-//    );
-//
-//    .footer-row {
-//      display: flex;
-//      flex-flow: column wrap;
-//
-//      .footer-col {
-//        flex: 0 0 100%;
-//        width: 100%;
-//        text-align: center;
-//      }
-//
-//      .footer-col3 {
-//        flex: 0 0 100%;
-//        width: 100%;
-//        align-items: center;
-//        text-align: center;
-//      }
-//    }
-//
-//  }
-//}
