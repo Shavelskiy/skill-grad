@@ -38,6 +38,9 @@ class EntityCacheListener
         $keysToClear = [];
 
         foreach ($entityClasses as $entityClass) {
+            if (!isset(Relations::ENTITY[$entityClass])) {
+                continue;
+            }
             $keysToClear = [...$keysToClear, ...Relations::ENTITY[$entityClass]];
         }
 
