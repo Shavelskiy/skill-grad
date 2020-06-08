@@ -14,7 +14,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
 
   &-item {
@@ -22,6 +22,7 @@
     flex: 0 0 30%;
     width: 30%;
     background: #f5f5f7;
+    margin-bottom: 20px;
 
     @media(max-width: 991px) {
       & {
@@ -115,8 +116,9 @@
     }
   }
 
-  .btn__link {
-    background-image: linear-gradient(0deg, #1f81b9 0%, #195da7 100%);
+  .blog-btn-container {
+    width: 270px;
+    margin: 30px auto 0;
   }
 }
 
