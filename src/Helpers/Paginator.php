@@ -58,8 +58,8 @@ class Paginator
     {
         if (!isset($this->result)) {
             $items = (clone $this->query)
-                ->setFirstResult(($this->page - 1) * $this->pageItems)
-                ->setMaxResults($this->pageItems)
+//                ->setFirstResult(($this->page - 1) * $this->pageItems)
+//                ->setMaxResults($this->pageItems)
                 ->getQuery()
                 ->getResult();
 

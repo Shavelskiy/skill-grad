@@ -5,6 +5,7 @@
       <h2>Восстановление пароля</h2>
       <form method="post" action="{{ path('ajax.auth.reset.password') }}">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('reset-password') }}">
+        <span class="modal-error"></span>
         <div class="modal-form-field">
           <input type="email" name="email" placeholder="E-mail" required="required"/>
         </div>

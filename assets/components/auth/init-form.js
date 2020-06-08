@@ -42,6 +42,7 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, reloadPageIfSucc
           .catch(error => {
             if (closeFormIfError) {
               showAlert(error.response.data.message)
+              modal.classList.remove('active')
             } else {
               formButton.disabled = false
               showModalFormError(form, error.response.data.message)
@@ -55,15 +56,25 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, reloadPageIfSucc
 }
 
 const showModalFormError = function (form, error) {
-  // const modalError = form.querySelector('.error') todo
-  // modalError.classList.add('error-active')
-  // modalError.textContent = error
+  const modalError = form.querySelector('.modal-error')
+
+  if (!modalError) {
+    return
+  }
+
+  modalError.classList.add('active')
+  modalError.textContent = error
 }
 
 const hideModalFormError = function (form) {
-  // const modalError = form.querySelector('.error') todo
-  // modalError.classList.remove('error-active')
-  // modalError.textContent = ''
+  const modalError = form.querySelector('.modal-error')
+
+  if (!modalError) {
+    return
+  }
+
+  modalError.classList.remove('active')
+  modalError.textContent = ''
 }
 
 export default initModalForm

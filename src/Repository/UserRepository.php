@@ -9,6 +9,8 @@ use App\Entity\User;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
@@ -86,14 +88,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @param int $pageItems
      * @param array|null $serach
      * @return PaginatorResult
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getPaginatorResult(SearchQuery $searchQuery): PaginatorResult
     {
         $query = $this
             ->createQueryBuilder('u')
-            ->innerJoin('u.userInfo', 'ui');
+            ->leftJoin('u.userInfo', 'ui');
 
         if ($searchQuery->getOrderField() !== null) {
             $query->addOrderBy('u.' . $searchQuery->getOrderField(), $searchQuery->getOrderType());

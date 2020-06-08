@@ -10,7 +10,7 @@ export const table = [
     },
   },
   {
-    title: 'Полной имя',
+    title: 'Полное имя',
     name: 'fullName',
     search: {
       enable: true,

@@ -1,5 +1,10 @@
 .alert {
   &-body {
-    padding: 0.5vw 1.6vw;
+    background-color: #fff;
+    padding: 0.7vw 1.8vw;
+
+    .message {
+      font-size: 18px;
+    }
   }
 }

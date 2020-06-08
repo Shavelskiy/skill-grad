@@ -17,6 +17,16 @@
     opacity: 1;
   }
 
+  .modal-error {
+    display: none;
+    margin-bottom: 5px;
+    color: #f7562e;
+
+    &.active {
+      display: block;
+    }
+  }
+
   button.close-modal {
     cursor: pointer;
     border: none;
@@ -37,6 +47,7 @@
   .modal-body {
     text-align: center;
     position: relative;
+    min-width: 370px;
     max-width: 370px;
     background-color: #fff;
     cursor: default;

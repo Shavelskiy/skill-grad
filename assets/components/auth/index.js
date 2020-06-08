@@ -3,5 +3,5 @@ import { loginModal, newPasswordModal, registerModal, resetPasswordModal } from 
 
 initModalForm(loginModal, false, false, true, 'login')
 initModalForm(resetPasswordModal, false, false, false, 'resetPassword')
-initModalForm(newPasswordModal, true, true, false, 'newPassword')
+initModalForm(newPasswordModal, true, true, true, 'newPassword')
 initModalForm(registerModal, true, false, false, 'register')

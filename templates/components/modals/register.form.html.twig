@@ -21,7 +21,7 @@
       <form method="post" action="{{ path('ajax.auth.register') }}" class="modal-form">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
         <input type="hidden" name="role">
-
+        <span class="modal-error"></span>
         <div class="modal-form-field">
           <input type="email" name="email" placeholder="E-mail" required="required"/>
         </div>
