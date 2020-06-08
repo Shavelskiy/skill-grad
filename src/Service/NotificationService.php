@@ -66,7 +66,7 @@ class NotificationService implements AuthMailerInterface
                 ->from('v.shavelsky@gmail.com')
                 ->to($toEmail)
                 ->subject('Потверждение регистрации')
-                ->html($this->templating->render('emails/forgot.password.html.twig', [
+                ->html($this->templating->render('emails/confirm.register.html.twig', [
                     'link' => $this->host . $this->urlGenerator->generate('site.index', [
                             ConfirmRegisterListener::CONFIRM_REGISTRATION_KEY => 1,
                             'token' => $token,
