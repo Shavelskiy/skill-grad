@@ -11,6 +11,11 @@ export const TAG_CREATE = '/tag/create'
 export const TAG_VIEW = '/tag/:id'
 export const TAG_UPDATE = '/tag/update/:id'
 
+export const ARTICLE_INDEX = '/article'
+export const ARTICLE_CREATE = '/article/create'
+export const ARTICLE_VIEW = '/article/:id'
+export const ARTICLE_UPDATE = '/article/update/:id'
+
 export const USER_INDEX = '/user'
 
 export const LOCATION_INDEX = '/location'

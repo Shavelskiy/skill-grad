@@ -1,9 +1,16 @@
 .input {
-  label {
-    font-size: 1rem;
-    font-weight: 400;
-    display: inline-block;
-    margin-bottom: 0.5rem;
+
+  &.img {
+    border: 1px solid #e2e5ec;
+    border-radius: 4px;
+    padding: 1vw;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input[type="file"] {
+    display: none;
   }
 
   input {
@@ -30,6 +37,39 @@
       opacity: 0.5;
     }
   }
+
+  img {
+    max-width: 100%;
+    max-height: 600px;
+  }
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.image-input-btn {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: .25rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #007bff;
+  display: inline-block;
+  margin-right: 20px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.image-container {
+  margin-bottom: 20px;
 }
 
 .save-wrap {

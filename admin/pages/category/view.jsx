@@ -91,7 +91,7 @@ const CategoryView = ({match}) => {
       </Portlet>
     )
   }
-console.log(item)
+
   return (
     <ViewPageTemplate
       key={item.id}

@@ -1,4 +1,4 @@
-import { CATEGORY_INDEX, LOCATION_INDEX, TAG_INDEX, USER_INDEX } from '../../utils/routes'
+import { CATEGORY_INDEX, LOCATION_INDEX, TAG_INDEX, ARTICLE_INDEX, USER_INDEX } from '../../utils/routes'
 
 export const menuItems = [
   {
@@ -17,7 +17,7 @@ export const menuItems = [
     items: [
       {
         title: 'Статьи',
-        link: '/article',
+        link: ARTICLE_INDEX,
       },
       {
         title: 'Теги',

@@ -280,14 +280,10 @@
     padding: 28px 0;
 
     .city-list-wrap {
-      display: flex;
-      flex-direction: column;
       position: relative;
-      align-items: flex-start;
       min-height: 420px;
       overflow-y: scroll;
       overflow-x: hidden;
-      flex-wrap: wrap;
 
       &::-webkit-scrollbar {
         width: 20px;

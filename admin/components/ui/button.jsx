@@ -5,12 +5,13 @@ import css from './button.scss?module'
 import cn from 'classnames'
 
 
-const Button = ({link = null, text, click, disabled = false, create = false, primary = false, success = false}) => {
+const Button = ({link = null, text, click, disabled = false, create = false, primary = false, success = false, danger = false}) => {
   const className = cn(
     css.btn,
     {[css.create]: create},
     {[css.primary]: primary},
-    {[css.success]: success}
+    {[css.success]: success},
+    {[css.danger]: danger},
   )
 
   if (link !== null) {

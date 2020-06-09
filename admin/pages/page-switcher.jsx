@@ -4,6 +4,7 @@ import {
   INDEX,
   CATEGORY_INDEX, CATEGORY_VIEW, CATEGORY_UPDATE,
   TAG_CREATE, TAG_INDEX, TAG_UPDATE, TAG_VIEW,
+  ARTICLE_INDEX, ARTICLE_CREATE, ARTICLE_VIEW, ARTICLE_UPDATE,
   USER_INDEX,
   LOCATION_INDEX, LOCATION_VIEW, CATEGORY_CREATE,
 } from './../utils/routes'
@@ -21,6 +22,10 @@ import TagsIndex from '../pages/tags'
 import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
 import TagUpdate from './tags/update'
+import ArticleIndex from './articles'
+import ArticleCreate from './articles/create'
+import ArticleView from './articles/view'
+import ArticleUpdate from './articles/update'
 import UsersIndex from './users'
 import LocationsIndex from '../pages/locations'
 import LocationView from '../pages/locations/view'
@@ -46,6 +51,11 @@ const PageSwitcher = ({active}) => {
         <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>
         <Route exact name="tag.view" path={TAG_VIEW} component={TagView}/>
         <Route exact name="tag.update" path={TAG_UPDATE} component={TagUpdate}/>
+
+        <Route exact name="article.index" path={ARTICLE_INDEX} component={ArticleIndex}/>
+        <Route exact name="article.create" path={ARTICLE_CREATE} component={ArticleCreate}/>
+        <Route exact name="article.view" path={ARTICLE_VIEW} component={ArticleView}/>
+        <Route exact name="article.update" path={ARTICLE_UPDATE} component={ArticleUpdate}/>
 
         <Route exact name="user.index" path={USER_INDEX} component={UsersIndex}/>
 
