@@ -36,7 +36,7 @@
     width: 22px;
     height: 22px;
     outline: none;
-    background: url(../../img/close.svg) no-repeat;
+    background: url(../../../img/close.svg) no-repeat;
   }
 
   .modal-content {
@@ -130,7 +130,7 @@
         position: absolute;
         right: 45px;
         top: 15px;
-        background: url(../../img/011-search.svg) no-repeat;
+        background: url(../../../img/011-search.svg) no-repeat;
         width: 16px !important;
         height: 20px !important;
         cursor: pointer;
@@ -177,7 +177,7 @@
         top: 1px;
         width: 15px;
         height: 15px;
-        background: url(../../img/check.svg) no-repeat;
+        background: url(../../../img/check.svg) no-repeat;
         content: "";
         position: absolute;
         display: none;
@@ -217,19 +217,19 @@
           }
 
           &-vk {
-            background: url(../../img/024-vk.svg) no-repeat;
+            background: url(../../../img/024-vk.svg) no-repeat;
           }
 
           &-ok {
-            background: url(../../img/021-odnoklassniki.svg) no-repeat;
+            background: url(../../../img/021-odnoklassniki.svg) no-repeat;
           }
 
           &-fb {
-            background: url(../../img/022-facebook.svg) no-repeat;
+            background: url(../../../img/022-facebook.svg) no-repeat;
           }
 
           &-plus {
-            background: url(../../img/023-google-plus.svg) no-repeat;
+            background: url(../../../img/023-google-plus.svg) no-repeat;
           }
         }
       }
