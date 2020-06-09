@@ -20,7 +20,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server --host 0.0.0.0 --disable-host-check --port 8082",
+        "dev-server": "encore dev-server --host 0.0.0.0 --disable-host-check --port 8888",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
