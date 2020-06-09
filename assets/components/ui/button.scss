@@ -1,0 +1,27 @@
+.btn {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 36px;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 25px;
+
+  &:disabled, &:hover {
+    opacity: 0.8;
+  }
+
+  &.btn-red {
+    background-image: linear-gradient(0deg, #fb5519 0%, #f9453f 100%);
+  }
+
+  &.btn-blue {
+    background-image: linear-gradient(0deg, #1f81b9 0%, #195da7 100%);
+  }
+}

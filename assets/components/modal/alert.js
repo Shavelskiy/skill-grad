@@ -1,5 +1,3 @@
-import './alert.scss'
-
 const alertModal = document.getElementById('alert-modal')
 const alertMessage = alertModal.querySelector('.message')
 

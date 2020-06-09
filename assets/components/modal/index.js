@@ -1,4 +1,3 @@
-import './index.scss'
 import './choose-role-modal'
 import './city-selector'
 import './alert'

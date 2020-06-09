@@ -1,5 +1,3 @@
-import './dropdown.scss'
-
 const dropdown = document.querySelector('.header-dropdown')
 
 if (dropdown) {

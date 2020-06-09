@@ -1,5 +1,3 @@
-import './category-menu.scss'
-
 const categoryMenuBtn = document.querySelector('.categories-menu-btn')
 const categoryMenu = document.querySelector('.categories-container')
 
