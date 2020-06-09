@@ -25,18 +25,21 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     protected SocialAuthInterface $socialAuthService;
     protected UserRepository $userRepository;
     protected RegisterUserInterface $registerUserService;
+    protected SocialAuthFactory $socialAuthFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         UserRepository $userRepository,
-        RegisterUserInterface $registerUserService
+        RegisterUserInterface $registerUserService,
+        SocialAuthFactory $socialAuthFactory
     )
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->userRepository = $userRepository;
         $this->registerUserService = $registerUserService;
+        $this->socialAuthFactory = $socialAuthFactory;
     }
 
     /**
@@ -47,7 +50,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     public function supports(Request $request): bool
     {
         try {
-            $this->socialAuthService = (new SocialAuthFactory())->getSocialAuthForRequest($request);
+            $this->socialAuthService = $this->socialAuthFactory->getSocialAuthForRequest($request);
 
             return true;
         } catch (Exception $e) {

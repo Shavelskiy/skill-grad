@@ -10,13 +10,17 @@ class SocialAuthFactory
     /** @var SocialAuthInterface[] */
     protected array $services;
 
-    public function __construct()
-    {
+    public function __construct(
+        VkAuth $vkAuth,
+        OkAuth $okAuth,
+        FacebookAuth $facebookAuth,
+        GooglePlusAuth $googlePlusAuth
+    ) {
         $this->services = [
-            new VkAuth(),
-            new OkAuth(),
-            new FacebookAuth(),
-            new GooglePlusAuth(),
+            $vkAuth,
+            $okAuth,
+            $facebookAuth,
+            $googlePlusAuth,
         ];
     }
 

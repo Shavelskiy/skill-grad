@@ -3,6 +3,7 @@
 namespace App\Social;
 
 use RuntimeException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -20,17 +21,23 @@ class VkAuth implements SocialAuthInterface
     protected string $clientId;
     protected string $secretKey;
 
-    public function __construct()
+    protected string $siteHost;
+
+    public function __construct(ParameterBagInterface $params)
     {
-        $this->clientId = '7351839';
-        $this->secretKey = '0raiFV7o7ZRetkxUnzWJ';
+        $vkParams = ($params->get('social.services'))['vk'];
+
+        $this->clientId = $vkParams['client_id'];
+        $this->secretKey = $vkParams['secret_key'];
+
+        $this->siteHost = ($params->get('site'))['host'];
     }
 
     public function getAuthLink(): string
     {
         $params = [
             'client_id' => $this->clientId,
-            'redirect_uri' => 'http://localhost:8080',
+            'redirect_uri' => $this->siteHost,
             'scope' => 'friends,email',
             'response_type' => 'code',
             'state' => serialize([

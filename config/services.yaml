@@ -5,6 +5,10 @@ parameters:
     vk:
       client_id: '%env(resolve:VK_CLIENT_ID)%'
       secret_key: '%env(resolve:VK_SECRET_KEY)%'
+    ok:
+      client_id: '%env(resolve:OK_CLIENT_ID)%'
+      public_key: '%env(resolve:OK_PUBLIC_KEY)%'
+      secret_key: '%env(resolve:OK_SECRET_KEY)%'
 
 services:
   _defaults:
@@ -13,7 +17,7 @@ services:
 
   App\:
     resource: '../src/*'
-    exclude: '../src/{DependencyInjection,Dto,Exception,Entity,Social,Adapter,Messenger,Migrations,Tests,Helpers,Kernel.php}'
+    exclude: '../src/{DependencyInjection,Dto,Exception,Entity,Adapter,Messenger,Migrations,Tests,Helpers,Kernel.php}'
 
   App\Controller\:
     resource: '../src/Controller'

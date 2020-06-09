@@ -8,6 +8,13 @@ use Twig\TwigFunction;
 
 class AuthExtension extends AbstractExtension
 {
+    protected SocialAuthFactory $socialAuthFactory;
+
+    public function __construct(SocialAuthFactory $socialAuthFactory)
+    {
+        $this->socialAuthFactory = $socialAuthFactory;
+    }
+
     public function getFunctions(): array
     {
         return [
@@ -17,6 +24,6 @@ class AuthExtension extends AbstractExtension
 
     public function getSocialAuthLinks(): array
     {
-        return (new SocialAuthFactory())->getLinks();
+        return $this->socialAuthFactory->getLinks();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Social;
 
 use RuntimeException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -25,18 +26,24 @@ class OkAuth implements SocialAuthInterface
     protected string $secretKey;
     protected string $publicKey;
 
-    public function __construct()
+    protected string $siteHost;
+
+    public function __construct(ParameterBagInterface $params)
     {
-        $this->clientId = '512000359268';
-        $this->secretKey = '43EB8875CCEF2F10D38AC5AB';
-        $this->publicKey = 'CFGMHKJGDIHBABABA';
+        $okParams = ($params->get('social.services'))['ok'];
+
+        $this->clientId = $okParams['client_id'];
+        $this->secretKey = $okParams['secret_key'];
+        $this->publicKey = $okParams['public_key'];
+
+        $this->siteHost = ($params->get('site'))['host'];
     }
 
     public function getAuthLink(): string
     {
         $params = [
             'client_id' => $this->clientId,
-            'redirect_uri' => 'http://localhost:8080',
+            'redirect_uri' => $this->siteHost,
             'scope' => 'GET_EMAIL',
             'response_type' => 'code',
             'state' => serialize([
