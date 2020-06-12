@@ -1,4 +1,4 @@
-tbody {
+.table-body {
   & tr:hover {
     color: #212529;
     background-color: #fafbfc;
@@ -28,5 +28,9 @@ tbody {
         background-color: #fd397a;
       }
     }
+  }
+
+  img {
+    max-height: 90px;
   }
 }

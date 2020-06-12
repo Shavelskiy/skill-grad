@@ -10,6 +10,7 @@ const ArticuleForm = ({item, setItem, uploadImage, setUploadImage, disable, save
       setItem({...item, slug: translate(name), name: name})
     } else {
       setItem({...item, name: name})
+      setEnableTranslate(translate(name) === item.slug)
     }
   }
 
@@ -41,8 +42,9 @@ const ArticuleForm = ({item, setItem, uploadImage, setUploadImage, disable, save
       <ImageInput
         label="Картинка"
         uploadImage={uploadImage}
+        imageSrc={item.image}
+        deleteImageSrc={() => setItem({...item, image: null})}
         setUploadImage={setUploadImage}
-        setFile={(file) => setItem({...item, image: file})}
       />
 
       <Wysiwyg

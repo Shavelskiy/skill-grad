@@ -76,7 +76,6 @@ const CategoryView = ({match}) => {
         width={50}
         title={'Спискок вложенных категорий'}
         titleIcon={'list'}
-        withButton={false}
       >
         <table>
           <thead>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import TableActions from './actions'
+import { IMAGE } from '../../utils/table-item-display'
 
 import css from './body.scss?module'
 import cn from 'classnames'
@@ -20,15 +21,27 @@ const BoolValue = ({isTrue}) => {
 
 const TableBody = ({body, table, actions, reload}) => {
   return (
-    <tbody>
+    <tbody className={css.tableBody}>
     {
       body.map((bodyItem, key) => {
         const row = table.map((item, key) => {
+          const value = bodyItem[item.name]
           let content
-          if (typeof bodyItem[item.name] === 'boolean') {
-            content = (<BoolValue isTrue={bodyItem[item.name]}/>)
+          if (item.display) {
+            switch (item.display) {
+              case IMAGE:
+                content = <img src={value}/>
+                break
+              default:
+                content = <>{value}</>
+                break
+            }
           } else {
-            content = (<>{bodyItem[item.name]}</>)
+            if (typeof value === 'boolean') {
+              content = <BoolValue isTrue={value}/>
+            } else {
+              content = <>{value}</>
+            }
           }
 
           return (

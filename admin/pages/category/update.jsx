@@ -72,7 +72,6 @@ const CategoryUpdate = ({match}) => {
       width={50}
       title={title}
       titleIcon={'info'}
-      withButton={false}
     >
       <CategoryForm
         item={item}

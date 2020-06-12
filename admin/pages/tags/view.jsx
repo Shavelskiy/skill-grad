@@ -42,7 +42,6 @@ const TagView = ({match}) => {
         width={50}
         title={title}
         titleIcon={'eye'}
-        withButton={false}
       >
         <table>
           <tbody>

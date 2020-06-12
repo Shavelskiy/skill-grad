@@ -48,7 +48,6 @@ const TagCreate = () => {
       width={50}
       title={title}
       titleIcon={'info'}
-      withButton={false}
     >
       <TagForm
         name={name}

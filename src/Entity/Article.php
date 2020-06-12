@@ -37,9 +37,9 @@ class Article
     private string $detailText;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Upload", )
+     * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
-    private Upload $image;
+    private ?Upload $image;
 
 
     public function getId(): int
@@ -97,12 +97,12 @@ class Article
         return $this;
     }
 
-    public function getImage(): Upload
+    public function getImage(): ?Upload
     {
         return $this->image;
     }
 
-    public function setImage(Upload $image): self
+    public function setImage(?Upload $image): self
     {
         $this->image = $image;
         return $this;

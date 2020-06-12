@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UploadRepository")
+ * @ORM\Entity()
  */
 class Upload
 {
@@ -36,5 +36,10 @@ class Upload
     {
         $this->name = $name;
         return $this;
+    }
+
+    public function getPublicPath(): string
+    {
+        return '/upload/' . $this->getName();
     }
 }

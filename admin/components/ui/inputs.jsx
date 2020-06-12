@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 
 import Button from './button'
 import ReactQuill from 'react-quill'
@@ -48,7 +48,7 @@ export function SaveButton({handler, disable}) {
   )
 }
 
-export function ImageInput({id = 1, label, uploadImage, setUploadImage}) {
+export function ImageInput({id = 1, label, uploadImage, setUploadImage, imageSrc = null, deleteImageSrc}) {
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
 
@@ -59,16 +59,24 @@ export function ImageInput({id = 1, label, uploadImage, setUploadImage}) {
     setUploadImage(file)
   }
 
+  const hasImage = () => {
+    return uploadImage !== null || imageSrc !== null
+  }
+
   const renderImage = () => {
-    if (uploadImage === null) {
-      return <></>
+    if (uploadImage !== null) {
+      return <div className={css.imageContainer}><img src={URL.createObjectURL(uploadImage)}/></div>
     }
 
-    return <div className={css.imageContainer}><img src={URL.createObjectURL(uploadImage)}/></div>
+    if (imageSrc !== null) {
+      return <div className={css.imageContainer}><img src={imageSrc}/></div>
+    }
+
+    return <></>
   }
 
   const renderDeleteButton = () => {
-    if (uploadImage === null) {
+    if (!hasImage()) {
       return <></>
     }
 
@@ -76,9 +84,14 @@ export function ImageInput({id = 1, label, uploadImage, setUploadImage}) {
       <Button
         text={'Удалить картинку'}
         danger={true}
-        click={() => setUploadImage(null)}
+        click={handleDeleteImage}
       />
     )
+  }
+
+  const handleDeleteImage = () => {
+    setUploadImage(null)
+    deleteImageSrc()
   }
 
   return (<>
@@ -87,7 +100,7 @@ export function ImageInput({id = 1, label, uploadImage, setUploadImage}) {
         {renderImage()}
         <div>
           <label htmlFor={`image-input-${id}`} className={css.imageInputBtn}>
-            {uploadImage === null ? 'Выберите картинку' : 'Заменить картинку'}
+            {!hasImage() ? 'Выберите картинку' : 'Заменить картинку'}
           </label>
           {renderDeleteButton()}
           <input

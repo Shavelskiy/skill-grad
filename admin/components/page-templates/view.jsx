@@ -16,6 +16,11 @@ const ViewPageTemplate = ({children, fetchUrl, setItem}) => {
         setItem(data)
         dispatch(hideLoader())
       })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          console.log('entity not found')
+        }
+      })
   }, [])
 
   return <>{children}</>

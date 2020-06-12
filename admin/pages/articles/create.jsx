@@ -65,7 +65,6 @@ const ArticleCreate = () => {
       width={50}
       title={title}
       titleIcon={'info'}
-      withButton={false}
     >
       <ArticuleForm
         item={item}

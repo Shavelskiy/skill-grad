@@ -41,30 +41,32 @@ const PageSwitcher = ({active}) => {
     <div className={cn(css.page, {[css.hidden]: !active})}>
       <Breadcrumbs items={breadcrumbs}/>
 
-      <Switch>
-        <Route exact name="categroy.index" path={CATEGORY_INDEX} component={CategroyIndex}/>
-        <Route exact name="categroy.create" path={CATEGORY_CREATE} component={CategoryCreate}/>
-        <Route exact name="categroy.view" path={CATEGORY_VIEW} component={CategoryView}/>
-        <Route exact name="categroy.update" path={CATEGORY_UPDATE} component={CategoryUpdate}/>
+      <div className={css.content}>
+        <Switch>
+          <Route exact name="categroy.index" path={CATEGORY_INDEX} component={CategroyIndex}/>
+          <Route exact name="categroy.create" path={CATEGORY_CREATE} component={CategoryCreate}/>
+          <Route exact name="categroy.view" path={CATEGORY_VIEW} component={CategoryView}/>
+          <Route exact name="categroy.update" path={CATEGORY_UPDATE} component={CategoryUpdate}/>
 
-        <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
-        <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>
-        <Route exact name="tag.view" path={TAG_VIEW} component={TagView}/>
-        <Route exact name="tag.update" path={TAG_UPDATE} component={TagUpdate}/>
+          <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
+          <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>
+          <Route exact name="tag.view" path={TAG_VIEW} component={TagView}/>
+          <Route exact name="tag.update" path={TAG_UPDATE} component={TagUpdate}/>
 
-        <Route exact name="article.index" path={ARTICLE_INDEX} component={ArticleIndex}/>
-        <Route exact name="article.create" path={ARTICLE_CREATE} component={ArticleCreate}/>
-        <Route exact name="article.view" path={ARTICLE_VIEW} component={ArticleView}/>
-        <Route exact name="article.update" path={ARTICLE_UPDATE} component={ArticleUpdate}/>
+          <Route exact name="article.index" path={ARTICLE_INDEX} component={ArticleIndex}/>
+          <Route exact name="article.create" path={ARTICLE_CREATE} component={ArticleCreate}/>
+          <Route exact name="article.view" path={ARTICLE_VIEW} component={ArticleView}/>
+          <Route exact name="article.update" path={ARTICLE_UPDATE} component={ArticleUpdate}/>
 
-        <Route exact name="user.index" path={USER_INDEX} component={UsersIndex}/>
+          <Route exact name="user.index" path={USER_INDEX} component={UsersIndex}/>
 
-        <Route exact name="location.view" path={LOCATION_INDEX} component={LocationsIndex}/>
-        <Route exact name="location.index" path={LOCATION_VIEW} component={LocationView}/>
+          <Route exact name="location.view" path={LOCATION_INDEX} component={LocationsIndex}/>
+          <Route exact name="location.index" path={LOCATION_VIEW} component={LocationView}/>
 
-        <Route exact name="index" path={INDEX} component={IndexPage}/>
-        <Route path="/" component={NotFoundPage}/>
-      </Switch>
+          <Route exact name="index" path={INDEX} component={IndexPage}/>
+          <Route path="/" component={NotFoundPage}/>
+        </Switch>
+      </div>
     </div>
   )
 }

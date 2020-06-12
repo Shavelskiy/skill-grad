@@ -66,9 +66,9 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
                 return null;
             }
 
-            if (in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
+//            if (in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
                 return $user;
-            }
+//            }
 
             throw new AccessDeniedException('');
         } catch (Exception $e) {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { CATEGORY_CREATE } from '../../utils/routes'
+import { ARTICLE_CREATE } from '../../utils/routes'
 
-import { FETCH_CATEGORIES_URL } from '../../utils/api/endpoints'
+import { FETCH_ARTICLES_URL } from '../../utils/api/endpoints'
 
 import IndexPageTemplate from '../../components/page-templates'
 import { table, actions } from './table'
@@ -9,13 +9,13 @@ import { table, actions } from './table'
 const ArticleIndex = () => {
   return (
     <IndexPageTemplate
-      title={'Список категорий програм обучения'}
-      icon={'list'}
+      title={'Список статей'}
+      icon={'newspaper'}
       table={table}
       actions={actions}
-      fetchUrl={FETCH_CATEGORIES_URL}
+      fetchUrl={FETCH_ARTICLES_URL}
       canCreate={true}
-      createLink={CATEGORY_CREATE.replace(':id', '')}
+      createLink={ARTICLE_CREATE}
     />
   )
 }
