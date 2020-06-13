@@ -9,8 +9,8 @@
   -webkit-font-smoothing: antialiased;
 
   .user-profile {
-    padding: 13px;
-    border-radius: 200px;
+    padding: .6vw .9vw;
+    border-radius: 100vw;
 
     &:hover {
       background-color: #f0f3ff;
@@ -19,10 +19,10 @@
 
   .card {
     position: absolute;
-    top: 74px;
+    top: 100%;
     background-color: #fff;
-    right: 25px;
-    box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
+    right: 1vw;
+    box-shadow: 0 0 2vw 0 rgba(82, 63, 105, 0.15);
     transition: visibility 0s, opacity 0.1s ease-out;
     opacity: 1;
     visibility: visible;
@@ -36,7 +36,7 @@
       padding: 0;
       list-style: none;
       border: 0;
-      margin: 15px 0 0;
+      margin: .8vw 0 0;
     }
 
     svg {
@@ -51,8 +51,8 @@
     }
 
     .list {
-      padding: 10px 42px 10px 30px;
-      margin-bottom: 15px;
+      padding: .4vw 1.4vw .4vw 0.9vw;
+      margin-bottom: .5vw;
 
       i {
         color: #595d6e;
@@ -71,12 +71,12 @@
       span {
         color: #595d6e;
         font-weight: 400;
-        margin-left: 15px;
+        margin-left: .5vw;
       }
     }
 
     .logout {
-      margin: 14px 0 14px 30px;
+      margin: .6vw 0 .6vw 0.9vw;
 
       button {
         background-color: rgba(93, 120, 255, 0.1);

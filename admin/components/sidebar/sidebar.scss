@@ -5,8 +5,8 @@
   bottom: 0;
   left: 0;
   z-index: 98;
-  width: 260px;
-  max-width: 260px;
+  width: 11vw;
+  max-width: 11vw;
   transition: max-width 0.2s ease-out;
   overflow: hidden;
 
@@ -15,7 +15,7 @@
   }
 
   &.closed {
-    max-width: 80px;
+    max-width: 3vw;
 
     .logo {
       display: none;
@@ -27,8 +27,8 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    padding: 0 25px;
-    height: 75px;
+    padding: 0 .79vw;
+    height: 2.93vw;
   }
 
   .tools-wrapper {

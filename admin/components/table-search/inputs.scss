@@ -1,12 +1,12 @@
 .search {
-  padding: 3px;
+  padding: .117vw;
 
   .input {
     position: relative;
 
     input {
       width: 100%;
-      padding: 5px 20px;
+      padding: .195vw .78vw;
       display: block;
       height: calc(1.5em + 1.3rem + 2px);
       font-size: 1rem;
@@ -15,7 +15,7 @@
       color: #777;
       background-color: #fff;
       border: 1px solid #e2e5ec;
-      border-radius: 3px;
+      border-radius: .117vw;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
       &::-webkit-outer-spin-button,
@@ -30,9 +30,9 @@
 
     .close {
       position: absolute;
-      height: 11px;
-      top: 14px;
-      right: 2%;
+      height: 30%;
+      top: 35%;
+      right: 5%;
       cursor: pointer;
     }
   }

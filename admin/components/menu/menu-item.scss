@@ -2,16 +2,16 @@ li {
   .item {
     display: flex;
     justify-content: flex-start;
-    padding: 5px 20px;
+    padding: .195vw .78vw;
     align-items: center;
-    min-height: 52px;
+    min-height: 2.028vw;
 
     .point {
-      margin: 0 10px 0 30px;
+      margin: 0 .39vw 0 1.17vw;
 
       span {
-        width: 4px;
-        height: 4px;
+        width: .156vw;
+        height: .156vw;
         border-radius: 100%;
         vertical-align: middle;
         display: inline-block;
@@ -27,10 +27,10 @@ li {
     }
 
     .arrow {
-      height: 7px;
-      width: 7px;
+      height: .273vw;
+      width: .273vw;
       position: absolute;
-      right: 14px;
+      right: .546vw;
       transition: all .15s ease-out;
       background: url('./../../images/menu-arrow.svg');
       background-size: 100%;

@@ -2,12 +2,12 @@
   position: absolute;
   display: flex;
   background-color: #fff;
-  padding: 23px 90px;
+  padding: .897vw 3.51vw;
   left: 50%;
   bottom: 100%;
   opacity: 0;
   transition: all 0.5s ease-out;
-  box-shadow: 0 0 40px 0 rgba(82, 63, 105, 0.1);
+  box-shadow: 0 0 1.56vw 0 rgba(82, 63, 105, 0.1);
 
   &.active {
     opacity: 1;
@@ -15,7 +15,7 @@
   }
 
   span {
-    max-width: 500px;
+    max-width: 19.5vw;
     text-align: center;
   }
 }

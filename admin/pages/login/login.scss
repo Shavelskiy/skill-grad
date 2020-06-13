@@ -8,8 +8,8 @@
 
   .container {
     width: 100%;
-    max-width: 500px;
-    box-shadow: 0 0 80px 0 rgba(77, 84, 124, 0.09);
+    max-width: 19.5vw;
+    box-shadow: 0 0 3.12vw 0 rgba(77, 84, 124, 0.09);
     border-radius: 0.6rem;
 
     &.lock {
@@ -27,12 +27,12 @@
     }
 
     .form {
-      padding: 10px 42px 25px;
+      padding: .39vw 1.638vw .975vw;
 
       .error {
         width: 100%;
         text-align: center;
-        margin-bottom: 7px;
+        margin-bottom: .273vw;
         display: none;
 
         span {
@@ -50,7 +50,7 @@
 
       input {
         height: calc(1.5em + 1.3rem + 2px);
-        font: 400 11px system-ui;
+        font: 400 .429vw system-ui;
         font-size: 1rem;
         line-height: 1.5;
         box-shadow: none !important;
@@ -83,7 +83,7 @@
           color: #fff;
           font-size: 1.2rem;
           font-weight: 500;
-          box-shadow: 0 4px 16px 0 rgba(93, 120, 255, 0.15);
+          box-shadow: 0 .156vw .624vw 0 rgba(93, 120, 255, 0.15);
           border-radius: 2rem;
           transition: all 0.3s ease 0s;
           background-color: #5d78ff;
@@ -92,7 +92,7 @@
           cursor: pointer;
 
           &:hover:enabled {
-            box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25) !important;
+            box-shadow: 0 .351vw .624vw 0 rgba(93, 120, 255, 0.25) !important;
             background-color: #3758ff;
             border-color: #2a4eff;
           }
