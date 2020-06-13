@@ -10,7 +10,7 @@ import cn from 'classnames'
 
 const Table = ({table, body, query, actions, disabled, changeSearch, changeOrder, reload}) => {
   return (
-    <table className={cn(css.table, {[css.disabled]: disabled})}>
+    <div className={cn(css.table, {[css.disabled]: disabled})}>
       <TableHeader
         table={table}
         order={query.order}
@@ -29,7 +29,7 @@ const Table = ({table, body, query, actions, disabled, changeSearch, changeOrder
         actions={actions}
         reload={reload}
       />
-    </table>
+    </div>
   )
 }
 

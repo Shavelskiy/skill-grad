@@ -63,11 +63,9 @@ const TableActions = ({actions, item, reload}) => {
 
 
   return (
-    <td className={css.actions}>
-      <div className={css.wrap}>
-        {tableActions}
-      </div>
-    </td>
+    <div className={css.actions}>
+      {tableActions}
+    </div>
   )
 }
 

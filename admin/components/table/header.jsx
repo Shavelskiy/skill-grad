@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './header.scss?module'
+import css from './table.scss?module'
 import cn from 'classnames'
 
 
@@ -15,29 +15,40 @@ const TableHeader = ({table, order, setOrder, hasActions}) => {
     }
   }
 
+  let totalWidth = 0
+  table.forEach(item => {
+    totalWidth += item.width
+  })
+
   return (
-    <thead>
-    <tr>
-      <th></th>
+    <div className={css.header}>
+      <div className={cn(css.col, css.numbering)}>
+        <div className={css.content}></div>
+      </div>
       {
         table.map((item, key) => {
           const orderClass = (order[item.name] === 'asc') ? css.asc :
             ((order[item.name] === 'desc') ? css.desc : '')
 
           return (
-            <th
+            <div
               key={key}
-              className={cn(css.orderable, orderClass)}
+              className={cn(css.orderable, orderClass, css.col)}
+              style={{flex: item.width * 45 / totalWidth}}
               onClick={() => changeOrder(item.name)}
             >
-              {item.title}
-            </th>
+              <div className={css.content}>{item.title}</div>
+            </div>
           )
         })
       }
-      {hasActions ? <th>Действия</th> : <></>}
-    </tr>
-    </thead>
+      {hasActions ?
+        <div className={cn(css.col, css.actions)}>
+          <div className={css.content}>Действия</div>
+        </div> :
+        <></>
+      }
+    </div>
   )
 }
 

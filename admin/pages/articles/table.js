@@ -2,13 +2,14 @@ import { BOOL, NUMBER, STRING } from './../../components/table-search/types'
 import { ARTICLE_UPDATE, ARTICLE_VIEW } from '../../utils/routes'
 import { DELETE_ARTICLE_URL } from '../../utils/api/endpoints'
 import { ACTION_DELETE, ACTION_UPDATE, ACTION_VIEW } from '../../utils/table-actions'
-import { IMAGE } from '../../utils/table-item-display'
+import { BOOLEAN, IMAGE } from '../../utils/table-item-display'
 
 
 export const table = [
   {
     title: 'Id',
     name: 'id',
+    width: 1,
     search: {
       enable: true,
       type: NUMBER,
@@ -17,6 +18,7 @@ export const table = [
   {
     title: 'Название',
     name: 'name',
+    width: 2,
     search: {
       enable: true,
       type: STRING,
@@ -25,6 +27,7 @@ export const table = [
   {
     title: 'Символьный код',
     name: 'slug',
+    width: 2,
     search: {
       enable: true,
       type: STRING,
@@ -33,6 +36,7 @@ export const table = [
   {
     title: 'Сортировка',
     name: 'sort',
+    width: 1,
     search: {
       enable: true,
       type: NUMBER,
@@ -41,6 +45,8 @@ export const table = [
   {
     title: 'Активность',
     name: 'active',
+    width: 1,
+    display: BOOLEAN,
     search: {
       enable: true,
       type: BOOL,
@@ -49,6 +55,7 @@ export const table = [
   {
     title: 'Картинка',
     name: 'image',
+    width: 2,
     display: IMAGE,
     search: {
       enable: false,
@@ -57,6 +64,8 @@ export const table = [
   {
     title: 'Показывать на главной',
     name: 'show_on_main',
+    width: 1.4,
+    display: BOOLEAN,
     search: {
       enable: true,
       type: BOOL,
@@ -65,6 +74,7 @@ export const table = [
   {
     title: 'Дата создания',
     name: 'created_at',
+    width: 1,
     search: {
       enable: false,
     },

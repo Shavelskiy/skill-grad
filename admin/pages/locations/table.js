@@ -4,6 +4,7 @@ export const table = [
   {
     title: 'Id',
     name: 'id',
+    width: 1,
     search: {
       enable: true,
       type: NUMBER,
@@ -12,6 +13,7 @@ export const table = [
   {
     title: 'Название',
     name: 'name',
+    width: 1,
     search: {
       enable: true,
       type: STRING,
@@ -20,6 +22,7 @@ export const table = [
   {
     title: 'Тип',
     name: 'type',
+    width: 1,
     search: {
       enable: true,
       type: LIST,
@@ -46,6 +49,7 @@ export const table = [
   {
     title: 'Сортировка',
     name: 'sort',
+    width: 1,
     search: {
       enable: true,
       type: NUMBER,

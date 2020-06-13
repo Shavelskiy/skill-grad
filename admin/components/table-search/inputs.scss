@@ -1,5 +1,6 @@
 .search {
   padding: .117vw;
+  width: 100%;
 
   .input {
     position: relative;
@@ -32,7 +33,7 @@
       position: absolute;
       height: 30%;
       top: 35%;
-      right: 5%;
+      right: .5vw;
       cursor: pointer;
     }
   }

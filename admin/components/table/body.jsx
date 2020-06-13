@@ -1,70 +1,94 @@
 import React from 'react'
 
 import TableActions from './actions'
-import { IMAGE } from '../../utils/table-item-display'
+import { BOOLEAN, IMAGE } from '../../utils/table-item-display'
 
-import css from './body.scss?module'
+import css from './table.scss?module'
 import cn from 'classnames'
 
-const BoolValue = ({isTrue}) => {
+const BoolColumn = ({isTrue, width}) => {
   return (
-    <div className={css.boolean}>
-      <span className={cn(
-        {[css.true]: isTrue},
-        {[css.false]: !isTrue}
-      )}>
-        {isTrue ? 'Да' : 'Нет'}
-      </span>
+    <div className={cn(css.col, css.boolean)} style={{flex: width}}>
+      <div className={css.content}>
+        <span className={cn(
+          {[css.true]: isTrue},
+          {[css.false]: !isTrue}
+        )}>
+          {isTrue ? 'Да' : 'Нет'}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+const ImageColumn = ({value, width}) => {
+  return (
+    <div className={cn(css.col, css.img)} style={{flex: width}}>
+      <div className={css.content}>
+        <img src={value}/>
+      </div>
+    </div>
+  )
+}
+
+const DefaultColumn = ({value, width}) => {
+  return (
+    <div className={css.col} style={{flex: width}}>
+      <div className={css.content}>{value}</div>
     </div>
   )
 }
 
 const TableBody = ({body, table, actions, reload}) => {
+  let totalWidth = 0
+  table.forEach(item => {
+    totalWidth += item.width
+  })
+
   return (
-    <tbody className={css.tableBody}>
-    {
-      body.map((bodyItem, key) => {
-        const row = table.map((item, key) => {
-          const value = bodyItem[item.name]
-          let content
-          if (item.display) {
-            switch (item.display) {
-              case IMAGE:
-                content = <img src={value}/>
-                break
-              default:
-                content = <>{value}</>
-                break
-            }
-          } else {
-            if (typeof value === 'boolean') {
-              content = <BoolValue isTrue={value}/>
+    <div>
+      {
+        body.map((bodyItem, key) => {
+          const row = table.map((item, rowKey) => {
+            const value = bodyItem[item.name]
+            const width = item.width * 45 / totalWidth
+            if (item.display) {
+              switch (item.display) {
+                case IMAGE:
+                  return <ImageColumn key={rowKey} value={value} width={width}/>
+                  break
+                case BOOLEAN:
+                  return <BoolColumn key={rowKey} isTrue={value} width={width}/>
+                  break
+                default:
+                  return <DefaultColumn key={rowKey} value={value} width={width}/>
+                  break
+              }
             } else {
-              content = <>{value}</>
+              return <DefaultColumn key={rowKey} value={value} width={width}/>
             }
-          }
+          })
 
           return (
-            <td key={key}>
-              {content}
-            </td>
+            <div key={key} className={css.row}>
+              <div className={cn(css.numbering, css.col)}>
+                <div className={css.content}>{key + 1}</div>
+              </div>
+              {row}
+              <div className={cn(css.col, css.actions)}>
+                <div className={css.content}>
+                  <TableActions
+                    actions={actions}
+                    item={bodyItem}
+                    reload={reload}
+                  />
+                </div>
+              </div>
+            </div>
           )
         })
-
-        return (
-          <tr key={key}>
-            <td className={css.numbering}>{key + 1}</td>
-            {row}
-            <TableActions
-              actions={actions}
-              item={bodyItem}
-              reload={reload}
-            />
-          </tr>
-        )
-      })
-    }
-    </tbody>
+      }
+    </div>
   )
 }
 

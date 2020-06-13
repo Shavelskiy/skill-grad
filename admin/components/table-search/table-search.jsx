@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 import SerachItem from './inputs'
 
+import css from './../table/table.scss?module'
+import cn from 'classnames'
+
 
 const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
   const [search, setSearch] = useState(null)
@@ -47,26 +50,34 @@ const TableSearch = ({table, tableSearch, changeSearch, hasActions}) => {
     })
   }
 
+  let totalWidth = 0
+  table.forEach(item => {
+    totalWidth += item.width
+  })
+
   return (
-    <tbody>
-    <tr>
-      <th></th>
+    <div className={css.search}>
+      <div className={cn(css.col, css.numbering)}></div>
       {
         table.map((item, key) => {
           return (
-            <SerachItem
+            <div
               key={key}
-              options={item.search}
-              field={item.name}
-              search={(search !== null) ? search.query : {}}
-              changeSearch={changeValue}
-            />
+              className={css.col}
+              style={{flex: item.width * 45 / totalWidth}}
+            >
+              <SerachItem
+                options={item.search}
+                field={item.name}
+                search={(search !== null) ? search.query : {}}
+                changeSearch={changeValue}
+              />
+            </div>
           )
         })
       }
-      {hasActions ? <th></th> : <></>}
-    </tr>
-    </tbody>
+      {hasActions ? <div className={cn(css.col, css.actions)}></div> : <></>}
+    </div>
   )
 }
 

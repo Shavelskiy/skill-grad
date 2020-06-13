@@ -69,7 +69,7 @@ const BoolInput = ({value, field, changeSearch}) => {
 
 const SerachItem = ({options, field, search, changeSearch}) => {
   if (!options.enable) {
-    return <th></th>
+    return <div></div>
   }
 
   const value = (typeof search[field] !== 'undefined') ? search[field] : null
@@ -109,9 +109,9 @@ const SerachItem = ({options, field, search, changeSearch}) => {
   }
 
   return (
-    <th className={css.search}>
+    <div className={css.search}>
       {renderInput()}
-    </th>
+    </div>
   )
 }
 

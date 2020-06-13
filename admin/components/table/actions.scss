@@ -1,19 +1,14 @@
-td.actions {
-  width: 1%;
-  min-width: 4.602vw;
+.actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
-  .wrap {
-    display: flex;
-    justify-content: space-evenly;
+  .item {
+    cursor: pointer;
 
-    .item {
-      margin-right: .39vw;
-      cursor: pointer;
-
-      i {
-        color: #5d78ff;
-        float: right;
-      }
+    i {
+      color: #5d78ff;
+      float: right;
     }
   }
 }
