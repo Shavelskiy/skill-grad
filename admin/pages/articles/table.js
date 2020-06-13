@@ -1,4 +1,4 @@
-import { NUMBER, STRING } from './../../components/table-search/types'
+import { BOOL, NUMBER, STRING } from './../../components/table-search/types'
 import { ARTICLE_UPDATE, ARTICLE_VIEW } from '../../utils/routes'
 import { DELETE_ARTICLE_URL } from '../../utils/api/endpoints'
 import { ACTION_DELETE, ACTION_UPDATE, ACTION_VIEW } from '../../utils/table-actions'
@@ -39,9 +39,32 @@ export const table = [
     },
   },
   {
+    title: 'Активность',
+    name: 'active',
+    search: {
+      enable: true,
+      type: BOOL,
+    },
+  },
+  {
     title: 'Картинка',
     name: 'image',
     display: IMAGE,
+    search: {
+      enable: false,
+    },
+  },
+  {
+    title: 'Показывать на главной',
+    name: 'show_on_main',
+    search: {
+      enable: true,
+      type: BOOL,
+    },
+  },
+  {
+    title: 'Дата создания',
+    name: 'created_at',
     search: {
       enable: false,
     },

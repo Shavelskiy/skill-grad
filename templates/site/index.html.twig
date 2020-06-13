@@ -11,7 +11,7 @@
   {% include 'site/blocks/banner.html.twig' %}
   {% include 'site/blocks/study.html.twig' %}
   {% include 'site/blocks/how-work.html.twig' %}
-  {% include 'site/blocks/blog.html.twig' %}
+  {% include 'site/blocks/blog.html.twig' with {articles: articles} %}
 {% endblock %}
 
 {% block javascripts %}

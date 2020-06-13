@@ -32,7 +32,9 @@ const ArticleCreate = () => {
     name: '',
     slug: '',
     sort: 0,
+    active: true,
     detailText: '',
+    showOnMain: false,
   })
   const [uploadImage, setUploadImage] = useState(null)
 

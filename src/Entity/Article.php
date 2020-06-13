@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +33,11 @@ class Article
     private int $sort;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $active;
+
+    /**
      * @ORM\Column(type="text")
      */
     private string $detailText;
@@ -41,6 +47,20 @@ class Article
      */
     private ?Upload $image;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $showOnMain;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private DateTime $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     public function getId(): int
     {
@@ -86,6 +106,17 @@ class Article
         return $this;
     }
 
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+        return $this;
+    }
+
     public function getDetailText(): string
     {
         return $this->detailText;
@@ -105,6 +136,28 @@ class Article
     public function setImage(?Upload $image): self
     {
         $this->image = $image;
+        return $this;
+    }
+
+    public function isShowOnMain(): bool
+    {
+        return $this->showOnMain;
+    }
+
+    public function setShowOnMain(bool $showOnMain): self
+    {
+        $this->showOnMain = $showOnMain;
+        return $this;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

@@ -33,8 +33,10 @@ const ArticleUpdate = ({match}) => {
     name: '',
     slug: '',
     sort: 0,
+    active: true,
     detailText: '',
     image: null,
+    showOnMain: false,
   })
 
   const [uploadImage, setUploadImage] = useState(null)
@@ -52,8 +54,10 @@ const ArticleUpdate = ({match}) => {
           name: data.name,
           slug: data.slug,
           sort: data.sort,
+          active: data.active,
           detailText: data.detail_text,
-          image: data.image
+          image: data.image,
+          showOnMain: data.show_on_main,
         })
         dispatch(setTitle(`Редактирование категории "${data.name}"`))
         dispatch(hideLoader())

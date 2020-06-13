@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NumberInput, SaveButton, TextInput, Wysiwyg, ImageInput } from '../../components/ui/inputs'
+import { NumberInput, SaveButton, TextInput, Wysiwyg, ImageInput, BooleanInput } from '../../components/ui/inputs'
 import translate from '../../helpers/translate'
 
 const ArticuleForm = ({item, setItem, uploadImage, setUploadImage, disable, save}) => {
@@ -37,6 +37,18 @@ const ArticuleForm = ({item, setItem, uploadImage, setUploadImage, disable, save
         value={item.sort}
         setValue={(sort) => setItem({...item, sort: sort})}
         label="Сортировка"
+      />
+
+      <BooleanInput
+        checed={item.active}
+        setValue={(value) => setItem({...item, active: value})}
+        label="Активность"
+      />
+
+      <BooleanInput
+        checed={item.showOnMain}
+        setValue={(value) => setItem({...item, showOnMain: value})}
+        label="Показывать на главной"
       />
 
       <ImageInput

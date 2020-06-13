@@ -18,6 +18,20 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function getMainPageArticles(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.active = :active')
+            ->andWhere('a.showOnMain = :showOnMain')
+            ->setParameters([
+                'active' => true,
+                'showOnMain' => true,
+            ])
+            ->orderBy('a.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @param SearchQuery $searchQuery
      * @return PaginatorResult
@@ -57,6 +71,16 @@ class ArticleRepository extends ServiceEntityRepository
                     $query
                         ->andWhere('a.sort = :sort')
                         ->setParameter('sort', (int)$value);
+                    break;
+                case 'active':
+                    $query
+                        ->andWhere('a.active = :active')
+                        ->setParameter('active', $value);
+                    break;
+                case 'show_on_main':
+                    $query
+                        ->andWhere('a.showOnMain = :showOnMain')
+                        ->setParameter('showOnMain', $value);
                     break;
             }
         }

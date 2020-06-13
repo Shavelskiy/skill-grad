@@ -19,8 +19,11 @@ const ArticleView = ({match}) => {
     name: '',
     slug: '',
     sort: 0,
+    active: false,
     detailText: '',
     image: null,
+    showOnMain: false,
+    createdAt: '',
   })
 
   useEffect(() => {
@@ -37,13 +40,17 @@ const ArticleView = ({match}) => {
   }, [item])
 
   const setItemFromResponse = (data) => {
+    console.log(data.created_at)
     setItem({
       id: data.id,
       name: data.name,
       slug: data.slug,
       sort: data.sort,
+      active: data.active,
       detailText: data.detail_text,
       image: data.image,
+      showOnMain: data.show_on_main,
+      createdAt: data.created_at,
     })
   }
 
@@ -77,8 +84,20 @@ const ArticleView = ({match}) => {
             <td>{item.sort}</td>
           </tr>
           <tr>
+            <td>Активность</td>
+            <td>{item.active ? 'Да' : 'Нет'}</td>
+          </tr>
+          <tr>
             <td>Изображение</td>
             <td><img src={item.image}/></td>
+          </tr>
+          <tr>
+            <td>Показывать на главной</td>
+            <td>{item.showOnMain ? 'Да' : 'Нет'}</td>
+          </tr>
+          <tr>
+            <td>Дата создания</td>
+            <td>{item.createdAt}</td>
           </tr>
           </tbody>
         </table>

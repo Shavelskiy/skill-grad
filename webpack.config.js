@@ -44,28 +44,8 @@ Encore
     options.camelCase = true;
   })
 
-  .enableVueLoader()
   .enableReactPreset()
   .enableSassLoader()
-  .addLoader({
-    test: /\.pug$/,
-    oneOf: [
-      {
-        resourceQuery: /^\?vue/,
-        use: ['pug-plain-loader']
-      },
-      {
-        use: ['raw-loader', 'pug-plain-loader']
-      }
-    ]
-  })
-
-  .copyFiles({
-    from: './admin/images',
-    to: 'images/[path][name].[ext]',
-    pattern: /\.(png|jpg|jpeg)$/
-  })
-
   .enableEslintLoader()
 ;
 

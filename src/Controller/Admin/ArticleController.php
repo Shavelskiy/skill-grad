@@ -67,7 +67,10 @@ class ArticleController extends AbstractController
             'name' => $item->getName(),
             'slug' => $item->getSlug(),
             'sort' => $item->getSort(),
+            'active' => $item->isActive(),
             'image' => ($item->getImage() !== null) ? $item->getImage()->getPublicPath() : null,
+            'show_on_main' => $item->isShowOnMain(),
+            'created_at' => $item->getCreatedAt()->format('d.m.Y')
         ];
     }
 
@@ -95,8 +98,11 @@ class ArticleController extends AbstractController
                 'name' => $article->getName(),
                 'slug' => $article->getSlug(),
                 'sort' => $article->getSort(),
+                'active' => $article->isActive(),
                 'image' => ($article->getImage() !== null) ? $article->getImage()->getPublicPath() : null,
                 'detail_text' => $article->getDetailText(),
+                'show_on_main' => $article->isShowOnMain(),
+                'created_at' => $article->getCreatedAt()->format('d.m.Y')
             ]);
         } catch (Exception $e) {
             throw new NotFoundHttpException('');
@@ -115,7 +121,9 @@ class ArticleController extends AbstractController
             ->setName($request->get('name'))
             ->setSlug($request->get('slug'))
             ->setSort($request->get('sort'))
-            ->setDetailText($request->get('detailText'));
+            ->setActive($request->get('active') === 'true')
+            ->setDetailText($request->get('detailText'))
+            ->setShowOnMain($request->get('showOnMain') === 'true');
 
         try {
             /** @var UploadedFile $uploadImage */
@@ -159,7 +167,9 @@ class ArticleController extends AbstractController
             ->setName($request->get('name'))
             ->setSlug($request->get('slug'))
             ->setSort($request->get('sort'))
-            ->setDetailText($request->get('detailText'));
+            ->setActive($request->get('active') === 'true')
+            ->setDetailText($request->get('detailText'))
+            ->setShowOnMain($request->get('showOnMain') === 'true');
 
         try {
             /** @var UploadedFile $uploadImage */
