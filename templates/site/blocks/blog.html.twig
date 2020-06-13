@@ -6,20 +6,22 @@
         {% for article in articles %}
           <a class="blog-item" href="{{ path('blog.view', {slug: article.slug}) }}">
             <div class="blog-item__photo">
-              <img src="{{ article.image.publicPath }}" alt="Photo"/>
+              <img src="{{ article.imageSrc }}" alt="Photo"/>
             </div>
             <div class="blog-item__main">
               <div class="blog-item__main-date">
-                <span class="date">22</span>сентября
+                <span class="date">{{ article.createdAt.day }}</span>
+                {{ ('date.month.' ~ article.createdAt.month) | trans }}
               </div>
               <div class="blog-item__title">{{ article.name }}</div>
-              <div class="blog-item__desc">{{ article.detailText | raw }}</div>
+              <div class="blog-item__desc">{{ article.previewText | raw }}</div>
             </div>
           </a>
         {% endfor %}
       </div>
       <div class="blog-btn-container">
-        <a class="btn btn-blue" href="#">Перейти в Блог </a></div>
+        <a class="btn btn-blue" href="#">Перейти в Блог </a>
+      </div>
     </div>
   </div>
 </div>
