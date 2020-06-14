@@ -28,9 +28,19 @@ class Location
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private string $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private string $code;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $showInList;
 
     /**
      * @ORM\Column(type="integer")
@@ -61,7 +71,28 @@ class Location
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
 
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    public function isShowInList(): bool
+    {
+        return $this->showInList;
+    }
+
+    public function setShowInList(bool $showInList): self
+    {
+        $this->showInList = $showInList;
         return $this;
     }
 
@@ -73,7 +104,6 @@ class Location
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
-
         return $this;
     }
 
@@ -85,7 +115,6 @@ class Location
     public function setType(string $type): self
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -97,7 +126,6 @@ class Location
     public function setParentLocation(Location $parentLocation): self
     {
         $this->parentLocation = $parentLocation;
-
         return $this;
     }
 

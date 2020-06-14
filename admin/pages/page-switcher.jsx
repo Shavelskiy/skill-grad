@@ -1,5 +1,10 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import css from './page-switcher.scss?module'
+import cn from 'classnames'
+
 import {
   INDEX,
   CATEGORY_INDEX,
@@ -20,10 +25,8 @@ import {
   PROGRAM_FORMAT_INDEX,
   PROGRAM_FORMAT_CREATE,
   PROGRAM_FORMAT_UPDATE,
-  PROVIDER_INDEX, PROVIDER_CREATE,
+  PROVIDER_INDEX, PROVIDER_CREATE, LOCATION_CREATE,
 } from './../utils/routes'
-
-import { useSelector } from 'react-redux'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
 import NotFoundPage from '../pages/not-found/not-found'
@@ -47,10 +50,8 @@ import ArticleView from './articles/view'
 import ArticleUpdate from './articles/update'
 import UsersIndex from './users'
 import LocationsIndex from '../pages/locations'
+import LocationCreate from './locations/create'
 import LocationView from '../pages/locations/view'
-
-import css from './page-switcher.scss?module'
-import cn from 'classnames'
 
 
 const PageSwitcher = ({active}) => {
@@ -86,8 +87,9 @@ const PageSwitcher = ({active}) => {
 
           <Route exact name="user.index" path={USER_INDEX} component={UsersIndex}/>
 
-          <Route exact name="location.view" path={LOCATION_INDEX} component={LocationsIndex}/>
-          <Route exact name="location.index" path={LOCATION_VIEW} component={LocationView}/>
+          <Route exact name="location.index" path={LOCATION_INDEX} component={LocationsIndex}/>
+          <Route exact name="location.create" path={LOCATION_CREATE} component={LocationCreate}/>
+          <Route exact name="location.view" path={LOCATION_VIEW} component={LocationView}/>
 
           <Route exact name="index" path={INDEX} component={IndexPage}/>
           <Route path="/" component={NotFoundPage}/>

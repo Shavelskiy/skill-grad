@@ -60,17 +60,40 @@ class LocationController extends AbstractController
         return new JsonResponse($data);
     }
 
-    /**
-     * @param Location $location
-     * @return array
-     */
     protected function prepareItem(Location $location): array
     {
         return [
             'id' => $location->getId(),
             'name' => $location->getName(),
+            'code' => $location->getCode(),
+            'show_in_list' => $location->isShowInList(),
             'type' => $this->translator->trans('location.type.' . $location->getType()),
             'sort' => $location->getSort(),
         ];
+    }
+
+    /**
+     * @Route("/all", name="admin.location.all", methods={"GET"})
+     */
+    public function fetchAll(): Response
+    {
+        $locations = [];
+        /** @var Location $location */
+        foreach ($this->locationRepository->findAll() as $location) {
+            $path = [];
+            $parentLocation = clone $location;
+
+            while ($parentLocation !== null) {
+                $path[] = $parentLocation->getName();
+                $parentLocation = $parentLocation->getParentLocation();
+            }
+
+            $locations[] = [
+              'value' => $location->getId(),
+              'title' => implode(', ', $path),
+            ];
+        }
+
+        return new JsonResponse(['locations' => $locations]);
     }
 }

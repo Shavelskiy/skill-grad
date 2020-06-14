@@ -7,6 +7,8 @@ use App\Dto\SearchQuery;
 use App\Entity\Location;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -38,8 +40,8 @@ class LocationRepository extends ServiceEntityRepository
      * @param int $pageItems
      * @param array|null $serach
      * @return PaginatorResult
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getPaginatorResult(SearchQuery $searchQuery): PaginatorResult
     {

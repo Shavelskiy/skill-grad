@@ -16,7 +16,7 @@ const LocationsIndex = () => {
       actions={actions}
       fetchUrl={FETCH_LOCATIONS_URL}
       canCreate={true}
-      createLink={LOCATION_CREATE}
+      createLink={LOCATION_CREATE.replace(':id', '')}
     />
   )
 }

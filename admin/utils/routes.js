@@ -3,11 +3,11 @@ export const LOGIN = '/login'
 
 export const CATEGORY_INDEX = '/category'
 export const CATEGORY_VIEW = '/category/:id'
-export const CATEGORY_CREATE = '/category/create/:id'
+export const CATEGORY_CREATE = '/category/create/:id?'
 export const CATEGORY_UPDATE = '/category/update/:id'
 
 export const PROGRAM_FORMAT_INDEX = '/program-format'
-export const PROGRAM_FORMAT_CREATE = '/program-format/create/:id'
+export const PROGRAM_FORMAT_CREATE = '/program-format/create'
 export const PROGRAM_FORMAT_UPDATE = '/program-format/update/:id'
 
 export const PROVIDER_INDEX = '/provider'
@@ -28,6 +28,6 @@ export const ARTICLE_UPDATE = '/article/update/:id'
 export const USER_INDEX = '/user'
 
 export const LOCATION_INDEX = '/location'
-export const LOCATION_CREATE = '/location/create'
 export const LOCATION_VIEW = '/location/:id'
+export const LOCATION_CREATE = '/location/create/:id?'
 export const LOCATION_UPDATE = '/location/update/:id'

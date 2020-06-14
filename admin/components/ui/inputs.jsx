@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 
 import Button from './button'
 import ReactQuill from 'react-quill'
@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill'
 import css from './inputs.scss?module'
 import './wysiwyg.scss'
 import cn from 'classnames'
+import Select from './select'
 
 
 export function TextInput({label, value, setValue, disabled = false}) {
@@ -56,6 +57,23 @@ export function BooleanInput({label, checed = false, setValue}) {
           type="checkbox"
           checked={checed === true}
           onChange={(event) => setValue(event.target.checked)}
+        />
+      </div>
+    </div>
+  )
+}
+
+export function SelectInput({label, value = null, setValue, options}) {
+  return (
+    <div className={css.input}>
+      <span className={css.label}>{label}</span>
+      <div className={css.selectWrap}>
+        <Select
+          options={options}
+          canUncheck={true}
+          value={value}
+          setValue={setValue}
+          high={true}
         />
       </div>
     </div>

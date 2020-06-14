@@ -1,4 +1,8 @@
-import { LIST, NUMBER, STRING }from './../../components/table-search/types'
+import { BOOL, LIST, NUMBER, STRING } from './../../components/table-search/types'
+import { BOOLEAN } from '../../utils/table-item-display'
+import { ACTION_DELETE, ACTION_UPDATE, ACTION_VIEW } from '../../utils/table-actions'
+import { LOCATION_UPDATE, LOCATION_VIEW } from '../../utils/routes'
+import { DELETE_LOCATION_URL } from '../../utils/api/endpoints'
 
 export const table = [
   {
@@ -17,6 +21,34 @@ export const table = [
     search: {
       enable: true,
       type: STRING,
+    },
+  },
+  {
+    title: 'Код',
+    name: 'code',
+    width: 1,
+    search: {
+      enable: true,
+      type: STRING,
+    },
+  },
+  {
+    title: 'Сортировка',
+    name: 'sort',
+    width: 1,
+    search: {
+      enable: true,
+      type: NUMBER,
+    },
+  },
+  {
+    title: 'Показывать в списке',
+    name: 'show_in_list',
+    width: 1,
+    display: BOOLEAN,
+    search: {
+      enable: true,
+      type: BOOL,
     },
   },
   {
@@ -46,28 +78,19 @@ export const table = [
       ]
     },
   },
-  {
-    title: 'Сортировка',
-    name: 'sort',
-    width: 1,
-    search: {
-      enable: true,
-      type: NUMBER,
-    },
-  },
 ]
 
 export const actions = [
   {
-    type: 'view',
-    link: '/tag',
+    type: ACTION_VIEW,
+    link: LOCATION_VIEW,
   },
   {
-    type: 'update',
-    link: '/tag',
+    type: ACTION_UPDATE,
+    link: LOCATION_UPDATE,
   },
   {
-    type: 'delete',
-    link: '/api/admin/location/',
+    type: ACTION_DELETE,
+    link: DELETE_LOCATION_URL,
   }
 ]
