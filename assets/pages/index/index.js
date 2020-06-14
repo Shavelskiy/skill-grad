@@ -32,7 +32,7 @@ const selectTabContent = (tabName, tabContent) => {
 }
 
 initTabs('.study-tabs-nav-item', '.study-content-item')
-// initTabs('.study-content__item-circle', '.study-tab-content')
+initTabs('.study-content__item-circle', '.study-tab-content')
 // initTabs('.how-work__info-mobile .how-work__info-title', '.how-work__info')
 
 const sliders = document.querySelectorAll('.study-slider')
@@ -61,12 +61,12 @@ sliders.forEach((item) => {
 document.querySelector('.how-work-register-user-btn').onclick = () => showRegisterForm(ROLE_USER)
 document.querySelector('.how-work-register-provider-btn').onclick = () => showRegisterForm(ROLE_PROVIDER)
 
-// document.querySelector('.main__mnu-mobile').onclick = () => {
-//   const mobileMenu = document.getElementById('mobile__list-mnu')
-//
-//   if (mobileMenu.style.display === 'none') {
-//     mobileMenu.style.display = 'block'
-//   } else {
-//     mobileMenu.style.display = 'none'
-//   }
-// }
+document.querySelector('.main__mnu-mobile').onclick = () => {
+const mobileMenu = document.getElementById('mobile__list-mnu')
+
+   if (mobileMenu.style.display === 'none') {
+     mobileMenu.style.display = 'block'
+   } else {
+     mobileMenu.style.display = 'none'
+   }
+   }
