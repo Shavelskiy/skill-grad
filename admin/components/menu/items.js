@@ -4,7 +4,7 @@ import {
   TAG_INDEX,
   ARTICLE_INDEX,
   USER_INDEX,
-  PROGRAM_FORMAT_INDEX
+  PROGRAM_FORMAT_INDEX, PROVIDER_INDEX
 } from '../../utils/routes'
 
 export const menuItems = [
@@ -20,6 +20,16 @@ export const menuItems = [
         title: 'Формы обучения',
         link: PROGRAM_FORMAT_INDEX,
       },
+    ],
+  },
+  {
+    title: 'Провайдеры обучения',
+    icon: 'fa fa-chalkboard-teacher',
+    items: [
+      {
+        title: 'Список провайдеров',
+        link: PROVIDER_INDEX,
+      }
     ],
   },
   {

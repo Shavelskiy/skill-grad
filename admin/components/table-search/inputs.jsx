@@ -47,6 +47,7 @@ const ListInput = ({value, field, options, changeSearch}) => {
       options={options.enum}
       value={value}
       setValue={(inputValue) => changeSearch(true, field, inputValue)}
+      high={true}
     />
   )
 }
@@ -63,6 +64,7 @@ const BoolInput = ({value, field, changeSearch}) => {
       value={value}
       canUncheck={true}
       setValue={(inputValue) => changeSearch(true, field, inputValue)}
+      high={true}
     />
   )
 }

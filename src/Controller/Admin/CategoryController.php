@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
  * @Route("/api/admin/category")
  */
@@ -33,8 +32,6 @@ class CategoryController extends AbstractController
     /**
      * @Route("", name="admin.category.index", methods={"GET"})
      *
-     * @param Request $request
-     * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -71,8 +68,6 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.category.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     * @param Request $request
-     * @return Response
      */
     public function view(int $id): Response
     {
@@ -134,8 +129,6 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.category.create", methods={"POST"}, requirements={"id"="[0-9]*"})
-     * @param Request $request
-     * @return Response
      */
     public function create(Request $request): Response
     {
@@ -206,5 +199,20 @@ class CategoryController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         return new JsonResponse();
+    }
+
+    /**
+     * @Route("/all", name="admin.category.all", methods={"GET"})
+     */
+    public function fetchAll(): Response
+    {
+        $categories = [];
+
+        /** @var Category $categroy */
+        foreach ($this->categoryRepository->findAll() as $categroy) {
+            $categories[] = $this->prepareItem($categroy);
+        }
+
+        return new JsonResponse(['categories' => $categories]);
     }
 }

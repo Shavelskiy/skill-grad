@@ -57,9 +57,7 @@ const Login = () => {
   return (
     <div className={css.page}>
       <div className={cn(css.container, {[css.lock]: lock})}>
-        <div className={css.title}>
-          <h3>Авторизация</h3>
-        </div>
+        <h3>Авторизация</h3>
         <div className={css.form}>
           <div className={cn(css.error, {[css.active]: error !== null})}>
             <span>{error}</span>

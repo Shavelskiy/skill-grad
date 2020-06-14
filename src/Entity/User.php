@@ -56,6 +56,11 @@ class User implements UserInterface
      */
     private UserInfo $userInfo;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Provider", mappedBy="user")
+     */
+    private ?Provider $provider;
+
 
     public function getId(): ?int
     {
@@ -148,6 +153,17 @@ class User implements UserInterface
     public function setUserInfo(UserInfo $userInfo): self
     {
         $this->userInfo = $userInfo;
+        return $this;
+    }
+
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(?Provider $provider): self
+    {
+        $this->provider = $provider;
         return $this;
     }
 }

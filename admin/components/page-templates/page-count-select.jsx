@@ -49,7 +49,7 @@ const PageCountSelect = ({value, setValue}) => {
         value={value}
         setValue={setValue}
         small={true}
-        high={false}
+        low={true}
       />
     </div>
   )

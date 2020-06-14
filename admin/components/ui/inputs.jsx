@@ -7,6 +7,7 @@ import css from './inputs.scss?module'
 import './wysiwyg.scss'
 import cn from 'classnames'
 
+
 export function TextInput({label, value, setValue, disabled = false}) {
   return (
     <div className={css.input}>
@@ -17,6 +18,17 @@ export function TextInput({label, value, setValue, disabled = false}) {
         disabled={disabled}
         onChange={(event) => setValue(event.target.value)}
       />
+    </div>
+  )
+}
+
+export function TextAreaInput({label, value, setValue}) {
+  return (
+    <div className={css.input}>
+      <span className={css.label}>{label}</span>
+      <textarea
+        value={value}
+        onChange={(event) => setValue(event.target.value)}/>
     </div>
   )
 }

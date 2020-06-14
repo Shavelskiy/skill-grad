@@ -109,7 +109,6 @@ class ArticleController extends AbstractController
         }
     }
 
-
     /**
      * @Route("", name="admin.article.create", methods={"POST"})
      * @param Request $request

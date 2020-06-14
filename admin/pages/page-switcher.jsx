@@ -2,11 +2,25 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import {
   INDEX,
-  CATEGORY_INDEX, CATEGORY_VIEW, CATEGORY_UPDATE,
-  TAG_CREATE, TAG_INDEX, TAG_UPDATE, TAG_VIEW,
-  ARTICLE_INDEX, ARTICLE_CREATE, ARTICLE_VIEW, ARTICLE_UPDATE,
+  CATEGORY_INDEX,
+  CATEGORY_VIEW,
+  CATEGORY_UPDATE,
+  TAG_CREATE,
+  TAG_INDEX,
+  TAG_UPDATE,
+  TAG_VIEW,
+  ARTICLE_INDEX,
+  ARTICLE_CREATE,
+  ARTICLE_VIEW,
+  ARTICLE_UPDATE,
   USER_INDEX,
-  LOCATION_INDEX, LOCATION_VIEW, CATEGORY_CREATE, PROGRAM_FORMAT_INDEX, PROGRAM_FORMAT_CREATE, PROGRAM_FORMAT_UPDATE,
+  LOCATION_INDEX,
+  LOCATION_VIEW,
+  CATEGORY_CREATE,
+  PROGRAM_FORMAT_INDEX,
+  PROGRAM_FORMAT_CREATE,
+  PROGRAM_FORMAT_UPDATE,
+  PROVIDER_INDEX, PROVIDER_CREATE,
 } from './../utils/routes'
 
 import { useSelector } from 'react-redux'
@@ -21,6 +35,8 @@ import CategoryUpdate from './category/update'
 import ProgramFormatIndex from './program-format'
 import ProgramFormatCreate from './program-format/create'
 import ProgramForatmUpdate from './program-format/update'
+import ProviderIndex from './provider'
+import ProviderCreate from './provider/create'
 import TagsIndex from '../pages/tags'
 import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
@@ -54,6 +70,9 @@ const PageSwitcher = ({active}) => {
           <Route exact name="program-format.index" path={PROGRAM_FORMAT_INDEX} component={ProgramFormatIndex}/>
           <Route exact name="program-format.create" path={PROGRAM_FORMAT_CREATE} component={ProgramFormatCreate}/>
           <Route exact name="program-format.update" path={PROGRAM_FORMAT_UPDATE} component={ProgramForatmUpdate}/>
+
+          <Route exact name="provider.index" path={PROVIDER_INDEX} component={ProviderIndex}/>
+          <Route exact name="provider.create" path={PROVIDER_CREATE} component={ProviderCreate}/>
 
           <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
           <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>

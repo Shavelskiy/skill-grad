@@ -3,12 +3,17 @@ export const LOGIN = '/login'
 
 export const CATEGORY_INDEX = '/category'
 export const CATEGORY_VIEW = '/category/:id'
-export const CATEGORY_CREATE = '/category/create/:id?'
+export const CATEGORY_CREATE = '/category/create/:id'
 export const CATEGORY_UPDATE = '/category/update/:id'
 
 export const PROGRAM_FORMAT_INDEX = '/program-format'
-export const PROGRAM_FORMAT_CREATE = '/program-format/create/:id?'
+export const PROGRAM_FORMAT_CREATE = '/program-format/create/:id'
 export const PROGRAM_FORMAT_UPDATE = '/program-format/update/:id'
+
+export const PROVIDER_INDEX = '/provider'
+export const PROVIDER_VIEW = '/provider/:id'
+export const PROVIDER_CREATE = '/provider/create'
+export const PROVIDER_UPDATE = '/provider/update/:id'
 
 export const TAG_INDEX = '/tag'
 export const TAG_CREATE = '/tag/create'
