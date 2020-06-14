@@ -9,11 +9,11 @@ import { hideLoader, showLoader, setTitle, setBreacrumbs, showAlert } from '../.
 
 import NotFound from '../../components/not-found/not-found'
 import Portlet from '../../components/portlet/portlet'
-import ProgramFormForm from './form'
+import ProgramFormatForm from './form'
 import { FETCH_PROGRAM_FORMAT_URL, UPDATE_PROGRAM_FORMAT_URL } from '../../utils/api/endpoints'
 
 
-const ProgramFormUpdate = ({match}) => {
+const ProgramForatmUpdate = ({match}) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -82,7 +82,7 @@ const ProgramFormUpdate = ({match}) => {
       title={title}
       titleIcon={'info'}
     >
-      <ProgramFormForm
+      <ProgramFormatForm
         item={item}
         setItem={setItem}
         save={save}
@@ -92,4 +92,4 @@ const ProgramFormUpdate = ({match}) => {
   )
 }
 
-export default ProgramFormUpdate
+export default ProgramForatmUpdate

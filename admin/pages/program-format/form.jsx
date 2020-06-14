@@ -2,7 +2,7 @@ import React  from 'react'
 import { NumberInput, SaveButton, TextInput, BooleanInput } from '../../components/ui/inputs'
 
 
-const ProgramFormForm = ({item, setItem, disable, save}) => {
+const ProgramFormatForm = ({item, setItem, disable, save}) => {
   return (
     <form>
       <TextInput
@@ -28,4 +28,4 @@ const ProgramFormForm = ({item, setItem, disable, save}) => {
   )
 }
 
-export default ProgramFormForm
+export default ProgramFormatForm

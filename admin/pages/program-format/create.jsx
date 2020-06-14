@@ -8,11 +8,11 @@ import { CREATE_PROGRAM_FORMAT_URL } from '../../utils/api/endpoints'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTitle, setBreacrumbs, showAlert } from '../../redux/actions'
 
-import ProgramFormForm from './form'
+import ProgramFormatForm from './form'
 import Portlet from '../../components/portlet/portlet'
 
 
-const ProgramFormCreate = () => {
+const ProgramFormatCreate = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -53,7 +53,7 @@ const ProgramFormCreate = () => {
       title={title}
       titleIcon={'info'}
     >
-      <ProgramFormForm
+      <ProgramFormatForm
         item={item}
         setItem={setItem}
         save={save}
@@ -63,4 +63,4 @@ const ProgramFormCreate = () => {
   )
 }
 
-export default ProgramFormCreate
+export default ProgramFormatCreate

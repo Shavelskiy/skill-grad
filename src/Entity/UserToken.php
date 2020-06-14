@@ -17,7 +17,7 @@ class UserToken
 
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private User $user;
 

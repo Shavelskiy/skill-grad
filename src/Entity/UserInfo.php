@@ -11,8 +11,7 @@ class UserInfo
 {
     /**
      * @ORM\Id()
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="userInfo")
      */
     private User $user;
 

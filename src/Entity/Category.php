@@ -33,7 +33,7 @@ class Category
     private int $sort;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="childCategories")
      */
     private ?Category $parentCategory;
 

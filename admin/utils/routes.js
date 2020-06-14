@@ -7,7 +7,6 @@ export const CATEGORY_CREATE = '/category/create/:id?'
 export const CATEGORY_UPDATE = '/category/update/:id'
 
 export const PROGRAM_FORMAT_INDEX = '/program-format'
-export const PROGRAM_FORMAT_VIEW = '/program-format/:id'
 export const PROGRAM_FORMAT_CREATE = '/program-format/create/:id?'
 export const PROGRAM_FORMAT_UPDATE = '/program-format/update/:id'
 

@@ -16,19 +16,5 @@ class ProgramRepository extends ServiceEntityRepository
         parent::__construct($registry, Program::class);
     }
 
-    public function getPaginatorUserItems(User $user, bool $active = true, int $page = 1, int $pageItems = 10): PaginatorResult
-    {
-        $query = $this->createQueryBuilder('p')
-            ->andWhere('p.active = :active')
-            ->andWhere('p.user = :user')
-            ->setParameters([
-                'active' => $active,
-                'user' => $user,
-            ]);
 
-        return (new Paginator())
-            ->setQuery($query)
-            ->setPage($page)
-            ->getResult();
-    }
 }

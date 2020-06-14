@@ -18,10 +18,10 @@ class Program
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="chatMessages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    private User $mainProvider;
 
     /**
      * @ORM\Column(type="string")
@@ -76,31 +76,39 @@ class Program
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $created;
+    private DateTime $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private DateTime $updated;
 
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
+
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
-    public function getUser(): User
+    public function getMainProvider(): User
     {
-        return $this->user;
+        return $this->mainProvider;
     }
 
-    public function setUser(User $user): void
+    public function setMainProvider(User $mainProvider): self
     {
-        $this->user = $user;
+        $this->mainProvider = $mainProvider;
+        return $this;
     }
 
     public function getName(): string
@@ -108,9 +116,10 @@ class Program
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 
     public function isActive(): bool
@@ -118,49 +127,109 @@ class Program
         return $this->active;
     }
 
-    public function setActive(bool $active): void
+    public function setActive(bool $active): self
     {
         $this->active = $active;
+        return $this;
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
-    public function setCategories($categories): void
+    public function setCategories(array $categories): self
     {
         $this->categories = $categories;
+        return $this;
     }
 
-    public function getRequests()
+    public function getAnnotation(): string
+    {
+        return $this->annotation;
+    }
+
+    public function setAnnotation(string $annotation): self
+    {
+        $this->annotation = $annotation;
+        return $this;
+    }
+
+    public function getDetailText(): string
+    {
+        return $this->detailText;
+    }
+
+    public function setDetailText(string $detailText): self
+    {
+        $this->detailText = $detailText;
+        return $this;
+    }
+
+    public function getTeachers(): array
+    {
+        return $this->teachers;
+    }
+
+    public function setTeachers(array $teachers): self
+    {
+        $this->teachers = $teachers;
+        return $this;
+    }
+
+    public function getDuration(): array
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(array $duration): self
+    {
+        $this->duration = $duration;
+        return $this;
+    }
+
+    public function getFormat(): array
+    {
+        return $this->format;
+    }
+
+    public function setFormat(array $format): self
+    {
+        $this->format = $format;
+        return $this;
+    }
+
+    public function getRequests(): array
     {
         return $this->requests;
     }
 
-    public function setRequests($requests): void
+    public function setRequests(array $requests): self
     {
         $this->requests = $requests;
+        return $this;
     }
 
-    public function getQuestions()
+    public function getQuestions(): array
     {
         return $this->questions;
     }
 
-    public function setQuestions($questions): void
+    public function setQuestions(array $questions): self
     {
         $this->questions = $questions;
+        return $this;
     }
 
-    public function getCreated(): DateTime
+    public function getCreatedAt(): DateTime
     {
-        return $this->created;
+        return $this->createdAt;
     }
 
-    public function setCreated(DateTime $created): void
+    public function setCreatedAt(DateTime $createdAt): self
     {
-        $this->created = $created;
+        $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function getUpdated(): DateTime
@@ -168,8 +237,9 @@ class Program
         return $this->updated;
     }
 
-    public function setUpdated(DateTime $updated): void
+    public function setUpdated(DateTime $updated): self
     {
         $this->updated = $updated;
+        return $this;
     }
 }
