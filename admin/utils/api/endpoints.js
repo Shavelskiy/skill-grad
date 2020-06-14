@@ -8,6 +8,12 @@ export const CREATE_CATEGORY_URL = '/api/admin/category/:id'
 export const UPDATE_CATEGORY_URL = '/api/admin/category'
 export const DELETE_CATEGORY_URL = '/api/admin/category'
 
+export const FETCH_PROGRAMS_FORMAT_URL = '/api/admin/program-format'
+export const FETCH_PROGRAM_FORMAT_URL = '/api/admin/program-format/:id'
+export const CREATE_PROGRAM_FORMAT_URL = '/api/admin/program-format'
+export const UPDATE_PROGRAM_FORMAT_URL = '/api/admin/program-format'
+export const DELETE_PROGRAM_FORMAT_URL = '/api/admin/program-format'
+
 export const FETCH_ARTICLES_URL = '/api/admin/article'
 export const FETCH_ARTICLE_URL = '/api/admin/article/:id'
 export const CREATE_ARTICLE_URL = '/api/admin/article'

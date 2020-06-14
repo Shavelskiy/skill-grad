@@ -6,7 +6,7 @@ import {
   TAG_CREATE, TAG_INDEX, TAG_UPDATE, TAG_VIEW,
   ARTICLE_INDEX, ARTICLE_CREATE, ARTICLE_VIEW, ARTICLE_UPDATE,
   USER_INDEX,
-  LOCATION_INDEX, LOCATION_VIEW, CATEGORY_CREATE,
+  LOCATION_INDEX, LOCATION_VIEW, CATEGORY_CREATE, PROGRAM_FORMAT_INDEX, PROGRAM_FORMAT_CREATE, PROGRAM_FORMAT_UPDATE,
 } from './../utils/routes'
 
 import { useSelector } from 'react-redux'
@@ -18,6 +18,9 @@ import CategroyIndex from './category'
 import CategoryView from './category/view'
 import CategoryCreate from './category/create'
 import CategoryUpdate from './category/update'
+import ProgramFormatIndex from './program-format'
+import ProgramFormCreate from './program-format/create'
+import ProgramFormUpdate from './program-format/update'
 import TagsIndex from '../pages/tags'
 import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
@@ -47,6 +50,10 @@ const PageSwitcher = ({active}) => {
           <Route exact name="categroy.create" path={CATEGORY_CREATE} component={CategoryCreate}/>
           <Route exact name="categroy.view" path={CATEGORY_VIEW} component={CategoryView}/>
           <Route exact name="categroy.update" path={CATEGORY_UPDATE} component={CategoryUpdate}/>
+
+          <Route exact name="program-format.index" path={PROGRAM_FORMAT_INDEX} component={ProgramFormatIndex}/>
+          <Route exact name="program-format.create" path={PROGRAM_FORMAT_CREATE} component={ProgramFormCreate}/>
+          <Route exact name="program-format.update" path={PROGRAM_FORMAT_UPDATE} component={ProgramFormUpdate}/>
 
           <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
           <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>

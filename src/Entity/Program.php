@@ -39,6 +39,31 @@ class Program
     private array $categories;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private string $annotation;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected string $detailText;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Teacher", mappedBy="program")
+     */
+    protected array $teachers;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    protected array $duration;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    protected array $format;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProgramRequest", mappedBy="program")
      */
     private array $requests;

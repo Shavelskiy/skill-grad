@@ -1,4 +1,11 @@
-import { CATEGORY_INDEX, LOCATION_INDEX, TAG_INDEX, ARTICLE_INDEX, USER_INDEX } from '../../utils/routes'
+import {
+  CATEGORY_INDEX,
+  LOCATION_INDEX,
+  TAG_INDEX,
+  ARTICLE_INDEX,
+  USER_INDEX,
+  PROGRAM_FORMAT_INDEX
+} from '../../utils/routes'
 
 export const menuItems = [
   {
@@ -8,6 +15,10 @@ export const menuItems = [
       {
         title: 'Категории',
         link: CATEGORY_INDEX,
+      },
+      {
+        title: 'Формы обучения',
+        link: PROGRAM_FORMAT_INDEX,
       },
     ],
   },
