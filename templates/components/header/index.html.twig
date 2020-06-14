@@ -2,13 +2,13 @@
 <header class="header">
   <div class="container">
     <div class="header-wrap">
-      <div class="header-wrap-left">
-        <a class="logo" href="{{ path('site.index') }}">
+      <a class="logo" href="{{ path('site.index') }}">
           <img src="/img/logo.png" alt="logo"/>
-        </a>
-{#        <div class="logo__mobile">#}
-{#          <img src="/img/logo_mobile.png" alt="logo"/>#}
-{#        </div>#}
+      </a>
+      <a class="logo-mobile" href="{{ path('site.index') }}">
+          <img src="/img/logo_mobile.png" alt="logo"/>
+     </a>
+
         {% include 'components/header/menu.html.twig' %}
 
         <div class="header-button-container">
@@ -19,48 +19,47 @@
             <span class="header-button-text">Ваш город:</span>
             <span class="header-button-link location-city open-city-selector-modal-btn">Нижний Новгород</span>
           </div>
-        </div>
-      </div>
 
-      <div class="header-wrap-right  {{ app.user ? 'header-wrap-right-auth' : '' }}">
-        {% if app.user is not null %}
+        </div>
+        <div class="header-wrap-right  {{ app.user ? 'header-wrap-right-auth' : '' }}">
+          {% if app.user is not null %}
+            <div class="header-button button-favourite">
+              <span class="header-button-tooltip">5</span>
+              <img src="/img/006-heart.svg"/>
+            </div>
+          {% endif %}
           <div class="header-button">
-            <span class="header-button-tooltip">5</span>
-            <img src="/img/006-heart.svg"/>
+            <span class="header-button-tooltip">12</span>
+            <img src="/img/007-add.svg"/>
           </div>
-        {% endif %}
-        <div class="header-button">
-          <span class="header-button-tooltip">12</span>
-          <img src="/img/007-add.svg"/>
-        </div>
 
-        {% if app.user is not null %}
-          <div class="header-button-container">
-            <div class="header-button open-header-dropdown-btn">
-              <img src="/img/009-login.svg"/>
-              {% if is_granted('ROLE_PROVIDER') %}
-                {% include 'components/header/provider.dropdown.html.twig' %}
-              {% else %}
-                {% include 'components/header/user.dropdown.html.twig' %}
-              {% endif %}
+          {% if app.user is not null %}
+            <div class="header-button-container">
+              <div class="header-button open-header-dropdown-btn">
+                <img src="/img/009-login.svg"/>
+                {% if is_granted('ROLE_PROVIDER') %}
+                  {% include 'components/header/provider.dropdown.html.twig' %}
+                {% else %}
+                  {% include 'components/header/user.dropdown.html.twig' %}
+                {% endif %}
+              </div>
+              <div class="header-button-info">
+                <span class="header-button-text">Добро пожаловать,</span>
+                <span class="header-button-link open-header-dropdown-btn">{{ app.user ? app.user.username : '' }}</span>
+              </div>
             </div>
-            <div class="header-button-info">
-              <span class="header-button-text">Добро пожаловать,</span>
-              <span class="header-button-link open-header-dropdown-btn">{{ app.user ? app.user.username : '' }}</span>
+          {% else %}
+            <div class="header-button-container">
+              <div class="header-button open-login-modal-btn">
+                <img src="/img/008-arrow.svg"/>
+              </div>
+              <div class="header-button-info">
+                <span class="header-button-link black open-login-modal-btn">Вход</span>
+                <span class="header-button-link black open-register-modal-btn">Регистрация</span>
+              </div>
             </div>
-          </div>
-        {% else %}
-          <div class="header-button-container">
-            <div class="header-button open-login-modal-btn">
-              <img src="/img/008-arrow.svg"/>
-            </div>
-            <div class="header-button-info">
-              <span class="header-button-link black open-login-modal-btn">Вход</span>
-              <span class="header-button-link black open-register-modal-btn">Регистрация</span>
-            </div>
-          </div>
-        {% endif %}
-      </div>
+          {% endif %}
+        </div>
     </div>
   </div>
 </header>

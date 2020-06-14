@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  padding: 12px 0;
+  padding: 1rem 0;
   width: 100%;
 
   .container {
@@ -10,22 +10,37 @@
   .header-wrap {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    .header-wrap-left {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 35%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .logo-mobile{
+      display: none;
+      @media(max-width: 767px){
+        display: block;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5vh;
+      }
+    }
+    .logo{
+      margin-right: 3vw;
+      display: block;
+      @media(max-width: 767px){
+        display: none;
+        
+      }
     }
 
     .header-wrap-right {
       display: flex;
-      width: 11%;
-      justify-content: space-between;
+      margin-left: auto;
+      @media (max-width: 550px){
+        margin-left: 0;
+      }
 
-      &.header-wrap-right-auth {
-        width: 19%;
+      .button-favourite{
+        margin-right: 1.6vw;
       }
     }
 
@@ -39,6 +54,10 @@
       color: #3d3d3d;
       font-size: 15px;
       font-weight: 700;
+      margin-right: 1.3vw;
+      @media(max-width: 550px){
+        padding: 0 10px 0 45px;
+      }
 
       &::before {
         content: "";
@@ -61,6 +80,9 @@
       height: 45px;
       cursor: pointer;
       background-color: #1d71b1;
+      @media(max-width: 550px){
+        margin-right: 2.5vw;
+      }
 
       img {
         pointer-events: none;
@@ -88,12 +110,19 @@
 
     .header-button-container {
       display: flex;
-
+      margin-left: 1.3vw;
+      @media(max-width: 550px){
+        margin-right: 0;
+        margin-left: auto;
+      }
       .header-button-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
         margin-left: 8px;
+        @media(max-width: 550px){
+          display: none;
+        }
       }
 
       .header-button-text {
@@ -120,3 +149,5 @@
     }
   }
 }
+
+

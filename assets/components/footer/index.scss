@@ -11,17 +11,40 @@
       justify-content: space-between;
       width: 100%;
 
+      @media(max-width: 767px){
+        flex-flow: column wrap;
+        text-align: center;
+       
+
+      }
       .footer-col {
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
+        border-bottom: 1px dashed #b2dbff;
+       
         &:last-child {
           flex: 0.3;
           padding-top: 20px;
-        }
+          border-bottom: none;
 
+        }
+        .footer-logo{
+          @media(max-width: 767px){
+            display: none;
+          }
+        }
+        .logo-mobile{
+          display: none;
+
+          @media(max-width: 767px){
+            display: flex;
+            justify-content: center;
+           
+          }
+
+        }
         .footer-menu {
           list-style: none;
           margin-top: 10px;
