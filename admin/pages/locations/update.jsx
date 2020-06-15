@@ -10,7 +10,7 @@ import { hideLoader, showLoader, setTitle, setBreacrumbs } from '../../redux/act
 import NotFound from '../../components/not-found/not-found'
 import Portlet from '../../components/portlet/portlet'
 import LocationForm from './form'
-import { FETCH_ALL_LOCATIONS, FETCH_LOCATION_URL, UPDATE_LOCATION_URL } from '../../utils/api/endpoints'
+import { FETCH_LOCATION_URL, UPDATE_LOCATION_URL } from '../../utils/api/endpoints'
 
 
 const LocationUpdate = ({match}) => {
@@ -37,8 +37,6 @@ const LocationUpdate = ({match}) => {
     showInList: false,
     parentLocation: null,
   })
-
-  const [locations, setLocations] = useState([])
 
   const [notFound, setNotFound] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
@@ -68,12 +66,6 @@ const LocationUpdate = ({match}) => {
 
         history.push(LOCATION_INDEX)
       })
-
-    axios.get(FETCH_ALL_LOCATIONS)
-      .then(({data}) => {
-        setLocations(data.locations)
-        dispatch(hideLoader())
-      })
   }, [])
 
   const save = () => {
@@ -96,7 +88,6 @@ const LocationUpdate = ({match}) => {
       <LocationForm
         item={item}
         setItem={setItem}
-        locations={locations}
         save={save}
         disable={disableButton}
       />

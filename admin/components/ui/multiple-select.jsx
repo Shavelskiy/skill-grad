@@ -28,20 +28,18 @@ const MultipleSelect = ({label, options, values, setValue, isForm = true, small 
     }
   }, [ref, setOpened])
 
-  const selectValue = (item) => {
-    if (values.includes(item.value)) {
-      setValue(values.filter(value => {
-        return item.value !== value
-      }))
-    } else {
-      setValue([...values, item.value])
+  const handleTitleClick = (event) => {
+    if (event.target.classList.contains(css.close)) {
+      return
     }
+
+    setOpened(!opened)
   }
 
   const getTitle = () => {
     let selectedValues = []
     options.forEach(item => {
-      if (values.includes(item.value)) {
+      if (values && values.includes(item.value)) {
         selectedValues.push(item)
       }
     })
@@ -53,19 +51,29 @@ const MultipleSelect = ({label, options, values, setValue, isForm = true, small 
           <img
             src={close}
             className={css.close}
-            onClick={() => selectValue(item)}
+            onClick={() => setValue(values.filter(value => item.value !== value))}
           />
         </span>
       )
     })
   }
 
-  const handleTitleClick = (event) => {
-    if (event.target.classList.contains(css.close)) {
-      return
+  const getOptions = () => {
+    const availableOptions = options.filter(item => {
+      return !values || !values.includes(item.value)
+    })
+
+    if (availableOptions.length < 1) {
+      return <li>Нет вариантов</li>
     }
 
-    setOpened(!opened)
+    return availableOptions.map((item, key) => {
+      return (
+        <li key={key} onClick={() => setValue([...values, item.value])}>
+          {item.title}
+        </li>
+      )
+    })
   }
 
   const content = (
@@ -85,20 +93,7 @@ const MultipleSelect = ({label, options, values, setValue, isForm = true, small 
         <img src={arrow} className={css.icon}/>
       </div>
       <div className={css.optionContainer}>
-        <ul>
-          {
-            options.map((item, key) => {
-              return (
-                <li
-                  key={key}
-                  className={cn({[css.active]: values.includes(item.value)})}
-                  onClick={() => selectValue(item)}>
-                  {item.title}
-                </li>
-              )
-            })
-          }
-        </ul>
+        <ul>{getOptions()}</ul>
       </div>
     </div>
   )

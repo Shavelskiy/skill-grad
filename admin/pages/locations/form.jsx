@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BooleanInput, NumberInput, SaveButton, SelectInput, TextInput } from '../../components/ui/inputs'
 import translate from '../../helpers/translate'
-import Select from '../../components/ui/select'
+import { hideLoader, showLoader } from '../../redux/actions'
+import axios from 'axios'
+import { FETCH_ALL_LOCATIONS } from '../../utils/api/endpoints'
+import { useDispatch } from 'react-redux'
 
 const types = [
   {
@@ -18,8 +21,21 @@ const types = [
   },
 ]
 
-const LocationForm = ({item, setItem, disable, locations = null, save}) => {
+const LocationForm = ({item, setItem, disable, save}) => {
+  const dispatch = useDispatch()
+
   const [enableTranslate, setEnableTranslate] = useState(true)
+  const [locations, setLocations] = useState([])
+
+  useEffect(() => {
+    dispatch(showLoader())
+
+    axios.get(FETCH_ALL_LOCATIONS)
+      .then(({data}) => {
+        setLocations(data.locations)
+        dispatch(hideLoader())
+      })
+  }, [])
 
   const setName = (name) => {
     if (enableTranslate) {

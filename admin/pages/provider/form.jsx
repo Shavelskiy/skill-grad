@@ -1,9 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../redux/actions'
+
+import axios from 'axios'
+import { FETCH_ALL_CATEGORIES, FETCH_ALL_LOCATIONS } from '../../utils/api/endpoints'
+
 import { SaveButton, TextInput, TextAreaInput } from '../../components/ui/inputs'
 import MultipleSelect from '../../components/ui/multiple-select'
 
 
-const ProviderForm = ({item, setItem, categories, disable, save}) => {
+const ProviderForm = ({item, setItem, disable, save}) => {
+  const dispatch = useDispatch()
+
+  const [categories, setCategories] = useState([])
+  const [locations, setLocations] = useState([])
+
+  useEffect(() => {
+    dispatch(showLoader())
+
+    axios.get(FETCH_ALL_CATEGORIES)
+      .then(({data}) => {
+        setCategories(data.categories)
+        dispatch(hideLoader())
+      })
+  }, [])
+
+  useEffect(() => {
+    dispatch(showLoader())
+
+    axios.get(FETCH_ALL_LOCATIONS)
+      .then(({data}) => {
+        setLocations(data.locations)
+        dispatch(hideLoader())
+      })
+  }, [])
+
   const getMainCategories = () => {
     return categories.filter(item => item.is_parent).map(item => {
       return {
@@ -50,6 +81,14 @@ const ProviderForm = ({item, setItem, categories, disable, save}) => {
         setValue={(categories) => setItem({...item, categories: categories})}
         high={false}
         label="Подкатегории"
+      />
+
+      <MultipleSelect
+        options={locations}
+        values={item.locations}
+        setValue={(locations) => setItem({...item, locations: locations})}
+        high={false}
+        label="Метоположения"
       />
 
       <SaveButton handler={save} disable={disable}/>

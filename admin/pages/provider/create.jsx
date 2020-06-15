@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { PROGRAM_FORMAT_INDEX, PROVIDER_INDEX } from '../../utils/routes'
+import { PROVIDER_INDEX } from '../../utils/routes'
 
 import axios from 'axios'
-import { CREATE_PROGRAM_FORMAT_URL, CREATE_PROVIDER_URL, FETCH_ALL_CATEGORIES } from '../../utils/api/endpoints'
+import { CREATE_PROVIDER_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTitle, setBreacrumbs, showAlert, showLoader, hideLoader } from '../../redux/actions'
+import { setTitle, setBreacrumbs, showAlert, showLoader } from '../../redux/actions'
 
 import ProviderForm from './form'
 import Portlet from '../../components/portlet/portlet'
@@ -23,9 +23,9 @@ const ProviderCreate = () => {
     description: '',
     mainCategories: [],
     categories: [],
+    locations: [],
   })
 
-  const [categories, setCategories] = useState([])
   const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
@@ -37,12 +37,6 @@ const ProviderCreate = () => {
         link: PROVIDER_INDEX,
       }
     ]))
-
-    axios.get(FETCH_ALL_CATEGORIES)
-      .then(({data}) => {
-        setCategories(data.categories)
-        dispatch(hideLoader())
-      })
   }, [])
 
   const save = () => {
@@ -65,7 +59,6 @@ const ProviderCreate = () => {
       <ProviderForm
         item={item}
         setItem={setItem}
-        categories={categories}
         save={save}
         disable={disableButton}
       />

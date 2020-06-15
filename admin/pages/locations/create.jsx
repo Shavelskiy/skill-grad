@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom'
 import { LOCATION_INDEX } from '../../utils/routes'
 
 import axios from 'axios'
-import { CREATE_LOCATION_URL, FETCH_ALL_LOCATIONS } from '../../utils/api/endpoints'
+import { CREATE_LOCATION_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTitle, setBreacrumbs, showLoader, hideLoader, showAlert } from '../../redux/actions'
+import { setTitle, setBreacrumbs, showAlert } from '../../redux/actions'
 
 import LocationForm from './form'
 import Portlet from '../../components/portlet/portlet'
@@ -27,8 +27,6 @@ const LocationCreate = ({match}) => {
     parentLocation: Number(match.params.id)
   })
 
-  const [locations, setLocations] = useState([])
-
   const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
@@ -39,14 +37,6 @@ const LocationCreate = ({match}) => {
         link: LOCATION_INDEX,
       }
     ]))
-
-    dispatch(showLoader())
-
-    axios.get(FETCH_ALL_LOCATIONS)
-      .then(({data}) => {
-        setLocations(data.locations)
-        dispatch(hideLoader())
-      })
   }, [])
 
 
@@ -72,7 +62,6 @@ const LocationCreate = ({match}) => {
         setItem={setItem}
         save={save}
         disable={disableButton}
-        locations={locations}
       />
     </Portlet>
   )
