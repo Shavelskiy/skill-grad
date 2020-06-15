@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use RuntimeException;
 
@@ -33,7 +35,7 @@ class Location
     private string $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     private string $code;
 
@@ -57,6 +59,17 @@ class Location
      * @ORM\JoinColumn(nullable=true)
      */
     private ?Location $parentLocation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="parentLocation")
+     */
+    private Collection $childLocations;
+
+
+    public function __construct()
+    {
+        $this->childLocations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,9 +136,20 @@ class Location
         return $this->parentLocation;
     }
 
-    public function setParentLocation(Location $parentLocation): self
+    public function setParentLocation(?Location $parentLocation): self
     {
         $this->parentLocation = $parentLocation;
+        return $this;
+    }
+
+    public function getChildLocations()
+    {
+        return $this->childLocations;
+    }
+
+    public function setChildLocations($childLocations): self
+    {
+        $this->childLocations = $childLocations;
         return $this;
     }
 

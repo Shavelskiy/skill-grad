@@ -24,7 +24,7 @@ const LocationCreate = ({match}) => {
     sort: 0,
     type: null,
     showInList: false,
-    parentLocation: match.params.id
+    parentLocation: Number(match.params.id)
   })
 
   const [locations, setLocations] = useState([])

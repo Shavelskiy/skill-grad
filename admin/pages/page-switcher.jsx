@@ -25,7 +25,7 @@ import {
   PROGRAM_FORMAT_INDEX,
   PROGRAM_FORMAT_CREATE,
   PROGRAM_FORMAT_UPDATE,
-  PROVIDER_INDEX, PROVIDER_CREATE, LOCATION_CREATE,
+  PROVIDER_INDEX, PROVIDER_CREATE, LOCATION_CREATE, LOCATION_UPDATE,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -52,6 +52,7 @@ import UsersIndex from './users'
 import LocationsIndex from '../pages/locations'
 import LocationCreate from './locations/create'
 import LocationView from '../pages/locations/view'
+import LocationUpdate from './locations/update'
 
 
 const PageSwitcher = ({active}) => {
@@ -90,6 +91,7 @@ const PageSwitcher = ({active}) => {
           <Route exact name="location.index" path={LOCATION_INDEX} component={LocationsIndex}/>
           <Route exact name="location.create" path={LOCATION_CREATE} component={LocationCreate}/>
           <Route exact name="location.view" path={LOCATION_VIEW} component={LocationView}/>
+          <Route exact name="location.update" path={LOCATION_UPDATE} component={LocationUpdate}/>
 
           <Route exact name="index" path={INDEX} component={IndexPage}/>
           <Route path="/" component={NotFoundPage}/>

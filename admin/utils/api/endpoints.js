@@ -34,7 +34,7 @@ export const FETCH_USERS_URL = '/api/admin/user'
 
 export const FETCH_LOCATIONS_URL = '/api/admin/location'
 export const FETCH_LOCATION_URL = '/api/admin/location/:id'
-export const CREATE_LOCATION_URL = '/api/admin/location/:id'
+export const CREATE_LOCATION_URL = '/api/admin/location'
 export const UPDATE_LOCATION_URL = '/api/admin/location'
 export const DELETE_LOCATION_URL = '/api/admin/location'
 export const FETCH_ALL_LOCATIONS = '/api/admin/location/all'
