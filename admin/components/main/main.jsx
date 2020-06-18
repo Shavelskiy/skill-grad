@@ -24,7 +24,7 @@ const Main = () => {
       />
       <div className={cn(css.container, {[css.active]: !sidebarOpened})}>
         <Header/>
-        <Preloader active={loading}/>
+        <Preloader active={loading !== 0}/>
         <Alert/>
         <PageSwitcher active={!loading}/>
       </div>

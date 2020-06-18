@@ -35,7 +35,7 @@ const App = () => {
   }, [])
 
   if (loadingApp) {
-    return <Preloader active={loadingApp}/>
+    return <Preloader active={loadingApp !== 0}/>
   }
 
   return (

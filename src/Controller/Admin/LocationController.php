@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Location;
 use App\Helpers\SearchHelper;
 use App\Repository\LocationRepository;
+use App\Service\LocationService;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -25,13 +26,16 @@ class LocationController extends AbstractController
 {
     protected LocationRepository $locationRepository;
     protected TranslatorInterface $translator;
+    protected LocationService $locationService;
 
     public function __construct(
         LocationRepository $locationRepository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        LocationService $locationService
     ) {
         $this->locationRepository = $locationRepository;
         $this->translator = $translator;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -145,17 +149,9 @@ class LocationController extends AbstractController
         $locations = [];
         /** @var Location $location */
         foreach ($this->locationRepository->findAll() as $location) {
-            $path = [];
-            $parentLocation = clone $location;
-
-            while ($parentLocation !== null) {
-                $path[] = $parentLocation->getName();
-                $parentLocation = $parentLocation->getParentLocation();
-            }
-
             $locations[] = [
               'value' => $location->getId(),
-              'title' => implode(', ', $path),
+              'title' => $this->locationService->getLocationPath($location),
             ];
         }
 

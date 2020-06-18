@@ -13,7 +13,7 @@ class ProviderRequisites
      * @ORM\Id()
      * @ORM\OneToOne(targetEntity="App\Entity\Provider", inversedBy="providerRequisites")
      */
-    private Provider $prover;
+    private Provider $provider;
 
     /**
      * @ORM\Column(type="string")
@@ -71,14 +71,14 @@ class ProviderRequisites
     private string $bank;
 
 
-    public function getProver(): Provider
+    public function getProvider(): Provider
     {
-        return $this->prover;
+        return $this->provider;
     }
 
-    public function setProver(Provider $prover): self
+    public function setProvider(Provider $provider): self
     {
-        $this->prover = $prover;
+        $this->provider = $provider;
         return $this;
     }
 

@@ -40,7 +40,6 @@ const ArticleView = ({match}) => {
   }, [item])
 
   const setItemFromResponse = (data) => {
-    console.log(data.created_at)
     setItem({
       id: data.id,
       name: data.name,

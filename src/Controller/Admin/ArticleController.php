@@ -127,15 +127,7 @@ class ArticleController extends AbstractController
         try {
             /** @var UploadedFile $uploadImage */
             if ($uploadImage = $request->files->get('uploadImage')) {
-                $fileName = uniqid('', true) . '-' . time() . '.' . $uploadImage->guessExtension();
-
-                try {
-                    $uploadImage->move($this->getParameter('upload_dir'), $fileName);
-                } catch (Exception $e) {
-                    throw new RuntimeException('Ошибка при сохранении файла');
-                }
-
-                $articleImage = (new Upload())->setName($fileName);
+                $articleImage = $this->uploadService->createUpload($uploadImage);
                 $article->setImage($articleImage);
 
                 $this->getDoctrine()->getManager()->persist($articleImage);
@@ -183,23 +175,8 @@ class ArticleController extends AbstractController
             }
 
             if ($uploadImage) {
-                $uploadImage = new UploadedFile(
-                    $uploadImage->getPathname(),
-                    $uploadImage->getClientOriginalName(),
-                    $uploadImage->getMimeType(),
-                    $uploadImage->getError(),
-                    true
-                );
-
-                $fileName = uniqid('', true) . '-' . time() . '.' . $uploadImage->guessExtension();
-
-                try {
-                    $uploadImage->move($this->getParameter('upload_dir'), $fileName);
-                } catch (Exception $e) {
-                    throw new RuntimeException('Ошибка при сохранении файла');
-                }
-
-                $articleImage = (new Upload())->setName($fileName);
+                $uploadImage = $this->uploadService->createTestUpload($uploadImage);
+                $articleImage = $this->uploadService->createUpload($uploadImage);
                 $article->setImage($articleImage);
 
                 $this->getDoctrine()->getManager()->persist($articleImage);

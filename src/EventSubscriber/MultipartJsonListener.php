@@ -4,9 +4,11 @@ namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
-class PutMiltipartFormRequestListener implements EventSubscriberInterface
+class MultipartJsonListener implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
@@ -40,6 +42,8 @@ class PutMiltipartFormRequestListener implements EventSubscriberInterface
 
         $request->request->replace($parameters['inputs']);
         $request->files->replace($parameters['files']);
+
+        $this->parseJsonBody($event);
     }
 
     public function decode(string $rawData): array
@@ -110,5 +114,48 @@ class PutMiltipartFormRequestListener implements EventSubscriberInterface
             $data[$name] = $value;
         }
         return $data;
+    }
+
+    /**
+     * @param RequestEvent $event
+     */
+    public function parseJsonBody(RequestEvent $event): void
+    {
+        $request = $event->getRequest();
+
+        if (!$this->isMultipartRequest($request)) {
+            return;
+        }
+
+        $content = $request->get('json_content');
+
+        if (empty($content)) {
+            return;
+        }
+
+        if (!$this->transformJsonBody($request, $content)) {
+            $event->setResponse(new Response('Unable to parse request.', 400));
+        }
+    }
+
+    protected function isMultipartRequest(Request $request): bool
+    {
+        return strpos($request->headers->get('content-type'), 'multipart/form-data;') === 0;
+    }
+
+    protected function transformJsonBody(Request $request, string $content): bool
+    {
+        $data = json_decode($content, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return false;
+        }
+
+        if ($data === null) {
+            return true;
+        }
+
+        $request->request->replace($data);
+
+        return true;
     }
 }

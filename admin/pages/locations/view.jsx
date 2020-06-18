@@ -77,8 +77,7 @@ const LocationView = ({match}) => {
           </tr>
           </thead>
           <tbody>{
-            items.map((item, key) => {
-              return (
+            items.map((item, key) => (
                 <tr key={key}>
                   <td>{item.id}</td>
                   <td><Link to={LOCATION_VIEW.replace(':id', item.id)}>{item.name}</Link></td>
@@ -86,7 +85,7 @@ const LocationView = ({match}) => {
                   <td>{item.type}</td>
                 </tr>
               )
-            })
+            )
           }</tbody>
         </table>
       </Portlet>

@@ -3,23 +3,26 @@ import { useHistory } from 'react-router-dom'
 import { PROVIDER_INDEX } from '../../utils/routes'
 
 import axios from 'axios'
-import { CREATE_PROVIDER_URL } from '../../utils/api/endpoints'
+import { FETCH_PROVIDER_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTitle, setBreacrumbs, showAlert, showLoader } from '../../redux/actions'
+import { setTitle, setBreacrumbs, showAlert, showLoader, hideLoader } from '../../redux/actions'
 
 import ProviderForm from './form'
 import Portlet from '../../components/portlet/portlet'
 import ProviderRequisitesForm from './requisites-form'
 
 
-const ProviderCreate = () => {
+const ProviderUpdate = ({match}) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
   const title = useSelector(state => state.title)
 
+  const [loaded, setLoaded] = useState(false)
+
   const [item, setItem] = useState({
+    id: match.params.id,
     name: '',
     description: '',
     mainCategories: [],
@@ -42,14 +45,63 @@ const ProviderCreate = () => {
   const [uploadImage, setUploadImage] = useState(null)
 
   useEffect(() => {
-    dispatch(showLoader())
-    dispatch(setTitle('Добавление провайдера обучения'))
     dispatch(setBreacrumbs([
       {
         title: 'Список провайдеров',
         link: PROVIDER_INDEX,
       }
     ]))
+
+    dispatch(showLoader())
+    axios.get(FETCH_PROVIDER_URL.replace(':id', match.params.id))
+      .then(({data}) => {
+        let mainCategories = []
+        data.mainCategories.forEach(item => {
+          mainCategories.push(item.id)
+        })
+
+        let categories = []
+        data.categories.forEach(item => {
+          categories.push(item.id)
+        })
+
+        let locations = []
+        data.locations.forEach(item => {
+          locations.push(item.id)
+        })
+
+        setItem({
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          image: data.image,
+          mainCategories: mainCategories,
+          categories: categories,
+          locations: locations,
+          organizationName: data.organizationName,
+          legalAddress: data.legalAddress,
+          mailingAddress: data.mailingAddress,
+          ITN: data.ITN,
+          IEC: data.IEC,
+          PSRN: data.PSRN,
+          OKPO: data.PSRN,
+          checkingAccount: data.checkingAccount,
+          correspondentAccount: data.correspondentAccount,
+          BIC: data.BIC,
+          bank: data.bank,
+        })
+        dispatch(setTitle(`Редактирование провайдера обучения "${data.name}"`))
+        dispatch(hideLoader())
+        setLoaded(true)
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 404) {
+          setNotFound(true)
+          dispatch(hideLoader())
+        }
+
+        history.push(PROVIDER_INDEX)
+      })
   }, [])
 
   const save = () => {
@@ -59,7 +111,7 @@ const ProviderCreate = () => {
     formData.append('uploadImage', uploadImage)
     formData.append('json_content', JSON.stringify(item))
 
-    axios.post(CREATE_PROVIDER_URL, formData, {
+    axios.put(UPDATE_PROVIDER_URL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -69,6 +121,10 @@ const ProviderCreate = () => {
         dispatch(showAlert(error.response.data.message))
         setDisableButton(false)
       })
+  }
+
+  if (!loaded) {
+    return <></>
   }
 
   return (
@@ -101,4 +157,4 @@ const ProviderCreate = () => {
   )
 }
 
-export default ProviderCreate
+export default ProviderUpdate

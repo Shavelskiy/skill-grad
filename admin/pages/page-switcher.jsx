@@ -25,7 +25,7 @@ import {
   PROGRAM_FORMAT_INDEX,
   PROGRAM_FORMAT_CREATE,
   PROGRAM_FORMAT_UPDATE,
-  PROVIDER_INDEX, PROVIDER_CREATE, LOCATION_CREATE, LOCATION_UPDATE,
+  PROVIDER_INDEX, PROVIDER_CREATE, LOCATION_CREATE, LOCATION_UPDATE, PROVIDER_UPDATE, PROVIDER_VIEW,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -40,6 +40,8 @@ import ProgramFormatCreate from './program-format/create'
 import ProgramForatmUpdate from './program-format/update'
 import ProviderIndex from './provider'
 import ProviderCreate from './provider/create'
+import ProviderView from './provider/view'
+import ProviderUpdate from './provider/update'
 import TagsIndex from '../pages/tags'
 import TagView from '../pages/tags/view'
 import TagCreate from '../pages/tags/create'
@@ -75,6 +77,8 @@ const PageSwitcher = ({active}) => {
 
           <Route exact name="provider.index" path={PROVIDER_INDEX} component={ProviderIndex}/>
           <Route exact name="provider.create" path={PROVIDER_CREATE} component={ProviderCreate}/>
+          <Route exact name="provider.view" path={PROVIDER_VIEW} component={ProviderView}/>
+          <Route exact name="provider.update" path={PROVIDER_UPDATE} component={ProviderUpdate}/>
 
           <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
           <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>

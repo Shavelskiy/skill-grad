@@ -34,6 +34,11 @@ class Provider
     private string $description;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
+     */
+    private ?Upload $image;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      * @ORM\JoinTable(name="provider_categroy_group")
      */
@@ -50,7 +55,7 @@ class Provider
     private Collection $locations;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ProviderRequisites", mappedBy="prover")
+     * @ORM\OneToOne(targetEntity="App\Entity\ProviderRequisites", mappedBy="provider")
      */
     private ProviderRequisites $providerRequisites;
 
@@ -106,6 +111,17 @@ class Provider
         return $this;
     }
 
+    public function getImage(): ?Upload
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Upload $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
     public function getCategoryGroups(): array
     {
         return $this->categoryGroups->toArray();
@@ -113,6 +129,7 @@ class Provider
 
     public function setCategoryGroups(array $categoryGroups): self
     {
+        $this->categoryGroups->clear();
         foreach ($categoryGroups as $categoryGroup) {
             if (!$this->categoryGroups->contains($categoryGroup)) {
                 $this->categoryGroups->add($categoryGroup);
@@ -129,6 +146,7 @@ class Provider
 
     public function setCategories(array $categories): self
     {
+        $this->categories->clear();
         foreach ($categories as $category) {
             if (!$this->categories->contains($category)) {
                 $this->categories->add($category);
@@ -143,11 +161,12 @@ class Provider
         return $this->locations->toArray();
     }
 
-    public function setLocations(Collection $locations): self
+    public function setLocations(array $locations): self
     {
+        $this->locations->clear();
         foreach ($locations as $location) {
             if (!$this->locations->contains($location)) {
-                $this->categories->add($location);
+                $this->locations->add($location);
             }
         }
 

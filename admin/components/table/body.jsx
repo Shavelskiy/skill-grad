@@ -25,7 +25,7 @@ const ImageColumn = ({value, width}) => {
   return (
     <div className={cn(css.col, css.img)} style={{flex: width}}>
       <div className={css.content}>
-        <img src={value}/>
+        {value ? <img src={value}/> : <></>}
       </div>
     </div>
   )

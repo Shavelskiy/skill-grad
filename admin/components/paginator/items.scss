@@ -7,9 +7,12 @@
   cursor: pointer;
 
   &.active {
-    color: #fff;
     background-color: #5d78ff;
     border-color: #5d78ff;
+
+    span {
+      color: #fff;
+    }
   }
 
   &.disabled {

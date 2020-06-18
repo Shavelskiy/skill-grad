@@ -5,11 +5,11 @@ import { hideLoader, showLoader } from '../../redux/actions'
 import axios from 'axios'
 import { FETCH_ALL_CATEGORIES, FETCH_ALL_LOCATIONS } from '../../utils/api/endpoints'
 
-import { SaveButton, TextInput, TextAreaInput } from '../../components/ui/inputs'
+import { SaveButton, TextInput, TextAreaInput, ImageInput } from '../../components/ui/inputs'
 import MultipleSelect from '../../components/ui/multiple-select'
 
 
-const ProviderForm = ({item, setItem, disable, save}) => {
+const ProviderForm = ({item, setItem, uploadImage, setUploadImage, disable, save}) => {
   const dispatch = useDispatch()
 
   const [categories, setCategories] = useState([])
@@ -65,6 +65,14 @@ const ProviderForm = ({item, setItem, disable, save}) => {
         value={item.description}
         setValue={(description) => setItem({...item, description: description})}
         label="Описание организации"
+      />
+
+      <ImageInput
+        label="Картинка"
+        uploadImage={uploadImage}
+        imageSrc={item.image}
+        deleteImageSrc={() => setItem({...item, image: null})}
+        setUploadImage={setUploadImage}
       />
 
       <MultipleSelect

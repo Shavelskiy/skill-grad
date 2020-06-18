@@ -13,7 +13,7 @@ const rootBreadcrumb = {
 }
 
 const initialState = {
-  loading: false,
+  loading: 0,
   alertMessage: null,
   title: 'Skill Grad Admin',
   breadcrumbs: [rootBreadcrumb],
@@ -24,9 +24,9 @@ const initialState = {
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_LOADER:
-      return {...state, loading: true}
+      return {...state, loading: state.loading + 1}
     case HIDE_LOADER:
-      return {...state, loading: false}
+      return {...state, loading: state.loading - 1}
     case SET_TITLE:
       document.title = action.payload
       return {...state, title: action.payload}
