@@ -164,7 +164,7 @@ export function Wysiwyg({label, value, setValue}) {
   return (
     <div className={css.input}>
       <span className={css.label}>{label}</span>
-      <ReactQuill theme="snow" value={value} onChange={setValue}/>
+      <ReactQuill theme="snow" value={value || ''} onChange={setValue}/>
     </div>
   )
 }

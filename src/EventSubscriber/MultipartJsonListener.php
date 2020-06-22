@@ -2,6 +2,8 @@
 
 namespace App\EventSubscriber;
 
+use Exception;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,24 +26,27 @@ class MultipartJsonListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        if ($request->getMethod() !== 'PUT') {
-            return;
+        try {
+            if ($request->getMethod() !== 'PUT') {
+                throw new RuntimeException('');
+            }
+
+            if (!preg_match('/multipart\/form-data/', $request->headers->get('Content-Type'))) {
+                throw new RuntimeException('');
+            }
+
+            $content = $request->getContent();
+
+            if (!$content) {
+                throw new RuntimeException('');
+            }
+
+            $parameters = $this->decode($content);
+
+            $request->request->replace($parameters['inputs']);
+            $request->files->replace($parameters['files']);
+        } catch (Exception $e) {
         }
-
-        if (!preg_match('/multipart\/form-data/', $request->headers->get('Content-Type'))) {
-            return;
-        }
-
-        $content = $request->getContent();
-
-        if (!$content) {
-            return;
-        }
-
-        $parameters = $this->decode($content);
-
-        $request->request->replace($parameters['inputs']);
-        $request->files->replace($parameters['files']);
 
         $this->parseJsonBody($event);
     }

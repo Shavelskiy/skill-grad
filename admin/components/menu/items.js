@@ -4,7 +4,7 @@ import {
   TAG_INDEX,
   ARTICLE_INDEX,
   USER_INDEX,
-  PROGRAM_FORMAT_INDEX, PROVIDER_INDEX
+  PROGRAM_FORMAT_INDEX, PROVIDER_INDEX, PROGRAM_INCLUDE_INDEX, PROGRAM_ADDITIONAL_INDEX
 } from '../../utils/routes'
 
 export const menuItems = [
@@ -19,6 +19,14 @@ export const menuItems = [
       {
         title: 'Формы обучения',
         link: PROGRAM_FORMAT_INDEX,
+      },
+      {
+        title: 'Дополнительные пункты',
+        link: PROGRAM_ADDITIONAL_INDEX,
+      },
+      {
+        title: 'Включено в курс',
+        link: PROGRAM_INCLUDE_INDEX,
       },
     ],
   },

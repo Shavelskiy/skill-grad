@@ -1,31 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { ARTICLE_INDEX } from '../../utils/routes'
 
-import axios from 'axios'
 import { CREATE_ARTICLE_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTitle, setBreacrumbs, showAlert } from '../../redux/actions'
+import { setTitle, setBreacrumbs } from '../../redux/actions'
 
-import ArticuleForm from './form'
+import ArticleForm from './form'
 import Portlet from '../../components/portlet/portlet'
+import CreatePageTemplate from '../../components/page-templates/create'
 
 
 const ArticleCreate = () => {
   const dispatch = useDispatch()
-  const history = useHistory()
-
-  useEffect(() => {
-    dispatch(setTitle('Добавление статьи'))
-    dispatch(setBreacrumbs([
-      {
-        title: 'Список статей',
-        link: ARTICLE_INDEX,
-      }
-    ]))
-  }, [])
-
   const title = useSelector(state => state.title)
 
   const [item, setItem] = useState({
@@ -38,45 +25,45 @@ const ArticleCreate = () => {
   })
   const [uploadImage, setUploadImage] = useState(null)
 
+  const [needSave, setNeedSave] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
 
-  const save = () => {
-    setDisableButton(true)
-
-    const formData = new FormData()
-    formData.append('uploadImage', uploadImage)
-
-    for (let key in item) {
-      formData.append(key, item[key])
-    }
-
-    axios.post(CREATE_ARTICLE_URL, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+  useEffect(() => {
+    dispatch(setTitle('Добавление статьи'))
+    dispatch(setBreacrumbs([
+      {
+        title: 'Список статей',
+        link: ARTICLE_INDEX,
       }
-    })
-      .then(() => history.push(ARTICLE_INDEX))
-      .catch((error) => {
-        dispatch(showAlert(error.response.data.message))
-        setDisableButton(false)
-      })
-  }
+    ]))
+  }, [])
 
   return (
-    <Portlet
-      width={50}
-      title={title}
-      titleIcon={'info'}
+    <CreatePageTemplate
+      indexPageUrl={ARTICLE_INDEX}
+      createUrl={CREATE_ARTICLE_URL}
+      item={item}
+      setDisableButton={setDisableButton}
+      needSave={needSave}
+      setNeedSave={setNeedSave}
+      multipart={true}
+      appendExternalData={(formData) => formData.append('uploadImage', uploadImage)}
     >
-      <ArticuleForm
-        item={item}
-        setItem={setItem}
-        save={save}
-        uploadImage={uploadImage}
-        setUploadImage={setUploadImage}
-        disable={disableButton}
-      />
-    </Portlet>
+      <Portlet
+        width={50}
+        title={title}
+        titleIcon={'info'}
+      >
+        <ArticleForm
+          item={item}
+          setItem={setItem}
+          save={() => setNeedSave(true)}
+          uploadImage={uploadImage}
+          setUploadImage={setUploadImage}
+          disable={disableButton}
+        />
+      </Portlet>
+    </CreatePageTemplate>
   )
 }
 

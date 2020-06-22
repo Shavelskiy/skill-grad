@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { CATEGORY_INDEX } from '../../utils/routes'
 
 import axios from 'axios'
@@ -10,12 +9,23 @@ import { setTitle, setBreacrumbs, showLoader, hideLoader, showAlert } from '../.
 
 import CategoryForm from './form'
 import Portlet from '../../components/portlet/portlet'
+import CreatePageTemplate from '../../components/page-templates/create'
 
 
 const CategoryCreate = ({match}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
+  const title = useSelector(state => state.title)
+
   const [parentCategory, setParentCategory] = useState(null)
+
+  const [item, setItem] = useState({
+    name: '',
+    slug: '',
+    sort: 0,
+  })
+
+  const [needSave, setNeedSave] = useState(false)
+  const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
     dispatch(setTitle('Создание категории'))
@@ -37,41 +47,29 @@ const CategoryCreate = ({match}) => {
     }
   }, [])
 
-  const title = useSelector(state => state.title)
-
-  const [item, setItem] = useState({
-    name: '',
-    slug: '',
-    sort: 0,
-  })
-
-  const [disableButton, setDisableButton] = useState(false)
-
-  const save = () => {
-    setDisableButton(true)
-
-    axios.post(CREATE_CATEGORY_URL.replace(':id', (parentCategory !== null) ? parentCategory.id : ''), item)
-      .then(() => history.push(CATEGORY_INDEX))
-      .catch((error) => {
-        dispatch(showAlert(error.response.data.message))
-        setDisableButton(false)
-      })
-  }
-
   return (
-    <Portlet
-      width={50}
-      title={title}
-      titleIcon={'info'}
+    <CreatePageTemplate
+      indexPageUrl={CATEGORY_INDEX}
+      createUrl={CREATE_CATEGORY_URL.replace(':id', (parentCategory !== null) ? parentCategory.id : '')}
+      item={item}
+      setDisableButton={setDisableButton}
+      needSave={needSave}
+      setNeedSave={setNeedSave}
     >
-      <CategoryForm
-        item={item}
-        setItem={setItem}
-        save={save}
-        disable={disableButton}
-        parentCategory={parentCategory}
-      />
-    </Portlet>
+      <Portlet
+        width={50}
+        title={title}
+        titleIcon={'info'}
+      >
+        <CategoryForm
+          item={item}
+          setItem={setItem}
+          save={() => setNeedSave(true)}
+          disable={disableButton}
+          parentCategory={parentCategory}
+        />
+      </Portlet>
+    </CreatePageTemplate>
   )
 }
 

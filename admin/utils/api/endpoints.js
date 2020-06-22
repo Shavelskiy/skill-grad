@@ -15,6 +15,18 @@ export const CREATE_PROGRAM_FORMAT_URL = '/api/admin/program-format'
 export const UPDATE_PROGRAM_FORMAT_URL = '/api/admin/program-format'
 export const DELETE_PROGRAM_FORMAT_URL = '/api/admin/program-format'
 
+export const FETCH_PROGRAMS_ADDITIONAL_URL = '/api/admin/program-additional'
+export const FETCH_PROGRAM_ADDITIONAL_URL = '/api/admin/program-additional/:id'
+export const CREATE_PROGRAM_ADDITIONAL_URL = '/api/admin/program-additional'
+export const UPDATE_PROGRAM_ADDITIONAL_URL = '/api/admin/program-additional'
+export const DELETE_PROGRAM_ADDITIONAL_URL = '/api/admin/program-additional'
+
+export const FETCH_PROGRAMS_INCLUDE_URL = '/api/admin/program-include'
+export const FETCH_PROGRAM_INCLUDE_URL = '/api/admin/program-include/:id'
+export const CREATE_PROGRAM_INCLUDE_URL = '/api/admin/program-include'
+export const UPDATE_PROGRAM_INCLUDE_URL = '/api/admin/program-include'
+export const DELETE_PROGRAM_INCLUDE_URL = '/api/admin/program-include'
+
 export const FETCH_PROVIDERS_URL = '/api/admin/provider'
 export const FETCH_PROVIDER_URL = '/api/admin/provider/:id'
 export const CREATE_PROVIDER_URL = '/api/admin/provider'

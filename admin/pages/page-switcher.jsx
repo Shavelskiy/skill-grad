@@ -37,7 +37,7 @@ import CategoryCreate from './category/create'
 import CategoryUpdate from './category/update'
 import ProgramFormatIndex from './program-format'
 import ProgramFormatCreate from './program-format/create'
-import ProgramForatmUpdate from './program-format/update'
+import ProgramFormatUpdate from './program-format/update'
 import ProviderIndex from './provider'
 import ProviderCreate from './provider/create'
 import ProviderView from './provider/view'
@@ -73,7 +73,7 @@ const PageSwitcher = ({active}) => {
 
           <Route exact name="program-format.index" path={PROGRAM_FORMAT_INDEX} component={ProgramFormatIndex}/>
           <Route exact name="program-format.create" path={PROGRAM_FORMAT_CREATE} component={ProgramFormatCreate}/>
-          <Route exact name="program-format.update" path={PROGRAM_FORMAT_UPDATE} component={ProgramForatmUpdate}/>
+          <Route exact name="program-format.update" path={PROGRAM_FORMAT_UPDATE} component={ProgramFormatUpdate}/>
 
           <Route exact name="provider.index" path={PROVIDER_INDEX} component={ProviderIndex}/>
           <Route exact name="provider.create" path={PROVIDER_CREATE} component={ProviderCreate}/>

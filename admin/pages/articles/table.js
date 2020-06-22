@@ -63,7 +63,7 @@ export const table = [
   },
   {
     title: 'Показывать на главной',
-    name: 'show_on_main',
+    name: 'showOnMain',
     width: 1.4,
     display: BOOLEAN,
     search: {

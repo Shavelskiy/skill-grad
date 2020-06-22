@@ -29,6 +29,7 @@ const Button = ({link = null, text, click, disabled = false, create = false, pri
     <button
       className={className}
       disabled={disabled}
+      type="button"
       onClick={() => click()}
     >
       {text}

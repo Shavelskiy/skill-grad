@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { LOCATION_INDEX } from '../../utils/routes'
 
-import axios from 'axios'
 import { CREATE_LOCATION_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTitle, setBreacrumbs, showAlert } from '../../redux/actions'
+import { setTitle, setBreacrumbs } from '../../redux/actions'
 
 import LocationForm from './form'
 import Portlet from '../../components/portlet/portlet'
+import CreatePageTemplate from '../../components/page-templates/create'
 
 
 const LocationCreate = ({match}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
-
   const title = useSelector(state => state.title)
 
   const [item, setItem] = useState({
@@ -27,6 +24,7 @@ const LocationCreate = ({match}) => {
     parentLocation: Number(match.params.id)
   })
 
+  const [needSave, setNeedSave] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
@@ -39,19 +37,15 @@ const LocationCreate = ({match}) => {
     ]))
   }, [])
 
-
-  const save = () => {
-    setDisableButton(true)
-
-    axios.post(CREATE_LOCATION_URL, item)
-      .then(() => history.push(LOCATION_INDEX))
-      .catch((error) => {
-        dispatch(showAlert(error.response.data.message))
-        setDisableButton(false)
-      })
-  }
-
   return (
+    <CreatePageTemplate
+      indexPageUrl={LOCATION_INDEX}
+      createUrl={CREATE_LOCATION_URL}
+      item={item}
+      setDisableButton={setDisableButton}
+      needSave={needSave}
+      setNeedSave={setNeedSave}
+    >
     <Portlet
       width={50}
       title={title}
@@ -60,10 +54,11 @@ const LocationCreate = ({match}) => {
       <LocationForm
         item={item}
         setItem={setItem}
-        save={save}
+        save={() => setNeedSave(true)}
         disable={disableButton}
       />
     </Portlet>
+    </CreatePageTemplate>
   )
 }
 

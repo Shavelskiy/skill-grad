@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NumberInput, SaveButton, TextInput, Wysiwyg, ImageInput, BooleanInput } from '../../components/ui/inputs'
 import translate from '../../helpers/translate'
 
-const ArticuleForm = ({item, setItem, uploadImage, setUploadImage, disable, save}) => {
+const ArticleForm = ({item, setItem, uploadImage, setUploadImage, disable, save}) => {
   const [enableTranslate, setEnableTranslate] = useState(true)
 
   const setName = (name) => {
@@ -70,4 +70,4 @@ const ArticuleForm = ({item, setItem, uploadImage, setUploadImage, disable, save
   )
 }
 
-export default ArticuleForm
+export default ArticleForm

@@ -10,6 +10,14 @@ export const PROGRAM_FORMAT_INDEX = '/program-format'
 export const PROGRAM_FORMAT_CREATE = '/program-format/create'
 export const PROGRAM_FORMAT_UPDATE = '/program-format/update/:id'
 
+export const PROGRAM_ADDITIONAL_INDEX = '/program-include'
+export const PROGRAM_ADDITIONAL_CREATE = '/program-include/create'
+export const PROGRAM_ADDITIONAL_UPDATE = '/program-include/update/:id'
+
+export const PROGRAM_INCLUDE_INDEX = '/program-include'
+export const PROGRAM_INCLUDE_CREATE = '/program-include/create'
+export const PROGRAM_INCLUDE_UPDATE = '/program-include/update/:id'
+
 export const PROVIDER_INDEX = '/provider'
 export const PROVIDER_VIEW = '/provider/:id'
 export const PROVIDER_CREATE = '/provider/create'

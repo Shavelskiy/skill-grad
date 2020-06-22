@@ -77,7 +77,7 @@ class ArticleRepository extends ServiceEntityRepository
                         ->andWhere('a.active = :active')
                         ->setParameter('active', $value);
                     break;
-                case 'show_on_main':
+                case 'showOnMain':
                     $query
                         ->andWhere('a.showOnMain = :showOnMain')
                         ->setParameter('showOnMain', $value);

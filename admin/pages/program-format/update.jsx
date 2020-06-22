@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { ARTICLE_INDEX, PROGRAM_FORMAT_INDEX } from '../../utils/routes'
+import { PROGRAM_FORMAT_INDEX } from '../../utils/routes'
 
-import axios from 'axios'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { hideLoader, showLoader, setTitle, setBreacrumbs, showAlert } from '../../redux/actions'
-
-import NotFound from '../../components/not-found/not-found'
-import Portlet from '../../components/portlet/portlet'
-import ProgramFormatForm from './form'
 import { FETCH_PROGRAM_FORMAT_URL, UPDATE_PROGRAM_FORMAT_URL } from '../../utils/api/endpoints'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { setBreacrumbs, setTitle } from '../../redux/actions'
 
-const ProgramForatmUpdate = ({match}) => {
+import Portlet from '../../components/portlet/portlet'
+import ProgramFormatForm from './form'
+import { UpdatePageTemplate } from '../../components/page-templates/update'
+
+
+const ProgramFormatUpdate = ({match}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const title = useSelector(state => state.title)
-
-  useEffect(() => {
-    dispatch(setBreacrumbs([
-      {
-        title: 'Список форм программ обучения',
-        link: ARTICLE_INDEX,
-      }
-    ]))
-  }, [])
 
   const [item, setItem] = useState({
     id: match.params.id,
@@ -35,61 +23,47 @@ const ProgramForatmUpdate = ({match}) => {
     active: true,
   })
 
-  const [notFound, setNotFound] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
+  const [needSave, setNeedSave] = useState(false)
 
   useEffect(() => {
-    dispatch(showLoader())
-    axios.get(FETCH_PROGRAM_FORMAT_URL.replace(':id', match.params.id))
-      .then(({data}) => {
-        setItem({
-          id: data.id,
-          name: data.name,
-          sort: data.sort,
-          active: data.active,
-        })
-        dispatch(setTitle(`Редактирование формы программы обучения "${data.name}"`))
-        dispatch(hideLoader())
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 404) {
-          setNotFound(true)
-          dispatch(hideLoader())
-        }
-
-        history.push(PROGRAM_FORMAT_INDEX)
-      })
+    dispatch(setBreacrumbs([
+      {
+        title: 'Список форм программ обучения',
+        link: PROGRAM_FORMAT_INDEX,
+      }
+    ]))
   }, [])
 
-  const save = () => {
-    setDisableButton(true)
-
-    axios.put(UPDATE_PROGRAM_FORMAT_URL, item)
-      .then(() => history.push(PROGRAM_FORMAT_INDEX))
-      .catch((error) => {
-        dispatch(showAlert(error.response.data.message))
-        setDisableButton(false)
-      })
-  }
-
-  if (notFound) {
-    return <NotFound/>
-  }
+  useEffect(() => {
+    dispatch(setTitle(`Редактирование формы программы обучения "${item.name}"`))
+  }, [item])
 
   return (
-    <Portlet
-      width={50}
-      title={title}
-      titleIcon={'info'}
+    <UpdatePageTemplate
+      indexPageUrl={PROGRAM_FORMAT_INDEX}
+      fetchUrl={FETCH_PROGRAM_FORMAT_URL.replace(':id', match.params.id)}
+      updateUrl={UPDATE_PROGRAM_FORMAT_URL}
+      item={item}
+      setItem={setItem}
+      setDisableButton={setDisableButton}
+      needSave={needSave}
+      setNeedSave={setNeedSave}
     >
-      <ProgramFormatForm
-        item={item}
-        setItem={setItem}
-        save={save}
-        disable={disableButton}
-      />
-    </Portlet>
+      <Portlet
+        width={50}
+        title={title}
+        titleIcon={'info'}
+      >
+        <ProgramFormatForm
+          item={item}
+          setItem={setItem}
+          save={() => setNeedSave(true)}
+          disable={disableButton}
+        />
+      </Portlet>
+    </UpdatePageTemplate>
   )
 }
 
-export default ProgramForatmUpdate
+export default ProgramFormatUpdate

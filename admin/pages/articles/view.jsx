@@ -48,7 +48,7 @@ const ArticleView = ({match}) => {
       active: data.active,
       detailText: data.detail_text,
       image: data.image,
-      showOnMain: data.show_on_main,
+      showOnMain: data.showOnMain,
       createdAt: data.created_at,
     })
   }
