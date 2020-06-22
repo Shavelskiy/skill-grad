@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\ProgramFormat;
+use App\Entity\ProgramAdditional;
 use App\Helpers\SearchHelper;
-use App\Repository\ProgramFormatRepository;
+use App\Repository\ProgramAdditionalRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use RuntimeException;
@@ -15,21 +15,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/admin/program-format")
+ * @Route("/api/admin/program-additional")
  */
-class ProgramFormatController extends AbstractController
+class ProgramAdditionalController extends AbstractController
 {
-    protected ProgramFormatRepository $programFormatRepository;
+    protected ProgramAdditionalRepository $programAdditionalRepository;
 
     public function __construct(
-        ProgramFormatRepository $programFormatRepository
+        ProgramAdditionalRepository $programAdditionalRepository
     )
     {
-        $this->programFormatRepository = $programFormatRepository;
+        $this->programAdditionalRepository = $programAdditionalRepository;
     }
 
     /**
-     * @Route("", name="admin.program-format.index", methods={"GET"})
+     * @Route("", name="admin.program-additional.index", methods={"GET"})
      *
      * @param Request $request
      * @return Response
@@ -38,9 +38,9 @@ class ProgramFormatController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $searchQuery = SearchHelper::createFromRequest($request, [ProgramFormat::class]);
+        $searchQuery = SearchHelper::createFromRequest($request, [ProgramAdditional::class]);
 
-        $paginator = $this->programFormatRepository->getPaginatorResult($searchQuery);
+        $paginator = $this->programAdditionalRepository->getPaginatorResult($searchQuery);
 
         $items = [];
         foreach ($paginator->getItems() as $item) {
@@ -56,18 +56,18 @@ class ProgramFormatController extends AbstractController
         return new JsonResponse($data);
     }
 
-    protected function prepareItem(ProgramFormat $item): array
+    protected function prepareItem(ProgramAdditional $item): array
     {
         return [
             'id' => $item->getId(),
-            'name' => $item->getName(),
+            'name' => $item->getTitle(),
             'active' => $item->isActive(),
             'sort' => $item->getSort(),
         ];
     }
 
     /**
-     * @Route("/{id}", name="admin.program-format.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{id}", name="admin.program-additional.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      * @param Request $request
      * @return Response
      */
@@ -77,75 +77,75 @@ class ProgramFormatController extends AbstractController
             throw new RuntimeException('');
         }
 
-        /** @var ProgramFormat $programFormat */
-        $programFormat = $this->programFormatRepository->find($id);
+        /** @var ProgramAdditional $programAdditional */
+        $programAdditional = $this->programAdditionalRepository->find($id);
 
-        if ($programFormat === null) {
+        if ($programAdditional === null) {
             throw new RuntimeException('');
         }
 
         return new JsonResponse([
-            'id' => $programFormat->getId(),
-            'name' => $programFormat->getName(),
-            'active' => $programFormat->isActive(),
-            'sort' => $programFormat->getSort(),
+            'id' => $programAdditional->getId(),
+            'name' => $programAdditional->getTitle(),
+            'active' => $programAdditional->isActive(),
+            'sort' => $programAdditional->getSort(),
         ]);
     }
 
     /**
-     * @Route("", name="admin.program-format.create", methods={"POST"})
+     * @Route("", name="admin.program-additional.create", methods={"POST"})
      * @param Request $request
      * @return Response
      */
     public function create(Request $request): Response
     {
-        $programFormat = (new ProgramFormat())
-            ->setName($request->get('name'))
+        $programAdditional = (new ProgramAdditional())
+            ->setTitle($request->get('name'))
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programFormat);
+        $this->getDoctrine()->getManager()->persist($programAdditional);
         $this->getDoctrine()->getManager()->flush();
 
         return new JsonResponse();
     }
 
     /**
-     * @Route("", name="admin.program-format.update", methods={"PUT"})
+     * @Route("", name="admin.program-additional.update", methods={"PUT"})
      */
     public function update(Request $request): Response
     {
-        /** @var ProgramFormat $programFormat */
-        $programFormat = $this->programFormatRepository->find($request->get('id'));
+        /** @var ProgramAdditional $programAdditional */
+        $programAdditional = $this->programAdditionalRepository->find($request->get('id'));
 
-        if ($programFormat === null) {
+        if ($programAdditional === null) {
             return new JsonResponse([], 404);
         }
 
-        $programFormat
-            ->setName($request->get('name'))
+        $programAdditional
+            ->setTitle($request->get('name'))
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programFormat);
+        $this->getDoctrine()->getManager()->persist($programAdditional);
         $this->getDoctrine()->getManager()->flush();
 
         return new JsonResponse();
     }
 
     /**
-     * @Route("", name="admin.program-format.delete", methods={"DELETE"})
+     * @Route("", name="admin.program-additional.delete", methods={"DELETE"})
      */
     public function delete(Request $request): Response
     {
-        /** @var ProgramFormat $programFormat */
-        $programFormat = $this->programFormatRepository->find($request->get('id'));
+        /** @var ProgramAdditional $programAdditional */
+        $programAdditional = $this->programAdditionalRepository->find($request->get('id'));
 
-        if ($programFormat === null) {
+        if ($programAdditional === null) {
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($programFormat);
+        $this->getDoctrine()->getManager()->remove($programAdditional);
         $this->getDoctrine()->getManager()->flush();
 
         return new JsonResponse();

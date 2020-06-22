@@ -10,9 +10,9 @@ export const PROGRAM_FORMAT_INDEX = '/program-format'
 export const PROGRAM_FORMAT_CREATE = '/program-format/create'
 export const PROGRAM_FORMAT_UPDATE = '/program-format/update/:id'
 
-export const PROGRAM_ADDITIONAL_INDEX = '/program-include'
-export const PROGRAM_ADDITIONAL_CREATE = '/program-include/create'
-export const PROGRAM_ADDITIONAL_UPDATE = '/program-include/update/:id'
+export const PROGRAM_ADDITIONAL_INDEX = '/program-additional'
+export const PROGRAM_ADDITIONAL_CREATE = '/program-additional/create'
+export const PROGRAM_ADDITIONAL_UPDATE = '/program-additional/update/:id'
 
 export const PROGRAM_INCLUDE_INDEX = '/program-include'
 export const PROGRAM_INCLUDE_CREATE = '/program-include/create'

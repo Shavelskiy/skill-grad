@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { PROGRAM_ADDITIONAL_INDEX } from '../../utils/routes'
-import { CREATE_PROGRAM_ADDITIONAL_URL } from '../../utils/api/endpoints'
+import { PROGRAM_INCLUDE_INDEX } from '../../utils/routes'
+import { CREATE_PROGRAM_INCLUDE_URL } from '../../utils/api/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setTitle, setBreacrumbs } from '../../redux/actions'
 
-import ProgramFormatForm from './form'
+import ProgramIncludeForm from './form'
 import CreatePageTemplate from '../../components/page-templates/create'
 import Portlet from '../../components/portlet/portlet'
 
 
-const ProgramAdditionalCreate = () => {
+const ProgramIncludeCreate = () => {
   const dispatch = useDispatch()
   const title = useSelector(state => state.title)
 
@@ -24,19 +24,19 @@ const ProgramAdditionalCreate = () => {
   const [disableButton, setDisableButton] = useState(false)
 
   useEffect(() => {
-    dispatch(setTitle('Добавление дополнительных пунктов программы обучения'))
+    dispatch(setTitle('Добавление включено в курс'))
     dispatch(setBreacrumbs([
       {
-        title: 'Дополнительные пункты программы обучения',
-        link: PROGRAM_ADDITIONAL_INDEX,
+        title: 'Включено в курс',
+        link: PROGRAM_INCLUDE_INDEX,
       }
     ]))
   }, [])
 
   return (
     <CreatePageTemplate
-      indexPageUrl={PROGRAM_ADDITIONAL_INDEX}
-      createUrl={CREATE_PROGRAM_ADDITIONAL_URL}
+      indexPageUrl={PROGRAM_INCLUDE_INDEX}
+      createUrl={CREATE_PROGRAM_INCLUDE_URL}
       item={item}
       setDisableButton={setDisableButton}
       needSave={needSave}
@@ -47,7 +47,7 @@ const ProgramAdditionalCreate = () => {
         title={title}
         titleIcon={'info'}
       >
-        <ProgramFormatForm
+        <ProgramIncludeForm
           item={item}
           setItem={setItem}
           save={() => setNeedSave(true)}
@@ -58,4 +58,4 @@ const ProgramAdditionalCreate = () => {
   )
 }
 
-export default ProgramAdditionalCreate
+export default ProgramIncludeCreate

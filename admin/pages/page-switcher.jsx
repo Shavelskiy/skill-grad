@@ -25,7 +25,17 @@ import {
   PROGRAM_FORMAT_INDEX,
   PROGRAM_FORMAT_CREATE,
   PROGRAM_FORMAT_UPDATE,
-  PROVIDER_INDEX, PROVIDER_CREATE, LOCATION_CREATE, LOCATION_UPDATE, PROVIDER_UPDATE, PROVIDER_VIEW,
+  PROVIDER_INDEX,
+  PROVIDER_CREATE,
+  LOCATION_CREATE,
+  LOCATION_UPDATE,
+  PROVIDER_UPDATE,
+  PROVIDER_VIEW,
+  PROGRAM_ADDITIONAL_INDEX,
+  PROGRAM_ADDITIONAL_CREATE,
+  PROGRAM_ADDITIONAL_UPDATE,
+  PROGRAM_INCLUDE_INDEX,
+  PROGRAM_INCLUDE_UPDATE, PROGRAM_INCLUDE_CREATE,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -55,6 +65,12 @@ import LocationsIndex from '../pages/locations'
 import LocationCreate from './locations/create'
 import LocationView from '../pages/locations/view'
 import LocationUpdate from './locations/update'
+import ProgramAdditionalIndex from './program-additional'
+import ProgramAdditionalCreate from './program-additional/create'
+import ProgramAdditionalUpdate from './program-additional/update'
+import ProgramIncludeIndex from './program-include'
+import ProgramIncludeUpdate from './program-include/update'
+import ProgramIncludeCreate from './program-include/create'
 
 
 const PageSwitcher = ({active}) => {
@@ -74,6 +90,14 @@ const PageSwitcher = ({active}) => {
           <Route exact name="program-format.index" path={PROGRAM_FORMAT_INDEX} component={ProgramFormatIndex}/>
           <Route exact name="program-format.create" path={PROGRAM_FORMAT_CREATE} component={ProgramFormatCreate}/>
           <Route exact name="program-format.update" path={PROGRAM_FORMAT_UPDATE} component={ProgramFormatUpdate}/>
+
+          <Route exact name="program-additional.index" path={PROGRAM_ADDITIONAL_INDEX} component={ProgramAdditionalIndex}/>
+          <Route exact name="program-additional.create" path={PROGRAM_ADDITIONAL_CREATE} component={ProgramAdditionalCreate}/>
+          <Route exact name="program-additional.update" path={PROGRAM_ADDITIONAL_UPDATE} component={ProgramAdditionalUpdate}/>
+
+          <Route exact name="program-include.index" path={PROGRAM_INCLUDE_INDEX} component={ProgramIncludeIndex}/>
+          <Route exact name="program-include.create" path={PROGRAM_INCLUDE_CREATE} component={ProgramIncludeCreate}/>
+          <Route exact name="program-include.update" path={PROGRAM_INCLUDE_UPDATE} component={ProgramIncludeUpdate}/>
 
           <Route exact name="provider.index" path={PROVIDER_INDEX} component={ProviderIndex}/>
           <Route exact name="provider.create" path={PROVIDER_CREATE} component={ProviderCreate}/>
