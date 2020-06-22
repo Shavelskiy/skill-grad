@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 import css from './page-switcher.scss?module'
 import cn from 'classnames'
@@ -74,11 +73,11 @@ import ProgramIncludeCreate from './program-include/create'
 
 
 const PageSwitcher = ({active}) => {
-  const breadcrumbs = useSelector(state => state.breadcrumbs)
+
 
   return (
     <div className={cn(css.page, {[css.hidden]: !active})}>
-      <Breadcrumbs items={breadcrumbs}/>
+      <Breadcrumbs/>
 
       <div className={css.content}>
         <Switch>

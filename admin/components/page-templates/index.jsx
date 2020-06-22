@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
-import { setTitle } from '../../redux/actions'
+import { setBreacrumbs, setTitle } from '../../redux/actions'
 
 import axios from 'axios'
 
@@ -42,6 +42,7 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
 
   useEffect(() => {
     dispatch(setTitle(title))
+    dispatch(setBreacrumbs([]))
   }, [])
 
   useEffect(() => {

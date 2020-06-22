@@ -1,20 +1,21 @@
 import React from 'react'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import BreadcrumbItem from './item'
 
 import css from './breadcrumbs.scss?module'
 
 
-const Breadcrumbs = ({items = []}) => {
+const Breadcrumbs = () => {
   const title = useSelector(state => state.title)
+  const breadcrumbs = useSelector(state => state.breadcrumbs)
 
   return (
     <div className={css.wrap}>
       <ol className={css.breadcrumb}>
         {
-          items.map((item, key) => {
+          breadcrumbs.map((item, key) => {
             return (<BreadcrumbItem key={key} item={item}/>)
           })
         }

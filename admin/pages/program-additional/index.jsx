@@ -9,7 +9,7 @@ import { table, actions } from './table'
 const ProgramAdditionalIndex = () => {
   return (
     <IndexPageTemplate
-      title={'Дополнительно'}
+      title={'Дополнительные пункты программы обучения'}
       icon={'abacus'}
       table={table}
       actions={actions}
