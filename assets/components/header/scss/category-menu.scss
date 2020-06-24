@@ -1,11 +1,19 @@
 .categories-menu {
   position: absolute;
+  pointer-events: none;
   top: 77%;
   left: 27%;
 
+  &.active {
+    pointer-events: auto;
+
+    .categories-container {
+      opacity: 1;
+    }
+  }
+
   .categories-container {
     opacity: 0;
-    pointer-events: none;
     position: relative;
     min-width: 380px;
     margin: 10px 0 0 -25px;
@@ -14,11 +22,6 @@
     padding: 20px 0 20px 20px;
     filter: drop-shadow(0px 7px 10px rgba(22, 58, 86, 0.1));
     transition: opacity .2s ease-out;
-
-    &.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
 
     .categories-list {
       max-height: calc((16px + 26px) * 15);

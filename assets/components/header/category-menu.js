@@ -1,5 +1,5 @@
 const categoryMenuBtn = document.querySelector('.categories-menu-btn')
-const categoryMenu = document.querySelector('.categories-container')
+const categoryMenu = document.querySelector('.categories-menu')
 
 categoryMenuBtn.addEventListener('click', () => {
   categoryMenu.classList.toggle('active')
