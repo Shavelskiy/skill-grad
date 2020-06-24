@@ -13,7 +13,8 @@ import Locations from './locations/locations'
 import AdditionalInfo from './additional-info/additional-info'
 
 import css from './app.scss?module'
-console.log(css)
+
+
 const App = () => {
   return (
     <div className={css.wrap}>

@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { ORGANIZAITION } from '../../utils/titles'
 
 
 const Organization = () => {
   return (
-    <h2>Организационные вопросы</h2>
+    <Block title={ORGANIZAITION}>
+
+    </Block>
   )
 }
 

@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { TERM_OF_USE } from '../../utils/titles'
 
 
 const TermOfUse = () => {
   return (
-    <h2>Условия участия</h2>
+    <Block title={TERM_OF_USE}>
+
+    </Block>
   )
 }
 

@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { LISTENERS } from '../../utils/titles'
 
 
 const Listeners = () => {
   return (
-    <h2>Слушатели программы</h2>
+    <Block title={LISTENERS}>
+
+    </Block>
   )
 }
 

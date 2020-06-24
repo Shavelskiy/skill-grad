@@ -1,0 +1,25 @@
+.input {
+  input {
+    border-radius: 100px;
+    width: 100%;
+    border: none;
+    background-color: #f3f3f3;
+    padding: 15px 40px;
+  }
+
+  &.required {
+    input::placeholder {
+      color: rgb(84, 84, 84);
+    }
+  }
+}
+
+.textarea {
+  border-radius: 22px;
+  border: none;
+  background-color: #f3f3f3;
+  padding: 15px 40px;
+  width: 100% !important;
+  max-height: 600px;
+  min-height: 100px;
+}

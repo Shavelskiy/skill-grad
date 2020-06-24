@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { PROVIDERS } from '../../utils/titles'
 
 
 const Providers = () => {
   return (
-    <h2>Провайдер обучения</h2>
+    <Block title={PROVIDERS}>
+
+    </Block>
   )
 }
 

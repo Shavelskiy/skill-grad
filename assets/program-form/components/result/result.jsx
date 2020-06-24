@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { RESULTS } from '../../utils/titles'
 
 
 const Result = () => {
   return (
-    <h2>Результаты обучения</h2>
+    <Block title={RESULTS}>
+
+    </Block>
   )
 }
 

@@ -1,0 +1,21 @@
+.categroies {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+
+  .category-select {
+    width: 100%;
+
+    &:first-child {
+      margin-right: 3%;
+    }
+
+    &:last-child {
+      margin-left: 3%;
+    }
+  }
+}
+
+.input-container {
+  margin-top: 30px;
+}

@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { ADDITIONAL_INFO } from '../../utils/titles'
 
 
 const AdditionalInfo = () => {
   return (
-    <h2>Дополнительная информация</h2>
+    <Block title={ADDITIONAL_INFO}>
+
+    </Block>
   )
 }
 

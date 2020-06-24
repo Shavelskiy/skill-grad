@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { LOCATIONS } from '../../utils/titles'
 
 
 const Locations = () => {
   return (
-    <h2>В каких городах показывать программу</h2>
+    <Block title={LOCATIONS}>
+
+    </Block>
   )
 }
 

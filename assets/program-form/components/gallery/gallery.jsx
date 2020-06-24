@@ -1,9 +1,14 @@
 import React from 'react'
+import Block from '../ui/block'
+
+import { GALLERY } from '../../utils/titles'
 
 
 const Gallery = () => {
   return (
-    <h2>Фотографии с мероприятия</h2>
+    <Block title={GALLERY}>
+
+    </Block>
   )
 }
 
