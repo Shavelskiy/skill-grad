@@ -1,0 +1,28 @@
+.wrap {
+  .progress-bar {
+    position: fixed;
+    left: 8vw;
+  }
+
+  .form {
+    padding: 0 5vw;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgb(246, 53, 0);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 15px;
+
+      &:after {
+        content: '';
+        border-bottom: 1px solid rgb(207, 207, 207);
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      }
+    }
+  }
+}

@@ -22,7 +22,6 @@ const initialState = {
 }
 
 export const rootReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case SHOW_LOADER:
       return {...state, loading: state.loading + 1}

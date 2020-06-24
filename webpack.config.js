@@ -28,6 +28,8 @@ Encore
   .addEntry('site.user.profile', './assets/pages/user-profile.js')
   .addEntry('site.provider.profile', './assets/pages/provider-profile.js')
 
+  .addEntry('program.add', './assets/program-form/index.js')
+
   .splitEntryChunks()
 
   .enableSingleRuntimeChunk()

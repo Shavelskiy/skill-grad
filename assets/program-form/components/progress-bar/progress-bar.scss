@@ -1,0 +1,14 @@
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(234, 244, 253);
+  padding: 1vw 1.5vw;
+  border-radius: 1vw;
+  width: 10vw;
+
+  span {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
