@@ -1,15 +1,29 @@
 import {
-  SHOW_LOADER,
+  SET_NAME,
+  SET_CATEGORY,
+  SET_ANNOTATION,
+  SET_DETAIL_TEXT,
 } from './types'
 
 const initialState = {
-  loading: 0,
+  name: '',
+  categories: [null, null, null],
+  annotation: '',
+  detailText: '',
 }
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_LOADER:
-      return {...state, loading: state.loading + 1}
+    case SET_NAME:
+      return {...state, name: action.payload}
+    case SET_CATEGORY:
+      let categories = state.categories
+      categories[ action.payload.key] = action.payload.value
+      return {...state, categories: categories}
+    case SET_ANNOTATION:
+      return {...state, annotation: action.payload}
+    case SET_DETAIL_TEXT:
+      return {...state, detailText: action.payload}
     default:
       return state
   }

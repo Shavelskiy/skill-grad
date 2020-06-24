@@ -6,7 +6,7 @@ import cn from 'classnames'
 import arrow from './../../../img/select-arrow.svg'
 
 
-const Select = ({options, value, setValue}) => {
+const Select = ({options, value, setValue, placeholder = ''}) => {
   const ref = useRef()
   const [opened, setOpened] = useState(false)
 
@@ -41,7 +41,7 @@ const Select = ({options, value, setValue}) => {
       return item.value === value
     })
 
-    return selectedItems.length > 0 ? selectedItems[0].title : ''
+    return selectedItems.length > 0 ? selectedItems[0].title : placeholder
   }
 
   return (

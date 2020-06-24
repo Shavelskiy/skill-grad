@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { DESCRIPTION } from '../../utils/titles'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/actions'
 
 import { TextInput, Textarea } from '../ui/input'
 import Select from '../ui/select'
 import Block from '../ui/block'
-
-import { DESCRIPTION } from '../../utils/titles'
+import Teachers from '../teachers/teachers'
 
 import css from './description.scss?module'
 import cn from 'classnames'
 
 
 const Description = () => {
-  const [name, setName] = useState('')
-  const [category, setCategroy] = useState(1)
+  const dispatch = useDispatch()
 
-  const options = [
+  const options = [ // todo
     {
       title: 'Архитектура',
       value: 1,
@@ -32,47 +34,41 @@ const Description = () => {
   return (
     <Block title={DESCRIPTION}>
       <TextInput
-        value={name}
+        value={useSelector(state => state.name)}
         placeholder={'Название программы обучения'}
         required={true}
-        setValue={setName}
+        setValue={(name) => dispatch(setName(name))}
       />
       <div className={cn(css.categroies, css.inputContainer)}>
-        <div className={css.categorySelect}>
-          <Select
-            value={category}
-            setValue={setCategroy}
-            options={[...options, ...options, ...options, ...options, ...options]}
-          />
-        </div>
-        <div className={css.categorySelect}>
-          <Select
-            value={category}
-            setValue={setCategroy}
-            options={[...options, ...options, ...options, ...options, ...options]}
-          />
-        </div>
-        <div className={css.categorySelect}>
-          <Select
-            value={category}
-            setValue={setCategroy}
-            options={[...options, ...options, ...options, ...options, ...options]}
-          />
-        </div>
+        {[...Array(3).keys()].map(key => {
+          return (
+            <div className={css.categorySelect} key={key}>
+              <Select
+                placeholder={'Выбрать категорию'}
+                value={useSelector(state => state.categories[key])}
+                setValue={(value) => dispatch(setCategory(key, value))}
+                options={options}
+              />
+            </div>
+          )
+        })}
       </div>
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Аннотация программы обучения'}
-          value={name}
-          setValue={setName}
+          value={useSelector(state => state.annotation)}
+          setValue={(annotation) => dispatch(setAnnotation(annotation))}
         />
       </div>
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Программа обучения'}
-          value={name}
-          setValue={setName}
+          value={useSelector(state => state.detailText)}
+          setValue={(detailText) => dispatch(setDetailText(detailText))}
         />
+      </div>
+      <div className={css.inputContainer}>
+        <Teachers/>
       </div>
     </Block>
   )
