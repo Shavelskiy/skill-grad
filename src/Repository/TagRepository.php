@@ -3,12 +3,10 @@
 namespace App\Repository;
 
 use App\Dto\PaginatorResult;
-use App\Entity\Program;
 use App\Entity\Tag;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Exception;
 
 class TagRepository extends ServiceEntityRepository
 {
@@ -19,12 +17,6 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
-    /**
-     * @param Program $program
-     * @param int $page
-     * @param int $pageItems
-     * @return PaginatorResult
-     */
     public function getPaginatorItems(int $page, ?array $order, int $pageItems): PaginatorResult
     {
         $query = $this->createQueryBuilder('t');

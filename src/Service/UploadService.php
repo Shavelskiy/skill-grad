@@ -44,7 +44,6 @@ class UploadService implements UploadServiceInterface
         return (new Upload())->setName($fileName);
     }
 
-
     public function deleteUpload(Upload $upload): void
     {
         $fileName = $this->uploadDir . '/' . $upload->getName();

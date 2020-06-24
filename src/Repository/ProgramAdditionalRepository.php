@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Dto\PaginatorResult;
 use App\Dto\SearchQuery;
-use App\Entity\ProgramAdditional;
+use App\Entity\Program\ProgramAdditional;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -19,8 +19,6 @@ class ProgramAdditionalRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param SearchQuery $searchQuery
-     * @return PaginatorResult
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

@@ -12,7 +12,6 @@ class MemcachedClient
     protected static Memcached $connection;
 
     /**
-     * @return MemcachedAdapter
      * @throws ErrorException
      * @throws CacheException
      */

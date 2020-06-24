@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\ProgramInclude;
+use App\Entity\Program\ProgramInclude;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramIncludeRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -23,16 +23,13 @@ class ProgramIncludeController extends AbstractController
 
     public function __construct(
         ProgramIncludeRepository $programIncludeRepository
-    )
-    {
+    ) {
         $this->programIncludeRepository = $programIncludeRepository;
     }
 
     /**
      * @Route("", name="admin.program-include.index", methods={"GET"})
      *
-     * @param Request $request
-     * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -68,8 +65,8 @@ class ProgramIncludeController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.program-include.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     *
      * @param Request $request
-     * @return Response
      */
     public function view(int $id): Response
     {
@@ -94,8 +91,6 @@ class ProgramIncludeController extends AbstractController
 
     /**
      * @Route("", name="admin.program-include.create", methods={"POST"})
-     * @param Request $request
-     * @return Response
      */
     public function create(Request $request): Response
     {

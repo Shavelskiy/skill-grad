@@ -12,7 +12,6 @@ use Symfony\Component\Cache\Exception\CacheException;
 class EntityCacheListener
 {
     /**
-     * @param OnFlushEventArgs $eventArgs
      * @throws ErrorException
      * @throws CacheException
      * @throws InvalidArgumentException

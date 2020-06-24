@@ -18,7 +18,7 @@ class CatalogController extends AbstractController
     public function view(Request $request): Response
     {
         return $this->render('catalog/index.html.twig', [
-            'slug' => $request->get('slug')
+            'slug' => $request->get('slug'),
         ]);
     }
 }

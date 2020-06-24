@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Program;
-use App\Entity\ProgramQuestion;
+use App\Entity\Program\Program;
+use App\Entity\Program\ProgramQuestion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProgramQuestionRepository extends ServiceEntityRepository
@@ -14,6 +16,10 @@ class ProgramQuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, ProgramQuestion::class);
     }
 
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function getProgramQuestionCount(Program $program): int
     {
         return $this->createQueryBuilder('pq')
@@ -25,12 +31,8 @@ class ProgramQuestionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Program $program
-     *
-     * @return int
-     *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getNewProgramQuestionCount(Program $program): int
     {

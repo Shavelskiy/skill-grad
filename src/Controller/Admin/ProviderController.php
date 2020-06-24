@@ -43,8 +43,7 @@ class ProviderController extends AbstractController
         LocationRepository $locationRepository,
         UploadServiceInterface $uploadService,
         LocationService $locationService
-    )
-    {
+    ) {
         $this->categoryRepository = $categoryRepository;
         $this->providerRepository = $providerRepository;
         $this->providerRequisitesRepository = $providerRequisitesRepository;
@@ -55,8 +54,7 @@ class ProviderController extends AbstractController
 
     /**
      * @Route("", name="admin.provider.index", methods={"GET"})
-     * @param Request $request
-     * @return Response
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

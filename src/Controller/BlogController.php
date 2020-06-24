@@ -18,7 +18,7 @@ class BlogController extends AbstractController
     public function view(Request $request): Response
     {
         return $this->render('blog/index.html.twig', [
-            'slug' => $request->get('slug')
+            'slug' => $request->get('slug'),
         ]);
     }
 }

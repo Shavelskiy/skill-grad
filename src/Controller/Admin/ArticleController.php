@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
-use App\Entity\Upload;
 use App\Helpers\SearchHelper;
 use App\Repository\ArticleRepository;
 use App\Service\UploadServiceInterface;
@@ -35,8 +34,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("", name="admin.artice.index", methods={"GET"})
-     * @param Request $request
-     * @return Response
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -70,14 +68,14 @@ class ArticleController extends AbstractController
             'active' => $item->isActive(),
             'image' => ($item->getImage() !== null) ? $item->getImage()->getPublicPath() : null,
             'showOnMain' => $item->isShowOnMain(),
-            'created_at' => $item->getCreatedAt()->format('d.m.Y')
+            'created_at' => $item->getCreatedAt()->format('d.m.Y'),
         ];
     }
 
     /**
      * @Route("/{id}", name="admin.article.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     *
      * @param Request $request
-     * @return Response
      */
     public function view(int $id): Response
     {
@@ -102,7 +100,7 @@ class ArticleController extends AbstractController
                 'image' => ($article->getImage() !== null) ? $article->getImage()->getPublicPath() : null,
                 'detail_text' => $article->getDetailText(),
                 'showOnMain' => $article->isShowOnMain(),
-                'created_at' => $article->getCreatedAt()->format('d.m.Y')
+                'created_at' => $article->getCreatedAt()->format('d.m.Y'),
             ]);
         } catch (Exception $e) {
             throw new NotFoundHttpException('');
@@ -111,8 +109,6 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("", name="admin.article.create", methods={"POST"})
-     * @param Request $request
-     * @return Response
      */
     public function create(Request $request): Response
     {

@@ -41,9 +41,6 @@ class ConfirmRegisterListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param RequestEvent $event
-     */
     public function onKernelRequest(RequestEvent $event): void
     {
         $this->flashBag->get('alert.message');

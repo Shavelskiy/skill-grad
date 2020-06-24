@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Program;
 
+use App\Entity\Upload;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +28,7 @@ class Teacher
     private ?Upload $photo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      */
     private Program $program;
 

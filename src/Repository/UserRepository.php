@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Dto\PaginatorResult;
 use App\Dto\SearchQuery;
-use App\Entity\Location;
 use App\Entity\User;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -28,9 +27,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
-     *
-     * @param UserInterface $user
-     * @param string        $newEncodedPassword
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -67,8 +63,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @param $email
      * @param $socialKey
-     *
-     * @return User
      */
     public function findUserByEmailAndSocialKey($email, $socialKey): User
     {
@@ -83,11 +77,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @param int $page
+     * @param int        $page
      * @param array|null $order
-     * @param int $pageItems
+     * @param int        $pageItems
      * @param array|null $serach
-     * @return PaginatorResult
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

@@ -34,9 +34,6 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         $this->authMailer = $authMailer;
     }
 
-    /**
-     * @param string $email
-     */
     public function initResetUserPassword(string $email): void
     {
         /** @var User $user */
@@ -48,15 +45,11 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         $this->em->flush();
 
         $this->authMailer->sendResetPasswordEmail(
-            $user->getEmail(), 
+            $user->getEmail(),
             $token->getToken()->getHex()->toString()
         );
     }
 
-    /**
-     * @param string $token
-     * @param string $newPassword
-     */
     public function resetUserPassword(string $token, string $newPassword): void
     {
         $userToken = $this->userTokenRepository->findByTokenAndType($token, UserToken::TYPE_RESET_PASSWORD);
@@ -69,11 +62,6 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         $this->em->flush();
     }
 
-    /**
-     * @param string $email
-     * @param string $password
-     * @param bool   $isProvider
-     */
     public function registerUser(string $email, string $password, bool $isProvider): void
     {
         try {
@@ -106,12 +94,6 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         );
     }
 
-    /**
-     * @param string $userEmail
-     * @param string $socialKey
-     *
-     * @return User
-     */
     public function createSocialUser(string $userEmail, string $socialKey): User
     {
         $user = (new User())
@@ -130,10 +112,6 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         return $user;
     }
 
-    /**
-     * @param User           $user
-     * @param UpdateUserData $updateUserData
-     */
     public function updateUser(User $user, UpdateUserData $updateUserData)
     {
         $user

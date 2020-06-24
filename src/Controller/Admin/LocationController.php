@@ -41,10 +41,6 @@ class LocationController extends AbstractController
     /**
      * @Route("/", name="admin.location.index", methods={"GET"})
      *
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -82,9 +78,6 @@ class LocationController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.location.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param int $id
-     * @return Response
      */
     public function view(int $id): Response
     {
@@ -225,7 +218,6 @@ class LocationController extends AbstractController
         } else {
             $location->setParentLocation(null);
         }
-
 
         $this->getDoctrine()->getManager()->persist($location);
         $this->getDoctrine()->getManager()->flush();

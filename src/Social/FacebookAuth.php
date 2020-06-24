@@ -2,8 +2,6 @@
 
 namespace App\Social;
 
-use RuntimeException;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -38,8 +36,6 @@ class FacebookAuth implements SocialAuthInterface
 
     /**
      * @param $credentials
-     *
-     * @return string
      *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface

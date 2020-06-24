@@ -35,8 +35,6 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="admin.user.index", methods={"GET"})
      *
-     * @param Request $request
-     * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -62,7 +60,6 @@ class UserController extends AbstractController
 
     /**
      * @param Location $location
-     * @return array
      */
     protected function prepareItem(User $user): array
     {

@@ -81,8 +81,6 @@ class OkAuth implements SocialAuthInterface
     /**
      * @param $credentials
      *
-     * @return string
-     *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
@@ -126,8 +124,6 @@ class OkAuth implements SocialAuthInterface
 
     /**
      * @param $code
-     *
-     * @return string
      *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface

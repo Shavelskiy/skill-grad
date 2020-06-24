@@ -61,7 +61,6 @@ class User implements UserInterface
      */
     private ?Provider $provider;
 
-
     public function getId(): ?int
     {
         return $this->id;

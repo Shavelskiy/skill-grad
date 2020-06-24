@@ -34,8 +34,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -79,7 +78,6 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         return $user->isActive() && $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
-
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         return new JsonResponse(['message' => 'Вы успешно авторизованы']);
@@ -95,7 +93,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function getLoginUrl()
     {

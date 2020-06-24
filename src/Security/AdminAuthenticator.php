@@ -33,8 +33,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -67,7 +66,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
             }
 
 //            if (in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
-                return $user;
+            return $user;
 //            }
 
             throw new AccessDeniedException('');
@@ -78,9 +77,6 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param mixed $credentials
-     * @param UserInterface $user
-     *
-     * @return bool
      */
     public function checkCredentials($credentials, UserInterface $user): bool
     {

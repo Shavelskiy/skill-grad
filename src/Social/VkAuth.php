@@ -75,8 +75,6 @@ class VkAuth implements SocialAuthInterface
     /**
      * @param $credentials
      *
-     * @return string
-     *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface

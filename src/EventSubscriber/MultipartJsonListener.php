@@ -19,9 +19,6 @@ class MultipartJsonListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param RequestEvent $event
-     */
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
@@ -93,7 +90,7 @@ class MultipartJsonListener implements EventSubscriberInterface
                         'type' => $headers['content-type'],
                         'tmp_name' => $localFileName,
                         'error' => 0,
-                        'size' => filesize($localFileName)
+                        'size' => filesize($localFileName),
                     ]);
 
                     register_shutdown_function(static function () use ($localFileName) {
@@ -118,12 +115,10 @@ class MultipartJsonListener implements EventSubscriberInterface
         } else {
             $data[$name] = $value;
         }
+
         return $data;
     }
 
-    /**
-     * @param RequestEvent $event
-     */
     public function parseJsonBody(RequestEvent $event): void
     {
         $request = $event->getRequest();

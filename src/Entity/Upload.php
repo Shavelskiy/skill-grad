@@ -21,7 +21,6 @@ class Upload
      */
     private string $name;
 
-
     public function getId(): ?int
     {
         return $this->id;

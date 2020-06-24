@@ -60,9 +60,6 @@ class TagController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.tag.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param int $id
-     * @return Response
      */
     public function view(int $id): Response
     {

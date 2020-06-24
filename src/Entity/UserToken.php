@@ -32,7 +32,6 @@ class UserToken
      */
     private string $type;
 
-
     public function __construct(string $type)
     {
         $this->type = $type;
@@ -55,8 +54,9 @@ class UserToken
         return $this->token;
     }
 
-    public function setToken(UuidInterface $token): void
+    public function setToken(UuidInterface $token): self
     {
         $this->token = $token;
+        return $this;
     }
 }

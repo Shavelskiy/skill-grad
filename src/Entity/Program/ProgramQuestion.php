@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Program;
 
+use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +25,7 @@ class ProgramQuestion
     private User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      */
     private Program $program;
 

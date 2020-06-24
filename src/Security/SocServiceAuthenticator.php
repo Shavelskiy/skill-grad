@@ -33,8 +33,7 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         UserRepository $userRepository,
         RegisterUserInterface $registerUserService,
         SocialAuthFactory $socialAuthFactory
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->userRepository = $userRepository;
@@ -42,11 +41,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         $this->socialAuthFactory = $socialAuthFactory;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     public function supports(Request $request): bool
     {
         try {
@@ -58,11 +52,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         }
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return array
-     */
     public function getCredentials(Request $request): array
     {
         return $this->socialAuthService->getCredentials($request);
@@ -70,7 +59,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param mixed $credentials
-     * @param UserProviderInterface $userProvider
      *
      * @return User|UserInterface|null
      */
@@ -93,9 +81,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param mixed $credentials
-     * @param UserInterface $user
-     *
-     * @return bool
      */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
@@ -103,8 +88,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param Request $request
-     * @param TokenInterface $token
      * @param string $providerKey
      *
      * @return RedirectResponse|Response|null
@@ -114,9 +97,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('site.index'));
     }
 
-    /**
-     * @return string
-     */
     protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate('site.index');

@@ -70,7 +70,6 @@ class ProviderRequisites
      */
     private string $bank;
 
-
     public function getProvider(): Provider
     {
         return $this->provider;

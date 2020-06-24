@@ -19,8 +19,6 @@ class ProviderRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param SearchQuery $searchQuery
-     * @return PaginatorResult
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

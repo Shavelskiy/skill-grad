@@ -44,7 +44,6 @@ class Chat implements MessageComponentInterface
     }
 
     /**
-     * @param ConnectionInterface $from
      * @param string $msgStr
      */
     public function onMessage(ConnectionInterface $from, $msgStr): void

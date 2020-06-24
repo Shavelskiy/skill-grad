@@ -42,7 +42,6 @@ class Category
      */
     private PersistentCollection $childCategories;
 
-
     public function getId(): int
     {
         return $this->id;

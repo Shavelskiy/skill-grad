@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\ProgramAdditional;
+use App\Entity\Program\ProgramAdditional;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramAdditionalRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -23,16 +23,13 @@ class ProgramAdditionalController extends AbstractController
 
     public function __construct(
         ProgramAdditionalRepository $programAdditionalRepository
-    )
-    {
+    ) {
         $this->programAdditionalRepository = $programAdditionalRepository;
     }
 
     /**
      * @Route("", name="admin.program-additional.index", methods={"GET"})
      *
-     * @param Request $request
-     * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -68,8 +65,8 @@ class ProgramAdditionalController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.program-additional.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     *
      * @param Request $request
-     * @return Response
      */
     public function view(int $id): Response
     {
@@ -94,8 +91,6 @@ class ProgramAdditionalController extends AbstractController
 
     /**
      * @Route("", name="admin.program-additional.create", methods={"POST"})
-     * @param Request $request
-     * @return Response
      */
     public function create(Request $request): Response
     {

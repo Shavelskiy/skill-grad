@@ -25,7 +25,7 @@ class SiteController extends AbstractController
 
     /**
      * @Route("/", name="site.index")
-     * @return Response
+     *
      * @throws CacheException
      * @throws ErrorException
      * @throws InvalidArgumentException
@@ -38,12 +38,11 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return array
      * @throws ErrorException
      * @throws InvalidArgumentException
      * @throws CacheException
      */
-    protected function getArticles():array
+    protected function getArticles(): array
     {
         $result = function () {
             $result = [];

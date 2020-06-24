@@ -21,6 +21,7 @@ class LocationRepository extends ServiceEntityRepository
 
     /**
      * @param $id
+     *
      * @return Location
      */
     public function findById($id): object
@@ -35,11 +36,11 @@ class LocationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $page
+     * @param int        $page
      * @param array|null $order
-     * @param int $pageItems
+     * @param int        $pageItems
      * @param array|null $serach
-     * @return PaginatorResult
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

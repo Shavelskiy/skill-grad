@@ -33,7 +33,6 @@ class SearchHelper
         $pageItemCount = (int)$request->get('pageItemCount', 0);
 
         $tableSearch->setPageItemCount($pageItemCount > 0 ? $pageItemCount : self::DEFAULT_PAGE_ITEMS);
-
     }
 
     private static function setOrder(Request $request, SearchQuery $tableSearch, array $entityClasses): void

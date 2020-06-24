@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Program;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class ProgramAdditional
+class ProgramInclude
 {
     /**
      * @ORM\Id()
@@ -30,7 +30,6 @@ class ProgramAdditional
      * @ORM\Column(type="boolean")
      */
     private bool $active;
-
 
     public function getId(): int
     {

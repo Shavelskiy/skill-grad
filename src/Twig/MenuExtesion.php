@@ -30,7 +30,6 @@ class MenuExtesion extends AbstractExtension
     }
 
     /**
-     * @return array
      * @throws CacheException
      * @throws ErrorException
      * @throws InvalidArgumentException
@@ -52,7 +51,6 @@ class MenuExtesion extends AbstractExtension
     }
 
     /**
-     * @return array
      * @throws CacheException
      * @throws InvalidArgumentException
      * @throws ErrorException

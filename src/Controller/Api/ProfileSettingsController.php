@@ -30,8 +30,6 @@ class ProfileSettingsController extends AbstractController
 
     /**
      * @Route("/", methods={"GET"}, name="get.profile.settings")
-     *
-     * @return Response
      */
     public function getProfileSettings(): Response
     {
@@ -47,10 +45,6 @@ class ProfileSettingsController extends AbstractController
 
     /**
      * @Route("/", methods={"POST"}, name="save.profile.settings")
-     *
-     * @param Request $request
-     *
-     * @return Response
      */
     public function saveProfileSettings(Request $request): Response
     {

@@ -2,8 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
-    ->exclude('var')
-;
+    ->exclude('var');
 
 return PhpCsFixer\Config::create()
     ->setRules([
@@ -12,6 +11,6 @@ return PhpCsFixer\Config::create()
         'yoda_style' => false,
         'concat_space' => ['spacing' => 'one'],
         'cast_spaces' => ['space' => 'none'],
+        'blank_line_before_statement' => false,
     ])
-    ->setFinder($finder)
-;
+    ->setFinder($finder);

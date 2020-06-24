@@ -59,7 +59,6 @@ class Provider
      */
     private ProviderRequisites $providerRequisites;
 
-
     public function __construct()
     {
         $this->categoryGroups = new ArrayCollection();

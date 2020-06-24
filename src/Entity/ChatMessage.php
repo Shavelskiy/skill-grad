@@ -64,7 +64,6 @@ class ChatMessage
     public function setUser(User $user): self
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -76,7 +75,6 @@ class ChatMessage
     public function setRecipient(?User $recipient): self
     {
         $this->recipient = $recipient;
-
         return $this;
     }
 
@@ -88,7 +86,6 @@ class ChatMessage
     public function setMessage($message): self
     {
         $this->message = $message;
-
         return $this;
     }
 
@@ -100,7 +97,6 @@ class ChatMessage
     public function setDateSend(DateTimeInterface $dateSend): self
     {
         $this->dateSend = $dateSend;
-
         return $this;
     }
 
@@ -112,7 +108,6 @@ class ChatMessage
     public function setViewed(bool $viewed): self
     {
         $this->viewed = $viewed;
-
         return $this;
     }
 }

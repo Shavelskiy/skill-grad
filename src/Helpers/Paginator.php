@@ -50,7 +50,6 @@ class Paginator
     }
 
     /**
-     * @return PaginatorResult
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

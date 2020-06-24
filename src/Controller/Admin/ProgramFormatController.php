@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\ProgramFormat;
+use App\Entity\Program\ProgramFormat;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramFormatRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -23,16 +23,13 @@ class ProgramFormatController extends AbstractController
 
     public function __construct(
         ProgramFormatRepository $programFormatRepository
-    )
-    {
+    ) {
         $this->programFormatRepository = $programFormatRepository;
     }
 
     /**
      * @Route("", name="admin.program-format.index", methods={"GET"})
      *
-     * @param Request $request
-     * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
@@ -68,8 +65,8 @@ class ProgramFormatController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.program-format.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     *
      * @param Request $request
-     * @return Response
      */
     public function view(int $id): Response
     {
@@ -94,8 +91,6 @@ class ProgramFormatController extends AbstractController
 
     /**
      * @Route("", name="admin.program-format.create", methods={"POST"})
-     * @param Request $request
-     * @return Response
      */
     public function create(Request $request): Response
     {

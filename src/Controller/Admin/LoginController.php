@@ -16,6 +16,5 @@ class LoginController extends AbstractController
      */
     public function login(): Response
     {
-
     }
 }

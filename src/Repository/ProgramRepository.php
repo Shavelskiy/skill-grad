@@ -2,10 +2,7 @@
 
 namespace App\Repository;
 
-use App\Dto\PaginatorResult;
-use App\Entity\Program;
-use App\Entity\User;
-use App\Helpers\Paginator;
+use App\Entity\Program\Program;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -15,6 +12,4 @@ class ProgramRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Program::class);
     }
-
-
 }

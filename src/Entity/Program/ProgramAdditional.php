@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Program;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramFormatRepository")
+ * @ORM\Entity()
  */
-class ProgramFormat
+class ProgramAdditional
 {
     /**
      * @ORM\Id()
@@ -19,7 +19,7 @@ class ProgramFormat
     /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    private string $title;
 
     /**
      * @ORM\Column(type="integer")
@@ -42,14 +42,14 @@ class ProgramFormat
         return $this;
     }
 
-    public function getName(): string
+    public function getTitle(): string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
         return $this;
     }
 

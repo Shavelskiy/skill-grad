@@ -39,7 +39,6 @@ class Tag
     public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -51,7 +50,6 @@ class Tag
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
-
         return $this;
     }
 }

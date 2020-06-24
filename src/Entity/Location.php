@@ -65,7 +65,6 @@ class Location
      */
     private Collection $childLocations;
 
-
     public function __construct()
     {
         $this->childLocations = new ArrayCollection();

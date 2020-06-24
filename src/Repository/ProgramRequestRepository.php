@@ -3,10 +3,12 @@
 namespace App\Repository;
 
 use App\Dto\PaginatorResult;
-use App\Entity\Program;
-use App\Entity\ProgramRequest;
+use App\Entity\Program\Program;
+use App\Entity\Program\ProgramRequest;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProgramRequestRepository extends ServiceEntityRepository
@@ -17,12 +19,8 @@ class ProgramRequestRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Program $program
-     *
-     * @return int
-     *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getProgramRequestsCount(Program $program): int
     {
@@ -35,12 +33,8 @@ class ProgramRequestRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Program $program
-     *
-     * @return int
-     *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getNewProgramRequestsCount(Program $program): int
     {
@@ -57,14 +51,10 @@ class ProgramRequestRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Program $program
-     * @param int $page
-     * @param int $pageItems
-     *
      * @return Paginator
      *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getPaginatorProgramItems(Program $program, int $page = 1, int $pageItems = 10): PaginatorResult
     {

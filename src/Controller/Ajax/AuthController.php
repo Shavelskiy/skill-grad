@@ -55,10 +55,6 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/reset-password", name="ajax.auth.reset.password")
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function resetPassword(Request $request): JsonResponse
     {
@@ -83,10 +79,6 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/new-password", name="ajax.auth.new.password")
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function newPassword(Request $request): JsonResponse
     {
@@ -117,10 +109,6 @@ class AuthController extends AbstractController
 
     /**
      * @Route("/register", name="ajax.auth.register")
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function registerAction(Request $request): JsonResponse
     {

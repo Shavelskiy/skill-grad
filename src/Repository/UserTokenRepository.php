@@ -18,8 +18,6 @@ class UserTokenRepository extends ServiceEntityRepository
 
     /**
      * @param $token
-     * @param string $type
-     * @return UserToken
      */
     public function findByTokenAndType($token, string $type): UserToken
     {
