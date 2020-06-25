@@ -4,16 +4,19 @@ import css from './radion-button.scss?module'
 import cn from 'classnames'
 
 
-const RadioButton = ({children, selected = false, click}) => {
+const RadioButton = ({children, selected = false, checked = false, click}) => {
 
   return (
-    <div className={css.radio}>
+    <div className={css.radio} onClick={click}>
       <span
-        onClick={click}
-        className={cn(css.point, {[css.selected]: selected})}
+        className={cn(
+          css.point,
+          {[css.selected]: selected},
+          {[css.checked]: checked},
+        )}
       >
       </span>
-      <span className={css.value}>{children}</span>
+      <div className={css.value}>{children}</div>
     </div>
   )
 }

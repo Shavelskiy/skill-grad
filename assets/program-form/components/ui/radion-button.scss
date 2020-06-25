@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 10px;
+  cursor: pointer;
 
   .point {
     display: block;
@@ -23,6 +24,17 @@
       border-radius: 100px;
       position: absolute;
       background-color: #208abd;
+    }
+
+    &.checked:before {
+      content: '';
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      top: 0;
+      left: 24%;
+      background-size: 100%;
+      background-image: url("./../../img/check.svg");
     }
   }
 

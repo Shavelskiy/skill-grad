@@ -24,13 +24,13 @@ export const TextInput = ({placeholder = '', value, disabled = false, required =
   )
 }
 
-export const NumberInput = ({placeholder = '', value, disabled = false, required = false, setValue, small = false}) => {
+export const NumberInput = ({placeholder = '', value, maxValue = 999999, disabled = false, required = false, setValue, small = false}) => {
   const onChange = (event) => {
     const eventValue = Number(event.target.value.replace(/[^.\d]+/g, ''))
     if (eventValue <= 0) {
       setValue(0)
-    } else if (eventValue > 999999) {
-      setValue(999999)
+    } else if (eventValue > maxValue) {
+      setValue(maxValue)
     } else {
       setValue(String(eventValue))
     }

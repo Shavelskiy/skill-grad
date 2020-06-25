@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { DURATION_HOURS, DURATION_DAYS, OTHER } from '../../utils/field-types'
@@ -18,6 +18,20 @@ const Duration = () => {
   const [hourValue, setHourValue] = useState(0)
   const [dayValue, setDayValue] = useState(0)
   const [otherValue, setOtherValue] = useState('')
+
+  useEffect(() => {
+    switch (duration.type) {
+      case DURATION_HOURS:
+        dispatch(selectDuration(DURATION_HOURS, hourValue))
+        break
+      case DURATION_DAYS:
+        dispatch(selectDuration(DURATION_DAYS, dayValue))
+        break
+      case OTHER:
+        dispatch(selectDuration(OTHER, otherValue))
+        break
+    }
+  }, [hourValue, dayValue, otherValue])
 
   return (
     <>

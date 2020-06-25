@@ -7,8 +7,8 @@ import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/
 import { TextInput, Textarea } from '../ui/input'
 import Select from '../ui/select'
 import Block from '../ui/block'
-import Teachers from '../teachers/teachers'
-import Duration from '../duration/duration'
+import Teachers from './teachers'
+import Duration from './duration'
 
 import css from './description.scss?module'
 import cn from 'classnames'

@@ -32,7 +32,7 @@ trait Design
     protected array $additional;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="text")
      */
     protected string $advantages;
 

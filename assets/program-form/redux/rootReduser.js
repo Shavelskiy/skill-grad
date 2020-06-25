@@ -3,9 +3,15 @@ import {
   SET_CATEGORY,
   SET_ANNOTATION,
   SET_DETAIL_TEXT,
-  ADD_TEACHER, DELETE_TEACHER, SET_TEACHER_NAME, SET_TEACHER_IMAGE, DELETE_TEACHER_IMAGE, SELECT_DURATION,
+  ADD_TEACHER,
+  DELETE_TEACHER,
+  SET_TEACHER_NAME,
+  SET_TEACHER_IMAGE,
+  DELETE_TEACHER_IMAGE,
+  SELECT_DURATION,
+  SELECT_FORMAT, SELECT_ADDITIONAL, SELECT_KNOWLEDGE_CHECK, SET_ADVANTAGES, SET_PROCESS_DESCRIPTION, SELECT_DESIGN,
 } from './types'
-import { DURATION_HOURS } from '../utils/field-types'
+import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
 
 const initialState = {
@@ -17,7 +23,25 @@ const initialState = {
   duration: {
     type: DURATION_HOURS,
     value: 0,
-  }
+  },
+  format: {
+    id: 0,
+    otherValue: '',
+  },
+  processDescription: '',
+  programDesign: {
+    type: DESIGN_SIMPLE,
+    value: [0, 0],
+  },
+  knowledgeCheck: {
+    id: 0,
+    otherValue: '',
+  },
+  additional: {
+    values: [],
+    otherValue: '',
+  },
+  advantages: '',
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -55,7 +79,19 @@ export const rootReducer = (state = initialState, action) => {
         })
       }
     case SELECT_DURATION:
-      return {...state, duration: {type: action.payload.type, value: action.payload.value}}
+      return {...state, duration: action.payload}
+    case SELECT_FORMAT:
+      return {...state, format: action.payload}
+    case SET_PROCESS_DESCRIPTION:
+      return {...state, processDescription: action.payload}
+    case SELECT_DESIGN:
+      return {...state, programDesign: action.payload}
+    case SELECT_KNOWLEDGE_CHECK:
+      return {...state, knowledgeCheck: action.payload}
+    case SELECT_ADDITIONAL:
+      return {...state, additional: action.payload}
+    case SET_ADVANTAGES:
+      return {...state, advantages: action.payload}
     default:
       return state
   }
