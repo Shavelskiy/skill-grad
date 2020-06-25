@@ -10,7 +10,9 @@ import realoadImg from '../../img/reload.svg'
 import deleteTeacherImg from '../../img/delete.svg'
 
 
-const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
+const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update = false, buttonText}) => {
+  const imageId = `add-new-provider-${update ? 'update' : 'create'}`
+
   const handleUploadImage = (event) => {
     const file = event.target.files[0]
 
@@ -22,7 +24,6 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
   }
 
   const renderImage = () => {
-    console.log(provider)
     if (provider.image !== null) {
       return (
         <img src={URL.createObjectURL(provider.image)}/>
@@ -30,7 +31,7 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
     }
 
     return (
-      <label className={css.noImage} htmlFor={'add-new-provider'}>
+      <label className={css.noImage} htmlFor={imageId}>
         <img src={noImage}/>
       </label>
     )
@@ -43,7 +44,7 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
 
     return (
       <div className={css.actions}>
-        <label htmlFor={'add-new-provider'} className={css.reload}>
+        <label htmlFor={imageId} className={css.reload}>
           <img src={realoadImg}/>
         </label>
         <img src={deleteTeacherImg} onClick={() => setProvider({...provider, image: null})}/>
@@ -55,14 +56,14 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
     <Modal
       active={active}
       close={close}
-      title={'Добавить нового провайдера'}
+      title={update ? 'Редактирование провайдера' : 'Добавить нового провайдера'}
     >
       <div className={css.newProviderPopup}>
         <div className={css.mainContainer}>
           <div className={css.logoWrap}>
             {renderImage()}
             <input
-              id={'add-new-provider'}
+              id={imageId}
               type="file"
               value=""
               onChange={handleUploadImage}
@@ -95,8 +96,9 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
         </div>
         <div className={css.buttonContainer}>
           <Button
-            text={'Добавить'}
-            red={true}
+            text={update ? 'Обновить' : 'Добавить'}
+            red={!update}
+            blue={update}
             click={sumbit}
           />
         </div>

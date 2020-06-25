@@ -1,28 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { addNewProvider } from '../../redux/actions'
+import { useDispatch } from 'react-redux'
+import { updateNewProvider } from '../../redux/actions'
 
 import ProviderFormPopup from './provider-form-popup'
 
 
-const ProviderUpdate = ({active, close, providerKey}) => {
-
-
+const ProviderUpdate = ({active, close, providerData = null}) => {
   const dispatch = useDispatch()
-  const [provider, setProvider] = useSelector(state => state.providers.filter((item, key) => key === providerKey)[0])
-  // const [tmpProvider, setTmpProvider] = useState(provider)
 
+  const [newProvider, setNewProvider] = useState(null)
 
   const handleSubmit = () => {
-    // console.log(tmpProvider)
-    // dispatch(addNewProvider(provider))
-    // setProvider(emptyProvider)
-    // close()
+    dispatch(updateNewProvider(newProvider, providerData.key))
+    close()
   }
 
-  console.log(provider)
-  if (!provider) {
+  useEffect(() => {
+    if (providerData === null) {
+      return
+    }
+    setNewProvider(providerData.provider)
+  }, [providerData])
+
+  if (providerData === null || newProvider === null) {
     return <></>
   }
 
@@ -30,9 +31,10 @@ const ProviderUpdate = ({active, close, providerKey}) => {
     <ProviderFormPopup
       active={active}
       close={close}
-      provider={provider}
-      setProvider={setTmpProvider}
+      provider={newProvider}
+      setProvider={setNewProvider}
       sumbit={handleSubmit}
+      update={true}
     />
   )
 }

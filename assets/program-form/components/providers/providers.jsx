@@ -28,7 +28,7 @@ const Providers = () => {
   const [newProviderPopupActive, setNewProviderPopupActive] = useState(false)
   const [updateProviderPopupActive, setUpdateProviderPopupActive] = useState(false)
 
-  const [updatedProviderKey, setUpdatedProviderKey] = useState(null)
+  const [updatedProvider, setUpdatedProvider] = useState(null)
 
 
   const renderTooltip = (provider) => {
@@ -47,7 +47,7 @@ const Providers = () => {
             <img
               src={editImage}
               onClick={() => {
-                setUpdatedProviderKey(key)
+                setUpdatedProvider({key: key, provider: provider})
                 setUpdateProviderPopupActive(true)
               }}
             />
@@ -107,11 +107,11 @@ const Providers = () => {
         close={() => setNewProviderPopupActive(false)}
       />
 
-      {/*<ProviderUpdate*/}
-      {/*  active={updateProviderPopupActive}*/}
-      {/*  close={() => setUpdateProviderPopupActive(false)}*/}
-      {/*  providerKey={updatedProviderKey}*/}
-      {/*/>*/}
+      <ProviderUpdate
+        active={updateProviderPopupActive}
+        close={() => setUpdateProviderPopupActive(false)}
+        providerData={updatedProvider}
+      />
 
       <div className={css.teacherContainer}>
         {renderProviderList()}

@@ -15,7 +15,7 @@ import {
   SET_ADVANTAGES,
   SET_PROCESS_DESCRIPTION,
   SELECT_DESIGN,
-  ADD_NEW_PROVIDER, DELETE_PROVIDER,
+  ADD_NEW_PROVIDER, DELETE_PROVIDER, UPDATE_NEW_PROVIDER,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -101,6 +101,12 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, advantages: action.payload}
     case ADD_NEW_PROVIDER:
       return {...state, providers: [...state.providers, action.payload]}
+    case UPDATE_NEW_PROVIDER:
+      return {
+        ...state, providers: state.providers.map((provider, key) => {
+        return key === action.payload.key ? action.payload.provider : provider
+        })
+      }
     case DELETE_PROVIDER:
       return {...state, providers: state.providers.filter((item, key) => key !== action.payload)}
     default:

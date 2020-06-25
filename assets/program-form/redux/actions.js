@@ -15,7 +15,7 @@ import {
   SET_PROCESS_DESCRIPTION,
   SET_ADVANTAGES,
   SELECT_DESIGN,
-  ADD_NEW_PROVIDER, DELETE_PROVIDER,
+  ADD_NEW_PROVIDER, DELETE_PROVIDER, UPDATE_NEW_PROVIDER,
 } from './types'
 
 export function setName(name) {
@@ -159,6 +159,16 @@ export function addNewProvider(provider) {
   return {
     type: ADD_NEW_PROVIDER,
     payload: {...provider, type: 'new'},
+  }
+}
+
+export function updateNewProvider(provider, key) {
+  return {
+    type: UPDATE_NEW_PROVIDER,
+    payload: {
+      provider: provider,
+      key: key,
+    }
   }
 }
 
