@@ -9,7 +9,13 @@ import {
   SET_TEACHER_IMAGE,
   DELETE_TEACHER_IMAGE,
   SELECT_DURATION,
-  SELECT_FORMAT, SELECT_ADDITIONAL, SELECT_KNOWLEDGE_CHECK, SET_ADVANTAGES, SET_PROCESS_DESCRIPTION, SELECT_DESIGN,
+  SELECT_FORMAT,
+  SELECT_ADDITIONAL,
+  SELECT_KNOWLEDGE_CHECK,
+  SET_ADVANTAGES,
+  SET_PROCESS_DESCRIPTION,
+  SELECT_DESIGN,
+  ADD_NEW_PROVIDER, DELETE_PROVIDER,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -42,6 +48,7 @@ const initialState = {
     otherValue: '',
   },
   advantages: '',
+  providers: [{name: 'fffff', image: null, link: '', comment: '', type: 'new'}],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -92,6 +99,10 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, additional: action.payload}
     case SET_ADVANTAGES:
       return {...state, advantages: action.payload}
+    case ADD_NEW_PROVIDER:
+      return {...state, providers: [...state.providers, action.payload]}
+    case DELETE_PROVIDER:
+      return {...state, providers: state.providers.filter((item, key) => key !== action.payload)}
     default:
       return state
   }

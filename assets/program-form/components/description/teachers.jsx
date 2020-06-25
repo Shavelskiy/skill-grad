@@ -6,7 +6,7 @@ import { addTeacher, deleteTeacher, setTeacherName, setTeacherImage, deleteTeach
 import css from './teachers.scss?module'
 import { Textarea } from '../ui/input'
 
-import deleteImage from './../../img/teacher-delete.svg'
+import deleteImage from './../../img/delete.svg'
 import addImage from './../../img/teacher-add.svg'
 import noImage from './../../img/teacher-no-img.svg'
 import realoadImg from './../../img/reload.svg'
@@ -91,7 +91,7 @@ const Teachers = () => {
   }
 
   const renderAddButton = () => {
-    if (teachers.length > 5) {
+    if (teachers.length > 3) {
       return
     }
 

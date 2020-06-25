@@ -22,8 +22,8 @@ const App = () => {
         <ProgressBar/>
       </div>
       <div className={css.form}>
-        <Description/>
-        <Design/>
+        {/*<Description/>*/}
+        {/*<Design/>*/}
         <Providers/>
         <Listeners/>
         <Result/>

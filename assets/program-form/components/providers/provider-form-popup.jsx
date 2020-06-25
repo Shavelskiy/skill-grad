@@ -1,0 +1,108 @@
+import React  from 'react'
+
+import Modal from '../ui/modal'
+import { Textarea, TextInput } from '../ui/input'
+import Button from '../ui/button'
+
+import css from './new-provider-popup.scss?module'
+import noImage from './../../img/provider-image.png'
+import realoadImg from '../../img/reload.svg'
+import deleteTeacherImg from '../../img/delete.svg'
+
+
+const ProviderFormPopup = ({active, close, provider, setProvider, sumbit}) => {
+  const handleUploadImage = (event) => {
+    const file = event.target.files[0]
+
+    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+      return
+    }
+
+    setProvider({...provider, image: file})
+  }
+
+  const renderImage = () => {
+    console.log(provider)
+    if (provider.image !== null) {
+      return (
+        <img src={URL.createObjectURL(provider.image)}/>
+      )
+    }
+
+    return (
+      <label className={css.noImage} htmlFor={'add-new-provider'}>
+        <img src={noImage}/>
+      </label>
+    )
+  }
+
+  const renderImageActions = () => {
+    if (provider.image === null) {
+      return <></>
+    }
+
+    return (
+      <div className={css.actions}>
+        <label htmlFor={'add-new-provider'} className={css.reload}>
+          <img src={realoadImg}/>
+        </label>
+        <img src={deleteTeacherImg} onClick={() => setProvider({...provider, image: null})}/>
+      </div>
+    )
+  }
+
+  return (
+    <Modal
+      active={active}
+      close={close}
+      title={'Добавить нового провайдера'}
+    >
+      <div className={css.newProviderPopup}>
+        <div className={css.mainContainer}>
+          <div className={css.logoWrap}>
+            {renderImage()}
+            <input
+              id={'add-new-provider'}
+              type="file"
+              value=""
+              onChange={handleUploadImage}
+            />
+            {renderImageActions()}
+          </div>
+          <div className={css.mainInfo}>
+            <div className={css.fieldWrap}>
+              <TextInput
+                placeholder={'Название организации'}
+                value={provider.name}
+                setValue={(name) => setProvider({...provider, name: name})}
+              />
+            </div>
+            <div className={css.fieldWrap}>
+              <TextInput
+                placeholder={'Ссылка на интернет-ресурс организации'}
+                value={provider.link}
+                setValue={(link) => setProvider({...provider, link: link})}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={css.commentContainer}>
+          <Textarea
+            placeholder={'Комментарий'}
+            value={provider.comment}
+            setValue={(comment) => setProvider({...provider, comment: comment})}
+          />
+        </div>
+        <div className={css.buttonContainer}>
+          <Button
+            text={'Добавить'}
+            red={true}
+            click={sumbit}
+          />
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
+export default ProviderFormPopup

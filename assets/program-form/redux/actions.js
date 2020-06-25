@@ -9,7 +9,13 @@ import {
   SET_TEACHER_IMAGE,
   DELETE_TEACHER_IMAGE,
   SELECT_DURATION,
-  SELECT_FORMAT, SELECT_KNOWLEDGE_CHECK, SELECT_ADDITIONAL, SET_PROCESS_DESCRIPTION, SET_ADVANTAGES, SELECT_DESIGN,
+  SELECT_FORMAT,
+  SELECT_KNOWLEDGE_CHECK,
+  SELECT_ADDITIONAL,
+  SET_PROCESS_DESCRIPTION,
+  SET_ADVANTAGES,
+  SELECT_DESIGN,
+  ADD_NEW_PROVIDER, DELETE_PROVIDER,
 } from './types'
 
 export function setName(name) {
@@ -146,5 +152,19 @@ export function setAdvantages(advantages) {
   return {
     type: SET_ADVANTAGES,
     payload: advantages,
+  }
+}
+
+export function addNewProvider(provider) {
+  return {
+    type: ADD_NEW_PROVIDER,
+    payload: {...provider, type: 'new'},
+  }
+}
+
+export function deleteProvider(key) {
+  return {
+    type: DELETE_PROVIDER,
+    payload: key,
   }
 }
