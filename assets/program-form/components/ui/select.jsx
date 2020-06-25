@@ -36,6 +36,14 @@ const Select = ({options, value, setValue, placeholder = ''}) => {
     setOpened(false)
   }
 
+  const handleTitleClick = () => {
+    if (options.length < 1) {
+      return
+    }
+
+    setOpened(!opened)
+  }
+
   const getTitle = () => {
     const selectedItems = options.filter((item) => {
       return item.value === value
@@ -48,10 +56,14 @@ const Select = ({options, value, setValue, placeholder = ''}) => {
     <div ref={ref} className={
       cn(
         css.select,
+        {[css.disabled]: options.length < 1},
         {[css.opened]: opened},
       )}
     >
-      <div className={css.selectedOption} onClick={() => setOpened(!opened)}>
+      <div
+        className={css.selectedOption}
+        onClick={handleTitleClick}
+      >
         <span> {getTitle()}</span>
         <img src={arrow} className={css.icon}/>
       </div>

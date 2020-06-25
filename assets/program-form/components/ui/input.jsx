@@ -19,10 +19,14 @@ export const TextInput = ({placeholder = '', value, disabled = false, required =
   )
 }
 
-export const Textarea = ({placeholder = '', value, setValue}) => {
+export const Textarea = ({placeholder = '', value, setValue, disableResize = true, large = false}) => {
   return (
     <textarea
-      className={css.textarea}
+      className={cn(
+        css.textarea,
+        {[css.resizeDisabled]: disableResize},
+        {[css.large]: large},
+      )}
       placeholder={placeholder}
       value={value}
       onChange={(event) => setValue(event.target.value)}

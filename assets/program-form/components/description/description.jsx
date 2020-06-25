@@ -25,11 +25,16 @@ const Description = () => {
       title: 'Дизайн',
       value: 2,
     },
-    {
-      title: 'История',
-      value: 3,
-    },
   ]
+
+  const getCategoriesOptions = (key) => {
+    const selectedCategories = useSelector(state => state.categories)
+    return options.filter(option => {
+      return selectedCategories.filter((selectedCategory, valueKey) => {
+        return (valueKey !== key) && (selectedCategory === option.value)
+      }).length < 1
+    })
+  }
 
   return (
     <Block title={DESCRIPTION}>
@@ -47,7 +52,7 @@ const Description = () => {
                 placeholder={'Выбрать категорию'}
                 value={useSelector(state => state.categories[key])}
                 setValue={(value) => dispatch(setCategory(key, value))}
-                options={options}
+                options={getCategoriesOptions(key)}
               />
             </div>
           )

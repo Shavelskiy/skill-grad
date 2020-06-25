@@ -7,4 +7,16 @@
   .form {
     padding: 0 5vw;
   }
+
+  h3 {
+    color: #3d3d3d;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 15px;
+  }
+}
+
+input[type="file"] {
+  display: none;
 }
