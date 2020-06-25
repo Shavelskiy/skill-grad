@@ -23,7 +23,6 @@ const SimpleMultiRadio = ({title = '', options, selectedValues, setValues}) => {
 
   const renderOptions = () => {
     return options.map((item, key) => {
-      console.log(selectedValues, selectedValues.values)
       return (
         <RadioButton
           key={key}
