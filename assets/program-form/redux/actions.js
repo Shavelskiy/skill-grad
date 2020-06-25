@@ -3,7 +3,7 @@ import {
   SET_CATEGORY,
   SET_ANNOTATION,
   SET_DETAIL_TEXT,
-  ADD_TEACHER, DELETE_TEACHER, SET_TEACHER_NAME, SET_TEACHER_IMAGE, DELETE_TEACHER_IMAGE,
+  ADD_TEACHER, DELETE_TEACHER, SET_TEACHER_NAME, SET_TEACHER_IMAGE, DELETE_TEACHER_IMAGE, SELECT_DURATION,
 } from './types'
 
 export function setName(name) {
@@ -75,6 +75,16 @@ export function deleteTeacherImage(key) {
     type: DELETE_TEACHER_IMAGE,
     payload: {
       key: key,
+    },
+  }
+}
+
+export function selectDuration(type, value) {
+  return {
+    type: SELECT_DURATION,
+    payload: {
+      type: type,
+      value: value,
     },
   }
 }

@@ -4,8 +4,16 @@
     width: 100%;
     border: none;
     background-color: #f3f3f3;
+    padding: 0 18px;
+    height: 40px;
+  }
+
+  &.big input {
     padding: 0 30px;
-    height: 50px;
+  }
+
+  &.small {
+    width: 40%;
   }
 
   &.required {

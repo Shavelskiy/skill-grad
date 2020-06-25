@@ -3,8 +3,9 @@ import {
   SET_CATEGORY,
   SET_ANNOTATION,
   SET_DETAIL_TEXT,
-  ADD_TEACHER, DELETE_TEACHER, SET_TEACHER_NAME, SET_TEACHER_IMAGE, DELETE_TEACHER_IMAGE,
+  ADD_TEACHER, DELETE_TEACHER, SET_TEACHER_NAME, SET_TEACHER_IMAGE, DELETE_TEACHER_IMAGE, SELECT_DURATION,
 } from './types'
+import { DURATION_HOURS } from '../utils/field-types'
 
 
 const initialState = {
@@ -13,6 +14,10 @@ const initialState = {
   annotation: '',
   detailText: '',
   teachers: [],
+  duration: {
+    type: DURATION_HOURS,
+    value: 0,
+  }
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -49,6 +54,8 @@ export const rootReducer = (state = initialState, action) => {
           return key === action.payload.key ? {image: null, name: teacher.name} : teacher
         })
       }
+    case SELECT_DURATION:
+      return {...state, duration: {type: action.payload.type, value: action.payload.value}}
     default:
       return state
   }

@@ -8,6 +8,7 @@ import { TextInput, Textarea } from '../ui/input'
 import Select from '../ui/select'
 import Block from '../ui/block'
 import Teachers from '../teachers/teachers'
+import Duration from '../duration/duration'
 
 import css from './description.scss?module'
 import cn from 'classnames'
@@ -42,6 +43,7 @@ const Description = () => {
         value={useSelector(state => state.name)}
         placeholder={'Название программы обучения'}
         required={true}
+        big={true}
         setValue={(name) => dispatch(setName(name))}
       />
       <div className={cn(css.categroies, css.inputContainer)}>
@@ -74,6 +76,9 @@ const Description = () => {
       </div>
       <div className={css.inputContainer}>
         <Teachers/>
+      </div>
+      <div className={css.inputContainer}>
+        <Duration/>
       </div>
     </Block>
   )
