@@ -163,7 +163,7 @@ export function setAdvantages(advantages) {
 export function addNewProvider(provider) {
   return {
     type: ADD_NEW_PROVIDER,
-    payload: {...provider, type: 'new'},
+    payload: {...provider},
   }
 }
 

@@ -52,7 +52,7 @@ const initialState = {
     otherValue: '',
   },
   advantages: '',
-  newProviders: [{name: 'fffff', image: null, link: '', comment: '', type: 'new'}],
+  newProviders: [{name: 'fffff', image: null, link: '', comment: ''}],
   selectedProvidersIds: [],
   providerList: [],
 }

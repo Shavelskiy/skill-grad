@@ -22,10 +22,13 @@ import editImage from './../../img/pencil.svg'
 const Providers = () => {
   const dispatch = useDispatch()
 
+  const providerList = useSelector(state => state.providerList)
+
   const newProviders = useSelector(state => state.newProviders)
+  const selectedProviderIds = useSelector(state => state.selectedProvidersIds)
 
   const [controlPopupActive, setControlPopupActive] = useState(false)
-  const [providersPopupActive, setProvidersPopupActive] = useState(true)
+  const [providersPopupActive, setProvidersPopupActive] = useState(false)
   const [newProviderPopupActive, setNewProviderPopupActive] = useState(false)
   const [updateProviderPopupActive, setUpdateProviderPopupActive] = useState(false)
 
@@ -39,8 +42,8 @@ const Providers = () => {
     return <div className={css.tooltip}>Ссылка ведет на другой ресурс</div>
   }
 
-  const renderActions = (provider, key) => {
-    switch (provider.type) {
+  const renderActions = (provider, key, type) => {
+    switch (type) {
       case 'new':
         return (
           <div className={css.actions}>
@@ -64,23 +67,27 @@ const Providers = () => {
     }
   }
 
-  const renderPorviderImage = (provider) => {
+  const renderPorviderImage = (provider, type) => {
     if (provider.image === null) {
       return <img src={noImage}/>
     }
 
-    return <img src={URL.createObjectURL(provider.image)}/>
+    switch (type) {
+      case 'new':
+        return <img src={URL.createObjectURL(provider.image)}/>
+      case 'list':
+        return <img src={provider.image}/>
+      default:
+        return <img src={noImage}/>
+    }
   }
 
   const renderProviderList = (providers, type) => {
     return providers.map((provider, key) => {
-      if (provider.image !== null) {
-
-      }
       return (
         <div key={key} className={css.teacher}>
           <div>
-            {renderPorviderImage(provider)}
+            {renderPorviderImage(provider, type)}
           </div>
           <div className={css.info}>
             <div className={cn(css.title, {[css.outside]: type === 'new'})}>
@@ -88,7 +95,7 @@ const Providers = () => {
                 {provider.name}
                 {renderTooltip(provider)}
               </a>
-              {renderActions(provider, key)}
+              {renderActions(provider, key, type)}
             </div>
             <div className={css.comment}>{provider.comment}</div>
           </div>
@@ -111,7 +118,7 @@ const Providers = () => {
       />
 
       <ChooseProviderPopup
-        selectedProvidersIds={useSelector(state => state.selectedProvidersIds)}
+        selectedProvidersIds={selectedProviderIds}
         active={providersPopupActive}
         close={() => setProvidersPopupActive(false)}
       />
@@ -128,7 +135,8 @@ const Providers = () => {
       />
 
       <div className={css.teacherContainer}>
-        {renderProviderList(newProviders)}
+        {renderProviderList(newProviders, 'new')}
+        {renderProviderList(providerList.filter(provider => selectedProviderIds.indexOf(provider.id) !== -1), 'list')}
       </div>
     </Block>
   )
