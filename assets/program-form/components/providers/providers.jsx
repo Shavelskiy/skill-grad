@@ -3,33 +3,33 @@ import React, { useState } from 'react'
 import { PROVIDERS } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteProvider } from '../../redux/actions'
+import { deleteNewProvider } from '../../redux/actions'
 
 import Block from '../ui/block'
 import ControlPopup from './control-popup'
 import ProviderCreate from './create-provider'
 import ChooseProviderPopup from './choose-provider-popup'
+import ProviderUpdate from './provider-update'
 
 import css from './providers.scss?module'
 import cn from 'classnames'
 
+import noImage from './../../img/provider-image.png'
 import deleteImage from './../../img/delete.svg'
 import editImage from './../../img/pencil.svg'
-import ProviderUpdate from './provider-update'
 
 
 const Providers = () => {
   const dispatch = useDispatch()
 
-  const providers = useSelector(state => state.providers)
+  const newProviders = useSelector(state => state.newProviders)
 
   const [controlPopupActive, setControlPopupActive] = useState(false)
-  const [providersPopupActive, setProvidersPopupActive] = useState(false)
+  const [providersPopupActive, setProvidersPopupActive] = useState(true)
   const [newProviderPopupActive, setNewProviderPopupActive] = useState(false)
   const [updateProviderPopupActive, setUpdateProviderPopupActive] = useState(false)
 
   const [updatedProvider, setUpdatedProvider] = useState(null)
-
 
   const renderTooltip = (provider) => {
     if (provider.type !== 'new') {
@@ -53,7 +53,7 @@ const Providers = () => {
             />
             <img
               src={deleteImage}
-              onClick={() => dispatch(deleteProvider(key))}
+              onClick={() => dispatch(deleteNewProvider(key))}
             />
           </div>
         )
@@ -64,13 +64,26 @@ const Providers = () => {
     }
   }
 
-  const renderProviderList = () => {
+  const renderPorviderImage = (provider) => {
+    if (provider.image === null) {
+      return <img src={noImage}/>
+    }
+
+    return <img src={URL.createObjectURL(provider.image)}/>
+  }
+
+  const renderProviderList = (providers, type) => {
     return providers.map((provider, key) => {
+      if (provider.image !== null) {
+
+      }
       return (
         <div key={key} className={css.teacher}>
-          {/*<img src={URL.createObjectURL(provider.image)}/>*/}
+          <div>
+            {renderPorviderImage(provider)}
+          </div>
           <div className={css.info}>
-            <div className={cn(css.title, {[css.outside]: provider.type === 'new'})}>
+            <div className={cn(css.title, {[css.outside]: type === 'new'})}>
               <a target='_blank' href={provider.link}>
                 {provider.name}
                 {renderTooltip(provider)}
@@ -98,6 +111,7 @@ const Providers = () => {
       />
 
       <ChooseProviderPopup
+        selectedProvidersIds={useSelector(state => state.selectedProvidersIds)}
         active={providersPopupActive}
         close={() => setProvidersPopupActive(false)}
       />
@@ -114,7 +128,7 @@ const Providers = () => {
       />
 
       <div className={css.teacherContainer}>
-        {renderProviderList()}
+        {renderProviderList(newProviders)}
       </div>
     </Block>
   )

@@ -15,7 +15,11 @@ import {
   SET_ADVANTAGES,
   SET_PROCESS_DESCRIPTION,
   SELECT_DESIGN,
-  ADD_NEW_PROVIDER, DELETE_PROVIDER, UPDATE_NEW_PROVIDER,
+  ADD_NEW_PROVIDER,
+  DELETE_NEW_PROVIDER,
+  UPDATE_NEW_PROVIDER,
+  SET_PROVIDER_LIST,
+  SET_PROVIDERS_FROM_LIST,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -48,7 +52,9 @@ const initialState = {
     otherValue: '',
   },
   advantages: '',
-  providers: [{name: 'fffff', image: null, link: '', comment: '', type: 'new'}],
+  newProviders: [{name: 'fffff', image: null, link: '', comment: '', type: 'new'}],
+  selectedProvidersIds: [],
+  providerList: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -100,15 +106,19 @@ export const rootReducer = (state = initialState, action) => {
     case SET_ADVANTAGES:
       return {...state, advantages: action.payload}
     case ADD_NEW_PROVIDER:
-      return {...state, providers: [...state.providers, action.payload]}
+      return {...state, newProviders: [...state.newProviders, action.payload]}
     case UPDATE_NEW_PROVIDER:
       return {
-        ...state, providers: state.providers.map((provider, key) => {
+        ...state, newProviders: state.newProviders.map((provider, key) => {
         return key === action.payload.key ? action.payload.provider : provider
         })
       }
-    case DELETE_PROVIDER:
-      return {...state, providers: state.providers.filter((item, key) => key !== action.payload)}
+    case DELETE_NEW_PROVIDER:
+      return {...state, newProviders: state.newProviders.filter((item, key) => key !== action.payload)}
+    case SET_PROVIDER_LIST:
+      return {...state, providerList: action.payload}
+    case SET_PROVIDERS_FROM_LIST:
+      return {...state, selectedProvidersIds: action.payload}
     default:
       return state
   }

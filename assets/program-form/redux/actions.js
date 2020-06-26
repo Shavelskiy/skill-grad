@@ -15,8 +15,13 @@ import {
   SET_PROCESS_DESCRIPTION,
   SET_ADVANTAGES,
   SELECT_DESIGN,
-  ADD_NEW_PROVIDER, DELETE_PROVIDER, UPDATE_NEW_PROVIDER,
+  ADD_NEW_PROVIDER,
+  DELETE_NEW_PROVIDER,
+  UPDATE_NEW_PROVIDER,
+  SET_PROVIDER_LIST,
+  SET_PROVIDERS_FROM_LIST,
 } from './types'
+
 
 export function setName(name) {
   return {
@@ -172,9 +177,23 @@ export function updateNewProvider(provider, key) {
   }
 }
 
-export function deleteProvider(key) {
+export function deleteNewProvider(key) {
   return {
-    type: DELETE_PROVIDER,
+    type: DELETE_NEW_PROVIDER,
     payload: key,
+  }
+}
+
+export function setProviderList(providers) {
+  return {
+    type: SET_PROVIDER_LIST,
+    payload: providers,
+  }
+}
+
+export function chooseProvidersFromList(providerIds) {
+  return {
+    type: SET_PROVIDERS_FROM_LIST,
+    payload: providerIds,
   }
 }

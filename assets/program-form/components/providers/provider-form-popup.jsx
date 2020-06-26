@@ -10,7 +10,7 @@ import realoadImg from '../../img/reload.svg'
 import deleteTeacherImg from '../../img/delete.svg'
 
 
-const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update = false, buttonText}) => {
+const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update = false}) => {
   const imageId = `add-new-provider-${update ? 'update' : 'create'}`
 
   const handleUploadImage = (event) => {

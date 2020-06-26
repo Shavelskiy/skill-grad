@@ -25,6 +25,10 @@
     .body {
       position: relative;
       padding: 44px 30px 50px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
 
       .title {
         margin-bottom: 23px;
