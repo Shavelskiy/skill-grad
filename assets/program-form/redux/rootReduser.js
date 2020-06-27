@@ -52,7 +52,8 @@ const initialState = {
     otherValue: '',
   },
   advantages: '',
-  newProviders: [{name: 'fffff', image: null, link: '', comment: ''}],
+  currentProvider: {name: 'kekek', comment: 'kekekek', image: '/upload/5ef5d372a30654.53556181-1593168754.png', link: 'https://google.com'},
+  newProviders: [],
   selectedProvidersIds: [],
   providerList: [],
 }

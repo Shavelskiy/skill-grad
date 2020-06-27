@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { PROVIDERS } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteNewProvider } from '../../redux/actions'
+import { chooseProvidersFromList, deleteNewProvider } from '../../redux/actions'
 
 import Block from '../ui/block'
 import ControlPopup from './control-popup'
@@ -24,6 +24,7 @@ const Providers = () => {
 
   const providerList = useSelector(state => state.providerList)
 
+  const currentProvider = useSelector(state => state.currentProvider)
   const newProviders = useSelector(state => state.newProviders)
   const selectedProviderIds = useSelector(state => state.selectedProvidersIds)
 
@@ -60,8 +61,15 @@ const Providers = () => {
             />
           </div>
         )
-      case 'old':
-        return <></>
+      case 'list':
+        return (
+          <div className={css.actions}>
+            <img
+              src={deleteImage}
+              onClick={() => dispatch(chooseProvidersFromList(selectedProviderIds.filter(id => id !== provider.id)))}
+            />
+          </div>
+        )
       default:
         return <></>
     }
@@ -75,6 +83,7 @@ const Providers = () => {
     switch (type) {
       case 'new':
         return <img src={URL.createObjectURL(provider.image)}/>
+      case 'current':
       case 'list':
         return <img src={provider.image}/>
       default:
@@ -135,8 +144,9 @@ const Providers = () => {
       />
 
       <div className={css.teacherContainer}>
-        {renderProviderList(newProviders, 'new')}
+        {renderProviderList([currentProvider], 'current')}
         {renderProviderList(providerList.filter(provider => selectedProviderIds.indexOf(provider.id) !== -1), 'list')}
+        {renderProviderList(newProviders, 'new')}
       </div>
     </Block>
   )
