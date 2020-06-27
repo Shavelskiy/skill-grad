@@ -25,13 +25,13 @@ const App = () => {
         {/*<Description/>*/}
         {/*<Design/>*/}
         {/*<Providers/>*/}
-        <Listeners/>
+        {/*<Listeners/>*/}
         <Result/>
-        <Organization/>
-        <TermOfUse/>
-        <Gallery/>
-        <Locations/>
-        <AdditionalInfo/>
+        {/*<Organization/>*/}
+        {/*<TermOfUse/>*/}
+        {/*<Gallery/>*/}
+        {/*<Locations/>*/}
+        {/*<AdditionalInfo/>*/}
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS,
+  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS, SET_GAINED_KNOWLEDGE, SET_CERTIFICATE,
 } from './types'
 
 
@@ -216,5 +216,19 @@ export function setPreparations(preparations) {
   return {
     type: SET_PREPARATIONS,
     payload: preparations,
+  }
+}
+
+export function setGainedKnowledge(gainedKnowledge) {
+  return {
+    type: SET_GAINED_KNOWLEDGE,
+    gainedKnowledge: gainedKnowledge
+  }
+}
+
+export function setCertificate(certificate) {
+  return {
+    type: SET_CERTIFICATE,
+    payload: certificate,
   }
 }

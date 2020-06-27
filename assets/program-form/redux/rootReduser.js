@@ -19,7 +19,7 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS,
+  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS, SET_GAINED_KNOWLEDGE, SET_CERTIFICATE,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -64,6 +64,11 @@ const initialState = {
   targetAudience: [],
   level: null,
   preparations: [],
+  gainedKnowledge: '',
+  certificate: {
+    name: '',
+    file: null,
+  }
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -134,6 +139,10 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, level: action.payload}
     case SET_PREPARATIONS:
       return {...state, preparations: action.payload}
+    case SET_GAINED_KNOWLEDGE:
+      return {...state, gainedKnowledge: action.payload}
+    case SET_CERTIFICATE:
+      return {...state, certificate: action.payload}
     default:
       return state
   }
