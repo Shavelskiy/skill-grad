@@ -24,7 +24,7 @@ const App = () => {
       <div className={css.form}>
         {/*<Description/>*/}
         {/*<Design/>*/}
-        <Providers/>
+        {/*<Providers/>*/}
         <Listeners/>
         <Result/>
         <Organization/>

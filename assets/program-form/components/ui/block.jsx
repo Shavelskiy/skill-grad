@@ -3,6 +3,7 @@ import React from 'react'
 import css from './block.scss?module'
 import addButtonImage from './../../img/plus.svg'
 
+
 const Block = ({children, title, link = null, linkClick}) => {
   const renderLink = () => {
     if (link === null) {

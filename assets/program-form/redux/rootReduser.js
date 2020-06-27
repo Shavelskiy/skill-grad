@@ -19,7 +19,7 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST,
+  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -52,10 +52,16 @@ const initialState = {
     otherValue: '',
   },
   advantages: '',
-  currentProvider: {name: 'kekek', comment: 'kekekek', image: '/upload/5ef5d372a30654.53556181-1593168754.png', link: 'https://google.com'},
+  currentProvider: {
+    name: 'kekek',
+    comment: 'kekekek',
+    image: '/upload/5ef5d372a30654.53556181-1593168754.png',
+    link: 'https://google.com'
+  },
   newProviders: [],
   selectedProvidersIds: [],
   providerList: [],
+  targetAudience: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -111,7 +117,7 @@ export const rootReducer = (state = initialState, action) => {
     case UPDATE_NEW_PROVIDER:
       return {
         ...state, newProviders: state.newProviders.map((provider, key) => {
-        return key === action.payload.key ? action.payload.provider : provider
+          return key === action.payload.key ? action.payload.provider : provider
         })
       }
     case DELETE_NEW_PROVIDER:
@@ -120,6 +126,8 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, providerList: action.payload}
     case SET_PROVIDERS_FROM_LIST:
       return {...state, selectedProvidersIds: action.payload}
+    case SET_TARGET_AUDIENCE:
+      return {...state, targetAudience: action.payload}
     default:
       return state
   }

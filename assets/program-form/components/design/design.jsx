@@ -15,7 +15,6 @@ import { Textarea } from '../ui/input'
 import ProgramDesign from './program-design'
 
 import css from './design.scss?module'
-import cn from 'classnames'
 import SimpleMultiRadio from '../ui/simple-multi-radio'
 
 
@@ -126,7 +125,6 @@ const Design = () => {
           setValue={(advantages) => dispatch(setAdvantages(advantages))}
         />
       </div>
-
     </Block>
   )
 }

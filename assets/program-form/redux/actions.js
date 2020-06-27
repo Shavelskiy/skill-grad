@@ -19,7 +19,7 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST,
+  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE,
 } from './types'
 
 
@@ -195,5 +195,12 @@ export function chooseProvidersFromList(providerIds) {
   return {
     type: SET_PROVIDERS_FROM_LIST,
     payload: providerIds,
+  }
+}
+
+export function setTargetAudience(targetAudience) {
+  return {
+    type: SET_TARGET_AUDIENCE,
+    payload: targetAudience,
   }
 }
