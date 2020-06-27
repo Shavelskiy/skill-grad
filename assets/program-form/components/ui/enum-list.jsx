@@ -10,10 +10,7 @@ const EnumList = ({title, values, setValues}) => {
   const renderList = () => {
     return values.map((item, key) => {
       return (
-        <div
-          key={key}
-          className={cn(css.item, css.add)}
-        >
+        <div key={key} className={cn(css.item, css.add)}>
           <span className={cn(css.point, css.number)}>{key + 1}</span>
           <input
             className={css.input}

@@ -19,7 +19,7 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE,
+  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS,
 } from './types'
 
 
@@ -202,5 +202,19 @@ export function setTargetAudience(targetAudience) {
   return {
     type: SET_TARGET_AUDIENCE,
     payload: targetAudience,
+  }
+}
+
+export function setLevel(level) {
+  return {
+    type: SET_LEVEL,
+    payload: level,
+  }
+}
+
+export function setPreparations(preparations) {
+  return {
+    type: SET_PREPARATIONS,
+    payload: preparations,
   }
 }

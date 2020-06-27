@@ -19,7 +19,7 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE,
+  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -62,6 +62,8 @@ const initialState = {
   selectedProvidersIds: [],
   providerList: [],
   targetAudience: [],
+  level: null,
+  preparations: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -128,6 +130,10 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, selectedProvidersIds: action.payload}
     case SET_TARGET_AUDIENCE:
       return {...state, targetAudience: action.payload}
+    case SET_LEVEL:
+      return {...state, level: action.payload}
+    case SET_PREPARATIONS:
+      return {...state, preparations: action.payload}
     default:
       return state
   }
