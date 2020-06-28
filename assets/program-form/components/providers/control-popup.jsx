@@ -12,7 +12,6 @@ const ControlPopup = ({active, close, showProvidersPopup, showNewProviderPopup})
     showNewPopup()
   }
 
-
   return (
     <Modal
       active={active}

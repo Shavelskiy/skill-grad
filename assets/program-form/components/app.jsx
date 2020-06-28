@@ -27,8 +27,8 @@ const App = () => {
         {/*<Providers/>*/}
         {/*<Listeners/>*/}
         {/*<Result/>*/}
-        <Organization/>
-        {/*<TermOfUse/>*/}
+        {/*<Organization/>*/}
+        <TermOfUse/>
         {/*<Gallery/>*/}
         {/*<Locations/>*/}
         {/*<AdditionalInfo/>*/}

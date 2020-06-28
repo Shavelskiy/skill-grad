@@ -24,7 +24,7 @@ export const TextInput = ({placeholder = '', value, disabled = false, required =
   )
 }
 
-export const NumberInput = ({placeholder = '', value, maxValue = 999999, disabled = false, required = false, setValue, small = false}) => {
+export const NumberInput = ({placeholder = '', value, maxValue = 9999999, disabled = false, required = false, setValue, small = false}) => {
   const onChange = (event) => {
     const eventValue = Number(event.target.value.replace(/[^.\d]+/g, ''))
     if (eventValue <= 0) {

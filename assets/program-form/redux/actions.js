@@ -25,7 +25,13 @@ import {
   SET_PREPARATIONS,
   SET_GAINED_KNOWLEDGE,
   SET_CERTIFICATE,
-  SET_TRAINING_DATE, SET_OCCUPATION_MODE, SET_LOCATION, SELECT_INCLUDE,
+  SET_TRAINING_DATE,
+  SET_OCCUPATION_MODE,
+  SET_LOCATION,
+  SELECT_INCLUDE,
+  SET_PRICE,
+  SET_SHOW_PRICE_REDUCTION,
+  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT,
 } from './types'
 
 
@@ -273,5 +279,47 @@ export function selectInclude(values, otherValue) {
       values: values,
       otherValue: otherValue,
     },
+  }
+}
+
+export function setPrice(price) {
+  return {
+    type: SET_PRICE,
+    payload: price,
+  }
+}
+
+export function setShowPriceReduction(showPriceReduction) {
+  return {
+    type: SET_SHOW_PRICE_REDUCTION,
+    payload: showPriceReduction,
+  }
+}
+
+export function setDiscounts(discounts) {
+  return {
+    type: SET_DISCOUNTS,
+    payload: discounts,
+  }
+}
+
+export function setActions(actions) {
+  return {
+    type: SET_ACTIONS,
+    payload: actions,
+  }
+}
+
+export function setFavoriteProviderAction(action) {
+  return {
+    type: SET_FAVORITE_PROVIDER_ACTION,
+    payload: action,
+  }
+}
+
+export function setTermOfPayment(termOfPayment) {
+  return {
+    type: SET_TERM_OF_PAYMENT,
+    payload: termOfPayment,
   }
 }

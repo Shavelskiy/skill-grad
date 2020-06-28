@@ -25,7 +25,13 @@ import {
   SET_PREPARATIONS,
   SET_GAINED_KNOWLEDGE,
   SET_CERTIFICATE,
-  SET_TRAINING_DATE, SET_OCCUPATION_MODE, SET_LOCATION, SELECT_INCLUDE,
+  SET_TRAINING_DATE,
+  SET_OCCUPATION_MODE,
+  SET_LOCATION,
+  SELECT_INCLUDE,
+  SET_PRICE,
+  SET_SHOW_PRICE_REDUCTION,
+  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -87,6 +93,47 @@ const initialState = {
   include: {
     values: [],
     otherValue: '',
+  },
+  price: {
+    legalEntity: {
+      checked: false,
+      price: 0,
+    },
+    individual: {
+      checked: false,
+      price: 0,
+    },
+    byRequest: false,
+    showPriceReduction: false,
+  },
+  discounts: {
+    legalEntity: {
+      checked: false,
+      value: 0,
+    },
+    individual: {
+      checked: false,
+      value: 0,
+    },
+    byRequest: false,
+    showPriceReduction: false,
+  },
+  actions: [],
+  favoriteProviderAction: {
+    firstDiscount: 0,
+    nextDiscount: 0,
+  },
+  termOfPayment: {
+    legalEntity: {
+      checked: false,
+      value: '',
+    },
+    individual: {
+      checked: false,
+      value: '',
+    },
+    byRequest: false,
+    showPriceReduction: false,
   },
 }
 
@@ -170,6 +217,18 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, location: action.payload}
     case SELECT_INCLUDE:
       return {...state, include: action.payload}
+    case SET_PRICE:
+      return {...state, price: action.payload}
+    case SET_SHOW_PRICE_REDUCTION:
+      return {...state, showPriceReduction: action.payload}
+    case SET_DISCOUNTS:
+      return {...state, discounts: action.payload}
+    case SET_ACTIONS:
+      return {...state, actions: action.payload}
+    case SET_FAVORITE_PROVIDER_ACTION:
+      return {...state, favoriteProviderAction: action.payload}
+    case SET_TERM_OF_PAYMENT:
+      return {...state, termOfPayment: action.payload}
     default:
       return state
   }

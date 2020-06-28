@@ -6,11 +6,11 @@ import cn from 'classnames'
 import deleteImage from './../../img/delete.svg'
 
 
-const EnumList = ({title, values, setValues}) => {
+const EnumList = ({title, values, setValues, wide = false}) => {
   const renderList = () => {
     return values.map((item, key) => {
       return (
-        <div key={key} className={cn(css.item, css.add)}>
+        <div key={key} className={cn(css.item, css.add, {[css.wide]: wide})}>
           <span className={cn(css.point, css.number)}>{key + 1}</span>
           <input
             className={css.input}
