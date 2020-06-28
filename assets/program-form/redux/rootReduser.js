@@ -25,7 +25,7 @@ import {
   SET_PREPARATIONS,
   SET_GAINED_KNOWLEDGE,
   SET_CERTIFICATE,
-  SET_TRAINING_DATE,
+  SET_TRAINING_DATE, SET_OCCUPATION_MODE,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -78,7 +78,11 @@ const initialState = {
   traningDate: {
     type: null,
     extra: null,
-  }
+  },
+  occupationMode: {
+    type: null,
+    extra: null,
+  },
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -155,6 +159,8 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, certificate: action.payload}
     case SET_TRAINING_DATE:
       return {...state, traningDate: action.payload}
+    case SET_OCCUPATION_MODE:
+      return {...state, occupationMode: action.payload}
     default:
       return state
   }

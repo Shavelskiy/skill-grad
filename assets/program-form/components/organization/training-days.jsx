@@ -26,7 +26,7 @@ const TrainingDays = () => {
       <h3>Даты обучения:</h3>
 
       <RadioButton
-        click={() => dispatch(setTraingDate(null, null))}
+        click={() => dispatch(setTraingDate(null))}
         selected={trainingDays.type === null}
       >
         Не выбрано
@@ -44,19 +44,19 @@ const TrainingDays = () => {
         />
       </div>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_ANYTIME, null))}
+        click={() => dispatch(setTraingDate(TRAINING_DATE_ANYTIME))}
         selected={trainingDays.type === TRAINING_DATE_ANYTIME}
       >
         В любое время
       </RadioButton>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_AS_THE_GROUP_FORM, null))}
+        click={() => dispatch(setTraingDate(TRAINING_DATE_AS_THE_GROUP_FORM))}
         selected={trainingDays.type === TRAINING_DATE_AS_THE_GROUP_FORM}
       >
         По мере формирования группы
       </RadioButton>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_REQUEST, null))}
+        click={() => dispatch(setTraingDate(TRAINING_DATE_REQUEST))}
         selected={trainingDays.type === TRAINING_DATE_REQUEST}
       >
         Направить запрос

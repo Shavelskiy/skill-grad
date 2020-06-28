@@ -25,7 +25,7 @@ import {
   SET_PREPARATIONS,
   SET_GAINED_KNOWLEDGE,
   SET_CERTIFICATE,
-  SET_TRAINING_DATE,
+  SET_TRAINING_DATE, SET_OCCUPATION_MODE,
 } from './types'
 
 
@@ -242,6 +242,16 @@ export function setCertificate(certificate) {
 export function setTraingDate(type, extra = null) {
   return {
     type: SET_TRAINING_DATE,
+    payload: {
+      type: type,
+      extra: extra,
+    }
+  }
+}
+
+export function setOccupationMode(type, extra = null) {
+  return {
+    type: SET_OCCUPATION_MODE,
     payload: {
       type: type,
       extra: extra,
