@@ -19,7 +19,13 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS, SET_GAINED_KNOWLEDGE, SET_CERTIFICATE,
+  SET_PROVIDERS_FROM_LIST,
+  SET_TARGET_AUDIENCE,
+  SET_LEVEL,
+  SET_PREPARATIONS,
+  SET_GAINED_KNOWLEDGE,
+  SET_CERTIFICATE,
+  SET_TRAINING_DATE,
 } from './types'
 
 
@@ -230,5 +236,15 @@ export function setCertificate(certificate) {
   return {
     type: SET_CERTIFICATE,
     payload: certificate,
+  }
+}
+
+export function setTraingDate(type, extra = null) {
+  return {
+    type: SET_TRAINING_DATE,
+    payload: {
+      type: type,
+      extra: extra,
+    }
   }
 }

@@ -19,7 +19,13 @@ import {
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
   SET_PROVIDER_LIST,
-  SET_PROVIDERS_FROM_LIST, SET_TARGET_AUDIENCE, SET_LEVEL, SET_PREPARATIONS, SET_GAINED_KNOWLEDGE, SET_CERTIFICATE,
+  SET_PROVIDERS_FROM_LIST,
+  SET_TARGET_AUDIENCE,
+  SET_LEVEL,
+  SET_PREPARATIONS,
+  SET_GAINED_KNOWLEDGE,
+  SET_CERTIFICATE,
+  SET_TRAINING_DATE,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -68,6 +74,10 @@ const initialState = {
   certificate: {
     name: '',
     file: null,
+  },
+  traningDate: {
+    type: null,
+    extra: null,
   }
 }
 
@@ -143,6 +153,8 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, gainedKnowledge: action.payload}
     case SET_CERTIFICATE:
       return {...state, certificate: action.payload}
+    case SET_TRAINING_DATE:
+      return {...state, traningDate: action.payload}
     default:
       return state
   }
