@@ -25,7 +25,7 @@ import {
   SET_PREPARATIONS,
   SET_GAINED_KNOWLEDGE,
   SET_CERTIFICATE,
-  SET_TRAINING_DATE, SET_OCCUPATION_MODE,
+  SET_TRAINING_DATE, SET_OCCUPATION_MODE, SET_LOCATION, SELECT_INCLUDE,
 } from './types'
 
 
@@ -256,5 +256,22 @@ export function setOccupationMode(type, extra = null) {
       type: type,
       extra: extra,
     }
+  }
+}
+
+export function setLocation(location) {
+  return {
+    type: SET_LOCATION,
+    payload: location
+  }
+}
+
+export function selectInclude(values, otherValue) {
+  return {
+    type: SELECT_INCLUDE,
+    payload: {
+      values: values,
+      otherValue: otherValue,
+    },
   }
 }

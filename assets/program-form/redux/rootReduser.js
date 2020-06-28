@@ -25,7 +25,7 @@ import {
   SET_PREPARATIONS,
   SET_GAINED_KNOWLEDGE,
   SET_CERTIFICATE,
-  SET_TRAINING_DATE, SET_OCCUPATION_MODE,
+  SET_TRAINING_DATE, SET_OCCUPATION_MODE, SET_LOCATION, SELECT_INCLUDE,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -82,6 +82,11 @@ const initialState = {
   occupationMode: {
     type: null,
     extra: null,
+  },
+  location: '',
+  include: {
+    values: [],
+    otherValue: '',
   },
 }
 
@@ -161,6 +166,10 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, traningDate: action.payload}
     case SET_OCCUPATION_MODE:
       return {...state, occupationMode: action.payload}
+    case SET_LOCATION:
+      return {...state, location: action.payload}
+    case SELECT_INCLUDE:
+      return {...state, include: action.payload}
     default:
       return state
   }
