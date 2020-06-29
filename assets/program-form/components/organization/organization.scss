@@ -1,3 +1,15 @@
-.input-container {
-  margin-bottom: 25px;
+.container {
+  padding: 26px 0 45px 0;
+
+  .mode-container {
+    margin-top: 33px;
+  }
+
+  .location-container {
+    margin-top: 40px;
+  }
+
+  .include-container {
+    margin-top: 36px;
+  }
 }

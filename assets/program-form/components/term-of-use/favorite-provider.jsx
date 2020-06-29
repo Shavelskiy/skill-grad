@@ -22,6 +22,7 @@ const FavoriteProvider = () => {
         <div className={css.valueContainer}>
           <NumberInput
             value={favoriteProviderAction.firstDiscount}
+            extraSmall={true}
             maxValue={99}
             setValue={(value) => dispatch(setFavoriteProviderAction({
               ...favoriteProviderAction,
@@ -36,6 +37,7 @@ const FavoriteProvider = () => {
         <div className={css.valueContainer}>
           <NumberInput
             value={favoriteProviderAction.nextDiscount}
+            extraSmall={true}
             maxValue={99}
             setValue={(value) => dispatch(setFavoriteProviderAction({
               ...favoriteProviderAction,

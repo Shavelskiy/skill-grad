@@ -22,12 +22,12 @@ const TermOfUse = () => {
   const showPriceReduction = useSelector(state => state.program.showPriceReduction)
 
   return (
-    <Block title={TERM_OF_USE}>
-      <div className={css.inputContainer}>
+    <Block title={TERM_OF_USE} containerClass={css.container}>
+      <div>
         <Price/>
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.smallMargin}>
         <h3>Показывать снижение цены</h3>
         <div className={css.switcherContainer} onClick={() => dispatch(setShowPriceReduction(!showPriceReduction))}>
           <span className={cn(css.switcher, {[css.selected]: showPriceReduction})}></span>
@@ -41,7 +41,7 @@ const TermOfUse = () => {
         <Discounts/>
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.smallMargin}>
         <EnumList
           title={'Акции от провайдера'}
           values={useSelector(state => state.program.actions)}

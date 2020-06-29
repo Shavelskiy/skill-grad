@@ -29,6 +29,7 @@ const Price = () => {
         <div className={css.numberInputContainer}>
           <NumberInput
             value={price.legalEntity.price}
+            small={true}
             disabled={price.byRequest}
             setValue={(value) => dispatch(setPrice({...price, legalEntity: {...price.legalEntity, price: value}}))}
           />
@@ -47,6 +48,7 @@ const Price = () => {
         <div className={css.numberInputContainer}>
           <NumberInput
             value={price.individual.price}
+            small={true}
             disabled={price.byRequest}
             setValue={(value) => dispatch(setPrice({...price, individual: {...price.individual, price: value}}))}
           />

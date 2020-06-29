@@ -15,15 +15,13 @@ const AdditionalInfo = () => {
   const dispatch = useDispatch()
 
   return (
-    <Block title={ADDITIONAL_INFO}>
-      <div className={css.inputContainer}>
-        <Textarea
-          placeholder={'Дополнительная информация'}
-          value={useSelector(state => state.program.additionalInfo)}
-          setValue={(value) => dispatch(setAdditionalInfo(value))}
-          extraLarge={true}
-        />
-      </div>
+    <Block title={ADDITIONAL_INFO} containerClass={css.container}>
+      <Textarea
+        placeholder={'Дополнительная информация'}
+        value={useSelector(state => state.program.additionalInfo)}
+        setValue={(value) => dispatch(setAdditionalInfo(value))}
+        extraLarge={true}
+      />
     </Block>
   )
 }

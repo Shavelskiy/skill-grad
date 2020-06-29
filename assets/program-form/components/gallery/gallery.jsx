@@ -46,6 +46,7 @@ const Gallery = () => {
           />
           <Textarea
             placeholder={'Название фото'}
+            smallText={true}
             value={item.name}
             setValue={(value) => dispatch(setGallery(gallery.map((item, itemKey) => itemKey === key ? {
               name: value,
@@ -60,6 +61,7 @@ const Gallery = () => {
   return (
     <Block
       title={GALLERY}
+      containerClass={css.container}
       link={'Добавить фотографии'}
       linkClick={() => ref.current.click()}
     >

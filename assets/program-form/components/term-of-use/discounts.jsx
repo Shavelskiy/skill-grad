@@ -36,6 +36,7 @@ const Discounts = () => {
         <div className={css.percentInputContainer}>
           <NumberInput
             value={discounts.legalEntity.value}
+            small={true}
             maxValue={99}
             disabled={discounts.byRequest}
             setValue={(value) => dispatch(setDiscounts({
@@ -48,6 +49,7 @@ const Discounts = () => {
         <div className={cn(css.numberInputContainer, css.discountInputContainer)}>
           <NumberInput
             value={getDiscountValue(price.legalEntity.price, discounts.legalEntity.value)}
+            small={true}
             disabled={true}
           />
         </div>
@@ -65,6 +67,7 @@ const Discounts = () => {
         <div className={css.percentInputContainer}>
           <NumberInput
             value={discounts.individual.value}
+            small={true}
             maxValue={99}
             disabled={discounts.byRequest}
             setValue={(value) => dispatch(setDiscounts({
@@ -77,6 +80,7 @@ const Discounts = () => {
         <div className={cn(css.numberInputContainer, css.discountInputContainer)}>
           <NumberInput
             value={getDiscountValue(price.individual.price, discounts.individual.value)}
+            small={true}
             disabled={true}
           />
         </div>

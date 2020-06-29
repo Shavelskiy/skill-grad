@@ -67,25 +67,23 @@ const Locations = () => {
   }
 
   return (
-    <Block title={LOCATIONS}>
-      <div className={css.container}>
-        {renderLocationList()}
-        <div
-          className={cn(css.item, css.add)}
-          onClick={() => setShowPopup(true)}
-        >
-          <span className={cn(css.point, css.plus)}></span>
-          <span className={css.addButton}>Добавить город/область/район</span>
-        </div>
-        <div className={cn(css.popupBackground, {[css.active]: showPopup})}></div>
-        <LocatoinPopup
-          active={showPopup}
-          locations={locations}
-          userSelectedLocations={selectedLocations}
-          selectLocations={(values) => dispatch(selectLocations(values))}
-          close={() => setShowPopup(false)}
-        />
+    <Block title={LOCATIONS} containerClass={css.container}>
+      {renderLocationList()}
+      <div
+        className={cn(css.item, css.add)}
+        onClick={() => setShowPopup(true)}
+      >
+        <span className={cn(css.point, css.plus)}></span>
+        <span className={css.addButton}>Добавить город/область/район</span>
       </div>
+      <div className={cn(css.popupBackground, {[css.active]: showPopup})}></div>
+      <LocatoinPopup
+        active={showPopup}
+        locations={locations}
+        userSelectedLocations={selectedLocations}
+        selectLocations={(values) => dispatch(selectLocations(values))}
+        close={() => setShowPopup(false)}
+      />
     </Block>
   )
 }

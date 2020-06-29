@@ -128,6 +128,7 @@ const OccupationMode = () => {
         <div className={css.timeContainer}>
           <TextInput
             value={selectedTime.start}
+            extraSmall={true}
             setValue={(value) => handleChangeTime(value)}
           />
         </div>
@@ -135,6 +136,7 @@ const OccupationMode = () => {
         <div className={css.timeContainer}>
           <TextInput
             value={selectedTime.end}
+            extraSmall={true}
             setValue={(value) => handleChangeTime(value, false)}
           />
         </div>

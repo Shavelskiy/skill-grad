@@ -40,17 +40,6 @@ const initialState = {
       title: 'Смешанная форма обучения',
     },
   ],
-  knowledgeCheck: [
-    {
-      id: true,
-      title: 'Да',
-    },
-
-    {
-      id: false,
-      title: 'Нет',
-    },
-  ],
   additional: [
     {
       id: 1,
@@ -84,6 +73,24 @@ const initialState = {
     {
       value: 3,
       title: 'Продвинутый',
+    },
+  ],
+  include: [
+    {
+      id: 1,
+      title: 'Книги',
+    },
+    {
+      id: 2,
+      title: 'Методические материалы',
+    },
+    {
+      id: 3,
+      title: 'Кофе-брейки',
+    },
+    {
+      id: 4,
+      title: 'Обеды',
     },
   ],
   locations: [],

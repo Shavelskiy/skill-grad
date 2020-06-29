@@ -15,12 +15,12 @@
 
   &.extra-small input {
     width: 70px;
-    padding: 0 22px;
+    padding: 0 14px;
   }
 
   &.small input {
     width: 90px;
-    padding: 0 22px;
+    padding: 0 16px;
   }
 
   &.standart input {
@@ -61,6 +61,13 @@
   &.resize-disabled {
     max-height: 100px;
     resize: none;
+  }
+
+  &.small-text {
+    padding: 13px 19px;
+    min-height: 70px;
+    max-height: 70px;
+    font-size: 14px;
   }
 
   &.extra-small {

@@ -17,36 +17,17 @@ import css from './organization.scss?module'
 const Organization = () => {
   const dispatch = useDispatch()
 
-  const include = [ // todo
-    {
-      id: 1,
-      title: 'Книги',
-    },
-    {
-      id: 2,
-      title: 'Методические материалы',
-    },
-    {
-      id: 3,
-      title: 'Кофе-брейки',
-    },
-    {
-      id: 4,
-      title: 'Обеды',
-    },
-  ]
-
   return (
-    <Block title={ORGANIZAITION}>
-      <div className={css.inputContainer}>
+    <Block title={ORGANIZAITION} containerClass={css.container}>
+      <div>
         <TrainingDays/>
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.modeContainer}>
         <OccupationMode/>
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.locationContainer}>
         <Textarea
           placeholder={'Место проведения'}
           value={useSelector(state => state.program.location)}
@@ -54,10 +35,10 @@ const Organization = () => {
         />
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.includeContainer}>
         <SimpleMultiRadio
           title={'Включено в курс'}
-          options={include}
+          options={useSelector(state => state.data.include)}
           selectedValues={useSelector(state => state.program.include)}
           setValues={selectInclude}
         />

@@ -21,6 +21,18 @@ import SimpleMultiRadio from '../ui/simple-multi-radio'
 const Design = () => {
   const dispatch = useDispatch()
 
+  const knowledgeCheck = [
+    {
+      id: true,
+      title: 'Да',
+    },
+
+    {
+      id: false,
+      title: 'Нет',
+    },
+  ]
+
   return (
     <Block title={DESIGN} containerClass={css.container}>
       <div>
@@ -47,7 +59,7 @@ const Design = () => {
       <div className={css.inputContainer}>
         <SimpleRadio
           title={'Проверка знаний'}
-          options={useSelector(state => state.data.knowledgeCheck)}
+          options={knowledgeCheck}
           selectedValue={useSelector(state => state.program.knowledgeCheck)}
           selectValue={selectKnowLedgeCheck}
         />

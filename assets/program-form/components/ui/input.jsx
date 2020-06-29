@@ -64,7 +64,7 @@ export const NumberInput = ({
   )
 }
 
-export const Textarea = ({placeholder = '', value, setValue, disableResize = true, extraSmall = false, small = false, medium = false, large = false, extraLarge = false}) => {
+export const Textarea = ({placeholder = '', value, setValue, disableResize = true, extraSmall = false, small = false, medium = false, large = false, extraLarge = false, smallText = false}) => {
   return (
     <textarea
       className={cn(
@@ -75,6 +75,7 @@ export const Textarea = ({placeholder = '', value, setValue, disableResize = tru
         {[css.medium]: medium},
         {[css.large]: large},
         {[css.extraLarge]: extraLarge},
+        {[css.smallText]: smallText},
       )}
       placeholder={placeholder}
       value={value}
