@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { addNewProvider } from '../../redux/actions'
+import { addNewProvider } from '../../redux/program/actions'
 
 import ProviderFormPopup from './provider-form-popup'
 

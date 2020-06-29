@@ -3,7 +3,7 @@ import React from 'react'
 import { RESULTS } from '../../utils/titles'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setCertificate, setGainedKnowledge } from '../../redux/actions'
+import { setCertificate, setGainedKnowledge } from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import { Textarea, TextInput } from '../ui/input'
@@ -19,7 +19,7 @@ import deleteImg from './../../img/delete-image.svg'
 const Result = () => {
   const dispatch = useDispatch()
 
-  const certificate = useSelector(state => state.certificate)
+  const certificate = useSelector(state => state.program.certificate)
 
   const certificateImageId = 'add-certificate-image'
 
@@ -65,7 +65,7 @@ const Result = () => {
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Полученные знания, приобретенные навыки'}
-          value={useSelector(state => state.gainedKnowledge)}
+          value={useSelector(state => state.program.gainedKnowledge)}
           setValue={(value) => dispatch(setGainedKnowledge(value))}
         />
       </div>

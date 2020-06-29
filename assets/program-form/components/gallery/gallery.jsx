@@ -3,14 +3,14 @@ import React, { useRef } from 'react'
 import { GALLERY } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setGallery } from '../../redux/actions'
+import { setGallery } from '../../redux/program/actions'
 
 import Block from '../ui/block'
+import { Textarea } from '../ui/input'
 
 import css from './gallery.scss?module'
 
 import deleteImage from './../../img/delete.svg'
-import { Textarea } from '../ui/input'
 
 
 const Gallery = () => {
@@ -19,7 +19,7 @@ const Gallery = () => {
   const ref = useRef()
   const dispatch = useDispatch()
 
-  const gallery = useSelector(state => state.gallery)
+  const gallery = useSelector(state => state.program.gallery)
 
   const handleImageUpdate = (event) => {
     let newItems = []

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { PROVIDERS } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { chooseProvidersFromList, deleteNewProvider } from '../../redux/actions'
+import { chooseProvidersFromList, deleteNewProvider } from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import ControlPopup from './control-popup'
@@ -22,11 +22,11 @@ import editImage from './../../img/pencil.svg'
 const Providers = () => {
   const dispatch = useDispatch()
 
-  const providerList = useSelector(state => state.providerList)
+  const providerList = useSelector(state => state.program.providerList)
 
-  const currentProvider = useSelector(state => state.currentProvider)
-  const newProviders = useSelector(state => state.newProviders)
-  const selectedProviderIds = useSelector(state => state.selectedProvidersIds)
+  const currentProvider = useSelector(state => state.program.currentProvider)
+  const newProviders = useSelector(state => state.program.newProviders)
+  const selectedProviderIds = useSelector(state => state.program.selectedProvidersIds)
 
   const [controlPopupActive, setControlPopupActive] = useState(false)
   const [providersPopupActive, setProvidersPopupActive] = useState(false)

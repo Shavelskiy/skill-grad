@@ -7,7 +7,7 @@ import {
   selectAdditional,
   selectFormat, selectKnowLedgeCheck, setAdvantages,
   setProcessDescription
-} from '../../redux/actions'
+} from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import SimpleRadio from '../ui/simple-radio'
@@ -83,7 +83,7 @@ const Design = () => {
         <SimpleRadio
           title={'Формат обучения'}
           options={formats}
-          selectedValue={useSelector(state => state.format)}
+          selectedValue={useSelector(state => state.program.format)}
           selectValue={selectFormat}
         />
       </div>
@@ -91,7 +91,7 @@ const Design = () => {
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Описание процесса обучения'}
-          value={useSelector(state => state.processDescription)}
+          value={useSelector(state => state.program.processDescription)}
           setValue={(processDescription) => dispatch(setProcessDescription(processDescription))}
         />
       </div>
@@ -104,7 +104,7 @@ const Design = () => {
         <SimpleRadio
           title={'Проверка знаний'}
           options={knowledgeCheck}
-          selectedValue={useSelector(state => state.knowledgeCheck)}
+          selectedValue={useSelector(state => state.program.knowledgeCheck)}
           selectValue={selectKnowLedgeCheck}
         />
       </div>
@@ -113,7 +113,7 @@ const Design = () => {
         <SimpleMultiRadio
           title={'Дополнительно'}
           options={additional}
-          selectedValues={useSelector(state => state.additional)}
+          selectedValues={useSelector(state => state.program.additional)}
           setValues={selectAdditional}
         />
       </div>
@@ -121,7 +121,7 @@ const Design = () => {
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Преимущества программы обучения'}
-          value={useSelector(state => state.advantages)}
+          value={useSelector(state => state.program.advantages)}
           setValue={(advantages) => dispatch(setAdvantages(advantages))}
         />
       </div>

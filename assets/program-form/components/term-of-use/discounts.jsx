@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setDiscounts } from '../../redux/actions'
+import { setDiscounts } from '../../redux/program/actions'
 
 import RadioButton from '../ui/radio-button'
 import { NumberInput } from '../ui/input'
@@ -13,8 +13,8 @@ import cn from 'classnames'
 const Discounts = () => {
   const dispatch = useDispatch()
 
-  const discounts = useSelector(state => state.discounts)
-  const price = useSelector(state => state.price)
+  const discounts = useSelector(state => state.program.discounts)
+  const price = useSelector(state => state.program.price)
 
   const getDiscountValue = (price, discount) => {
     const value = price * (1 - discount / 100)

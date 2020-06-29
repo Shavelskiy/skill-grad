@@ -2,7 +2,7 @@ import React from 'react'
 import { DESCRIPTION } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/actions'
+import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/program/actions'
 
 import { TextInput, Textarea } from '../ui/input'
 import Select from '../ui/select'
@@ -29,7 +29,7 @@ const Description = () => {
   ]
 
   const getCategoriesOptions = (key) => {
-    const selectedCategories = useSelector(state => state.categories)
+    const selectedCategories = useSelector(state => state.program.categories)
     return options.filter(option => {
       return selectedCategories.filter((selectedCategory, valueKey) => {
         return (valueKey !== key) && (selectedCategory === option.value)
@@ -40,7 +40,7 @@ const Description = () => {
   return (
     <Block title={DESCRIPTION}>
       <TextInput
-        value={useSelector(state => state.name)}
+        value={useSelector(state => state.program.name)}
         placeholder={'Название программы обучения'}
         required={true}
         big={true}
@@ -52,7 +52,7 @@ const Description = () => {
             <div className={css.categorySelect} key={key}>
               <Select
                 placeholder={'Выбрать категорию'}
-                value={useSelector(state => state.categories[key])}
+                value={useSelector(state => state.program.categories[key])}
                 setValue={(value) => dispatch(setCategory(key, value))}
                 options={getCategoriesOptions(key)}
               />
@@ -63,14 +63,14 @@ const Description = () => {
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Аннотация программы обучения'}
-          value={useSelector(state => state.annotation)}
+          value={useSelector(state => state.program.annotation)}
           setValue={(annotation) => dispatch(setAnnotation(annotation))}
         />
       </div>
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Программа обучения'}
-          value={useSelector(state => state.detailText)}
+          value={useSelector(state => state.program.detailText)}
           setValue={(detailText) => dispatch(setDetailText(detailText))}
         />
       </div>

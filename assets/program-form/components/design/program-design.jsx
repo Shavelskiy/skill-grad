@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { selectDesign } from '../../redux/actions'
+import { selectDesign } from '../../redux/program/actions'
 
 import RadioButton from '../ui/radio-button'
 import { NumberInput, TextInput } from '../ui/input'
@@ -13,7 +13,7 @@ import css from './program-design.scss?module'
 
 const ProgramDesign = () => {
   const dispatch = useDispatch()
-  const design = useSelector(state => state.programDesign)
+  const design = useSelector(state => state.program.programDesign)
 
   const [otherValue, setOtherValue] = useState('')
   const [percents, setPercents] = useState([0, 0])

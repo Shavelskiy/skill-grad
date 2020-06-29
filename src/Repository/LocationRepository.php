@@ -19,11 +19,6 @@ class LocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Location::class);
     }
 
-    /**
-     * @param $id
-     *
-     * @return Location
-     */
     public function findById($id): object
     {
         $location = $this->findOneBy(['id' => $id]);
@@ -35,12 +30,28 @@ class LocationRepository extends ServiceEntityRepository
         return $location;
     }
 
+    public function findAllRegions(): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.type = :type')
+            ->setParameter('type', Location::TYPE_REGION)
+            ->orderBy('l.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCityForList(): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.type = :type')
+            ->setParameter('type', Location::TYPE_CITY)
+            ->andWhere('l.showInList = true')
+            ->orderBy('l.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
-     * @param int        $page
-     * @param array|null $order
-     * @param int        $pageItems
-     * @param array|null $serach
-     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

@@ -3,7 +3,7 @@ import React from 'react'
 import { ADDITIONAL_INFO } from '../../utils/titles'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setGainedKnowledge } from '../../redux/actions'
+import { setGainedKnowledge } from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import { Textarea } from '../ui/input'
@@ -19,7 +19,7 @@ const AdditionalInfo = () => {
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Дополнительная информация'}
-          value={useSelector(state => state.gainedKnowledge)}
+          value={useSelector(state => state.program.gainedKnowledge)}
           setValue={(value) => dispatch(setGainedKnowledge(value))}
         />
       </div>

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
+
 import { useSelector, useDispatch } from 'react-redux'
+import { selectDuration } from '../../redux/program/actions'
 
 import { DURATION_HOURS, DURATION_DAYS, OTHER } from '../../utils/field-types'
 
 import RadioButton from '../ui/radio-button'
 
 import css from './duration.scss?module'
-import { selectDuration } from '../../redux/actions'
 import { TextInput, NumberInput } from '../ui/input'
 
 
 const Duration = () => {
   const dispatch = useDispatch()
 
-  const duration = useSelector(state => state.duration)
+  const duration = useSelector(state => state.program.duration)
 
   const [hourValue, setHourValue] = useState(0)
   const [dayValue, setDayValue] = useState(0)

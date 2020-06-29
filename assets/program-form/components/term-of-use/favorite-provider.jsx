@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setFavoriteProviderAction } from '../../redux/actions'
+import { setFavoriteProviderAction } from '../../redux/program/actions'
 
 import { NumberInput } from '../ui/input'
 
@@ -12,7 +12,7 @@ import cn from 'classnames'
 const FavoriteProvider = () => {
   const dispatch = useDispatch()
 
-  const favoriteProviderAction = useSelector(state => state.favoriteProviderAction)
+  const favoriteProviderAction = useSelector(state => state.program.favoriteProviderAction)
 
   return (
     <>

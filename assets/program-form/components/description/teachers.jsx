@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addTeacher, deleteTeacher, setTeacherName, setTeacherImage, deleteTeacherImage } from '../../redux/actions'
+import { addTeacher, deleteTeacher, setTeacherName, setTeacherImage, deleteTeacherImage } from '../../redux/program/actions'
 
 import css from './teachers.scss?module'
 import { Textarea } from '../ui/input'
@@ -15,7 +15,7 @@ import deleteTeacherImg from './../../img/delete-image.svg'
 
 const Teachers = () => {
   const dispatch = useDispatch()
-  const teachers = useSelector(state => state.teachers)
+  const teachers = useSelector(state => state.program.teachers)
 
   const handleImageUpdate = (key, event) => {
     const file = event.target.files[0]

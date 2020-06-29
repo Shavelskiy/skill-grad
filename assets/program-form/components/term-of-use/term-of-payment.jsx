@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTermOfPayment } from '../../redux/actions'
+import { setTermOfPayment } from '../../redux/program/actions'
 
 import RadioButton from '../ui/radio-button'
 import { Textarea } from '../ui/input'
@@ -13,7 +13,7 @@ import cn from 'classnames'
 const TermOfPayment = () => {
   const dispatch = useDispatch()
 
-  const termOfPayment = useSelector(state => state.termOfPayment)
+  const termOfPayment = useSelector(state => state.program.termOfPayment)
 
   return (
     <>

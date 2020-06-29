@@ -31,7 +31,7 @@ import {
   SELECT_INCLUDE,
   SET_PRICE,
   SET_SHOW_PRICE_REDUCTION,
-  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT, SET_GALLERY,
+  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT, SET_GALLERY, SELECT_LOCATIONS,
 } from './types'
 
 
@@ -328,5 +328,12 @@ export function setGallery(gallery) {
   return {
     type: SET_GALLERY,
     payload: gallery,
+  }
+}
+
+export function selectLocations(locations) {
+  return {
+    type: SELECT_LOCATIONS,
+    payload: locations,
   }
 }

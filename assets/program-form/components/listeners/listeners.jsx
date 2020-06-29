@@ -3,7 +3,7 @@ import React from 'react'
 import { LISTENERS } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {setLevel, setPreparations, setTargetAudience } from '../../redux/actions'
+import {setLevel, setPreparations, setTargetAudience } from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import EnumList from '../ui/enum-list'
@@ -36,7 +36,7 @@ const Listeners = () => {
       <div className={css.inputContainer}>
         <EnumList
           title={'Целевая аудитория'}
-          values={useSelector(state => state.targetAudience)}
+          values={useSelector(state => state.program.targetAudience)}
           setValues={(values) => dispatch(setTargetAudience(values))}
         />
       </div>
@@ -45,7 +45,7 @@ const Listeners = () => {
         <h3>Уровень:</h3>
         <Select
           placeholder={'Выберите уровень'}
-          value={useSelector(state => state.level)}
+          value={useSelector(state => state.program.level)}
           setValue={(value) => dispatch(setLevel(value))}
           options={levels}
         />
@@ -54,7 +54,7 @@ const Listeners = () => {
       <div className={css.inputContainer}>
         <EnumList
           title={'Предварительная подготовка'}
-          values={useSelector(state => state.preparations)}
+          values={useSelector(state => state.program.preparations)}
           setValues={(values) => dispatch(setPreparations(values))}
         />
       </div>

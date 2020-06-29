@@ -3,7 +3,7 @@ import React from 'react'
 import { TERM_OF_USE } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setActions, setShowPriceReduction } from '../../redux/actions'
+import { setActions, setShowPriceReduction } from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import EnumList from '../ui/enum-list'
@@ -19,7 +19,7 @@ import cn from 'classnames'
 const TermOfUse = () => {
   const dispatch = useDispatch()
 
-  const showPriceReduction = useSelector(state => state.showPriceReduction)
+  const showPriceReduction = useSelector(state => state.program.showPriceReduction)
 
   return (
     <Block title={TERM_OF_USE}>
@@ -44,7 +44,7 @@ const TermOfUse = () => {
       <div className={css.inputContainer}>
         <EnumList
           title={'Акции от провайдера'}
-          values={useSelector(state => state.actions)}
+          values={useSelector(state => state.program.actions)}
           setValues={(values) => dispatch(setActions(values))}
           wide={true}
         />

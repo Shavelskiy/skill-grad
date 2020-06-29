@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setOccupationMode } from '../../redux/actions'
+import { setOccupationMode } from '../../redux/program/actions'
 
 import { OCCUPATION_MODE_ANYTIME, OCCUPATION_MODE_TIME, OTHER } from '../../utils/field-types'
 
@@ -46,7 +46,7 @@ const days = [
 const OccupationMode = () => {
   const dispatch = useDispatch()
 
-  const occupationMode = useSelector(state => state.occupationMode)
+  const occupationMode = useSelector(state => state.program.occupationMode)
 
   const [selectedDays, setSelectedDays] = useState([])
   const [selectedTime, setSelectedTime] = useState({

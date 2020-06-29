@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { createStore, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { rootReducer } from './redux/rootReduser'
+import { dataReduser } from './redux/data/data-reduser'
+import { programReduser } from './redux/program/program-reduser'
 
 import App from './components/app'
 
@@ -11,12 +12,15 @@ import App from './components/app'
 const middlewares = []
 
 if (process.env.NODE_ENV === `development`) {
-  const { logger } = require(`redux-logger`);
+  const {logger} = require(`redux-logger`);
 
   middlewares.push(logger)
 }
 
-const store = compose(applyMiddleware(...middlewares))(createStore)(rootReducer)
+const store = compose(applyMiddleware(...middlewares))(createStore)(combineReducers({
+  program: programReduser,
+  data: dataReduser
+}))
 
 const app = (
   <Provider store={store}>

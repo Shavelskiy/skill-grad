@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {useSelector, useDispatch} from 'react-redux'
-import { setPrice } from '../../redux/actions'
+import { setPrice } from '../../redux/program/actions'
 
 import RadioButton from '../ui/radio-button'
 import { NumberInput } from '../ui/input'
@@ -12,7 +12,7 @@ import css from './term-of-use.scss?module'
 const Price = () => {
   const dispatch = useDispatch()
 
-  const price = useSelector(state => state.price)
+  const price = useSelector(state => state.program.price)
 
   return (
     <>

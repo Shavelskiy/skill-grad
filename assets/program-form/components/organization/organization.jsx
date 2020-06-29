@@ -3,7 +3,7 @@ import React from 'react'
 import { ORGANIZAITION } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { selectInclude, setLocation } from '../../redux/actions'
+import { selectInclude, setLocation } from '../../redux/program/actions'
 
 import Block from '../ui/block'
 import TrainingDays from './training-days'
@@ -49,7 +49,7 @@ const Organization = () => {
       <div className={css.inputContainer}>
         <Textarea
           placeholder={'Место проведения'}
-          value={useSelector(state => state.location)}
+          value={useSelector(state => state.program.location)}
           setValue={(value) => dispatch(setLocation(value))}
         />
       </div>
@@ -58,7 +58,7 @@ const Organization = () => {
         <SimpleMultiRadio
           title={'Включено в курс:'}
           options={include}
-          selectedValues={useSelector(state => state.include)}
+          selectedValues={useSelector(state => state.program.include)}
           setValues={selectInclude}
         />
       </div>

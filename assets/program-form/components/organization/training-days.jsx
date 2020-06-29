@@ -12,14 +12,14 @@ import {
   TRAINING_DATE_CALENDAR,
   TRAINING_DATE_REQUEST
 } from '../../utils/field-types'
-import { setTraingDate } from '../../redux/actions'
+import { setTraingDate } from '../../redux/program/actions'
 
 
 const TrainingDays = () => {
   const dispatch = useDispatch()
 
   const [selectedDays, setSelectedDays] = useState([])
-  const trainingDays = useSelector(state => state.traningDate)
+  const trainingDays = useSelector(state => state.program.traningDate)
 
   return (
     <>
