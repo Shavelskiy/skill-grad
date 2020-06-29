@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from 'react'
-
-import axios from 'axios'
-import { FETCH_ALL_LOCATIONS } from '../../utils/endpoints'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { setLocations } from '../../redux/data/actions'
+import React, { useEffect, useRef, useState } from 'react'
 
 import css from './locaton-popup.scss?module'
 import cn from 'classnames'
 
 
-const LocatoinPopup = ({active, close, userSelectedLocations, selectLocations}) => {
-  const dispatch = useDispatch()
-
-  const locations = useSelector(state => state.data.locations)
+const LocatoinPopup = ({active, close, locations, userSelectedLocations, selectLocations}) => {
   const [selectedLocations, setSelectedLocations] = useState([])
 
+  const ref = useRef()
+
   useEffect(() => {
-    axios.get(FETCH_ALL_LOCATIONS)
-      .then(({data}) => dispatch(setLocations(data)))
-  }, [])
+    const listener = event => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return
+      }
+
+      close()
+    }
+
+    document.addEventListener('mousedown', listener)
+
+    return () => {
+      document.removeEventListener('mousedown', listener)
+    }
+  }, [ref])
 
   useEffect(() => {
     if (typeof userSelectedLocations === 'undefined') {
@@ -71,13 +75,9 @@ const LocatoinPopup = ({active, close, userSelectedLocations, selectLocations}) 
 
   const handleClickCity = (city, region = null) => {
     if (selectedLocations.indexOf(city.id) === -1) {
-      const needSelectRegion = region && region.subregions.filter(
-        subregion => ((city.id === subregion.id) || (selectedLocations.indexOf(subregion.id) !== -1))
-      ).length === region.subregions.length
-
-      setSelectedLocations(needSelectRegion ? [...selectedLocations, city.id, region.id] : [...selectedLocations, city.id])
+      setSelectedLocations(locations.indexOf(region.id) === -1 ? [...selectedLocations, city.id, region.id] : [...selectedLocations, city.id])
     } else {
-      setSelectedLocations(selectedLocations.filter(id => id !== city.id && (region === null || id !== region.id)))
+      setSelectedLocations(selectedLocations.filter(id => id !== city.id))
     }
   }
 
@@ -146,7 +146,7 @@ const LocatoinPopup = ({active, close, userSelectedLocations, selectLocations}) 
 
   return (
     <div className={cn(css.container, {[css.active]: active})}>
-      <div className={css.modal}>
+      <div className={css.modal} ref={ref}>
         <div className={css.body}>
           <div className={css.list}>
             <div className={cn(css.listItem, css.city)}>
