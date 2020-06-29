@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   .item {
     display: flex;
@@ -72,5 +73,23 @@
       line-height: 16px;
       text-decoration: underline;
     }
+  }
+}
+
+.popup-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999998;
+  background-color: rgba(22, 22, 22, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease-out;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 }

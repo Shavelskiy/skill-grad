@@ -145,24 +145,22 @@ const LocatoinPopup = ({active, close, locations, userSelectedLocations, selectL
   }
 
   return (
-    <div className={cn(css.container, {[css.active]: active})}>
-      <div className={css.modal} ref={ref}>
-        <div className={css.body}>
-          <div className={css.list}>
-            <div className={cn(css.listItem, css.city)}>
-              <div onClick={() => handleClickAllCity()} className={css.regionTitle}>
-                <div
-                  className={cn(
-                    css.point,
-                    {[css.checked]: getAllLocationIds().length === selectedLocations.length},
-                  )}
-                ></div>
-                Вся Россия
-              </div>
+    <div className={cn(css.modal, {[css.active]: active})} ref={ref}>
+      <div className={css.body}>
+        <div className={css.list}>
+          <div className={cn(css.listItem, css.city)}>
+            <div onClick={() => handleClickAllCity()} className={css.regionTitle}>
+              <div
+                className={cn(
+                  css.point,
+                  {[css.checked]: getAllLocationIds().length === selectedLocations.length},
+                )}
+              ></div>
+              Вся Россия
             </div>
-            {renderCityList()}
-            {renderRegionList()}
           </div>
+          {renderCityList()}
+          {renderRegionList()}
         </div>
       </div>
     </div>
