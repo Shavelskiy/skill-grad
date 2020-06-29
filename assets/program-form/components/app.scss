@@ -11,7 +11,12 @@
 
   .progress-bar {
     position: fixed;
-    left: 8vw;
+    right: calc(548px + 50vw);
+    width: 300px;
+
+    @media (max-width: 1730px) {
+      display: none;
+    }
   }
 
   .form {

@@ -1,14 +1,63 @@
 .progress-bar {
   display: flex;
   flex-direction: column;
-  background-color: rgb(234, 244, 253);
-  padding: 1vw 1.5vw;
-  border-radius: 1vw;
-  width: 10vw;
+  padding: 33px 30px;
+  border-radius: 35px;
+  background-color: #e9f4fd;
+  width: 100%;
 
-  span {
+  .item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
     &:not(:last-child) {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    &.success {
+      .number {
+        color: #fff;
+
+        &:after {
+          content: '';
+          background-image: url("./../../img/correct.svg");
+          background-size: 100%;
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          left: 13px;
+          top: 12%;
+        }
+      }
+
+      .text {
+        color: #6db4fe;
+      }
+    }
+
+    &.error {
+      .number {
+        color: #f92e25;
+      }
+
+      .text {
+        color: #f92e25;
+      }
+    }
+
+    .number {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 22px;
+      color: #d3e0ea;
+      margin-right: 17px;
+      position: relative;
+    }
+
+    .text {
+      font-size: 15px;
+      line-height: 22px;
     }
   }
 }

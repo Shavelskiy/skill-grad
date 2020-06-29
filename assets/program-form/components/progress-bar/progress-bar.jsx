@@ -1,6 +1,5 @@
 import React from 'react'
 
-import css from './progress-bar.scss?module'
 import {
   ADDITIONAL_INFO,
   DESCRIPTION,
@@ -13,20 +12,73 @@ import {
   TERM_OF_USE
 } from '../../utils/titles'
 
+import css from './progress-bar.scss?module'
+import cn from 'classnames'
+
 
 const ProgressBar = () => {
   return (
     <div className={css.progressBar}>
-      <span>01 {DESCRIPTION}</span>
-      <span>02 {DESIGN}</span>
-      <span>03 {PROVIDERS}</span>
-      <span>04 {LISTENERS}</span>
-      <span>05 {RESULTS}</span>
-      <span>06 {ORGANIZAITION}</span>
-      <span>07 {TERM_OF_USE}</span>
-      <span>08 {GALLERY}</span>
-      <span>09 {LOCATIONS}</span>
-      <span>10 {ADDITIONAL_INFO}</span>
+      <div className={cn(css.item, css.success)}>
+        <span className={css.number}>01</span>
+        <span className={css.text}>
+           {DESCRIPTION}
+        </span>
+      </div>
+      <div className={cn(css.item, css.success)}>
+        <span className={css.number}>02</span>
+        <span className={css.text}>
+           {DESIGN}
+        </span>
+      </div>
+      <div className={cn(css.item, css.success)}>
+        <span className={css.number}>03</span>
+        <span className={css.text}>
+           {PROVIDERS}
+        </span>
+      </div>
+      <div className={cn(css.item, css.error)}>
+        <span className={css.number}>04</span>
+        <span className={css.text}>
+           {LISTENERS}
+        </span>
+      </div>
+      <div className={cn(css.item, css.error)}>
+        <span className={css.number}>05</span>
+        <span className={css.text}>
+           {RESULTS}
+        </span>
+      </div>
+      <div className={css.item}>
+        <span className={css.number}>06</span>
+        <span className={css.text}>
+           {ORGANIZAITION}
+        </span>
+      </div>
+      <div className={css.item}>
+        <span className={css.number}>07</span>
+        <span className={css.text}>
+           {TERM_OF_USE}
+        </span>
+      </div>
+      <div className={css.item}>
+        <span className={css.number}>08</span>
+        <span className={css.text}>
+           {GALLERY}
+        </span>
+      </div>
+      <div className={css.item}>
+        <span className={css.number}>09</span>
+        <span className={css.text}>
+           {LOCATIONS}
+        </span>
+      </div>
+      <div className={css.item}>
+        <span className={css.number}>10</span>
+        <span className={css.text}>
+           {ADDITIONAL_INFO}
+        </span>
+      </div>
     </div>
   )
 }
