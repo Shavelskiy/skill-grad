@@ -4,7 +4,8 @@ import axios from 'axios'
 import { FETCH_ALL_PROVIDERS } from '../../utils/endpoints'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { chooseProvidersFromList, setProviderList } from '../../redux/program/actions'
+import { chooseProvidersFromList } from '../../redux/program/actions'
+import { setProviderList } from '../../redux/data/actions'
 
 import Modal from '../ui/modal'
 import Button from '../ui/button'
@@ -17,7 +18,7 @@ import noImage from './../../img/provider-image.png'
 const ChooseProviderPopup = ({active, close, selectedProvidersIds}) => {
   const dispatch = useDispatch()
 
-  const providerList = useSelector(state => state.program.providerList)
+  const providerList = useSelector(state => state.data.providerList)
   const [providersIds, setProvidersIds] = useState(null)
 
   const [searchQuery, setSerchQuery] = useState('')

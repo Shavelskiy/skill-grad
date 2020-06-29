@@ -89,6 +89,7 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update
         <div className={css.commentContainer}>
           <Textarea
             placeholder={'Комментарий'}
+            medium={true}
             value={provider.comment}
             setValue={(comment) => setProvider({...provider, comment: comment})}
           />

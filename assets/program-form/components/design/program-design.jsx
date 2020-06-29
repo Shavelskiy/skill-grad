@@ -30,7 +30,7 @@ const ProgramDesign = () => {
             <NumberInput
               extraSmall={true}
               value={percents[0]}
-              maxValue={99}
+              maxValue={100 - percents[1]}
               setValue={(value) => setPercents([value, percents[1]])}
             />
             <span className={css.theory}>% теории,</span>
@@ -39,7 +39,7 @@ const ProgramDesign = () => {
             <NumberInput
               extraSmall={true}
               value={percents[1]}
-              maxValue={99}
+              maxValue={100 - percents[0]}
               setValue={(value) => setPercents([percents[0], value])}
             />
             <span className={css.practice}>% практики</span>

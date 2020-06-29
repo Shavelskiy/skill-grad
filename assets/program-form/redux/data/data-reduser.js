@@ -1,4 +1,4 @@
-import { SET_LOCATIONS } from './types'
+import { SET_PROVIDER_LIST, SET_LOCATIONS } from './types'
 
 
 const initialState = {
@@ -65,11 +65,20 @@ const initialState = {
       title: 'Трудоустройство, практика, стажировка выпускников',
     },
   ],
+  currentProvider: {
+    name: 'kekek',
+    comment: 'kekekek',
+    image: '/upload/5ef5d372a30654.53556181-1593168754.png',
+    link: 'https://google.com'
+  },
+  providerList: [],
   locations: [],
 }
 
 export const dataReduser = (state = initialState, action) => {
   switch (action.type) {
+    case SET_PROVIDER_LIST:
+      return {...state, providerList: action.payload}
     case SET_LOCATIONS:
       return {...state, locations: action.payload}
     default:

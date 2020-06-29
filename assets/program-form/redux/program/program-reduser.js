@@ -14,7 +14,6 @@ import {
   ADD_NEW_PROVIDER,
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
-  SET_PROVIDER_LIST,
   SET_PROVIDERS_FROM_LIST,
   SET_TARGET_AUDIENCE,
   SET_LEVEL,
@@ -66,15 +65,8 @@ const initialState = {
     otherValue: '',
   },
   advantages: '',
-  currentProvider: {
-    name: 'kekek',
-    comment: 'kekekek',
-    image: '/upload/5ef5d372a30654.53556181-1593168754.png',
-    link: 'https://google.com'
-  },
   newProviders: [],
   selectedProvidersIds: [],
-  providerList: [],
   targetAudience: [],
   level: null,
   preparations: [],
@@ -180,8 +172,6 @@ export const programReduser = (state = initialState, action) => {
       }
     case DELETE_NEW_PROVIDER:
       return {...state, newProviders: state.newProviders.filter((item, key) => key !== action.payload)}
-    case SET_PROVIDER_LIST:
-      return {...state, providerList: action.payload}
     case SET_PROVIDERS_FROM_LIST:
       return {...state, selectedProvidersIds: action.payload}
     case SET_TARGET_AUDIENCE:

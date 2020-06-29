@@ -14,7 +14,6 @@ import {
   ADD_NEW_PROVIDER,
   DELETE_NEW_PROVIDER,
   UPDATE_NEW_PROVIDER,
-  SET_PROVIDER_LIST,
   SET_PROVIDERS_FROM_LIST,
   SET_TARGET_AUDIENCE,
   SET_LEVEL,
@@ -160,13 +159,6 @@ export function deleteNewProvider(key) {
   return {
     type: DELETE_NEW_PROVIDER,
     payload: key,
-  }
-}
-
-export function setProviderList(providers) {
-  return {
-    type: SET_PROVIDER_LIST,
-    payload: providers,
   }
 }
 

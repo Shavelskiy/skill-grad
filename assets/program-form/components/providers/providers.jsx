@@ -22,9 +22,9 @@ import editImage from './../../img/pencil.svg'
 const Providers = () => {
   const dispatch = useDispatch()
 
-  const providerList = useSelector(state => state.program.providerList)
+  const providerList = useSelector(state => state.data.providerList)
 
-  const currentProvider = useSelector(state => state.program.currentProvider)
+  const currentProvider = useSelector(state => state.data.currentProvider)
   const newProviders = useSelector(state => state.program.newProviders)
   const selectedProviderIds = useSelector(state => state.program.selectedProvidersIds)
 
@@ -35,12 +35,20 @@ const Providers = () => {
 
   const [updatedProvider, setUpdatedProvider] = useState(null)
 
-  const renderTooltip = (provider) => {
-    if (provider.type !== 'new') {
+  const renderTooltip = (type) => {
+    if (type !== 'new') {
       return <></>
     }
 
     return <div className={css.tooltip}>Ссылка ведет на другой ресурс</div>
+  }
+
+  const renderImageDescription = (type) => {
+    if (type !== 'new') {
+      return <></>
+    }
+
+    return <div className={css.description}>Провайдера нет в базе SillGrad</div>
   }
 
   const renderActions = (provider, key, type) => {
@@ -94,19 +102,22 @@ const Providers = () => {
   const renderProviderList = (providers, type) => {
     return providers.map((provider, key) => {
       return (
-        <div key={key} className={css.teacher}>
-          <div>
+        <div key={key} className={css.provider}>
+          <div className={css.logo}>
             {renderPorviderImage(provider, type)}
+            {renderImageDescription(type)}
           </div>
           <div className={css.info}>
             <div className={cn(css.title, {[css.outside]: type === 'new'})}>
               <a target='_blank' href={provider.link}>
                 {provider.name}
-                {renderTooltip(provider)}
+                {renderTooltip(type)}
               </a>
               {renderActions(provider, key, type)}
             </div>
-            <div className={css.comment}>{provider.comment}</div>
+            <div className={css.comment}>
+              {provider.comment}
+            </div>
           </div>
         </div>
       )
@@ -118,6 +129,7 @@ const Providers = () => {
       title={PROVIDERS}
       link={'Добавить провайдера'}
       linkClick={() => setControlPopupActive(true)}
+      containerClass={css.container}
     >
       <ControlPopup
         active={controlPopupActive}
@@ -143,7 +155,7 @@ const Providers = () => {
         providerData={updatedProvider}
       />
 
-      <div className={css.teacherContainer}>
+      <div className={css.providerContainer}>
         {renderProviderList([currentProvider], 'current')}
         {renderProviderList(providerList.filter(provider => selectedProviderIds.indexOf(provider.id) !== -1), 'list')}
         {renderProviderList(newProviders, 'new')}

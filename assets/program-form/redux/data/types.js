@@ -1,1 +1,3 @@
+export const SET_PROVIDER_LIST = 'SET_PROVIDER_LIST'
+
 export const SET_LOCATIONS = 'SET_LOCATIONS'
