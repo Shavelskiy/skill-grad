@@ -82,7 +82,6 @@ const Result = () => {
           <input
             id={certificateImageId}
             type="file"
-            value=""
             onChange={(event) => handleImageUpdate(event)}
           />
         </div>

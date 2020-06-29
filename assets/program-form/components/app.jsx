@@ -22,16 +22,16 @@ const App = () => {
         <ProgressBar/>
       </div>
       <div className={css.form}>
-        {/*<Description/>*/}
-        {/*<Design/>*/}
-        {/*<Providers/>*/}
-        {/*<Listeners/>*/}
-        {/*<Result/>*/}
-        {/*<Organization/>*/}
+        <Description/>
+        <Design/>
+        <Providers/>
+        <Listeners/>
+        <Result/>
+        <Organization/>
         <TermOfUse/>
-        {/*<Gallery/>*/}
-        {/*<Locations/>*/}
-        {/*<AdditionalInfo/>*/}
+        <Gallery/>
+        <Locations/>
+        <AdditionalInfo/>
       </div>
     </div>
   )

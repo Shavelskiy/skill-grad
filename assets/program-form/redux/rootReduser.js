@@ -31,7 +31,7 @@ import {
   SELECT_INCLUDE,
   SET_PRICE,
   SET_SHOW_PRICE_REDUCTION,
-  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT,
+  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT, SET_GALLERY,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../utils/field-types'
 
@@ -135,6 +135,7 @@ const initialState = {
     byRequest: false,
     showPriceReduction: false,
   },
+  gallery: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -229,6 +230,8 @@ export const rootReducer = (state = initialState, action) => {
       return {...state, favoriteProviderAction: action.payload}
     case SET_TERM_OF_PAYMENT:
       return {...state, termOfPayment: action.payload}
+    case SET_GALLERY:
+      return {...state, gallery: action.payload}
     default:
       return state
   }

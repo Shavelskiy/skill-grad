@@ -69,7 +69,6 @@ const Teachers = () => {
             <input
               id={imageId}
               type="file"
-              value=""
               onChange={(event) => handleImageUpdate(key, event)}
             />
             {renderImageActions(key, teacher.image, imageId)}

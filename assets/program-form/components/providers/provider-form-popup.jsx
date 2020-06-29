@@ -65,7 +65,6 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update
             <input
               id={imageId}
               type="file"
-              value=""
               onChange={handleUploadImage}
             />
             {renderImageActions()}

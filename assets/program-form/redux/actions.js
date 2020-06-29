@@ -31,7 +31,7 @@ import {
   SELECT_INCLUDE,
   SET_PRICE,
   SET_SHOW_PRICE_REDUCTION,
-  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT,
+  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT, SET_GALLERY,
 } from './types'
 
 
@@ -321,5 +321,12 @@ export function setTermOfPayment(termOfPayment) {
   return {
     type: SET_TERM_OF_PAYMENT,
     payload: termOfPayment,
+  }
+}
+
+export function setGallery(gallery) {
+  return {
+    type: SET_GALLERY,
+    payload: gallery,
   }
 }
