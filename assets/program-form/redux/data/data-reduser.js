@@ -72,6 +72,20 @@ const initialState = {
     link: 'https://google.com'
   },
   providerList: [],
+  levels: [
+    {
+      value: 1,
+      title: 'Начальный',
+    },
+    {
+      value: 2,
+      title: 'Средний',
+    },
+    {
+      value: 3,
+      title: 'Продвинутый',
+    },
+  ],
   locations: [],
 }
 

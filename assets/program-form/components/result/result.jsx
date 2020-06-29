@@ -61,8 +61,8 @@ const Result = () => {
   }
 
   return (
-    <Block title={RESULTS}>
-      <div className={css.inputContainer}>
+    <Block title={RESULTS} containerClass={css.container}>
+      <div>
         <Textarea
           placeholder={'Полученные знания, приобретенные навыки'}
           value={useSelector(state => state.program.gainedKnowledge)}
