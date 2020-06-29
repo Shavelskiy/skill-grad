@@ -1,0 +1,36 @@
+.button-container {
+  margin: 30px 0 160px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .button {
+    margin-left: 30px;
+    padding: 7px 45px;
+    border-radius: 100px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &.cancel {
+      background-color: #f92e25;
+      background-image: linear-gradient(to top, #fc5619 0%, #fa463f 100%);
+    }
+
+    &.save {
+      background-color: #f3f3f3;
+      color: #1d71b1;
+    }
+
+    &.publish {
+      background-color: #f3f3f3;
+      background-image: linear-gradient(to top, #1f82b9 0%, #1a5da7 100%);
+    }
+  }
+}

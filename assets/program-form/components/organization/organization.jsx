@@ -56,7 +56,7 @@ const Organization = () => {
 
       <div className={css.inputContainer}>
         <SimpleMultiRadio
-          title={'Включено в курс:'}
+          title={'Включено в курс'}
           options={include}
           selectedValues={useSelector(state => state.program.include)}
           setValues={selectInclude}

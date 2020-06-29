@@ -56,13 +56,14 @@ export const NumberInput = ({placeholder = '', value, maxValue = 9999999, disabl
   )
 }
 
-export const Textarea = ({placeholder = '', value, setValue, disableResize = true, large = false}) => {
+export const Textarea = ({placeholder = '', value, setValue, disableResize = true, large = false, extraLarge = false}) => {
   return (
     <textarea
       className={cn(
         css.textarea,
         {[css.resizeDisabled]: disableResize},
         {[css.large]: large},
+        {[css.extraLarge]: extraLarge}
       )}
       placeholder={placeholder}
       value={value}

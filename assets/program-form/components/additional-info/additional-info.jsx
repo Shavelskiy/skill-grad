@@ -21,6 +21,7 @@ const AdditionalInfo = () => {
           placeholder={'Дополнительная информация'}
           value={useSelector(state => state.program.gainedKnowledge)}
           setValue={(value) => dispatch(setGainedKnowledge(value))}
+          extraLarge={true}
         />
       </div>
     </Block>

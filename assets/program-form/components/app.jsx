@@ -11,6 +11,7 @@ import TermOfUse from './term-of-use/term-of-use'
 import Gallery from './gallery/gallery'
 import Locations from './locations/locations'
 import AdditionalInfo from './additional-info/additional-info'
+import ResultButtons from './result-buttons/result-buttons'
 
 import css from './app.scss?module'
 
@@ -22,16 +23,17 @@ const App = () => {
         <ProgressBar/>
       </div>
       <div className={css.form}>
-        {/*<Description/>*/}
-        {/*<Design/>*/}
-        {/*<Providers/>*/}
-        {/*<Listeners/>*/}
-        {/*<Result/>*/}
-        {/*<Organization/>*/}
-        {/*<TermOfUse/>*/}
-        {/*<Gallery/>*/}
+        <Description/>
+        <Design/>
+        <Providers/>
+        <Listeners/>
+        <Result/>
+        <Organization/>
+        <TermOfUse/>
+        <Gallery/>
         <Locations/>
-        {/*<AdditionalInfo/>*/}
+        <AdditionalInfo/>
+        <ResultButtons/>
       </div>
     </div>
   )
