@@ -31,7 +31,13 @@ import {
   SELECT_INCLUDE,
   SET_PRICE,
   SET_SHOW_PRICE_REDUCTION,
-  SET_DISCOUNTS, SET_ACTIONS, SET_FAVORITE_PROVIDER_ACTION, SET_TERM_OF_PAYMENT, SET_GALLERY, SELECT_LOCATIONS,
+  SET_DISCOUNTS,
+  SET_ACTIONS,
+  SET_FAVORITE_PROVIDER_ACTION,
+  SET_TERM_OF_PAYMENT,
+  SET_GALLERY,
+  SELECT_LOCATIONS,
+  SET_ADDITIONAL_INFO,
 } from './types'
 import { DESIGN_SIMPLE, DURATION_HOURS } from '../../utils/field-types'
 
@@ -137,6 +143,7 @@ const initialState = {
   },
   gallery: [],
   locations: [],
+  additionalInfo: '',
 }
 
 export const programReduser = (state = initialState, action) => {
@@ -235,6 +242,8 @@ export const programReduser = (state = initialState, action) => {
       return {...state, gallery: action.payload}
     case SELECT_LOCATIONS:
       return {...state, locations: action.payload}
+    case SET_ADDITIONAL_INFO:
+      return {...state, additionalInfo: action.payload}
     default:
       return state
   }
