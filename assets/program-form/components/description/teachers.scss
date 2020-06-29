@@ -1,14 +1,14 @@
 .teacher-container {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 -19px -10px -19px;
 
   .teacher {
-    width: 25%;
-    height: 121px;
-    margin-bottom: 30px;
-    padding-right: 40px;
+    width: 33.33333%;
+    padding: 0 19px;
     position: relative;
     display: flex;
+    margin-bottom: 10px;
 
     .image-container {
       display: flex;
@@ -16,7 +16,6 @@
       justify-content: space-between;
       min-width: 100px;
       max-width: 100px;
-      height: 124px;
       margin-right: 20px;
 
       .image-wrap {
@@ -25,6 +24,7 @@
 
         img {
           height: 100%;
+          width: 100%;
         }
       }
 
@@ -36,13 +36,14 @@
         align-items: center;
         width: 100px;
         height: 100px;
-        padding: 10px 0;
+        padding: 10px 18px;
         font-size: 13px;
         background-color: #f3f3f3;
         color: #999;
+        text-align: center;
 
         img {
-          width: 55%;
+          width: 73%;
         }
       }
 
@@ -73,10 +74,10 @@
     .delete-button {
       cursor: pointer;
       position: absolute;
-      width: 4%;
+      width: 16px;
       z-index: 9999;
-      top: -4px;
-      right: 33px;
+      top: -8px;
+      right: 11px;
 
       &:hover {
         opacity: .7;
@@ -91,6 +92,7 @@
     align-items: center;
     background-color: #e9f4fd;
     color: #999;
+    margin: 0 19px;
     width: 100px;
     height: 100px;
     padding: 10px 0;

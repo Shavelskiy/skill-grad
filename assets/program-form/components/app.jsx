@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div className={css.wrap}>
       <div className={css.progressBar}>
-        <ProgressBar/>
+        {/*<ProgressBar/>*/}
       </div>
       <div className={css.form}>
         <Description/>

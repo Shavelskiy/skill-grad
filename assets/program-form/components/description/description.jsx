@@ -17,20 +17,9 @@ import cn from 'classnames'
 const Description = () => {
   const dispatch = useDispatch()
 
-  const options = [ // todo
-    {
-      title: 'Архитектура',
-      value: 1,
-    },
-    {
-      title: 'Дизайн',
-      value: 2,
-    },
-  ]
-
   const getCategoriesOptions = (key) => {
     const selectedCategories = useSelector(state => state.program.categories)
-    return options.filter(option => {
+    return useSelector(state => state.data.categories).filter(option => {
       return selectedCategories.filter((selectedCategory, valueKey) => {
         return (valueKey !== key) && (selectedCategory === option.value)
       }).length < 1
@@ -38,15 +27,14 @@ const Description = () => {
   }
 
   return (
-    <Block title={DESCRIPTION}>
+    <Block title={DESCRIPTION} containerClass={css.container}>
       <TextInput
         value={useSelector(state => state.program.name)}
         placeholder={'Название программы обучения'}
         required={true}
-        big={true}
         setValue={(name) => dispatch(setName(name))}
       />
-      <div className={cn(css.categroies, css.inputContainer)}>
+      <div className={cn(css.categroies, css.fieldContainer)}>
         {[...Array(3).keys()].map(key => {
           return (
             <div className={css.categorySelect} key={key}>
@@ -60,18 +48,20 @@ const Description = () => {
           )
         })}
       </div>
-      <div className={css.inputContainer}>
+      <div className={css.fieldContainer}>
         <Textarea
           placeholder={'Аннотация программы обучения'}
           value={useSelector(state => state.program.annotation)}
           setValue={(annotation) => dispatch(setAnnotation(annotation))}
+          extraSmall={true}
         />
       </div>
-      <div className={css.inputContainer}>
+      <div className={css.fieldContainer}>
         <Textarea
           placeholder={'Программа обучения'}
           value={useSelector(state => state.program.detailText)}
           setValue={(detailText) => dispatch(setDetailText(detailText))}
+          extraSmall={true}
         />
       </div>
       <div className={css.inputContainer}>

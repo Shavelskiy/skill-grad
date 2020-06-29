@@ -1,21 +1,22 @@
-.categroies {
-  margin-top: 30px;
-  width: 100%;
-  display: flex;
+.container {
+  padding: 20px 0 55px 0;
 
-  .category-select {
+  .categroies {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 
-    &:first-child {
-      margin-right: 3%;
-    }
-
-    &:last-child {
-      margin-left: 3%;
+    .category-select {
+      width: 31%;
     }
   }
-}
 
-.input-container {
-  margin-top: 25px;
+  .field-container {
+    margin-top: 25px;
+  }
+
+  .input-container {
+    margin-top: 36px;
+  }
+
 }

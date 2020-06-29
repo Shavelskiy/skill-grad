@@ -3,8 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import css from './select.scss?module'
 import cn from 'classnames'
 
-import arrow from './../../../img/select-arrow.svg'
-
 
 const Select = ({options, value, setValue, placeholder = ''}) => {
   const ref = useRef()
@@ -65,7 +63,7 @@ const Select = ({options, value, setValue, placeholder = ''}) => {
         onClick={handleTitleClick}
       >
         <span> {getTitle()}</span>
-        <img src={arrow} className={css.icon}/>
+        <span className={css.icon}></span>
       </div>
       <div className={css.optionsConainer}>
         <div className={css.options}>

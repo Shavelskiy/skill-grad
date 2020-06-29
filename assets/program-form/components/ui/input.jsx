@@ -4,12 +4,17 @@ import css from './input.scss?module'
 import cn from 'classnames'
 
 
-export const TextInput = ({placeholder = '', value, disabled = false, required = false, setValue, big = false}) => {
+export const TextInput = ({placeholder = '', value, disabled = false, required = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false}) => {
   return (
     <div className={cn(
       css.input,
-      {[css.big]: big},
       {[css.required]: required},
+      {[css.extraSmall]: extraSmall},
+      {[css.small]: small},
+      {[css.standart]: standart},
+      {[css.medium]: medium},
+      {[css.large]: large},
+      {[css.extraLarge]: extraLarge},
     )}
     >
       <input
@@ -24,7 +29,9 @@ export const TextInput = ({placeholder = '', value, disabled = false, required =
   )
 }
 
-export const NumberInput = ({placeholder = '', value, maxValue = 9999999, disabled = false, required = false, setValue, small = false}) => {
+export const NumberInput = ({
+                              placeholder = '', value, maxValue = 9999999, disabled = false, required = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false
+                            }) => {
   const onChange = (event) => {
     const eventValue = Number(event.target.value.replace(/[^.\d]+/g, ''))
     if (eventValue <= 0) {
@@ -39,8 +46,13 @@ export const NumberInput = ({placeholder = '', value, maxValue = 9999999, disabl
   return (
     <div className={cn(
       css.input,
-      {[css.small]: small},
       {[css.required]: required},
+      {[css.extraSmall]: extraSmall},
+      {[css.small]: small},
+      {[css.standart]: standart},
+      {[css.medium]: medium},
+      {[css.large]: large},
+      {[css.extraLarge]: extraLarge},
     )}
     >
       <input
@@ -56,14 +68,17 @@ export const NumberInput = ({placeholder = '', value, maxValue = 9999999, disabl
   )
 }
 
-export const Textarea = ({placeholder = '', value, setValue, disableResize = true, large = false, extraLarge = false}) => {
+export const Textarea = ({placeholder = '', value, setValue, disableResize = true, extraSmall = false, small = false, medium = false, large = false, extraLarge = false}) => {
   return (
     <textarea
       className={cn(
         css.textarea,
         {[css.resizeDisabled]: disableResize},
+        {[css.extraSmall]: extraSmall},
+        {[css.small]: small},
+        {[css.medium]: medium},
         {[css.large]: large},
-        {[css.extraLarge]: extraLarge}
+        {[css.extraLarge]: extraLarge},
       )}
       placeholder={placeholder}
       value={value}

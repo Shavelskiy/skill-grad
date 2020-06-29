@@ -1,10 +1,11 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addTeacher, deleteTeacher, setTeacherName, setTeacherImage, deleteTeacherImage } from '../../redux/program/actions'
+import { setTeachers } from '../../redux/program/actions'
+
+import { Textarea } from '../ui/input'
 
 import css from './teachers.scss?module'
-import { Textarea } from '../ui/input'
 
 import deleteImage from './../../img/delete.svg'
 import addImage from './../../img/teacher-add.svg'
@@ -24,7 +25,7 @@ const Teachers = () => {
       return
     }
 
-    dispatch(setTeacherImage(key, file))
+    dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {name: item.name, image: file} : item)))
   }
 
   const renderImage = (image, imageId) => {
@@ -52,7 +53,10 @@ const Teachers = () => {
         <label htmlFor={imageId} className={css.reload}>
           <img src={realoadImg}/>
         </label>
-        <img src={deleteTeacherImg} onClick={() => dispatch(deleteTeacherImage(key))}/>
+        <img src={deleteTeacherImg} onClick={() => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
+          name: item.name,
+          image: null,
+        } : item)))}/>
       </div>
     )
   }
@@ -75,14 +79,17 @@ const Teachers = () => {
           </div>
           <Textarea
             placeholder={'ФИО'}
-            setValue={(name) => dispatch(setTeacherName(key, name))}
-            large={true}
+            medium={true}
+            setValue={(name) => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
+              name: name,
+              image: item.image,
+            } : item)))}
             value={teacher.name}
           />
           <img
             className={css.deleteButton}
             src={deleteImage}
-            onClick={() => dispatch(deleteTeacher(key))}
+            onClick={() => dispatch(setTeachers(teachers.filter((item, itemKey) => key !== itemKey)))}
           />
         </div>
       )
@@ -90,12 +97,12 @@ const Teachers = () => {
   }
 
   const renderAddButton = () => {
-    if (teachers.length > 3) {
+    if (teachers.length > 5) {
       return
     }
 
     return (
-      <button onClick={() => dispatch(addTeacher())} className={css.addButton}>
+      <button onClick={() => dispatch(setTeachers([...teachers, {image: null, name: ''}]))} className={css.addButton}>
         <img src={addImage}/>
         Добавить преподавателя
       </button>

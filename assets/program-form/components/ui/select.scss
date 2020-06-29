@@ -4,8 +4,7 @@
   border: none;
   background-color: #f3f3f3;
   cursor: pointer;
-  padding: 0 20px;
-  height: 40px;
+  height: 48px;
   color: #777;
   font-weight: 300;
   position: relative;
@@ -17,9 +16,12 @@
 
   .icon {
     position: absolute;
-    height: 1vw;
-    top: calc(50% - .5vw);
-    right: 1.2vw;
+    height: 16px;
+    width: 16px;
+    background-image: url("./../../img/down-arrow.svg");
+    background-size: 100%;
+    top: calc(50% - 8px);
+    right: 18px;
     transition: all 275ms;
   }
 
@@ -30,7 +32,7 @@
     align-items: center;
     min-height: 0;
     height: 100%;
-    padding: 0 1.3vw 0 .39vw;
+    padding: 0 18px 0 24px;
   }
 
   .options-conainer {

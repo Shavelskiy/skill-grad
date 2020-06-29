@@ -4,7 +4,7 @@ import css from './block.scss?module'
 import addButtonImage from './../../img/plus.svg'
 
 
-const Block = ({children, title, link = null, linkClick}) => {
+const Block = ({children, title, link = null, linkClick, containerClass}) => {
   const renderLink = () => {
     if (link === null) {
       return <></>
@@ -19,13 +19,15 @@ const Block = ({children, title, link = null, linkClick}) => {
   }
 
   return (
-    <div className={css.block}>
+    <>
       <div className={css.title}>
         <h2>{title}</h2>
         {renderLink()}
       </div>
-      {children}
-    </div>
+      <div className={containerClass}>
+        {children}
+      </div>
+    </>
   )
 }
 

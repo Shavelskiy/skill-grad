@@ -37,13 +37,13 @@ const Duration = () => {
   return (
     <>
       <h3>Продолжительность программы обучения:</h3>
-      <div className={css.duration}>
+      <div>
         <RadioButton
           click={() => dispatch(selectDuration(DURATION_HOURS, hourValue))}
           selected={duration.type === DURATION_HOURS}
         >
           <NumberInput
-            small={true}
+            standart={true}
             value={hourValue}
             setValue={setHourValue}
           />
@@ -54,7 +54,7 @@ const Duration = () => {
           selected={duration.type === DURATION_DAYS}
         >
           <NumberInput
-            small={true}
+            standart={true}
             value={dayValue}
             setValue={setDayValue}
           />
@@ -66,6 +66,7 @@ const Duration = () => {
         >
           <TextInput
             placeholder={'Другой варинт'}
+            medium={true}
             value={otherValue}
             setValue={setOtherValue}
           />

@@ -3,11 +3,7 @@ import {
   SET_CATEGORY,
   SET_ANNOTATION,
   SET_DETAIL_TEXT,
-  ADD_TEACHER,
-  DELETE_TEACHER,
-  SET_TEACHER_NAME,
-  SET_TEACHER_IMAGE,
-  DELETE_TEACHER_IMAGE,
+  SET_TEACHERS,
   SELECT_DURATION,
   SELECT_FORMAT,
   SELECT_KNOWLEDGE_CHECK,
@@ -72,45 +68,10 @@ export function setDetailText(detailText) {
   }
 }
 
-export function addTeacher() {
+export function setTeachers(teachers) {
   return {
-    type: ADD_TEACHER,
-  }
-}
-
-export function deleteTeacher(key) {
-  return {
-    type: DELETE_TEACHER,
-    payload: key
-  }
-}
-
-export function setTeacherName(key, name) {
-  return {
-    type: SET_TEACHER_NAME,
-    payload: {
-      key: key,
-      name: name,
-    },
-  }
-}
-
-export function setTeacherImage(key, image) {
-  return {
-    type: SET_TEACHER_IMAGE,
-    payload: {
-      key: key,
-      image: image,
-    },
-  }
-}
-
-export function deleteTeacherImage(key) {
-  return {
-    type: DELETE_TEACHER_IMAGE,
-    payload: {
-      key: key,
-    },
+    type: SET_TEACHERS,
+    payload: teachers,
   }
 }
 
