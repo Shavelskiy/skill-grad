@@ -31,7 +31,6 @@ const Description = () => {
       <TextInput
         value={useSelector(state => state.program.name)}
         placeholder={'Название программы обучения'}
-        required={true}
         setValue={(name) => dispatch(setName(name))}
       />
       <div className={cn(css.categroies, css.fieldContainer)}>

@@ -21,74 +21,18 @@ import SimpleMultiRadio from '../ui/simple-multi-radio'
 const Design = () => {
   const dispatch = useDispatch()
 
-  const formats = [ //todo
-    {
-      id: 1,
-      title: 'Вебинар',
-    },
-    {
-      id: 2,
-      title: 'Онлайн курс',
-    },
-    {
-      id: 3,
-      title: 'Очная форма обучения',
-    },
-    {
-      id: 4,
-      title: 'Очно-заочная форма обучения',
-    },
-    {
-      id: 5,
-      title: 'Заочная форма обучения',
-    },
-
-    {
-      id: 6,
-      title: 'Смешанная форма обучения',
-    },
-  ]
-
-  const knowledgeCheck = [
-    {
-      id: true,
-      title: 'Да',
-    },
-
-    {
-      id: false,
-      title: 'Нет',
-    },
-  ]
-
-  const additional = [
-    {
-      id: 1,
-      title: 'Консультационная поддержка после обучения',
-    },
-    {
-      id: 2,
-      title: 'Онлайн форум выпускников',
-    },
-    {
-      id: 3,
-      title: 'Трудоустройство, практика, стажировка выпускников',
-    },
-  ]
-
-
   return (
-    <Block title={DESIGN}>
-      <div className={css.inputContainer}>
+    <Block title={DESIGN} containerClass={css.container}>
+      <div>
         <SimpleRadio
           title={'Формат обучения'}
-          options={formats}
+          options={useSelector(state => state.data.formats)}
           selectedValue={useSelector(state => state.program.format)}
           selectValue={selectFormat}
         />
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.bigMargin}>
         <Textarea
           placeholder={'Описание процесса обучения'}
           value={useSelector(state => state.program.processDescription)}
@@ -103,7 +47,7 @@ const Design = () => {
       <div className={css.inputContainer}>
         <SimpleRadio
           title={'Проверка знаний'}
-          options={knowledgeCheck}
+          options={useSelector(state => state.data.knowledgeCheck)}
           selectedValue={useSelector(state => state.program.knowledgeCheck)}
           selectValue={selectKnowLedgeCheck}
         />
@@ -112,13 +56,13 @@ const Design = () => {
       <div className={css.inputContainer}>
         <SimpleMultiRadio
           title={'Дополнительно'}
-          options={additional}
+          options={useSelector(state => state.data.additional)}
           selectedValues={useSelector(state => state.program.additional)}
           setValues={selectAdditional}
         />
       </div>
 
-      <div className={css.inputContainer}>
+      <div className={css.bigMargin}>
         <Textarea
           placeholder={'Преимущества программы обучения'}
           value={useSelector(state => state.program.advantages)}

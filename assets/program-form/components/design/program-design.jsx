@@ -19,30 +19,30 @@ const ProgramDesign = () => {
   const [percents, setPercents] = useState([0, 0])
 
   return (
-    <div className={css.container}>
+    <>
       <h3>Дизайн программы обучения:</h3>
-      <div className={css.programDesign}>
+      <div>
         <RadioButton
           click={() => dispatch(selectDesign(DESIGN_SIMPLE, percents))}
           selected={design.type === DESIGN_SIMPLE}
         >
           <div className={css.percentInput}>
             <NumberInput
-              small={true}
+              extraSmall={true}
               value={percents[0]}
               maxValue={99}
               setValue={(value) => setPercents([value, percents[1]])}
             />
-            <span>% теории,</span>
+            <span className={css.theory}>% теории,</span>
           </div>
           <div className={css.percentInput}>
             <NumberInput
-              small={true}
+              extraSmall={true}
               value={percents[1]}
               maxValue={99}
               setValue={(value) => setPercents([percents[0], value])}
             />
-            <span>% практики</span>
+            <span className={css.practice}>% практики</span>
           </div>
         </RadioButton>
         <RadioButton
@@ -57,12 +57,13 @@ const ProgramDesign = () => {
         >
           <TextInput
             placeholder={'Другой варинт'}
+            medium={true}
             value={otherValue}
             setValue={(value) => setOtherValue(value)}
           />
         </RadioButton>
       </div>
-    </div>
+    </>
   )
 }
 

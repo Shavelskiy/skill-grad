@@ -4,11 +4,10 @@ import css from './input.scss?module'
 import cn from 'classnames'
 
 
-export const TextInput = ({placeholder = '', value, disabled = false, required = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false}) => {
+export const TextInput = ({placeholder = '', value, disabled = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false}) => {
   return (
     <div className={cn(
       css.input,
-      {[css.required]: required},
       {[css.extraSmall]: extraSmall},
       {[css.small]: small},
       {[css.standart]: standart},
@@ -21,7 +20,6 @@ export const TextInput = ({placeholder = '', value, disabled = false, required =
         type={'text'}
         value={value}
         placeholder={placeholder}
-        required={required}
         disabled={disabled}
         onChange={(event) => setValue(event.target.value)}
       />
@@ -30,7 +28,7 @@ export const TextInput = ({placeholder = '', value, disabled = false, required =
 }
 
 export const NumberInput = ({
-                              placeholder = '', value, maxValue = 9999999, disabled = false, required = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false
+                              placeholder = '', value, maxValue = 9999999, disabled = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false
                             }) => {
   const onChange = (event) => {
     const eventValue = Number(event.target.value.replace(/[^.\d]+/g, ''))
@@ -46,7 +44,6 @@ export const NumberInput = ({
   return (
     <div className={cn(
       css.input,
-      {[css.required]: required},
       {[css.extraSmall]: extraSmall},
       {[css.small]: small},
       {[css.standart]: standart},
@@ -60,7 +57,6 @@ export const NumberInput = ({
         min={0}
         value={value}
         placeholder={placeholder}
-        required={required}
         disabled={disabled}
         onChange={(event) => onChange(event)}
       />

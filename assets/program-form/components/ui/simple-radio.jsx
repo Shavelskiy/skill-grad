@@ -41,6 +41,7 @@ const SimpleRadio = ({title = '', options, selectedValue, selectValue}) => {
         >
           <TextInput
             placeholder={'Другой варинт'}
+            medium={true}
             value={selectedValue.otherValue}
             setValue={(value) => dispatch(selectValue(selectedValue.id, value))}
           />
