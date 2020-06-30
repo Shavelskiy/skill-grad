@@ -20,6 +20,7 @@ use App\Repository\ProviderRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -201,5 +202,15 @@ class ProgramFormController extends AbstractController
         }
 
         return new JsonResponse($result);
+    }
+
+    /**
+     * @Route("/save")
+     */
+    public function save(Request $request): Response
+    {
+
+        $a = 1;
+        die;
     }
 }
