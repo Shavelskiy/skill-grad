@@ -35,22 +35,6 @@ const Providers = () => {
 
   const [updatedProvider, setUpdatedProvider] = useState(null)
 
-  const renderTooltip = (type) => {
-    if (type !== 'new') {
-      return <></>
-    }
-
-    return <div className={css.tooltip}>Ссылка ведет на другой ресурс</div>
-  }
-
-  const renderImageDescription = (type) => {
-    if (type !== 'new') {
-      return <></>
-    }
-
-    return <div className={css.description}>Провайдера нет в базе SillGrad</div>
-  }
-
   const renderActions = (provider, key, type) => {
     switch (type) {
       case 'new':
@@ -105,13 +89,13 @@ const Providers = () => {
         <div key={key} className={css.provider}>
           <div className={css.logo}>
             {renderPorviderImage(provider, type)}
-            {renderImageDescription(type)}
+            {(type === 'new') ? <div className={css.description}>Провайдера нет в базе SillGrad</div> : <></>}
           </div>
           <div className={css.info}>
             <div className={cn(css.title, {[css.outside]: type === 'new'})}>
               <a target='_blank' href={provider.link}>
                 {provider.name}
-                {renderTooltip(type)}
+                {(type === 'new') ? <div className={css.tooltip}>Ссылка ведет на другой ресурс</div> : <></>}
               </a>
               {renderActions(provider, key, type)}
             </div>
