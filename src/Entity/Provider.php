@@ -34,6 +34,16 @@ class Provider
     private string $description;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $externalLink;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private bool $proAccount;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
     private ?Upload $image;
@@ -107,6 +117,28 @@ class Provider
     public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getExternalLink(): ?string
+    {
+        return $this->externalLink;
+    }
+
+    public function setExternalLink(?string $externalLink): self
+    {
+        $this->externalLink = $externalLink;
+        return $this;
+    }
+
+    public function isProAccount(): bool
+    {
+        return $this->proAccount;
+    }
+
+    public function setProAccount(bool $proAccount): self
+    {
+        $this->proAccount = $proAccount;
         return $this;
     }
 

@@ -18,6 +18,15 @@ class ProgramIncludeRepository extends ServiceEntityRepository
         parent::__construct($registry, ProgramInclude::class);
     }
 
+    public function findActiveInclude(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.active = true')
+            ->orderBy('p.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException

@@ -5,7 +5,7 @@ namespace App\Entity\Program;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\ProgramLevelRepository")
  */
 class ProgramLevel
 {
@@ -20,6 +20,11 @@ class ProgramLevel
      * @ORM\Column(type="string")
      */
     protected string $title;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $sort;
 
     public function getId(): int
     {
@@ -40,6 +45,17 @@ class ProgramLevel
     public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
+    }
+
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
+    public function setSort(int $sort): self
+    {
+        $this->sort = $sort;
         return $this;
     }
 }

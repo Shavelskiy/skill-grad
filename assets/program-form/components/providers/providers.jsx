@@ -84,7 +84,9 @@ const Providers = () => {
   }
 
   const renderProviderList = (providers, type) => {
-    return providers.map((provider, key) => {
+    return providers
+      .filter(provider => provider !== null)
+      .map((provider, key) => {
       return (
         <div key={key} className={css.provider}>
           <div className={css.logo}>

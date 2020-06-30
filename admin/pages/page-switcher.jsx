@@ -34,7 +34,7 @@ import {
   PROGRAM_ADDITIONAL_CREATE,
   PROGRAM_ADDITIONAL_UPDATE,
   PROGRAM_INCLUDE_INDEX,
-  PROGRAM_INCLUDE_UPDATE, PROGRAM_INCLUDE_CREATE,
+  PROGRAM_INCLUDE_UPDATE, PROGRAM_INCLUDE_CREATE, PROGRAM_LEVEL_INDEX, PROGRAM_LEVEL_UPDATE, PROGRAM_LEVEL_CREATE,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -70,6 +70,9 @@ import ProgramAdditionalUpdate from './program-additional/update'
 import ProgramIncludeIndex from './program-include'
 import ProgramIncludeUpdate from './program-include/update'
 import ProgramIncludeCreate from './program-include/create'
+import ProgramLevelIndex from './program-level'
+import ProgramLevelCreate from './program-level/create'
+import ProgramLevelUpdate from './program-level/update'
 
 
 const PageSwitcher = ({active}) => {
@@ -97,6 +100,10 @@ const PageSwitcher = ({active}) => {
           <Route exact name="program-include.index" path={PROGRAM_INCLUDE_INDEX} component={ProgramIncludeIndex}/>
           <Route exact name="program-include.create" path={PROGRAM_INCLUDE_CREATE} component={ProgramIncludeCreate}/>
           <Route exact name="program-include.update" path={PROGRAM_INCLUDE_UPDATE} component={ProgramIncludeUpdate}/>
+
+          <Route exact name="program-level.index" path={PROGRAM_LEVEL_INDEX} component={ProgramLevelIndex}/>
+          <Route exact name="program-level.create" path={PROGRAM_LEVEL_CREATE} component={ProgramLevelCreate}/>
+          <Route exact name="program-level.update" path={PROGRAM_LEVEL_UPDATE} component={ProgramLevelUpdate}/>
 
           <Route exact name="provider.index" path={PROVIDER_INDEX} component={ProviderIndex}/>
           <Route exact name="provider.create" path={PROVIDER_CREATE} component={ProviderCreate}/>

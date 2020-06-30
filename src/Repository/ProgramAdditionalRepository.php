@@ -18,6 +18,15 @@ class ProgramAdditionalRepository extends ServiceEntityRepository
         parent::__construct($registry, ProgramAdditional::class);
     }
 
+    public function findActiveAdditional(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.active = true')
+            ->orderBy('p.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException

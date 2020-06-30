@@ -27,6 +27,12 @@ export const CREATE_PROGRAM_INCLUDE_URL = '/api/admin/program-include'
 export const UPDATE_PROGRAM_INCLUDE_URL = '/api/admin/program-include'
 export const DELETE_PROGRAM_INCLUDE_URL = '/api/admin/program-include'
 
+export const FETCH_PROGRAMS_LEVEL_URL = '/api/admin/program-level'
+export const FETCH_PROGRAM_LEVEL_URL = '/api/admin/program-level/:id'
+export const CREATE_PROGRAM_LEVEL_URL = '/api/admin/program-level'
+export const UPDATE_PROGRAM_LEVEL_URL = '/api/admin/program-level'
+export const DELETE_PROGRAM_LEVEL_URL = '/api/admin/program-level'
+
 export const FETCH_PROVIDERS_URL = '/api/admin/provider'
 export const FETCH_PROVIDER_URL = '/api/admin/provider/:id'
 export const CREATE_PROVIDER_URL = '/api/admin/provider'

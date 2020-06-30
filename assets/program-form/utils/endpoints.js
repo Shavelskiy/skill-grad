@@ -1,2 +1,5 @@
-export const FETCH_ALL_PROVIDERS = '/api/provider/all'
-export const FETCH_ALL_LOCATIONS = '/api/location/all'
+export const FETCH_FIELDS = '/api/program-form/fields'
+export const FETCH_CURRENT_PROVIDER = '/api/program-form/provider-info'
+
+export const FETCH_ALL_PROVIDERS = '/api/program-form/all-providers'
+export const FETCH_ALL_LOCATIONS = '/api/program-form/all-locations'

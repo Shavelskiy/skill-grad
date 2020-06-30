@@ -1,5 +1,20 @@
-import { SET_PROVIDER_LIST, SET_LOCATIONS } from './types'
+import { SET_PROVIDER_LIST, SET_LOCATIONS, SET_FIELDS } from './types'
+import { SET_CURRENT_USER } from '../../../../admin/redux/types'
 
+
+export function setFields(fields) {
+  return {
+    type: SET_FIELDS,
+    payload: fields,
+  }
+}
+
+export function setCurrentProvider(data) {
+  return {
+    type: SET_CURRENT_USER,
+    payload: data,
+  }
+}
 
 export function setProviderList(providers) {
   return {

@@ -1,4 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import axios from 'axios'
+import { FETCH_CURRENT_PROVIDER, FETCH_FIELDS } from './../utils/endpoints'
+
+import { useDispatch } from 'react-redux'
+import { setCurrentProvider, setFields } from '../redux/data/actions'
 
 import ProgressBar from './progress-bar/progress-bar'
 import Description from './description/description'
@@ -17,6 +23,16 @@ import css from './app.scss?module'
 
 
 const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    axios.get(FETCH_FIELDS)
+      .then(({data}) => dispatch(setFields(data)))
+
+    axios.get(FETCH_CURRENT_PROVIDER)
+      .then(({data}) => dispatch(setCurrentProvider(data)))
+  }, [])
+
   return (
     <div className={css.wrap}>
       <div className={css.progressBar}>

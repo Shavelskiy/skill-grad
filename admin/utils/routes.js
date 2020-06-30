@@ -18,6 +18,10 @@ export const PROGRAM_INCLUDE_INDEX = '/program-include'
 export const PROGRAM_INCLUDE_CREATE = '/program-include/create'
 export const PROGRAM_INCLUDE_UPDATE = '/program-include/update/:id'
 
+export const PROGRAM_LEVEL_INDEX = '/program-level'
+export const PROGRAM_LEVEL_CREATE = '/program-level/create'
+export const PROGRAM_LEVEL_UPDATE = '/program-level/update/:id'
+
 export const PROVIDER_INDEX = '/provider'
 export const PROVIDER_VIEW = '/provider/:id'
 export const PROVIDER_CREATE = '/provider/create'

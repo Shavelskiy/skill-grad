@@ -18,6 +18,15 @@ class ProgramFormatRepository extends ServiceEntityRepository
         parent::__construct($registry, ProgramFormat::class);
     }
 
+    public function findActiveFormats(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.active = true')
+            ->orderBy('p.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
