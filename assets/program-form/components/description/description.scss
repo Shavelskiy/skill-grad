@@ -6,8 +6,20 @@
     display: flex;
     justify-content: space-between;
 
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
     .category-select {
       width: 31%;
+
+      @media (max-width: 768px) {
+        width: 100%;
+
+        &:not(:last-child) {
+          margin-bottom: 25px;
+        }
+      }
     }
   }
 

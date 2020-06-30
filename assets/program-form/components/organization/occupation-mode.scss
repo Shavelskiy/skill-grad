@@ -24,7 +24,18 @@
   }
 }
 
+.days-wrap, .tiem-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tiem-wrap {
+  @media (max-width: 912px) {
+    display: none;
+  }
+}
+
 .time-container {
-  //max-width: 90px;
   padding: 0 9px;
 }

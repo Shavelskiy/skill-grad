@@ -21,6 +21,10 @@
 
   .form {
     width: 82.82%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   h3 {

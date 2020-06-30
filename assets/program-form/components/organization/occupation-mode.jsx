@@ -120,25 +120,29 @@ const OccupationMode = () => {
         }))}
         selected={occupationMode.type === OCCUPATION_MODE_TIME}
       >
-        Занятие по:
-        <div className={css.days}>
-          {renderDays()}
+        <div className={css.daysWrap}>
+          Занятие по:
+          <div className={css.days}>
+            {renderDays()}
+          </div>
         </div>
-        , время проведения с
-        <div className={css.timeContainer}>
-          <TextInput
-            value={selectedTime.start}
-            extraSmall={true}
-            setValue={(value) => handleChangeTime(value)}
-          />
-        </div>
-        до
-        <div className={css.timeContainer}>
-          <TextInput
-            value={selectedTime.end}
-            extraSmall={true}
-            setValue={(value) => handleChangeTime(value, false)}
-          />
+        <div className={css.tiemWrap}>
+          , время проведения с
+          <div className={css.timeContainer}>
+            <TextInput
+              value={selectedTime.start}
+              extraSmall={true}
+              setValue={(value) => handleChangeTime(value)}
+            />
+          </div>
+          до
+          <div className={css.timeContainer}>
+            <TextInput
+              value={selectedTime.end}
+              extraSmall={true}
+              setValue={(value) => handleChangeTime(value, false)}
+            />
+          </div>
         </div>
       </RadioButton>
       <RadioButton
