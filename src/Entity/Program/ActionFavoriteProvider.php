@@ -26,11 +26,6 @@ class ActionFavoriteProvider
      */
     protected float $discount;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    protected array $termsOfPayment;
-
     public function getFirstDiscount(): float
     {
         return $this->firstDiscount;
@@ -50,17 +45,6 @@ class ActionFavoriteProvider
     public function setDiscount(float $discount): self
     {
         $this->discount = $discount;
-        return $this;
-    }
-
-    public function getTermsOfPayment(): array
-    {
-        return $this->termsOfPayment;
-    }
-
-    public function setTermsOfPayment(array $termsOfPayment): self
-    {
-        $this->termsOfPayment = $termsOfPayment;
         return $this;
     }
 }

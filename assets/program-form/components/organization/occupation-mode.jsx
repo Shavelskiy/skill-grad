@@ -85,7 +85,7 @@ const OccupationMode = () => {
       let minuts = Number(found[3])
 
       hours = (hours > 24) ? 24 : ((hours < 0) ? 0 : hours)
-      minuts = (minuts > 59 || minuts < 0) ? oldValues[3] : minuts
+      minuts = (minuts > 59) ? 59 : ((minuts < 0) ? 0 : minuts)
 
       newValue = `${hours < 10 ? '0' : ''}${hours}:${minuts < 10 ? '0' : ''}${minuts}`
     }

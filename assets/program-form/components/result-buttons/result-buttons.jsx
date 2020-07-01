@@ -31,7 +31,7 @@ const ResultButtons = () => {
 
     formData.append('json_content', JSON.stringify(data))
 
-    program.forEach((item, key) => {
+    program.teachers.forEach((item, key) => {
       if (item.image !== null) {
         formData.append(`teachers[${key}]`, item.image)
       }

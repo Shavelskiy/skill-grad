@@ -193,7 +193,7 @@ export function setPreparations(preparations) {
 export function setGainedKnowledge(gainedKnowledge) {
   return {
     type: SET_GAINED_KNOWLEDGE,
-    gainedKnowledge: gainedKnowledge
+    payload: gainedKnowledge
   }
 }
 

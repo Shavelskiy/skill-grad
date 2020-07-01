@@ -41,7 +41,7 @@ class Provider
     /**
      * @ORM\Column(type="boolean", options={"default": false})
      */
-    private bool $proAccount;
+    private bool $proAccount = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")

@@ -12,7 +12,7 @@ trait Terms
     protected array $price;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     protected array $oldPrice;
 
@@ -27,7 +27,7 @@ trait Terms
     protected array $discount;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     protected array $providerActions;
 
@@ -35,6 +35,11 @@ trait Terms
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\ActionFavoriteProvider")
      */
     protected ActionFavoriteProvider $actionFavoriteProvider;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    protected array $termOfPayment;
 
     public function getPrice(): array
     {
@@ -99,6 +104,17 @@ trait Terms
     public function setActionFavoriteProvider(ActionFavoriteProvider $actionFavoriteProvider): self
     {
         $this->actionFavoriteProvider = $actionFavoriteProvider;
+        return $this;
+    }
+
+    public function getTermOfPayment(): array
+    {
+        return $this->termOfPayment;
+    }
+
+    public function setTermOfPayment(array $termOfPayment): self
+    {
+        $this->termOfPayment = $termOfPayment;
         return $this;
     }
 }

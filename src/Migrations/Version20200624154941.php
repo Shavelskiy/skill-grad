@@ -37,7 +37,7 @@ final class Version20200624154941 extends AbstractMigration
         $this->addSql('CREATE TABLE program_location (program_id INT NOT NULL, location_id INT NOT NULL, PRIMARY KEY(program_id, location_id))');
         $this->addSql('CREATE INDEX IDX_DFAB75FE3EB8070A ON program_location (program_id)');
         $this->addSql('CREATE INDEX IDX_DFAB75FE64D218E ON program_location (location_id)');
-        $this->addSql('CREATE TABLE action_favorite_provider (id INT NOT NULL, first_discount DOUBLE PRECISION NOT NULL, discount DOUBLE PRECISION NOT NULL, terms_of_payment JSON NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE action_favorite_provider (id INT NOT NULL, first_discount DOUBLE PRECISION NOT NULL, discount DOUBLE PRECISION NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE program_level (id INT NOT NULL, title VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE certificate ADD CONSTRAINT FK_219CDA4A3DA5256D FOREIGN KEY (image_id) REFERENCES upload (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE program_gallery ADD CONSTRAINT FK_CCC180EE3DA5256D FOREIGN KEY (image_id) REFERENCES upload (id) NOT DEFERRABLE INITIALLY IMMEDIATE');

@@ -24,7 +24,7 @@ trait Design
     /**
      * @ORM\Column(type="json")
      */
-    protected string $knowledgeCheck;
+    protected array $knowledgeCheck;
 
     /**
      * @ORM\Column(type="json")
@@ -69,12 +69,12 @@ trait Design
         return $this;
     }
 
-    public function getKnowledgeCheck(): string
+    public function getKnowledgeCheck(): array
     {
         return $this->knowledgeCheck;
     }
 
-    public function setKnowledgeCheck(string $knowledgeCheck): self
+    public function setKnowledgeCheck(array $knowledgeCheck): self
     {
         $this->knowledgeCheck = $knowledgeCheck;
         return $this;

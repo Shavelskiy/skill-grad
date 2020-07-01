@@ -98,8 +98,8 @@ const initialState = {
       price: 0,
     },
     byRequest: false,
-    showPriceReduction: false,
   },
+  showPriceReduction: false,
   discounts: {
     legalEntity: {
       checked: false,
@@ -110,7 +110,6 @@ const initialState = {
       value: 0,
     },
     byRequest: false,
-    showPriceReduction: false,
   },
   actions: [],
   favoriteProviderAction: {
@@ -127,7 +126,6 @@ const initialState = {
       value: '',
     },
     byRequest: false,
-    showPriceReduction: false,
   },
   gallery: [],
   locations: [],

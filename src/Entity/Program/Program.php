@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Program
 {
@@ -20,6 +21,22 @@ class Program
     use Organization;
     use Terms;
     use Iteraction;
+
+    public const DURATION_HOURS = 'DURATION_HOURS';
+    public const DURATION_DAYS = 'DURATION_DAYS';
+
+    public const OTHER = 'OTHER';
+
+    public const DESIGN_SIMPLE = 'DESIGN_SIMPLE';
+    public const DESIGN_WORK = 'DESIGN_WORK';
+
+    public const TRAINING_DATE_CALENDAR = 'TRAINING_DATE_CALENDAR';
+    public const TRAINING_DATE_ANYTIME = 'TRAINING_DATE_ANYTIME';
+    public const TRAINING_DATE_AS_THE_GROUP_FORM = 'TRAINING_DATE_AS_THE_GROUP_FORM';
+    public const TRAINING_DATE_REQUEST = 'TRAINING_DATE_REQUEST';
+
+    public const OCCUPATION_MODE_ANYTIME = 'OCCUPATION_MODE_ANYTIME';
+    public const OCCUPATION_MODE_TIME = 'OCCUPATION_MODE_TIME';
 
     /**
      * @ORM\Id()
@@ -38,6 +55,16 @@ class Program
      * @ORM\Column(type="boolean")
      */
     private bool $active;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     */
+    private Collection $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\Teacher", mappedBy="program")
+     */
+    protected Collection $teachers;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider")
@@ -71,10 +98,12 @@ class Program
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
+        $this->categories = new ArrayCollection();
+        $this->teachers = new ArrayCollection();
         $this->providers = new ArrayCollection();
         $this->gallery = new ArrayCollection();
         $this->locations = new ArrayCollection();
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): int
@@ -110,14 +139,52 @@ class Program
         return $this;
     }
 
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(array $categories): self
+    {
+        $this->categories->clear();
+        foreach ($categories as $category) {
+            if (!$this->categories->contains($category)) {
+                $this->categories->add($category);
+            }
+        }
+        return $this;
+    }
+
+    public function getTeachers()
+    {
+        return $this->teachers;
+    }
+
+    public function setTeachers(array $teachers): self
+    {
+        $this->teachers->clear();
+        foreach ($teachers as $teacher) {
+            if (!$this->teachers->contains($teacher)) {
+                $this->teachers->add($teacher);
+            }
+        }
+        return $this;
+    }
+
     public function getProviders()
     {
         return $this->providers;
     }
 
-    public function setProviders($providers): self
+    public function setProviders(array $providers): self
     {
-        $this->providers = $providers;
+        $this->providers->clear();
+        foreach ($providers as $provider) {
+            if (!$this->providers->contains($provider)) {
+                $this->providers->add($provider);
+            }
+        }
+
         return $this;
     }
 
@@ -126,9 +193,15 @@ class Program
         return $this->gallery;
     }
 
-    public function setGallery($gallery): self
+    public function setGallery(array $gallery): self
     {
-        $this->gallery = $gallery;
+        $this->gallery->clear();
+        foreach ($gallery as $item) {
+            if (!$this->gallery->contains($item)) {
+                $this->gallery->add($item);
+            }
+        }
+
         return $this;
     }
 
@@ -137,9 +210,15 @@ class Program
         return $this->locations;
     }
 
-    public function setLocations($locations): self
+    public function setLocations(array $locations): self
     {
-        $this->locations = $locations;
+        $this->locations->clear();
+        foreach ($locations as $location) {
+            if (!$this->locations->contains($location)) {
+                $this->locations->add($location);
+            }
+        }
+
         return $this;
     }
 
@@ -170,9 +249,12 @@ class Program
         return $this->updated;
     }
 
-    public function setUpdated(DateTime $updated): self
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps(): void
     {
-        $this->updated = $updated;
-        return $this;
+        $this->updated = new DateTime();
     }
 }

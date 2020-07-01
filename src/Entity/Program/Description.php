@@ -12,11 +12,6 @@ trait Description
     private string $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
-     */
-    private array $categories;
-
-    /**
      * @ORM\Column(type="text")
      */
     private string $annotation;
@@ -25,11 +20,6 @@ trait Description
      * @ORM\Column(type="text")
      */
     protected string $detailText;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Program\Teacher", mappedBy="program")
-     */
-    protected array $teachers;
 
     /**
      * @ORM\Column(type="json")
@@ -44,17 +34,6 @@ trait Description
     public function setName(string $name): self
     {
         $this->name = $name;
-        return $this;
-    }
-
-    public function getCategories(): array
-    {
-        return $this->categories;
-    }
-
-    public function setCategories(array $categories): self
-    {
-        $this->categories = $categories;
         return $this;
     }
 
@@ -77,17 +56,6 @@ trait Description
     public function setDetailText(string $detailText): self
     {
         $this->detailText = $detailText;
-        return $this;
-    }
-
-    public function getTeachers(): array
-    {
-        return $this->teachers;
-    }
-
-    public function setTeachers(array $teachers): self
-    {
-        $this->teachers = $teachers;
         return $this;
     }
 
