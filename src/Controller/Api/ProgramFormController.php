@@ -55,8 +55,7 @@ class ProgramFormController extends AbstractController
         ProviderRepository $providerRepository,
         LocationRepository $locationRepository,
         UploadServiceInterface $uploadService
-    )
-    {
+    ) {
         $this->categoryRepository = $categoryRepository;
         $this->programFormatRepository = $programFormatRepository;
         $this->programAdditionalRepository = $programAdditionalRepository;
@@ -327,7 +326,6 @@ class ProgramFormController extends AbstractController
     {
         $certificate = (new Certificate())
             ->setName('certificateName');
-
 
         if ($request->files->has('certificateImage')) {
             $certificateFile = $request->files->get('certificateImage');

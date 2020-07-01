@@ -50,7 +50,6 @@ class ImportLocationCommand extends Command
         $output->writeln('success import locaitons');
 
         return 1;
-
     }
 
     protected function getRootLocation(): Location

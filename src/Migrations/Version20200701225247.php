@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200701123705 extends AbstractMigration
+final class Version20200701225247 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,9 +22,7 @@ final class Version20200701123705 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('ALTER TABLE program ADD term_of_payment JSON NOT NULL');
-        $this->addSql('ALTER TABLE program ALTER old_price DROP NOT NULL');
-        $this->addSql('ALTER TABLE program ALTER provider_actions DROP NOT NULL');
+        $this->addSql('ALTER TABLE article ADD views INT NOT NULL');
     }
 
     public function down(Schema $schema): void
@@ -33,8 +31,6 @@ final class Version20200701123705 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE program ALTER provider_actions SET NOT NULL');
-        $this->addSql('ALTER TABLE program ALTER old_price SET NOT NULL');
-        $this->addSql('ALTER TABLE program DROP term_of_payment');
+        $this->addSql('ALTER TABLE article DROP views');
     }
 }

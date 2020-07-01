@@ -53,6 +53,11 @@ class Article
     private bool $showOnMain;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private int $views = 0;
+
+    /**
      * @ORM\Column(type="date")
      */
     private DateTime $createdAt;
@@ -147,6 +152,17 @@ class Article
     public function setShowOnMain(bool $showOnMain): self
     {
         $this->showOnMain = $showOnMain;
+        return $this;
+    }
+
+    public function getViews(): int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
         return $this;
     }
 
