@@ -36,6 +36,18 @@ class LocationRepository extends ServiceEntityRepository
             ->andWhere('l.type = :type')
             ->setParameter('type', Location::TYPE_REGION)
             ->orderBy('l.sort', 'asc')
+            ->addOrderBy('l.name', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findRegionCities(Location $region): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.parentLocation = :region')
+            ->setParameter('region', $region)
+            ->orderBy('l.sort', 'asc')
+            ->addOrderBy('l.name', 'asc')
             ->getQuery()
             ->getResult();
     }

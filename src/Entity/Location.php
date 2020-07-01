@@ -42,7 +42,7 @@ class Location
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $showInList;
+    private bool $showInList = false;
 
     /**
      * @ORM\Column(type="integer")

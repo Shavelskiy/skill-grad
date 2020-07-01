@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { DESCRIPTION } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,6 +16,12 @@ import cn from 'classnames'
 
 const Description = () => {
   const dispatch = useDispatch()
+  const [showErrors, setShowErrors] = useState({
+    name: false,
+  })
+
+  const name = useSelector(state => state.program.name)
+
 
   const getCategoriesOptions = (key) => {
     const selectedCategories = useSelector(state => state.program.categories)
@@ -29,9 +35,13 @@ const Description = () => {
   return (
     <Block title={DESCRIPTION} containerClass={css.container}>
       <TextInput
-        value={useSelector(state => state.program.name)}
+        value={name}
+        error={showErrors.name && name.length < 10}
         placeholder={'Название программы обучения'}
-        setValue={(name) => dispatch(setName(name))}
+        setValue={(value) => {
+          setShowErrors({...showErrors, name: true})
+          dispatch(setName(value))
+        }}
       />
       <div className={cn(css.categroies, css.fieldContainer)}>
         {[...Array(3).keys()].map(key => {

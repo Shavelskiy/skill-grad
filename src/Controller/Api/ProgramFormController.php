@@ -25,7 +25,6 @@ use App\Repository\ProviderRepository;
 use App\Service\UploadServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -197,7 +196,7 @@ class ProgramFormController extends AbstractController
             $subregions = [];
 
             /** @var Location $childLocation */
-            foreach ($region->getChildLocations() as $childLocation) {
+            foreach ($this->locationRepository->findRegionCities($region) as $childLocation) {
                 $subregions[] = [
                     'id' => $childLocation->getId(),
                     'name' => $childLocation->getName(),

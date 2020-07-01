@@ -4,10 +4,11 @@ import css from './input.scss?module'
 import cn from 'classnames'
 
 
-export const TextInput = ({placeholder = '', value, disabled = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false}) => {
+export const TextInput = ({placeholder = '', value, disabled = false, error = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false}) => {
   return (
     <div className={cn(
       css.input,
+      {[css.error]: error},
       {[css.extraSmall]: extraSmall},
       {[css.small]: small},
       {[css.standart]: standart},

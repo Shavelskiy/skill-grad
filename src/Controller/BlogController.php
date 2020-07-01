@@ -13,6 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlogController extends AbstractController
 {
     /**
+     * @Route("")
+     */
+    public function index(Request $request): Response
+    {
+
+    }
+
+    /**
      * @Route("/{slug}", name="blog.view")
      */
     public function view(Request $request): Response

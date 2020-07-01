@@ -9,6 +9,7 @@
     "ext-memcached": "*",
     "ext-redis": "*",
     "ext-sockets": "*",
+    "ext-simplexml": "*",
     "cboden/ratchet": "^0.4.2",
     "ramsey/uuid": "^4.0",
     "ramsey/uuid-doctrine": "^1.6",
