@@ -10,6 +10,7 @@
     "ext-redis": "*",
     "ext-sockets": "*",
     "ext-simplexml": "*",
+    "ext-curl": "*",
     "cboden/ratchet": "^0.4.2",
     "ramsey/uuid": "^4.0",
     "ramsey/uuid-doctrine": "^1.6",

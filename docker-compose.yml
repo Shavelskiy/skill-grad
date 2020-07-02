@@ -57,9 +57,27 @@ services:
       - 8888:8888
     working_dir: /application
 
+  elasticsearch:
+    image: elasticsearch:5.6.8
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data:rw
+    networks:
+      - network_php
+    ports:
+      - 9200:9200
+      - 9300:9300
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+      memlock:
+        soft: -1
+        hard: -1
+
 volumes:
   db-data: {}
   redis-data: {}
+  elasticsearch-data: {}
 
 networks:
   network_nginx:
