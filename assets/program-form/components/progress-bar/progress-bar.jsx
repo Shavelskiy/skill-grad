@@ -6,7 +6,7 @@ import {
   DESIGN,
   GALLERY,
   LISTENERS, LOCATIONS,
-  ORGANIZAITION,
+  ORGANIZATION,
   PROVIDERS,
   RESULTS,
   TERM_OF_USE
@@ -53,7 +53,7 @@ const ProgressBar = () => {
         <div className={css.item}>
           <span className={css.number}>06</span>
           <span className={css.text}>
-           {ORGANIZAITION}
+           {ORGANIZATION}
         </span>
         </div>
         <div className={css.item}>

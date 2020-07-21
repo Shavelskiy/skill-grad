@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ORGANIZAITION } from '../../utils/titles'
+import { ORGANIZATION } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { selectInclude, setLocation } from '../../redux/program/actions'
@@ -18,7 +18,7 @@ const Organization = () => {
   const dispatch = useDispatch()
 
   return (
-    <Block title={ORGANIZAITION} containerClass={css.container}>
+    <Block title={ORGANIZATION} containerClass={css.container}>
       <div>
         <TrainingDays/>
       </div>
