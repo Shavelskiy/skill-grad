@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SearchIndexCommand extends Command
 {
     protected LoggerInterface $logger;
-    protected SearchService $searchServide;
+    protected SearchService $searchService;
     protected ArticleRepository $articleRepository;
     protected ProviderRepository $providerRepository;
     protected ProgramRepository $programRepository;
@@ -32,7 +32,7 @@ class SearchIndexCommand extends Command
     ) {
         parent::__construct($name);
         $this->logger = $logger;
-        $this->searchServide = $searchService;
+        $this->searchService = $searchService;
         $this->articleRepository = $articleRepository;
         $this->providerRepository = $providerRepository;
         $this->programRepository = $programRepository;
@@ -51,19 +51,19 @@ class SearchIndexCommand extends Command
 
         /** @var Article $article */
         foreach ($this->articleRepository->findAll() as $article) {
-            $this->searchServide->addArticleToIndex($article);
+            $this->searchService->addArticleToIndex($article);
             $output->writeln(sprintf('Add article to index: %s', $article->getName()));
         }
 
         /** @var Provider $provider */
         foreach ($this->providerRepository->findAll() as $provider) {
-            $this->searchServide->addProviderToIndex($provider);
+            $this->searchService->addProviderToIndex($provider);
             $output->writeln(sprintf('Add provider to index: %s', $provider->getName()));
         }
 
         /** @var Program $program */
         foreach ($this->programRepository->findAll() as $program) {
-            $this->searchServide->addProgramToIndex($program);
+            $this->searchService->addProgramToIndex($program);
             $output->writeln(sprintf('Add program to index: %s', $program->getName()));
         }
 

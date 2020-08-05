@@ -100,7 +100,7 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
     return () => mounted = false
   }, [query, currentPage, reloadTable])
 
-  const clearSerach = () => {
+  const clearSearch = () => {
     if (JSON.stringify(query.search) === JSON.stringify({})) {
       return
     }
@@ -126,7 +126,7 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
         <Button
           text="очистить поиск"
           primary={true}
-          click={() => clearSerach()}
+          click={() => clearSearch()}
         />
       </div>
       <Table

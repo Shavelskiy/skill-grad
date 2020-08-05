@@ -1,0 +1,96 @@
+.check-status {
+    @include mobile {
+        display: none;
+    }
+    @include tablet {
+        display: none;
+    }
+    position: absolute;
+    z-index: 1;
+    top: 2%;
+    left: -25%;
+    ul {
+        max-width: 300px;
+        padding: 30px 30px 30px;
+        border-radius: 35px;
+        background-color: #e9f4fd;
+        counter-reset: section;
+        list-style-type: none;
+        li {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 20px;
+            &.complete {
+                color: #6db4fe;
+                &:before {
+                    color: #ffffff;
+                }
+                &:after {
+                    content: "\ea01";
+                    position: absolute;
+                    top: 5px;
+                    left: 10px;
+                    font-family: "skillgrad-icon" !important;
+                    font-style: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    color: #6db4fe;
+                    font-size: 26px;
+                }
+            }
+            &.active {
+                color: #f92e25;
+                &:before {
+                    color: #f92e25;
+                }
+            }
+            &:before {
+                content: "0"counters(section, ".") " ";
+                counter-increment: section;
+                color: #d7d7d7;
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 0.79;
+                margin-right: 10px;
+            }
+            &:last-child {
+                &:before {
+                    content: counters(section, ".") " ";
+                    counter-increment: section;
+                }
+            }
+        }
+    }
+}
+.check-program {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+    .check-title {
+        font-size: 14px;
+        line-height: 1.29;
+        text-align: center;
+        color: #3c3c3c;
+    }
+    .square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 95px;
+        height: 95px;
+        background-color: #6db4fe;
+        border-radius: 100%;
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 0.6;
+        color: #fff;
+        text-align: center;
+    }
+}

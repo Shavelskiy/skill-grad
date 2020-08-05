@@ -7,7 +7,6 @@
   <meta name="format-detection" content="date=no">
   <meta name="format-detection" content="address=no">
   <meta name="format-detection" content="email=no">
-  <meta content="notranslate" name="google">
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -15,17 +14,17 @@
     {{ encore_entry_link_tags('site.layout') }}
   {% endblock %}
 </head>
-
 <body>
-<div class="wrapper">
-  {% include 'components/header/index.html.twig' %}
 
-  <div class="content">
-    {% block body %}{% endblock %}
-  </div>
+{% include 'components/header/page.index.html.twig' %}
 
-  {% include 'components/footer/index.html.twig' %}
-</div>
+<main class="content">
+  {% block body %}
+  {% endblock %}
+</main>
+
+{% include 'components/footer/index.html.twig' %}
+
 {% block javascripts %}
   {{ encore_entry_script_tags('site.layout') }}
 {% endblock %}

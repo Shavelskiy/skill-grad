@@ -24,17 +24,17 @@ const Paginator = ({currentPage, totalPages, click}) => {
     }
 
     if (currentPage < 5 || currentPage > (totalPages - 4)) {
-      if (currentPage == 3) {
+      if (currentPage === 3) {
         result.start = 4
-      } else if (currentPage == 4) {
+      } else if (currentPage === 4) {
         result.start = 5
       } else {
         result.start = 3
       }
 
-      if (currentPage == (totalPages - 2)) {
+      if (currentPage === (totalPages - 2)) {
         result.end = 3
-      } else if (currentPage == (totalPages - 3)) {
+      } else if (currentPage === (totalPages - 3)) {
         result.end = 4
       } else {
         result.end = 2
@@ -48,7 +48,7 @@ const Paginator = ({currentPage, totalPages, click}) => {
   }
 
   if (totalPages <= 1) {
-    return (null)
+    return <></>
   }
 
   let items = []

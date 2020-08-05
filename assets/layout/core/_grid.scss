@@ -1,0 +1,24 @@
+// Grid Classes
+
+.container {
+    @include grid-base($desktop-grid-width);
+    @include tablet {
+        width: $tablet-grid-width;
+    }
+    @include mobile {
+        width: $mobile-grid-width;
+    }
+    &-0 {
+        @include grid-base(100%);
+    }
+}
+
+.col {
+    @include columns-loop(lg, $grid-desktop-columns, $desktop-gutter);
+    @include tablet {
+        @include columns-loop(md, $grid-tablet-columns, $tablet-gutter);
+    }
+    @include mobile {
+        @include columns-loop(sm, $grid-mobile-columns, $mobile-gutter);
+    }
+}

@@ -1,47 +1,61 @@
-<div class="footer">
-  <div class="footer-content">
+<footer class="footer">
+  <div class="footer__content">
     <div class="container">
-      <div class="footer-row">
-       <a class="logo-mobile" href="{{ path('site.index') }}">
-            <img src="/img/logo_mobile.png" alt="logo"/>
-          </a>
-        <div class="footer-col">
-          <a class="footer-logo" href="{{  path('site.index') }}">
-            <img src="/img/logo.png" alt="Footer-logo"/>
-          </a>
-        
-          <div class="footer-menu">
-            <a class="footer-menu-link" href="#">Пользовательское соглашение</a>
-            <a class="footer-menu-link" href="#">Соглашение о конфиденциальности</a>
-            <a class="footer-menu-link" href="#">Оферта</a>
-          </div>
+      <div class="col-lg-4 col-sm-4 col-md-6 left">
+        <div class="logo-container">
+          <a href="/"><img class="logo-img" src="/img/logo.svg" alt="logo"></a>
         </div>
-        <div class="footer-col">
-          <div class="footer-nav">
-            <a class="footer-nav-link" href="#"> О проекте</a>
-            <a class="footer-nav-link" href="#"> Как добавить программу обучения</a>
-            <a class="footer-nav-link" href="#"> Как добавить образовательную организацию</a>
-            <a class="footer-nav-link" href="#"> FAQ</a>
-          </div>
+        <div class="logo-mobile">
+          <a href="/"><img src="/img/logo_mobile.png" alt="logo"></a>
         </div>
-        <div class="footer-col">
-          <a class="btn btn-blue footer-feedback-form-modal-btn">Написать нам</a>
-          <div class="footer-social">
-            <div class="footer-social-title">Мы в соцсетях</div>
-            <div class="footer-social-items">
-              <a class="footer-social-link footer-social-link-vk" href="#" target="_blank"></a>
-              <a class="footer-social-link footer-social-link-ok" href="#" target="_blank"></a>
-              <a class="footer-social-link footer-social-link-fb" href="#" target="_blank"></a>
-            </div>
-          </div>
+        <ul class="menu">
+          <li><a href="#">Пользовательское соглашение</a></li>
+          <li><a href="#">Соглашение о конфиденциальности</a></li>
+          <li><a href="#">Оферта</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-5 col-sm-4 col-md-6 center">
+        <ul>
+          <li><a href="#">О проекте</a></li>
+          <li><a href="#">Как добавить программу обучения</a></li>
+          <li><a href="#">Как добавить образовательную организацию</a></li>
+          <li><a href="{{ path('faq.index') }}">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-4 col-md-12 right">
+        <div class="contact-block">
+          <button class="open-send-message button-blue">Написать нам</button>
+          <span class="contact-block__title">Мы в соцсетях</span>
+          <ul>
+            <li>
+              <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+            </li>
+            <li>
+              <a href="#"><img src="/img/svg/odnoklassniki.svg" alt=""></a>
+            </li>
+            <li>
+              <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4 offer-links">
+        <ul class="left-menu">
+          <li><a href="#">Пользовательское соглашение</a></li>
+          <li><a href="#">Соглашение о конфиденциальности</a></li>
+          <li><a href="#">Оферта</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="col-lg-12">
+        <div class="text">
+          ООО «Эмили Консалтинг». Все права защищены. 2015-2020<br/>
+          115191, Россия, город Москва, улица Рощинская 2я, дом 4, офис 503 ОГРН 1137746126540. ИНН 7725783023.
         </div>
       </div>
     </div>
   </div>
-  <div class="footer-copyright">
-    <span>ООО «Эмили Консалтинг». Все права защищены. 2015-2020</span>
-    <span>115191, Россия, город Москва, улица Рощинская 2я, дом 4, офис 503 ОГРН
-      1137746126540. ИНН 7725783023.
-    </span>
-  </div>
-</div>
+</footer>

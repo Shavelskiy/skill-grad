@@ -1,0 +1,36 @@
+.slider-compare, .slider-compare-2 {
+    position: relative;
+    margin-top: 50px;
+    .previous {
+        /* Добавляет курсору иконку, когда тот оказывается над кнопкой: */
+        cursor: pointer;
+        /* Положение элемента задаётся относительно границ браузера: */
+        position: absolute;
+        top: -70px;
+        width: auto;
+        padding: 16px;
+        font-size: 35px;
+    }
+    .next {
+        /* Добавляет курсору иконку, когда тот оказывается над кнопкой: */
+        cursor: pointer;
+        /* Положение элемента задаётся относительно границ браузера: */
+        position: absolute;
+        top: -70px;
+        width: auto;
+        padding: 16px;
+        font-size: 35px;
+    }
+    .next {
+        right: 0;
+    }
+    .current-slide {
+        position: absolute;
+        top: -40px;
+        left: 57px;
+        font-size: 18px;
+        line-height: 1.11;
+        text-align: center;
+        color: #1d71b1;
+    }
+}

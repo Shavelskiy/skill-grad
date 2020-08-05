@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Личный кабинет провайдера</title>
+	<meta name="theme-color" content="#c9e0e04d">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"/>
+	<link rel="stylesheet" href="/styles/main.css">
+	<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+@@include("../../../blocks/modules/headerPage/headerPage.html")
+<main class="content program">
+	@@include("../../../blocks/modules/personal/providers/publication/publication.html")
+</main>
+@@include("../../../blocks/modules/footer/footer.html")
+@@include("../../../blocks/modules/modals/modals.html")
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/js/main.js"></script>
+<script>
+	const quill = new Quill('#editor', {
+		placeholder: 'Текст статьи',
+		theme: 'snow',
+	});
+</script>
+</body>
+</html>

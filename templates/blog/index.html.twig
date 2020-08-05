@@ -1,19 +1,196 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block stylesheets %}
-  {{ parent() }}
-{% endblock %}
-
-{% block title %}Стаья{% endblock %}
-
 {% block body %}
   <div class="container">
-    {{ slug }}
-    <br/>
-    {{ views }}
+    <div class="d-f w-100 j-c-center">
+      <div class="breadcrumbs">
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a class="active" href="#">Блог</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="main_blog mt-0">
+        <h2 class="title">Блог </h2>
+        <div class="alert">
+          Бесплатно разместите новость или статью о вашей организации или программе
+          <button class="button-blue">Разместить статью</button>
+        </div>
+        <div class="box">
+          <div class="box-content">
+            <div class="container-0">
+              <div class="col-lg-12 pl-0">
+                <div class="tab blog">
+                  <div class="tab__nav">
+                    <ul class="nav">
+                      <li data-tab-name="tab-1" class="nav-item active">Все статьи</li>
+                      <li data-tab-name="tab-2" class="nav-item">Мои статьи</li>
+                      <li data-tab-name="tab-3" class="nav-item">Модерация</li>
+                    </ul>
+                    <ul class="nav-doted">
+                      <li data-tab-name="tab-1" class="nav-doted-item is-active"></li>
+                      <li data-tab-name="tab-2" class="nav-doted-item"></li>
+                      <li data-tab-name="tab-3" class="nav-doted-item"></li>
+                      <li data-tab-name="tab-4" class="nav-doted-item"></li>
+                      <li data-tab-name="tab-5" class="nav-doted-item"></li>
+                    </ul>
+                  </div>
+                  <div class="mobile-filter">
+                    <div id="open-filter" class="mobile-filter-header">
+                      Фильтр поиска
+                      <span class="icon open"></span>
+                      <!--                                        <span class="icon close"></span>-->
+                    </div>
+                    <div id="filter" class="mobile-filter-content">
+                      <form class="form-filter" action="#">
+                        <div class="input-search-gray">
+                          <input class="input search" type="text" placeholder="Поиск по блогу">
+                          <i class="icon-search"></i>
+                        </div>
+                        <div class="select custom-select-wrapper">
+                          <div class="custom-select">
+                            <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                              <div class="arrow"></div>
+                            </div>
+                            <div class="custom-options scrollbar">
+                              <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                              <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                              <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="select custom-select-wrapper">
+                          <div class="custom-select">
+                            <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                              <div class="arrow"></div>
+                            </div>
+                            <div class="custom-options scrollbar">
+                              <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                              <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                              <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="tab__content">
+                    <div class="tab__content-item tab-1 active">
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      <div class="pagination">
+                        <a href="#">
+                          <span class="prev"></span>
+                        </a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">
+                          <span class="next"></span>
+                        </a>
+                      </div>
+                      <div class="authors mobile">
+                        <h5 class="title">Лучшие авторы</h5>
+                        <div class="item">
+                          <div class="avatar">
+                            <span class="index">1</span>
+                            <img src="/img/author.jpg" alt="">
+                          </div>
+                          <div class="name">
+                            <a href="#">Зиновки Алексей Александрович</a>
+                          </div>
+                          <div class="count">112</div>
+                        </div>
+                        <div class="item">
+                          <div class="avatar">
+                            <span class="index">1</span>
+                            <img src="/img/author.jpg" alt="">
+                          </div>
+                          <div class="name">
+                            <a href="#">Зиновки Алексей Александрович</a>
+                          </div>
+                          <div class="count">112</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab__content-item tab-2">
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                      {% include 'blog/blocks/card-blog.html.twig' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box-sidebar">
+            <div class="container-0">
+              <div class="col-lg-12 pr-0">
+                <form class="form-filter" action="#">
+                  <div class="input-search-gray">
+                    <input class="input search" type="text" placeholder="Поиск по блогу">
+                    <i class="icon-search"></i>
+                  </div>
+                  <div class="select custom-select-wrapper">
+                    <div class="custom-select">
+                      <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                        <div class="arrow"></div>
+                      </div>
+                      <div class="custom-options scrollbar">
+                        <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                        <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                        <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="select custom-select-wrapper">
+                    <div class="custom-select">
+                      <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                        <div class="arrow"></div>
+                      </div>
+                      <div class="custom-options scrollbar">
+                        <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                        <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                        <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="authors">
+                    <h5 class="title">Лучшие авторы</h5>
+                    <div class="item">
+                      <div class="avatar">
+                        <span class="index">1</span>
+                        <img src="/img/author.jpg" alt="">
+                      </div>
+                      <div class="name">
+                        <a href="#">Зиновки Алексей Александрович</a>
+                      </div>
+                      <div class="count">112</div>
+                    </div>
+                    <div class="item">
+                      <div class="avatar">
+                        <span class="index">1</span>
+                        <img src="/img/author.jpg" alt="">
+                      </div>
+                      <div class="name">
+                        <a href="#">Зиновки Алексей Александрович</a>
+                      </div>
+                      <div class="count">112</div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-{% endblock %}
-
-{% block javascripts %}
-  {{ parent() }}
 {% endblock %}

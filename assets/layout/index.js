@@ -1,6 +1,7 @@
-import './../components/header'
-import './../components/footer'
-import './../components/auth'
-import './../components/modal'
+// import './../components/header'
+// import './../components/footer'
+// import './../components/auth'
+// import './../components/modal'
 
-import './index.scss'
+// import './index.scss'
+import './main.scss'

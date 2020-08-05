@@ -1,0 +1,84 @@
+{#<button class="categories-menu-btn">Категории</button>#}
+{#<div class="categories-menu">#}
+{#  <div class="categories-container">#}
+{#    <ul class="categories-list">#}
+{#      {% for menuItem in getMenuItems() %}#}
+{#        <li class="categories-item">#}
+{#          <a class="categories-root-link" href="#">{{ menuItem.name }}</a>#}
+{#          <div class="categories-submenu">#}
+{#            <ul class="categories-submenu-col">#}
+{#              {% for childCategory in menuItem.childCategories %}#}
+{#              <li class="categories-submenu-item">#}
+{#                <a class="categories-submenu-link" href="{{ path('catalog.view', {slug: childCategory.slug }) }}">#}
+{#                  {{ childCategory.name }}#}
+{#                </a>#}
+{#              </li>#}
+{#              {% endfor %}#}
+{#            </ul>#}
+{#          </div>#}
+{#        </li>#}
+{#      {% endfor %}#}
+{#    </ul>#}
+{#  </div>#}
+{#</div>#}
+
+<div class="header__menu">
+  <div class="container">
+    <div class="col-lg-12 col-sm-4">
+      <ul class="menu">
+        <li class="menu__item">
+          <a href="{{ path('faq.provider') }}" class="menu__item-link">Для провайдеров обучения </a>
+        </li>
+        <li class="menu__item">
+          <a href="{{ path('faq.student') }}" class="menu__item-link">Для желающих обучаться</a>
+        </li>
+        <li class="menu__item">
+          <a href="{{ path('program.index') }}" class="menu__item-link">Программы обучения</a>
+        </li>
+        <li class="menu__item">
+          <a href="{{ path('provider.index') }}" class="menu__item-link">Провайдеры обучения</a>
+        </li>
+        <li class="menu__item">
+          <a href="{{ path('blog.index') }}" class="menu__item-link">Блог</a>
+        </li>
+        <li class="menu__item">
+          <i class="icon-add-folder"></i>
+          <a href="{{ path('program.add') }}" class="menu__item-link">
+            Добавить программу
+          </a>
+        </li>
+      </ul>
+    </div>
+    <ul class="menu-mobile">
+      <li class="menu-mobile__item">
+        <i class="icon-square"></i>
+        <a href="#" class="menu-mobile__item-link">
+          Меню
+        </a>
+        <ul class="sub-menu">
+          <li class="menu__item">
+            <a href="{{ path('faq.provider') }}" class="menu__item-link">Для провайдеров обучения </a>
+          </li>
+          <li class="menu__item">
+            <a href="{{ path('faq.student') }}" class="menu__item-link">Для желающих обучаться</a>
+          </li>
+          <li class="menu__item">
+            <a href="{{ path('program.index') }}" class="menu__item-link">Программы обучения</a>
+          </li>
+          <li class="menu__item">
+            <a href="{{ path('provider.index') }}" class="menu__item-link">Провайдеры обучения</a>
+          </li>
+          <li class="menu__item">
+            <a href="{{ path('blog.index') }}" class="menu__item-link">Блог</a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-mobile__item">
+        <i class="icon-add-folder"></i>
+        <a href="{{ path('program.add') }}" class="menu-mobile__item-link">
+          Добавить программу
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

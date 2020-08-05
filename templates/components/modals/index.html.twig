@@ -1,0 +1,307 @@
+{#{% include 'components/modals/alert.html.twig' %}#}
+{#{% include 'components/modals/login.html.twig' %}#}
+{#{% include 'components/modals/reset.passorder.html.twig' %}#}
+{#{% include 'components/modals/new.password.html.twig' %}#}
+{#{% include 'components/modals/register.form.html.twig' %}#}
+{#{% include 'components/modals/feedback.html.twig' %}#}
+{#{% include 'components/modals/city-selector.html.twig' %}#}
+
+<div id="type-account" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content type">
+      <h4>Выберите тип аккаунта</h4>
+      <button class="open-reg button-blue">Обучающийся</button>
+      <button class="open-reg button-red">Образовательное учреждение</button>
+    </div>
+  </div>
+</div>
+<div id="reg" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Регистрация на сайте</h4>
+      <form class="form-auth reg" action="">
+        <input class="input" type="email" placeholder="E-mail">
+        <input class="input" type="password" placeholder="Пароль">
+        <input class="input" type="password" placeholder="Повторите пароль">
+        <button class="button-red">Зарегистрироваться</button>
+        <span class="reg-info">Нажимая на кнопку "Зарегистрироваться"
+Вы соглашаетесь с «<a href="#">Пользовательским соглашением</a>», «<a href="#">Политикой платных услуг</a>»
+и обработкой персональных данных в соответствии с «<a href="#">Политикой конфиденциальности</a>»</span>
+        </span>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <span class="social-title">Регистрация через социальные сети:</span>
+      <ul>
+        <li><a href="#"><img src="/img/svg/vk.svg" alt=""></a></li>
+        <li><a href="#"><img src="/img/svg/odnoklassniki.svg" alt=""></a></li>
+        <li><a href="#"><img src="/img/svg/facebook.svg" alt=""></a></li>
+        <li><a href="#"><img src="/img/svg/google-plus.svg" alt=""></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="auth" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Вход на сайт</h4>
+      <form class="form-auth" action="">
+        <input class="input" type="email" placeholder="E-mail">
+        <input class="input" type="password" placeholder="Пароль">
+        <label class="checkbox-container">
+          Запомнить пароль
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+        <button class="button-red mt-10 mb-10">Войти</button>
+        <span class="link-reg">или <a href="javascript:void(0);" class="open-reg">Зарегистрироваться</a></span>
+        <span class="restore-pass">
+                    Если вы забыли пароль, то можете<br />
+<a href="javascript:void(0);" class="open-restore-pass">восстановить его</a>
+                </span>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <span class="social-title">Войти через социальные сети:</span>
+      <ul>
+        <li><a href="#"><img src="/img/svg/vk.svg" alt=""></a></li>
+        <li><a href="#"><img src="/img/svg/odnoklassniki.svg" alt=""></a></li>
+        <li><a href="#"><img src="/img/svg/facebook.svg" alt=""></a></li>
+        <li><a href="#"><img src="/img/svg/google-plus.svg" alt=""></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="restore-pass" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content restore-pass">
+      <h4>Восстановление пароля</h4>
+      <form class="form-auth" action="">
+        <input class="input" type="email" placeholder="E-mail">
+        <button class="button-red">Восстановить пароль</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="change-city" class="modal">
+  <div class="modal-content change-city">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Выбор города</h4>
+      <div class="input-search-gray">
+        <input class="input search" type="text" placeholder="Поиск по названию города">
+        <i class="icon-search"></i>
+      </div>
+      <div class="scroll-block cities">
+        <div class="column">
+          <span><a href="#">Москва</a></span>
+          <span><a href="#">Санкт-Петербург</a></span>
+          <span><a href="#">Екатеринбург</a></span>
+          <span><a href="#">Новосибирск</a></span>
+          <span><a href="#">Нижний Новгород</a></span>
+          <span><a href="#">Казань</a></span>
+          <span><a href="#">Челябинск</a></span>
+          <span><a href="#">Омск</a></span>
+          <span><a href="#">Самара</a></span>
+          <span><a href="#">Адыгея</a></span>
+          <span><a href="#">Алтай</a></span>
+          <span><a href="#">Алтайский край</a></span>
+          <span><a href="#">Амурская область</a></span>
+          <span><a href="#">Архангельская область</a></span>
+          <span><a href="#">Астраханская область</a></span>
+          <span><a href="#">Башкортостан</a></span>
+          <span><a href="#">Белгородская область</a></span>
+          <span><a href="#">Брянская область</a></span>
+          <span><a href="#">Бурятия</a></span>
+          <span><a href="#">Владимирская область</a></span>
+          <span><a href="#">Волгоградская область</a></span>
+          <span><a href="#">Вологодская область</a></span>
+          <span><a href="#">Воронежская область</a></span>
+          <span><a href="#">Дагестан</a></span>
+          <span><a href="#">Еврейская АО</a></span>
+          <span><a href="#">Забайкальский край</a></span>
+          <span><a href="#">Ивановская область</a></span>
+          <span><a href="#">Ингушетия</a></span>
+          <span><a href="#">Иркутская область</a></span>
+          <span><a href="#">Кабардино-Балкария</a></span>
+          <span><a href="#">Калининградская область</a></span>
+          <span><a href="#">Калмыкия</a></span>
+          <span><a href="#">Калужская область</a></span>
+          <span><a href="#">Камчатский край</a></span>
+          <span><a href="#">Карачаево-Черкесия</a></span>
+          <span><a href="#">Карелия</a></span>
+          <span><a href="#">Кемеровская область</a></span>
+          <span><a href="#">Кировская область</a></span>
+          <span><a href="#">Коми</a></span>
+          <span><a href="#">Костромская область</a></span>
+          <span><a href="#">Краснодарский край</a></span>
+          <span><a href="#">Красноярский край</a></span>
+          <span><a href="#">Крым</a></span>
+          <span><a href="#">Курганская область</a></span>
+          <span><a href="#">Курская область</a></span>
+          <span><a href="#">Ленинградская область</a></span>
+          <span><a href="#">Липецкая область</a></span>
+          <span><a href="#">Магаданская область</a></span>
+          <span><a href="#">Марий Эл</a></span>
+          <span><a href="#">Мордовия</a></span>
+          <span><a href="#">Московская область</a></span>
+          <span><a href="#">Мурманская область</a></span>
+          <span><a href="#">Ненецкий АО</a></span>
+          <span><a href="#">Нижегородская область</a></span>
+          <span><a href="#">Новгородская область</a></span>
+          <span><a href="#">Новосибирская область</a></span>
+          <span><a href="#">Омская область</a></span>
+          <span><a href="#">Оренбургская область</a></span>
+          <span><a href="#">Пензенская область</a></span>
+          <span><a href="#">Пермский край</a></span>
+          <span><a href="#">Приморский край</a></span>
+          <span><a href="#">Псковская область</a></span>
+          <span><a href="#">Ростовская область</a></span>
+          <span><a href="#">Рязанская область</a></span>
+          <span><a href="#">Самарская область</a></span>
+          <span><a href="#">Саратовская область</a></span>
+          <span><a href="#">Саха (Якутия)</a></span>
+          <span><a href="#">Сахалинская область</a></span>
+          <span><a href="#">Свердловская область</a></span>
+          <span><a href="#">Северная Осетия — Алания</a></span>
+          <span><a href="#">Смоленская область</a></span>
+          <span><a href="#">Ставропольский край</a></span>
+          <span><a href="#">Тамбовская область</a></span>
+          <span><a href="#">Татарстан</a></span>
+          <span><a href="#">Тверская область</a></span>
+          <span><a href="#">Томская область</a></span>
+          <span><a href="#">Тульская область</a></span>
+          <span><a href="#">Тюменская область</a></span>
+          <span><a href="#">Удмуртия</a></span>
+          <span><a href="#">Ульяновская область</a></span>
+          <span><a href="#">Хабаровский край</a></span>
+          <span><a href="#">Хакасия</a></span>
+          <span><a href="#">Ханты-Мансийский АО</a></span>
+          <span><a href="#">Челябинская область</a></span>
+          <span><a href="#">Чечня</a></span>
+          <span><a href="#">Чувашия</a></span>
+          <span><a href="#">Чукотский АО</a></span>
+          <span><a href="#">Ямало-Ненецкий АО</a></span>
+          <span><a href="#">Ярославская область</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+                <span class="social-title">Если Вы не нашли Вашего города, свяжитесь с нами с
+                    помощью <a href="javascript:void(0)" class="open-send-message">формы обратной связи</a></span>
+    </div>
+  </div>
+</div>
+<div id="send-message" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Написать нам</h4>
+      <form class="form-auth send" action="">
+        <input class="input" type="text" placeholder="Имя">
+        <input class="input" type="email" placeholder="E-mail">
+        <textarea class="textarea" placeholder="Вопрос" id="" cols="30" rows="5"></textarea>
+        <button class="button-red">Войти</button>
+        <span class="reg-info">
+                        Отправляя запрос Вы соглашаетесь
+                        с «<a href="#">Пользовательским соглашением</a>»,
+                        «<a href="#">Политикой платных услуг</a>» и обработкой персональных данных в соответствии с
+                        «<a href="#">Политикой конфиденциальности</a>»
+                    </span>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="add-favorites" class="add-favorites modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content pb-20">
+      <p>Добавление в Избранное доступно только авторизованным пользователям</p>
+      <p>Войдите или зарегистрируйтесь</p>
+      <button class="button-blue">Войти</button>
+      <button class="button-red">Зарегистрироваться</button>
+    </div>
+  </div>
+</div>
+<div id="send-mail" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content pb-20">
+      <p>Возможность переписки
+        с провайдером обучения доступна только авторизованным пользователям
+      </p>
+      <p>Войдите или зарегистрируйтесь</p>
+      <button class="button-blue">Войти</button>
+      <button class="button-red">Зарегистрироваться</button>
+    </div>
+  </div>
+</div>
+<div id="reject" class="answer-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Отклонить заявку</h4>
+      <div class="textarea-box">
+        <textarea class="textarea" rows="5" placeholder="Укажите причину отказа"></textarea>
+      </div>
+      <button class="button-red">Отклонить заявку</button>
+    </div>
+  </div>
+</div>
+<div id="answer" class="answer-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Ответ на вопрос</h4>
+      <p class="text">
+        <strong class="blue">Вопрос</strong> : Скажите пожалуйста, диплом по данной программе будет государственного образца?
+      </p>
+      <div class="textarea-box">
+        <textarea class="textarea" rows="5" placeholder="Введите текст ответа"></textarea>
+      </div>
+      <button class="button-red">Отправить ответ</button>
+    </div>
+  </div>
+</div>
+<div id="to-review" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Ответить на отзыв</h4>
+      <div class="textarea-box">
+        <textarea class="textarea" rows="5" placeholder="Введите текст ответа"></textarea>
+      </div>
+      <button class="button-red">Отправить ответ</button>
+    </div>
+  </div>
+</div>
+<div id="about-rate" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <p class="text">Чтобы писать ответы на отзывы необходимо приобрести тариф Pro. Цена 1990 руб. с НДС в месяц</p>
+      <div class="buttons d-flex">
+        <button class="button-red">Отменить</button>
+        <button class="button-blue">Купить</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div id="insufficient" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <p class="text">На вашем счету недостаточно средств</p>
+      <div class="buttons d-flex">
+        <button class="button-red">Отменить</button>
+        <button class="button-blue">Пополнить</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+@import "../../node_modules/bootstrap/scss/bootstrap-reboot";
+
+@import "utils/_functions";
+@import "utils/_variables";
+@import "utils/_mixins";
+@import "utils/_placeholders";
+
+@import "core/_animations";
+@import "core/_typography";
+@import "core/_base";
+@import "core/_grid";
+@import "core/_utilities";
+@import "core/_icons";
+
+@import "libraries/nouislider";
+@import "libraries/tiny-slider";
+@import "libraries/range";
+@import "libraries/slider";

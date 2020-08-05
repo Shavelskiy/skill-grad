@@ -1,0 +1,90 @@
+// Color
+//////////////////////////////////////////////////////
+
+$color-accent: #f7562e;
+$color-green: #73ba04;
+$primary-color: #1d71b1 !default;
+$color-text: #3c3c3c;
+
+
+// Media
+//////////////////////////////////////////////////////
+
+$mobile-width: 320px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+
+//Grid
+//////////////////////////////////////////////////////
+
+// desktop grid
+$grid-desktop-columns: 12;
+$grid-desktop-sideMargin: 60px;
+$grid-desktop-gutter: 40px;
+$grid-desktop-breakpoint: 1170px;
+
+// tablet grid
+$grid-tablet-columns: 12;
+$grid-tablet-sideMargin: 50px;
+$grid-tablet-gutter: 30px;
+$grid-tablet-breakpoint: 1024px;
+
+// mobile grid
+$grid-mobile-columns: 4;
+$grid-mobile-sideMargin: 32px;
+$grid-mobile-gutter: 20px;
+$grid-mobile-breakpoint: 620px;
+
+//pixels to % variables
+$desktop-grid-width:
+        100% - (($grid-desktop-sideMargin * 2 / $grid-desktop-breakpoint)*100%);
+$tablet-grid-width:
+        100% - (($grid-tablet-sideMargin * 2 / $grid-tablet-breakpoint)*100%);
+$mobile-grid-width:
+        100% - (($grid-mobile-sideMargin * 2 / $grid-mobile-breakpoint)*100%);
+
+$desktop-gutter: (($grid-desktop-gutter / ($grid-desktop-breakpoint - ($grid-desktop-sideMargin*2))) * 100%);
+$tablet-gutter: (($grid-tablet-gutter / ($grid-tablet-breakpoint - ($grid-tablet-sideMargin*2))) * 100%);
+$mobile-gutter: (($grid-mobile-gutter / ($grid-mobile-breakpoint - ($grid-mobile-sideMargin*2))) * 100%);
+
+
+// Icon
+//////////////////////////////////////////////////////
+$icomoon-font-family: "skillgrad-icon" !default;
+$icomoon-font-path: "../../fonts" !default;
+
+$icon-menu: "\e940";
+$icon-place: "\e941";
+$icon-heart: "\e942";
+$icon-add-file: "\e943";
+$icon-arrow: "\e944";
+$icon-login: "\e945";
+$icon-add-folder: "\e946";
+$icon-search: "\e947";
+$icon-book: "\e94c";
+$icon-insurance: "\e94d";
+$icon-clock: "\e94e";
+$icon-star: "\e94f";
+$icon-right: "\e950";
+$icon-left: "\e951";
+$icon-cancel: "\e98c";
+$icon-next: "\e98d";
+$icon-down-arrow: "\e98e";
+$icon-gear: "\e98f";
+$icon-web-development: "\e990";
+$icon-contract: "\e991";
+$icon-email1: "\e992";
+$icon-google: "\e993";
+$icon-out: "\e994";
+$icon-student: "\e995";
+$icon-square: "\e996";
+$icon-calendar-2: "\e9ae";
+$icon-camera: "\e9b8";
+$icon-check: "\e9d2";
+$icon-close: "\e9e6";
+$icon-correct: "\ea01";
+$icon-love: "\ea31";
+$icon-love-red: "\ea32";
+$icon-more: "\ea3c";
+$icon-no-entry: "\ea3d";

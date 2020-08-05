@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ЛК ученик настройки</title>
+    <meta name="theme-color" content="#c9e0e04d">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"/>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    @@include("../../../blocks/modules/headerPage/headerPage.html")
+    <main class="content program">
+        <div class="container">
+            <div class="col-lg-12 mobile-no-gutter">
+                <div class="main_profile">
+                    <h2 class="title">Личный кабинет обучающегося</h2>
+                    <div class="toggle-menu">
+                        <ul>
+                            <li class="toggle-item active"><i class="icon-gear"></i><a href="/personal/student/settings.html">Настройки профиля</a></li>
+                            <li class="toggle-item"><i class="icon-email1"></i><a href="/personal/student/messages.html">Сообщения</a></li>
+                            <li class="toggle-item"><i class="icon-student"></i><a href="/personal/student/learn.html">Мое обучение</a></li>
+                        </ul>
+                        <i class="icon-down-arrow"></i>
+                    </div>
+                    <h5 class="result-title">Настройки пользователя</h5>
+                    <div class="user-settings">
+                        <div class="settings-sidebar">
+                            <img src="../../../img/photo-lk.jpg" alt="">
+                            <div class="button-group">
+                                <button class="button__edit">Изменить</button>
+                                <button class="button__delete">Удалить</button>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="form-group">
+                                <input class="input" type="text" placeholder="ФИО *">
+                                <div class="form-inline">
+                                    <input type="email" class="input" placeholder="E-mail *">
+                                    <input type="tel" class="input" placeholder="+7 (_ _ _) - _ _ _ - _ _ - _ _">
+                                    <div class="select custom-select-wrapper">
+                                        <div class="custom-select">
+                                            <div class="custom-select__trigger"><span>Выбрать специализацию</span>
+                                                <div class="arrow"></div>
+                                            </div>
+                                            <div class="custom-options scrollbar">
+                                                <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                                                <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                                                <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <textarea class="textarea" cols="30" rows="10" placeholder="О себе"></textarea>
+                                <div class="form-inline">
+                                    <input class="input" type="password" placeholder="Старый пароль">
+                                    <input class="input" type="password" placeholder="Новый пароль">
+                                    <input class="input" type="password" placeholder="Повторите новый пароль">
+                                </div>
+                                <div class="button">
+                                    <button class="button-blue">Сохранить настройки</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @@include("../../../blocks/modules/footer/footer.html")
+    @@include("../../../blocks/modules/modals/modals.html")
+<script src="/js/main.js"></script>
+</body>
+</html>

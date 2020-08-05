@@ -1,0 +1,14 @@
+.auth-modal {
+    z-index: 111;
+    .modal-content {
+        @include mobile {
+            width: 90%;
+        }
+        @include tablet {
+            width: 90%;
+        }
+        @include desktop {
+            width: 370px;
+        }
+    }
+}

@@ -1,0 +1,745 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <div class="d-f w-100 j-c-center">
+      <div class="breadcrumbs">
+        <ul>
+          <li><a href="#">Главная</a></li>
+          <li><a class="active" href="#">Сравнение программ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="main_compare compare mt-0">
+      <h2 class="title">Сравнение программ</h2>
+      <div class="container-0">
+        <div class="col-lg-12 col-sm-4 no-gutter">
+          <div class="tab">
+            <div class="toggle-menu tab__nav">
+              <ul class="nav">
+                <li class="nav-title">Показывать:</li>
+                <li data-tab-name="tab-1" class="toggle-item nav-item active">Различающиеся характеристики</li>
+                <li data-tab-name="tab-2" class="toggle-item nav-item"> Все характеристики</li>
+              </ul>
+              <i class="icon-down-arrow"></i>
+              <span class="clear">Очистить сравнение</span>
+            </div>
+            <div class="tab__content">
+              <div class="tab__content-item tab-1 active">
+                <div class="compare__table non-moblie">
+                  <div class="container-0">
+                    <div class="item col-lg-3 col-sm-2 no-gutter">
+                      {% include 'compare/compare-block1.html.twig' %}
+                    </div>
+                    <div class="item col-lg-3 col-sm-2 no-gutter">
+                      <div class="compare__table-column">
+                        <div class="compare__table-header">
+                          <span class="close"></span>
+                          <a href="#">Маркетинг (многопрофильный бакалавриат «Маркетинг
+                            и управление продажами»)</a>
+                          <div class="description">
+                            <div class="price">
+                              <span class="price-text">124 000 р.</span>
+                            </div>
+                            <div class="button-container">
+                              <button class="button-blue">Заказать</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="compare__table-category">
+                          <div class="category-link">
+                            <span>Маркетинг</span>
+                            <span>Офис, делопроизводство</span>
+                            <span>Управление и бизнес</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-annotation">
+                          <button>Подробнее</button>
+                          <p class="annotation-text">
+                            Менеджмент — направление, объединившее в себе несколько старых специальностей, которые стали
+                            соответствующими профилями. Будущие менеджеры изучают экономические, управленческие,
+                            социальные и гуманитарные дисциплины.
+                          </p>
+                        </div>
+                        <div class="compare__table-program">
+                          <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех
+                            факультетов МИИТ строительного профиля.</p>
+                          <div class="hidden">
+                            <p>- Это факультеты «Строительство железных дорог»,</p>
+                            <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка
+                              инженеров-путейцев и мостовиков, и факультет «Промышленное и гражданское
+                              строительство»,</p>
+                            <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного
+                              строительства.</p>
+                          </div>
+                          <button>Подробнее</button>
+                        </div>
+                        <div class="compare__table-users">
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-duration">
+                          <p>170 ак.ч.</p>
+                        </div>
+                        <div class="compare__table-design">
+                          <p class="non">Нет информации</p>
+                        </div>
+                        <div class="compare__table-provider">
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Институт системного анализа и управления Государственного университета
+                              «Дубна»</a>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
+                          </div>
+                        </div>
+                        <div class="compare__table-audience">
+                          <p>1. Дети до 16 лет.</p>
+                        </div>
+                        <div class="compare__table-document">
+                          <div class="photo-row cert">
+                            <img src="/img/cert.jpg" alt="">
+                            <span>Сертификат</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-date">
+                          <p>В любое время</p>
+                        </div>
+                        <div class="compare__table-mode">
+                          <p>Занятия по: ВТ, ЧТ, СБ,
+                            <br/>время проведения: с 11:00 до 15:00
+                          </p>
+                        </div>
+                        <div class="compare__table-course">
+                          <p>Книги, методические материалы, обеды</p>
+                        </div>
+                        <div class="compare__table-sales">
+                          <p>Для юридических лиц - 10%
+                            (18 700 руб.)</p>
+                        </div>
+                        <div class="compare__table-photo">
+                          <p class="non">Не размещены</p>
+                        </div>
+                        <div class="compare__table-information">
+                          <p>Программа обучения представляет из себя синтез математических, естественно-научных и
+                            профессиональных дисциплин. </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item col-lg-3 col-sm-2 no-gutter">
+                      {% include 'compare/compare-block.html.twig' %}
+                    </div>
+                    <div class="item col-lg-3 col-sm-2 no-gutter">
+                      {% include 'compare/compare-block.html.twig' %}
+                    </div>
+                  </div>
+                </div>
+                <div class="container-0 only-mobile">
+                  <div class="col-sm-2 no-gutter">
+                    <div class="compare__table">
+                      <div class="slider-compare mobile container-0">
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block1.html.twig' %}
+                        </div>
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block1.html.twig' %}
+                        </div>
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block1.html.twig' %}
+                        </div>
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block1.html.twig' %}
+                        </div>
+                        <div class="current-slide">
+                          <span class="current"></span>
+                          из
+                          <span class="all"></span>
+                        </div>
+                        <a class="previous">
+                          <i data-type="previous" class="icon-left"></i>
+                        </a>
+                        <a class="next">
+                          <i data-type="next" class="icon-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-2 no-gutter">
+                    <div class="compare__table">
+                      <div class="slider-compare-2 container-0">
+                        <div class="item col-sm-4 no-gutter">
+                          <div class="compare__table-column">
+                            <div class="compare__table-header">
+                              <span class="close"></span>
+                              <a href="#">Маркетинг (многопрофильный бакалавриат «Маркетинг
+                                и управление продажами»)</a>
+                              <div class="description">
+                                <div class="price">
+                                  <span class="price-text">124 000 р.</span>
+                                </div>
+                                <div class="button-container">
+                                  <button class="button-blue">Заказать</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="compare__table-category">
+                              <div class="category-link">
+                                <span>Маркетинг</span>
+                                <span>Офис, делопроизводство</span>
+                                <span>Управление и бизнес</span>
+                              </div>
+                            </div>
+                            <div class="compare__table-annotation">
+                              <button>Подробнее</button>
+                              <p class="annotation-text">
+                                Менеджмент — направление, объединившее в себе несколько старых специальностей, которые
+                                стали соответствующими профилями. Будущие менеджеры изучают экономические,
+                                управленческие, социальные и гуманитарные дисциплины.
+                              </p>
+                            </div>
+                            <div class="compare__table-program">
+                              <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех
+                                факультетов МИИТ строительного профиля.</p>
+                              <div class="hidden">
+                                <p>- Это факультеты «Строительство железных дорог»,</p>
+                                <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка
+                                  инженеров-путейцев и мостовиков, и факультет «Промышленное и гражданское
+                                  строительство»,</p>
+                                <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного
+                                  строительства.</p>
+                              </div>
+                              <button>Подробнее</button>
+                            </div>
+                            <div class="compare__table-users">
+                              <div class="photo-row">
+                                <img src="/img/photo.jpg" alt="">
+                                <span>Ермакова Елизавета Васильевна</span>
+                              </div>
+                              <div class="photo-row">
+                                <img src="/img/photo.jpg" alt="">
+                                <span>Ермакова Елизавета Васильевна</span>
+                              </div>
+                            </div>
+                            <div class="compare__table-duration">
+                              <p>170 ак.ч.</p>
+                            </div>
+                            <div class="compare__table-design">
+                              <p class="non">Нет информации</p>
+                            </div>
+                            <div class="compare__table-provider">
+                              <div class="photo-row">
+                                <img src="/img/orig_(1).jpg" alt="">
+                                <a href="#">Институт системного анализа и управления Государственного университета
+                                  «Дубна»</a>
+                              </div>
+                              <div class="photo-row">
+                                <img src="/img/orig_(1).jpg" alt="">
+                                <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
+                              </div>
+                            </div>
+                            <div class="compare__table-audience">
+                              <p>1. Дети до 16 лет.</p>
+                            </div>
+                            <div class="compare__table-document">
+                              <div class="photo-row cert">
+                                <img src="/img/cert.jpg" alt="">
+                                <span>Сертификат</span>
+                              </div>
+                            </div>
+                            <div class="compare__table-date">
+                              <p>В любое время</p>
+                            </div>
+                            <div class="compare__table-mode">
+                              <p>Занятия по: ВТ, ЧТ, СБ,
+                                <br/>время проведения: с 11:00 до 15:00
+                              </p>
+                            </div>
+                            <div class="compare__table-course">
+                              <p>Книги, методические материалы, обеды</p>
+                            </div>
+                            <div class="compare__table-sales">
+                              <p>Для юридических лиц - 10%
+                                (18 700 руб.)</p>
+                            </div>
+                            <div class="compare__table-photo">
+                              <p class="non">Не размещены</p>
+                            </div>
+                            <div class="compare__table-information">
+                              <p>Программа обучения представляет из себя синтез математических, естественно-научных и
+                                профессиональных дисциплин. </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block.html.twig' %}
+                        </div>
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block.html.twig' %}
+                        </div>
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'compare/compare-block.html.twig' %}
+                        </div>
+                        <div class="current-slide">
+                          <span class="current"></span>
+                          из
+                          <span class="all"></span>
+                        </div>
+                        <a class="previous">
+                          <i data-type="previous" class="icon-left"></i>
+                        </a>
+                        <a class="next">
+                          <i data-type="next" class="icon-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab__content-item tab-2">
+                <div class="compare__table">
+                  <div class="container-0">
+                    <div class="col-lg-3 no-gutter">
+                      <div class="compare__table-column">
+                        <div class="compare__table-header">
+                          <span class="close"></span>
+                          <a href="#">Маркетинг (многопрофильный бакалавриат «Маркетинг
+                            и управление продажами»)</a>
+                          <div class="description">
+                            <div class="price">
+                              <div class="old">148 000 р.</div>
+                              <div class="correct">124 000 р.</div>
+                            </div>
+                            <div class="button-container">
+                              <button class="button-blue">Заказать</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="compare__table-category">
+                          <h6 class="title">Категории программы обучения</h6>
+                          <div class="category-link">
+                            <span>Маркетинг</span>
+                            <span>Офис, делопроизводство</span>
+                            <span>Управление и бизнес</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-annotation">
+                          <h6 class="title">Аннотация программы обучения</h6>
+                          <p>Менеджмент — направление, объединившее в себе несколько старых специальностей, которые
+                            стали соответствующими профилями. Будущие менеджеры изучают экономические, управленческие,
+                            социальные и гуманитарные дисциплины.</p>
+                        </div>
+                        <div class="compare__table-program">
+                          <h6 class="title">Программа обучения</h6>
+                          <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех
+                            факультетов МИИТ строительного профиля.</p>
+                          <p>- Это факультеты «Строительство железных дорог»,</p>
+                          <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка
+                            инженеров-путейцев и мостовиков, и факультет «Промышленное и гражданское строительство»,</p>
+                          <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного строительства.</p>
+                        </div>
+                        <div class="compare__table-users">
+                          <h6 class="title">Преподаватели</h6>
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-duration">
+                          <h6 class="title">Продолжительность программы обучения</h6>
+                          <p>170 ак.ч.</p>
+                        </div>
+                        <div class="compare__table-design">
+                          <h6 class="title">Дизайн программы обучения</h6>
+                          <p>20% теории, 80% практики</p>
+                        </div>
+                        <div class="compare__table-provider">
+                          <h6 class="title">Провайдер обучения</h6>
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Институт системного анализа и управления Государственного университета
+                              «Дубна»</a>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
+                          </div>
+                        </div>
+                        <div class="compare__table-audience">
+                          <h6 class="title">Целевая аудитория</h6>
+                          <p>1. Дети до 16 лет.</p>
+                        </div>
+                        <div class="compare__table-document">
+                          <h6 class="title">Выдаваемый документ</h6>
+                          <div class="photo-row cert">
+                            <img src="/img/cert.jpg" alt="">
+                            <span>Сертификат</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-date">
+                          <h6 class="title">Даты обучения</h6>
+                          <p>В любое время</p>
+                        </div>
+                        <div class="compare__table-mode">
+                          <h6 class="title">Режим занятий</h6>
+                          <p>Занятия по: ВТ, ЧТ, СБ,
+                            <br/>время проведения: с 11:00 до 15:00
+                          </p>
+                        </div>
+                        <div class="compare__table-course">
+                          <h6 class="title">Включено в курс</h6>
+                          <p>Книги, методические материалы, обеды</p>
+                        </div>
+                        <div class="compare__table-sales">
+                          <h6 class="title">Скидки</h6>
+                          <p>Для юридических лиц - 10%
+                            (18 700 руб.)</p>
+                        </div>
+                        <div class="compare__table-photo">
+                          <h6 class="title">Фотографии с мероприятия</h6>
+                          <div class="photo">
+                            <img src="/img/photo.jpg" alt="">
+                            <img src="/img/photo.jpg" alt="">
+                          </div>
+                          <a href="#" class="more">Смотреть все в карточке программы</a>
+                        </div>
+                        <div class="compare__table-information">
+                          <h6 class="title">Дополнительная информация</h6>
+                          <p>Программа обучения представляет из себя синтез математических, естественно-научных и
+                            профессиональных дисциплин. </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 no-gutter">
+                      <div class="compare__table-column">
+                        <div class="compare__table-header">
+                          <span class="close"></span>
+                          <a href="#">Маркетинг (многопрофильный бакалавриат «Маркетинг
+                            и управление продажами»)</a>
+                          <div class="description">
+                            <div class="price">
+                              <div class="old">148 000 р.</div>
+                              <div class="correct">124 000 р.</div>
+                            </div>
+                            <div class="button-container">
+                              <button class="button-blue">Заказать</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="compare__table-category">
+                          <div class="category-link">
+                            <span>Маркетинг</span>
+                            <span>Офис, делопроизводство</span>
+                            <span>Управление и бизнес</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-annotation">
+                          <p>Менеджмент — направление, объединившее в себе несколько старых специальностей, которые
+                            стали соответствующими профилями. Будущие менеджеры изучают экономические, управленческие,
+                            социальные и гуманитарные дисциплины.</p>
+                        </div>
+                        <div class="compare__table-program">
+                          <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех
+                            факультетов МИИТ строительного профиля.</p>
+                          <p>- Это факультеты «Строительство железных дорог»,</p>
+                          <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка
+                            инженеров-путейцев и мостовиков, и факультет «Промышленное и гражданское строительство»,</p>
+                          <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного строительства.</p>
+                        </div>
+                        <div class="compare__table-users">
+
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-duration">
+
+                          <p>170 ак.ч.</p>
+                        </div>
+                        <div class="compare__table-design">
+
+                          <p>20% теории, 80% практики</p>
+                        </div>
+                        <div class="compare__table-provider">
+
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Институт системного анализа и управления Государственного университета
+                              «Дубна»</a>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
+                          </div>
+                        </div>
+                        <div class="compare__table-audience">
+
+                          <p>1. Дети до 16 лет.</p>
+                        </div>
+                        <div class="compare__table-document">
+
+                          <div class="photo-row cert">
+                            <img src="/img/cert.jpg" alt="">
+                            <span>Сертификат</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-date">
+
+                          <p>В любое время</p>
+                        </div>
+                        <div class="compare__table-mode">
+
+                          <p>Занятия по: ВТ, ЧТ, СБ,
+                            <br/>время проведения: с 11:00 до 15:00
+                          </p>
+                        </div>
+                        <div class="compare__table-course">
+
+                          <p>Книги, методические материалы, обеды</p>
+                        </div>
+                        <div class="compare__table-sales">
+
+                          <p>Для юридических лиц - 10%
+                            (18 700 руб.)</p>
+                        </div>
+                        <div class="compare__table-photo">
+
+                          <div class="photo">
+                            <img src="/img/photo.jpg" alt="">
+                            <img src="/img/photo.jpg" alt="">
+                          </div>
+                          <a href="#" class="more">Смотреть все в карточке программы</a>
+                        </div>
+                        <div class="compare__table-information">
+
+                          <p>Программа обучения представляет из себя синтез математических, естественно-научных и
+                            профессиональных дисциплин. </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 no-gutter">
+                      <div class="compare__table-column">
+                        <div class="compare__table-header">
+                          <span class="close"></span>
+                          <a href="#">Маркетинг (многопрофильный бакалавриат «Маркетинг
+                            и управление продажами»)</a>
+                          <div class="description">
+                            <div class="price">
+                              <div class="old">148 000 р.</div>
+                              <div class="correct">124 000 р.</div>
+                            </div>
+                            <div class="button-container">
+                              <button class="button-blue">Заказать</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="compare__table-category">
+                          <div class="category-link">
+                            <span>Маркетинг</span>
+                            <span>Офис, делопроизводство</span>
+                            <span>Управление и бизнес</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-annotation">
+                          <p>Менеджмент — направление, объединившее в себе несколько старых специальностей, которые
+                            стали соответствующими профилями. Будущие менеджеры изучают экономические, управленческие,
+                            социальные и гуманитарные дисциплины.</p>
+                        </div>
+                        <div class="compare__table-program">
+                          <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех
+                            факультетов МИИТ строительного профиля.</p>
+                          <p>- Это факультеты «Строительство железных дорог»,</p>
+                          <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка
+                            инженеров-путейцев и мостовиков, и факультет «Промышленное и гражданское строительство»,</p>
+                          <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного строительства.</p>
+                        </div>
+                        <div class="compare__table-users">
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-duration">
+                          <p>170 ак.ч.</p>
+                        </div>
+                        <div class="compare__table-design">
+                          <p>20% теории, 80% практики</p>
+                        </div>
+                        <div class="compare__table-provider">
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Институт системного анализа и управления Государственного университета
+                              «Дубна»</a>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
+                          </div>
+                        </div>
+                        <div class="compare__table-audience">
+                          <p>1. Дети до 16 лет.</p>
+                        </div>
+                        <div class="compare__table-document">
+                          <div class="photo-row cert">
+                            <img src="/img/cert.jpg" alt="">
+                            <span>Сертификат</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-date">
+                          <p>В любое время</p>
+                        </div>
+                        <div class="compare__table-mode">
+                          <p>Занятия по: ВТ, ЧТ, СБ,
+                            <br/>время проведения: с 11:00 до 15:00
+                          </p>
+                        </div>
+                        <div class="compare__table-course">
+                          <p>Книги, методические материалы, обеды</p>
+                        </div>
+                        <div class="compare__table-sales">
+                          <p>Для юридических лиц - 10%
+                            (18 700 руб.)</p>
+                        </div>
+                        <div class="compare__table-photo">
+                          <div class="photo">
+                            <img src="/img/photo.jpg" alt="">
+                            <img src="/img/photo.jpg" alt="">
+                          </div>
+                          <a href="#" class="more">Смотреть все в карточке программы</a>
+                        </div>
+                        <div class="compare__table-information">
+                          <p>Программа обучения представляет из себя синтез математических, естественно-научных и
+                            профессиональных дисциплин. </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 no-gutter">
+                      <div class="compare__table-column">
+                        <div class="compare__table-header">
+                          <span class="close"></span>
+                          <a href="#">Маркетинг (многопрофильный бакалавриат «Маркетинг
+                            и управление продажами»)</a>
+                          <div class="description">
+                            <div class="price">
+                              <div class="old">148 000 р.</div>
+                              <div class="correct">124 000 р.</div>
+                            </div>
+                            <div class="button-container">
+                              <button class="button-blue">Заказать</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="compare__table-category">
+                          <div class="category-link">
+                            <span>Маркетинг</span>
+                            <span>Офис, делопроизводство</span>
+                            <span>Управление и бизнес</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-annotation">
+                          <p>Менеджмент — направление, объединившее в себе несколько старых специальностей, которые
+                            стали соответствующими профилями. Будущие менеджеры изучают экономические, управленческие,
+                            социальные и гуманитарные дисциплины.</p>
+                        </div>
+                        <div class="compare__table-program">
+                          <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех
+                            факультетов МИИТ строительного профиля.</p>
+                          <p>- Это факультеты «Строительство железных дорог»,</p>
+                          <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка
+                            инженеров-путейцев и мостовиков, и факультет «Промышленное и гражданское строительство»,</p>
+                          <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного строительства.</p>
+                        </div>
+                        <div class="compare__table-users">
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/photo.jpg" alt="">
+                            <span>Ермакова Елизавета Васильевна</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-duration">
+                          <p>170 ак.ч.</p>
+                        </div>
+                        <div class="compare__table-design">
+                          <p class="no-inform">Нет информации</p>
+                        </div>
+                        <div class="compare__table-provider">
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Институт системного анализа и управления Государственного университета
+                              «Дубна»</a>
+                          </div>
+                          <div class="photo-row">
+                            <img src="/img/orig_(1).jpg" alt="">
+                            <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
+                          </div>
+                        </div>
+                        <div class="compare__table-audience">
+                          <p>1. Дети до 16 лет.</p>
+                        </div>
+                        <div class="compare__table-document">
+                          <div class="photo-row cert">
+                            <img src="/img/cert.jpg" alt="">
+                            <span>Сертификат</span>
+                          </div>
+                        </div>
+                        <div class="compare__table-date">
+                          <p>В любое время</p>
+                        </div>
+                        <div class="compare__table-mode">
+                          <p>Занятия по: ВТ, ЧТ, СБ,
+                            <br/>время проведения: с 11:00 до 15:00
+                          </p>
+                        </div>
+                        <div class="compare__table-course">
+                          <p>Книги, методические материалы, обеды</p>
+                        </div>
+                        <div class="compare__table-sales">
+                          <p>Для юридических лиц - 10%
+                            (18 700 руб.)</p>
+                        </div>
+                        <div class="compare__table-photo">
+                          <div class="photo">
+                            <img src="/img/photo.jpg" alt="">
+                            <img src="/img/photo.jpg" alt="">
+                          </div>
+                          <a href="#" class="more">Смотреть все в карточке программы</a>
+                        </div>
+                        <div class="compare__table-information">
+                          <p>Программа обучения представляет из себя синтез математических, естественно-научных и
+                            профессиональных дисциплин. </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

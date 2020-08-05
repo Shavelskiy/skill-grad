@@ -1,0 +1,43 @@
+.range-container {
+    & .range {
+        .noUi-handle {
+            top: -12px !important;
+            right: -5px !important;
+            width: 10px !important;
+            border: none;
+            box-shadow: none;
+            border-radius: 4px;
+            background-color: $color-accent;
+            outline: none;
+            &:after, &:before {
+                display: none;
+            }
+        }
+        &.noUi-target {
+            width: 100%;
+            height: 4px;
+            border-radius: 1px;
+            background: #f3f3f3;
+            border: none;
+            box-shadow: none;
+        }
+        .noUi-connect {
+            background: $color-accent;
+        }
+    }
+    & .range-desc {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    & .range-rule {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        .input {
+            width: 90px;
+            padding-left: 15px;
+        }
+    }
+}

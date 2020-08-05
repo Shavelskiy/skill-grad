@@ -1,0 +1,116 @@
+.pay-service {
+    .modal-content {
+        @include mobile {
+            width: 90%;
+        }
+        @include tablet {
+            width: 90%;
+        }
+        width: 30%;
+        .block-modal {
+            &:not(:last-child) {
+                border-bottom: 1px solid #ccc;
+            }
+        }
+    }
+}
+.deactivate {
+    .modal-content {
+        @include mobile {
+            width: 90%;
+        }
+        @include tablet {
+            width: 90%;
+        }
+        width: 25%;
+        padding-bottom: 1px;
+    }
+}
+.personal {
+    @include mobile {
+        .mobile-p-b {
+            padding-bottom: 10px !important;
+            width: 100%;
+        }
+        .table {
+
+            .mobile {
+                display: block;
+                margin-bottom: 10px;
+            }
+            .rules {
+                flex-direction: column-reverse;
+                position: absolute;
+                top: 10px;
+                right: 5px;
+                .delete {
+                    margin-left: 0;
+                }
+                span {
+                    margin-bottom: 10px;
+                }
+                i {
+                    margin-bottom: 10px;
+                }
+            }
+            tr {
+                flex-wrap: wrap;
+                flex-direction: row;
+            }
+        }
+    }
+    .program-first-column {
+        width: 399px;
+    }
+    .mobile {
+        display: none;
+    }
+    .tab {
+        &__nav {
+            @include mobile {
+                flex-wrap: wrap;
+                .nav {
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                }
+                .nav-item {
+                    display: block;
+                    &.active {
+                        width: auto;
+                    }
+                }
+            }
+            @include tablet {
+                flex-wrap: wrap;
+                .nav {
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                }
+                .nav-item {
+                    display: block;
+                    &.active {
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }
+    .main_profile .tab__nav .button-blue {
+        @include mobile {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        @include tablet {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 20px;
+        }
+    }
+    .profile-search {
+        @include mobile {
+            width: 90%;
+            margin: 0 auto;
+        }
+    }
+}

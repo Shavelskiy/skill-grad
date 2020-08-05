@@ -1,0 +1,25 @@
+.main-create {
+    .providers-block {
+        .provider {
+            @include mobile {
+                display: flex;
+                align-items: flex-end;
+                position: relative;
+                margin-right: 0 !important;
+                margin-bottom: 55%;
+                .textarea-box {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                }
+                .rules {
+                    i {
+                        position: absolute;
+                        right: 25px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,320 @@
+@font-face {
+  font-family: "#{$icomoon-font-family}";
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?8opc7o");
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?8opc7o#iefix") format("embedded-opentype"),
+  url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?8opc7o") format("truetype"),
+  url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?8opc7o") format("woff"),
+  url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?8opc7o##{$icomoon-font-family}") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "#{$icomoon-font-family}" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil .path1:before {
+  content: "\ea4c";
+  color: rgb(26, 92, 167);
+}
+
+.icon-pencil .path2:before {
+  content: "\ea4d";
+  margin-left: -1.5em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-pencil .path3:before {
+  content: "\ea4e";
+  margin-left: -1.5em;
+  color: rgb(26, 92, 167);
+}
+
+.icon-outside .path1:before {
+  content: "\ea3e";
+  color: rgb(26, 92, 167);
+}
+
+.icon-outside .path2:before {
+  content: "\ea3f";
+  margin-left: -1em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-outside .path3:before {
+  content: "\ea40";
+  margin-left: -1em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-outside .path4:before {
+  content: "\ea41";
+  margin-left: -1em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-plus .path1:before {
+  content: "\ea55";
+  color: rgb(109, 180, 254);
+}
+
+.icon-plus .path2:before {
+  content: "\ea56";
+  margin-left: -1.5em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-reload .path1:before {
+  content: "\ea57";
+  color: rgb(26, 92, 167);
+}
+
+.icon-reload .path2:before {
+  content: "\ea58";
+  margin-left: -1.5em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-menu {
+  &:before {
+    content: $icon-menu;
+  }
+}
+
+.icon-place {
+  &:before {
+    content: $icon-place;
+    color: #fff;
+  }
+}
+
+.icon-heart {
+  &:before {
+    content: $icon-heart;
+    color: #bababa;
+  }
+}
+
+.icon-add-file {
+  &:before {
+    content: $icon-add-file;
+    color: #fff;
+  }
+}
+
+.icon-arrow {
+  &:before {
+    content: $icon-arrow;
+    color: #fff;
+  }
+}
+
+.icon-login {
+  &:before {
+    content: $icon-login;
+    color: #fff;
+  }
+}
+
+.icon-add-folder {
+  &:before {
+    content: $icon-add-folder;
+    color: #fff;
+  }
+}
+
+.icon-search {
+  &:before {
+    content: $icon-search;
+    color: #1d71b1;
+  }
+}
+
+.icon-book {
+  &:before {
+    content: $icon-book;
+    color: #1d71b1;
+  }
+}
+
+.icon-insurance {
+  &:before {
+    content: $icon-insurance;
+    color: #1d71b1;
+  }
+}
+
+.icon-clock {
+  &:before {
+    content: $icon-clock;
+    color: #1d71b1;
+  }
+}
+
+.icon-star {
+  &:before {
+    content: $icon-star;
+    color: #1d71b1;
+  }
+}
+
+.icon-right {
+  &:before {
+    content: $icon-right;
+    color: #767676;
+  }
+}
+
+.icon-left {
+  &:before {
+    content: $icon-left;
+    color: #767676;
+  }
+}
+
+.icon-cancel {
+  &:before {
+    content: $icon-cancel;
+    color: #f7562e;
+  }
+}
+
+.icon-next {
+  &:before {
+    content: $icon-next;
+    color: #ccc;
+  }
+}
+
+.icon-down-arrow {
+  &:before {
+    content: $icon-down-arrow;
+    color: #c3cbd1;
+  }
+}
+
+.icon-gear {
+  &:before {
+    content: $icon-gear;
+    color: #1d71b1;
+  }
+}
+
+.icon-web-development {
+  &:before {
+    content: $icon-web-development;
+    color: #1d71b1;
+  }
+}
+
+.icon-contract {
+  &:before {
+    content: $icon-contract;
+    color: #1d71b1;
+  }
+}
+
+.icon-email1 {
+  &:before {
+    content: $icon-email1;
+    color: #1d71b1;
+  }
+}
+
+.icon-google {
+  &:before {
+    content: $icon-google;
+    color: #1d71b1;
+  }
+}
+
+.icon-out {
+  &:before {
+    content: $icon-out;
+    color: #1d71b1;
+  }
+}
+
+.icon-student {
+  &:before {
+    content: $icon-student;
+    color: #1d71b1;
+  }
+}
+
+.icon-square {
+  &:before {
+    content: $icon-square;
+    color: #fff;
+  }
+}
+
+.icon-calendar-2 {
+  &:before {
+    content: $icon-calendar-2;
+  }
+}
+
+.icon-camera {
+  &:before {
+    content: $icon-camera;
+  }
+}
+
+.icon-check {
+  &:before {
+    content: $icon-check;
+    color: #208abd;
+  }
+}
+
+.icon-close {
+  &:before {
+    content: $icon-close;
+    color: #f92e25;
+  }
+}
+
+.icon-correct {
+  &:before {
+    content: $icon-correct;
+    color: #6db4fe;
+  }
+}
+
+.icon-love {
+  &:before {
+    content: $icon-love;
+    color: #eceff1;
+  }
+}
+
+.icon-love-red {
+  &:before {
+    content: $icon-love-red;
+    color: #f92e25;
+  }
+}
+
+.icon-more {
+  &:before {
+    content: $icon-more;
+  }
+}
+
+.icon-no-entry {
+  &:before {
+    content: $icon-no-entry;
+  }
+}
