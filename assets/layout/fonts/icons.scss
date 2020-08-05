@@ -1,25 +1,23 @@
 @font-face {
-  font-family: "#{$icomoon-font-family}";
-  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?8opc7o");
-  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?8opc7o#iefix") format("embedded-opentype"),
-  url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?8opc7o") format("truetype"),
-  url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?8opc7o") format("woff"),
-  url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?8opc7o##{$icomoon-font-family}") format("svg");
+  font-family: "skillgrad-icon";
+  src: url("../fonts/skillgrad-icon.eot?8opc7o");
+  src: url("../fonts/skillgrad-icon.eot?8opc7o#iefix") format("embedded-opentype"),
+  url("../fonts/skillgrad-icon.ttf?8opc7o") format("truetype"),
+  url("../fonts/skillgrad-icon.woff?8opc7o") format("woff"),
+  url("../fonts/skillgrad-icon.svg?8opc7o#skillgrad-icon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
 i {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "#{$icomoon-font-family}" !important;
+  font-family: "skillgrad-icon", sans-serif !important;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
 
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -88,233 +86,235 @@ i {
 
 .icon-menu {
   &:before {
-    content: $icon-menu;
+    content: "\e940";
   }
 }
 
 .icon-place {
   &:before {
-    content: $icon-place;
+    content: "\e941";
     color: #fff;
   }
 }
 
 .icon-heart {
   &:before {
-    content: $icon-heart;
+    content: "\e942";
     color: #bababa;
   }
 }
 
 .icon-add-file {
   &:before {
-    content: $icon-add-file;
+    content: "\e943";
     color: #fff;
   }
 }
 
 .icon-arrow {
   &:before {
-    content: $icon-arrow;
+    content: "\e944";
     color: #fff;
   }
 }
 
 .icon-login {
   &:before {
-    content: $icon-login;
+    content: "\e945";
     color: #fff;
   }
 }
 
 .icon-add-folder {
   &:before {
-    content: $icon-add-folder;
+    content: "\e946";
     color: #fff;
   }
 }
 
 .icon-search {
   &:before {
-    content: $icon-search;
+    content: "\e947";
     color: #1d71b1;
   }
 }
 
 .icon-book {
   &:before {
-    content: $icon-book;
+    content: "\e94c";
     color: #1d71b1;
   }
 }
 
 .icon-insurance {
   &:before {
-    content: $icon-insurance;
+    content: "\e94d";
     color: #1d71b1;
   }
 }
 
 .icon-clock {
   &:before {
-    content: $icon-clock;
+    content: "\e94e";
     color: #1d71b1;
   }
 }
 
 .icon-star {
   &:before {
-    content: $icon-star;
+    content: "\e94f";
     color: #1d71b1;
   }
 }
 
 .icon-right {
   &:before {
-    content: $icon-right;
+    content: "\e950";
     color: #767676;
   }
 }
 
 .icon-left {
   &:before {
-    content: $icon-left;
+    content: "\e951";
     color: #767676;
   }
 }
 
 .icon-cancel {
   &:before {
-    content: $icon-cancel;
+    content: "\e98c";
     color: #f7562e;
   }
 }
 
 .icon-next {
   &:before {
-    content: $icon-next;
+    content: "\e98d";
     color: #ccc;
   }
 }
 
 .icon-down-arrow {
   &:before {
-    content: $icon-down-arrow;
+    content: "\e98e";
     color: #c3cbd1;
   }
 }
 
 .icon-gear {
   &:before {
-    content: $icon-gear;
+    content: "\e98f";
     color: #1d71b1;
   }
 }
 
 .icon-web-development {
   &:before {
-    content: $icon-web-development;
+    content: "\e990";
     color: #1d71b1;
   }
 }
 
 .icon-contract {
   &:before {
-    content: $icon-contract;
+    content: "\e991";
     color: #1d71b1;
   }
 }
 
 .icon-email1 {
   &:before {
-    content: $icon-email1;
+    content: "\e992";
     color: #1d71b1;
   }
 }
 
 .icon-google {
   &:before {
-    content: $icon-google;
+    content: "\e993";
     color: #1d71b1;
   }
 }
 
 .icon-out {
   &:before {
-    content: $icon-out;
+    content: "\e994";
     color: #1d71b1;
   }
 }
 
 .icon-student {
   &:before {
-    content: $icon-student;
+    content: "\e995";
     color: #1d71b1;
   }
 }
 
 .icon-square {
   &:before {
-    content: $icon-square;
+    content: "\e996";
     color: #fff;
   }
 }
 
 .icon-calendar-2 {
   &:before {
-    content: $icon-calendar-2;
+    content: "\e9ae";
   }
 }
 
 .icon-camera {
   &:before {
-    content: $icon-camera;
+    content: "\e9b8";
   }
 }
 
 .icon-check {
   &:before {
-    content: $icon-check;
+    content: "\e9d2";
     color: #208abd;
   }
 }
 
 .icon-close {
   &:before {
-    content: $icon-close;
+    content: "\e9e6";
     color: #f92e25;
   }
 }
 
 .icon-correct {
   &:before {
-    content: $icon-correct;
+    content: "\ea01";
     color: #6db4fe;
   }
 }
 
 .icon-love {
   &:before {
-    content: $icon-love;
+    content: "\ea31";
     color: #eceff1;
   }
 }
 
 .icon-love-red {
   &:before {
-    content: $icon-love-red;
+    content: "\ea32";
     color: #f92e25;
   }
 }
 
 .icon-more {
   &:before {
-    content: $icon-more;
+    content: "\ea3c";
   }
 }
 
 .icon-no-entry {
   &:before {
-    content: $icon-no-entry;
+    content: "\ea3d";
   }
 }
+
+

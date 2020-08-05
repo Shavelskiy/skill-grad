@@ -1,88 +1,21 @@
-@import "./fonts/index";
-@import "./../components/ui/index";
-@import "./../components/modal/index";
-@import "./../components/header/index";
-@import "./../components/footer/index";
+@import "../../node_modules/bootstrap/scss/bootstrap-reboot";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
-  font-size: 14px;
-  line-height: 1.4;
-}
+@import "fonts/index";
 
-a {
-  text-decoration: none;
-}
-html{
-  font-size: 62.5%;
-}
-html,
-body {
-  height: 100%;
-  overflow-x: hidden;
-  background-color: #fff;
-  color: hsl(0, 0%, 20%);;
-}
+@import "core/_mixins";
+@import "core/base";
+@import "core/_typography";
+@import "core/_grid";
+@import "core/_utilities";
 
-ul {
-  list-style: none;
-}
+@import "libraries/nouislider";
+@import "libraries/tiny-slider";
+@import "libraries/range";
+@import "libraries/slider";
 
-input:focus, textarea:focus {
-  outline: none;
-}
+@import "project/elements";
+@import "project/widgets";
+@import "project/layout";
 
-button {
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  outline: none;
-}
+@import "../blocks/modules";
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  min-width: 320px;
-}
-
-.header {
-  flex: 0 0 auto;
-}
-
-.content {
-  flex: 1 0 auto;
-}
-
-.footer {
-  flex: 0 0 auto;
-}
-
-.container {
-  display: block;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-  height: 100%;
-
-  @media (min-width: 480px) {
-    width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    width: 100%;
-  }
-
-  @media (min-width: 992px) {
-    width: 962px;
-  }
-
-  @media (min-width: 1200px) {
-    width: 1170px;
-  }
-}

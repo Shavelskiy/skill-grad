@@ -3,5 +3,4 @@
 // import './../components/auth'
 // import './../components/modal'
 
-// import './index.scss'
-import './main.scss'
+import './index.scss'
