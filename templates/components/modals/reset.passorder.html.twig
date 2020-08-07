@@ -1,15 +1,13 @@
-<div class="modal" id="forgot-password-modal">
+<div id="forgot-password-modal" class="auth-modal modal">
   <div class="modal-content">
-    <div class="modal-body modal-body-without-footer">
-      <button class="close-modal"></button>
-      <h2>Восстановление пароля</h2>
-      <form method="post" action="{{ path('ajax.auth.reset.password') }}">
+    <span class="close">&times;</span>
+    <div class="content restore-pass">
+      <h4>Восстановление пароля</h4>
+      <form class="form-auth" action="{{ path('ajax.auth.reset.password') }}">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('reset-password') }}">
         <span class="modal-error"></span>
-        <div class="modal-form-field">
-          <input type="email" name="email" placeholder="E-mail" required="required"/>
-        </div>
-        <button class="btn btn-red" type="submit">Восстановить пароль</button>
+        <input class="input" type="email" placeholder="E-mail" name="email" required="required">
+        <button class="button-red" type="submit">Восстановить пароль</button>
       </form>
     </div>
   </div>

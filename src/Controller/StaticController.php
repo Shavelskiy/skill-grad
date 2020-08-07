@@ -32,4 +32,20 @@ class StaticController extends AbstractController
         return $this->render('static/provider-faq.html.twig');
 
     }
+
+    /**
+     * @Route("/compare", name="app.compare", methods={"GET"})
+     */
+    public function compareAction(): Response
+    {
+        return $this->render('static/compare.html.twig');
+    }
+
+    /**
+     * @Route("/favorite", name="app.favorite", methods={"GET"})
+     */
+    public function favoriteAction(): Response
+    {
+        return $this->render('static/favorite.html.twig');
+    }
 }

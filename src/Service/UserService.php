@@ -17,20 +17,20 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected UserRepository $userRepository;
     protected UserTokenRepository $userTokenRepository;
-    protected EntityManagerInterface $em;
+    protected EntityManagerInterface $entityManager;
     protected AuthMailerInterface $authMailer;
 
     public function __construct(
         UserRepository $userRepository,
         UserTokenRepository $userTokenRepository,
         UserPasswordEncoderInterface $userPasswordEncoder,
-        EntityManagerInterface $em,
+        EntityManagerInterface $entityManager,
         AuthMailerInterface $authMailer
     ) {
         $this->userRepository = $userRepository;
         $this->userTokenRepository = $userTokenRepository;
         $this->userPasswordEncoder = $userPasswordEncoder;
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->authMailer = $authMailer;
     }
 
@@ -41,8 +41,8 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
 
         $token = (new UserToken(UserToken::TYPE_RESET_PASSWORD))->setUser($user);
 
-        $this->em->persist($token);
-        $this->em->flush();
+        $this->entityManager->persist($token);
+        $this->entityManager->flush();
 
         $this->authMailer->sendResetPasswordEmail(
             $user->getEmail(),
@@ -57,9 +57,9 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         $user = $userToken->getUser();
         $user->setPassword($this->userPasswordEncoder->encodePassword($user, $newPassword));
 
-        $this->em->persist($user);
-        $this->em->remove($userToken);
-        $this->em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->remove($userToken);
+        $this->entityManager->flush();
     }
 
     public function registerUser(string $email, string $password, bool $isProvider): void
@@ -84,9 +84,9 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             }
         }
 
-        $this->em->persist($user);
-        $this->em->persist($registerToken);
-        $this->em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->persist($registerToken);
+        $this->entityManager->flush();
 
         $this->authMailer->sendRegisterEmail(
             $user->getEmail(),
@@ -106,8 +106,8 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             $this->userPasswordEncoder->encodePassword($user, '123456')
         );
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         return $user;
     }
@@ -124,8 +124,8 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             $this->updateUserPassword($user, $updateUserData->getNewPassword());
         }
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     protected function checkPasswordCorrect(User $user, string $oldPassword): void

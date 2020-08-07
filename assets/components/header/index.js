@@ -1,7 +1,7 @@
 import { loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, feedbackModal } from '../modal'
-import './logout'
-import './category-menu'
-import './dropdown'
+// import './logout'
+// import './category-menu'
+// import './dropdown'
 
 
 const openLoginModalBtns = document.querySelectorAll('.open-login-modal-btn')
@@ -27,6 +27,7 @@ openCitySelectorModalBtns.forEach((item) => {
     citySelectorModal.classList.add('active')
   }
 })
+
 
 loginModal.querySelector('.login-forgot-password-link').onclick = () => {
   resetPasswordModal.classList.add('active')

@@ -1,18 +1,3 @@
-@mixin columns-loop($name, $columns, $gutter) {
-  @for $i from 0 through $columns {
-    &-#{$name}-#{$i} {
-      box-sizing: border-box;
-      width: 100% / $columns * $i;
-      padding-left: $gutter / 2;
-      padding-right: $gutter / 2;
-    }
-
-    &-#{$name}-shift-#{$i} {
-      margin-left: 100% / $columns * $i;
-    }
-  }
-}
-
 @mixin mobile {
   @media (min-width: 320px) and (max-width: 767px) {
     @content;
@@ -28,42 +13,6 @@
 @mixin desktop {
   @media (min-width: 1024px) {
     @content;
-  }
-}
-
-@mixin button($font-size, $color) {
-  display: block;
-  cursor: pointer;
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  padding: 5px 10px;
-  text-align: center;
-  font-family: "Lato", sans-serif;
-  font-size: $font-size;
-  line-height: 36px;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 25px;
-  &:disabled, &:hover {
-    opacity: 0.8;
-    color: #fff;
-  }
-  &:focus, &:active {
-    outline: none;
-  }
-  @if $color == "blue" {
-    background-image: linear-gradient(0deg, #1f81b9 0%, #195da7 100%);
-  } @else if ($color == "grey") {
-    background-color: #f8f8f8;
-    color: $primary-color;
-    &:hover {
-      opacity: 0.8;
-      color: $primary-color;
-    }
-  } @else {
-    background-image: linear-gradient(0deg, #fb5519 0%, #f9453f 100%);
   }
 }
 
@@ -194,11 +143,13 @@
   user-select: none;
   width: 100%;
   margin-bottom: 30px;
+
   .custom-select {
     display: flex;
     flex-direction: column;
     position: relative;
   }
+
   .custom-select__trigger {
     display: flex;
     align-items: center;

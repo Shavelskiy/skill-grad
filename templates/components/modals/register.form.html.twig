@@ -1,48 +1,32 @@
-<div class="modal" id="register-role-modal">
+<div id="register-role-modal" class="auth-modal modal">
   <div class="modal-content">
-    <div class="modal-body modal-body-without-footer">
-      <button class="close-modal"></button>
-      <h2>Выберите тип аккаунта</h2>
-      <div class="modal-form-field">
-        <button class="btn btn-red" id="register-user-button">Обучающийся</button>
-      </div>
-      <div class="modal-form-field">
-        <button class="btn btn-blue" id="register-provider-button">Образовательное учреждение</button>
-      </div>
+    <span class="close">&times;</span>
+    <div class="content type">
+      <h4>Выберите тип аккаунта</h4>
+      <button class="open-reg button-blue" id="register-user-button">Обучающийся</button>
+      <button class="open-reg button-red" id="register-provider-button">Образовательное учреждение</button>
     </div>
   </div>
 </div>
 
-<div class="modal" id="register-modal">
+<div id="register-modal" class="auth-modal modal">
   <div class="modal-content">
-    <div class="modal-body">
-      <button class="close-modal"></button>
-      <h2>Регистрация на сайте</h2>
-      <form method="post" action="{{ path('ajax.auth.register') }}" class="modal-form">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Регистрация на сайте</h4>
+      <form class="form-auth reg" action="{{ path('ajax.auth.register') }}">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
-        <input type="hidden" name="role">
         <span class="modal-error"></span>
-        <div class="modal-form-field">
-          <input type="email" name="email" placeholder="E-mail" required="required"/>
-        </div>
-        <div class="modal-form-field">
-          <input type="password" name="password" placeholder="Пароль" required="required"/>
-        </div>
-        <div class="modal-form-field">
-          <input type="password" name="confirm-password" placeholder="Повторите пароль" required="required"/>
-        </div>
-        <button class="btn btn-red" type="submit">Зарегистрироваться</button>
+        <input type="hidden" name="role">
+        <input class="input" type="email" placeholder="E-mail" name="email">
+        <input class="input" type="password" placeholder="Пароль" name="password">
+        <input class="input" type="password" placeholder="Повторите пароль" name="confirm-password">
+        <button class="button-red" type="submit">Зарегистрироваться</button>
+        <span class="reg-info">Нажимая на кнопку "Зарегистрироваться"
+Вы соглашаетесь с «<a href="#">Пользовательским соглашением</a>», «<a href="#">Политикой платных услуг</a>»
+и обработкой персональных данных в соответствии с «<a href="#">Политикой конфиденциальности</a>»</span>
       </form>
-      <div class="modal-additional-content">
-        <div class="modal-additional-row">
-          Нажимая на кнопку «Зарегистрироваться» Вы
-          соглашаетесь с « <a class="modal-link modal-link-blue" href="#">Пользовательским соглашением</a>»,«<a
-            class="modal-link modal-link-blue" href="#">Политикой платных услуг</a>»,и
-          обработкой персональных данных в соответствии c «<a class="modal-link modal-link-blue" href="#">Политикой конфиденциальности</a>»
-        </div>
-      </div>
     </div>
-
     {% include 'components/modals/social.auth.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
   </div>
 </div>

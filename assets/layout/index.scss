@@ -2,11 +2,11 @@
 
 @import "fonts/index";
 
-@import "core/_mixins";
+@import "core/mixins";
 @import "core/base";
-@import "core/_typography";
-@import "core/_grid";
-@import "core/_utilities";
+@import "core/typography";
+@import "core/grid";
+@import "core/utilities";
 
 @import "libraries/nouislider";
 @import "libraries/tiny-slider";
@@ -19,3 +19,11 @@
 
 @import "../blocks/modules";
 
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+@import "./../components/modal/index";
+@import "./../components/header/index";

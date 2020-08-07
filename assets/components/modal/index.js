@@ -41,7 +41,7 @@ const initModalFormCloseBtn = (modal) => {
     return
   }
 
-  const closeButton = modal.querySelector('button.close-modal')
+  const closeButton = modal.querySelector('span.close')
 
   if (closeButton !== null) {
     closeButton.onclick = () => {
