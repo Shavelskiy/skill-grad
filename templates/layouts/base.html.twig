@@ -14,7 +14,7 @@
     {{ encore_entry_link_tags('site.layout') }}
   {% endblock %}
 </head>
-<body>
+<body data-auth="{{ app.user is not null ? 'true' : 'false' }}">
 
 {% include 'components/header/page.index.html.twig' %}
 

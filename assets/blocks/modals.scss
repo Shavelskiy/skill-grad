@@ -1,14 +1,13 @@
 .auth-modal {
     z-index: 111;
     .modal-content {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
             width: 90%;
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
             width: 90%;
         }
-        @include desktop {
-            width: 370px;
+        @media (min-width: 1024px) {            width: 370px;
         }
     }
 }

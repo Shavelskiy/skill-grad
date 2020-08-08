@@ -7,13 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/program")
- */
 class ProgramController extends AbstractController
 {
     /**
-     * @Route("", name="program.index", methods={"GET"})
+     * @Route("/program", name="program.index", methods={"GET"})
      */
     public function indexAction(): Response
     {
@@ -21,7 +18,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="program.view", methods={"GET"})
+     * @Route("/program/{slug}", name="program.view", methods={"GET"})
      */
     public function actionView(): Response
     {
@@ -29,12 +26,11 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="program.add", methods={"GET"})
-     *
-     * @IsGranted("ROLE_PROVIDER")
+     * @Route("/program-create", name="program.add", methods={"GET"})
      */
-    public function addAction(): Response
+    public function createAction(): Response
     {
+//        @IsGranted("ROLE_PROVIDER")
         return $this->render('program/add.html.twig');
     }
 }

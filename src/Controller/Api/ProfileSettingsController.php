@@ -36,10 +36,12 @@ class ProfileSettingsController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        $userInfo = $user->getUserInfo();
+
         return new JsonResponse([
-            'fullName' => $user->getFullName(),
+            'fullName' => ($userInfo !== null) ? $userInfo->getFullName() : '',
             'email' => $user->getEmail(),
-            'phone' => $user->getPhone(),
+            'phone' => ($userInfo !== null) ? $userInfo->getPhone() : '',
         ]);
     }
 

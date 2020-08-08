@@ -1,33 +1,51 @@
-<div class="how-work">
+<div class="main__service service">
   <div class="container">
-    <h1 class="how-work-title">Как работает сервис?</h1>
-    <div class="how-work__list">
-{#      <div class="how-work__info-mobile">#}
-{#        <div class="how-work__info-title how-work__info-school is-active tabWork-1" data-tab-name="tabWork-1">Для#}
-{#          желающих обучиться#}
-{#        </div>#}
-{#        <div class="how-work__info-title how-work__info-provaider tabWork-2" data-tab-name="tabWork-2">Для провайдеров#}
-{#          обучения#}
-{#        </div>#}
-{#      </div>#}
-      <div class="how-work__info">
-        <div class="how-work__info-title how-work__info-school">Для желающих обучиться</div>
-        <ul class="how-work__info-items">
-          <li class="how-work__info-item">Подберите программу обучения, используя поиск, фильтры, сравнение</li>
-          <li class="how-work__info-item">Направьте заявку провайдеру обучения</li>
-          <li class="how-work__info-item">Зарегистрируйтесь. Вы сможете писать отзывы, задавать вопросы</li>
-        </ul>
-        <a class="btn btn__popup how-work-register-user-btn">Регистрация обучающегося</a></div>
-      <div class="how-work__info">
-        <div class="how-work__info-title how-work__info-provaider">Для провайдеров обучения</div>
-        <ul class="how-work__info-items">
-          <li class="how-work__info-item">Зарегистрируйтесь</li>
-          <li class="how-work__info-item">Добавьте описание вашей организации</li>
-          <li class="how-work__info-item">Добавьте программы обучения</li>
-          <li class="how-work__info-item">Отвечайте на отзывы</li>
-          <li class="how-work__info-item">Получайте заявки</li>
-        </ul>
-        <a class="btn btn__popup how-work-register-provider-btn">Регистрация провайдера</a></div>
+    <div class="col-lg-12">
+      <h2 class="title">Как работает сервис?</h2>
+    </div>
+    <div class="service-container">
+      <div class="control">
+        <div data-tab-name="tab-1" class="nav-item tab-service__nav left-block active">
+          <span class="title-text">Для желающих <br/>обучиться</span>
+        </div>
+        <div data-tab-name="tab-2" class="nav-item tab-service__nav right-block">
+          <span class="title-text">Для провайдеров <br/>обучения</span>
+        </div>
+      </div>
+      <div class="col-lg-6 tab-service__content tab__content-item left tab-1 active">
+        <div class="title">
+          <span class="title-icon knowledge"></span>
+          <span class="title-text">Для желающих <br/>обучиться</span>
+        </div>
+        <div class="content">
+          <ul class="tick">
+            <li>Подберите программу обучения, используя поиск, фильтры, сравнение</li>
+            <li>Направьте заявку провайдеру обучения</li>
+            <li>Зарегистрируйтесь. Вы сможете писать отзывы, задавать вопросы</li>
+          </ul>
+          <div class="btn-container">
+            <button class="button-red register-user-btn">Регистрация обучающегося</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 tab-service__content tab__content-item right tab-2">
+        <div class="title">
+          <span class="title-icon school"></span>
+          <span class="title-text">Для провайдеров <br/>обучения</span>
+        </div>
+        <div class="content">
+          <ul class="tick">
+            <li>Зарегистрируйтесь</li>
+            <li>Добавьте описание вашей организации</li>
+            <li>Добавьте программы обучения</li>
+            <li>Отвечайте на отзывы</li>
+            <li>Получайте заявки</li>
+          </ul>
+          <div class="btn-container">
+            <button class="button-red register-provider-btn">Регистрация провайдера</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

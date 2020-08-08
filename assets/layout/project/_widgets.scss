@@ -2,7 +2,7 @@
   width: 100%;
 
   .toggle-menu {
-    @include mobile() {
+    @media (min-width: 320px) and (max-width: 767px) {
       background-color: #f5f6f8;
       padding-bottom: 10px;
       padding-top: 10px;
@@ -15,14 +15,14 @@
     position: relative;
 
     .icon-down-arrow {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: flex;
         position: absolute;
         top: 20px;
         right: 20px;
         font-size: 20px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         display: flex;
         position: absolute;
         top: 13px;
@@ -33,22 +33,22 @@
     }
 
     ul {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         flex-direction: column;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         flex-direction: column;
       }
       display: flex;
       justify-content: center;
 
       li {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: none;
           padding-right: 10px;
           padding-left: 20px;
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           display: none;
           padding-right: 10px;
           padding-left: 20px;
@@ -66,11 +66,11 @@
 
         &:not(:first-child) {
 
-          @include mobile {
+          @media (min-width: 320px) and (max-width: 767px) {
             border: none;
             padding-left: 20px;
           }
-          @include tablet {
+          @media (min-width: 768px) and (max-width: 1023px) {
             border: none;
             padding-left: 20px;
           }
@@ -78,12 +78,12 @@
         }
 
         &.active {
-          @include mobile {
+          @media (min-width: 320px) and (max-width: 767px) {
             display: flex;
             background-color: transparent;
             border-color: transparent;
           }
-          @include tablet {
+          @media (min-width: 768px) and (max-width: 1023px) {
             display: flex;
             background-color: transparent;
             border-color: transparent;
@@ -94,22 +94,22 @@
             font-size: 20px;
 
             &:before {
-              @include mobile {
-                color: $color-accent;
+              @media (min-width: 320px) and (max-width: 767px) {
+                color: #f7562e;
               }
-              @include tablet {
-                color: $color-accent;
+              @media (min-width: 768px) and (max-width: 1023px) {
+                color: #f7562e;
               }
               color: #fff;
             }
           }
 
           a {
-            @include mobile {
-              color: $color-accent;
+            @media (min-width: 320px) and (max-width: 767px) {
+              color: #f7562e;
             }
-            @include tablet {
-              color: $color-accent;
+            @media (min-width: 768px) and (max-width: 1023px) {
+              color: #f7562e;
             }
             color: #fff;
           }
@@ -119,12 +119,12 @@
           margin-right: 10px;
 
           &:before {
-            color: $color-text;
+            color: #3c3c3c;
           }
         }
 
         a {
-          color: $color-text;
+          color: #3c3c3c;
         }
       }
     }
@@ -136,7 +136,7 @@
     position: relative;
 
     & .nav {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         flex-direction: column;
         width: 100%;
         padding: 0;
@@ -149,7 +149,7 @@
       z-index: 0;
 
       &-item {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: none;
         }
         z-index: 1;
@@ -162,14 +162,14 @@
       }
 
       &-item.active {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: block;
           width: 100%;
           text-align: center;
           border: none;
         }
-        color: $color-accent;
-        border-bottom: 3px solid $color-accent;
+        color: #f7562e;
+        border-bottom: 3px solid #f7562e;
       }
     }
   }
@@ -179,7 +179,7 @@
     width: 100%;
 
     .tns-ovh {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         overflow: hidden;
       }
       overflow: visible;
@@ -204,7 +204,7 @@
 
   &.doted {
     & .nav-doted {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: flex;
       }
       display: none;
@@ -229,15 +229,15 @@
       }
 
       &-item.active {
-        border: 1px solid $color-accent;
-        background-color: $color-accent;
+        border: 1px solid #f7562e;
+        background-color: #f7562e;
       }
     }
   }
 
   &.blog {
     & .nav {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         flex-direction: row;
         justify-content: space-between;
         &-item {
@@ -258,7 +258,7 @@
 }
 
 .service-container {
-  @include desktop {
+  @media (min-width: 1024px) {
     .tab__content-item {
       display: block;
     }
@@ -297,7 +297,7 @@
   }
 
   &__body {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       padding: 10px 10px;
     }
     padding: 20px 25px;
@@ -305,7 +305,7 @@
     &-title {
       font-size: 18px;
       display: block;
-      color: $color-text;
+      color: #3c3c3c;
       font-weight: 700;
       line-height: 24px;
       padding-bottom: 15px;
@@ -321,7 +321,7 @@
   }
 
   &__footer {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       flex-direction: column;
       padding: 10px;
     }
@@ -331,11 +331,11 @@
     padding: 10px 25px 25px;
 
     &-info {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         justify-content: space-between;
         margin-bottom: 20px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         justify-content: space-between;
       }
       display: flex;
@@ -355,10 +355,10 @@
     }
 
     & .info, .time, .star {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-right: 0;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         margin-right: 0;
       }
       display: flex;
@@ -372,7 +372,7 @@
     & .info-text {
       font-size: 12px;
       line-height: 14px;
-      color: $primary-color;
+      color: #1d71b1;
     }
 
     &-price {
@@ -389,7 +389,7 @@
       }
 
       & .price-new {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           font-size: 18px;
         }
         font-size: 20px;
@@ -418,7 +418,7 @@
       &:hover {
         & > i {
           &:before {
-            color: $color-text;
+            color: #3c3c3c;
           }
         }
 
@@ -440,7 +440,7 @@
 
         &.active {
           &:before {
-            color: $primary-color;
+            color: #1d71b1;
           }
         }
       }
@@ -480,7 +480,7 @@
       & .info-text {
         font-size: 12px;
         line-height: 14px;
-        color: $primary-color;
+        color: #1d71b1;
         margin-top: 2px;
       }
     }
@@ -826,12 +826,12 @@
 }
 
 .service {
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     .container {
       width: 100%;
     }
   }
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     padding-top: 40px;
   }
   position: relative;
@@ -854,10 +854,10 @@
   }
 
   &-container {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       margin-top: 40px;
     }
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       flex-direction: column;
       margin-bottom: 60px;
       .control {
@@ -896,7 +896,7 @@
         display: block;
       }
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       flex-direction: column;
       margin-bottom: 60px;
       .control {
@@ -1023,7 +1023,7 @@
 
 .blog-single {
   .tns-controls {
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       width: 100%;
     }
     bottom: 0;
@@ -1214,10 +1214,10 @@
 }
 
 .mobile-filter {
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     display: block;
   }
-  @include tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
     display: block;
   }
   display: none;
@@ -1254,16 +1254,8 @@
   }
 }
 
-.compare-page {
-  //.container {
-  //    @include mobile {
-  //        width: 100%;
-  //    }
-  //}
-}
-
 .compare {
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     .only-mobile {
       display: flex;
     }
@@ -1274,13 +1266,8 @@
     display: none;
   }
 
-  //.container-0 {
-  //    @include mobile {
-  //        max-width: 320px;
-  //    }
-  //}
   .tab__nav {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       border-bottom: none;
       .icon-down-arrow {
         right: 7px;
@@ -1290,7 +1277,7 @@
     width: 100%;
 
     & .clear {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         top: 60px;
         right: 18%;
       }
@@ -1332,7 +1319,7 @@
     width: 100%;
 
     &-item {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         font-size: 15px !important;
       }
       font-weight: 400;
@@ -1355,7 +1342,7 @@
     flex-direction: row;
 
     .non {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         height: 36px;
       }
       font-size: 14px;
@@ -1378,7 +1365,7 @@
     }
 
     &.non-moblie {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: none;
       }
     }
@@ -1412,7 +1399,7 @@
 
       & > div {
         &:not(:first-child) {
-          @include mobile {
+          @media (min-width: 320px) and (max-width: 767px) {
             padding: 55px 15px 15px;
           }
           position: relative;
@@ -1436,7 +1423,7 @@
     }
 
     &-provider {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         .photo-row {
           flex-direction: column;
 
@@ -1449,7 +1436,7 @@
     }
 
     &-annotation {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: flex;
         flex-direction: column;
         max-height: 375px;
@@ -1472,7 +1459,7 @@
           border: none;
           padding: 0;
           background-color: transparent;
-          color: $primary-color;
+          color: #1d71b1;
           outline: none;
           text-decoration: underline;
           text-align: left;
@@ -1486,7 +1473,7 @@
     }
 
     &-program {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         max-height: 650px;
         .hidden {
           display: none;
@@ -1504,7 +1491,7 @@
           border: none;
           padding: 0;
           background-color: transparent;
-          color: $primary-color;
+          color: #1d71b1;
           outline: none;
           text-decoration: underline;
           text-align: left;
@@ -1518,12 +1505,12 @@
     }
 
     &-header {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         box-shadow: 0 22px 8px -12px rgba(0, 0, 0, 0.63);
       }
 
       .description {
-        @include desktop {
+        @media (min-width: 1024px) {
           align-items: center;
           .button-container {
             width: 50%;
@@ -1620,7 +1607,7 @@
     }
 
     &-photo {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         height: 300px;
       }
       height: 180px;
@@ -1652,7 +1639,7 @@
       }
 
       a {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           font-size: 12px;
         }
 
@@ -1666,7 +1653,7 @@
     }
 
     & .photo {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         flex-direction: column;
       }
       display: flex;
@@ -1674,7 +1661,7 @@
       margin-bottom: 10px;
 
       img {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           margin-bottom: 10px;
         }
         width: 100px;
@@ -1701,13 +1688,13 @@
 
 .main-card__program {
   .alert {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       padding: 20px 10px;
     }
   }
 
   .information {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       justify-content: space-between;
       width: 100%;
     }
@@ -1717,7 +1704,7 @@
     line-height: 22px;
 
     & .date, & .rating, & .proposal {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-right: 0;
         .text {
           display: none;
@@ -1734,7 +1721,7 @@
   }
 
   .share {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       justify-content: space-between;
       width: 100%;
       margin-top: 20px;
@@ -1778,7 +1765,7 @@
     }
 
     ul {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-left: 0;
       }
       display: flex;
@@ -1804,7 +1791,7 @@
 
 .reviews {
   .container-0 {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       flex-direction: column;
     }
     background-color: #e9f4fd;
@@ -1813,7 +1800,7 @@
   }
 
   .information {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       padding: 20px 15px;
     }
     flex: 1 1 60%;
@@ -1823,7 +1810,7 @@
     padding: 15px 25px;
 
     .top {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         .d-flex {
           flex-direction: column;
           margin-top: 0;
@@ -1849,7 +1836,7 @@
     }
 
     .comment {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         padding-left: 0;
         margin-top: 10px;
       }
@@ -1861,7 +1848,7 @@
     }
 
     img {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         width: 40px;
         height: 40px;
       }
@@ -1873,7 +1860,7 @@
   }
 
   .value {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       margin-left: 0;
     }
     margin-left: 20px;
@@ -1952,10 +1939,10 @@
     margin-top: 20px;
 
     .information {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         width: 90%;
       }
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-left: 40px;
       }
       width: 60%;
@@ -1963,7 +1950,7 @@
     }
 
     .right-arrow {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         left: 15px;
       }
       display: block;
@@ -1979,7 +1966,7 @@
 .blog-description {
   position: relative;
   height: 100%;
-  background-color: $primary-color;
+  background-color: #1d71b1;
   color: #fff;
   padding-top: 25px;
   padding-left: 25px;
@@ -2052,7 +2039,7 @@
 
 .blog-content {
   .alert {
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       flex-direction: column;
     }
   }
@@ -2061,17 +2048,17 @@
     margin-top: 25px;
     margin-bottom: 25px;
 
-    a {
+    span {
       text-decoration: underline;
     }
   }
 
   .share {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       padding-bottom: 20px;
       border-bottom: 1px solid #ccc;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       padding-bottom: 20px;
       border-bottom: 1px solid #ccc;
     }
@@ -2098,7 +2085,7 @@
 
   .tab {
     .nav {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         flex-direction: row;
         justify-content: space-around;
         li {
@@ -2107,7 +2094,7 @@
 
           &.active {
             width: auto;
-            border-bottom: 3px solid $color-accent;
+            border-bottom: 3px solid #f7562e;
           }
         }
       }
@@ -2136,7 +2123,7 @@
       margin-bottom: 20px;
 
       .top {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           .d-flex {
             flex-direction: column;
             margin-top: 0;
@@ -2163,7 +2150,7 @@
       }
 
       .comment {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           padding-left: 0;
           margin-top: 10px;
         }
@@ -2179,7 +2166,7 @@
         }
 
         .rules {
-          @include desktop {
+          @media (min-width: 1024px) {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -2193,7 +2180,7 @@
               }
             }
           }
-          @include mobile {
+          @media (min-width: 320px) and (max-width: 767px) {
             .rating {
               justify-content: center;
 
@@ -2212,7 +2199,7 @@
           a {
             font-size: 14px;
             text-decoration: underline;
-            color: $primary-color;
+            color: #1d71b1;
 
             &:not(:last-child) {
               margin-right: 20px;
@@ -2226,7 +2213,7 @@
       }
 
       img {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           width: 40px;
           height: 40px;
         }
@@ -2238,10 +2225,10 @@
     }
 
     .answer {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-left: 30px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         margin-left: 30px;
       }
       margin-left: 60px;
@@ -2286,7 +2273,7 @@
         cursor: pointer;
 
         &.active {
-          color: $primary-color;
+          color: #1d71b1;
 
           &:before {
             content: "";
@@ -2307,7 +2294,7 @@
 }
 
 .dropdown {
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     position: fixed;
     top: 15%;
     left: 2.5%;
@@ -2336,7 +2323,7 @@
       height: 75%;
     }
   }
-  @include tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
     position: fixed;
     top: 15%;
     left: 2.5%;
@@ -2396,7 +2383,7 @@
   }
 
   .close-drop {
-    @include desktop {
+    @media (min-width: 1024px) {
       display: none;
     }
     position: fixed;
@@ -2413,10 +2400,10 @@
   }
 
   &__menu {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       margin-top: 10%;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       margin-top: 5%;
     }
     position: relative;
@@ -2427,10 +2414,10 @@
     list-style-type: none;
 
     &-icon {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: none;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         display: none;
       }
       display: block;
@@ -2462,15 +2449,15 @@
     }
 
     &-item {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         padding-left: 20px;
         padding-right: 20px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         padding-left: 20px;
         padding-right: 20px;
       }
-      @include desktop {
+      @media (min-width: 1024px) {
         &:hover {
           .dropdown__menu-icon {
             background-color: #eaf1f7;
@@ -2505,18 +2492,17 @@
   }
 
   &__right {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       flex-wrap: nowrap;
       position: absolute;
       z-index: 111111;
       top: 0;
       left: 0;
       width: 100%;
-      margin: 0;
       padding: 0;
       background-color: #fff;
       box-shadow: none;
-      margin-top: 1%;
+      margin: 1% 0 0;
       list-style-type: none;
       &:after {
         display: none;
@@ -2543,7 +2529,7 @@
         }
       }
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       flex-wrap: nowrap;
       position: absolute;
       z-index: 111111;
@@ -2626,12 +2612,12 @@
 }
 
 .toggle-menu {
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     padding-top: 5px;
     padding-bottom: 5px;
     justify-content: flex-start;
   }
-  @include tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
     padding-top: 5px;
     padding-bottom: 5px;
     justify-content: flex-start;
@@ -2644,14 +2630,14 @@
   position: relative;
 
   .icon-down-arrow {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       display: flex;
       position: absolute;
       top: 13px;
       right: 20px;
       font-size: 20px;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       display: flex;
       position: absolute;
       top: 13px;
@@ -2662,10 +2648,10 @@
   }
 
   ul {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       flex-direction: column;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       flex-direction: column;
     }
     display: flex;
@@ -2678,12 +2664,12 @@
     }
 
     li {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: none;
         padding-right: 10px;
         padding-left: 20px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         display: none;
         padding-right: 10px;
         padding-left: 20px;
@@ -2701,11 +2687,11 @@
 
       &:not(:first-child) {
 
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           border: none;
           padding-left: 20px;
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           border: none;
           padding-left: 20px;
         }
@@ -2713,39 +2699,39 @@
       }
 
       &.active {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: flex;
           background-color: transparent;
           border-color: transparent;
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           display: flex;
           background-color: transparent;
           border-color: transparent;
         }
-        background-color: $color-accent;
-        border-color: $color-accent;
+        background-color: #f7562e;
+        border-color: #f7562e;
 
         i {
           font-size: 20px;
 
           &:before {
-            @include mobile {
-              color: $color-accent;
+            @media (min-width: 320px) and (max-width: 767px) {
+              color: #f7562e;
             }
-            @include tablet {
-              color: $color-accent;
+            @media (min-width: 768px) and (max-width: 1023px) {
+              color: #f7562e;
             }
             color: #fff;
           }
         }
 
         a {
-          @include mobile {
-            color: $color-accent;
+          @media (min-width: 320px) and (max-width: 767px) {
+            color: #f7562e;
           }
-          @include tablet {
-            color: $color-accent;
+          @media (min-width: 768px) and (max-width: 1023px) {
+            color: #f7562e;
           }
           color: #fff;
         }
@@ -2755,22 +2741,22 @@
         margin-right: 10px;
 
         &:before {
-          color: $color-text;
+          color: #3c3c3c;
         }
       }
 
       a {
-        color: $color-text;
+        color: #3c3c3c;
       }
     }
   }
 }
 
 .messages {
-  @include mobile {
+  @media (min-width: 320px) and (max-width: 767px) {
     border: none;
   }
-  @include tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
     border: none;
   }
   display: flex;
@@ -2779,10 +2765,10 @@
   border: 1px solid #cccccc;
 
   .user {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       margin: 15px 10px;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       margin: 15px 10px;
     }
     display: flex;
@@ -2793,10 +2779,10 @@
     border-bottom: 1px solid #ccc;
 
     .avatar {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-right: 5px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         margin-right: 5px;
       }
       margin-right: 15px;
@@ -2809,12 +2795,12 @@
     }
 
     .date {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         .day {
           display: none;
         }
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         .day {
           display: none;
         }
@@ -2826,7 +2812,7 @@
     }
 
     .name {
-      color: $primary-color;
+      color: #1d71b1;
     }
 
     .last-message {
@@ -2842,7 +2828,7 @@
         right: 0;
         width: 20px;
         height: 20px;
-        background-color: $color-accent;
+        background-color: #f7562e;
         border-radius: 100%;
         color: #ffffff;
         font-size: 10px;
@@ -2853,10 +2839,10 @@
     }
 
     &.new-message {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         padding: 15px 10px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         padding: 15px 10px;
       }
       margin: 0;
@@ -2871,11 +2857,11 @@
   }
 
   .textarea-box {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       margin-right: 10px;
       margin-left: 10px;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       margin-right: 10px;
       margin-left: 10px;
     }
@@ -2886,11 +2872,11 @@
     margin-top: 20px;
 
     .textarea {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         height: 50px;
         margin-bottom: 0;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         height: 50px;
         margin-bottom: 0;
       }
@@ -2906,22 +2892,22 @@
   }
 
   &-sidebar {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       display: none;
       &.active {
         display: block;
       }
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       display: none;
       &.active {
         display: block;
       }
     }
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       border: none;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       border: none;
     }
     flex: 1 1 35%;
@@ -2940,22 +2926,22 @@
   }
 
   &-content {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       display: none;
       &.active {
         display: block;
       }
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       display: none;
       &.active {
         display: block;
       }
     }
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       padding-bottom: 0;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       padding-bottom: 0;
     }
     flex: 1 1 65%;
@@ -2971,7 +2957,7 @@
       padding-left: 70px;
 
       .icon-left {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: block;
           position: absolute;
           left: 10px;
@@ -2980,7 +2966,7 @@
             color: #208abd;
           }
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           display: block;
           position: absolute;
           left: 10px;
@@ -3003,28 +2989,28 @@
       }
 
       .info {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: flex;
           flex-direction: column;
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           display: flex;
           flex-direction: column;
         }
 
         a {
-          color: $primary-color;
+          color: #1d71b1;
         }
       }
     }
   }
 
   &-box {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       margin-right: 0;
       margin-left: 0;
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       margin-right: 0;
       margin-left: 0;
     }
@@ -3034,10 +3020,10 @@
     margin-left: 50px;
 
     .line-date {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         display: flex;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         display: flex;
       }
       display: none;
@@ -3056,17 +3042,17 @@
       padding-bottom: 10px;
 
       .avatar {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           margin-right: 10px;
         }
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           margin-right: 10px;
         }
       }
 
       &.my {
         .name {
-          color: $color-accent;
+          color: #f7562e;
         }
       }
     }

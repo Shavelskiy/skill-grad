@@ -1,5 +1,5 @@
 import { feedbackModal } from './../modal'
 
-document.querySelector('.footer-feedback-form-modal-btn').onclick = () => {
+document.querySelectorAll('.feedback-form-modal-btn').forEach(item => item.onclick = () => {
   feedbackModal.classList.add('active')
-}
+})

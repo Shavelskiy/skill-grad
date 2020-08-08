@@ -10,17 +10,17 @@
   }
 
   &__top {
-    @include desktop {
+    @media (min-width: 1024px) {
       & .logo-mobile {
         display: none;
       }
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       & .logo-mobile {
         display: none;
       }
     }
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       & .logo-mobile {
         display: block;
         width: 100%;
@@ -42,10 +42,10 @@
       }
 
       & .button-info {
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           display: none;
         }
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: none;
         }
         display: flex;
@@ -55,7 +55,7 @@
 
         & .button-link {
           text-decoration: underline;
-          color: $primary-color;
+          color: #1d71b1;
           cursor: pointer;
         }
       }
@@ -67,14 +67,14 @@
       height: 100%;
 
       & .logo-container {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           display: none;
         }
         margin-left: -25px;
       }
 
       & .button__menu {
-        @include desktop {
+        @media (min-width: 1024px) {
           &:hover {
             & > .dropdown, & > .dropdown:focus-within {
               opacity: 1;
@@ -127,10 +127,10 @@
       height: 100%;
 
       & .button-container {
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           margin-right: 0;
         }
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           margin-right: 0;
         }
         margin-right: 20px;
@@ -146,7 +146,7 @@
   }
 
   &__menu {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       .container {
         width: 100%;
       }
@@ -239,7 +239,7 @@
         display: none;
       }
     }
-    @include tablet {
+    @media (min-width: 768px) and (max-width: 1023px) {
       .container {
         width: 100%;
       }
@@ -332,7 +332,7 @@
         display: none;
       }
     }
-    @include desktop {
+    @media (min-width: 1024px) {
       & .menu {
         display: flex;
         align-items: center;
@@ -405,7 +405,7 @@
 
     &-description {
       & h1 {
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
           margin-top: 20px;
         }
         color: #ffffff;
@@ -425,7 +425,7 @@
   }
 
   &__bottom {
-    @include mobile {
+    @media (min-width: 320px) and (max-width: 767px) {
       padding-top: 30px;
     }
     background-color: rgba(10, 35, 55, .45);
@@ -433,12 +433,12 @@
     padding-bottom: 30px;
 
     .col-lg-4:not(:last-child) {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         border-right: none;
         border-bottom: 2px dotted rgba(255, 255, 255, .25);
         margin-bottom: 20px;
       }
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         border-right: none;
         border-bottom: 2px dotted rgba(255, 255, 255, .25);
         margin-bottom: 20px;
@@ -452,14 +452,14 @@
     }
 
     &-container {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         padding-bottom: 20px;
       }
       display: flex;
     }
 
     &-icon {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         margin-right: 15px;
         img {
           width: 35px;
@@ -495,7 +495,7 @@
       }
 
       & > .dropdown {
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
           left: -130px;
           &:after {
             right: 10px;
@@ -546,7 +546,7 @@
               line-height: 15px;
               margin-left: 10px;
               border-radius: 100%;
-              background-color: $color-accent;
+              background-color: #f7562e;
               margin-bottom: 2px;
             }
 
@@ -554,10 +554,10 @@
               font-size: 12px;
               font-weight: 400;
               line-height: 15px;
-              color: $color-text;
+              color: #3c3c3c;
 
               &:hover {
-                color: $primary-color;
+                color: #1d71b1;
               }
             }
 
@@ -571,7 +571,7 @@
     }
 
     .auth-text {
-      @include tablet {
+      @media (min-width: 768px) and (max-width: 1023px) {
         display: none !important;
       }
 
@@ -581,7 +581,7 @@
         }
 
         &:last-child {
-          color: $primary-color;
+          color: #1d71b1;
         }
       }
     }
@@ -591,7 +591,7 @@
     }
 
     .button__menu {
-      @include mobile {
+      @media (min-width: 320px) and (max-width: 767px) {
         width: 50px;
         &-text {
           display: none;

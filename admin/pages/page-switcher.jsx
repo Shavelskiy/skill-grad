@@ -76,8 +76,6 @@ import ProgramLevelUpdate from './program-level/update'
 
 
 const PageSwitcher = ({active}) => {
-
-
   return (
     <div className={cn(css.page, {[css.hidden]: !active})}>
       <Breadcrumbs/>

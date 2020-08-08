@@ -1,9 +1,9 @@
 .add-provider-select {
     .modal-content {
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
             width: 90%;
         }
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
             width: 90%;
         }
         width: 50%;
@@ -48,10 +48,10 @@
 
 .add-provider-form {
     .modal-content {
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
             width: 90%;
         }
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
             width: 90%;
         }
         width: 50%;
@@ -72,10 +72,10 @@
 }
 .excle-modal {
     .modal-content {
-        @include tablet {
+        @media (min-width: 768px) and (max-width: 1023px) {
             width: 90%;
         }
-        @include mobile {
+        @media (min-width: 320px) and (max-width: 767px) {
             width: 90%;
         }
         width: 30%;

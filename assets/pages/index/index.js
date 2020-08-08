@@ -4,10 +4,9 @@ import showRegisterForm from '../../components/modal/choose-role-modal'
 import { ROLE_PROVIDER, ROLE_USER } from '../../utils/user-roles'
 import './index.scss'
 
-
 const initTabs = (navSelector, contentSelector) => {
-  const tabContent = document.querySelectorAll(contentSelector)
   const tabNav = document.querySelectorAll(navSelector)
+  const tabContent = document.querySelectorAll(contentSelector)
 
   tabNav.forEach(item => {
     item.addEventListener('click', (event) => handleTabClick(event, tabNav, tabContent))
@@ -26,14 +25,13 @@ const handleTabClick = (event, tabNav, tabContent) => {
 
 const selectTabContent = (tabName, tabContent) => {
   tabContent.forEach(item => {
-    console.log(tabName, item)
     item.classList.contains(tabName) ? item.classList.add('active') : item.classList.remove('active')
   })
 }
 
-initTabs('.study-tabs-nav-item', '.study-content-item')
-initTabs('.study-content__item-circle', '.study-tab-content')
-// initTabs('.how-work__info-mobile .how-work__info-title', '.how-work__info')
+initTabs('.study-tabs-nav .nav-item', '.study-content-items .tab__content-item')
+// initTabs('.study-content__item-circle', '.study-tab-content')
+// // initTabs('.how-work__info-mobile .how-work__info-title', '.how-work__info')
 
 const sliders = document.querySelectorAll('.study-slider')
 
@@ -58,15 +56,3 @@ sliders.forEach((item) => {
   })
 })
 
-document.querySelector('.how-work-register-user-btn').onclick = () => showRegisterForm(ROLE_USER)
-document.querySelector('.how-work-register-provider-btn').onclick = () => showRegisterForm(ROLE_PROVIDER)
-
-document.querySelector('.main__mnu-mobile').onclick = () => {
-const mobileMenu = document.getElementById('mobile__list-mnu')
-
-   if (mobileMenu.style.display === 'none') {
-     mobileMenu.style.display = 'block'
-   } else {
-     mobileMenu.style.display = 'none'
-   }
-   }

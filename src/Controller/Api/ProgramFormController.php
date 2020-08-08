@@ -32,8 +32,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/api/program-form")
- *
- * @IsGranted("ROLE_PROVIDER")
  */
 class ProgramFormController extends AbstractController
 {
