@@ -1081,9 +1081,15 @@
     background-color: #f5f6f8;
     padding: 30px;
 
-    a {
+    span {
+      cursor: pointer;
+      color: #007bff;
       display: block;
       margin-top: 10px;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

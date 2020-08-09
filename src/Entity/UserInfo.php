@@ -11,19 +11,25 @@ class UserInfo
 {
     /**
      * @ORM\Id()
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="userInfo")
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private User $user;
+    protected int $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="userInfo", cascade={"persist", "remove"})
+     */
+    protected User $user;
 
     /**
      * @ORM\Column(type="string", length=180, nullable=true)
      */
-    private ?string $fullName;
+    protected ?string $fullName;
 
     /**
      * @ORM\Column(type="string", length=11, nullable=true)
      */
-    private ?string $phone;
+    protected ?string $phone;
 
     public function getUser(): User
     {

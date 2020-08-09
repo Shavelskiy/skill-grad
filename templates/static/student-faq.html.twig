@@ -1,25 +1,27 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% set title = 'Для желающих обучаться' %}
+
 {% block body %}
   <div class="container">
     <div class="d-f w-100 j-c-center">
       <div class="breadcrumbs">
         <ul>
-          <li><a href="/">Главная</a></li>
-          <li><a class="active" href="#">Для желающих обучаться</a></li>
+          <li><a href="{{ path('site.index') }}">Главная</a></li>
+          <li><a class="active" href="#">{{ title }}</a></li>
         </ul>
       </div>
     </div>
     <div class="col-lg-12">
       <div class="main_learn mt-0">
-        <h2 class="title">Для желающих обучаться </h2>
+        <h2 class="title">{{ title }}</h2>
         <div class="container-0 learn">
           <div class="col-lg-4 col-sm-4">
             <div class="learn-icon">
               <img src="/img/svg/form.svg" alt="">
             </div>
-            <p class="learn-text">Возможность подать заявку
-              на обучение с сайта
+            <p class="learn-text">
+              Возможность подать заявку на обучение с сайта
             </p>
           </div>
           <div class="col-lg-4 col-sm-4">

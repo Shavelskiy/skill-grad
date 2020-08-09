@@ -11,64 +11,70 @@ class ProviderRequisites
 {
     /**
      * @ORM\Id()
-     * @ORM\OneToOne(targetEntity="App\Entity\Provider", inversedBy="providerRequisites")
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private int $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Provider", inversedBy="providerRequisites", cascade={"persist", "remove"})
      */
     private Provider $provider;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $organizationName;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private string $legalAddress;
+    private ?string $organizationName;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $mailingAddress;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private string $ITN;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private string $IEC;
+    private ?string $legalAddress;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $PSRN;
+    private ?string $mailingAddress;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $OKPO;
+    private ?string $ITN;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $checkingAccount;
+    private ?string $IEC;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $correspondentAccount;
+    private ?string $PSRN;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $BIC;
+    private ?string $OKPO;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $bank;
+    private ?string $checkingAccount;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $correspondentAccount;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $BIC;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $bank;
 
     public function getProvider(): Provider
     {
@@ -81,7 +87,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getOrganizationName(): string
+    public function getOrganizationName(): ?string
     {
         return $this->organizationName;
     }
@@ -92,7 +98,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getLegalAddress(): string
+    public function getLegalAddress(): ?string
     {
         return $this->legalAddress;
     }
@@ -103,7 +109,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getMailingAddress(): string
+    public function getMailingAddress(): ?string
     {
         return $this->mailingAddress;
     }
@@ -114,7 +120,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getITN(): string
+    public function getITN(): ?string
     {
         return $this->ITN;
     }
@@ -125,7 +131,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getIEC(): string
+    public function getIEC(): ?string
     {
         return $this->IEC;
     }
@@ -136,7 +142,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getPSRN(): string
+    public function getPSRN(): ?string
     {
         return $this->PSRN;
     }
@@ -147,7 +153,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getOKPO(): string
+    public function getOKPO(): ?string
     {
         return $this->OKPO;
     }
@@ -158,7 +164,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getCheckingAccount(): string
+    public function getCheckingAccount(): ?string
     {
         return $this->checkingAccount;
     }
@@ -169,7 +175,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getCorrespondentAccount(): string
+    public function getCorrespondentAccount(): ?string
     {
         return $this->correspondentAccount;
     }
@@ -180,7 +186,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getBIC(): string
+    public function getBIC(): ?string
     {
         return $this->BIC;
     }
@@ -191,7 +197,7 @@ class ProviderRequisites
         return $this;
     }
 
-    public function getBank(): string
+    public function getBank(): ?string
     {
         return $this->bank;
     }

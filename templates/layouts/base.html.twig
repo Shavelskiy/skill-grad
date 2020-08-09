@@ -7,7 +7,7 @@
   <meta name="format-detection" content="date=no">
   <meta name="format-detection" content="address=no">
   <meta name="format-detection" content="email=no">
-  <title>{% block title %}{% endblock %}</title>
+  <title>{{ title is defined ? title : 'Skill Grad' }}</title>
   <meta name="description" content="">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   {% block stylesheets %}
@@ -24,6 +24,10 @@
 </main>
 
 {% include 'components/footer/index.html.twig' %}
+
+{% block modals %}
+  {% include 'components/modals/index.html.twig' %}
+{% endblock %}
 
 {% block javascripts %}
   {{ encore_entry_script_tags('site.layout') }}

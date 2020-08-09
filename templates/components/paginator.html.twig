@@ -1,0 +1,74 @@
+{% if total_pages > 1 %}
+  <div class="pagination">
+    {% if (page != 1) %}
+      <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): page -1 }) }}">
+        <span class="prev"></span>
+      </a>
+    {% endif %}
+
+    {% if total_pages > 7 %}
+
+      {% if (page < 5 or page > (total_pages - 4)) %}
+        {% if (page == 3) %}
+          {% set offset_start = 4 %}
+        {% elseif (page == 4) %}
+          {% set offset_start = 5 %}
+        {% else %}
+          {% set offset_start = 3 %}
+        {% endif %}
+
+        {% if (page == (total_pages - 2)) %}
+          {% set offset_end = 3 %}
+        {% elseif (page == (total_pages - 3)) %}
+          {% set offset_end = 4 %}
+        {% else %}
+          {% set offset_end = 2 %}
+        {% endif %}
+      {% else %}
+        {% set offset_start = 2 %}
+        {% set offset_end = 1 %}
+      {% endif %}
+
+      {% for i in 1 .. offset_start %}
+        <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+           class="{{ (page == i) ? 'active' : '' }}">
+          {{ i }}
+        </a>
+      {% endfor %}
+
+      <span>..</span>
+
+      {% if (page >= 5 and page <= (total_pages - 4) ) %}
+        {% for i in page - 1 .. page + 1 %}
+          <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+             class="{{ (page == i) ? 'active' : '' }}">
+            {{ i }}
+          </a>
+        {% endfor %}
+      {% endif %}
+
+      <span>..</span>
+
+      {% for i in total_pages - offset_end .. total_pages %}
+        <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+           class="{{ (page == i) ? 'active' : '' }}">
+          {{ i }}
+        </a>
+      {% endfor %}
+
+    {% else %}
+      {% for i in 1 .. total_pages %}
+        <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+           class="{{ (page == i) ? 'active' : '' }}">
+          {{ i }}
+        </a>
+      {% endfor %}
+    {% endif %}
+
+    {% if (page != total_pages) %}
+      <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): page + 1 }) }}">
+        <span class="next"></span>
+      </a>
+    {% endif %}
+  </div>
+{% endif %}

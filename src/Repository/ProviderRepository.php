@@ -45,6 +45,12 @@ class ProviderRepository extends ServiceEntityRepository
                         ->andWhere('upper(p.name) like :name')
                         ->setParameter('name', '%' . mb_strtoupper($value) . '%');
                     break;
+                case 'favoriteUsers':
+                    $query
+                        ->innerJoin('p.favoriteUsers', 'fu')
+                        ->andWhere('fu = :user')
+                        ->setParameter('user', $value);
+                    break;
             }
         }
 

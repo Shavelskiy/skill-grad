@@ -8,6 +8,8 @@ const openLoginModalBtns = document.querySelectorAll('.open-login-modal-btn')
 const openRegisterModalBtn = document.querySelector('.open-register-modal-btn')
 const openCitySelectorModalBtns = document.querySelectorAll('.open-city-selector-modal-btn')
 
+const favoriteCount = document.querySelector('.user-favorite-count')
+
 if (openLoginModalBtns.length > 0) {
   openLoginModalBtns.forEach((item) => {
     item.onclick = () => {
@@ -42,4 +44,10 @@ loginModal.querySelector('.login-register-link').onclick = () => {
 citySelectorModal.querySelector('.open-feedback-modal-btn').onclick = () => {
   feedbackModal.classList.add('active')
   citySelectorModal.classList.remove('active')
+}
+
+export const updateFavoriteCount = (value) => {
+  if (favoriteCount) {
+    favoriteCount.innerHTML = Number(favoriteCount.innerHTML) + value
+  }
 }

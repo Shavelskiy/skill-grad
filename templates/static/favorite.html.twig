@@ -1,17 +1,24 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('static.favorite') }}
+{% endblock %}
+
+{% set title = 'Избранное' %}
+
 {% block body %}
   <div class="container">
     <div class="d-f w-100 j-c-center">
       <div class="breadcrumbs">
         <ul>
-          <li><a href="#">Главная</a></li>
-          <li><a class="active" href="#">Избранное</a></li>
+          <li><a href="{{ path('site.index') }}">Главная</a></li>
+          <li><a class="active" href="#">{{ title }}</a></li>
         </ul>
       </div>
       <div class="col-lg-12">
         <div class="main_favorites mt-0">
-          <h2 class="title">Избранное</h2>
+          <h2 class="title">{{ title }}</h2>
           <div class="alert red">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             Некоторые избранные вами программы были удалены провайдером
@@ -20,19 +27,39 @@
             <div class="tab">
               <div class="toggle-menu tab__nav">
                 <ul class="nav">
-                  <li data-tab-name="tab-1" class="toggle-item nav-item active">Провайдеры обучения (10)</li>
-                  <li data-tab-name="tab-2" class="toggle-item nav-item">Программы обучения (6)</li>
-                  <li data-tab-name="tab-3" class="toggle-item nav-item">Статьи (72)</li>
+                  <li class="toggle-item nav-item nav-item-providers active">Провайдеры обучения
+                    ({{ providers.total_count }})
+                  </li>
+                  <li class="toggle-item nav-item nav-item-programs">Программы обучения (6)</li>
+                  <li class="toggle-item nav-item nav-item-articles">Статьи (72)</li>
                 </ul>
                 <i class="icon-down-arrow"></i>
               </div>
               <div class="tab__content">
-                <div class="tab__content-item tab-1 active">
+                <div class="tab__content-item tab-providers active">
                   <div class="col-lg-12 col-sm-4">
-                    {% include 'provider/blocks/card-provider.html.twig' %}
+                    {% if providers.items|length > 0 %}
+                      {% for provider in providers.items %}
+                        {% include 'provider/card-provider.html.twig' with {
+                          provider: provider,
+                          favorite_provider_ids: providers.items|map(p => p.id)
+                        } %}
+                      {% endfor %}
+                    {% else %}
+                      <h5>В избранном пока нет провайдеров!</h5>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-lg-12">
+                    {% include 'components/paginator.html.twig' with {
+                      page: providers.page,
+                      total_pages: providers.total_pages,
+                      path_name: 'app.favorite',
+                      page_key: 'provider_page'
+                    } %}
                   </div>
                 </div>
-                <div class="tab__content-item tab-2">
+                <div class="tab__content-item tab-programs">
                   <div class="col-lg-12 col-sm-4">
                     <div class="card">
                       <span
@@ -164,7 +191,7 @@
                     <div class="card non-active">
                       <div class="card__header">
                         <div class="card__header-icon">
-                          <img src="images/src/head__icon.png" alt="">
+                          <img src="/img/head__icon.png" alt="">
                         </div>
                         <span class="card__header-title">Центр компьютерного обучения
 													«Специалист» при МГТУ им. Н.Э. Баумана</span>
@@ -222,8 +249,25 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-lg-12">
+                    <div class="pagination">
+                      <a href="#">
+                        <span class="prev"></span>
+                      </a>
+                      <a href="#">1</a>
+                      <a class="active" href="#">2</a>
+                      <a href="#">3</a>
+                      <a href="#">4</a>
+                      <a href="#">5</a>
+                      <a href="#">6</a>
+                      <a href="#">
+                        <span class="next"></span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div class="tab__content-item tab-3">
+                <div class="tab__content-item tab-articles">
                   <div class="card-blog">
                     <div class="card-container">
                       <div class="card-img">
@@ -290,28 +334,34 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-lg-12">
+                    <div class="pagination">
+                      <a href="#">
+                        <span class="prev"></span>
+                      </a>
+                      <a href="#">1</a>
+                      <a class="active" href="#">2</a>
+                      <a href="#">3</a>
+                      <a href="#">4</a>
+                      <a href="#">5</a>
+                      <a href="#">6</a>
+                      <a href="#">
+                        <span class="next"></span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="pagination">
-              <a href="#">
-                <span class="prev"></span>
-              </a>
-              <a href="#">1</a>
-              <a class="active" href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <a href="#">6</a>
-              <a href="#">
-                <span class="next"></span>
-              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('static.favorite') }}
 {% endblock %}

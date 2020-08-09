@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Upload;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -33,7 +34,8 @@ class UploadService implements UploadServiceInterface
 
     public function createUpload(UploadedFile $uploadedFile): Upload
     {
-        $fileName = uniqid('', true) . '-' . time() . '.' . $uploadedFile->guessExtension();
+        $uuid = Uuid::uuid4();
+        $fileName = $uuid->toString() . '-' . time() . '.' . $uploadedFile->guessExtension();
 
         try {
             $uploadedFile->move($this->uploadDir, $fileName);

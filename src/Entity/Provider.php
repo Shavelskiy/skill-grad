@@ -29,7 +29,7 @@ class Provider
     private string $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private string $description;
 
@@ -65,9 +65,14 @@ class Provider
     private Collection $locations;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ProviderRequisites", mappedBy="provider")
+     * @ORM\OneToOne(targetEntity="App\Entity\ProviderRequisites", mappedBy="provider", cascade={"persist", "remove"}, fetch="EAGER")
      */
-    private ProviderRequisites $providerRequisites;
+    private ?ProviderRequisites $providerRequisites;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="favoriteProviders")
+     */
+    private Collection $favoriteUsers;
 
     public function __construct()
     {
@@ -204,14 +209,25 @@ class Provider
         return $this;
     }
 
-    public function getProviderRequisites(): ProviderRequisites
+    public function getProviderRequisites(): ?ProviderRequisites
     {
         return $this->providerRequisites;
     }
 
-    public function setProviderRequisites(ProviderRequisites $providerRequisites): self
+    public function setProviderRequisites(?ProviderRequisites $providerRequisites): self
     {
         $this->providerRequisites = $providerRequisites;
+        return $this;
+    }
+
+    public function getFavoriteUsers(): Collection
+    {
+        return $this->favoriteUsers;
+    }
+
+    public function setFavoriteUsers(Collection $favoriteUsers): self
+    {
+        $this->favoriteUsers = $favoriteUsers;
         return $this;
     }
 }

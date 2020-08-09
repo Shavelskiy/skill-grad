@@ -47,7 +47,7 @@ class ImportLocationCommand extends Command
             return 0;
         }
 
-        $output->writeln('success import locaitons');
+        $output->writeln('success import locations');
 
         return 1;
     }

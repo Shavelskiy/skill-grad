@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -52,14 +54,24 @@ class User implements UserInterface
     private ?string $socialKey;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\UserInfo", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\UserInfo", mappedBy="user", cascade={"persist", "remove"})
      */
     private UserInfo $userInfo;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Provider", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\Provider", mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Provider $provider;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers")
+     */
+    private Collection $favoriteProviders;
+
+    public function __construct()
+    {
+        $this->favoriteProviders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -164,5 +176,27 @@ class User implements UserInterface
     {
         $this->provider = $provider;
         return $this;
+    }
+
+    public function getFavoriteProviders(): Collection
+    {
+        return $this->favoriteProviders;
+    }
+
+    public function setFavoriteProviders(Collection $favoriteProviders): self
+    {
+        $this->favoriteProviders = $favoriteProviders;
+        return $this;
+    }
+
+    public function addFavoriteProvider(Provider $favoriteProvider): self
+    {
+        $this->favoriteProviders->add($favoriteProvider);
+        return $this;
+    }
+
+    public function getFavoriteCount(): int
+    {
+        return $this->favoriteProviders->count();
     }
 }

@@ -1,204 +1,219 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block body %}
-<div class="container">
-  <div class="d-f w-100 j-c-center">
-    <div class="breadcrumbs">
-      <ul>
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Каталог провайдеров обучения</a></li>
-        <li><a class="active" href="#">Всероссийский государственный университет юстиции (РПА Минюста России)</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="main_provider mt-0">
-    <div class="container-0 j-c-center">
-      <div class="col-lg-10">
-        <h2 class="title">Всероссийский государственный университет юстиции
-          (РПА Минюста России)</h2>
-      </div>
-    </div>
-    <div class="tab">
-      <div class="toggle-menu tab__nav">
-        <ul class="nav">
-          <li data-tab-name="tab-1" class="toggle-item nav-item active">
-            <i class="icon-gear"></i>Описание провайдера
-          </li>
-          <li data-tab-name="tab-2" class="toggle-item nav-item">
-            <i class="icon-web-development"></i>Программы обучения
-          </li>
-          <li data-tab-name="tab-3" class="toggle-item nav-item">
-            <i class="icon-web-development"></i>Фотогалерея
-          </li>
-        </ul>
-        <i class="icon-down-arrow"></i>
-      </div>
-      <div class="tab__content">
-        <div class="tab__content-item tab-1 active">
-          <div class="container-0">
-            <div class="col-lg-2 col-sm-4 no-gutter">
-              <div class="logo-company">
-                <img src="../img/orig_(1).jpg" alt="">
-              </div>
-              <div class="description">
-                Вы владелец или увидели ошибку?
-                <a href="#">Сообщите нам,
-                  нажав Ctrl+Enter</a>
-              </div>
-            </div>
-            <div class="col-lg-7 col-sm-4">
-              <div class="content">
-                <h4 class="result-title">Об учебном заведении</h4>
-                <p>Единственный юридический вуз Министерства юстиции РФ. Здесь готовят специалистов для юридический служб и правоохранительных органов.
-                  При университете действует Центр научных исследований, издаются журналы правовой тематики, которые входят в перечень ВАК.
-                </p>
-                <a href="javascript:void(0)" id="more" class="more">Развернуть</a>
-                <p id="hidden-block" class="mobile-hidden">
-                  ВГУЮ поддерживает партнерские отношения с вузами разных стран,
-                  что открывает перед студентами возможность стажировок и обучения
-                  за рубежом. В составе университета работают 15 филиалов по всей России.
-                </p>
-                <h4 class="result-title">Основные категории</h4>
-                <p class="blue">
-                  <strong>1. Архитектура и строительство архитектура</strong>
-                </p>
-                <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
-                <p class="blue">
-                  <strong>2. Информационные технологииИТ-менеджмент</strong>
-                </p>
-                <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
-                <p class="blue">
-                  <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
-                </p>
-                <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
-                <h4 class="result-title">Дополнительные категории</h4>
-                <p class="blue">
-                  <strong>1. Архитектура и строительство архитектура</strong>
-                </p>
-                <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
-                <p class="blue">
-                  <strong>2. Информационные технологииИТ-менеджмент</strong>
-                </p>
-                <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
-                <p class="blue">
-                  <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
-                </p>
-                <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('provider.view') }}
+{% endblock %}
 
+{% set title = provider.name %}
+
+{% block body %}
+  <div class="container">
+    <div class="d-f w-100 j-c-center">
+      <div class="breadcrumbs">
+        <ul>
+          <li><a href="{{ path('site.index') }}">Главная</a></li>
+          <li><a href="{{ path('provider.index') }}">Каталог провайдеров обучения</a></li>
+          <li><a class="active" href="#">{{ title }}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="main_provider mt-0">
+      <div class="container-0 j-c-center">
+        <div class="col-lg-10">
+          <h2 class="title">{{ title }}</h2>
+        </div>
+      </div>
+      <div class="tab">
+        <div class="toggle-menu tab__nav">
+          <ul class="nav">
+            <li class="toggle-item nav-item nav-item-description active">
+              <i class="icon-gear"></i>Описание провайдера
+            </li>
+            <li class="toggle-item nav-item nav-item-programs">
+              <i class="icon-web-development"></i>Программы обучения
+            </li>
+            <li class="toggle-item nav-item nav-item-gallery">
+              <i class="icon-web-development"></i>Фотогалерея
+            </li>
+          </ul>
+          <i class="icon-down-arrow"></i>
+        </div>
+        <div class="tab__content">
+          <div class="tab__content-item tab-description active">
+            <div class="container-0">
+              <div class="col-lg-2 col-sm-4 no-gutter">
+                <div class="logo-company">
+                  {% if provider.image is not null %}
+                    <img src="{{ provider.image.publicPath }}" alt="{{ provider.name }}">
+                  {% else %}
+                    <img src="/img/provider_no_logo.png" alt="{{ provider.name }}">
+                  {% endif %}              </div>
+                <div class="description">
+                  Вы владелец или увидели ошибку?
+                  <span class="feedback-form-modal-btn">
+                    Сообщите нам,
+                    нажав Ctrl+Enter
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-3 col-sm-4 no-gutter">
-              <div class="contact">
-                <h5 class="title">Контакты</h5>
-                <a class="phone" href="#">+7 (495) 758-68-99</a>
-                <a class="email" href="#">
-                  <i class="icon-email1"></i>
-                  abiturient-rpa@mail.ru</a>
-                <a class="address" href="#">
-                  <i class="icon-place"></i>
-                  Москва, ул. Азовская,
-                  д. 2, корп. 1</a>
+              <div class="col-lg-7 col-sm-4">
+                <div class="content">
+                  <h4 class="result-title">Об учебном заведении</h4>
+                  <p>{{ provider.description }}</p>
+                  <h4 class="result-title">Основные категории</h4>
+                  <p class="blue">
+                    <strong>1. Архитектура и строительство архитектура</strong>
+                  </p>
+                  <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
+                  <p class="blue">
+                    <strong>2. Информационные технологииИТ-менеджмент</strong>
+                  </p>
+                  <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
+                  <p class="blue">
+                    <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
+                  </p>
+                  <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
+                  <h4 class="result-title">Дополнительные категории</h4>
+                  <p class="blue">
+                    <strong>1. Архитектура и строительство архитектура</strong>
+                  </p>
+                  <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
+                  <p class="blue">
+                    <strong>2. Информационные технологииИТ-менеджмент</strong>
+                  </p>
+                  <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
+                  <p class="blue">
+                    <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
+                  </p>
+                  <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
+
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-4 no-gutter">
+                <div class="contact">
+                  <h5 class="title">Контакты</h5>
+                  {% if provider.user is not null and provider.user.userInfo is not null and provider.user.userInfo.phone is not null %}
+                    <a class="phone" href="tel:{{ provider.user.userInfo.phone|format_phone }}">
+                      {{ provider.user.userInfo.phone|format_phone }}
+                    </a>
+                  {% endif %}
+                  {% if provider.providerRequisites.mailingAddress is not null %}
+                    <a class="email" href="mailto:{{ provider.providerRequisites.mailingAddress }}">
+                      <i class="icon-email1"></i>
+                      {{ provider.providerRequisites.mailingAddress }}
+                    </a>
+                  {% endif %}
+                  {% if provider.providerRequisites.legalAddress is not null %}
+                    <a class="address"
+                       href="https://yandex.ru/maps?{{ {text:provider.providerRequisites.legalAddress }|url_encode }}"
+                       target="_blank"
+                    >
+                      <i class="icon-place"></i>
+                      {{ provider.providerRequisites.legalAddress }}
+                    </a>
+                  {% endif %}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="tab__content-item tab-2">
-          <div class="container-0">
-            <div class="box">
-              <div class="mobile-filter">
-                <div id="open-filter" class="mobile-filter-header">
-                  Фильтр поиска
-                  <i class="icon-more"></i>
-                  <!--                                        <span class="icon close"></span>-->
-                </div>
-                <div id="filter" class="mobile-filter-content">
-                  @@include("../../blocks/modules/catalogFilter/catalogFilter.html")
-                </div>
-              </div>
-              <div class="box-content">
-                <div class="container-0">
-                  <div class="col-lg-12 pl-0">
-                    @@include("../../blocks/modules/cardProgram/cardProgram.html")
-                    @@include("../../blocks/modules/cardProgram/cardProgram.html")
+          <div class="tab__content-item tab-programs">
+            <div class="container-0">
+              <div class="box">
+                <div class="mobile-filter">
+                  <div id="open-filter" class="mobile-filter-header">
+                    Фильтр поиска
+                    <i class="icon-more"></i>
                   </div>
-                </div>
-              </div>
-              <div class="box-sidebar">
-                <div class="container-0">
-                  <div class="col-lg-12 pr-0">
+                  <div id="filter" class="mobile-filter-content">
                     @@include("../../blocks/modules/catalogFilter/catalogFilter.html")
                   </div>
                 </div>
+                <div class="box-content">
+                  <div class="container-0">
+                    <div class="col-lg-12 pl-0">
+                      @@include("../../blocks/modules/cardProgram/cardProgram.html")
+                      @@include("../../blocks/modules/cardProgram/cardProgram.html")
+                    </div>
+                  </div>
+                </div>
+                <div class="box-sidebar">
+                  <div class="container-0">
+                    <div class="col-lg-12 pr-0">
+                      @@include("../../blocks/modules/catalogFilter/catalogFilter.html")
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="tab__content-item tab-3">
-          <div class="container-0">
-            <div class="box">
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+          <div class="tab__content-item tab-gallery">
+            <div class="container-0">
+              <div class="box">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                <div class="box-block">
+                  <div class="photo">
+                    <img src="../img/photo.jpg" alt="">
+                  </div>
+                  <p class="text--center">
+                    Переподаватель на уроке актерского мастерства
+                  </p>
                 </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
               </div>
             </div>
           </div>
@@ -206,5 +221,9 @@
       </div>
     </div>
   </div>
-</div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('provider.view') }}
 {% endblock %}

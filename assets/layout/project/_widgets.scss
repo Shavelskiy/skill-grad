@@ -791,7 +791,7 @@
         margin-right: 20px;
       }
 
-      .send-email, .add-favorites {
+      .send-email, .add-provider-favorites, .add-favorites {
         display: flex;
         align-items: center;
         color: #90a4ae;
@@ -1099,9 +1099,10 @@
       }
     }
 
-    a {
+    span {
       color: #1d71b1;
       text-decoration: underline;
+      cursor: pointer;
     }
   }
 

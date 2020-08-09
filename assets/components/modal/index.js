@@ -36,7 +36,7 @@ window.addEventListener('click', (event) => {
   }
 })
 
-const initModalFormCloseBtn = (modal) => {
+export const initModalFormCloseBtn = (modal) => {
   if (modal === null) {
     return
   }

@@ -2,12 +2,27 @@
 
 namespace App\Controller;
 
+use App\Dto\SearchQuery;
+use App\Entity\User;
+use App\Repository\ProviderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StaticController extends AbstractController
 {
+    protected const PAGE_ITEM_COUNT = 10;
+
+    protected ProviderRepository $providerRepository;
+
+    public function __construct(
+        ProviderRepository $providerRepository
+    )
+    {
+        $this->providerRepository = $providerRepository;
+    }
+
     /**
      * @Route("/faq", name="faq.index", methods={"GET"})
      */
@@ -44,8 +59,25 @@ class StaticController extends AbstractController
     /**
      * @Route("/favorite", name="app.favorite", methods={"GET"})
      */
-    public function favoriteAction(): Response
+    public function favoriteAction(Request $request): Response
     {
-        return $this->render('static/favorite.html.twig');
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $providerQuery = (new SearchQuery())
+            ->setSearch(['favoriteUsers' => $user])
+            ->setPage((int)($request->get('provider_page', 1)))
+            ->setPageItemCount(self::PAGE_ITEM_COUNT);
+
+        $providerSearchResult = $this->providerRepository->getPaginatorResult($providerQuery);
+
+        return $this->render('static/favorite.html.twig', [
+            'providers' => [
+                'items' => $providerSearchResult->getItems(),
+                'page' => $providerSearchResult->getCurrentPage(),
+                'total_pages' => $providerSearchResult->getTotalPageCount(),
+                'total_count' => $user->getFavoriteProviders()->count(),
+            ],
+        ]);
     }
 }
