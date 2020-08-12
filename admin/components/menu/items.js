@@ -4,7 +4,12 @@ import {
   TAG_INDEX,
   ARTICLE_INDEX,
   USER_INDEX,
-  PROGRAM_FORMAT_INDEX, PROVIDER_INDEX, PROGRAM_INCLUDE_INDEX, PROGRAM_ADDITIONAL_INDEX, PROGRAM_LEVEL_INDEX
+  PROGRAM_FORMAT_INDEX,
+  PROVIDER_INDEX,
+  PROGRAM_INCLUDE_INDEX,
+  PROGRAM_ADDITIONAL_INDEX,
+  PROGRAM_LEVEL_INDEX,
+  FEEDBACK_INDEX
 } from '../../utils/routes'
 
 export const menuItems = [
@@ -82,4 +87,14 @@ export const menuItems = [
       },
     ],
   },
+  {
+    title: 'Форма обратной связи',
+    icon: 'fa fa-comments',
+    items: [
+      {
+        title: 'Список вопросов',
+        link: FEEDBACK_INDEX,
+      },
+    ],
+  }
 ]

@@ -2,81 +2,58 @@
 
 namespace App\Entity;
 
-use DateTime;
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    private string $slug;
+    protected string $slug;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $sort;
+    protected int $sort;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $active;
+    protected bool $active;
 
     /**
      * @ORM\Column(type="text")
      */
-    private string $detailText;
+    protected string $detailText;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
-    private ?Upload $image;
+    protected ?Upload $image;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $showOnMain;
+    protected bool $showOnMain;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $views = 0;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private DateTime $createdAt;
-
-    public function __construct()
-    {
-        $this->createdAt = new DateTime();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
+    protected int $views = 0;
 
     public function getName(): string
     {
@@ -163,17 +140,6 @@ class Article
     public function setViews(int $views): self
     {
         $this->views = $views;
-        return $this;
-    }
-
-    public function getCreatedAt(): DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
         return $this;
     }
 }

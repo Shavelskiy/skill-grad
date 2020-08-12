@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,12 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserInfo
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected int $id;
+    use IdTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="userInfo", cascade={"persist", "remove"})

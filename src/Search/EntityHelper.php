@@ -30,14 +30,14 @@ class EntityHelper
         return [
             'name' => $program->getName(),
             'description' => $program->getDetailText(),
-            'locations' => $program->getLocations()->map(fn($location) => $location->getId()),
+            'locations' => $program->getLocations()->map(fn ($location) => $location->getId()),
             'min_price' => 0,
             'max_price' => 0,
             'level' => $program->getLevel()->getId(),
             'practice' => 32,
             'format' => $program->getFormat()->getId(),
             'raiting' => 32,
-            'categories' => $program->getCategories()->map(fn($category) => $category->getId()),
+            'categories' => $program->getCategories()->map(fn ($category) => $category->getId()),
         ];
     }
 }

@@ -25,8 +25,7 @@ class FavoriteController extends AbstractController
     public function __construct(
         EntityManagerInterface $entityManager,
         ProviderRepository $providerRepository
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->providerRepository = $providerRepository;
     }

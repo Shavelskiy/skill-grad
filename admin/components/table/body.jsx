@@ -1,10 +1,11 @@
 import React from 'react'
 
 import TableActions from './actions'
-import { BOOLEAN, IMAGE } from '../../utils/table-item-display'
+import { BOOLEAN, DATETIME, IMAGE } from '../../utils/table-item-display'
 
 import css from './table.scss?module'
 import cn from 'classnames'
+import dateFormat from '../../helpers/date-fromater'
 
 const BoolColumn = ({isTrue, width}) => {
   return (
@@ -26,6 +27,16 @@ const ImageColumn = ({value, width}) => {
     <div className={cn(css.col, css.img)} style={{flex: width}}>
       <div className={css.content}>
         {value ? <img src={value}/> : <></>}
+      </div>
+    </div>
+  )
+}
+
+const DatetimeColumn =({value, width}) => {
+  return (
+    <div className={css.col} style={{flex: width}}>
+      <div className={css.content}>
+        {dateFormat(new Date(value))}
       </div>
     </div>
   )
@@ -53,13 +64,12 @@ const TableBody = ({body, table, actions, reload}) => {
         switch (item.display) {
           case IMAGE:
             return <ImageColumn key={rowKey} value={value} width={width}/>
-            break
           case BOOLEAN:
             return <BoolColumn key={rowKey} isTrue={value} width={width}/>
-            break
+          case DATETIME:
+            return <DatetimeColumn key={rowKey} value={value} width={width}/>
           default:
             return <DefaultColumn key={rowKey} value={value} width={width}/>
-            break
         }
       } else {
         return <DefaultColumn key={rowKey} value={value} width={width}/>

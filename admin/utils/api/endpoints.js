@@ -56,3 +56,7 @@ export const CREATE_LOCATION_URL = '/api/admin/location'
 export const UPDATE_LOCATION_URL = '/api/admin/location'
 export const DELETE_LOCATION_URL = '/api/admin/location'
 export const FETCH_ALL_LOCATIONS = '/api/admin/location/all'
+
+export const FETCH_FEEDBACK_LIST_URL = '/api/admin/feedback'
+export const FETCH_FEEDBACK_ITEM_URL = '/api/admin/feedback/:id'
+export const DELETE_FEEDBACK_ITEM_URL = '/api/admin/feedback'

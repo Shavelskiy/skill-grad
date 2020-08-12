@@ -39,7 +39,7 @@ class BlogController extends AbstractController
      */
     public function viewAction(Request $request): Response
     {
-        /** @var Article[] $articles */
+        /* @var Article[] $articles */
 //        $articles = $this->articleRepository->findBy(['slug' => $request->get('slug')]);
 //        $article = current($articles);
 //

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,49 +12,39 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ChatMessage
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recipientId")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="chatMessages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $recipient;
+    protected User $recipient;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $message;
+    protected string $message;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateSend;
+    protected DateTimeInterface $dateSend;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $viewed;
+    protected bool $viewed;
 
     public function __construct()
     {
         $this->viewed = false;
         $this->dateSend = new DateTime();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getUser(): User
@@ -78,7 +69,7 @@ class ChatMessage
         return $this;
     }
 
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }

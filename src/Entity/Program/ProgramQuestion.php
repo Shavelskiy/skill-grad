@@ -2,62 +2,40 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\TimestampTrait;
 use App\Entity\User;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramQuestionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class ProgramQuestion
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
+    use TimestampTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    protected User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      */
-    private Program $program;
+    protected Program $program;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      */
-    private string $question;
+    protected string $question;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $answer;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $created;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $updated;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
+    protected string $answer;
 
     public function getUser(): User
     {
@@ -97,25 +75,5 @@ class ProgramQuestion
     public function setAnswer(string $answer): void
     {
         $this->answer = $answer;
-    }
-
-    public function getCreated(): DateTime
-    {
-        return $this->created;
-    }
-
-    public function setCreated(DateTime $created): void
-    {
-        $this->created = $created;
-    }
-
-    public function getUpdated(): DateTime
-    {
-        return $this->updated;
-    }
-
-    public function setUpdated(DateTime $updated): void
-    {
-        $this->updated = $updated;
     }
 }

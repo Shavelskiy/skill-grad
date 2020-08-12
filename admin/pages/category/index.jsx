@@ -7,7 +7,7 @@ import IndexPageTemplate from '../../components/page-templates'
 import { table, actions } from './table'
 
 
-const CategroyIndex = () => {
+const CategoryIndex = () => {
   return (
     <IndexPageTemplate
       title={'Список категорий програм обучения'}
@@ -21,4 +21,4 @@ const CategroyIndex = () => {
   )
 }
 
-export default CategroyIndex
+export default CategoryIndex

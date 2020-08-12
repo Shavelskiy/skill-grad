@@ -9,12 +9,12 @@ trait Description
     /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\Column(type="text")
      */
-    private string $annotation;
+    protected string $annotation;
 
     /**
      * @ORM\Column(type="text")

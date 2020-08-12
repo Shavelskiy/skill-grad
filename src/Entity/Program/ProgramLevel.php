@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,12 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramLevel
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string")
@@ -25,17 +21,6 @@ class ProgramLevel
      * @ORM\Column(type="integer")
      */
     protected int $sort;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     public function getTitle(): string
     {

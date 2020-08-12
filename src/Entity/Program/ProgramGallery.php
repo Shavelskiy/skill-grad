@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
 use App\Entity\Upload;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,12 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramGallery
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string")
@@ -31,17 +27,6 @@ class ProgramGallery
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      */
     protected Program $program;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     public function getName(): string
     {

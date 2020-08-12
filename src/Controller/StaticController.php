@@ -18,8 +18,7 @@ class StaticController extends AbstractController
 
     public function __construct(
         ProviderRepository $providerRepository
-    )
-    {
+    ) {
         $this->providerRepository = $providerRepository;
     }
 
@@ -45,7 +44,6 @@ class StaticController extends AbstractController
     public function providerAction(): Response
     {
         return $this->render('static/provider-faq.html.twig');
-
     }
 
     /**

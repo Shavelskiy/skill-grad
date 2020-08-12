@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
 use App\Entity\Upload;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,38 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Teacher
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
-    private ?Upload $photo;
+    protected ?Upload $photo;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      */
-    private Program $program;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
+    protected Program $program;
 
     public function getName(): string
     {

@@ -21,8 +21,7 @@ class ProviderController extends AbstractController
 
     public function __construct(
         ProviderRepository $providerRepository
-    )
-    {
+    ) {
         $this->providerRepository = $providerRepository;
     }
 

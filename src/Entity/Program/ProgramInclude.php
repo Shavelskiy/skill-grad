@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,38 +10,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramInclude
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $title;
+    protected string $title;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $sort;
+    protected int $sort;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $active;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
+    protected bool $active;
 
     public function getTitle(): string
     {

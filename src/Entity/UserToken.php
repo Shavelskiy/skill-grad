@@ -19,18 +19,18 @@ class UserToken
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
-    private User $user;
+    protected User $user;
 
     /**
      * @ORM\Id()
      * @ORM\Column(type="uuid", unique=true)
      */
-    private UuidInterface $token;
+    protected UuidInterface $token;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $type;
+    protected string $type;
 
     public function __construct(string $type)
     {

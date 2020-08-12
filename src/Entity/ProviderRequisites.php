@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,72 +10,67 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProviderRequisites
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Provider", inversedBy="providerRequisites", cascade={"persist", "remove"})
      */
-    private Provider $provider;
+    protected Provider $provider;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $organizationName;
+    protected ?string $organizationName;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $legalAddress;
+    protected ?string $legalAddress;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $mailingAddress;
+    protected ?string $mailingAddress;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $ITN;
+    protected ?string $ITN;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $IEC;
+    protected ?string $IEC;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $PSRN;
+    protected ?string $PSRN;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $OKPO;
+    protected ?string $OKPO;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $checkingAccount;
+    protected ?string $checkingAccount;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $correspondentAccount;
+    protected ?string $correspondentAccount;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $BIC;
+    protected ?string $BIC;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $bank;
+    protected ?string $bank;
 
     public function getProvider(): Provider
     {

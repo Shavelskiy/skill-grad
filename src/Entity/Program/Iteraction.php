@@ -9,10 +9,10 @@ trait Iteraction
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramRequest", mappedBy="program")
      */
-    private array $requests;
+    protected array $requests;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramQuestion", mappedBy="program")
      */
-    private array $questions;
+    protected array $questions;
 }

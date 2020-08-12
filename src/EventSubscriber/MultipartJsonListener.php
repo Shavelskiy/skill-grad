@@ -106,7 +106,7 @@ class MultipartJsonListener implements EventSubscriberInterface
         return ['inputs' => $fields->all(), 'files' => $files];
     }
 
-    private function transformData($data, $name, $value)
+    protected function transformData($data, $name, $value)
     {
         $isArray = strpos($name, '[]');
         if ($isArray && (($isArray + 2) === strlen($name))) {

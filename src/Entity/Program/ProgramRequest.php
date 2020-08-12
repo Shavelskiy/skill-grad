@@ -2,71 +2,49 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\TimestampTrait;
 use App\Entity\User;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRequestRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class ProgramRequest
 {
+    use IdTrait;
+    use TimestampTrait;
+
     public const STATUS_NEW = 'new';
     public const STATUS_AGREE = 'agree';
     public const STATUS_REJECT = 'reject';
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    protected User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
      */
-    private Program $program;
+    protected Program $program;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      */
-    private string $comment;
+    protected string $comment;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      */
-    private string $status;
+    protected string $status;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $rejectReason;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $created;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $updated;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
+    protected string $rejectReason;
 
     public function getUser(): User
     {
@@ -116,25 +94,5 @@ class ProgramRequest
     public function setRejectReason(string $rejectReason): void
     {
         $this->rejectReason = $rejectReason;
-    }
-
-    public function getCreated(): DateTime
-    {
-        return $this->created;
-    }
-
-    public function setCreated(DateTime $created): void
-    {
-        $this->created = $created;
-    }
-
-    public function getUpdated(): DateTime
-    {
-        return $this->updated;
-    }
-
-    public function setUpdated(DateTime $updated): void
-    {
-        $this->updated = $updated;
     }
 }

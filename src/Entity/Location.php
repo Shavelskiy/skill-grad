@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +13,8 @@ use RuntimeException;
  */
 class Location
 {
+    use IdTrait;
+
     public const TYPE_COUNTRY = 'country';
     public const TYPE_REGION = 'region';
     public const TYPE_CITY = 'city';
@@ -23,56 +26,44 @@ class Location
     ];
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
-
-    /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    private string $code;
+    protected string $code;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $showInList = false;
+    protected bool $showInList = false;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $sort = 100;
+    protected int $sort = 100;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $type;
+    protected string $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Location")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="childLocations")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ?Location $parentLocation;
+    protected ?Location $parentLocation;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="parentLocation")
      */
-    private Collection $childLocations;
+    protected Collection $childLocations;
 
     public function __construct()
     {
         $this->childLocations = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getName(): ?string

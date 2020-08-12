@@ -4,11 +4,11 @@ namespace App\Dto;
 
 class SearchQuery
 {
-    private int $page;
-    private int $pageItemCount;
-    private ?string $orderField;
-    private ?string $orderType;
-    private array $search = [];
+    protected int $page;
+    protected int $pageItemCount;
+    protected ?string $orderField;
+    protected ?string $orderType;
+    protected array $search = [];
 
     public function getPage(): int
     {

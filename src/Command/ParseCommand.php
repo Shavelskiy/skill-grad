@@ -7,14 +7,12 @@ use App\Entity\ProviderRequisites;
 use App\Entity\Upload;
 use App\Entity\User;
 use App\Entity\UserInfo;
-use App\Entity\UserToken;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -28,8 +26,7 @@ class ParseCommand extends Command
         HttpClientInterface $client,
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $userPasswordEncoder
-    )
-    {
+    ) {
         parent::__construct();
         $this->client = $client;
         $this->entityManager = $entityManager;
@@ -229,9 +226,9 @@ class ParseCommand extends Command
     protected function randomPassword()
     {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array(); //remember to declare $pass as an array
+        $pass = []; //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-        for ($i = 0; $i < 8; $i++) {
+        for ($i = 0; $i < 8; ++$i) {
             $n = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,85 +12,69 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Provider
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="provider")
      */
-    private ?User $user;
+    protected ?User $user;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private string $description;
+    protected string $description;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $externalLink;
+    protected ?string $externalLink;
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
      */
-    private bool $proAccount = false;
+    protected bool $proAccount = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
-    private ?Upload $image;
+    protected ?Upload $image;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      * @ORM\JoinTable(name="provider_categroy_group")
      */
-    private Collection $categoryGroups;
+    protected Collection $categoryGroups;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      */
-    private Collection $categories;
+    protected Collection $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Location")
      */
-    private Collection $locations;
+    protected Collection $locations;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\ProviderRequisites", mappedBy="provider", cascade={"persist", "remove"}, fetch="EAGER")
      */
-    private ?ProviderRequisites $providerRequisites;
+    protected ?ProviderRequisites $providerRequisites;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="favoriteProviders")
      */
-    private Collection $favoriteUsers;
+    protected Collection $favoriteUsers;
 
     public function __construct()
     {
         $this->categoryGroups = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->locations = new ArrayCollection();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function getUser(): ?User

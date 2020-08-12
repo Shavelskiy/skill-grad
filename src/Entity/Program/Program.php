@@ -2,8 +2,9 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\TimestampTrait;
 use App\Entity\User;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Program
 {
+    use IdTrait;
+    use TimestampTrait;
     use Description;
     use Design;
     use Listeners;
@@ -39,27 +42,20 @@ class Program
     public const OCCUPATION_MODE_TIME = 'OCCUPATION_MODE_TIME';
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $author;
+    protected User $author;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $active;
+    protected bool $active;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      */
-    private Collection $categories;
+    protected Collection $categories;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Program\Teacher", mappedBy="program")
@@ -69,32 +65,22 @@ class Program
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider")
      */
-    private Collection $providers;
+    protected Collection $providers;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramGallery", mappedBy="program")
      */
-    private Collection $gallery;
+    protected Collection $gallery;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Location")
      */
-    private Collection $locations;
+    protected Collection $locations;
 
     /**
      * @ORM\Column(type="string")
      */
     protected string $additionalInfo;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $updated;
 
     public function __construct()
     {
@@ -103,18 +89,6 @@ class Program
         $this->providers = new ArrayCollection();
         $this->gallery = new ArrayCollection();
         $this->locations = new ArrayCollection();
-        $this->createdAt = new DateTime();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function getAuthor(): User
@@ -231,30 +205,5 @@ class Program
     {
         $this->additionalInfo = $additionalInfo;
         return $this;
-    }
-
-    public function getCreatedAt(): DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getUpdated(): DateTime
-    {
-        return $this->updated;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps(): void
-    {
-        $this->updated = new DateTime();
     }
 }

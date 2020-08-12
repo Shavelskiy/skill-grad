@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Traits\IdTrait;
 use App\Entity\Upload;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,12 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Certificate
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string")
@@ -26,17 +22,6 @@ class Certificate
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
     protected ?Upload $image;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     public function getName(): string
     {

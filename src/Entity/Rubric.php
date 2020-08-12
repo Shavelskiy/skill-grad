@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,27 +10,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rubric
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $sort;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    protected int $sort;
 
     public function getName(): ?string
     {

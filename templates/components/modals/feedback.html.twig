@@ -3,13 +3,12 @@
     <span class="close">&times;</span>
     <div class="content">
       <h4>Написать нам</h4>
-      <form class="form-auth send" action="">
+      <form class="form-auth send" action="{{ path('ajax.feedback.index') }}">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('feedback') }}">
-        <span class="modal-error"></span>
-        <input class="input" type="text" placeholder="Имя">
-        <input class="input" type="email" placeholder="E-mail">
-        <textarea class="textarea" placeholder="Вопрос" id="" cols="30" rows="5"></textarea>
-        <button class="button-red" type="submit">Войти</button>
+        <input class="input" type="text" placeholder="Имя" name="author_name">
+        <input class="input" type="email" placeholder="E-mail" name="email">
+        <textarea class="textarea" placeholder="Вопрос" id="" cols="30" rows="5" name="text"></textarea>
+        <button class="button-red" type="submit">Отправить</button>
         <span class="reg-info">
           Отправляя запрос Вы соглашаетесь
           с «<a href="#">Пользовательским соглашением</a>»,

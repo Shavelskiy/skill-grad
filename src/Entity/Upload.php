@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,22 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Upload
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $name;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    protected string $name;
 
     public function getName(): ?string
     {

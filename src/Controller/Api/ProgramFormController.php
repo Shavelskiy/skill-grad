@@ -23,7 +23,6 @@ use App\Repository\ProgramIncludeRepository;
 use App\Repository\ProgramLevelRepository;
 use App\Repository\ProviderRepository;
 use App\Service\UploadServiceInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

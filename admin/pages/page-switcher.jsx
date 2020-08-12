@@ -34,13 +34,18 @@ import {
   PROGRAM_ADDITIONAL_CREATE,
   PROGRAM_ADDITIONAL_UPDATE,
   PROGRAM_INCLUDE_INDEX,
-  PROGRAM_INCLUDE_UPDATE, PROGRAM_INCLUDE_CREATE, PROGRAM_LEVEL_INDEX, PROGRAM_LEVEL_UPDATE, PROGRAM_LEVEL_CREATE,
+  PROGRAM_INCLUDE_UPDATE,
+  PROGRAM_INCLUDE_CREATE,
+  PROGRAM_LEVEL_INDEX,
+  PROGRAM_LEVEL_UPDATE,
+  PROGRAM_LEVEL_CREATE,
+  FEEDBACK_INDEX, FEEDBACK_VIEW,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
 import NotFoundPage from '../pages/not-found/not-found'
 import IndexPage from './'
-import CategroyIndex from './category'
+import CategoryIndex from './category'
 import CategoryView from './category/view'
 import CategoryCreate from './category/create'
 import CategoryUpdate from './category/update'
@@ -73,6 +78,8 @@ import ProgramIncludeCreate from './program-include/create'
 import ProgramLevelIndex from './program-level'
 import ProgramLevelCreate from './program-level/create'
 import ProgramLevelUpdate from './program-level/update'
+import FeedbackIndex from './feedback'
+import FeedbackView from './feedback/view'
 
 
 const PageSwitcher = ({active}) => {
@@ -82,10 +89,10 @@ const PageSwitcher = ({active}) => {
 
       <div className={css.content}>
         <Switch>
-          <Route exact name="categroy.index" path={CATEGORY_INDEX} component={CategroyIndex}/>
-          <Route exact name="categroy.create" path={CATEGORY_CREATE} component={CategoryCreate}/>
-          <Route exact name="categroy.view" path={CATEGORY_VIEW} component={CategoryView}/>
-          <Route exact name="categroy.update" path={CATEGORY_UPDATE} component={CategoryUpdate}/>
+          <Route exact name="category.index" path={CATEGORY_INDEX} component={CategoryIndex}/>
+          <Route exact name="category.create" path={CATEGORY_CREATE} component={CategoryCreate}/>
+          <Route exact name="category.view" path={CATEGORY_VIEW} component={CategoryView}/>
+          <Route exact name="category.update" path={CATEGORY_UPDATE} component={CategoryUpdate}/>
 
           <Route exact name="program-format.index" path={PROGRAM_FORMAT_INDEX} component={ProgramFormatIndex}/>
           <Route exact name="program-format.create" path={PROGRAM_FORMAT_CREATE} component={ProgramFormatCreate}/>
@@ -124,6 +131,10 @@ const PageSwitcher = ({active}) => {
           <Route exact name="location.create" path={LOCATION_CREATE} component={LocationCreate}/>
           <Route exact name="location.view" path={LOCATION_VIEW} component={LocationView}/>
           <Route exact name="location.update" path={LOCATION_UPDATE} component={LocationUpdate}/>
+
+          <Route exact name="feedback.index" path={FEEDBACK_INDEX} component={FeedbackIndex}/>
+          <Route exact name="feedback.view" path={FEEDBACK_VIEW} component={FeedbackView}/>
+
 
           <Route exact name="index" path={INDEX} component={IndexPage}/>
           <Route path="/" component={NotFoundPage}/>

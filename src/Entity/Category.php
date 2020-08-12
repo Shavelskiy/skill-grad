@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 
@@ -10,48 +11,32 @@ use Doctrine\ORM\PersistentCollection;
  */
 class Category
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $name;
+    protected string $name;
 
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    private string $slug;
+    protected string $slug;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $sort;
+    protected int $sort;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="childCategories")
      */
-    private ?Category $parentCategory;
+    protected ?Category $parentCategory;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory")
      */
-    private PersistentCollection $childCategories;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
+    protected PersistentCollection $childCategories;
 
     public function getName(): string
     {

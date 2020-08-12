@@ -9,11 +9,11 @@ use Doctrine\ORM\QueryBuilder;
 
 class Paginator
 {
-    private QueryBuilder $query;
-    private QueryBuilder $countQuery;
-    private int $page = 1;
-    private int $pageItems;
-    private PaginatorResult $result;
+    protected QueryBuilder $query;
+    protected QueryBuilder $countQuery;
+    protected int $page = 1;
+    protected int $pageItems;
+    protected PaginatorResult $result;
 
     public function setQuery(QueryBuilder $query): self
     {

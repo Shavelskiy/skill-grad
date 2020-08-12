@@ -43,3 +43,6 @@ export const LOCATION_INDEX = '/location'
 export const LOCATION_VIEW = '/location/:id'
 export const LOCATION_CREATE = '/location/create/:id?'
 export const LOCATION_UPDATE = '/location/update/:id'
+
+export const FEEDBACK_INDEX = '/feedback'
+export const FEEDBACK_VIEW = '/feedback/:id'

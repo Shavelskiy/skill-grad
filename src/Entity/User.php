@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +16,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    use IdTrait;
+
     public const ROLE_ADMIN = 'ROLE_ADMIN';
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_PROVIDER = 'ROLE_PROVIDER';
@@ -22,60 +25,48 @@ class User implements UserInterface
     public const ROLE_REDACTOR = 'ROLE_REDACTOR';
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
-
-    /**
      * @ORM\Column(type="string", length=180)
      */
-    private ?string $email;
+    protected ?string $email;
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
      */
-    private bool $active = false;
+    protected bool $active = false;
 
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    protected array $roles = [];
 
     /**
      * @ORM\Column(type="string")
      */
-    private ?string $password;
+    protected ?string $password;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $socialKey;
+    protected ?string $socialKey;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserInfo", mappedBy="user", cascade={"persist", "remove"})
      */
-    private UserInfo $userInfo;
+    protected UserInfo $userInfo;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Provider", mappedBy="user", cascade={"persist", "remove"})
      */
-    private ?Provider $provider;
+    protected ?Provider $provider;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers")
      */
-    private Collection $favoriteProviders;
+    protected Collection $favoriteProviders;
 
     public function __construct()
     {
         $this->favoriteProviders = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getUsername(): string
