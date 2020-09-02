@@ -2,11 +2,15 @@
 
 namespace App\Command;
 
+use App\Entity\Program\Program;
+use App\Entity\Program\ProgramFormat;
 use App\Entity\Provider;
 use App\Entity\ProviderRequisites;
 use App\Entity\Upload;
 use App\Entity\User;
 use App\Entity\UserInfo;
+use App\Repository\ProgramFormatRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Command\Command;
@@ -21,16 +25,36 @@ class ParseCommand extends Command
     protected HttpClientInterface $client;
     protected EntityManagerInterface $entityManager;
     protected UserPasswordEncoderInterface $userPasswordEncoder;
+    protected ProgramFormatRepository $programFormatRepository;
+
+    protected array $formats = [];
+
+    protected const MONTHS = [
+        1 => 'янв',
+        2 => 'фев',
+        3 => 'мар',
+        4 => 'апр',
+        5 => 'май',
+        6 => 'июн',
+        7 => 'июл',
+        8 => 'авг',
+        9 => 'сен',
+        10 => 'окт',
+        11 => 'ноя',
+        12 => 'дек',
+    ];
 
     public function __construct(
         HttpClientInterface $client,
         EntityManagerInterface $entityManager,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        ProgramFormatRepository $programFormatRepository
     ) {
         parent::__construct();
         $this->client = $client;
         $this->entityManager = $entityManager;
         $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->programFormatRepository = $programFormatRepository;
     }
 
     public function configure(): void
@@ -42,7 +66,63 @@ class ParseCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        $fileName = __DIR__ . '/../../files/providers_data.json';
+        $this->kek();
+
+        $fileName = __DIR__ . '/../../files/ucheba/variants.csv';
+
+        $handle = fopen($fileName, 'rb');
+        $row = 0;
+
+        $result = [];
+
+        while (($data = fgetcsv($handle, 10000, ';')) !== false) {
+            ++$row;
+
+            if ($row === 1) {
+                continue;
+            }
+
+            $programId = (explode('/', $data[0]))[0];
+
+            if (!empty($data[6])) {
+                $prices = explode(',', str_replace(['р', ' ', '.'], '', $data[6]));
+
+                foreach ($prices as $key => $price) {
+                    $prices[$key] = (int)$price;
+                }
+            } else {
+                $price = (int)str_replace(['р', ' ', '.'], '', $data[7]);
+                $prices = [(int)($price / 12)];
+            }
+
+            if (in_array(mb_strtoupper($data[0]), $this->formats, true)) {
+                $format = [
+                    'id' => array_search(mb_strtoupper($data[0]), $this->formats, true),
+                ];
+            } else {
+                $format = [
+                    'type' => Program::OTHER,
+                    'value' => $data[0],
+                ];
+            }
+
+            if (!isset($result[$programId])) {
+                $result[$programId] = [];
+            }
+
+            $result[$programId][] = [
+                'format' => $format,
+                'prices' => $prices,
+                'date' => $this->parseStart($data[8]),
+                'duration' => $this->kek222($data[9]),
+                'occupation' => $data[10],
+            ];
+        }
+        fclose($handle);
+
+
+        die;
+
 
         $providersData = (array)json_decode(file_get_contents($fileName));
 
@@ -234,4 +314,5 @@ class ParseCommand extends Command
         }
         return implode($pass); //turn the array into a string
     }
+
 }
