@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait Iteraction
@@ -9,10 +10,10 @@ trait Iteraction
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramRequest", mappedBy="program")
      */
-    protected array $requests;
+    protected Collection $requests;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramQuestion", mappedBy="program")
      */
-    protected array $questions;
+    protected Collection $questions;
 }

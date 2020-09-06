@@ -12,9 +12,9 @@ trait Terms
     protected array $price;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    protected array $oldPrice;
+    protected ?int $oldPrice;
 
     /**
      * @ORM\Column(type="boolean")
@@ -52,12 +52,12 @@ trait Terms
         return $this;
     }
 
-    public function getOldPrice(): array
+    public function getOldPrice(): ?int
     {
         return $this->oldPrice;
     }
 
-    public function setOldPrice(array $oldPrice): self
+    public function setOldPrice(?int $oldPrice): self
     {
         $this->oldPrice = $oldPrice;
         return $this;

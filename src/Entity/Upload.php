@@ -12,6 +12,8 @@ class Upload
 {
     use IdTrait;
 
+    public const UPLOAD_PATH = '/upload';
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -30,6 +32,14 @@ class Upload
 
     public function getPublicPath(): string
     {
-        return '/upload/' . $this->getName();
+        $parts = explode('-', $this->getName());
+
+        return sprintf('%s/%s/%s/%s/%s',
+            self::UPLOAD_PATH,
+            substr($parts[0], 0, 3),
+            substr($parts[1], 0, 3),
+            substr($parts[2], 0, 3),
+            $this->getName()
+        );
     }
 }

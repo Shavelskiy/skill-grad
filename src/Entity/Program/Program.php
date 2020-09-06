@@ -92,6 +92,8 @@ class Program
         $this->providers = new ArrayCollection();
         $this->gallery = new ArrayCollection();
         $this->locations = new ArrayCollection();
+        $this->requests = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getAuthor(): User

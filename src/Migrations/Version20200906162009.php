@@ -26,6 +26,8 @@ final class Version20200906162009 extends AbstractMigration
         $this->addSql('ALTER TABLE program ALTER target_audience DROP NOT NULL');
         $this->addSql('ALTER TABLE program ALTER additional_info DROP NOT NULL');
         $this->addSql('ALTER TABLE program ALTER preparation DROP NOT NULL');
+        $this->addSql('alter table program drop old_price');
+        $this->addSql('ALTER TABLE program ADD old_price INT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
@@ -34,6 +36,7 @@ final class Version20200906162009 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
+        $this->addSql('ALTER TABLE program DROP old_price');
         $this->addSql('ALTER TABLE program ALTER preparation SET NOT NULL');
         $this->addSql('ALTER TABLE program ALTER additional_info SET NOT NULL');
         $this->addSql('ALTER TABLE program ALTER target_audience SET NOT NULL');

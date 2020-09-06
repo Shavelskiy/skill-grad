@@ -1,0 +1,58 @@
+<div class="card">
+  {% if additional.discount is not null %}
+  <span class="icon discount"></span>
+  {% endif %}
+  <div class="card__header">
+    <div class="card__header-icon">
+      <img src="{{ program.providers[0].image.publicPath }}" alt="" style="max-height: 40px;">
+    </div>
+    <span class="card__header-title">{{ program.providers[0].name }}</span>
+  </div>
+  <div class="card__body">
+    <a href="{{ path('program.view', { id: program.id }) }}" class="card__body-title">{{ program.name }}</a>
+    <div class="card__body-description">{{ program.annotation }}</div>
+  </div>
+  <div class="card__footer">
+    <div class="col-lg-7 col-md-6 col-sm-4 no-gutter">
+      <div class="card__footer-info">
+        <div class="info">
+          <i class="icon-book"></i>
+          <span class="info-text">
+            {{ additional.format }}
+          </span>
+        </div>
+        <div class="time">
+          <i class="icon-clock"></i>
+          <span class="info-text">{{ additional.duration }}</span>
+        </div>
+        <div class="star">
+          <i class="icon-star"></i>
+          <span class="info-text">4.2</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">
+      {% if additional.price is not null %}
+        <div class="card__footer-price">
+          {% if program.oldPrice is not null and program.showPriceReduction %}
+            <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
+            <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+          {% else %}
+            <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="card__footer-button">
+        <button class="button-blue">
+          Заказать
+        </button>
+      </div>
+      <div class="card__footer-add">
+        <span class="tooltip">
+          Добавить в сравнение
+        </span>
+        <i class="icon-add-file"></i>
+      </div>
+    </div>
+  </div>
+</div>
