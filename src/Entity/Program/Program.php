@@ -24,7 +24,6 @@ class Program
     use Result;
     use Organization;
     use Terms;
-    use Iteraction;
 
     public const DURATION_HOURS = 'DURATION_HOURS';
     public const DURATION_DAYS = 'DURATION_DAYS';
@@ -81,9 +80,24 @@ class Program
     protected Collection $locations;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramRequest", mappedBy="program")
+     */
+    protected Collection $requests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramQuestion", mappedBy="program")
+     */
+    protected Collection $questions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramReview", mappedBy="program")
+     */
+    protected Collection $reviews;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected string $additionalInfo;
+    protected ?string $additionalInfo;
 
     public function __construct()
     {
@@ -94,6 +108,7 @@ class Program
         $this->locations = new ArrayCollection();
         $this->requests = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getAuthor(): User
@@ -207,12 +222,34 @@ class Program
         return $this;
     }
 
-    public function getAdditionalInfo(): string
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function setRequests($requests): self
+    {
+        $this->requests = $requests;
+        return $this;
+    }
+
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function setQuestions($questions): self
+    {
+        $this->questions = $questions;
+        return $this;
+    }
+
+    public function getAdditionalInfo(): ?string
     {
         return $this->additionalInfo;
     }
 
-    public function setAdditionalInfo(string $additionalInfo): self
+    public function setAdditionalInfo(?string $additionalInfo): self
     {
         $this->additionalInfo = $additionalInfo;
         return $this;

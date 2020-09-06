@@ -24,7 +24,7 @@ class Teacher
     protected ?Upload $photo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program", inversedBy="teachers")
      */
     protected Program $program;
 

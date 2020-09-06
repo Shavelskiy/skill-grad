@@ -14,7 +14,7 @@ trait Result
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\Certificate")
      */
-    protected Certificate $certificate;
+    protected ?Certificate $certificate;
 
     public function getGainedKnowledge(): string
     {
@@ -27,12 +27,12 @@ trait Result
         return $this;
     }
 
-    public function getCertificate(): Certificate
+    public function getCertificate(): ?Certificate
     {
         return $this->certificate;
     }
 
-    public function setCertificate(Certificate $certificate): self
+    public function setCertificate(?Certificate $certificate): self
     {
         $this->certificate = $certificate;
         return $this;

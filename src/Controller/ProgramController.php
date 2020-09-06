@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
 use App\Repository\ProgramRepository;
+use App\Repository\ProgramReviewsRepository;
 use App\Service\ProgramService;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -17,16 +18,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProgramController extends AbstractController
 {
     protected const PAGE_ITEM_COUNT = 15;
+    protected const PAGE_REVIEWS_COUNT = 5;
 
     protected ProgramRepository $programRepository;
     protected ProgramService $programService;
+    protected ProgramReviewsRepository $programReviewsRepository;
 
     public function __construct(
         ProgramRepository $programRepository,
-        ProgramService $programService
+        ProgramService $programService,
+        ProgramReviewsRepository $programReviewsRepository
     ) {
         $this->programRepository = $programRepository;
         $this->programService = $programService;
+        $this->programReviewsRepository = $programReviewsRepository;
     }
 
     /**
@@ -43,14 +48,6 @@ class ProgramController extends AbstractController
 
         $searchResult = $this->programRepository->getPaginatorResult($query);
 
-//        $favoriteProviderIds = [];
-//
-//        if ($this->getUser()) {
-//            foreach ($this->getUser()->getFavoriteProviders() as $provider) {
-//                $favoriteProviderIds[] = $provider->getId();
-//            }
-//        }
-
         $programs = [];
 
         /** @var Program $program */
@@ -65,16 +62,33 @@ class ProgramController extends AbstractController
             'programs' => $programs,
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
-//            'favorite_provider_ids' => $favoriteProviderIds,
         ]);
     }
 
     /**
      * @Route("/program/{id}", name="program.view", methods={"GET"})
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
-    public function actionView(int $id): Response
+    public function actionView(Program $program, Request $request): Response
     {
-        return $this->render('program/view.html.twig');
+        $query = (new SearchQuery())
+            ->setPage((int)($request->get('page', 1)))
+            ->setPageItemCount(self::PAGE_REVIEWS_COUNT);
+
+        $searchResult = $this->programReviewsRepository->getPaginatorResult($query);
+        $reviews = $searchResult->getItems();
+
+        return $this->render('program/view.html.twig', [
+            'program' => $program,
+            'additional' => $this->programService->prepareProgramCard($program),
+            'reviews' => [
+                'items' => $reviews,
+                'page' => $searchResult->getCurrentPage(),
+                'total_pages' => $searchResult->getTotalPageCount(),
+            ],
+        ]);
     }
 
     /**

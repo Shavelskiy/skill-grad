@@ -23,7 +23,7 @@ class ProgramQuestion
     protected User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program", inversedBy="questions")
      */
     protected Program $program;
 

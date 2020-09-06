@@ -60,6 +60,11 @@ class User implements UserInterface
     protected ?Provider $provider;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramReview", mappedBy="user", fetch="LAZY")
+     */
+    protected Collection $programReviews;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers")
      */
     protected Collection $favoriteProviders;

@@ -24,7 +24,7 @@ class ProgramGallery
     protected Upload $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program", inversedBy="gallery")
      */
     protected Program $program;
 

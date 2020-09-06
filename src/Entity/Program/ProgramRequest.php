@@ -27,7 +27,7 @@ class ProgramRequest
     protected User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program", inversedBy="requests")
      */
     protected Program $program;
 

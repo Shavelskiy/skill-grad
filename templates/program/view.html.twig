@@ -1,29 +1,32 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% set title = program.name %}
+
 {% block body %}
   <div class="container">
     <div class="d-f w-100 j-c-center">
       <div class="breadcrumbs">
         <ul>
-          <li><a href="#">Главная</a></li>
-          <li><a href="#">Каталог программ обучения</a></li>
-          <li><a class="active" href="#">Прикладная информатика в энергетических системах</a></li>
+          <li><a href="{{ path('site.index') }}">Главная</a></li>
+          <li><a href="{{ path('program.index') }}">Каталог программ обучения</a></li>
+          <li><a class="active" href="#">{{ title }}</a></li>
         </ul>
       </div>
     </div>
+
     <div class="col-lg-12 mobile-no-gutter">
       <div class="main-card__program mt-0">
-        <h2 class="title program">Прикладная информатика в энергетических системах</h2>
+        <h2 class="title program">{{ title }}</h2>
         <div class="alert">
           <div class="container-0 j-c-space-between">
             <div class="information">
               <div class="date">
                 <span class="icon calendar"></span>
-                <span class="text">Добавлена: </span><strong>19.02.2019</strong>
+                <span class="text">Добавлена: </span><strong>{{ program.createdAt|date('d.m.Y') }}</strong>
               </div>
               <div class="proposal">
                 <span class="icon mail"></span>
-                <span class="text">Получено заявок:</span> <strong>12</strong>
+                <span class="text">Получено заявок:</span> <strong>{{ program.requests.count }}</strong>
               </div>
               <div class="rating">
                 <span class="icon goal"></span>
@@ -56,109 +59,100 @@
             </div>
           </div>
         </div>
+
         <div class="box">
           <div class="box-content show">
             <div class="container-0">
               <div class="col-lg-12 pl-0">
+
                 <h5 class="result-title mt-0">Категории программы обучения</h5>
                 <p class="text"><span class="blue">1. Архитектура и строительство:</span> архитектура</p>
-                <p><span class="blue">2. Информационные технологии:</span> ИТ-менеджмент / программирование / системное
+                <p class="text"><span class="blue">2. Информационные технологии:</span> ИТ-менеджмент / программирование
+                  / системное
                   администрирование</p>
                 <p class="text"><span class="blue">3. Природопользование и экология:</span> геология и разведка полезных
                   ископаемых / гидрометеорология</p>
+
                 <h5 class="result-title">Аннотация программы</h5>
-                <p class="text">Главная задача: подготовка квалифицированных специалистов, способных вести
-                  проектирование
-                  и разработку новых экономических прикладных программ и информационных систем, осуществлять внедрение в
-                  эксплуатацию и развитие существующих систем в бизнесе
-                  и государственном управлении. Области применения знаний — экономика, энергетика, государственное
-                  управление, страхование, банковская и инвестиционная деятельность.</p>
-                <h5 class="result-title">Программа обучения</h5>
-                <p class="text">Программа состоит из 5 онлайн сессий и предусматривает выполнение самостоятельных
-                  задач:</p>
-                <p class="text">Сессия 1 . "Время как ресурс: индивидуальные особенности тайм-менеджмента"</p>
-                <p class="text">Сессия 2. "Правила целеполагания и формулировка задач"</p>
-                <p class="text">Сессия 3. "Инструменты планирования деятельности в условиях изменений и
-                  неопределенности"</p>
-                <p class="text">Сессия 4. «Инструменты оценки и фиксации результатов деятельности"</p>
-                <p class="text">Сессия 5. "Дефицит рабочего времени как фактор эмоционального выгорания".</p>
-                <p class="text">Обучение предполагает активные, пассивные и интерактивные методы взаимодействия, такие
-                  как
-                  интерактивная лекция, модерируемых дискуссия, практические задания, ответы на проблемные вопросы.
-                </p>
-                <h5 class="result-title">Описание процесса обучения</h5>
-                <p class="text">В современных условиях деятельности государственной службы важно уметь выстроить процесс
-                  дистанционной работы с учетом актуальных техник и инструментов, позволяющих государственным служащим
-                  эффективно выполнять свои обязанности и поддерживать себя в сложное время. В программе вебинара
-                  предложены инструменты планирования, определения приоритетов, оценки и фиксации результатов
-                  деятельности, саморегуляции, помогают поддерживать эмоционально-психологическое состояние и
-                  эффективную
-                  работоспособность.
-                </p>
-                <p class="text">Целью программы является актуализация и углубление знаний, по инструментов
-                  тайм-менеджмента, которые помогут повысить индивидуальную эффективность в условиях удаленной работы.
-                </p>
-                <p class="text">Онлайн программу вебинаров разработан по общей краткосрочной программе «Тайм-менеджмент»
-                  с
-                  целью продолжения профессионального обучения в условиях карантинных мероприятий.
-                </p>
+                <p class="text">{{ program.annotation }}</p>
+
+                {% if program.detailText|length > 0 %}
+                  <h5 class="result-title">Программа обучения</h5>
+                  <p class="text">{{ program.detailText }}</p>
+                {% endif %}
+
+                {% if program.processDescription|length > 0 %}
+                  <h5 class="result-title">Описание процесса обучения</h5>
+                  <p class="text">{{ program.processDescription }}</p>
+                {% endif %}
+
                 <h5 class="result-title">Дизайн программы обучения</h5>
-                <p class="text">Работа с наставником (тьютором, преподавателем)</p>
+                <p class="text">{{ additional.design }}</p>
+
                 <h5 class="result-title">Проверка знаний</h5>
                 <p class="text">Экзамен по итогам обучения</p>
-                <h5 class="result-title">Дополнительно</h5>
-                <ul class="tick">
-                  <li>Консультационная поддержка после обучения
-                  </li>
-                  <li>Онлайн форум выпускников</li>
-                </ul>
-                <h5 class="result-title">Преимущества программы обучения</h5>
-                <p class="text">В 2019 году на бюджетные места очно-заочной формы поступили все на базе СПО, проходной
-                  балл 2019 - 202.
-                </p>
-                <p class="text">15 мест с оплатой очно-заочного обучения в 2020 году.
-                </p>
-                <p class="text">
-                  Выдаваемые документы: Диплом о присвоении степени бакалавра Прикладной информатики государственного
-                  образца и возможность получения дополнительного диплома о присвоении степени бакалавра экономики
-                  европейского образца (Университет Гренобль Альпы (Франция).
-                </p>
-                <h5 class="result-title">Целевая аудитория</h5>
-                <ul class="tick">
-                  <li>Дети до 12 лет</li>
-                  <li>
-                    Родители с детьми до 12 лет
-                  </li>
-                </ul>
-                <h5 class="result-title">Предварительная подготовка</h5>
-                <ul class="tick">
-                  <li>Не требуется</li>
-                </ul>
-                <h5 class="result-title">Полученные знания, приобретенные навыки</h5>
-                <p class="text">Выдаваемые документы: Диплом о присвоении степени бакалавра Прикладной информатики
-                  государственного образца и возможность получения дополнительного диплома о присвоении степени
-                  бакалавра
-                  экономики европейского образца (Университет Гренобль Альпы (Франция).</p>
-                <h5 class="result-title">Включено в курс</h5>
-                <ul class="tick">
-                  <li>Книги</li>
-                  <li>Методические материалы</li>
-                  <li>Кофе-брейки</li>
-                </ul>
+
+                {% if additional.additional is not empty %}
+                  <h5 class="result-title">Дополнительно</h5>
+                  <ul class="tick">
+                    {% for value in additional.additional %}
+                      <li>{{ value }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                {% if program.advantages|length > 0 %}
+                  <h5 class="result-title">Преимущества программы обучения</h5>
+                  <p class="text">{{ program.advantages }}</p>
+                {% endif %}
+
+                {% if program.targetAudience is not empty %}
+                  <h5 class="result-title">Целевая аудитория</h5>
+                  <ul class="tick">
+                    {% for listener in program.targetAudience %}
+                      <li>Дети до 12 лет</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                {% if program.preparation is not empty %}
+                  <h5 class="result-title">Предварительная подготовка</h5>
+                  <ul class="tick">
+                    {% for preparation in program.preparation %}
+                      <li>{{ preparation }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                {% if program.gainedKnowledge|length > 0 %}
+                  <h5 class="result-title">Полученные знания, приобретенные навыки</h5>
+                  <p class="text">{{ program.gainedKnowledge }}</p>
+                {% endif %}
+
+                {% if additional.includes is not empty %}
+                  <h5 class="result-title">Включено в курс</h5>
+                  <ul class="tick">
+                    {% for include in additional.includes %}
+                      <li>{{ include }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
                 <h5 class="result-title">Скидки</h5>
                 <ul class="tick">
                   <li>Для физических лиц - 10% = 1850 руб.</li>
                   <li>Для юридических лиц - 15% = 2300 руб.</li>
                 </ul>
-                <h5 class="result-title">Акции от провайдера</h5>
-                <ul class="tick">
-                  <li>Акция «Весеннее чудо». Скидка 5% для всех зарегистрировавшихся в период с 25 апреля
-                    по 25 мая
-                  </li>
-                  <li>Акция к 75-летию победы! В период с 1 по 11 мая зарегистрируйся на обучение и получи скидку в
-                    размере 20 % от стоимости! А еще 5% от стоимости пойдет в благотворительный фонд «ПАМЯТЬ ПОКОЛЕНИЙ»
-                  </li>
-                </ul>
+
+                {% if program.providerActions is not empty %}
+                  <h5 class="result-title">Акции от провайдера</h5>
+                  <ul class="tick">
+                    {% for actioin in program.providerActions %}
+                      <li>{{ action }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
                 <h5 class="result-title">Акция «Любимый провайдер»</h5>
                 <div class="container-0">
                   <div class="sale">
@@ -170,220 +164,126 @@
                     <span class="text">Скидка при приобретении <br/> первого курса</span>
                   </div>
                 </div>
+
                 <h5 class="result-title">Условия оплаты</h5>
-                <ul class="tick">
-                  <li>
-                    <strong>Для юридических лиц</strong>
-                    <p class="text mt-10"> Акция к 75-летию победы! В период с 1 по 11 мая зарегистрируйся на обучение и
-                      получи скидку в размере 20 % от стоимости! А еще 5% от стоимости пойдет в благотворительный фонд
-                      «ПАМЯТЬ ПОКОЛЕНИЙ»
-                      Акция к 75-летию победы! В период с 1 по 11 мая зарегистрируйся на обучение и получи скидку в
-                      размере 20 % от стоимости! А еще 5% от стоимости пойдет в благотворительный фонд «ПАМЯТЬ
-                      ПОКОЛЕНИЙ»
-                    </p>
-                  </li>
-                  <li><strong>Для физических лиц</strong>
-                    <p class="text mt-10"> Акция к 75-летию победы! В период с 1 по 11 мая зарегистрируйся на обучение и
-                      получи скидку в размере 20 % от стоимости! А еще 5% от стоимости пойдет в благотворительный фонд
-                      «ПАМЯТЬ ПОКОЛЕНИЙ»
-                      Акция к 75-летию победы! В период с 1 по 11 мая зарегистрируйся на обучение и получи скидку в
-                      размере 20 % от стоимости! А еще 5% от стоимости пойдет в благотворительный фонд «ПАМЯТЬ
-                      ПОКОЛЕНИЙ»
-                    </p></li>
-                </ul>
-                <h5 class="result-title">Фотографии с мероприятия</h5>
-                <div class="photo-container">
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
+                {% if additional.term_of_payment is null %}
+                  <p class="text">По запросу</p>
+                {% else %}
+                  <ul class="tick">
+                    {% if additional.term_of_payment.legal != false %}
+                      <li>
+                        <strong>Для юридических лиц</strong>
+                        <p class="text mt-10">{{ additional.term_of_payment.legal }}</p>
+                      </li>
+                    {% endif %}
+                    {% if additional.term_of_payment.individual != false %}
+                      <li>
+                        <strong>Для физических лиц</strong>
+                        <p class="text mt-10">{{ additional.term_of_payment.individual }}</p>
+                      </li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+
+                {% if program.gallery.count > 0 %}
+                  <h5 class="result-title">Фотографии с мероприятия</h5>
+                  <div class="photo-container">
+                    {% for galleryItem in program.gallery %}
+                      <div class="photo-block">
+                        <img src="{{ galleryItem.image.publicPath }}" alt="">
+                        <span>{{ galleryItem.name }}</span>
+                      </div>
+                    {% endfor %}
                   </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                  <div class="photo-block">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Переподаватель на уроке актерского мастерства</span>
-                  </div>
-                </div>
-                <h5 class="result-title">Дополнительная информация</h5>
-                <p class="text">3 балла за спортивные достижения: звания чемпиона мира, Европы или Олимпийских
-                  (и Паралимпийских) игр, статус мастера спорта или кандидата в мастера спорта</p>
-                <p class="text">7 баллов за результаты олимпиад и творческих конкурсов, не используемые для получения
-                  особых прав
-                </p>
-                <p class="text">7 баллов за результаты предпрофессионального экзамена (для участников городских проектов
-                  «Инженерный класс», «Медицинский класс», «Академический класс» и «Кадетский класс»)
-                </p>
-                <p class="text">2 балла за наличие статуса победителя чемпионата по профессиональному мастерству среди
-                  инвалидов и лиц с ограниченными возможностями здоровья (ОВЗ) «Абилимпикс»
-                </p>
-                <h5 class="result-title">Отзывы и оценки (15)</h5>
+                {% endif %}
+
+                {% if  program.additionalInfo is not null %}
+                  <h5 class="result-title">Дополнительная информация</h5>
+                  <p class="text">{{ program.additionalInfo }}</p>
+                {% endif %}
+
+                <h5 class="result-title">Отзывы и оценки ({{ reviews.items|length }})</h5>
                 <div class="container-0">
-                  <div class="reviews">
-                    <div class="container-0">
-                      <div class="information">
-                        <div class="top">
-                          <img class="rounded" src="/img/photo.jpg" alt="">
-                          <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">Викторов Тимофей</span>
-                            <span class="date">22 авг 2020,  12:35</span>
+                  {% if reviews.items|length == 0 %}
+                    У программы пока нет отзывов
+                  {% else %}
+                    {% for review in reviews.items %}
+                      <div class="reviews">
+                        <div class="container-0">
+                          <div class="information">
+                            <div class="top">
+                              <img class="rounded" src="/img/photo.jpg" alt="">
+                              <div class="d-flex w-100 j-c-space-between mt-10">
+                                <span class="name">{{ review.user.userInfo.fullName }}</span>
+                                <span class="date">{{ review.createdAt|date('d m Y i:g') }}</span>
+                              </div>
+                            </div>
+                            <div class="comment">
+                              <p class="text">{{ review.review }}</p>
+                            </div>
+                          </div>
+                          <div class="value">
+                            <p class="text">
+                              <i class="icon-star"></i>
+                              Средняя оценка: <strong class="accent">{{ review.averageRating }}</strong>
+                            </p>
+                            <div class="text">
+                              <span class="title">Программа</span>
+                              <span>{{ review.rating['program'][0] }}
+                                <span class="tooltip">
+                                  Полученные знания, навыки будут использованы мною
+                                  в рабочей практике
+                                </span>
+                              </span>
+                              <span>{{ review.rating['program'][1] }}</span>
+                              <span>{{ review.rating['program'][2] }}</span>
+                            </div>
+                            <div class="text">
+                              <span class="title">Преподаватель</span>
+                              <span>{{ review.rating['teacher'][0] }}
+                                <span class="tooltip">
+                                  Полученные знания, навыки будут использованы мною
+                                  в рабочей практике
+                                </span>
+                              </span>
+                            </div>
+                            <div class="text">
+                              <span class="title">Организация обучения</span>
+                              <span>{{ review.rating['organization'][0] }}</span>
+                              <span>{{ review.rating['organization'][1] }}</span>
+                            </div>
                           </div>
                         </div>
-                        <div class="comment">
-                          <p class="text">
-                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
-                            настоящий знаток своего дела. Получил не только знания и навыки,
-                            но и массу впечатлений!
-                          </p>
-                        </div>
-                      </div>
-                      <div class="value">
-                        <p class="text">
-                          <i class="icon-star"></i>
-                          Средняя оценка: <strong class="accent">4.7</strong>
-                        </p>
-                        <div class="text">
-                          <span class="title">Программа</span>
-                          <span>
-                                                            5
-                                                            <span class="tooltip">
-                                                                Полученные знания, навыки будут использованы мною
-                                                                в рабочей практике
-                                                            </span>
-                                                        </span>
 
-                          <span>5</span>
-                          <span>4</span>
-                        </div>
-                        <div class="text">
-                          <span class="title">Преподаватель</span>
-                          <span>
-                                                            5
-                                                            <span class="tooltip">
-                                                                Полученные знания, навыки будут использованы мною
-                                                                в рабочей практике
-                                                            </span>
-                                                        </span>
-                        </div>
-                        <div class="text">
-                          <span class="title">Организация обучения</span>
-                          <span>5
-                                                        </span>
-                          <span>4</span>
-                        </div>
-
-                      </div>
-                    </div>
-                    <div class="answer">
-                      <span class="right-arrow"></span>
-                      <div class="information">
-                        <div class="top">
-                          <img class="rounded" src="/img/photo.jpg" alt="">
-                          <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">Ермакова Валентина</span>
-                            <span class="date">22 авг 2020,  12:35</span>
+                        {% if review.answer is not null %}
+                          <div class="answer">
+                            <span class="right-arrow"></span>
+                            <div class="information">
+                              <div class="top">
+                                <img class="rounded" src="/img/photo.jpg" alt="">
+                                <div class="d-flex w-100 j-c-space-between mt-10">
+                                  <span class="name">{{ program.author.userInfo.fullName }}</span>
+                                  <span class="date">{{ review.answerDate|date('d m Y i:g') }}</span>
+                                </div>
+                              </div>
+                              <div class="comment">
+                                <p class="text">Большое спасибо за вашу оценку!</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="comment">
-                          <p class="text">
-                            Большое спасибо за вашу оценку!
-                          </p>
-                        </div>
+                        {% endif %}
                       </div>
-                    </div>
-                  </div>
-                  <div class="reviews">
-                    <div class="container-0">
-                      <div class="information">
-                        <div class="top">
-                          <img class="rounded" src="/img/photo.jpg" alt="">
-                          <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">Викторов Тимофей</span>
-                            <span class="date">22 авг 2020,  12:35</span>
-                          </div>
-                        </div>
-                        <div class="comment">
-                          <p class="text">
-                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
-                            настоящий знаток своего дела. Получил не только знания и навыки,
-                            но и массу впечатлений!
-                          </p>
-                        </div>
-                      </div>
-                      <div class="value">
-                        <p class="text">
-                          <i class="icon-star"></i>
-                          Средняя оценка: <strong class="accent">4.7</strong>
-                        </p>
-                        <div class="text">
-                          <span class="title">Программа</span>
-                          <span>
-                                                            5
-                                                            <span class="tooltip">
-                                                                Полученные знания, навыки будут использованы мною
-                                                                в рабочей практике
-                                                            </span>
-                                                        </span>
-
-                          <span>5</span>
-                          <span>4</span>
-                        </div>
-                        <div class="text">
-                          <span class="title">Преподаватель</span>
-                          <span>
-                                                            5
-                                                            <span class="tooltip">
-                                                                Полученные знания, навыки будут использованы мною
-                                                                в рабочей практике
-                                                            </span>
-                                                        </span>
-                        </div>
-                        <div class="text">
-                          <span class="title">Организация обучения</span>
-                          <span>5
-                                                        </span>
-                          <span>4</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    {% endfor %}
+                  {% endif %}
                 </div>
               </div>
               <div class="col-lg-12 no-gutter">
-                <div class="pagination mt-40">
-                  <a href="#">
-                    <span class="prev"></span>
-                  </a>
-                  <a href="#">1</a>
-                  <a class="active" href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a>
-                  <a href="#">
-                    <span class="next"></span>
-                  </a>
+                <div class="mt-40">
+                  {% include 'components/paginator.html.twig' with {
+                    page: reviews.page,
+                    total_pages: reviews.total_pages,
+                    path_name: 'program.view'
+                  } %}
                 </div>
               </div>
               <div class="container-0 j-c-center mt-40">
@@ -396,85 +296,105 @@
               </div>
             </div>
           </div>
+
           <div class="box-sidebar show">
             <div class="container-0">
               <div class="col-lg-12 pr-0">
                 <div class="price-block">
                   <div class="price">
-                    <span class="price-old">148 000 р.</span>
-                    <span class="price-new">124 000 р.</span>
+                    {% if program.oldPrice is not null and program.showPriceReduction %}
+                      <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
+                      <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                    {% else %}
+                      <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                    {% endif %}
                     <a href="#">Узнать о скидках/акциях</a>
                   </div>
                   <div class="button">
                     <button class="button-blue">Подать заявку</button>
                   </div>
                 </div>
+
                 <div class="card-shadow pl-45">
                   <p class="text">
                     <i class="icon-book"></i>
                     <span>Продолжительность обучения:</span>
-                    <strong class="blue">125 дней</strong>
+                    <strong class="blue">{{ additional.duration }}</strong>
                   </p>
+
                   <p class="text">
                     <i class="icon-square"></i>
                     <span>Формат обучения:</span>
-                    <strong class="blue">Заочная форма обучения
-                    </strong>
+                    <strong class="blue">{{ additional.format }}</strong>
                   </p>
+
+
                   <p class="text">
                     <i class="icon-student"></i>
                     <span>Уровень:</span>
                     <strong class="blue">Начальный</strong>
                   </p>
+
                   <p class="text">
                     <i class="icon-calendar-2"></i>
                     <span>Даты обучения:</span>
                     <strong class="blue"> 13 апреля - 25 сентября
                     </strong>
                   </p>
+
                   <p class="text">
                     <i class="icon-clock"></i>
                     <span>Режим занятий:</span>
                     <strong class="blue">Будни, с 18:00 до 20:00</strong>
                   </p>
-                  <p class="text">
-                    <i class="icon-place"></i>
-                    <span>Место проведения:</span>
-                    <strong class="blue"> Москва, ул. Петровская, д.45, аудитория 125
-                    </strong>
-                  </p>
+
+
+                  {% if program.location|length > 0 %}
+                    <p class="text">
+                      <i class="icon-place"></i>
+                      <span>Место проведения:</span>
+                      <strong class="blue">{{ program.location }}</strong>
+                    </p>
+                  {% endif %}
                 </div>
+
                 <div class="card-shadow">
                   <h5 class="result-title">Провайдеры обучения</h5>
-                  <div class="provider">
-                    <img src="/img/orig_(1).jpg" alt="">
-                    <a href="#">Институт системного анализа
-                      и управления Государственного университета «Дубна»</a>
-                  </div>
-                  <div class="provider">
-                    <img src="/img/orig_(1).jpg" alt="">
-                    <a href="#">Институт системного анализа
-                      и управления Государственного университета «Дубна»</a>
-                  </div>
+                  {% for provider in program.providers %}
+                    <div class="provider">
+                      <img src="{{ provider.image.publicPath }}" alt="">
+                      <a href="{{ path('provider.view', { id: provider.id }) }}" target="_blank">
+                        {{ provider.name }}
+                      </a>
+                    </div>
+                  {% endfor %}
                 </div>
-                <div class="card-shadow">
-                  <h5 class="result-title">Преподаватели</h5>
-                  <div class="teacher">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Кудряшова Елизавета Вячеславовна</span>
+
+                {% if program.teachers.count > 0 %}
+                  <div class="card-shadow">
+                    <h5 class="result-title">Преподаватели</h5>
+                    {% for teacher in program.teachers %}
+                      <div class="teacher">
+                        {% if teacher.photo is not null %}
+                          <img src="{{ teacher.photo.publicPath }}" alt="">
+                        {% endif %}
+                        <span>{{ teacher.name }}</span>
+                      </div>
+                    {% endfor %}
                   </div>
-                  <div class="teacher">
-                    <img src="/img/photo.jpg" alt="">
-                    <span>Кудряшова Елизавета Вячеславовна</span>
+                {% endif %}
+
+                {% if program.certificate is not null %}
+                  <div class="card-shadow">
+                    <h5 class="result-title">Выдаваемый документ</h5>
+                    <div class="cert">
+                      <span>{{ program.certificate.name }}</span>
+                      {% if program.certificate.image is not null %}
+                        <img src="{{ program.certificate.image.publicPath }}" alt="">
+                      {% endif %}
+                    </div>
                   </div>
-                </div>
-                <div class="card-shadow">
-                  <h5 class="result-title">Выдаваемый документ</h5>
-                  <div class="cert">
-                    <span>Диплом Государственного Образца</span>
-                    <img src="/img/cert.jpg" alt="">
-                  </div>
-                </div>
+                {% endif %}
               </div>
             </div>
           </div>
