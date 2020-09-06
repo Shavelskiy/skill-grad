@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Provider;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
 use App\Entity\User;
@@ -41,9 +42,11 @@ class Program
     public const OCCUPATION_MODE_ANYTIME = 'OCCUPATION_MODE_ANYTIME';
     public const OCCUPATION_MODE_TIME = 'OCCUPATION_MODE_TIME';
 
+    public const REAL_PRICE = 'REAL_PRICE';
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     protected User $author;
 
@@ -78,7 +81,7 @@ class Program
     protected Collection $locations;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected string $additionalInfo;
 
@@ -148,6 +151,12 @@ class Program
     public function getProviders()
     {
         return $this->providers;
+    }
+
+    public function addProvider(Provider $provider): self
+    {
+        $this->providers->add($provider);
+        return $this;
     }
 
     public function setProviders(array $providers): self

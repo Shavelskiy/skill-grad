@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait Listeners
 {
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     protected array $targetAudience;
 
@@ -17,7 +17,7 @@ trait Listeners
     protected ProgramLevel $level;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     protected array $preparation;
 
