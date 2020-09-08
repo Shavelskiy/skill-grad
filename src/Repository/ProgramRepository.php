@@ -33,6 +33,17 @@ class ProgramRepository extends ServiceEntityRepository
         $query
             ->addOrderBy('p.id', 'asc');
 
+        foreach ($searchQuery->getSearch() as $field => $value) {
+            switch ($field) {
+                case 'favoriteUsers':
+                    $query
+                        ->innerJoin('p.favoriteUsers', 'fu')
+                        ->andWhere('fu = :user')
+                        ->setParameter('user', $value);
+                    break;
+            }
+        }
+
         return (new Paginator())
             ->setQuery($query)
             ->setPageItems($searchQuery->getPageItemCount())

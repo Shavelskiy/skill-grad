@@ -1,6 +1,6 @@
 <div class="card">
   {% if additional.discount is not null %}
-  <span class="icon discount"></span>
+    <span class="icon discount"></span>
   {% endif %}
   <div class="card__header">
     <div class="card__header-icon">
@@ -29,6 +29,14 @@
           <i class="icon-star"></i>
           <span class="info-text">4.2</span>
         </div>
+
+        {% if favorite is defined %}
+          <div class="favorites">
+            <div data-tippy-content="В избранном" class="like">
+              <i class="icon-love-red"></i>
+            </div>
+          </div>
+        {% endif %}
       </div>
     </div>
     <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">

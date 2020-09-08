@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Service;
+namespace App\Twig;
 
 use App\Entity\Program\Program;
 use App\Repository\ProgramAdditionalRepository;
 use App\Repository\ProgramFormatRepository;
 use App\Repository\ProgramIncludeRepository;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ProgramService
+class ProgramExtension extends AbstractExtension
 {
     protected ProgramFormatRepository $programFormatRepository;
     protected ProgramIncludeRepository $programIncludeRepository;
@@ -23,7 +25,14 @@ class ProgramService
         $this->programAdditionalRepository = $programAdditionalRepository;
     }
 
-    public function prepareProgramCard(Program $program): array
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('programAdditional', [$this, 'programAdditional']),
+        ];
+    }
+
+    public function programAdditional(Program $program): array
     {
         return [
             'format' => $this->prepareProgramFormat($program->getFormat()),

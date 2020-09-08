@@ -1,6 +1,13 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('program.view') }}
+{% endblock %}
+
 {% set title = program.name %}
+
+{% set additional = programAdditional(program) %}
 
 {% block body %}
   <div class="container">
@@ -49,10 +56,10 @@
                 </ul>
               </div>
               <div class="buttons">
-                <div data-tippy-content="Добавить в избранное" id="add-favorite" class="button-container">
-                  <i class="icon-heart"></i>
+                <div class="button-container">
+                  <i class="{{ is_favorite ? 'icon-love-red' : 'icon-heart' }} add-program-favorites" data-id="{{ program.id }}"></i>
                 </div>
-                <div id="add-compare" data-tippy-content="Добавить к сравнению" class="button-container">
+                <div class="button-container">
                   <i class="icon-add-file"></i>
                 </div>
               </div>
@@ -402,4 +409,15 @@
       </div>
     </div>
   </div>
+
+{% endblock %}
+
+{% block modals %}
+  {{ parent() }}
+  {% include 'components/modals/add.favorite.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('program.view') }}
 {% endblock %}

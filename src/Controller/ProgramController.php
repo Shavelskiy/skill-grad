@@ -6,7 +6,7 @@ use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramReviewsRepository;
-use App\Service\ProgramService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -21,16 +21,13 @@ class ProgramController extends AbstractController
     protected const PAGE_REVIEWS_COUNT = 5;
 
     protected ProgramRepository $programRepository;
-    protected ProgramService $programService;
     protected ProgramReviewsRepository $programReviewsRepository;
 
     public function __construct(
         ProgramRepository $programRepository,
-        ProgramService $programService,
         ProgramReviewsRepository $programReviewsRepository
     ) {
         $this->programRepository = $programRepository;
-        $this->programService = $programService;
         $this->programReviewsRepository = $programReviewsRepository;
     }
 
@@ -48,18 +45,8 @@ class ProgramController extends AbstractController
 
         $searchResult = $this->programRepository->getPaginatorResult($query);
 
-        $programs = [];
-
-        /** @var Program $program */
-        foreach ($searchResult->getItems() as $program) {
-            $programs[] = [
-                'item' => $program,
-                'additional' => $this->programService->prepareProgramCard($program),
-            ];
-        }
-
         return $this->render('program/index.html.twig', [
-            'programs' => $programs,
+            'programs' => $searchResult->getItems(),
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
         ]);
@@ -80,9 +67,14 @@ class ProgramController extends AbstractController
         $searchResult = $this->programReviewsRepository->getPaginatorResult($query);
         $reviews = $searchResult->getItems();
 
+        $isFavorite = false;
+
+        if ($this->getUser()) {
+            $isFavorite = $this->getUser()->getFavoritePrograms()->contains($program);
+        }
         return $this->render('program/view.html.twig', [
             'program' => $program,
-            'additional' => $this->programService->prepareProgramCard($program),
+            'is_favorite' => $isFavorite,
             'reviews' => [
                 'items' => $reviews,
                 'page' => $searchResult->getCurrentPage(),

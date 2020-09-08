@@ -61,6 +61,11 @@ class Provider
     protected Collection $locations;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\Program", mappedBy="providers")
+     */
+    protected Collection $programs;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\ProviderRequisites", mappedBy="provider", cascade={"persist", "remove"}, fetch="EAGER")
      */
     protected ?ProviderRequisites $providerRequisites;
@@ -191,6 +196,17 @@ class Provider
             }
         }
 
+        return $this;
+    }
+
+    public function getPrograms(): Collection
+    {
+        return $this->programs;
+    }
+
+    public function setPrograms(Collection $programs): self
+    {
+        $this->programs = $programs;
         return $this;
     }
 

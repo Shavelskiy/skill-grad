@@ -26,6 +26,8 @@ Encore
   .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index/index.js')
 
+  .addEntry('program.view', './assets/pages/program/view.js')
+
   .addEntry('provider.index', './assets/pages/provider/index.js')
   .addEntry('provider.view', './assets/pages/provider/view.js')
 

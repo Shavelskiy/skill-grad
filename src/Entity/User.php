@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Program\Program;
 use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -69,9 +70,15 @@ class User implements UserInterface
      */
     protected Collection $favoriteProviders;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\Program", inversedBy="favoriteUsers")
+     */
+    protected Collection $favoritePrograms;
+
     public function __construct()
     {
         $this->favoriteProviders = new ArrayCollection();
+        $this->favoritePrograms = new ArrayCollection();
     }
 
     public function getUsername(): string
@@ -191,8 +198,25 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFavoritePrograms()
+    {
+        return $this->favoritePrograms;
+    }
+
+    public function setFavoritePrograms($favoritePrograms): self
+    {
+        $this->favoritePrograms = $favoritePrograms;
+        return $this;
+    }
+
+    public function addFavoriteProgram(Program $favoriteProgram): self
+    {
+        $this->favoritePrograms->add($favoriteProgram);
+        return $this;
+    }
+
     public function getFavoriteCount(): int
     {
-        return $this->favoriteProviders->count();
+        return $this->favoriteProviders->count() + $this->favoritePrograms->count();
     }
 }

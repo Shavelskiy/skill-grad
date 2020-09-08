@@ -73,7 +73,7 @@ class AuthController extends AbstractController
 
             return new JsonResponse(['message' => 'На ваш email отправлено письмо']);
         } catch (Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage()], 400);
+            return new JsonResponse(['message' => 'Произошла ошибка'], 400);
         }
     }
 
@@ -103,7 +103,7 @@ class AuthController extends AbstractController
 
             return new JsonResponse(['message' => 'Ваш пароль успешно сменен']);
         } catch (Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage()], 400);
+            return new JsonResponse(['message' => 'Произошла ошибка'], 400);
         }
     }
 
@@ -133,7 +133,7 @@ class AuthController extends AbstractController
 
             return new JsonResponse(['message' => 'На ваш email отправлено письмо с подтверждением']);
         } catch (Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage()], 400);
+            return new JsonResponse(['message' => 'Произошла ошибка'], 400);
         }
     }
 }

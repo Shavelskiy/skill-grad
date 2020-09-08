@@ -1,4 +1,5 @@
-import { addProviderToFavorite } from '../../components/favorite'
+import {addProviderToFavorite} from '../../components/favorite'
+import {insertParam} from '../../helpers/location-helper';
 
 const tabProviders = document.querySelector('.tab-providers')
 const tabPrograms = document.querySelector('.tab-programs')
@@ -8,6 +9,7 @@ const navProviders = document.querySelector('.nav-item-providers')
 const navPrograms = document.querySelector('.nav-item-programs')
 const navArticles = document.querySelector('.nav-item-articles')
 
+
 const initNavClick = (nav) => {
   nav.onclick = () => {
     if (nav.classList.contains('active')) {
@@ -16,6 +18,7 @@ const initNavClick = (nav) => {
 
     switch (nav) {
       case navProviders:
+        insertParam('tab', 'providers')
         navPrograms.classList.remove('active')
         navArticles.classList.remove('active')
 
@@ -23,9 +26,9 @@ const initNavClick = (nav) => {
         tabArticles.classList.remove('active')
 
         tabProviders.classList.add('active')
-
         break
       case navPrograms:
+        insertParam('tab', 'programs')
         navProviders.classList.remove('active')
         navArticles.classList.remove('active')
 
@@ -33,9 +36,9 @@ const initNavClick = (nav) => {
         tabArticles.classList.remove('active')
 
         tabPrograms.classList.add('active')
-
         break
       case navArticles:
+        insertParam('tab', 'articles')
         navProviders.classList.remove('active')
         navPrograms.classList.remove('active')
 
@@ -43,7 +46,6 @@ const initNavClick = (nav) => {
         tabPrograms.classList.remove('active')
 
         tabArticles.classList.add('active')
-
         break
     }
 

@@ -19,24 +19,28 @@
       <div class="col-lg-12">
         <div class="main_favorites mt-0">
           <h2 class="title">{{ title }}</h2>
-          <div class="alert red">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            Некоторые избранные вами программы были удалены провайдером
-          </div>
+{#          <div class="alert red">#}
+{#            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>#}
+{#            Некоторые избранные вами программы были удалены провайдером#}
+{#          </div>#}
           <div class="container">
             <div class="tab">
               <div class="toggle-menu tab__nav">
                 <ul class="nav">
-                  <li class="toggle-item nav-item nav-item-providers active">Провайдеры обучения
-                    ({{ providers.total_count }})
+                  <li class="toggle-item nav-item nav-item-providers {{ tab == 'providers' ? 'active' : '' }}">
+                    Провайдеры обучения ({{ providers.total_count }})
                   </li>
-                  <li class="toggle-item nav-item nav-item-programs">Программы обучения (6)</li>
-                  <li class="toggle-item nav-item nav-item-articles">Статьи (72)</li>
+                  <li class="toggle-item nav-item nav-item-programs {{ tab == 'programs' ? 'active' : '' }}">
+                    Программы обучения ({{ programs.total_count }})
+                  </li>
+                  <li class="toggle-item nav-item nav-item-articles {{ tab == 'articles' ? 'active' : '' }}">
+                    Статьи (72)
+                  </li>
                 </ul>
                 <i class="icon-down-arrow"></i>
               </div>
               <div class="tab__content">
-                <div class="tab__content-item tab-providers active">
+                <div class="tab__content-item tab-providers {{ tab == 'providers' ? 'active' : '' }}">
                   <div class="col-lg-12 col-sm-4">
                     {% if providers.items|length > 0 %}
                       {% for provider in providers.items %}
@@ -59,215 +63,33 @@
                     } %}
                   </div>
                 </div>
-                <div class="tab__content-item tab-programs">
+
+                <div class="tab__content-item tab-programs {{ tab == 'programs' ? 'active' : '' }}">
                   <div class="col-lg-12 col-sm-4">
-                    <div class="card">
-                      <span
-                        data-tippy-content="Провайдер готов предоставить дополнительную скидку при заказе через наш сайт"
-                        class="icon discount"></span>
-                      <div class="card__header">
-                        <div class="card__header-icon">
-                          <img src="/img/head__icon.png" alt="">
-                        </div>
-                        <span class="card__header-title">Центр компьютерного обучения
-													«Специалист» при МГТУ им. Н.Э. Баумана</span>
-                      </div>
-                      <div class="card__body">
-                        <a href="/pages/card-program.html" class="card__body-title">Прикладная математика и экономика
-                          (совместно с МФТИ)</a>
-                        <div class="card__body-description">
-                          Как провести анализ и выявить проблемы существующей системы вознаграждения персонала (проблемы
-                          в управлении и мотивации сотрудников. Главная задача: подготовка квалифицированных
-                          специалистов, способных вести проектирование и разработку новых экономических прикладных
-                          про... и информационных систем, осуще... внедрение в эксплуатацию и развитие существующих
-                          систем в бизнесе и государственном управлении. Области применения знаний — экономика,
-                          энергетика, государственное управление, страхование, банковская и инвестиционная деятельность.
-                        </div>
-                      </div>
-                      <div class="card__footer">
-                        <div class="col-lg-7 col-md-6 col-sm-4 no-gutter">
-                          <div class="card__footer-info">
-                            <div class="info">
-                              <i class="icon-book"></i>
-                              <span class="info-text">Очная, заочная, <br/>дистанционная</span>
-                            </div>
-                            <div class="time">
-                              <i class="icon-clock"></i>
-                              <span class="info-text">5 месяцев</span>
-                            </div>
-                            <div class="star">
-                              <i class="icon-star"></i>
-                              <span class="info-text">4.2</span>
-                            </div>
-                            <div class="favorites">
-                              <div data-tippy-content="В избранном" id="button-like" class="like">
-                                <i class="icon-love-red"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">
-                          <div class="card__footer-price">
-                            <span class="price-old">148 000 р.</span>
-                            <span class="price-new">124 000 р.</span>
-                          </div>
-                          <div class="card__footer-button">
-                            <button class="button-blue">
-                              Заказать
-                            </button>
-                          </div>
-                          <div class="card__footer-add">
-                        <span class="tooltip">
-                        	Добавить в сравнение
-                        </span>
-                            <i class="icon-add-file"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <span
-                        data-tippy-content="Провайдер готов предоставить дополнительную скидку при заказе через наш сайт"
-                        class="icon discount"></span>
-                      <div class="card__header">
-                        <div class="card__header-icon">
-                          <img src="/img/head__icon.png" alt="">
-                        </div>
-                        <span class="card__header-title">Центр компьютерного обучения
-													«Специалист» при МГТУ им. Н.Э. Баумана</span>
-                      </div>
-                      <div class="card__body">
-                        <a href="/pages/card-program.html" class="card__body-title">Прикладная математика и экономика
-                          (совместно с МФТИ)</a>
-                        <div class="card__body-description">
-                          Как провести анализ и выявить проблемы существующей системы вознаграждения персонала (проблемы
-                          в управлении и мотивации сотрудников. Главная задача: подготовка квалифицированных
-                          специалистов, способных вести проектирование и разработку новых экономических прикладных
-                          про... и информационных систем, осуще... внедрение в эксплуатацию и развитие существующих
-                          систем в бизнесе и государственном управлении. Области применения знаний — экономика,
-                          энергетика, государственное управление, страхование, банковская и инвестиционная деятельность.
-                        </div>
-                      </div>
-                      <div class="card__footer">
-                        <div class="col-lg-7 col-md-6 col-sm-4 no-gutter">
-                          <div class="card__footer-info">
-                            <div class="info">
-                              <i class="icon-book"></i>
-                              <span class="info-text">Очная, заочная, <br/>дистанционная</span>
-                            </div>
-                            <div class="time">
-                              <i class="icon-clock"></i>
-                              <span class="info-text">5 месяцев</span>
-                            </div>
-                            <div class="star">
-                              <i class="icon-star"></i>
-                              <span class="info-text">4.2</span>
-                            </div>
-                            <div class="favorites">
-                              <div data-tippy-content="В избранном" class="like">
-                                <i class="icon-love-red"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">
-                          <div class="card__footer-price">
-                            <span class="price-text">124 000 р.</span>
-                          </div>
-                          <div class="card__footer-button">
-                            <button class="button-blue">
-                              Заказать
-                            </button>
-                          </div>
-                          <div class="card__footer-add">
-                        <span class="tooltip">
-                        	Добавить в сравнение
-                        </span>
-                            <i class="icon-add-file"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card non-active">
-                      <div class="card__header">
-                        <div class="card__header-icon">
-                          <img src="/img/head__icon.png" alt="">
-                        </div>
-                        <span class="card__header-title">Центр компьютерного обучения
-													«Специалист» при МГТУ им. Н.Э. Баумана</span>
-                      </div>
-                      <div class="card__body">
-                        <h4 class="card__body-title">Прикладная математика и экономика (совместно с МФТИ)</h4>
-                        <div class="card__body-description">
-                          Как провести анализ и выявить проблемы существующей системы вознаграждения персонала (проблемы
-                          в управлении и мотивации сотрудников. Главная задача: подготовка квалифицированных
-                          специалистов, способных вести проектирование и разработку новых экономических прикладных
-                          про... и информационных систем, осуще... внедрение в эксплуатацию и развитие существующих
-                          систем в бизнесе и государственном управлении. Области применения знаний — экономика,
-                          энергетика, государственное управление, страхование, банковская и инвестиционная деятельность.
-                        </div>
-                      </div>
-                      <div class="card__footer">
-                        <div class="col-lg-7 col-md-6 col-sm-4 no-gutter">
-                          <div class="card__footer-info">
-                            <div class="info">
-                              <i class="icon-book"></i>
-                              <span class="info-text">Очная, заочная, <br/>дистанционная</span>
-                            </div>
-                            <div class="time">
-                              <i class="icon-clock"></i>
-                              <span class="info-text">5 месяцев</span>
-                            </div>
-                            <div class="star">
-                              <i class="icon-star"></i>
-                              <span class="info-text">4.2</span>
-                            </div>
-                            <div class="favorites">
-                              <div class="like">
-                                <i class="icon-love-red"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">
-                          <div class="card__footer-price">
-                            <span class="price-old">148 000 р.</span>
-                            <span class="price-new">124 000 р.</span>
-                          </div>
-                          <div class="card__footer-button">
-                            <button class="button-blue">
-                              Заказать
-                            </button>
-                          </div>
-                          <div class="card__footer-add">
-                        <span class="tooltip">
-                        	Добавить в сравнение
-                        </span>
-                            <i class="icon-add-file"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {% if programs.items|length > 0 %}
+                      {% for program in programs.items %}
+                        {% include 'program/card-program.html.twig' with {
+                          program: program,
+                          additional: programAdditional(program),
+                          favorite: true
+                        } %}
+                      {% endfor %}
+                    {% else %}
+                      <h5>В избранном пока нет программ!</h5>
+                    {% endif %}
                   </div>
 
                   <div class="col-lg-12">
-                    <div class="pagination">
-                      <a href="#">
-                        <span class="prev"></span>
-                      </a>
-                      <a href="#">1</a>
-                      <a class="active" href="#">2</a>
-                      <a href="#">3</a>
-                      <a href="#">4</a>
-                      <a href="#">5</a>
-                      <a href="#">6</a>
-                      <a href="#">
-                        <span class="next"></span>
-                      </a>
-                    </div>
+                    {% include 'components/paginator.html.twig' with {
+                      page: programs.page,
+                      total_pages: programs.total_pages,
+                      path_name: 'app.favorite',
+                      page_key: 'program_page'
+                    } %}
                   </div>
                 </div>
-                <div class="tab__content-item tab-articles">
+
+                <div class="tab__content-item tab-articles {{ tab == 'articles' ? 'active' : '' }}">
                   <div class="card-blog">
                     <div class="card-container">
                       <div class="card-img">

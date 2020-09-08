@@ -65,7 +65,7 @@ class Program
     protected Collection $teachers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Provider")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="programs")
      */
     protected Collection $providers;
 
@@ -99,6 +99,11 @@ class Program
      */
     protected ?string $additionalInfo;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="favoritePrograms", fetch="LAZY")
+     */
+    protected Collection $favoriteUsers;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -109,6 +114,7 @@ class Program
         $this->requests = new ArrayCollection();
         $this->questions = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->favoriteUsers = new ArrayCollection();
     }
 
     public function getAuthor(): User

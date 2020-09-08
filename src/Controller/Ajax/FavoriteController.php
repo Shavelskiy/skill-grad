@@ -2,8 +2,10 @@
 
 namespace App\Controller\Ajax;
 
+use App\Entity\Program\Program;
 use App\Entity\Provider;
 use App\Entity\User;
+use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -21,19 +23,22 @@ class FavoriteController extends AbstractController
 {
     protected EntityManagerInterface $entityManager;
     protected ProviderRepository $providerRepository;
+    protected ProgramRepository $programRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        ProviderRepository $providerRepository
+        ProviderRepository $providerRepository,
+        ProgramRepository $programRepository
     ) {
         $this->entityManager = $entityManager;
         $this->providerRepository = $providerRepository;
+        $this->programRepository = $programRepository;
     }
 
     /**
      * @Route("/provider", name="ajax.provider.favorite", methods={"POST"})
      */
-    public function favoriteAction(Request $request): Response
+    public function favoriteProviderAction(Request $request): Response
     {
         try {
             /** @var Provider $provider */
@@ -46,15 +51,15 @@ class FavoriteController extends AbstractController
             /** @var User $user */
             $user = $this->getUser();
 
-            $isRemove = $user->getFavoriteProviders()->contains($provider);
+            $favoriteProviders = $user->getFavoriteProviders();
 
-            if ($user->getFavoriteProviders()->contains($provider)) {
-                $favoriteProviders = $user->getFavoriteProviders();
+            $isRemove = $favoriteProviders->contains($provider);
+
+            if ($isRemove) {
                 $favoriteProviders->removeElement($provider);
                 $user->setFavoriteProviders($favoriteProviders);
 
                 $this->entityManager->persist($user);
-                $this->entityManager->flush();
             } else {
                 $user->addFavoriteProvider($provider);
             }
@@ -68,6 +73,47 @@ class FavoriteController extends AbstractController
             ]);
         } catch (Exception $e) {
             return new JsonResponse(['message' => 'Произошла ошибка при добавлении провайдера в избранное'], 400);
+        }
+    }
+
+    /**
+     * @Route("/program", name="ajax.program.favorite", methods={"POST"})
+     */
+    public function favoriteProgramAction(Request $request): Response
+    {
+        try {
+            /** @var Program $program */
+            $program = $this->programRepository->find($request->get('id'));
+
+            if ($program === null) {
+                throw new RuntimeException('');
+            }
+
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $favoritePrograms = $user->getFavoritePrograms();
+
+            $isRemove = $favoritePrograms->contains($program);
+
+            if ($isRemove) {
+                $favoritePrograms->removeElement($program);
+                $user->setFavoritePrograms($favoritePrograms);
+
+                $this->entityManager->persist($user);
+            } else {
+                $user->addFavoriteProgram($program);
+            }
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return new JsonResponse([
+                'message' => !$isRemove ? 'Программа успешно добавлена в избранное' : 'Программа успешно убрана из избранного',
+                'isAdded' => !$isRemove,
+            ]);
+        } catch (Exception $e) {
+            return new JsonResponse(['message' => 'Произошла ошибка при добавлении программы в избранное'], 400);
         }
     }
 }
