@@ -89,7 +89,7 @@ class StaticController extends AbstractController
         $programSearchResult = $this->programRepository->getPaginatorResult($programQuery);
 
         return $this->render('static/favorite.html.twig', [
-            'tab' => $this->getFavoriteCurrentTab($request->get('tab')),
+            'tab' => $this->getFavoriteCurrentTab($request->get('tab', '')),
             'providers' => [
                 'items' => $providerSearchResult->getItems(),
                 'page' => $providerSearchResult->getCurrentPage(),
