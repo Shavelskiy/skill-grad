@@ -2,6 +2,7 @@
 
 namespace App\Entity\Program;
 
+use App\Entity\Category;
 use App\Entity\Provider;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
@@ -152,6 +153,15 @@ class Program
                 $this->categories->add($category);
             }
         }
+        return $this;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
         return $this;
     }
 
