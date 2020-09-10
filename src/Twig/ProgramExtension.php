@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Repository\ProgramAdditionalRepository;
 use App\Repository\ProgramFormatRepository;
@@ -29,6 +30,7 @@ class ProgramExtension extends AbstractExtension
     {
         return [
             new TwigFunction('programAdditional', [$this, 'programAdditional']),
+            new TwigFunction('programCategories', [$this, 'programCategories']),
         ];
     }
 
@@ -143,6 +145,31 @@ class ProgramExtension extends AbstractExtension
 
         if (!empty($data['other_value'])) {
             $result[] = $data['other_value'];
+        }
+
+        return $result;
+    }
+
+    public function programCategories(Program $program): array
+    {
+        $result = [];
+
+        /** @var Category $category */
+        foreach ($program->getCategories() as $category) {
+            $parentCategory = $category->getParentCategory();
+
+            if ($parentCategory === null) {
+                continue;
+            }
+
+            if (!isset($result[$parentCategory->getId()])) {
+                $result[$parentCategory->getId()] = [
+                    'item' => $parentCategory,
+                    'childItems' => [],
+                ];
+            }
+
+            $result[$parentCategory->getId()]['childItems'][] = $category;
         }
 
         return $result;

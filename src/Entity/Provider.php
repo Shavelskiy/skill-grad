@@ -46,14 +46,14 @@ class Provider
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
-     * @ORM\JoinTable(name="provider_categroy_group")
      */
-    protected Collection $categoryGroups;
+    protected Collection $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     * @ORM\JoinTable(name="provider_categroy_additions")
      */
-    protected Collection $categories;
+    protected Collection $additionalCategories;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Location")
@@ -77,7 +77,7 @@ class Provider
 
     public function __construct()
     {
-        $this->categoryGroups = new ArrayCollection();
+        $this->additionalCategories = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->locations = new ArrayCollection();
     }
@@ -148,26 +148,9 @@ class Provider
         return $this;
     }
 
-    public function getCategoryGroups(): array
+    public function getCategories(): Collection
     {
-        return $this->categoryGroups->toArray();
-    }
-
-    public function setCategoryGroups(array $categoryGroups): self
-    {
-        $this->categoryGroups->clear();
-        foreach ($categoryGroups as $categoryGroup) {
-            if (!$this->categoryGroups->contains($categoryGroup)) {
-                $this->categoryGroups->add($categoryGroup);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getCategories(): array
-    {
-        return $this->categories->toArray();
+        return $this->categories;
     }
 
     public function setCategories(array $categories): self
@@ -181,6 +164,42 @@ class Provider
 
         return $this;
     }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function getAdditionalCategories(): Collection
+    {
+        return $this->additionalCategories;
+    }
+
+    public function setAdditionalCategories(array $categories): self
+    {
+        $this->additionalCategories->clear();
+        foreach ($categories as $category) {
+            if (!$this->additionalCategories->contains($category)) {
+                $this->additionalCategories->add($category);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addAdditionalCategory(Category $category): self
+    {
+        if (!$this->additionalCategories->contains($category)) {
+            $this->additionalCategories->add($category);
+        }
+
+        return $this;
+    }
+
 
     public function getLocations(): array
     {

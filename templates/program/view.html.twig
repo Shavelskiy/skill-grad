@@ -8,6 +8,7 @@
 {% set title = program.name %}
 
 {% set additional = programAdditional(program) %}
+{% set categories = programCategories(program) %}
 
 {% block body %}
   <div class="container">
@@ -48,7 +49,7 @@
                     <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
                   </li>
                   <li>
-                    <a href="#"><img src="/img/svg/odnoklassniki.svg" alt=""></a>
+                    <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
                   </li>
                   <li>
                     <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
@@ -57,7 +58,8 @@
               </div>
               <div class="buttons">
                 <div class="button-container">
-                  <i class="{{ is_favorite ? 'icon-love-red' : 'icon-heart' }} add-program-favorites" data-id="{{ program.id }}"></i>
+                  <i class="{{ is_favorite ? 'icon-love-red' : 'icon-heart' }} add-program-favorites"
+                     data-id="{{ program.id }}"></i>
                 </div>
                 <div class="button-container">
                   <i class="icon-add-file"></i>
@@ -72,13 +74,20 @@
             <div class="container-0">
               <div class="col-lg-12 pl-0">
 
-                <h5 class="result-title mt-0">Категории программы обучения</h5>
-                <p class="text"><span class="blue">1. Архитектура и строительство:</span> архитектура</p>
-                <p class="text"><span class="blue">2. Информационные технологии:</span> ИТ-менеджмент / программирование
-                  / системное
-                  администрирование</p>
-                <p class="text"><span class="blue">3. Природопользование и экология:</span> геология и разведка полезных
-                  ископаемых / гидрометеорология</p>
+                {% if categories|length > 0 %}
+                  <h5 class="result-title mt-0">Категории программы обучения</h5>
+
+                  {% set i = 0 %}
+                  {% for category in categories %}
+                    {% set i = i + 1 %}
+                    <p class="text">
+                      <span class="blue">
+                        {{ i }}. {{ category.item.name }}:
+                      </span>
+                      {{ category.childItems|map(item => item.name)|join(', ') }}
+                    </p>
+                  {% endfor %}
+                {% endif %}
 
                 <h5 class="result-title">Аннотация программы</h5>
                 <p class="text">{{ program.annotation }}</p>
@@ -238,8 +247,7 @@
                               <span class="title">Программа</span>
                               <span>{{ review.rating['program'][0] }}
                                 <span class="tooltip">
-                                  Полученные знания, навыки будут использованы мною
-                                  в рабочей практике
+                                  Полученные знания, навыки будут использованы мною в рабочей практике
                                 </span>
                               </span>
                               <span>{{ review.rating['program'][1] }}</span>
@@ -249,8 +257,7 @@
                               <span class="title">Преподаватель</span>
                               <span>{{ review.rating['teacher'][0] }}
                                 <span class="tooltip">
-                                  Полученные знания, навыки будут использованы мною
-                                  в рабочей практике
+                                  Полученные знания, навыки будут использованы мною в рабочей практике
                                 </span>
                               </span>
                             </div>

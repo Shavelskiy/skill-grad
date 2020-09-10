@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% set title = provider.name %}
+{% set categories = providerCategories(provider) %}
 
 {% block body %}
   <div class="container">
@@ -61,32 +62,36 @@
                 <div class="content">
                   <h4 class="result-title">Об учебном заведении</h4>
                   <p>{{ provider.description }}</p>
-                  <h4 class="result-title">Основные категории</h4>
-                  <p class="blue">
-                    <strong>1. Архитектура и строительство архитектура</strong>
-                  </p>
-                  <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
-                  <p class="blue">
-                    <strong>2. Информационные технологииИТ-менеджмент</strong>
-                  </p>
-                  <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
-                  <p class="blue">
-                    <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
-                  </p>
-                  <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
-                  <h4 class="result-title">Дополнительные категории</h4>
-                  <p class="blue">
-                    <strong>1. Архитектура и строительство архитектура</strong>
-                  </p>
-                  <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
-                  <p class="blue">
-                    <strong>2. Информационные технологииИТ-менеджмент</strong>
-                  </p>
-                  <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
-                  <p class="blue">
-                    <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
-                  </p>
-                  <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
+
+                  {% if categories.main|length > 0 %}
+                    <h4 class="result-title">Основные категории</h4>
+                    {% set i = 0 %}
+                    {% for category in categories.main %}
+                      {% set i = i + 1 %}
+                      <p class="blue">
+                        <strong>{{ i }}. {{ category.item.name }}</strong>
+                      </p>
+                      <span class="text">
+                           {{ category.childItems|map(item => item.name)|join(' / ') }}
+                      </span>
+                    {% endfor %}
+                  {% endif %}
+
+                  {% if categories.additional|length > 0 %}
+                    <h4 class="result-title">Дополнительные категории</h4>
+                    <p class="blue">
+                      <strong>1. Архитектура и строительство архитектура</strong>
+                    </p>
+                    <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
+                    <p class="blue">
+                      <strong>2. Информационные технологииИТ-менеджмент</strong>
+                    </p>
+                    <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
+                    <p class="blue">
+                      <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
+                    </p>
+                    <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
+                  {% endif %}
 
                 </div>
               </div>

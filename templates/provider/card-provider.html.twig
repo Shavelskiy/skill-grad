@@ -13,25 +13,27 @@
   </div>
   <div class="card-catalog-content">
     {% if provider.description|length > 300 %}
-      <p class="text">{{ provider.description|slice(1, 300) }} ...</p>
+      <p class="text">{{ provider.description|slice(0, 300) }} ...</p>
     {% else %}
       <p class="text">{{ provider.description }}</p>
     {% endif %}
   </div>
   <div class="card-catalog-footer">
     <div class="category">
-      <span>Категории:</span>
-      <a href="#">Маркетинг</a>
-      <a href="#">Офис</a>
-      <a href="#">делопроизводство</a>
-      <a href="#">Управление и бизнес</a>
+      {% if provider.categories|length > 0 %}
+        <span>Категории:</span>
+        {% for category in provider.categories %}
+          <a href="#">{{ category.name }}</a>
+        {% endfor %}
+      {% endif %}
     </div>
     <div class="send">
       <div class="open-send-mail send-email">
         <span class="icon email-f"></span>
         Написать
       </div>
-      <div class="add-provider-favorites {{ provider.id in favorite_provider_ids  ? 'active' : '' }}" data-id="{{ provider.id }}">
+      <div class="add-provider-favorites {{ provider.id in favorite_provider_ids  ? 'active' : '' }}"
+           data-id="{{ provider.id }}">
         <i class="icon-love"></i>
         <span>В избранное</span>
       </div>
