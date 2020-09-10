@@ -74,14 +74,6 @@
       }
 
       & .button__menu {
-        @media (min-width: 1024px) {
-          &:hover {
-            & > .dropdown, & > .dropdown:focus-within {
-              opacity: 1;
-              visibility: visible;
-            }
-          }
-        }
         display: flex;
         align-items: center;
         justify-content: center;

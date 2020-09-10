@@ -1,15 +1,30 @@
-<ul class="dropdown__menu">
-  {% for menuItem in getMenuItems() %}
-    <li data-hoverabl class="dropdown__menu-item">
-      <a href="#">{{ menuItem.name }}</a>
-      <span class="dropdown__menu-icon"></span>
-      <ul class="dropdown__right">
-        {% for childMenuItem in menuItem.childCategories %}
-          <li>
-            <a href="#">{{ childMenuItem.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
-</ul>
+<nav class="scroll-block dropdown categories-menu">
+  <div class="menu-container">
+
+    <span class="back-drop">
+      <i class="icon-left"></i>
+    </span>
+    <span class="close-drop">
+      <i class="icon-cancel"></i>
+    </span>
+    <div class="mobile-header">
+      <h5>Категории</h5>
+    </div>
+
+    <ul class="dropdown__menu">
+      {% for menuItem in getMenuItems() %}
+        <li class="dropdown__menu-item">
+          <a class="main-category-link" href="#">{{ menuItem.name }}</a>
+          <span class="dropdown__menu-icon"></span>
+          <ul class="dropdown__right">
+            {% for childMenuItem in menuItem.childCategories %}
+              <li>
+                <a href="#">{{ childMenuItem.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

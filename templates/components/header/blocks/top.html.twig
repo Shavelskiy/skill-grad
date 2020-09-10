@@ -14,27 +14,14 @@
             <img class="logo-img" src="/img/logo.svg" alt="logo">
           </a>
         </div>
-        <div class="button__menu">
+        <div class="button__menu categories-menu-btn">
           <div class="open-drop d-flex">
             <span class="button__menu-icon">
               <i class="icon-menu"></i>
             </span>
             <span class="button__menu-text">Категории</span>
           </div>
-          <nav data-simplebar-direction='rtl' class="scroll-block dropdown">
-            <div class="wrapper">
-              <span class="back-drop">
-                <i class="icon-left"></i>
-              </span>
-              <span class="close-drop">
-                <i class="icon-cancel"></i>
-              </span>
-              <div class="mobile-header">
-                <h5>Категории</h5>
-              </div>
-              {% include 'components/header/blocks/categories.html.twig' %}
-            </div>
-          </nav>
+          {% include 'components/header/blocks/categories.html.twig' %}
         </div>
 
         <div class="open-change-city button-container">

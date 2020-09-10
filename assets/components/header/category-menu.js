@@ -2,11 +2,15 @@ const categoryMenuBtn = document.querySelector('.categories-menu-btn')
 const categoryMenu = document.querySelector('.categories-menu')
 
 categoryMenuBtn.addEventListener('click', () => {
+  if (categoryMenu.contains(event.target)) {
+    return
+  }
+
   categoryMenu.classList.toggle('active')
 })
 
 window.addEventListener('click', (event) => {
-  if (event.target === categoryMenuBtn) {
+  if (categoryMenuBtn.contains(event.target)) {
     return
   }
 
