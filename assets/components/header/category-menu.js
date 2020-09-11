@@ -1,7 +1,7 @@
 const categoryMenuBtn = document.querySelector('.categories-menu-btn')
 const categoryMenu = document.querySelector('.categories-menu')
 
-categoryMenuBtn.addEventListener('click', () => {
+categoryMenuBtn.addEventListener('click', (event) => {
   if (categoryMenu.contains(event.target)) {
     return
   }

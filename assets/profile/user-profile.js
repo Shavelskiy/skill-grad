@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 // import { Provider } from 'react-redux'
 // import { rootReducer } from './redux/rootReduser'
 
-import App from './components/app'
+import UserApp from './components/user-app'
 import { BrowserRouter } from 'react-router-dom'
 
 // const store = createStore(rootReducer)
@@ -13,7 +13,7 @@ import { BrowserRouter } from 'react-router-dom'
 const app = (
   // <Provider store={store}>
   <BrowserRouter basename={'/profile'}>
-    <App/>
+    <UserApp/>
   </BrowserRouter>
   // </Provider>
 )

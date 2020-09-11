@@ -1,25 +1,19 @@
-<ul class="header-dropdown">
-  <li class="header-dropdown-item">
-    <img src="/img/dropdown/028-gear.svg"/>
-    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'settings' }) }}">
-      Настройки профиля
-    </a>
+<ul>
+  <li>
+    <i class="icon-gear"></i>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'settings' }) }}">Настройки профиля</a>
   </li>
-  <li class="header-dropdown-item">
-    <img src="/img/dropdown/031-email.svg"/>
-    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'messages' }) }}">
-      Сообщения
-    </a>
-    <div class="header-dropdown-item-tooltip">10</div>
+  <li>
+    <i class="icon-email1"></i>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'messages' }) }}">Сообщения</a>
+    <span class="notification">10</span>
   </li>
-  <li class="header-dropdown-item">
-    <img src="/img/dropdown/student.svg"/>
-    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'training' }) }}">
-      Мое обучения
-    </a>
+  <li>
+    <i class="icon-student"></i>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'training' }) }}">Мое обучения</a>
   </li>
-  <li class="header-dropdown-item">
-    <img src="/img/dropdown/033-out.svg"/>
+  <li>
+    <i class="icon-out"></i>
     <div class="header-dropdown-link logout-link">Выйти</div>
   </li>
 </ul>

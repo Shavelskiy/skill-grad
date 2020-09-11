@@ -58,28 +58,19 @@
               </a>
             </div>
             <div class="button-container auth">
-              <div class="button-icon">
+              <div class="button-icon open-header-dropdown-btn">
                 <i class="icon-login"></i>
               </div>
-              <div class="button-info auth-text">
+              <div class="button-info auth-text open-header-dropdown-btn">
                 <span class="button-text">Добро пожаловать,</span>
                 <span class="button-text">Иванов Алесей</span>
               </div>
-              <div class="dropdown">
-                <ul class="student">
-                  <li><i class="icon-gear"></i>Настройки профиля</li>
-                  <li><i class="icon-email1"></i>Сообщения <span class="notification">10</span></li>
-                  <li><i class="icon-student"></i>Мое обучение</li>
-                  <li><i class="icon-out"></i>Выйти</li>
-                </ul>
-                <ul class="provider">
-                  <li><i class="icon-gear"></i><a href="#">Настройки профиля</a></li>
-                  <li><i class="icon-web-development"></i><a href="#">Программы обучения</a></li>
-                  <li><i class="icon-contract"></i><a href="#">Публикации</a></li>
-                  <li><i class="icon-email1"></i><a href="#">Сообщения <span class="notification">10</span></a></li>
-                  <li><i class="icon-google"></i><a href="#">Платные услуги, документы</a></li>
-                  <li><i class="icon-out"></i><a href="#">Выйти</a></li>
-                </ul>
+              <div class="dropdown header-dropdown">
+                {% if is_granted('ROLE_PROVIDER') %}
+                  {% include 'components/header/blocks/provider.dropdown.html.twig' %}
+                {% else %}
+                  {% include 'components/header/blocks/student.dropdown.html.twig' %}
+                {% endif %}
               </div>
             </div>
           </div>

@@ -20,9 +20,11 @@
 
 <main class="content">
   <div class="container">
-    <div class="d-f w-100 j-c-center">
-      {% include 'components/breadcrumbs.html.twig' %}
-    </div>
+    {% if disableBreadcrumbs is not defined %}
+      <div class="d-f w-100 j-c-center">
+        {% include 'components/breadcrumbs.html.twig' %}
+      </div>
+    {% endif %}
     <div class="col-lg-12">
       {% block body %}
       {% endblock %}

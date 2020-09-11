@@ -1,24 +1,21 @@
-// import './../components/profile/scss/index.scss';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-// import Vue from 'vue';
-// import Router from 'vue-router'
-// import App from './../components/profile/ProviderApp';
-// import {routes} from './../components/profile/routes/provider-routes';
-//
-// Vue.config.productionTip = false;
-//
-// Vue.use(Router);
-//
-// const router = new Router({
-//   mode: 'history',
-//   routes: routes,
-// })
-//
-// if (document.getElementById('profile-app') !== null) {
-//   new Vue({
-//     router,
-//     render: h => h(App),
-//   }).$mount('#profile-app');
-// }
+// import { createStore } from 'redux'
+// import { Provider } from 'react-redux'
+// import { rootReducer } from './redux/rootReduser'
 
-console.log('todo remake to react')
+import ProviderApp from './components/provider-app'
+import { BrowserRouter } from 'react-router-dom'
+
+// const store = createStore(rootReducer)
+
+const app = (
+  // <Provider store={store}>
+  <BrowserRouter basename={'/profile'}>
+    <ProviderApp/>
+  </BrowserRouter>
+  // </Provider>
+)
+
+ReactDOM.render(app, document.getElementById('profile-app'))

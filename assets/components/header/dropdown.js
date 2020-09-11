@@ -1,9 +1,9 @@
 const dropdown = document.querySelector('.header-dropdown')
 
 if (dropdown) {
-  const openDropdownBtns = document.querySelectorAll('.open-header-dropdown-btn')
+  const openDropdownButtons = document.querySelectorAll('.open-header-dropdown-btn')
 
-  openDropdownBtns.forEach((button) => {
+  openDropdownButtons.forEach((button) => {
     button.addEventListener('click', () => {
       dropdown.classList.toggle('active')
     })
@@ -11,8 +11,8 @@ if (dropdown) {
 
   window.addEventListener('click', (event) => {
     let needCheck = true;
-    openDropdownBtns.forEach((button) => {
-      if (event.target === button) {
+    openDropdownButtons.forEach((button) => {
+      if (button.contains(event.target)) {
         needCheck = false
       }
     })

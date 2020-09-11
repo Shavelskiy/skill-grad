@@ -5,7 +5,8 @@
   {{ encore_entry_link_tags('site.provider.profile') }}
 {% endblock %}
 
-{% block title %}Личный кабинет{% endblock %}
+{% set title = 'Личный кабинет' %}
+{% set disableBreadcrumbs = true %}
 
 {% block body %}
   <div class="wrap">
