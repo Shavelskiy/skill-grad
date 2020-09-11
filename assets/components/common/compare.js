@@ -16,6 +16,7 @@ const compareAdd = (item) => {
       showAlert(data.message)
       updateCompareCount(data.count)
     })
+    .catch((error) => showAlert(error.response.data.message))
     .finally(() => disableCompareRequest = false)
 }
 
@@ -30,7 +31,8 @@ const compareRemove = (item) => {
       showAlert(data.message)
       updateCompareCount(data.count)
     })
-    .finally(() => disableCompareRequest = false)
+    .catch((error) => showAlert(error.response.data.message))
+    .finally(() => window.location.reload())
 }
 
 const compareClear = () => {
@@ -43,10 +45,13 @@ const compareClear = () => {
     .then(() => {
       updateCompareCount(0)
     })
-    .finally(() => disableCompareRequest = false)
+    .finally(() => window.location.href = '/')
 }
 
 const addCompareButtons = document.querySelectorAll('.compare-program-add')
+const removeCompareButtons = document.querySelectorAll('.compare-program-remove')
+const clearCompareButton = document.querySelector('.clear-compare-button')
+
 
 if (addCompareButtons.length > 0) {
   addCompareButtons.forEach((item) => {
@@ -54,4 +59,18 @@ if (addCompareButtons.length > 0) {
       compareAdd(item)
     }
   })
+}
+
+if (removeCompareButtons.length > 0) {
+  removeCompareButtons.forEach((item) => {
+    item.onclick = () => {
+      compareRemove(item)
+    }
+  })
+}
+
+if (clearCompareButton) {
+  clearCompareButton.onclick = () => {
+    compareClear()
+  }
 }

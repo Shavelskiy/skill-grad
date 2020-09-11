@@ -59,7 +59,7 @@ class CompareController extends AbstractController
         }
 
         return $this->createResponse(
-            $this->removeProgramFromCompare($compareProgramIds, $programId)
+            $this->removeProgramFromCompare($compareProgramIds, $programId), 'Программа удалена из сравнения'
         );
     }
 

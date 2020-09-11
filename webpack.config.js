@@ -32,6 +32,7 @@ Encore
   .addEntry('provider.view', './assets/pages/provider/view.js')
 
   .addEntry('static.favorite', './assets/pages/static/favorite.js')
+  .addEntry('static.compare', './assets/pages/static/compare.js')
 
   .addEntry('site.user.profile', './assets/profile/user-profile.js')
   .addEntry('site.provider.profile', './assets/profile/provider-profile.js')

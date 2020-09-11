@@ -10,7 +10,7 @@ class CompareHelper
 
     public static function getCompareProgramsFromParameterBag(ParameterBag $parameterBag): array
     {
-        $compareProgramIds = json_decode($parameterBag->get(self::COMPARE_PROGRAMS_KEY));
+        $compareProgramIds = (array)json_decode($parameterBag->get(self::COMPARE_PROGRAMS_KEY));
 
         if ($compareProgramIds === null) {
             return [];

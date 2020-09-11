@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Dto\SearchQuery;
 use App\Entity\User;
+use App\Helpers\CompareHelper;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -59,9 +60,13 @@ class StaticController extends AbstractController
     /**
      * @Route("/compare", name="app.compare", methods={"GET"})
      */
-    public function compareAction(): Response
+    public function compareAction(Request $request): Response
     {
-        return $this->render('static/compare.html.twig');
+        $programIds = CompareHelper::getCompareProgramsFromParameterBag($request->cookies);
+
+        return $this->render('static/compare.html.twig', [
+            'programs' => $this->programRepository->findBy(['id' => $programIds]),
+        ]);
     }
 
     /**
