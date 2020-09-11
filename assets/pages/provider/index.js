@@ -1,6 +1,6 @@
 import { loginModal, registerRoleModal, initModalFormCloseBtn } from '../../components/modal'
 
-import { addProviderToFavorite } from '../../components/favorite'
+import { addProviderToFavorite } from '../../components/common/favorite'
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 const sendMessageModal = document.getElementById('send-message-modal')

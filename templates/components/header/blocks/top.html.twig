@@ -53,7 +53,7 @@
               <a href="{{ path('app.compare') }}">
                 <div class="button-icon">
                   <i class="icon-add-file"></i>
-                  <span class="button-notification">12</span>
+                  <span class="button-notification compare-count">{{ getCompareCount(app.request.cookies) }}</span>
                 </div>
               </a>
             </div>

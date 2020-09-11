@@ -1,3 +1,5 @@
+{% set filters = getProgramFilters() %}
+
 <form class="form-filter" action="#">
   <div class="input-search-gray">
     <input class="input search" type="text" placeholder="Поиск по каталогу">
@@ -7,7 +9,7 @@
     <span class="filter-title">По категории:</span>
     <div class="select custom-select-wrapper">
       <div class="custom-select">
-        <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+        <div class="custom-select__trigger"><span>Выберите категорию</span>
           <div class="arrow"></div>
         </div>
         <div class="custom-options scrollbar">
@@ -59,41 +61,18 @@
   </div>
   <div class="format">
     <span class="filter-title">По формату обучения:</span>
-    <label class="circle-checkbox">
-      Вебинар
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
-    <label class="circle-checkbox">
-      Онлайн курс
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
-    <label class="circle-checkbox">
-      Очно
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
-    <label class="circle-checkbox">
-      Очно-заочно
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
-    <label class="circle-checkbox">
-      Заочно
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
-    <label class="circle-checkbox">
-      Смешанная форма
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label>
+    {% for format in filters.formats %}
+      <label class="circle-checkbox">
+        {{ format.name }}
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+    {% endfor %}
   </div>
   <div class="practice">
     <span class="filter-title">Теория и практика:</span>
     <div class="practice-container">
-      Практики не менее <input class="input" value="100" type="number" min="0" max="100"/> %
+      Практики не менее <input class="input" type="number" min="0" max="100"/> %
     </div>
   </div>
   <div class="level">

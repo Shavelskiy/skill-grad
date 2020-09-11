@@ -1,17 +1,18 @@
-import { loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, feedbackModal } from '../modal'
+import {loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, feedbackModal} from '../modal'
 // import './logout'
 import './category-menu'
 // import './dropdown'
 
 
-const openLoginModalBtns = document.querySelectorAll('.open-login-modal-btn')
+const openLoginModalButtons = document.querySelectorAll('.open-login-modal-btn')
 const openRegisterModalBtn = document.querySelector('.open-register-modal-btn')
-const openCitySelectorModalBtns = document.querySelectorAll('.open-city-selector-modal-btn')
+const openCitySelectorModalButtons = document.querySelectorAll('.open-city-selector-modal-btn')
 
 const favoriteCount = document.querySelector('.user-favorite-count')
+const compareCount = document.querySelector('.compare-count')
 
-if (openLoginModalBtns.length > 0) {
-  openLoginModalBtns.forEach((item) => {
+if (openLoginModalButtons.length > 0) {
+  openLoginModalButtons.forEach((item) => {
     item.onclick = () => {
       loginModal.classList.add('active')
     }
@@ -24,7 +25,7 @@ if (openRegisterModalBtn !== null) {
   }
 }
 
-openCitySelectorModalBtns.forEach((item) => {
+openCitySelectorModalButtons.forEach((item) => {
   item.onclick = () => {
     citySelectorModal.classList.add('active')
   }
@@ -49,5 +50,11 @@ citySelectorModal.querySelector('.open-feedback-modal-btn').onclick = () => {
 export const updateFavoriteCount = (value) => {
   if (favoriteCount) {
     favoriteCount.innerHTML = Number(favoriteCount.innerHTML) + value
+  }
+}
+
+export const updateCompareCount = (value) => {
+  if (compareCount) {
+    compareCount.innerHTML = value
   }
 }

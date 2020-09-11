@@ -1,4 +1,4 @@
-import {addProviderToFavorite} from '../../components/favorite'
+import {addProviderToFavorite} from '../../components/common/favorite'
 import {insertParam} from '../../helpers/location-helper';
 
 const tabProviders = document.querySelector('.tab-providers')

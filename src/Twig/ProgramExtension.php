@@ -7,6 +7,7 @@ use App\Entity\Program\Program;
 use App\Repository\ProgramAdditionalRepository;
 use App\Repository\ProgramFormatRepository;
 use App\Repository\ProgramIncludeRepository;
+use App\Repository\ProgramLevelRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -15,15 +16,18 @@ class ProgramExtension extends AbstractExtension
     protected ProgramFormatRepository $programFormatRepository;
     protected ProgramIncludeRepository $programIncludeRepository;
     protected ProgramAdditionalRepository $programAdditionalRepository;
+    protected ProgramLevelRepository $programLevelRepository;
 
     public function __construct(
         ProgramFormatRepository $programFormatRepository,
         ProgramIncludeRepository $programIncludeRepository,
-        ProgramAdditionalRepository $programAdditionalRepository
+        ProgramAdditionalRepository $programAdditionalRepository,
+        ProgramLevelRepository $programLevelRepository
     ) {
         $this->programFormatRepository = $programFormatRepository;
         $this->programIncludeRepository = $programIncludeRepository;
         $this->programAdditionalRepository = $programAdditionalRepository;
+        $this->programLevelRepository = $programLevelRepository;
     }
 
     public function getFunctions(): array
@@ -31,6 +35,7 @@ class ProgramExtension extends AbstractExtension
         return [
             new TwigFunction('programAdditional', [$this, 'programAdditional']),
             new TwigFunction('programCategories', [$this, 'programCategories']),
+            new TwigFunction('getProgramFilters', [$this, 'getProgramFilters']),
         ];
     }
 
@@ -173,5 +178,13 @@ class ProgramExtension extends AbstractExtension
         }
 
         return $result;
+    }
+
+    public function getProgramFilters(): array
+    {
+        return [
+            'formats' => $this->programFormatRepository->findAll(),
+            'levels' => $this->programLevelRepository->findAll(),
+        ];
     }
 }

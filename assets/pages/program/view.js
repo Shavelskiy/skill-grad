@@ -1,6 +1,6 @@
 import {loginModal, registerRoleModal, initModalFormCloseBtn} from '../../components/modal'
 
-import {addProgramToFavorite} from '../../components/favorite'
+import {addProgramToFavorite} from '../../components/common/favorite'
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 
