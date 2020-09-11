@@ -7,416 +7,406 @@
 
 {% set title = program.name %}
 
+{% set additionalBreadcrumb = {
+  link: path('program.index'),
+  name: 'Каталог программ обучения'
+} %}
+
 {% set additional = programAdditional(program) %}
 {% set categories = programCategories(program) %}
 
 {% block body %}
-  <div class="container">
-    <div class="d-f w-100 j-c-center">
-      <div class="breadcrumbs">
-        <ul>
-          <li><a href="{{ path('site.index') }}">Главная</a></li>
-          <li><a href="{{ path('program.index') }}">Каталог программ обучения</a></li>
-          <li><a class="active" href="#">{{ title }}</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-lg-12 mobile-no-gutter">
-      <div class="main-card__program mt-0">
-        <h2 class="title program">{{ title }}</h2>
-        <div class="alert">
-          <div class="container-0 j-c-space-between">
-            <div class="information">
-              <div class="date">
-                <span class="icon calendar"></span>
-                <span class="text">Добавлена: </span><strong>{{ program.createdAt|date('d.m.Y') }}</strong>
-              </div>
-              <div class="proposal">
-                <span class="icon mail"></span>
-                <span class="text">Получено заявок:</span> <strong>{{ program.requests.count }}</strong>
-              </div>
-              <div class="rating">
-                <span class="icon goal"></span>
-                <span class="text">Средняя оценка: </span> <strong class="accent">4.1</strong>
-              </div>
+  <div class="main-card__program mt-0">
+    <h2 class="title program">{{ title }}</h2>
+    <div class="alert">
+      <div class="container-0 j-c-space-between">
+        <div class="information">
+          <div class="date">
+            <span class="icon calendar"></span>
+            <span class="text">Добавлена: </span><strong>{{ program.createdAt|date('d.m.Y') }}</strong>
+          </div>
+          <div class="proposal">
+            <span class="icon mail"></span>
+            <span class="text">Получено заявок:</span> <strong>{{ program.requests.count }}</strong>
+          </div>
+          <div class="rating">
+            <span class="icon goal"></span>
+            <span class="text">Средняя оценка: </span> <strong class="accent">4.1</strong>
+          </div>
+        </div>
+        <div class="share">
+          <div class="contact-block">
+            <span class="text">Поделиться:</span>
+            <ul>
+              <li>
+                <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+              </li>
+              <li>
+                <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+              </li>
+              <li>
+                <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+              </li>
+            </ul>
+          </div>
+          <div class="buttons">
+            <div class="button-container">
+              <i class="{{ is_favorite ? 'icon-love-red' : 'icon-heart' }} add-program-favorites"
+                 data-id="{{ program.id }}"></i>
             </div>
-            <div class="share">
-              <div class="contact-block">
-                <span class="text">Поделиться:</span>
-                <ul>
-                  <li>
-                    <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
-                  </li>
-                  <li>
-                    <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
-                  </li>
-                  <li>
-                    <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="buttons">
-                <div class="button-container">
-                  <i class="{{ is_favorite ? 'icon-love-red' : 'icon-heart' }} add-program-favorites"
-                     data-id="{{ program.id }}"></i>
-                </div>
-                <div class="button-container">
-                  <i class="icon-add-file compare-program-add" data-id="{{ program.id }}"></i>
-                </div>
-              </div>
+            <div class="button-container">
+              <i class="icon-add-file compare-program-add" data-id="{{ program.id }}"></i>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="box">
-          <div class="box-content show">
-            <div class="container-0">
-              <div class="col-lg-12 pl-0">
+    <div class="box">
+      <div class="box-content show">
+        <div class="container-0">
+          <div class="col-lg-12 pl-0">
 
-                {% if categories|length > 0 %}
-                  <h5 class="result-title mt-0">Категории программы обучения</h5>
+            {% if categories|length > 0 %}
+              <h5 class="result-title mt-0">Категории программы обучения</h5>
 
-                  {% set i = 0 %}
-                  {% for category in categories %}
-                    {% set i = i + 1 %}
-                    <p class="text">
+              {% set i = 0 %}
+              {% for category in categories %}
+                {% set i = i + 1 %}
+                <p class="text">
                       <span class="blue">
                         {{ i }}. {{ category.item.name }}:
                       </span>
-                      {{ category.childItems|map(item => item.name)|join(', ') }}
-                    </p>
-                  {% endfor %}
+                  {{ category.childItems|map(item => item.name)|join(', ') }}
+                </p>
+              {% endfor %}
+            {% endif %}
+
+            <h5 class="result-title">Аннотация программы</h5>
+            <p class="text">{{ program.annotation }}</p>
+
+            {% if program.detailText|length > 0 %}
+              <h5 class="result-title">Программа обучения</h5>
+              <p class="text">{{ program.detailText }}</p>
+            {% endif %}
+
+            {% if program.processDescription|length > 0 %}
+              <h5 class="result-title">Описание процесса обучения</h5>
+              <p class="text">{{ program.processDescription }}</p>
+            {% endif %}
+
+            <h5 class="result-title">Дизайн программы обучения</h5>
+            <p class="text">{{ additional.design }}</p>
+
+            <h5 class="result-title">Проверка знаний</h5>
+            <p class="text">Экзамен по итогам обучения</p>
+
+            {% if additional.additional is not empty %}
+              <h5 class="result-title">Дополнительно</h5>
+              <ul class="tick">
+                {% for value in additional.additional %}
+                  <li>{{ value }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if program.advantages|length > 0 %}
+              <h5 class="result-title">Преимущества программы обучения</h5>
+              <p class="text">{{ program.advantages }}</p>
+            {% endif %}
+
+            {% if program.targetAudience is not empty %}
+              <h5 class="result-title">Целевая аудитория</h5>
+              <ul class="tick">
+                {% for listener in program.targetAudience %}
+                  <li>Дети до 12 лет</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if program.preparation is not empty %}
+              <h5 class="result-title">Предварительная подготовка</h5>
+              <ul class="tick">
+                {% for preparation in program.preparation %}
+                  <li>{{ preparation }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if program.gainedKnowledge|length > 0 %}
+              <h5 class="result-title">Полученные знания, приобретенные навыки</h5>
+              <p class="text">{{ program.gainedKnowledge }}</p>
+            {% endif %}
+
+            {% if additional.includes is not empty %}
+              <h5 class="result-title">Включено в курс</h5>
+              <ul class="tick">
+                {% for include in additional.includes %}
+                  <li>{{ include }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <h5 class="result-title">Скидки</h5>
+            <ul class="tick">
+              <li>Для физических лиц - 10% = 1850 руб.</li>
+              <li>Для юридических лиц - 15% = 2300 руб.</li>
+            </ul>
+
+            {% if program.providerActions is not empty %}
+              <h5 class="result-title">Акции от провайдера</h5>
+              <ul class="tick">
+                {% for actioin in program.providerActions %}
+                  <li>{{ action }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <h5 class="result-title">Акция «Любимый провайдер»</h5>
+            <div class="container-0">
+              <div class="sale">
+                <span class="percent">20%</span>
+                <span class="text">Скидка при приобретении <br/> первого курса</span>
+              </div>
+              <div class="sale">
+                <span class="percent">10%</span>
+                <span class="text">Скидка при приобретении <br/> первого курса</span>
+              </div>
+            </div>
+
+            <h5 class="result-title">Условия оплаты</h5>
+            {% if additional.term_of_payment is null %}
+              <p class="text">По запросу</p>
+            {% else %}
+              <ul class="tick">
+                {% if additional.term_of_payment.legal != false %}
+                  <li>
+                    <strong>Для юридических лиц</strong>
+                    <p class="text mt-10">{{ additional.term_of_payment.legal }}</p>
+                  </li>
                 {% endif %}
-
-                <h5 class="result-title">Аннотация программы</h5>
-                <p class="text">{{ program.annotation }}</p>
-
-                {% if program.detailText|length > 0 %}
-                  <h5 class="result-title">Программа обучения</h5>
-                  <p class="text">{{ program.detailText }}</p>
+                {% if additional.term_of_payment.individual != false %}
+                  <li>
+                    <strong>Для физических лиц</strong>
+                    <p class="text mt-10">{{ additional.term_of_payment.individual }}</p>
+                  </li>
                 {% endif %}
+              </ul>
+            {% endif %}
 
-                {% if program.processDescription|length > 0 %}
-                  <h5 class="result-title">Описание процесса обучения</h5>
-                  <p class="text">{{ program.processDescription }}</p>
-                {% endif %}
-
-                <h5 class="result-title">Дизайн программы обучения</h5>
-                <p class="text">{{ additional.design }}</p>
-
-                <h5 class="result-title">Проверка знаний</h5>
-                <p class="text">Экзамен по итогам обучения</p>
-
-                {% if additional.additional is not empty %}
-                  <h5 class="result-title">Дополнительно</h5>
-                  <ul class="tick">
-                    {% for value in additional.additional %}
-                      <li>{{ value }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-
-                {% if program.advantages|length > 0 %}
-                  <h5 class="result-title">Преимущества программы обучения</h5>
-                  <p class="text">{{ program.advantages }}</p>
-                {% endif %}
-
-                {% if program.targetAudience is not empty %}
-                  <h5 class="result-title">Целевая аудитория</h5>
-                  <ul class="tick">
-                    {% for listener in program.targetAudience %}
-                      <li>Дети до 12 лет</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-
-                {% if program.preparation is not empty %}
-                  <h5 class="result-title">Предварительная подготовка</h5>
-                  <ul class="tick">
-                    {% for preparation in program.preparation %}
-                      <li>{{ preparation }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-
-                {% if program.gainedKnowledge|length > 0 %}
-                  <h5 class="result-title">Полученные знания, приобретенные навыки</h5>
-                  <p class="text">{{ program.gainedKnowledge }}</p>
-                {% endif %}
-
-                {% if additional.includes is not empty %}
-                  <h5 class="result-title">Включено в курс</h5>
-                  <ul class="tick">
-                    {% for include in additional.includes %}
-                      <li>{{ include }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-
-                <h5 class="result-title">Скидки</h5>
-                <ul class="tick">
-                  <li>Для физических лиц - 10% = 1850 руб.</li>
-                  <li>Для юридических лиц - 15% = 2300 руб.</li>
-                </ul>
-
-                {% if program.providerActions is not empty %}
-                  <h5 class="result-title">Акции от провайдера</h5>
-                  <ul class="tick">
-                    {% for actioin in program.providerActions %}
-                      <li>{{ action }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-
-                <h5 class="result-title">Акция «Любимый провайдер»</h5>
-                <div class="container-0">
-                  <div class="sale">
-                    <span class="percent">20%</span>
-                    <span class="text">Скидка при приобретении <br/> первого курса</span>
+            {% if program.gallery.count > 0 %}
+              <h5 class="result-title">Фотографии с мероприятия</h5>
+              <div class="photo-container">
+                {% for galleryItem in program.gallery %}
+                  <div class="photo-block">
+                    <img src="{{ galleryItem.image.publicPath }}" alt="">
+                    <span>{{ galleryItem.name }}</span>
                   </div>
-                  <div class="sale">
-                    <span class="percent">10%</span>
-                    <span class="text">Скидка при приобретении <br/> первого курса</span>
-                  </div>
-                </div>
+                {% endfor %}
+              </div>
+            {% endif %}
 
-                <h5 class="result-title">Условия оплаты</h5>
-                {% if additional.term_of_payment is null %}
-                  <p class="text">По запросу</p>
-                {% else %}
-                  <ul class="tick">
-                    {% if additional.term_of_payment.legal != false %}
-                      <li>
-                        <strong>Для юридических лиц</strong>
-                        <p class="text mt-10">{{ additional.term_of_payment.legal }}</p>
-                      </li>
-                    {% endif %}
-                    {% if additional.term_of_payment.individual != false %}
-                      <li>
-                        <strong>Для физических лиц</strong>
-                        <p class="text mt-10">{{ additional.term_of_payment.individual }}</p>
-                      </li>
-                    {% endif %}
-                  </ul>
-                {% endif %}
+            {% if  program.additionalInfo is not null %}
+              <h5 class="result-title">Дополнительная информация</h5>
+              <p class="text">{{ program.additionalInfo }}</p>
+            {% endif %}
 
-                {% if program.gallery.count > 0 %}
-                  <h5 class="result-title">Фотографии с мероприятия</h5>
-                  <div class="photo-container">
-                    {% for galleryItem in program.gallery %}
-                      <div class="photo-block">
-                        <img src="{{ galleryItem.image.publicPath }}" alt="">
-                        <span>{{ galleryItem.name }}</span>
-                      </div>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-
-                {% if  program.additionalInfo is not null %}
-                  <h5 class="result-title">Дополнительная информация</h5>
-                  <p class="text">{{ program.additionalInfo }}</p>
-                {% endif %}
-
-                <h5 class="result-title">Отзывы и оценки ({{ reviews.items|length }})</h5>
-                <div class="container-0">
-                  {% if reviews.items|length == 0 %}
-                    У программы пока нет отзывов
-                  {% else %}
-                    {% for review in reviews.items %}
-                      <div class="reviews">
-                        <div class="container-0">
-                          <div class="information">
-                            <div class="top">
-                              <img class="rounded" src="/img/photo.jpg" alt="">
-                              <div class="d-flex w-100 j-c-space-between mt-10">
-                                <span class="name">{{ review.user.userInfo.fullName }}</span>
-                                <span class="date">{{ review.createdAt|date('d m Y i:g') }}</span>
-                              </div>
-                            </div>
-                            <div class="comment">
-                              <p class="text">{{ review.review }}</p>
-                            </div>
-                          </div>
-                          <div class="value">
-                            <p class="text">
-                              <i class="icon-star"></i>
-                              Средняя оценка: <strong class="accent">{{ review.averageRating }}</strong>
-                            </p>
-                            <div class="text">
-                              <span class="title">Программа</span>
-                              <span>{{ review.rating['program'][0] }}
-                                <span class="tooltip">
-                                  Полученные знания, навыки будут использованы мною в рабочей практике
-                                </span>
-                              </span>
-                              <span>{{ review.rating['program'][1] }}</span>
-                              <span>{{ review.rating['program'][2] }}</span>
-                            </div>
-                            <div class="text">
-                              <span class="title">Преподаватель</span>
-                              <span>{{ review.rating['teacher'][0] }}
-                                <span class="tooltip">
-                                  Полученные знания, навыки будут использованы мною в рабочей практике
-                                </span>
-                              </span>
-                            </div>
-                            <div class="text">
-                              <span class="title">Организация обучения</span>
-                              <span>{{ review.rating['organization'][0] }}</span>
-                              <span>{{ review.rating['organization'][1] }}</span>
-                            </div>
+            <h5 class="result-title">Отзывы и оценки ({{ reviews.items|length }})</h5>
+            <div class="container-0">
+              {% if reviews.items|length == 0 %}
+                У программы пока нет отзывов
+              {% else %}
+                {% for review in reviews.items %}
+                  <div class="reviews">
+                    <div class="container-0">
+                      <div class="information">
+                        <div class="top">
+                          <img class="rounded" src="/img/photo.jpg" alt="">
+                          <div class="d-flex w-100 j-c-space-between mt-10">
+                            <span class="name">{{ review.user.userInfo.fullName }}</span>
+                            <span class="date">{{ review.createdAt|date('d m Y i:g') }}</span>
                           </div>
                         </div>
+                        <div class="comment">
+                          <p class="text">{{ review.review }}</p>
+                        </div>
+                      </div>
+                      <div class="value">
+                        <p class="text">
+                          <i class="icon-star"></i>
+                          Средняя оценка: <strong class="accent">{{ review.averageRating }}</strong>
+                        </p>
+                        <div class="text">
+                          <span class="title">Программа</span>
+                          <span>{{ review.rating['program'][0] }}
+                                <span class="tooltip">
+                                  Полученные знания, навыки будут использованы мною в рабочей практике
+                                </span>
+                              </span>
+                          <span>{{ review.rating['program'][1] }}</span>
+                          <span>{{ review.rating['program'][2] }}</span>
+                        </div>
+                        <div class="text">
+                          <span class="title">Преподаватель</span>
+                          <span>{{ review.rating['teacher'][0] }}
+                                <span class="tooltip">
+                                  Полученные знания, навыки будут использованы мною в рабочей практике
+                                </span>
+                              </span>
+                        </div>
+                        <div class="text">
+                          <span class="title">Организация обучения</span>
+                          <span>{{ review.rating['organization'][0] }}</span>
+                          <span>{{ review.rating['organization'][1] }}</span>
+                        </div>
+                      </div>
+                    </div>
 
-                        {% if review.answer is not null %}
-                          <div class="answer">
-                            <span class="right-arrow"></span>
-                            <div class="information">
-                              <div class="top">
-                                <img class="rounded" src="/img/photo.jpg" alt="">
-                                <div class="d-flex w-100 j-c-space-between mt-10">
-                                  <span class="name">{{ program.author.userInfo.fullName }}</span>
-                                  <span class="date">{{ review.answerDate|date('d m Y i:g') }}</span>
-                                </div>
-                              </div>
-                              <div class="comment">
-                                <p class="text">Большое спасибо за вашу оценку!</p>
-                              </div>
+                    {% if review.answer is not null %}
+                      <div class="answer">
+                        <span class="right-arrow"></span>
+                        <div class="information">
+                          <div class="top">
+                            <img class="rounded" src="/img/photo.jpg" alt="">
+                            <div class="d-flex w-100 j-c-space-between mt-10">
+                              <span class="name">{{ program.author.userInfo.fullName }}</span>
+                              <span class="date">{{ review.answerDate|date('d m Y i:g') }}</span>
                             </div>
                           </div>
-                        {% endif %}
+                          <div class="comment">
+                            <p class="text">Большое спасибо за вашу оценку!</p>
+                          </div>
+                        </div>
                       </div>
-                    {% endfor %}
-                  {% endif %}
-                </div>
-              </div>
-              <div class="col-lg-12 no-gutter">
-                <div class="mt-40">
-                  {% include 'components/paginator.html.twig' with {
-                    page: reviews.page,
-                    total_pages: reviews.total_pages,
-                    path_name: 'program.view'
-                  } %}
-                </div>
-              </div>
-              <div class="container-0 j-c-center mt-40">
-                <div class="col-lg-4 col-sm-4 col-md-6">
-                  <button class="button-red">Оставить оценку</button>
-                </div>
-                <div class="col-lg-4 col-sm-4 col-md-6">
-                  <button class="button-blue">Задать вопрос</button>
-                </div>
-              </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
+          <div class="col-lg-12 no-gutter">
+            <div class="mt-40">
+              {% include 'components/paginator.html.twig' with {
+                page: reviews.page,
+                total_pages: reviews.total_pages,
+                path_name: 'program.view'
+              } %}
+            </div>
+          </div>
+          <div class="container-0 j-c-center mt-40">
+            <div class="col-lg-4 col-sm-4 col-md-6">
+              <button class="button-red">Оставить оценку</button>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-md-6">
+              <button class="button-blue">Задать вопрос</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <div class="box-sidebar show">
-            <div class="container-0">
-              <div class="col-lg-12 pr-0">
-                <div class="price-block">
-                  <div class="price">
-                    {% if program.oldPrice is not null and program.showPriceReduction %}
-                      <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
-                      <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
-                    {% else %}
-                      <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
-                    {% endif %}
-                    <a href="#">Узнать о скидках/акциях</a>
-                  </div>
-                  <div class="button">
-                    <button class="button-blue">Подать заявку</button>
-                  </div>
-                </div>
-
-                <div class="card-shadow pl-45">
-                  <p class="text">
-                    <i class="icon-book"></i>
-                    <span>Продолжительность обучения:</span>
-                    <strong class="blue">{{ additional.duration }}</strong>
-                  </p>
-
-                  <p class="text">
-                    <i class="icon-square"></i>
-                    <span>Формат обучения:</span>
-                    <strong class="blue">{{ additional.format }}</strong>
-                  </p>
-
-
-                  <p class="text">
-                    <i class="icon-student"></i>
-                    <span>Уровень:</span>
-                    <strong class="blue">Начальный</strong>
-                  </p>
-
-                  <p class="text">
-                    <i class="icon-calendar-2"></i>
-                    <span>Даты обучения:</span>
-                    <strong class="blue"> 13 апреля - 25 сентября
-                    </strong>
-                  </p>
-
-                  <p class="text">
-                    <i class="icon-clock"></i>
-                    <span>Режим занятий:</span>
-                    <strong class="blue">Будни, с 18:00 до 20:00</strong>
-                  </p>
-
-
-                  {% if program.location|length > 0 %}
-                    <p class="text">
-                      <i class="icon-place"></i>
-                      <span>Место проведения:</span>
-                      <strong class="blue">{{ program.location }}</strong>
-                    </p>
-                  {% endif %}
-                </div>
-
-                <div class="card-shadow">
-                  <h5 class="result-title">Провайдеры обучения</h5>
-                  {% for provider in program.providers %}
-                    <div class="provider">
-                      <img src="{{ provider.image.publicPath }}" alt="">
-                      <a href="{{ path('provider.view', { id: provider.id }) }}" target="_blank">
-                        {{ provider.name }}
-                      </a>
-                    </div>
-                  {% endfor %}
-                </div>
-
-                {% if program.teachers.count > 0 %}
-                  <div class="card-shadow">
-                    <h5 class="result-title">Преподаватели</h5>
-                    {% for teacher in program.teachers %}
-                      <div class="teacher">
-                        {% if teacher.photo is not null %}
-                          <img src="{{ teacher.photo.publicPath }}" alt="">
-                        {% endif %}
-                        <span>{{ teacher.name }}</span>
-                      </div>
-                    {% endfor %}
-                  </div>
+      <div class="box-sidebar show">
+        <div class="container-0">
+          <div class="col-lg-12 pr-0">
+            <div class="price-block">
+              <div class="price">
+                {% if program.oldPrice is not null and program.showPriceReduction %}
+                  <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
+                  <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                {% else %}
+                  <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
                 {% endif %}
-
-                {% if program.certificate is not null %}
-                  <div class="card-shadow">
-                    <h5 class="result-title">Выдаваемый документ</h5>
-                    <div class="cert">
-                      <span>{{ program.certificate.name }}</span>
-                      {% if program.certificate.image is not null %}
-                        <img src="{{ program.certificate.image.publicPath }}" alt="">
-                      {% endif %}
-                    </div>
-                  </div>
-                {% endif %}
+                <a href="#">Узнать о скидках/акциях</a>
+              </div>
+              <div class="button">
+                <button class="button-blue">Подать заявку</button>
               </div>
             </div>
+
+            <div class="card-shadow pl-45">
+              <p class="text">
+                <i class="icon-book"></i>
+                <span>Продолжительность обучения:</span>
+                <strong class="blue">{{ additional.duration }}</strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-square"></i>
+                <span>Формат обучения:</span>
+                <strong class="blue">{{ additional.format }}</strong>
+              </p>
+
+
+              <p class="text">
+                <i class="icon-student"></i>
+                <span>Уровень:</span>
+                <strong class="blue">Начальный</strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-calendar-2"></i>
+                <span>Даты обучения:</span>
+                <strong class="blue"> 13 апреля - 25 сентября
+                </strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-clock"></i>
+                <span>Режим занятий:</span>
+                <strong class="blue">Будни, с 18:00 до 20:00</strong>
+              </p>
+
+
+              {% if program.location|length > 0 %}
+                <p class="text">
+                  <i class="icon-place"></i>
+                  <span>Место проведения:</span>
+                  <strong class="blue">{{ program.location }}</strong>
+                </p>
+              {% endif %}
+            </div>
+
+            <div class="card-shadow">
+              <h5 class="result-title">Провайдеры обучения</h5>
+              {% for provider in program.providers %}
+                <div class="provider">
+                  <img src="{{ provider.image.publicPath }}" alt="">
+                  <a href="{{ path('provider.view', { id: provider.id }) }}" target="_blank">
+                    {{ provider.name }}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+
+            {% if program.teachers.count > 0 %}
+              <div class="card-shadow">
+                <h5 class="result-title">Преподаватели</h5>
+                {% for teacher in program.teachers %}
+                  <div class="teacher">
+                    {% if teacher.photo is not null %}
+                      <img src="{{ teacher.photo.publicPath }}" alt="">
+                    {% endif %}
+                    <span>{{ teacher.name }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if program.certificate is not null %}
+              <div class="card-shadow">
+                <h5 class="result-title">Выдаваемый документ</h5>
+                <div class="cert">
+                  <span>{{ program.certificate.name }}</span>
+                  {% if program.certificate.image is not null %}
+                    <img src="{{ program.certificate.image.publicPath }}" alt="">
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
     </div>
   </div>
-
 {% endblock %}
 
 {% block modals %}

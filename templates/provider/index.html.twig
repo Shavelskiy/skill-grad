@@ -8,24 +8,53 @@
 {% set title = 'Каталог провайдеров обучения' %}
 
 {% block body %}
-  <div class="container">
-    <div class="d-f w-100 j-c-center">
-      <div class="breadcrumbs">
-        <ul>
-          <li><a href="{{ path('site.index') }}">Главная</a></li>
-          <li><a class="active" href="#">{{ title }}</a></li>
-        </ul>
+  <div class="main-catalog mt-0">
+    <h2 class="title">{{ title }}</h2>
+    <div class="mobile-filter">
+      <div id="open-filter" class="mobile-filter-header">
+        Фильтр поиска
+        <i class="icon-more"></i>
+      </div>
+      <div id="filter" class="mobile-filter-content">
+        <form action="" class="form-filter">
+          <div class="input-search-gray">
+            <input class="input search" type="text" placeholder="Поиск по каталогу">
+            <i class="icon-search"></i>
+          </div>
+          <div class="category">
+            <span class="filter-title">Поиск по категории:</span>
+            <div class="select custom-select-wrapper">
+              <div class="custom-select">
+                <div class="custom-select__trigger"><span>Tesla</span>
+                  <div class="arrow"></div>
+                </div>
+                <div class="custom-options scrollbar">
+                  <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                  <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                  <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="col-lg-12">
-      <div class="main-catalog mt-0">
-        <h2 class="title">{{ title }}</h2>
-        <div class="mobile-filter">
-          <div id="open-filter" class="mobile-filter-header">
-            Фильтр поиска
-            <i class="icon-more"></i>
+    <div class="box">
+      <div class="box-content">
+        <div class="container-0">
+          <div class="col-lg-12 pl-0">
+            {% for provider in providers %}
+              {% include 'provider/card-provider.html.twig' with {
+                provider: provider,
+                favorite_provider_ids: favorite_provider_ids
+              } %}
+            {% endfor %}
           </div>
-          <div id="filter" class="mobile-filter-content">
+        </div>
+      </div>
+      <div class="box-sidebar">
+        <div class="container-0">
+          <div class="col-lg-12 pr-0">
             <form action="" class="form-filter">
               <div class="input-search-gray">
                 <input class="input search" type="text" placeholder="Поиск по каталогу">
@@ -35,7 +64,19 @@
                 <span class="filter-title">Поиск по категории:</span>
                 <div class="select custom-select-wrapper">
                   <div class="custom-select">
-                    <div class="custom-select__trigger"><span>Tesla</span>
+                    <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options scrollbar">
+                      <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                      <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                      <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="select custom-select-wrapper">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
                       <div class="arrow"></div>
                     </div>
                     <div class="custom-options scrollbar">
@@ -46,75 +87,22 @@
                   </div>
                 </div>
               </div>
+              <div class="city">
+                <span class="filter-title open-city-selector-modal-btn">Выбор города:</span>
+                <div class="current-city">Ваш город: <strong>Москва</strong></div>
+                <span class="open-city-selector-modal-btn">Изменить город</span>
+              </div>
             </form>
           </div>
         </div>
-        <div class="box">
-          <div class="box-content">
-            <div class="container-0">
-              <div class="col-lg-12 pl-0">
-                {% for provider in providers %}
-                  {% include 'provider/card-provider.html.twig' with {
-                    provider: provider,
-                    favorite_provider_ids: favorite_provider_ids
-                  } %}
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          <div class="box-sidebar">
-            <div class="container-0">
-              <div class="col-lg-12 pr-0">
-                <form action="" class="form-filter">
-                  <div class="input-search-gray">
-                    <input class="input search" type="text" placeholder="Поиск по каталогу">
-                    <i class="icon-search"></i>
-                  </div>
-                  <div class="category">
-                    <span class="filter-title">Поиск по категории:</span>
-                    <div class="select custom-select-wrapper">
-                      <div class="custom-select">
-                        <div class="custom-select__trigger"><span>Природопользование и эк...</span>
-                          <div class="arrow"></div>
-                        </div>
-                        <div class="custom-options scrollbar">
-                          <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
-                          <span class="custom-option category-option" data-value="volvo">Volvo</span>
-                          <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="select custom-select-wrapper">
-                      <div class="custom-select">
-                        <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
-                          <div class="arrow"></div>
-                        </div>
-                        <div class="custom-options scrollbar">
-                          <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
-                          <span class="custom-option category-option" data-value="volvo">Volvo</span>
-                          <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="city">
-                    <span class="filter-title open-city-selector-modal-btn">Выбор города:</span>
-                    <div class="current-city">Ваш город: <strong>Москва</strong></div>
-                    <span class="open-city-selector-modal-btn">Изменить город</span>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {% include 'components/paginator.html.twig' with {
-          page: page,
-          total_pages: total_pages,
-          path_name: 'provider.index'
-        } %}
       </div>
     </div>
+
+    {% include 'components/paginator.html.twig' with {
+      page: page,
+      total_pages: total_pages,
+      path_name: 'provider.index'
+    } %}
   </div>
 {% endblock %}
 

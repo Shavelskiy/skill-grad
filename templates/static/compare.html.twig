@@ -8,104 +8,94 @@
 {% set title = 'Сравнение программ' %}
 
 {% block body %}
-  <div class="container">
-    <div class="d-f w-100 j-c-center">
-      <div class="breadcrumbs">
-        <ul>
-          <li><a href="{{ path('site.index') }}">Главная</a></li>
-          <li><a class="active" href="#">{{ title }}</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="main_compare compare mt-0">
-      <h2 class="title">{{ title }}</h2>
-      <div class="container-0">
-        <div class="col-lg-12 col-sm-4 no-gutter">
-          <div class="tab">
-            <div class="toggle-menu tab__nav">
-              <ul class="nav">
-                <li class="nav-title">Показывать:</li>
-                <li class="toggle-item nav-item active"> Все характеристики</li>
-                <li class="toggle-item nav-item">Различающиеся характеристики</li>
-              </ul>
-              <i class="icon-down-arrow"></i>
-              <span class="clear clear-compare-button">Очистить сравнение</span>
-            </div>
-            <div class="tab__content">
-              <div class="tab__content-item active">
-                <div class="compare__table non-mobile">
-                  <div class="container-0">
-                    {% for program in programs %}
-                      <div class="item col-lg-3 col-sm-2 no-gutter">
-                        {% include 'static/compare-block.html.twig' with {
-                          program: program
-                        } %}
-                      </div>
-                    {% endfor %}
-                  </div>
+  <div class="main_compare compare mt-0">
+    <h2 class="title">{{ title }}</h2>
+    <div class="container-0">
+      <div class="col-lg-12 col-sm-4 no-gutter">
+        <div class="tab">
+          <div class="toggle-menu tab__nav">
+            <ul class="nav">
+              <li class="nav-title">Показывать:</li>
+              <li class="toggle-item nav-item active"> Все характеристики</li>
+              <li class="toggle-item nav-item">Различающиеся характеристики</li>
+            </ul>
+            <i class="icon-down-arrow"></i>
+            <span class="clear clear-compare-button">Очистить сравнение</span>
+          </div>
+          <div class="tab__content">
+            <div class="tab__content-item active">
+              <div class="compare__table non-mobile">
+                <div class="container-0">
+                  {% for program in programs %}
+                    <div class="item col-lg-3 col-sm-2 no-gutter">
+                      {% include 'static/compare-block.html.twig' with {
+                        program: program
+                      } %}
+                    </div>
+                  {% endfor %}
                 </div>
-                <div class="container-0 only-mobile">
-                  <div class="col-sm-2 no-gutter">
-                    <div class="compare__table">
-                      <div class="slider-compare mobile container-0">
-                        {% for program in programs %}
-                          <div class="item col-lg-3 col-sm-2 no-gutter">
-                            {% include 'static/compare-block.html.twig' with {
-                              program: program
-                            } %}
-                          </div>
-                        {% endfor %}
-                        <div class="current-slide">
-                          <span class="current"></span>
-                          из
-                          <span class="all"></span>
+              </div>
+              <div class="container-0 only-mobile">
+                <div class="col-sm-2 no-gutter">
+                  <div class="compare__table">
+                    <div class="slider-compare mobile container-0">
+                      {% for program in programs %}
+                        <div class="item col-lg-3 col-sm-2 no-gutter">
+                          {% include 'static/compare-block.html.twig' with {
+                            program: program
+                          } %}
                         </div>
-                        <a class="previous">
-                          <i data-type="previous" class="icon-left"></i>
-                        </a>
-                        <a class="next">
-                          <i data-type="next" class="icon-right"></i>
-                        </a>
+                      {% endfor %}
+                      <div class="current-slide">
+                        <span class="current"></span>
+                        из
+                        <span class="all"></span>
                       </div>
+                      <a class="previous">
+                        <i data-type="previous" class="icon-left"></i>
+                      </a>
+                      <a class="next">
+                        <i data-type="next" class="icon-right"></i>
+                      </a>
                     </div>
                   </div>
-                  <div class="col-sm-2 no-gutter">
-                    <div class="compare__table">
-                      <div class="slider-compare-2 container-0">
-                        {% for program in programs %}
-                          <div class="item col-sm-4 no-gutter">
-                            {% include 'static/compare-block.html.twig' with {
-                              program: program
-                            } %}
-                          </div>
-                        {% endfor %}
-                        <div class="current-slide">
-                          <span class="current"></span>
-                          из
-                          <span class="all"></span>
+                </div>
+                <div class="col-sm-2 no-gutter">
+                  <div class="compare__table">
+                    <div class="slider-compare-2 container-0">
+                      {% for program in programs %}
+                        <div class="item col-sm-4 no-gutter">
+                          {% include 'static/compare-block.html.twig' with {
+                            program: program
+                          } %}
                         </div>
-                        <a class="previous">
-                          <i data-type="previous" class="icon-left"></i>
-                        </a>
-                        <a class="next">
-                          <i data-type="next" class="icon-right"></i>
-                        </a>
+                      {% endfor %}
+                      <div class="current-slide">
+                        <span class="current"></span>
+                        из
+                        <span class="all"></span>
                       </div>
+                      <a class="previous">
+                        <i data-type="previous" class="icon-left"></i>
+                      </a>
+                      <a class="next">
+                        <i data-type="next" class="icon-right"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="tab__content-item">
-                <div class="compare__table">
-                  <div class="container-0">
-                    {% for program in programs %}
-                      <div class="col-lg-3 no-gutter">
-                        {% include 'static/compare-block.html.twig' with {
-                          program: program
-                        } %}
-                      </div>
-                    {% endfor %}
-                  </div>
+            </div>
+            <div class="tab__content-item">
+              <div class="compare__table">
+                <div class="container-0">
+                  {% for program in programs %}
+                    <div class="col-lg-3 no-gutter">
+                      {% include 'static/compare-block.html.twig' with {
+                        program: program
+                      } %}
+                    </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>

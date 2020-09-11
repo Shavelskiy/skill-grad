@@ -19,8 +19,15 @@
 {% include 'components/header/page.index.html.twig' %}
 
 <main class="content">
-  {% block body %}
-  {% endblock %}
+  <div class="container">
+    <div class="d-f w-100 j-c-center">
+      {% include 'components/breadcrumbs.html.twig' %}
+    </div>
+    <div class="col-lg-12">
+      {% block body %}
+      {% endblock %}
+    </div>
+  </div>
 </main>
 
 {% include 'components/footer/index.html.twig' %}

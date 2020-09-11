@@ -8,172 +8,159 @@
 {% set title = 'Избранное' %}
 
 {% block body %}
-  <div class="container">
-    <div class="d-f w-100 j-c-center">
-      <div class="breadcrumbs">
-        <ul>
-          <li><a href="{{ path('site.index') }}">Главная</a></li>
-          <li><a class="active" href="#">{{ title }}</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-12">
-        <div class="main_favorites mt-0">
-          <h2 class="title">{{ title }}</h2>
-{#          <div class="alert red">#}
-{#            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>#}
-{#            Некоторые избранные вами программы были удалены провайдером#}
-{#          </div>#}
-          <div class="container">
-            <div class="tab">
-              <div class="toggle-menu tab__nav">
-                <ul class="nav">
-                  <li class="toggle-item nav-item nav-item-providers {{ tab == 'providers' ? 'active' : '' }}">
-                    Провайдеры обучения ({{ providers.total_count }})
-                  </li>
-                  <li class="toggle-item nav-item nav-item-programs {{ tab == 'programs' ? 'active' : '' }}">
-                    Программы обучения ({{ programs.total_count }})
-                  </li>
-                  <li class="toggle-item nav-item nav-item-articles {{ tab == 'articles' ? 'active' : '' }}">
-                    Статьи (72)
-                  </li>
-                </ul>
-                <i class="icon-down-arrow"></i>
+  <div class="main_favorites mt-0">
+    <h2 class="title">{{ title }}</h2>
+    {#          <div class="alert red">#}
+    {#            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>#}
+    {#            Некоторые избранные вами программы были удалены провайдером#}
+    {#          </div>#}
+    <div class="container">
+      <div class="tab">
+        <div class="toggle-menu tab__nav">
+          <ul class="nav">
+            <li class="toggle-item nav-item nav-item-providers {{ tab == 'providers' ? 'active' : '' }}">
+              Провайдеры обучения ({{ providers.total_count }})
+            </li>
+            <li class="toggle-item nav-item nav-item-programs {{ tab == 'programs' ? 'active' : '' }}">
+              Программы обучения ({{ programs.total_count }})
+            </li>
+            <li class="toggle-item nav-item nav-item-articles {{ tab == 'articles' ? 'active' : '' }}">
+              Статьи (72)
+            </li>
+          </ul>
+          <i class="icon-down-arrow"></i>
+        </div>
+        <div class="tab__content">
+          <div class="tab__content-item tab-providers {{ tab == 'providers' ? 'active' : '' }}">
+            <div class="col-lg-12 col-sm-4">
+              {% if providers.items|length > 0 %}
+                {% for provider in providers.items %}
+                  {% include 'provider/card-provider.html.twig' with {
+                    provider: provider,
+                    favorite_provider_ids: providers.items|map(p => p.id)
+                  } %}
+                {% endfor %}
+              {% else %}
+                <h5>В избранном пока нет провайдеров!</h5>
+              {% endif %}
+            </div>
+
+            <div class="col-lg-12">
+              {% include 'components/paginator.html.twig' with {
+                page: providers.page,
+                total_pages: providers.total_pages,
+                path_name: 'app.favorite',
+                page_key: 'provider_page'
+              } %}
+            </div>
+          </div>
+
+          <div class="tab__content-item tab-programs {{ tab == 'programs' ? 'active' : '' }}">
+            <div class="col-lg-12 col-sm-4">
+              {% if programs.items|length > 0 %}
+                {% for program in programs.items %}
+                  {% include 'program/card-program.html.twig' with {
+                    program: program,
+                    favorite: true
+                  } %}
+                {% endfor %}
+              {% else %}
+                <h5>В избранном пока нет программ!</h5>
+              {% endif %}
+            </div>
+
+            <div class="col-lg-12">
+              {% include 'components/paginator.html.twig' with {
+                page: programs.page,
+                total_pages: programs.total_pages,
+                path_name: 'app.favorite',
+                page_key: 'program_page'
+              } %}
+            </div>
+          </div>
+
+          <div class="tab__content-item tab-articles {{ tab == 'articles' ? 'active' : '' }}">
+            <div class="card-blog">
+              <div class="card-container">
+                <div class="card-img">
+                  <img src="/img/card-image.jpg" alt="">
+                  <div class="bottom">
+                    <div class="views">
+                      <span class="icon view"></span>
+                      253
+                    </div>
+                    <div class="comments">
+                      <span class="icon comment"></span>
+                      <a href="#">25 комментариев</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-content">
+                  <div class="top">
+                    <div class="date">
+                      <span class="icon calendar"></span>
+                      19.02.2019
+                    </div>
+                    <div class="time-read">
+                      <span class="icon read"></span>
+                      <span class="text">Время чтения:</span> 2 минуты
+                    </div>
+                    <div class="favorites">
+                      <div data-tippy-content="Убрать из избранного" class="like">
+                        <i class="icon-love-red"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <h4 class="title">Семейное образование: с чего начинать родителям обучение ребенка «дома»</h4>
+                  <p class="description">
+                    Для того чтобы составить инструкцию для родителей, решивших перевести ребенка на семейное
+                    обучение и не знающих с чего начать, «Учеба.ру» поговорила с ведущим эксперт...
+                    <a href="/pages/blog-single.html">Читать далее</a>
+                  </p>
+                  <div class="mobile-bottom">
+                    <div class="views">
+                      <span class="icon view"></span>
+                      253
+                    </div>
+                    <div class="comments">
+                      <span class="icon comment not"></span>
+                      <a href="#">Нет комментариев</a>
+                    </div>
+                  </div>
+                  <div class="bottom">
+                    <div class="status-block">
+                      <span class="icon status no"></span>
+                      Опубликована
+                    </div>
+                    <div class="rating">
+                      <div class="minus-block">
+                        <span class="icon minus"></span>
+                        5
+                      </div>
+                      <div class="plus-block">
+                        <span class="icon plus"></span>
+                        26
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="tab__content">
-                <div class="tab__content-item tab-providers {{ tab == 'providers' ? 'active' : '' }}">
-                  <div class="col-lg-12 col-sm-4">
-                    {% if providers.items|length > 0 %}
-                      {% for provider in providers.items %}
-                        {% include 'provider/card-provider.html.twig' with {
-                          provider: provider,
-                          favorite_provider_ids: providers.items|map(p => p.id)
-                        } %}
-                      {% endfor %}
-                    {% else %}
-                      <h5>В избранном пока нет провайдеров!</h5>
-                    {% endif %}
-                  </div>
+            </div>
 
-                  <div class="col-lg-12">
-                    {% include 'components/paginator.html.twig' with {
-                      page: providers.page,
-                      total_pages: providers.total_pages,
-                      path_name: 'app.favorite',
-                      page_key: 'provider_page'
-                    } %}
-                  </div>
-                </div>
-
-                <div class="tab__content-item tab-programs {{ tab == 'programs' ? 'active' : '' }}">
-                  <div class="col-lg-12 col-sm-4">
-                    {% if programs.items|length > 0 %}
-                      {% for program in programs.items %}
-                        {% include 'program/card-program.html.twig' with {
-                          program: program,
-                          additional: programAdditional(program),
-                          favorite: true
-                        } %}
-                      {% endfor %}
-                    {% else %}
-                      <h5>В избранном пока нет программ!</h5>
-                    {% endif %}
-                  </div>
-
-                  <div class="col-lg-12">
-                    {% include 'components/paginator.html.twig' with {
-                      page: programs.page,
-                      total_pages: programs.total_pages,
-                      path_name: 'app.favorite',
-                      page_key: 'program_page'
-                    } %}
-                  </div>
-                </div>
-
-                <div class="tab__content-item tab-articles {{ tab == 'articles' ? 'active' : '' }}">
-                  <div class="card-blog">
-                    <div class="card-container">
-                      <div class="card-img">
-                        <img src="/img/card-image.jpg" alt="">
-                        <div class="bottom">
-                          <div class="views">
-                            <span class="icon view"></span>
-                            253
-                          </div>
-                          <div class="comments">
-                            <span class="icon comment"></span>
-                            <a href="#">25 комментариев</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card-content">
-                        <div class="top">
-                          <div class="date">
-                            <span class="icon calendar"></span>
-                            19.02.2019
-                          </div>
-                          <div class="time-read">
-                            <span class="icon read"></span>
-                            <span class="text">Время чтения:</span> 2 минуты
-                          </div>
-                          <div class="favorites">
-                            <div data-tippy-content="Убрать из избранного" class="like">
-                              <i class="icon-love-red"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <h4 class="title">Семейное образование: с чего начинать родителям обучение ребенка «дома»</h4>
-                        <p class="description">
-                          Для того чтобы составить инструкцию для родителей, решивших перевести ребенка на семейное
-                          обучение и не знающих с чего начать, «Учеба.ру» поговорила с ведущим эксперт...
-                          <a href="/pages/blog-single.html">Читать далее</a>
-                        </p>
-                        <div class="mobile-bottom">
-                          <div class="views">
-                            <span class="icon view"></span>
-                            253
-                          </div>
-                          <div class="comments">
-                            <span class="icon comment not"></span>
-                            <a href="#">Нет комментариев</a>
-                          </div>
-                        </div>
-                        <div class="bottom">
-                          <div class="status-block">
-                            <span class="icon status no"></span>
-                            Опубликована
-                          </div>
-                          <div class="rating">
-                            <div class="minus-block">
-                              <span class="icon minus"></span>
-                              5
-                            </div>
-                            <div class="plus-block">
-                              <span class="icon plus"></span>
-                              26
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-12">
-                    <div class="pagination">
-                      <a href="#">
-                        <span class="prev"></span>
-                      </a>
-                      <a href="#">1</a>
-                      <a class="active" href="#">2</a>
-                      <a href="#">3</a>
-                      <a href="#">4</a>
-                      <a href="#">5</a>
-                      <a href="#">6</a>
-                      <a href="#">
-                        <span class="next"></span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+            <div class="col-lg-12">
+              <div class="pagination">
+                <a href="#">
+                  <span class="prev"></span>
+                </a>
+                <a href="#">1</a>
+                <a class="active" href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">
+                  <span class="next"></span>
+                </a>
               </div>
             </div>
           </div>

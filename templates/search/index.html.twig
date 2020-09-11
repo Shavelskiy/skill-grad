@@ -1,356 +1,356 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% set title = 'Результаты поиска' %}
+
 {% block body %}
-  <div class="container">
-    <div class="d-f w-100 j-c-center">
-      <div class="breadcrumbs">
-        <ul>
-          <li><a href="#">Главная</a></li>
-          <li><a class="active" href="#">Результаты поиска</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="main_search-result mt-0">
-      <h2 class="title">Результаты поиска</h2>
-      <div class="box">
-        <div class="box-content">
-          <div class="container-0">
-            <div class="col-lg-12">
-              <div class="mobile-filter">
-                <div id="open-filter" class="mobile-filter-header">
-                  Фильтр поиска
-                  <span class="icon open"></span>
-                </div>
-                <div id="filter" class="mobile-filter-content">
-                  <form class="form-filter" action="#">
-                    <div class="input-search-gray">
-                      <input class="input search" type="text" placeholder="Поиск">
-                      <i class="icon-search"></i>
-                    </div>
-                    <div class="type-search">
-                      <label class="circle-checkbox">
-                        Вебинар
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-                    <div class="category">
-                      <span class="filter-title">По категории:</span>
-                      <div class="select custom-select-wrapper">
-                        <div class="custom-select">
-                          <div class="custom-select__trigger"><span>Природопользование и эк...</span>
-                            <div class="arrow"></div>
-                          </div>
-                          <div class="custom-options scrollbar">
-                            <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 2</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 4</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 6</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 8</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="select custom-select-wrapper">
-                        <div class="custom-select">
-                          <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
-                            <div class="arrow"></div>
-                          </div>
-                          <div class="custom-options">
-                            <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 2</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 4</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 6</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
-                            <span class="custom-option category-option" data-value="volvo">Категория 8</span>
-                            <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="rating">
-                      <span class="filter-title">По рейтингу программы:</span>
-                      <div class="select custom-select-wrapper">
-                        <div class="custom-select">
-                          <div class="custom-select__trigger"><span>Выберите рейтинг</span>
-                            <div class="arrow"></div>
-                          </div>
-                          <div class="custom-options scrollbar">
-                            <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
-                            <span class="custom-option category-option" data-value="volvo">Volvo</span>
-                            <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="format">
-                      <span class="filter-title">По формату обучения:</span>
-                      <label class="circle-checkbox">
-                        Вебинар
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="circle-checkbox">
-                        Онлайн курс
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="circle-checkbox">
-                        Очно
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="circle-checkbox">
-                        Очно-заочно
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="circle-checkbox">
-                        Заочно
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="circle-checkbox">
-                        Смешанная форма
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-                    <div class="practice">
-                      <span class="filter-title">Теория и практика:</span>
-                      <div class="practice-container">
-                        Практики не менее <input class="input" value="100" type="number" min="0" max="100"/> %
-                      </div>
-                    </div>
-                    <div class="level">
-                      <span class="filter-title">Уровень:</span>
-                      <div class="select custom-select-wrapper">
-                        <div class="custom-select">
-                          <div class="custom-select__trigger"><span>Выберите уровень</span>
-                            <div class="arrow"></div>
-                          </div>
-                          <div class="custom-options scrollbar">
-                            <span class="custom-option category-option selected" data-value="tesla">Уровень 1</span>
-                            <span class="custom-option category-option selected" data-value="tesla">Уровень 2</span>
-                            <span class="custom-option category-option selected" data-value="tesla">Уровень 3</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="price">
-                      <span class="filter-title">Стоимость:</span>
-                      <div class="range-container">
-                        <div class="range-desc">
-                          <span>от</span>
-                          <span>до</span>
-                        </div>
-                        <div class="range"></div>
-                        <div class="range-rule">
-                          <input class="input from" min="0" type="number">
-                          <input class="input before" min="0" type="number">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="city">
-                      <span class="filter-title">Выбор города:</span>
-                      <div class="current-city">Ваш город: <strong>Москва</strong></div>
-                      <a href="javascript:void(0)" class="open-change-city link-city">Изменить город</a>
-                    </div>
-                    <div class="button-container">
-                      <button class="button-red">Сохранить</button>
-                      <a href="#">Сбросить фильтр</a>
-                    </div>
-                  </form>
-                </div>
+  <div class="main_search-result mt-0">
+    <h2 class="title">{{ title }}</h2>
+    <div class="box">
+      <div class="box-content">
+        <div class="container-0">
+          <div class="col-lg-12">
+            <div class="mobile-filter">
+              <div id="open-filter" class="mobile-filter-header">
+                Фильтр поиска
+                <span class="icon open"></span>
               </div>
-              <h5 class="result-title">Программы обучения ( 1 ) </h5>
-              {% include 'program/blocks/card-program.old.html.twig' %}
-              <h5 class="result-title">Провайдеры обучения ( 1 ) </h5>
-              {% include 'provider/blocks/card-provider.old.html.twig' %}
-              <h5 class="result-title">Блог ( 1 ) </h5>
-              {% include 'blog/blocks/card-blog.html.twig' %}
-              <div class="row">
-                <div class="pagination">
-                  <a href="#">
-                    <span class="prev"></span>
-                  </a>
-                  <a href="#">1</a>
-                  <a class="active" href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a>
-                  <a href="#">
-                    <span class="next"></span>
-                  </a>
-                </div>
+              <div id="filter" class="mobile-filter-content">
+                <form class="form-filter" action="#">
+                  <div class="input-search-gray">
+                    <input class="input search" type="text" placeholder="Поиск">
+                    <i class="icon-search"></i>
+                  </div>
+                  <div class="type-search">
+                    <label class="circle-checkbox">
+                      Вебинар
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="category">
+                    <span class="filter-title">По категории:</span>
+                    <div class="select custom-select-wrapper">
+                      <div class="custom-select">
+                        <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                          <div class="arrow"></div>
+                        </div>
+                        <div class="custom-options scrollbar">
+                          <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 2</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 4</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 6</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 8</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="select custom-select-wrapper">
+                      <div class="custom-select">
+                        <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
+                          <div class="arrow"></div>
+                        </div>
+                        <div class="custom-options">
+                          <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 2</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 4</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 6</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
+                          <span class="custom-option category-option" data-value="volvo">Категория 8</span>
+                          <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rating">
+                    <span class="filter-title">По рейтингу программы:</span>
+                    <div class="select custom-select-wrapper">
+                      <div class="custom-select">
+                        <div class="custom-select__trigger"><span>Выберите рейтинг</span>
+                          <div class="arrow"></div>
+                        </div>
+                        <div class="custom-options scrollbar">
+                          <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                          <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                          <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="format">
+                    <span class="filter-title">По формату обучения:</span>
+                    <label class="circle-checkbox">
+                      Вебинар
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="circle-checkbox">
+                      Онлайн курс
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="circle-checkbox">
+                      Очно
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="circle-checkbox">
+                      Очно-заочно
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="circle-checkbox">
+                      Заочно
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="circle-checkbox">
+                      Смешанная форма
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="practice">
+                    <span class="filter-title">Теория и практика:</span>
+                    <div class="practice-container">
+                      Практики не менее <input class="input" value="100" type="number" min="0" max="100"/> %
+                    </div>
+                  </div>
+                  <div class="level">
+                    <span class="filter-title">Уровень:</span>
+                    <div class="select custom-select-wrapper">
+                      <div class="custom-select">
+                        <div class="custom-select__trigger"><span>Выберите уровень</span>
+                          <div class="arrow"></div>
+                        </div>
+                        <div class="custom-options scrollbar">
+                          <span class="custom-option category-option selected" data-value="tesla">Уровень 1</span>
+                          <span class="custom-option category-option selected" data-value="tesla">Уровень 2</span>
+                          <span class="custom-option category-option selected" data-value="tesla">Уровень 3</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="price">
+                    <span class="filter-title">Стоимость:</span>
+                    <div class="range-container">
+                      <div class="range-desc">
+                        <span>от</span>
+                        <span>до</span>
+                      </div>
+                      <div class="range"></div>
+                      <div class="range-rule">
+                        <input class="input from" min="0" type="number">
+                        <input class="input before" min="0" type="number">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="city">
+                    <span class="filter-title">Выбор города:</span>
+                    <div class="current-city">Ваш город: <strong>Москва</strong></div>
+                    <a href="javascript:void(0)" class="open-change-city link-city">Изменить город</a>
+                  </div>
+                  <div class="button-container">
+                    <button class="button-red">Сохранить</button>
+                    <a href="#">Сбросить фильтр</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <h5 class="result-title">Программы обучения ( {{ programs|length }} ) </h5>
+            {% for program in programs %}
+              {% include 'program/card-program.html.twig' with {
+                program:program
+              } %}
+            {% endfor %}
+            <h5 class="result-title">Провайдеры обучения ( {{ providers|length }} ) </h5>
+            {% for provider in providers %}
+              {% include 'provider/card-provider.html.twig' with {
+                provider: provider
+              } %}
+            {% endfor %}
+            <h5 class="result-title">Блог ( 1 ) </h5>
+            {% include 'blog/blocks/card-blog.html.twig' %}
+            <div class="row">
+              <div class="pagination">
+                <a href="#">
+                  <span class="prev"></span>
+                </a>
+                <a href="#">1</a>
+                <a class="active" href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">
+                  <span class="next"></span>
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="box-sidebar">
-          <div class="container-0">
-            <div class="col-lg-12">
-              <form class="form-filter" action="#">
-                <div class="input-search-gray">
-                  <input class="input search" type="text" placeholder="Поиск">
-                  <i class="icon-search"></i>
-                </div>
-                <div class="type-search">
-                  <label class="circle-checkbox">
-                    По программам обучения
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    По провайдерам обучения
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    По блогу
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="category">
-                  <span class="filter-title">По категории:</span>
-                  <div class="select custom-select-wrapper">
-                    <div class="custom-select">
-                      <div class="custom-select__trigger"><span>Природопользование и эк...</span>
-                        <div class="arrow"></div>
-                      </div>
-                      <div class="custom-options scrollbar">
-                        <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 2</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 4</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 6</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 8</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
-                      </div>
+      </div>
+      <div class="box-sidebar">
+        <div class="container-0">
+          <div class="col-lg-12">
+            <form class="form-filter" action="#">
+              <div class="input-search-gray">
+                <input class="input search" type="text" placeholder="Поиск">
+                <i class="icon-search"></i>
+              </div>
+              <div class="type-search">
+                <label class="circle-checkbox">
+                  По программам обучения
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  По провайдерам обучения
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  По блогу
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="category">
+                <span class="filter-title">По категории:</span>
+                <div class="select custom-select-wrapper">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+                      <div class="arrow"></div>
                     </div>
-                  </div>
-                  <div class="select custom-select-wrapper">
-                    <div class="custom-select">
-                      <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
-                        <div class="arrow"></div>
-                      </div>
-                      <div class="custom-options">
-                        <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 2</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 4</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 6</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
-                        <span class="custom-option category-option" data-value="volvo">Категория 8</span>
-                        <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
-                      </div>
+                    <div class="custom-options scrollbar">
+                      <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 2</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 4</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 6</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 8</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
                     </div>
                   </div>
                 </div>
-                <div class="rating">
-                  <span class="filter-title">По рейтингу программы:</span>
-                  <div class="select custom-select-wrapper">
-                    <div class="custom-select">
-                      <div class="custom-select__trigger"><span>Выберите рейтинг</span>
-                        <div class="arrow"></div>
-                      </div>
-                      <div class="custom-options scrollbar">
-                        <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
-                        <span class="custom-option category-option" data-value="volvo">Volvo</span>
-                        <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
-                      </div>
+                <div class="select custom-select-wrapper">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options">
+                      <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 2</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 3</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 4</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 5</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 6</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 7</span>
+                      <span class="custom-option category-option" data-value="volvo">Категория 8</span>
+                      <span class="custom-option category-option" data-value="mercedes">Категория 9</span>
                     </div>
                   </div>
                 </div>
-                <div class="format">
-                  <span class="filter-title">По формату обучения:</span>
-                  <label class="circle-checkbox">
-                    Вебинар
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    Онлайн курс
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    Очно
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    Очно-заочно
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    Заочно
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="circle-checkbox">
-                    Смешанная форма
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="practice">
-                  <span class="filter-title">Теория и практика:</span>
-                  <div class="practice-container">
-                    Практики не менее <input class="input" value="100" type="number" min="0" max="100"/> %
-                  </div>
-                </div>
-                <div class="level">
-                  <span class="filter-title">Уровень:</span>
-                  <div class="select custom-select-wrapper">
-                    <div class="custom-select">
-                      <div class="custom-select__trigger"><span>Выберите уровень</span>
-                        <div class="arrow"></div>
-                      </div>
-                      <div class="custom-options scrollbar">
-                        <span class="custom-option category-option selected" data-value="tesla">Уровень 1</span>
-                        <span class="custom-option category-option selected" data-value="tesla">Уровень 2</span>
-                        <span class="custom-option category-option selected" data-value="tesla">Уровень 3</span>
-                      </div>
+              </div>
+              <div class="rating">
+                <span class="filter-title">По рейтингу программы:</span>
+                <div class="select custom-select-wrapper">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger"><span>Выберите рейтинг</span>
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options scrollbar">
+                      <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+                      <span class="custom-option category-option" data-value="volvo">Volvo</span>
+                      <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
                     </div>
                   </div>
                 </div>
-                <div class="price">
-                  <span class="filter-title">Стоимость:</span>
-                  <div class="range-container">
-                    <div class="range-desc">
-                      <span>от</span>
-                      <span>до</span>
+              </div>
+              <div class="format">
+                <span class="filter-title">По формату обучения:</span>
+                <label class="circle-checkbox">
+                  Вебинар
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  Онлайн курс
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  Очно
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  Очно-заочно
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  Заочно
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="circle-checkbox">
+                  Смешанная форма
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="practice">
+                <span class="filter-title">Теория и практика:</span>
+                <div class="practice-container">
+                  Практики не менее <input class="input" value="100" type="number" min="0" max="100"/> %
+                </div>
+              </div>
+              <div class="level">
+                <span class="filter-title">Уровень:</span>
+                <div class="select custom-select-wrapper">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger"><span>Выберите уровень</span>
+                      <div class="arrow"></div>
                     </div>
-                    <div class="range"></div>
-                    <div class="range-rule">
-                      <input class="input from" min="0" type="number">
-                      <input class="input before" min="0" type="number">
+                    <div class="custom-options scrollbar">
+                      <span class="custom-option category-option selected" data-value="tesla">Уровень 1</span>
+                      <span class="custom-option category-option selected" data-value="tesla">Уровень 2</span>
+                      <span class="custom-option category-option selected" data-value="tesla">Уровень 3</span>
                     </div>
                   </div>
                 </div>
-                <div class="city">
-                  <span class="filter-title">Выбор города:</span>
-                  <div class="current-city">Ваш город: <strong>Москва</strong></div>
-                  <a href="javascript:void(0)" class="open-change-city link-city">Изменить город</a>
+              </div>
+              <div class="price">
+                <span class="filter-title">Стоимость:</span>
+                <div class="range-container">
+                  <div class="range-desc">
+                    <span>от</span>
+                    <span>до</span>
+                  </div>
+                  <div class="range"></div>
+                  <div class="range-rule">
+                    <input class="input from" min="0" type="number">
+                    <input class="input before" min="0" type="number">
+                  </div>
                 </div>
-                <div class="button-container">
-                  <button class="button-red">Сохранить</button>
-                  <a href="#">Сбросить фильтр</a>
-                </div>
-              </form>
-            </div>
+              </div>
+              <div class="city">
+                <span class="filter-title">Выбор города:</span>
+                <div class="current-city">Ваш город: <strong>Москва</strong></div>
+                <a href="javascript:void(0)" class="open-change-city link-city">Изменить город</a>
+              </div>
+              <div class="button-container">
+                <button class="button-red">Сохранить</button>
+                <a href="#">Сбросить фильтр</a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
