@@ -1,4 +1,5 @@
 {% set additional = programAdditional(program) %}
+{% set inCompare = inCompare(program.id, app.request.cookies) %}
 
 <div class="card">
   {% if additional.discount is not null %}
@@ -59,9 +60,9 @@
       </div>
       <div class="card__footer-add compare-program-add" data-id="{{ program.id }}">
         <span class="tooltip">
-          Добавить в сравнение
+          {{ inCompare ? 'Находится в сравнении' : 'Добавить в сравнение' }}
         </span>
-        <i class="icon-add-file"></i>
+        <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }}"></i>
       </div>
     </div>
   </div>

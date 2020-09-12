@@ -13,11 +13,17 @@ class CommonExtension extends AbstractExtension
     {
         return [
             new TwigFunction('getCompareCount', [$this, 'getCompareCount']),
+            new TwigFunction('inCompare', [$this, 'inCompare']),
         ];
     }
 
     public function getCompareCount(ParameterBag $cookies): int
     {
         return count(CompareHelper::getCompareProgramsFromParameterBag($cookies));
+    }
+
+    public function inCompare(int $programId, ParameterBag $cookies): bool
+    {
+        return in_array($programId, CompareHelper::getCompareProgramsFromParameterBag($cookies), true);
     }
 }

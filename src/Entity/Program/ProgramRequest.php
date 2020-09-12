@@ -51,9 +51,10 @@ class ProgramRequest
         return $this->user;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): self
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getProgram(): Program
@@ -61,9 +62,10 @@ class ProgramRequest
         return $this->program;
     }
 
-    public function setProgram(Program $program): void
+    public function setProgram(Program $program): self
     {
         $this->program = $program;
+        return $this;
     }
 
     public function getComment(): string
@@ -71,9 +73,10 @@ class ProgramRequest
         return $this->comment;
     }
 
-    public function setComment(string $comment): void
+    public function setComment(string $comment): self
     {
         $this->comment = $comment;
+        return $this;
     }
 
     public function getStatus(): string
@@ -81,9 +84,10 @@ class ProgramRequest
         return $this->status;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): self
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getRejectReason(): string
@@ -91,8 +95,9 @@ class ProgramRequest
         return $this->rejectReason;
     }
 
-    public function setRejectReason(string $rejectReason): void
+    public function setRejectReason(string $rejectReason): self
     {
         $this->rejectReason = $rejectReason;
+        return $this;
     }
 }

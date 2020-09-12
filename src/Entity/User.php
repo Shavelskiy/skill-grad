@@ -66,6 +66,11 @@ class User implements UserInterface
     protected Collection $programReviews;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramRequest", mappedBy="user", fetch="LAZY")
+     */
+    protected Collection $programRequests;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers")
      */
     protected Collection $favoriteProviders;
@@ -79,6 +84,8 @@ class User implements UserInterface
     {
         $this->favoriteProviders = new ArrayCollection();
         $this->favoritePrograms = new ArrayCollection();
+        $this->programReviews = new ArrayCollection();
+        $this->programRequests = new ArrayCollection();
     }
 
     public function getUsername(): string
@@ -218,5 +225,27 @@ class User implements UserInterface
     public function getFavoriteCount(): int
     {
         return $this->favoriteProviders->count() + $this->favoritePrograms->count();
+    }
+
+    public function getProgramReviews()
+    {
+        return $this->programReviews;
+    }
+
+    public function setProgramReviews($programReviews): self
+    {
+        $this->programReviews = $programReviews;
+        return $this;
+    }
+
+    public function getProgramRequests()
+    {
+        return $this->programRequests;
+    }
+
+    public function setProgramRequests($programRequests): self
+    {
+        $this->programRequests = $programRequests;
+        return $this;
     }
 }
