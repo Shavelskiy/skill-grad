@@ -59,13 +59,9 @@
 
   &__footer {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 10px 25px 25px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 
     @media (min-width: 320px) and (max-width: 767px) {
       flex-direction: column;
@@ -99,6 +95,7 @@
 
     & .info, .time, .star {
       display: flex;
+      margin-right: 50px;
 
       @media (min-width: 320px) and (max-width: 1023px) {
         margin-right: 0;
@@ -113,7 +110,6 @@
       font-size: 12px;
       line-height: 14px;
       color: #1d71b1;
-      margin-top: 2px;
     }
 
     &-price {
@@ -209,6 +205,18 @@
         justify-content: space-between;
         height: 100%;
         margin: 15px 0 15px 0;
+      }
+    }
+
+    .card__footer {
+      flex-direction: column;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+
+      .info, .time, .star {
+        margin-right: 0;
       }
     }
   }
