@@ -1,21 +1,19 @@
-{% set additional = programAdditional(program) %}
-
 <div class="swiper-slide">
   <div class="slider__item">
     <div class="card small">
-      {% if additional.discount is not null %}
+      {% if program.additional.discount is not null %}
         <span class="icon discount"></span>
       {% endif %}
       <div class="card__header">
         <div class="card__header-icon">
-          {% if program.providers[0].image %}
-            <img src="{{ program.providers[0].image.publicPath }}" alt="">
+          {% if program.provider.image is not null %}
+            <img src="{{ program.provider.image }}" alt="">
           {% else %}
             <img src="/img/provider_no_logo.png" alt="">
           {% endif %}
         </div>
         <span class="card__header-title">
-          {{ program.providers[0].name }}
+          {{ program.provider.name }}
         </span>
       </div>
       <div class="card__body">
@@ -30,11 +28,11 @@
         <div class="card__body-info col-lg-12 col-sm-4 no-gutter">
           <div class="info">
             <i class="icon-book"></i>
-            <span class="info-text">{{ additional.format }}</span>
+            <span class="info-text">{{ program.additional.format }}</span>
           </div>
           <div class="time">
             <i class="icon-clock"></i>
-            <span class="info-text">{{ additional.duration }}</span>
+            <span class="info-text">{{ program.additional.duration }}</span>
           </div>
           <div class="star">
             <i class="icon-star"></i>
@@ -43,13 +41,13 @@
         </div>
 
         <div class="col-lg-12 col-md-12 col-sm-4 d-flex j-c-space-between">
-          {% if additional.price is not null %}
+          {% if program.additional.price is not null %}
             <div class="card__footer-price">
               {% if program.oldPrice is not null and program.showPriceReduction %}
                 <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
-                <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                <span class="price-new">{{ program.additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
               {% else %}
-                <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                <span class="price-text">{{ program.additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
               {% endif %}
             </div>
           {% endif %}

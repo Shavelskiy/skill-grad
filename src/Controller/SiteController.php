@@ -6,9 +6,12 @@ use App\Cache\Keys;
 use App\Cache\MemcachedClient;
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Program\Program;
+use App\Entity\Provider;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
+use App\Service\ProgramService;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,15 +23,18 @@ class SiteController extends AbstractController
     protected ArticleRepository $articleRepository;
     protected CategoryRepository $categoryRepository;
     protected ProgramRepository $programRepository;
+    protected ProgramService $programService;
 
     public function __construct(
         ArticleRepository $articleRepository,
         CategoryRepository $categoryRepository,
-        ProgramRepository $programRepository
+        ProgramRepository $programRepository,
+        ProgramService $programService
     ) {
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
         $this->programRepository = $programRepository;
+        $this->programService = $programService;
     }
 
     /**
@@ -44,17 +50,56 @@ class SiteController extends AbstractController
 
     protected function getSliderItems(): array
     {
-        $result = [];
+        $result = function () {
+            $result = [];
 
-        /** @var Category $category */
-        foreach ($this->categoryRepository->findRootCategories() as $category) {
-            $result[] = [
-                'category' => $category->getName(),
-                'programs' => $this->programRepository->getNewCategoryPrograms($category),
-            ];
+            /** @var Category $category */
+            foreach ($this->categoryRepository->findRootCategories() as $category) {
+                $programs = [];
+
+                /** @var Program $program */
+                foreach ($this->programRepository->getNewCategoryPrograms($category) as $program) {
+                    /** @var Provider $provider */
+                    $provider = $program->getProviders()[0];
+
+                    $programs[] = [
+                        'id' => $program->getId(),
+                        'name' => $program->getName(),
+                        'provider' => [
+                            'name' => $provider->getName(),
+                            'image' => $provider->getImage() ? $provider->getImage()->getPublicPath() : null,
+                        ],
+                        'annotation' => $program->getAnnotation(),
+                        'oldPrice' => $program->getOldPrice(),
+                        'additional' => $this->programService->programAdditional($program),
+                    ];
+                }
+
+                $result[] = [
+                    'category' => $category->getName(),
+                    'programs' => $programs,
+                ];
+            }
+
+            return $result;
+        };
+
+        try {
+            $cache = MemcachedClient::getCache();
+
+            /** @var CacheItemInterface $item */
+            $item = $cache->getItem(Keys::MAIN_SLIDER);
+
+            if (!$item->isHit()) {
+                $item->set($result());
+                $item->expiresAfter(360000);
+                $cache->save($item);
+            }
+
+            return $item->get();
+        } catch (Throwable $e) {
+            return [];
         }
-
-        return $result;
     }
 
     protected function getArticles(): array
@@ -79,8 +124,6 @@ class SiteController extends AbstractController
 
             return $result;
         };
-
-        return $result();
 
         try {
             $cache = MemcachedClient::getCache();

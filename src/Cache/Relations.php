@@ -4,6 +4,7 @@ namespace App\Cache;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Program\Program;
 
 final class Relations
 {
@@ -13,6 +14,9 @@ final class Relations
         ],
         Article::class => [
             Keys::MAIN_BLOG,
+        ],
+        Program::class => [
+            Keys::MAIN_SLIDER,
         ],
     ];
 }
