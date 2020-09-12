@@ -74,8 +74,6 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.article.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param Request $request
      */
     public function view(int $id): Response
     {

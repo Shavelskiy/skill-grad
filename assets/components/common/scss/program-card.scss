@@ -1,0 +1,221 @@
+.card {
+  box-shadow: 0 10px 40px rgba(10, 43, 74, 0.07);
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  position: relative;
+
+  .discount {
+    position: absolute;
+    z-index: 100;
+    top: -20px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  &__header {
+    background-color: #eaf1f7;
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+
+    &-icon {
+      margin-right: 15px;
+
+      img {
+        height: 35px;
+      }
+    }
+
+    &-title {
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+
+  &__body {
+    @media (min-width: 320px) and (max-width: 767px) {
+      padding: 10px 10px;
+    }
+    padding: 20px 25px;
+
+    &-title {
+      font-size: 18px;
+      display: block;
+      color: #3c3c3c;
+      font-weight: 700;
+      line-height: 24px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #cccccc;
+      margin-bottom: 15px;
+    }
+
+    &-description {
+      font-size: 15px;
+      color: #3c3c3c;
+      line-height: 22px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 25px 25px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    &-info {
+      display: flex;
+      position: relative;
+      height: 100%;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      @media (min-width: 768px) and (max-width: 1023px) {
+        justify-content: space-between;
+      }
+
+      .favorites {
+        position: absolute;
+        right: 80px;
+
+        .like {
+          i {
+            font-size: 25px;
+          }
+        }
+      }
+    }
+
+    & .info, .time, .star {
+      display: flex;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        margin-right: 0;
+      }
+
+      & > i {
+        margin-right: 10px;
+      }
+    }
+
+    & .info-text {
+      font-size: 12px;
+      line-height: 14px;
+      color: #1d71b1;
+      margin-top: 2px;
+    }
+
+    &-price {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      & .price-old {
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 700;
+        text-decoration: line-through;
+        text-decoration-color: #f92e25;
+      }
+
+      & .price-new {
+        @media (min-width: 320px) and (max-width: 767px) {
+          font-size: 18px;
+        }
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 18px;
+        color: #f92e25;
+      }
+    }
+
+    &-button {
+      width: 100px;
+    }
+
+    &-add {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 45px;
+      height: 45px;
+      background-color: #f5f6f8;
+      border-radius: 100%;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        & > i {
+          &:before {
+            color: #3c3c3c;
+          }
+        }
+
+        & > .tooltip {
+          bottom: 125%;
+          left: 50%;
+          visibility: visible;
+          margin-left: -55px;
+        }
+      }
+
+      & > i {
+        font-size: 19px;
+        margin-left: 3px;
+
+        &:before {
+          color: #999;
+        }
+
+        &.active {
+          &:before {
+            color: #1d71b1;
+          }
+        }
+      }
+    }
+  }
+
+  &.small {
+    position: relative;
+    height: 564px;
+
+    .discount {
+      position: absolute;
+      z-index: 100;
+      top: -20px;
+      right: 0;
+      width: 40px;
+      height: 40px;
+    }
+
+    .card__body {
+      padding-bottom: 10px;
+
+      &-info {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        margin: 15px 0 15px 0;
+      }
+    }
+  }
+
+  &.non-active {
+    opacity: .4;
+    position: relative;
+    cursor: pointer;
+  }
+}

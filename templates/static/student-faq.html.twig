@@ -53,10 +53,12 @@
         </p>
       </div>
     </div>
-    <div class="container-0 j-c-center mt-20">
-      <div class="col-lg-4 col-sm-4 col-md-6">
-        <span class="register-user-btn button-red">Регистрация обучающегося</span>
+    {% if app.user is null %}
+      <div class="container-0 j-c-center mt-20">
+        <div class="col-lg-4 col-sm-4 col-md-6">
+          <span class="register-user-btn button-red">Регистрация обучающегося</span>
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 {% endblock %}

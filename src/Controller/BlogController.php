@@ -35,9 +35,9 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="blog.view", methods={"GET"})
+     * @Route("/{id}", name="blog.view", methods={"GET"})
      */
-    public function viewAction(Request $request): Response
+    public function viewAction(int $id): Response
     {
         /* @var Article[] $articles */
 //        $articles = $this->articleRepository->findBy(['slug' => $request->get('slug')]);

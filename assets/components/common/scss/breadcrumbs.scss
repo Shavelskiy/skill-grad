@@ -1,0 +1,49 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    font-size: 12px;
+  }
+
+  ul {
+    display: flex;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+
+    li {
+      .active {
+        color: #3c3c3c;
+        font-size: 14px;
+      }
+
+      &:not(:last-child) {
+        position: relative;
+        margin-right: 30px;
+
+        &:after {
+          content: "/";
+          position: absolute;
+          right: -18px;
+        }
+
+        a {
+          color: #1d71b1;
+          text-decoration: underline;
+          font-size: 14px;
+
+          @media (min-width: 320px) and (max-width: 767px) {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

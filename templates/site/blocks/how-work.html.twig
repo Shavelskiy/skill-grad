@@ -23,9 +23,11 @@
             <li>Направьте заявку провайдеру обучения</li>
             <li>Зарегистрируйтесь. Вы сможете писать отзывы, задавать вопросы</li>
           </ul>
-          <div class="btn-container">
-            <button class="button-red register-user-btn">Регистрация обучающегося</button>
-          </div>
+          {% if app.user is null %}
+            <div class="btn-container">
+              <button class="button-red register-user-btn">Регистрация обучающегося</button>
+            </div>
+          {% endif %}
         </div>
       </div>
       <div class="col-lg-6 tab-service__content tab__content-item right tab-2">
@@ -41,9 +43,11 @@
             <li>Отвечайте на отзывы</li>
             <li>Получайте заявки</li>
           </ul>
-          <div class="btn-container">
-            <button class="button-red register-provider-btn">Регистрация провайдера</button>
-          </div>
+          {% if app.user is null %}
+            <div class="btn-container">
+              <button class="button-red register-provider-btn">Регистрация провайдера</button>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

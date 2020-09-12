@@ -5,6 +5,10 @@
 @import "project/layout";
 
 @import "../blocks/modules";
+@import "../components/common/scss/breadcrumbs";
+@import "../components/common/scss/paginator";
+@import "../components/common/scss/blog-card";
+@import "../components/common/scss/program-card";
 
 *,
 *::before,

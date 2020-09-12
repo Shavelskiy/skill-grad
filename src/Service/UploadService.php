@@ -37,6 +37,9 @@ class UploadService implements UploadServiceInterface
         $uuid = Uuid::uuid4();
         $fileName = $uuid->toString() . '-' . time() . '.' . $uploadedFile->guessExtension();
 
+        [$path1, $path2, $path3] = explode('-', $uuid->toString());
+
+
         try {
             $uploadedFile->move($this->uploadDir, $fileName);
         } catch (Exception $e) {

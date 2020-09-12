@@ -1,10 +1,4 @@
 @mixin input($font-size, $placeholder-color, $background-color) {
-  @media (min-width: 768px) and (max-width: 1023px) {
-    padding-left: 15px;
-  }
-  @media (min-width: 320px) and (max-width: 767px) {
-    padding-left: 15px;
-  }
   width: 100%;
   border: none;
   background-color: $background-color;
@@ -17,9 +11,15 @@
   font-size: $font-size;
   line-height: 16px;
   margin-bottom: 20px;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    padding-left: 15px;
+  }
+
   &:focus, &:active {
     outline: none;
   }
+
   &::placeholder {
     color: $placeholder-color;
     font-size: $font-size;
@@ -44,14 +44,15 @@
   }
 
   & > i {
-    @media (min-width: 320px) and (max-width: 767px) {
-      right: 20px;
-    }
     position: absolute;
     top: 50%;
     right: 40px;
     font-size: 20px;
     margin-top: -20px;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      right: 20px;
+    }
 
     &:before {
       color: #1d71b1;
@@ -67,14 +68,15 @@
   }
 
   & > i {
-    @media (min-width: 320px) and (max-width: 767px) {
-      right: 20px;
-    }
     position: absolute;
     top: 50%;
     right: 40px;
     font-size: 20px;
     margin-top: -20px;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      right: 20px;
+    }
 
     &:before {
       color: #1d71b1;
@@ -147,6 +149,7 @@
     color: #999;
     font-size: 15px;
     line-height: 16px;
+
     @media (max-width: 768px) {
       padding-left: 15px;
     }
@@ -384,168 +387,6 @@
       color: #3c3c3c;
       line-height: 22px;
       margin-top: 15px;
-    }
-  }
-}
-
-.breadcrumbs {
-  @media (min-width: 320px) and (max-width: 767px) {
-    font-size: 12px;
-  }
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  ul {
-    @media (min-width: 320px) and (max-width: 767px) {
-      flex-wrap: wrap;
-      justify-content: center;
-      text-align: center;
-    }
-    display: flex;
-
-    li {
-      .active {
-        color: #3c3c3c;
-        font-size: 14px;
-      }
-
-      &:not(:last-child) {
-        position: relative;
-        margin-right: 30px;
-
-        &:after {
-          content: "/";
-          position: absolute;
-          right: -18px;
-        }
-
-        a {
-          @media (min-width: 320px) and (max-width: 767px) {
-            font-size: 12px;
-          }
-          color: #1d71b1;
-          text-decoration: underline;
-          font-size: 14px;
-        }
-      }
-    }
-  }
-}
-
-.pagination {
-  @media (min-width: 320px) and (max-width: 767px) {
-    justify-content: center;
-  }
-  display: flex;
-
-  .prev {
-    display: block;
-    position: relative;
-    width: 20px;
-    height: 2px;
-    background-color: #c4c6ca;
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: -4px;
-      left: -1px;
-      width: 10px;
-      height: 2px;
-      transform: rotate(-45deg);
-      background-color: #c4c6ca;
-    }
-
-    &:before {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: -1px;
-      width: 10px;
-      height: 2px;
-      transform: rotate(45deg);
-      background-color: #c4c6ca;
-    }
-
-    &:hover {
-      background-color: #3c3c3c;
-
-      &:after {
-        background-color: #3c3c3c;
-      }
-
-      &:before {
-        background-color: #3c3c3c;
-      }
-    }
-  }
-
-  .next {
-    display: block;
-    position: relative;
-    width: 20px;
-    height: 2px;
-    background-color: #c4c6ca;
-
-    &:after {
-      content: "";
-      position: absolute;
-      right: -1px;
-      bottom: -4px;
-      width: 10px;
-      height: 2px;
-      transform: rotate(-45deg);
-      background-color: #c4c6ca;
-    }
-
-    &:before {
-      content: "";
-      position: absolute;
-      top: -4px;
-      right: -1px;
-      width: 10px;
-      height: 2px;
-      transform: rotate(45deg);
-      background-color: #c4c6ca;
-    }
-
-    &:hover {
-      background-color: #3c3c3c;
-
-      &:after {
-        background-color: #3c3c3c;
-      }
-
-      &:before {
-        background-color: #3c3c3c;
-      }
-    }
-  }
-
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    transition: background-color .3s;
-    color: #3c3c3c;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22px;
-    text-decoration: none;
-
-    &.active {
-      background-color: #f5f6f8;
-      border-radius: 100%;
-      color: #f7562e;
-    }
-
-    &:hover:not(.active) {
-      color: #f7562e;
     }
   }
 }

@@ -5,43 +5,58 @@ namespace App\Controller;
 use App\Cache\Keys;
 use App\Cache\MemcachedClient;
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Repository\ArticleRepository;
-use ErrorException;
+use App\Repository\CategoryRepository;
+use App\Repository\ProgramRepository;
 use Psr\Cache\CacheItemInterface;
-use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 class SiteController extends AbstractController
 {
     protected ArticleRepository $articleRepository;
+    protected CategoryRepository $categoryRepository;
+    protected ProgramRepository $programRepository;
 
-    public function __construct(ArticleRepository $articleRepository)
-    {
+    public function __construct(
+        ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository,
+        ProgramRepository $programRepository
+    ) {
         $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->programRepository = $programRepository;
     }
 
     /**
      * @Route("/", name="site.index")
-     *
-     * @throws CacheException
-     * @throws ErrorException
-     * @throws InvalidArgumentException
      */
     public function index(): Response
     {
         return $this->render('site/index.html.twig', [
             'articles' => $this->getArticles(),
+            'sliderItems' => $this->getSliderItems(),
         ]);
     }
 
-    /**
-     * @throws ErrorException
-     * @throws InvalidArgumentException
-     * @throws CacheException
-     */
+    protected function getSliderItems(): array
+    {
+        $result = [];
+
+        /** @var Category $category */
+        foreach ($this->categoryRepository->findRootCategories() as $category) {
+            $result[] = [
+                'category' => $category->getName(),
+                'programs' => $this->programRepository->getNewCategoryPrograms($category),
+            ];
+        }
+
+        return $result;
+    }
+
     protected function getArticles(): array
     {
         $result = function () {
@@ -50,6 +65,7 @@ class SiteController extends AbstractController
             /** @var Article $article */
             foreach ($this->articleRepository->getMainPageArticles() as $article) {
                 $result[] = [
+                    'id' => $article->getId(),
                     'slug' => $article->getSlug(),
                     'imageSrc' => $article->getImage() ? $article->getImage()->getPublicPath() : null,
                     'name' => $article->getName(),
@@ -64,17 +80,23 @@ class SiteController extends AbstractController
             return $result;
         };
 
-        $cache = MemcachedClient::getCache();
+        return $result();
 
-        /** @var CacheItemInterface $item */
-        $item = $cache->getItem(Keys::MAIN_BLOG);
+        try {
+            $cache = MemcachedClient::getCache();
 
-        if (!$item->isHit()) {
-            $item->set($result());
-            $item->expiresAfter(360000);
-            $cache->save($item);
+            /** @var CacheItemInterface $item */
+            $item = $cache->getItem(Keys::MAIN_BLOG);
+
+            if (!$item->isHit()) {
+                $item->set($result());
+                $item->expiresAfter(360000);
+                $cache->save($item);
+            }
+
+            return $item->get();
+        } catch (Throwable $e) {
+            return [];
         }
-
-        return $item->get();
     }
 }

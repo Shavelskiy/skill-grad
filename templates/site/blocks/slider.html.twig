@@ -1,64 +1,71 @@
-<div class="slider swiper-container study-slider" id="slider-{{ id }}">
-  <div class="swiper-wrapper">
-    {% for i in 1..5 %}
-      <div class="swiper-slide">
-        <div class="slider__item">
-          <div class="card small">
-            <span class="icon discount"></span>
-            <div class="card__header">
-              <div class="card__header-icon">
-                <img src="/img/head__icon.png" alt="">
-              </div>
-              <span class="card__header-title">{{ id ~  '-' ~ i }}Центр компьютерного обучения <br/>
-													«Специалист» при МГТУ им. Н.Э. Баумана</span>
+{% set additional = programAdditional(program) %}
+
+<div class="swiper-slide">
+  <div class="slider__item">
+    <div class="card small">
+      {% if additional.discount is not null %}
+        <span class="icon discount"></span>
+      {% endif %}
+      <div class="card__header">
+        <div class="card__header-icon">
+          {% if program.providers[0].image %}
+            <img src="{{ program.providers[0].image.publicPath }}" alt="">
+          {% else %}
+            <img src="/img/provider_no_logo.png" alt="">
+          {% endif %}
+        </div>
+        <span class="card__header-title">
+          {{ program.providers[0].name }}
+        </span>
+      </div>
+      <div class="card__body">
+        <a href="{{ path('program.view', {id: program.id}) }}" class="card__body-title" target="_blank">
+          {{ program.name }}
+        </a>
+        <div class="card__body-description">
+          {{ program.annotation|slice(0, 300) }}{{ program.annotation|length > 300 ? '...' : '' }}
+        </div>
+      </div>
+      <div class="card__footer">
+        <div class="card__body-info col-lg-12 col-sm-4 no-gutter">
+          <div class="info">
+            <i class="icon-book"></i>
+            <span class="info-text">{{ additional.format }}</span>
+          </div>
+          <div class="time">
+            <i class="icon-clock"></i>
+            <span class="info-text">{{ additional.duration }}</span>
+          </div>
+          <div class="star">
+            <i class="icon-star"></i>
+            <span class="info-text">4.2</span>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-4 d-flex j-c-space-between">
+          {% if additional.price is not null %}
+            <div class="card__footer-price">
+              {% if program.oldPrice is not null and program.showPriceReduction %}
+                <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
+                <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+              {% else %}
+                <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+              {% endif %}
             </div>
-            <div class="card__body">
-              <a href="/pages/card-program.html" class="card__body-title">Правовое обеспечение
-                национальной безопасности</a>
-              <div class="card__body-description">
-                Как провести анализ и выявить проблемы существующей системы
-                вознаграждения персонала (проблемы в управлении, мотив....
-              </div>
-              <div class="card__body-info col-lg-12 col-sm-4 no-gutter">
-                <div class="info">
-                  <i class="icon-book"></i>
-                  <span class="info-text">Очная, заочная, <br/>дистанционная</span>
-                </div>
-                <div class="time">
-                  <i class="icon-clock"></i>
-                  <span class="info-text">5 месяцев</span>
-                </div>
-                <div class="star">
-                  <i class="icon-star"></i>
-                  <span class="info-text">4.2</span>
-                </div>
-              </div>
-            </div>
-            <div class="card__footer">
-              <div class="col-lg-12 col-md-12 col-sm-4 d-flex j-c-space-between">
-                <div class="card__footer-price">
-                  <span class="price-old">148 000 р.</span>
-                  <span class="price-new">124 000 р.</span>
-                </div>
-                <div class="card__footer-button">
-                  <button class="button-blue">
-                    Заказать
-                  </button>
-                </div>
-                <div class="card__footer-add">
-                  <span class="tooltip">
-                    Добавить в сравнение
-                  </span>
-                  <i class="icon-add-file"></i>
-                </div>
-              </div>
-            </div>
+          {% endif %}
+          <div class="card__footer-button">
+            <button class="button-blue">
+              Заказать
+            </button>
+          </div>
+          <div class="card__footer-add compare-program-add" data-id="{{ program.id }}">
+            <span class="tooltip">
+              Добавить в сравнение
+            </span>
+            <i class="icon-add-file"></i>
           </div>
         </div>
       </div>
-    {% endfor %}
+    </div>
   </div>
-
-  <div class="swiper-button swiper-button-prev"></div>
-  <div class="swiper-button swiper-button-next"></div>
 </div>
