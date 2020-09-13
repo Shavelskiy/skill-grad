@@ -30,7 +30,7 @@
           </div>
           <div class="button-info">
             <span class="button-text">Ваш город:</span>
-            <span class="button-link open-city-selector-modal-btn">Нижний Новгород</span>
+            <span class="button-link open-city-selector-modal-btn">Москва</span>
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
               </div>
               <div class="button-info auth-text open-header-dropdown-btn">
                 <span class="button-text">Добро пожаловать,</span>
-                <span class="button-text">{{ getUsername() }}</span>
+                <span class="button-text">{{ getUsername(app.user) }}</span>
               </div>
               <div class="dropdown header-dropdown">
                 {% if is_granted('ROLE_PROVIDER') %}

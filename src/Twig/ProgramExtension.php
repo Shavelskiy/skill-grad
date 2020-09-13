@@ -40,6 +40,7 @@ class ProgramExtension extends AbstractExtension
             new TwigFunction('programCategories', [$this, 'programCategories']),
             new TwigFunction('getProgramFilters', [$this, 'getProgramFilters']),
             new TwigFunction('hasRequest', [$this, 'hasRequest']),
+            new TwigFunction('getAverageRating', [$this, 'getAverageRating']),
         ];
     }
 
@@ -100,5 +101,10 @@ class ProgramExtension extends AbstractExtension
         }
 
         return false;
+    }
+
+    public function getAverageRating(Program $program): float
+    {
+        return $this->programService->getAverageRating($program);
     }
 }

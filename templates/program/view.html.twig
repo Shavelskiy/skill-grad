@@ -32,7 +32,7 @@
           </div>
           <div class="rating">
             <span class="icon goal"></span>
-            <span class="text">Средняя оценка: </span> <strong class="accent">4.1</strong>
+            <span class="text">Средняя оценка: </span> <strong class="accent">{{ getAverageRating(program) }}</strong>
           </div>
         </div>
         <div class="share">
@@ -224,7 +224,7 @@
                         <div class="top">
                           <img class="rounded" src="/img/photo.jpg" alt="">
                           <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">{{ review.user.userInfo.fullName }}</span>
+                            <span class="name">{{ getUsername(review.user) }}</span>
                             <span class="date">{{ review.createdAt|date('d m Y i:g') }}</span>
                           </div>
                         </div>
@@ -239,17 +239,17 @@
                         </p>
                         <div class="text">
                           <span class="title">Программа</span>
-                          <span>{{ review.rating['program'][0] }}
+                          <span>{{ review.rating[0][0] }}
                                 <span class="tooltip">
                                   Полученные знания, навыки будут использованы мною в рабочей практике
                                 </span>
                               </span>
-                          <span>{{ review.rating['program'][1] }}</span>
-                          <span>{{ review.rating['program'][2] }}</span>
+                          <span>{{ review.rating[0][1] }}</span>
+                          <span>{{ review.rating[0][2] }}</span>
                         </div>
                         <div class="text">
                           <span class="title">Преподаватель</span>
-                          <span>{{ review.rating['teacher'][0] }}
+                          <span>{{ review.rating[1][0] }}
                                 <span class="tooltip">
                                   Полученные знания, навыки будут использованы мною в рабочей практике
                                 </span>
@@ -257,8 +257,8 @@
                         </div>
                         <div class="text">
                           <span class="title">Организация обучения</span>
-                          <span>{{ review.rating['organization'][0] }}</span>
-                          <span>{{ review.rating['organization'][1] }}</span>
+                          <span>{{ review.rating[2][0] }}</span>
+                          <span>{{ review.rating[2][1] }}</span>
                         </div>
                       </div>
                     </div>

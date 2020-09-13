@@ -69,6 +69,7 @@ class SiteController extends AbstractController
                             'name' => $provider->getName(),
                             'image' => $provider->getImage() ? $provider->getImage()->getPublicPath() : null,
                         ],
+                        'rating' => $this->programService->getAverageRating($program),
                         'annotation' => $program->getAnnotation(),
                         'oldPrice' => $program->getOldPrice(),
                         'additional' => $this->programService->programAdditional($program),

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Dto\PaginatorResult;
 use App\Dto\SearchQuery;
+use App\Entity\Program\Program;
 use App\Entity\Program\ProgramReview;
 use App\Entity\User;
 use App\Helpers\Paginator;
@@ -23,11 +24,13 @@ class ProgramReviewsRepository extends ServiceEntityRepository
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function getPaginatorResult(SearchQuery $searchQuery): PaginatorResult
+    public function getPaginatorResult(SearchQuery $searchQuery, Program $program): PaginatorResult
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->addOrderBy('p.createdAt', 'desc');
+            ->addOrderBy('p.createdAt', 'desc')
+            ->andWhere('p.program = :program')
+            ->setParameter('program', $program);
 
         return (new Paginator())
             ->setQuery($query)

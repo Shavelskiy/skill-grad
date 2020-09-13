@@ -1,9 +1,12 @@
 import axios from 'axios'
+import {ADD_PROGRAM_QUESTION} from '../../utils/api-routes'
+
 import {loginModal, registerRoleModal, initModalFormCloseBtn} from '../../components/modal'
 import {addProgramToFavorite} from '../../components/common/favorite'
 import showAlert from '../../components/modal/alert'
 
-import {ADD_PROGRAM_QUESTION} from '../../utils/api-routes'
+import './view.scss'
+
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 const questionAuthModal = document.getElementById('question-auth-modal')

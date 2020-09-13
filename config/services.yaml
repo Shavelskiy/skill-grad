@@ -27,3 +27,7 @@ services:
   App\EventListener\EntityCacheListener:
     tags:
       - { name: doctrine.event_listener, event: onFlush, priority: 100 }
+
+  App\EventSubscriber\CustomCacheListener:
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }

@@ -64,6 +64,25 @@ const ReviewModal = ({active, close, reload, programReview, programId}) => {
       })
   }
 
+  const renderSaveButton = () => {
+    if (programReview !== null) {
+      return <></>
+    }
+
+    return (
+      <div className="container j-c-center">
+        <div className="col-lg-6 col-sm-4">
+          <button
+            className="button-blue"
+            onClick={() => saveReview()}
+          >
+            Опубликовать
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Modal
       active={active}
@@ -160,17 +179,7 @@ const ReviewModal = ({active, close, reload, programReview, programId}) => {
             </div>
           </div>
         </div>
-        <div className="container j-c-center">
-          <div className="col-lg-6 col-sm-4">
-            <button
-              className="button-blue"
-              onClick={() => saveReview()}
-              disabled={programReview !== null}
-            >
-              Опубликовать
-            </button>
-          </div>
-        </div>
+        {renderSaveButton()}
       </div>
     </Modal>
   )

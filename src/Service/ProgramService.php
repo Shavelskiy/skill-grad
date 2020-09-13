@@ -2,11 +2,16 @@
 
 namespace App\Service;
 
+use App\Cache\Keys;
+use App\Cache\MemcachedClient;
 use App\Entity\Program\Program;
+use App\Entity\Program\ProgramReview;
 use App\Repository\ProgramAdditionalRepository;
 use App\Repository\ProgramFormatRepository;
 use App\Repository\ProgramIncludeRepository;
 use App\Repository\ProgramLevelRepository;
+use Psr\Cache\CacheItemInterface;
+use Throwable;
 
 class ProgramService
 {
@@ -141,5 +146,36 @@ class ProgramService
         }
 
         return $result;
+    }
+
+    public function getAverageRating(Program $program): float
+    {
+        $result = static function (Program $program) {
+            $result = 0;
+
+            /** @var ProgramReview $programReview */
+            foreach ($program->getReviews() as $programReview) {
+                $result += $programReview->getAverageRating();
+            }
+
+            return $result;
+        };
+
+        try {
+            $cache = MemcachedClient::getCache();
+
+            /** @var CacheItemInterface $item */
+            $item = $cache->getItem(sprintf('%s_%s', Keys::PROGRAM_AVERAGE_REVIEW, $program->getId()));
+
+            if (!$item->isHit()) {
+                $item->set($result($program));
+                $item->expiresAfter(360000);
+                $cache->save($item);
+            }
+
+            return $item->get();
+        } catch (Throwable $e) {
+            return 0;
+        }
     }
 }

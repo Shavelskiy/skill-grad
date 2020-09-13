@@ -58,13 +58,13 @@ class ProgramController extends AbstractController
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function actionView(Program $program, Request $request): Response
+    public function viewAction(Program $program, Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
             ->setPageItemCount(self::PAGE_REVIEWS_COUNT);
 
-        $searchResult = $this->programReviewsRepository->getPaginatorResult($query);
+        $searchResult = $this->programReviewsRepository->getPaginatorResult($query, $program);
         $reviews = $searchResult->getItems();
 
         $isFavorite = false;

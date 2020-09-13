@@ -5,20 +5,11 @@ namespace App\Twig;
 use App\Entity\User;
 use App\Helpers\CompareHelper;
 use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class CommonExtension extends AbstractExtension
 {
-    protected TokenStorageInterface $tokenStorage;
-
-    public function __construct(
-        TokenStorageInterface $tokenStorage
-    ) {
-        $this->tokenStorage = $tokenStorage;
-    }
-
     public function getFunctions(): array
     {
         return [
@@ -38,14 +29,9 @@ class CommonExtension extends AbstractExtension
         return in_array($programId, CompareHelper::getCompareProgramsFromParameterBag($cookies), true);
     }
 
-    public function getUsername(): string
+    public function getUsername(?User $user): string
     {
-        if (($token = $this->tokenStorage->getToken()) === null) {
-            return '';
-        }
-
-        /** @var User $user */
-        if (($user = $token->getUser()) === null) {
+        if ($user === null) {
             return '';
         }
 

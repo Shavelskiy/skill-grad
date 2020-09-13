@@ -270,4 +270,15 @@ class Program
         $this->additionalInfo = $additionalInfo;
         return $this;
     }
+
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    public function setReviews($reviews): self
+    {
+        $this->reviews = $reviews;
+        return $this;
+    }
 }
