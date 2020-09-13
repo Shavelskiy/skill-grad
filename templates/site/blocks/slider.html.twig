@@ -1,3 +1,5 @@
+{% set inCompare = inCompare(program.id, app.request.cookies) %}
+
 <div class="swiper-slide">
   <div class="slider__item">
     <div class="card small">
@@ -52,15 +54,16 @@
             </div>
           {% endif %}
           <div class="card__footer-button">
-            <button class="button-blue">
+            <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                    data-id="{{ program.id }}">
               Заказать
             </button>
           </div>
           <div class="card__footer-add compare-program-add" data-id="{{ program.id }}">
             <span class="tooltip">
-              Добавить в сравнение
+              {{ inCompare ? 'Находится в сравнении' : 'Добавить в сравнение' }}
             </span>
-            <i class="icon-add-file"></i>
+            <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }}"></i>
           </div>
         </div>
       </div>

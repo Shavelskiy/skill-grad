@@ -32,7 +32,7 @@ class ProgramRequest
     protected Program $program;
 
     /**
-     * @ORM\Column(type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected string $comment;
 

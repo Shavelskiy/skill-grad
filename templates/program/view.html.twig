@@ -319,7 +319,9 @@
                 <a href="#">Узнать о скидках/акциях</a>
               </div>
               <div class="button">
-                <button class="button-blue">Подать заявку</button>
+                <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }} data-id="{{ program.id }}">
+                  Подать заявку
+                </button>
               </div>
             </div>
 
