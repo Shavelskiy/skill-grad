@@ -10,18 +10,26 @@ import ReviewModal from './review-modal'
 
 const Learn = () => {
   const [programs, setPrograms] = useState([])
+  const [reviews, setReviews] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [activeModal, setActiveModal] = useState(false)
 
+  const [currentProgramId, setCurrentProgramId] = useState(null)
+
   useEffect(() => {
+    reload()
+  }, [])
+
+  const reload = () => {
     axios.get(LEARN_URL)
       .then(({data}) => {
         setCurrentPage(data.page)
         setTotalPages(data.total_pages)
         setPrograms(data.programs)
+        setReviews(data.reviews)
       })
-  }, [])
+  }
 
   return (
     <>
@@ -42,7 +50,11 @@ const Learn = () => {
               <Item
                 key={key}
                 program={item}
-                openReviewModal={() => setActiveModal(true)}
+                review={(item.id in reviews) ? reviews[currentProgramId] : null}
+                openReviewModal={() => {
+                  setActiveModal(true)
+                  setCurrentProgramId(item.id)
+                }}
               />
             )
           })
@@ -56,7 +68,10 @@ const Learn = () => {
       />
       <ReviewModal
         active={activeModal}
+        programReview={(currentProgramId in reviews) ? reviews[currentProgramId] : null}
+        programId={currentProgramId}
         close={() => setActiveModal(false)}
+        reload={() => reload()}
       />
     </>
   )

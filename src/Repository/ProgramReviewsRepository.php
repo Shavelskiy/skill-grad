@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Dto\PaginatorResult;
 use App\Dto\SearchQuery;
 use App\Entity\Program\ProgramReview;
+use App\Entity\User;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -32,6 +33,21 @@ class ProgramReviewsRepository extends ServiceEntityRepository
             ->setQuery($query)
             ->setPageItems($searchQuery->getPageItemCount())
             ->setPage($searchQuery->getPage())
+            ->getResult();
+    }
+
+    public function findUserProgramsReviews(User $user, array $programIds): array
+    {
+        return $this
+            ->createQueryBuilder('p')
+            ->join('p.program', 'pr')
+            ->andWhere('p.user = :user')
+            ->andWhere('pr.id in (:ids)')
+            ->setParameters([
+                'user' => $user,
+                'ids' => $programIds,
+            ])
+            ->getQuery()
             ->getResult();
     }
 }

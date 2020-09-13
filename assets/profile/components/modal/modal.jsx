@@ -4,12 +4,11 @@ import cn from 'classnames'
 import css from './modal.scss?module'
 
 
-const Modal = ({children, width = false, active, title, close}) => {
+const Modal = ({children, width = false, active, title, close, error = ''}) => {
   const ref = useRef()
 
   useEffect(() => {
     const listener = event => {
-      console.log(event.target)
       if (!ref.current || ref.current !== event.target) {
         return
       }
@@ -30,6 +29,7 @@ const Modal = ({children, width = false, active, title, close}) => {
         <span className={css.close} onClick={close}>&times;</span>
         <div className={css.content}>
           <h4>{title}</h4>
+          <span className={css.error}>{error}</span>
           {children}
         </div>
       </div>

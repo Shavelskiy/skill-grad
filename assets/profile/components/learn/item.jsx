@@ -3,7 +3,28 @@ import React from 'react'
 import dateFormat from '../../helpers/date-fromater'
 
 
-const Item = ({program, openReviewModal}) => {
+const Item = ({program, openReviewModal, review}) => {
+  const renderReviewButton = () => {
+    if (review === null) {
+      return (
+        <td>
+          <button className="open-learn button" onClick={openReviewModal}>Оставить оценку</button>
+        </td>
+      )
+    }
+
+    return (
+      <td>
+        <div className="success-block">
+          <div className="success">
+            <span>Оценка поставлена</span>
+            <i className="icon-correct"></i>
+          </div>
+          <a className="open-learn"  onClick={openReviewModal}>посмотреть</a>
+        </div>
+      </td>
+    )
+  }
   return (
     <>
       <tr>
@@ -16,19 +37,8 @@ const Item = ({program, openReviewModal}) => {
         <td>
           <a href={program.provider.link} target="_blank">{program.provider.name}</a>
         </td>
-        <td><span className="date">{ dateFormat(new Date(program.date)) }</span></td>
-        <td>
-          <button className="open-learn button" onClick={openReviewModal}>Оставить оценку</button>
-        </td>
-        {/*<td>*/}
-        {/*  <div className="success-block">*/}
-        {/*    <div className="success">*/}
-        {/*      <span>Оценка поставлена</span>*/}
-        {/*      <i className="icon-correct"></i>*/}
-        {/*    </div>*/}
-        {/*    <a className="open-learn">посмотреть</a>*/}
-        {/*  </div>*/}
-        {/*</td>*/}
+        <td><span className="date">{dateFormat(new Date(program.date))}</span></td>
+        {renderReviewButton()}
       </tr>
     </>
   )
