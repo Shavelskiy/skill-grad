@@ -63,13 +63,13 @@
               </div>
               <div class="button-info auth-text open-header-dropdown-btn">
                 <span class="button-text">Добро пожаловать,</span>
-                <span class="button-text">Иванов Алесей</span>
+                <span class="button-text">{{ getUsername() }}</span>
               </div>
               <div class="dropdown header-dropdown">
                 {% if is_granted('ROLE_PROVIDER') %}
                   {% include 'components/header/blocks/provider.dropdown.html.twig' %}
                 {% else %}
-                  {% include 'components/header/blocks/student.dropdown.html.twig' %}
+                  {% include 'components/header/blocks/user.dropdown.html.twig' %}
                 {% endif %}
               </div>
             </div>

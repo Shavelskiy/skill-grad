@@ -9,10 +9,12 @@ import Settings from './settings/settings'
 import Messages from './messages/messages'
 import Learn from './learn/learn'
 
+import css from './index.scss?module'
+
 
 const UserApp = () => {
   return (
-    <div className="main_profile">
+    <div className={ css.mainProfile }>
       <h2 className="title">Личный кабинет обучающегося</h2>
       <UserMenu/>
 

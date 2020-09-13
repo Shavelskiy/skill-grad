@@ -109,18 +109,7 @@
     }
   }
 
-  .main_profile .tab__nav .button-blue {
-    @media (min-width: 320px) and (max-width: 767px) {
-      width: 90%;
-      margin: 0 auto;
-      margin-top: 20px;
-    }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 20px;
-    }
-  }
+
 
   .profile-search {
     @media (min-width: 320px) and (max-width: 767px) {

@@ -89,6 +89,4 @@ addProgramQuestionButton.onclick = () => {
     })
     .catch((error) => showAlert(error.response.data.message))
     .finally(() => questionModal.classList.remove('active'))
-
-  console.log(value)
 }

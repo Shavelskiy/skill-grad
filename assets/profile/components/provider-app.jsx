@@ -11,9 +11,12 @@ import Publications from './publications/publications'
 import Messages from './messages/messages'
 import Services from './services/services'
 
+import css from './index.scss?module'
+
+
 const ProviderApp = () => {
   return (
-    <div className="main_profile">
+    <div className={ css.mainProfile }>
       <h2 className="title">Личный кабинет провайдера</h2>
       <ProviderMenu/>
 
