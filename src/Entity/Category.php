@@ -35,6 +35,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory")
+     * @ORM\OrderBy({"sort" = "ASC"})
      */
     protected PersistentCollection $childCategories;
 
