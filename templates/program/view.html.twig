@@ -14,6 +14,7 @@
 
 {% set additional = programAdditional(program) %}
 {% set categories = programCategories(program) %}
+{% set inCompare = inCompare(program.id, app.request.cookies) %}
 
 {% block body %}
   <div class="main-card__program mt-0">
@@ -55,7 +56,7 @@
                  data-id="{{ program.id }}"></i>
             </div>
             <div class="button-container">
-              <i class="icon-add-file compare-program-add" data-id="{{ program.id }}"></i>
+              <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }} compare-program-add" data-id="{{ program.id }}"></i>
             </div>
           </div>
         </div>

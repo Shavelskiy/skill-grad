@@ -21,7 +21,7 @@ class ProgramRequest
     public const STATUS_REJECT = 'reject';
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="programRequests")
      * @ORM\JoinColumn(nullable=false)
      */
     protected User $user;
