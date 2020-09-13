@@ -4,7 +4,6 @@ import dateFormat from '../../helpers/date-fromater'
 
 
 const Item = ({program, openReviewModal}) => {
-  console.log(new Date(program.date))
   return (
     <>
       <tr>
