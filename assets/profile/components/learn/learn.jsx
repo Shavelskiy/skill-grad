@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {useHistory, useLocation} from 'react-router-dom'
 
 import axios from 'axios'
 import {LEARN_URL} from '../../utils/api/endpoints'
@@ -7,11 +8,20 @@ import Paginator from '../paginator/paginator'
 import Item from './item'
 import ReviewModal from './review-modal'
 
+import querystring from 'querystring'
+
 
 const Learn = () => {
+  const history = useHistory()
+  const location = useLocation()
+
+  const queryParams = querystring.parse(location.search.substr(1))
+
+  const [paginatorRequest, setPaginatorRequest] = useState(null)
+
   const [programs, setPrograms] = useState([])
   const [reviews, setReviews] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState('page' in queryParams ? queryParams.page : 1)
   const [totalPages, setTotalPages] = useState(1)
   const [activeModal, setActiveModal] = useState(false)
 
@@ -19,10 +29,26 @@ const Learn = () => {
 
   useEffect(() => {
     reload()
-  }, [])
+  }, [currentPage])
 
   const reload = () => {
-    axios.get(LEARN_URL)
+    const axiosSource = axios.CancelToken.source()
+
+    if (paginatorRequest) {
+      paginatorRequest.cancel()
+    }
+
+    setPaginatorRequest({cancel: axiosSource.cancel})
+
+    history.push({
+      pathname: history.pathname,
+      search: `?page=${currentPage}`
+    })
+
+    axios.get(LEARN_URL, {
+      cancelToken: axiosSource.token,
+      params: {page: currentPage}
+    })
       .then(({data}) => {
         setCurrentPage(data.page)
         setTotalPages(data.total_pages)
@@ -64,7 +90,7 @@ const Learn = () => {
       <Paginator
         currentPage={currentPage}
         totalPages={totalPages}
-        click={(page) => console.log(page)}
+        click={(page) => setCurrentPage(page)}
       />
       <ReviewModal
         active={activeModal}

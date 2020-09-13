@@ -66,7 +66,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/question", name="ajax.program.request", methods={"POST"})
+     * @Route("/question", name="ajax.program.question", methods={"POST"})
      */
     public function questionAction(Request $request): Response
     {
