@@ -1,0 +1,25 @@
+<div id="question-auth-modal" class="add-favorites modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content pb-20">
+      <p>Задать вопрос могут только авторизованные пользователи</p>
+      <p>Войдите или зарегистрируйтесь</p>
+      <button class="button-blue login-btn">Войти</button>
+      <button class="button-red register-btn">Зарегистрироваться</button>
+    </div>
+  </div>
+</div>
+
+<div id="program-question-modal" class="answer-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Задать вопрос</h4>
+      <span class="modal-error"></span>
+      <div class="textarea-box">
+        <textarea class="textarea" rows="8" placeholder="Введите текст вопроса"></textarea>
+      </div>
+      <button class="button-blue" data-id="{{ id }}">Отправить</button>
+    </div>
+  </div>
+</div>

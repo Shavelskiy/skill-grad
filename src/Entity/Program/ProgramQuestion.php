@@ -17,7 +17,7 @@ class ProgramQuestion
     use TimestampTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="programQuestions")
      * @ORM\JoinColumn(nullable=false)
      */
     protected User $user;
@@ -42,9 +42,10 @@ class ProgramQuestion
         return $this->user;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): self
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getProgram(): Program
@@ -52,9 +53,10 @@ class ProgramQuestion
         return $this->program;
     }
 
-    public function setProgram(Program $program): void
+    public function setProgram(Program $program): self
     {
         $this->program = $program;
+        return $this;
     }
 
     public function getQuestion(): string
@@ -62,9 +64,10 @@ class ProgramQuestion
         return $this->question;
     }
 
-    public function setQuestion(string $question): void
+    public function setQuestion(string $question): self
     {
         $this->question = $question;
+        return $this;
     }
 
     public function getAnswer(): string
@@ -72,8 +75,9 @@ class ProgramQuestion
         return $this->answer;
     }
 
-    public function setAnswer(string $answer): void
+    public function setAnswer(string $answer): self
     {
         $this->answer = $answer;
+        return $this;
     }
 }

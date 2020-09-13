@@ -299,7 +299,7 @@
               <button class="button-red">Оставить оценку</button>
             </div>
             <div class="col-lg-4 col-sm-4 col-md-6">
-              <button class="button-blue">Задать вопрос</button>
+              <button class="button-blue program-question-button">Задать вопрос</button>
             </div>
           </div>
         </div>
@@ -415,6 +415,7 @@
 {% block modals %}
   {{ parent() }}
   {% include 'components/modals/add.favorite.html.twig' %}
+  {% include 'program/modals.html.twig' with {id: program.id} %}
 {% endblock %}
 
 {% block javascripts %}

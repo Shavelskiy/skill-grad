@@ -3,6 +3,7 @@
 namespace App\Controller\Ajax;
 
 use App\Entity\Program\Program;
+use App\Entity\Program\ProgramQuestion;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\User;
 use App\Repository\ProgramRepository;
@@ -62,5 +63,40 @@ class ProgramController extends AbstractController
         $this->entityManger->flush();
 
         return new JsonResponse(['message' => 'Заявка к программе отправлена']);
+    }
+
+    /**
+     * @Route("/question", name="ajax.program.request", methods={"POST"})
+     */
+    public function questionAction(Request $request): Response
+    {
+        $programId = $request->get('id');
+
+        /** @var Program $program */
+        $program = $this->programRepository->find((int)$programId);
+
+        if ($program === null) {
+            return new JsonResponse([], 404);
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($user->getProgramQuestions()->filter(static function ($item) use ($programId) {
+            /* @var ProgramQuestion $item */
+            return $item->getProgram()->getId() === $programId;
+        })->count() > 5) {
+            return new JsonResponse(['message' => 'Вы отправили слишком много вопросов к данной программе!', 400]);
+        }
+
+        $programQuestion = (new ProgramQuestion())
+            ->setUser($user)
+            ->setProgram($program)
+            ->setQuestion($request->get('question'));
+
+        $this->entityManger->persist($programQuestion);
+        $this->entityManger->flush();
+
+        return new JsonResponse(['message' => 'Вопрос отправлен']);
     }
 }
