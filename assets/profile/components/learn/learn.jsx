@@ -4,12 +4,15 @@ import {useHistory, useLocation} from 'react-router-dom'
 import axios from 'axios'
 import {LEARN_URL} from '../../utils/api/endpoints'
 
+import Table from '../table/table'
 import Paginator from '../paginator/paginator'
 import Item from './item'
 import ReviewModal from './review-modal'
 
 import querystring from 'querystring'
 
+
+const headers = ['Название программы', 'Категории', 'Образовательная орг-я', 'Дата', 'Оценка']
 
 const Learn = () => {
   const history = useHistory()
@@ -59,17 +62,7 @@ const Learn = () => {
 
   return (
     <>
-      <table className="table">
-        <thead>
-        <tr>
-          <th>Название программы</th>
-          <th>Категории</th>
-          <th>Образовательная орг-я</th>
-          <th>Дата</th>
-          <th>Оценка</th>
-        </tr>
-        </thead>
-        <tbody>
+      <Table headers={headers}>
         {
           programs.map((item, key) => {
             return (
@@ -85,8 +78,8 @@ const Learn = () => {
             )
           })
         }
-        </tbody>
-      </table>
+      </Table>
+
       <Paginator
         currentPage={currentPage}
         totalPages={totalPages}

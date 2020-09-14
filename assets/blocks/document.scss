@@ -1,114 +1,120 @@
 .balance {
-    @media (min-width: 320px) and (max-width: 767px) {
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        .button-blue {
-            width: 70%;
-        }
-        h4 {
-            font-size: 18px;
-            margin-right: 0;
-            margin-bottom: 20px;
-        }
-    }
-    @media (min-width: 768px) and (max-width: 1023px) {
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        .button-blue {
-            width: 70%;
-        }
-        h4 {
-            font-size: 18px;
-            margin-right: 0;
-            margin-bottom: 20px;
-        }
-    }
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 20px;
-    padding-bottom: 10px;
+  @media (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
     .button-blue {
-        width: 20%;
+      width: 70%;
     }
     h4 {
-        font-weight: 400;
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-right: 30px;
+      font-size: 18px;
+      margin-right: 0;
+      margin-bottom: 20px;
     }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    .button-blue {
+      width: 70%;
+    }
+    h4 {
+      font-size: 18px;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+
+  .button-blue {
+    width: 20%;
+  }
+
+  h4 {
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 30px;
+  }
 }
+
 .link-icon {
-    display: flex;
+  display: flex;
 }
+
 .icon {
-    &.pdf {
-        width: 22px;
-        height: 22px;
-        background: url("../img/pdf.png") no-repeat;
-    }
+  &.pdf {
+    width: 22px;
+    height: 22px;
+    background: url("../img/pdf.png") no-repeat;
+  }
 }
+
 .pay-balance {
-    padding-bottom: 50px !important;
+  padding-bottom: 50px !important;
 }
+
 .document {
-    @media (min-width: 320px) and (max-width: 767px) {
-        .date {
-            top: 16px;
-            right: initial;
-        }
-        .title {
-            width: 130px;
-            margin-left: 110px;
-            border-bottom: none !important;
-        }
-        td {
-            &:first-child {
-                padding-top: 0 !important;
-            }
-        }
-        .price {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            color: #208abd;
-            font-weight: 600;
-            line-height: 1.13;
-        }
-        .number {
-            padding-top: 10px !important;
-            border-top: 1px solid #ccc;
-        }
+  @media (min-width: 320px) and (max-width: 767px) {
+    .date {
+      top: 16px;
+      right: initial;
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
-        .date {
-            top: 16px;
-            right: initial;
-        }
-        .title {
-            position: absolute;
-            top: 10px;
-            margin-left: 110px;
-            border-bottom: none !important;
-        }
-        td {
-            &:first-child {
-                padding-top: 0 !important;
-            }
-        }
-        .price {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            color: #208abd;
-            font-weight: 600;
-            line-height: 1.13;
-        }
-        .number {
-            padding-top: 10px !important;
-            border-top: 1px solid #ccc;
-        }
+    .title {
+      width: 130px;
+      margin-left: 110px;
+      border-bottom: none !important;
     }
+    td {
+      &:first-child {
+        padding-top: 0 !important;
+      }
+    }
+    .price {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      color: #208abd;
+      font-weight: 600;
+      line-height: 1.13;
+    }
+    .number {
+      padding-top: 10px !important;
+      border-top: 1px solid #ccc;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .date {
+      top: 16px;
+      right: initial;
+    }
+    .title {
+      position: absolute;
+      top: 10px;
+      margin-left: 110px;
+      border-bottom: none !important;
+    }
+    td {
+      &:first-child {
+        padding-top: 0 !important;
+      }
+    }
+    .price {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      color: #208abd;
+      font-weight: 600;
+      line-height: 1.13;
+    }
+    .number {
+      padding-top: 10px !important;
+      border-top: 1px solid #ccc;
+    }
+  }
 }

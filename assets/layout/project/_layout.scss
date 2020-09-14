@@ -322,28 +322,6 @@
     }
   }
 
-  .delete {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    background-color: #f43d30;
-    border-radius: 100%;
-    cursor: pointer;
-
-    &:after {
-      content: "\2715";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 4px;
-      color: #fff;
-      font-size: 10px;
-    }
-  }
-
   .format {
     @media (min-width: 320px) and (max-width: 767px) {
       flex-wrap: nowrap;
@@ -649,27 +627,6 @@
   }
 }
 
-.delete {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 16px;
-  height: 16px;
-  background-color: #f43d30;
-  border-radius: 100%;
-  cursor: pointer;
-
-  &:after {
-    content: "\2715";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 4px;
-    color: #fff;
-    font-size: 10px;
-  }
-}
 
 .main_favorites {
   .tab {

@@ -20,44 +20,7 @@
     }
   }
 
-  .tab {
-    &__nav {
-      display: flex;
-      border-bottom: none;
-      justify-content: space-between;
 
-      .button-blue {
-        width: 40%;
-        margin-left: 30px;
-      }
-
-      .nav {
-        justify-content: flex-start;
-        width: 100%;
-        padding: 0;
-        border-bottom: 1px solid #3c3c3c;
-
-        &-item {
-          position: relative;
-          font-weight: 400;
-          border-bottom: none;
-
-          &.active {
-            &:after {
-              content: "";
-              position: absolute;
-              z-index: 1;
-              bottom: -1px;
-              left: 0;
-              width: 100%;
-              height: 3px;
-              background-color: #f7562e;
-            }
-          }
-        }
-      }
-    }
-  }
 
   .profile-search {
     justify-content: space-between;
@@ -66,24 +29,6 @@
     .input-search-gray {
       width: 100%;
       margin-right: 20px;
-    }
-  }
-
-  .icon-button {
-    position: relative;
-    cursor: pointer;
-
-    .button-notification {
-      right: 40px;
-      width: 18px;
-      height: 18px;
-      line-height: 1.8;
-      padding-top: 0;
-    }
-
-    .mail, .email-f {
-      width: 20px;
-      height: 20px;
     }
   }
 
