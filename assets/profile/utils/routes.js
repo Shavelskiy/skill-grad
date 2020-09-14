@@ -4,3 +4,7 @@ export const LEARN = '/learn'
 export const PROGRAMS  = '/programs'
 export const PUBLICATIONS = '/publications'
 export const SERVICES = '/services'
+
+export const PROGRAM_REQUESTS = '/program/requests/:id'
+export const PROGRAM_QUESTIONS = '/program/questions/:id'
+export const PROGRAM_REVIEWS = '/program/reviews/:id'

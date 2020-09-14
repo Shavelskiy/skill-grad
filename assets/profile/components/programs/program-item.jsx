@@ -1,4 +1,7 @@
 import React from 'react'
+import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '../../utils/routes'
+
+import Request from './request'
 
 import css from './program-item.scss?module'
 import cn from 'classnames'
@@ -12,35 +15,24 @@ const ProgramItem = ({program}) => {
       <td className="mobile-p-b">
         <span className={css.categories}>{program.categories}</span>
       </td>
-      <td className="col-sm-1">
-        {/*<strong className="accent mobile">Заявки</strong>*/}
-        <div className={css.iconButton}>
-          <span className={cn('icon', 'mail')}></span>
-          <span className={css.buttonNotification}>12</span>
-        </div>
-        <p className={css.iconTotalText}>
-          Всего: {program.requests.total}
-        </p>
-      </td>
-      <td className="col-sm-1">
-        {/*<strong className="accent mobile">Вопросы</strong>*/}
-        <div className={css.iconButton}>
-          <span className={cn('icon', 'mail')}></span>
-          <span className={css.buttonNotification}>12</span>
-        </div>
-        <p className={css.iconTotalText}>
-          Всего: {program.questions.total}
-        </p>
-      </td>
-      <td className="col-sm-1">
-        {/*<strong className="accent mobile">Оценки</strong>*/}
-        <div className={css.iconButton}>
-          <span className="icon email-f small"></span>
-        </div>
-        <p className={css.iconTotalText}>
-          Всего: {program.requests.total}
-        </p>
-      </td>
+      <Request
+        link={PROGRAM_REQUESTS}
+        programId={program.id}
+        values={program.requests}
+        name='Заявки'
+      />
+      <Request
+        link={PROGRAM_QUESTIONS}
+        programId={program.id}
+        values={program.questions}
+        name='Вопросы'
+      />
+      <Request
+        link={PROGRAM_REVIEWS}
+        programId={program.id}
+        values={program.reviews}
+        name='Оценки'
+      />
       <td>
         <div className={css.actions}>
           <span className={cn('icon', 'goal', css.item)}></span>
