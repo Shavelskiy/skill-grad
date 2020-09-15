@@ -122,6 +122,21 @@ strong {
   font-weight: 700;
 }
 
+button {
+  outline: none;
+  border: none;
+  &:hover {
+    outline: none;
+    border: none;  }
+
+  &:focus {
+    outline: 0;
+  }
+  &:active {
+    outline: none;
+    border: none;  }
+}
+
 .text {
   &--large {
     font-family: "Lato", sans-serif;
@@ -227,8 +242,12 @@ button {
 }
 
 button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
+  outline: none;
+}
+
+button:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 input,

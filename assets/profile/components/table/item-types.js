@@ -1,0 +1,2 @@
+export const PROGRAM = 'PROGRAM'
+export const PROGRAM_REQUEST = 'PROGRAM_REQUEST'

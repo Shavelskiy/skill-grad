@@ -24,13 +24,17 @@ class ProgramRequestRepository extends ServiceEntityRepository
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function getPaginatorResult(SearchQuery $searchQuery, User $user): PaginatorResult
+    public function getPaginatorResult(SearchQuery $searchQuery, ?User $user = null): PaginatorResult
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->addOrderBy('p.createdAt', 'desc')
-            ->andWhere('p.user = :user')
-            ->setParameter('user', $user);
+            ->addOrderBy('p.createdAt', 'desc');
+
+        if ($user !== null) {
+            $query
+                ->andWhere('p.user = :user')
+                ->setParameter('user', $user);
+        }
 
         return (new Paginator())
             ->setQuery($query)

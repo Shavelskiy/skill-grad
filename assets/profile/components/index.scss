@@ -87,6 +87,18 @@
       padding-bottom: 10px;
 
       .back {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 400;
+        word-break: break-word;
+        line-height: 1.07;
+        letter-spacing: normal;
+        text-align: left;
+        color: #208abd;
+        margin-right: 30px;
+        cursor: pointer;
+
         @media (min-width: 320px) and (max-width: 767px) {
           margin-right: 0;
           .back-text {
@@ -99,17 +111,6 @@
             display: none;
           }
         }
-        display: flex;
-        align-items: center;
-        font-size: 15px;
-        font-weight: 400;
-        word-break: break-word;
-        line-height: 1.07;
-        letter-spacing: normal;
-        text-align: left;
-        color: #208abd;
-        margin-right: 30px;
-        cursor: pointer;
 
         i {
           font-size: 30px;
@@ -125,14 +126,6 @@
     &.active {
       display: block;
     }
-  }
-
-  .applications {
-    display: none;
-  }
-
-  .questions {
-    display: none;
   }
 
   .assessment {

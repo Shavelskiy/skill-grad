@@ -12,7 +12,28 @@ import ReviewModal from './review-modal'
 import querystring from 'querystring'
 
 
-const headers = ['Название программы', 'Категории', 'Образовательная орг-я', 'Дата', 'Оценка']
+const headers = [
+  {
+    title: 'Название программы',
+    type: null
+  },
+  {
+    title: 'Категории',
+    type: null
+  },
+  {
+    title: 'Образовательная орг-я',
+    type: null
+  },
+  {
+    title: 'Дата',
+    type: null
+  },
+  {
+    title: 'Оценка',
+    type: null
+  },
+]
 
 const Learn = () => {
   const history = useHistory()

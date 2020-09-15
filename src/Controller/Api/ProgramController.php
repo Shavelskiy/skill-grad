@@ -12,11 +12,12 @@ use App\Repository\ProgramRequestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @Route("/api/profile/programs")
+ * @Route("/api/profile/program")
  */
 class ProgramController extends AbstractController
 {
@@ -42,7 +43,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("", methods={"GET"}, name="api.profile.programs.index")
      */
-    public function index(Request $request): JsonResponse
+    public function indexAction(Request $request): Response
     {
         /** @var User $user */
         if (($user = $this->getUser()) === null) {
@@ -84,7 +85,7 @@ class ProgramController extends AbstractController
         }
 
         return new JsonResponse([
-            'programs' => $programs,
+            'items' => $programs,
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
         ]);

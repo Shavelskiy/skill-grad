@@ -96,38 +96,6 @@
     width: 18%;
   }
 
-  .rejected {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-height: 70px;
-    font-weight: 600;
-    color: #f92e25;
-    line-height: 1.07;
-
-    i {
-      margin-left: 10px;
-      font-weight: 600;
-    }
-  }
-
-  .supported {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-height: 70px;
-    font-weight: 600;
-    color: #6db4fe;
-    line-height: 1.07;
-
-    i {
-      margin-left: 10px;
-      font-weight: 600;
-    }
-  }
-
   thead {
     background-color: #f7562e;
     color: #ffffff;

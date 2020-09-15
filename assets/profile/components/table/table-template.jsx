@@ -1,20 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import {useHistory, useLocation} from 'react-router-dom'
 
+import querystring from 'querystring'
 import axios from 'axios'
-import {LEARN_URL, PROVIDER_PROGRAMS_URL} from '../../utils/api/endpoints'
 
-import Table from '../table/table'
-import Navigation from './navigation'
-import ProgramItem from './program-item'
+import {PROGRAM, PROGRAM_REQUEST} from './item-types'
+
+import Table from './table'
 import Paginator from '../paginator/paginator'
+import ProgramItem from '../programs/list/program-item'
+import ProgramRequestItem from '../programs/requests/program-request-item'
 
-import css from './programs.scss'
-import querystring from 'querystring';
 
-const headers = ['Название программы', 'Категории', 'Заявки', 'Вопросы', 'Оценки']
-
-const Programs = () => {
+const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) => {
   const history = useHistory()
   const location = useLocation()
 
@@ -22,7 +20,7 @@ const Programs = () => {
 
   const [paginatorRequest, setPaginatorRequest] = useState(null)
 
-  const [programs, setPrograms] = useState([])
+  const [items, setItems] = useState([])
   const [currentPage, setCurrentPage] = useState('page' in queryParams ? queryParams.page : 1)
   const [totalPages, setTotalPages] = useState(1)
 
@@ -45,23 +43,30 @@ const Programs = () => {
       search: `?page=${currentPage}`
     })
 
-    axios.get(PROVIDER_PROGRAMS_URL, {
+    axios.get(fetchUrl, {
       cancelToken: axiosSource.token,
       params: {page: currentPage}
     })
       .then(({data}) => {
         setCurrentPage(data.page)
         setTotalPages(data.total_pages)
-        setPrograms(data.programs)
+        setItems(data.items)
       })
   }
 
-  return (
-    <div className="container-0 mt-20">
-      <Navigation/>
+  const renderItem = (item, key) => {
+    switch (itemType) {
+      case PROGRAM:
+        return <ProgramItem key={key} program={item}/>
+      case PROGRAM_REQUEST:
+        return <ProgramRequestItem key={key} request={item} reload={reload}/>
+    }
+  }
 
-      <Table headers={headers} withEmpty={true}>
-        {programs.map((program, key) => <ProgramItem key={key} program={program}/>)}
+  return (
+    <>
+      <Table headers={headers} withEmpty={tableEmptyItem}>
+        {items.map((item, key) => renderItem(item, key))}
       </Table>
 
       <Paginator
@@ -69,8 +74,8 @@ const Programs = () => {
         totalPages={totalPages}
         click={(page) => setCurrentPage(page)}
       />
-    </div>
+    </>
   )
 }
 
-export default Programs
+export default TableTemplate
