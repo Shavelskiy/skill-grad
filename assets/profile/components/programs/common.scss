@@ -53,3 +53,18 @@
     margin-right: 10px;
   }
 }
+
+.name-block {
+  color: #1d71b1;
+  text-decoration: underline;
+}
+
+.q-block {
+  display: flex;
+  position: relative;
+  padding-left: 15px !important;
+
+  &.active {
+    font-weight: 600;
+  }
+}

@@ -1,6 +1,26 @@
 import React from 'react'
+import {DATE} from '../../table/header-types'
+import {PROGRAM_QUESTIONS_URL} from '../../../utils/api/endpoints'
+import {PROGRAM_QUESTION} from '../../table/item-types'
+import TableTemplate from '../../table/table-template'
 
-const ProgramQuestions = () => {
+
+const headers = [
+  {
+    title: 'Дата/время',
+    type: DATE
+  },
+  {
+    title: 'Автор заявки',
+    type: null
+  },
+  {
+    title: 'Вопрос',
+    type: null
+  },
+]
+
+const ProgramQuestions = ({match}) => {
   return (
     <>
       <div className="container-0 table-programs questions mt-20">
@@ -11,40 +31,12 @@ const ProgramQuestions = () => {
 						</span>
           Вопросы к программе «Производственный менеджмент»
         </h3>
-        <table className="table">
-          <thead>
-          <tr>
-            <th className="column__date">Дата/время</th>
-            <th>Автор заявки</th>
-            <th>Вопрос</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>25.10.20 <br/> 19:33</td>
-            <td className="name-block"><a href="#">Петракова Александра Анатольевна</a></td>
-            <td className="q-block active"><p className="text">Скажите подалуйста, диплом по данной программе будет
-              государственного образца?</p></td>
-            <td>
-              <div className="buttons">
-                <button className="open-answer button-b">Ответить</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>25.10.20 <br/> 19:33</td>
-            <td><a href="#">Петракова Александра Анатольевна</a></td>
-            <td className="q-block"><p className="text">Хотелось бы приобрести программу в рассрочку на 5-6 месяцев с
-              предоплатой 30% в июне</p></td>
-            <td className="support-block">
-              <div className="supported">
-                Ответ есть <i className="icon-correct"></i>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <TableTemplate
+          fetchUrl={PROGRAM_QUESTIONS_URL.replace(':id', match.params.id)}
+          headers={headers}
+          itemType={PROGRAM_QUESTION}
+          tableEmptyItem={true}
+        />
       </div>
     </>
   )

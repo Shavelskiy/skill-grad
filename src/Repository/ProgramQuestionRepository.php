@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Dto\PaginatorResult;
+use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramQuestion;
+use App\Entity\User;
+use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -15,6 +19,30 @@ class ProgramQuestionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ProgramQuestion::class);
     }
+
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getPaginatorResult(SearchQuery $searchQuery, ?User $user = null): PaginatorResult
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->addOrderBy('p.createdAt', 'desc');
+
+        if ($user !== null) {
+            $query
+                ->andWhere('p.user = :user')
+                ->setParameter('user', $user);
+        }
+
+        return (new Paginator())
+            ->setQuery($query)
+            ->setPageItems($searchQuery->getPageItemCount())
+            ->setPage($searchQuery->getPage())
+            ->getResult();
+    }
+
 
     /**
      * @throws NoResultException

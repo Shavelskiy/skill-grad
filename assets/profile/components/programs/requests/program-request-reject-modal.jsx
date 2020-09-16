@@ -1,12 +1,13 @@
 import React from 'react'
 import Modal from '../../modal/modal'
 
-const ProgramRequestRejectModal = ({active, reason, setReason, submit}) => {
+const ProgramRequestRejectModal = ({active, close, reason, setReason, submit}) => {
   return (
     <Modal
       active={active}
+      close={close}
+      title={'Отклонить заявку'}
     >
-      <h4>Отклонить заявку</h4>
       <div className="textarea-box">
         <textarea
           className="textarea"

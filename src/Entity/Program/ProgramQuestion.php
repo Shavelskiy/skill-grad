@@ -35,7 +35,7 @@ class ProgramQuestion
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected string $answer;
+    protected ?string $answer;
 
     public function getUser(): User
     {
@@ -70,7 +70,7 @@ class ProgramQuestion
         return $this;
     }
 
-    public function getAnswer(): string
+    public function getAnswer(): ?string
     {
         return $this->answer;
     }

@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 
 import axios from 'axios'
-import {AGREE_PROGRAM_REQUEST, REJECT_PROGRAM_REQUEST} from '../../../utils/api/endpoints'
+import {AGREE_PROGRAM_URL, REJECT_PROGRAM_URL} from '../../../utils/api/endpoints'
 
-import dateFormat from '../../../helpers/date-fromater'
+import {dateFormat} from '../../../helpers/date-fromater'
 
 import ProgramRequestRejectModal from './program-request-reject-modal'
 
-import css from './program-request-item.scss?module'
+import css from './../common.scss?module'
 
 
 const ProgramRequestItem = ({request, reload}) => {
@@ -39,12 +39,12 @@ const ProgramRequestItem = ({request, reload}) => {
   }
 
   const agreeRequest = () => {
-    axios.post(AGREE_PROGRAM_REQUEST.replace(':id', request.id))
+    axios.post(AGREE_PROGRAM_URL.replace(':id', request.id))
       .finally(() => reload())
   }
 
   const rejectRequest = () => {
-    axios.post(REJECT_PROGRAM_REQUEST.replace(':id', request.id), {
+    axios.post(REJECT_PROGRAM_URL.replace(':id', request.id), {
       reason: rejectReason
     })
       .finally(() => {
@@ -71,6 +71,7 @@ const ProgramRequestItem = ({request, reload}) => {
       <td>
         <ProgramRequestRejectModal
           active={rejectModalActive}
+          close={() => setRejectModalActive(false)}
           reason={rejectReason}
           setReason={setRejectReason}
           submit={rejectRequest}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import dateFormat from '../../helpers/date-fromater'
+import {dateFormat} from '../../helpers/date-fromater'
 
 
 const Item = ({program, openReviewModal, review}) => {
