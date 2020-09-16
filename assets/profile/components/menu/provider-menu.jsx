@@ -1,7 +1,13 @@
 import React from 'react'
 
 import {Link, useLocation} from 'react-router-dom'
-import {SETTINGS, PROGRAMS, PUBLICATIONS, MESSAGES, SERVICES} from '../../utils/routes'
+import {
+  SETTINGS,
+  PROGRAMS,
+  PUBLICATIONS,
+  MESSAGES,
+  SERVICES,
+} from '../../utils/routes'
 
 import css from './menu.scss?module'
 import cn from 'classnames'
@@ -17,7 +23,7 @@ const ProviderMenu = () => {
           <i className="icon-gear"></i>
           <Link to={SETTINGS}>Настройки профиля</Link>
         </li>
-        <li className={cn({[css.active]: location.pathname === PROGRAMS})}>
+        <li className={cn({[css.active]: location.pathname.indexOf(PROGRAMS) === 0})}>
           <i className="icon-web-development"></i>
           <Link to={PROGRAMS}>Программы обучения</Link>
         </li>

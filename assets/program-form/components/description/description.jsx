@@ -22,7 +22,6 @@ const Description = () => {
 
   const name = useSelector(state => state.program.name)
 
-
   const getCategoriesOptions = (key) => {
     const selectedCategories = useSelector(state => state.program.categories)
     return useSelector(state => state.data.categories).filter(option => {

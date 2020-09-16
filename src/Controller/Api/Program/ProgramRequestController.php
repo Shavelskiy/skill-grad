@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller\Api\Program;
 
 use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
@@ -62,6 +62,7 @@ class ProgramRequestController extends AbstractController
 
         return new JsonResponse([
             'items' => $requests,
+            'program_title' => $program->getName(),
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
         ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller\Api\Program;
 
 use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/api/profile/program/question")
  */
-class QuestionController extends AbstractController
+class ProgramQuestionController extends AbstractController
 {
     protected const PAGE_ITEM_COUNT = 10;
 
@@ -57,6 +57,7 @@ class QuestionController extends AbstractController
 
         return new JsonResponse([
             'items' => $questions,
+            'program_title' => $program->getName(),
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
         ]);

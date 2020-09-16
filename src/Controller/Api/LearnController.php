@@ -64,12 +64,16 @@ class LearnController extends AbstractController
         $searchResult = $this->programRequestRepository->getPaginatorResult($query, $user);
 
         $programs = [];
-        $programIds = [];
 
         /** @var ProgramRequest $programRequest */
         foreach ($searchResult->getItems() as $programRequest) {
             $program = $programRequest->getProgram();
-            $programIds[] = $program->getId();
+            $programId = $program->getId();
+
+            if (isset($programs[$programId])) {
+                continue;
+            }
+
             $categories = [];
 
             /** @var Category $category */
@@ -80,12 +84,25 @@ class LearnController extends AbstractController
             /** @var Provider $provider */
             $provider = $program->getProviders()[0];
 
-            $programs[] = [
-                'id' => $program->getId(),
+            $programReview = null;
+
+            /** @var ProgramReview $programReview */
+            foreach ($program->getReviews() as $programReview) {
+                if ($programReview->getUser()->getId() === $user->getId()) {
+                    $programReview = [
+                        'review' => $programReview->getReview(),
+                        'rating' => $programReview->getRating(),
+                    ];
+                }
+            }
+
+            $programs[$programId] = [
+                'id' => $programId,
                 'name' => $program->getName(),
                 'categories' => implode(',', $categories),
                 'link' => $this->router->generate('program.view', ['id' => $program->getId()]),
                 'date' => $programRequest->getCreatedAt()->format('c'),
+                'review' => $programReview,
                 'provider' => [
                     'name' => $provider->getName(),
                     'link' => $this->router->generate('provider.view', ['id' => $provider->getId()]),
@@ -93,21 +110,10 @@ class LearnController extends AbstractController
             ];
         }
 
-        $programReviews = [];
-
-        /** @var ProgramReview $programReview */
-        foreach ($this->programReviewRepository->findUserProgramsReviews($user, $programIds) as $programReview) {
-            $programReviews[$programReview->getProgram()->getId()] = [
-                'review' => $programReview->getReview(),
-                'rating' => $programReview->getRating(),
-            ];
-        }
-
         return new JsonResponse([
-            'programs' => $programs,
+            'items' => array_values($programs),
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
-            'reviews' => $programReviews,
         ]);
     }
 

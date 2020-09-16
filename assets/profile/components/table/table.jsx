@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {DATE, AUTHOR, CONTACT} from './header-types'
+import {DATE, AUTHOR, CONTACT, ASSESSMENT} from './header-types'
 import css from './table.scss?module'
 
 const Table = ({children, headers, withEmpty = false}) => {
@@ -21,6 +21,9 @@ const Table = ({children, headers, withEmpty = false}) => {
           break
         case CONTACT:
           headerClass = css.column__contact
+          break
+        case ASSESSMENT:
+          headerClass = css.column__assessment
           break
       }
 

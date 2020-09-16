@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller\Api\Program;
 
 use App\Dto\SearchQuery;
 use App\Entity\Category;
