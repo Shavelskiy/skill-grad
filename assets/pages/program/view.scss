@@ -1,3 +1,112 @@
 .reviews {
   width: 100%;
 }
+
+.main-card__program {
+  .alert {
+    @media (min-width: 320px) and (max-width: 767px) {
+      padding: 20px 10px;
+    }
+  }
+
+  .information {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22px;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    & .date, & .rating, & .proposal {
+      display: flex;
+      align-items: center;
+      margin-right: 40px;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        margin-right: 0;
+
+        .text {
+          display: none;
+        }
+      }
+
+      strong {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .share {
+    display: flex;
+    font-size: 14px;
+    line-height: 22px;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 20px;
+
+      .text {
+        display: none;
+      }
+    }
+
+    .contact-block {
+      display: flex;
+      align-items: center;
+    }
+
+    .buttons {
+      display: flex;
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+      border-radius: 100%;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      i {
+        font-size: 22px;
+
+        &:before {
+          color: #99a6b0;
+        }
+      }
+    }
+
+    ul {
+      display: flex;
+      margin-left: 10px;
+      margin-right: 20px;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        margin-left: 0;
+      }
+
+      li {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+
+      img {
+        width: 34px;
+      }
+    }
+  }
+
+  .rating {
+    margin-top: 0;
+  }
+}

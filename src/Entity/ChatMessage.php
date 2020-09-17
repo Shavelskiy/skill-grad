@@ -6,11 +6,12 @@ use App\Entity\Traits\IdTrait;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChatMessageRepository")
  */
-class ChatMessage
+class ChatMessage implements JsonSerializable
 {
     use IdTrait;
 
@@ -100,5 +101,17 @@ class ChatMessage
     {
         $this->viewed = $viewed;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'user' => $this->getUser()->getId(),
+            'recipient' => $this->getRecipient()->getId(),
+            'message' => $this->getMessage(),
+            'viewed' => $this->isViewed(),
+            'date' => $this->getDateSend()->format('c'),
+        ];
     }
 }

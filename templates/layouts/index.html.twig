@@ -12,6 +12,7 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   {% block stylesheets %}
     {{ encore_entry_link_tags('site.layout') }}
+    {{ encore_entry_link_tags('app.chat') }}
   {% endblock %}
 </head>
 <body data-auth="{{ app.user is not null ? 'true' : 'false' }}">
@@ -31,6 +32,7 @@
 
 {% block javascripts %}
   {{ encore_entry_script_tags('site.layout') }}
+  {{ encore_entry_script_tags('app.chat') }}
 {% endblock %}
 </body>
 </html>

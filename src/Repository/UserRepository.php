@@ -26,8 +26,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -60,10 +58,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         throw new NotFoundHttpException('Пользователь с таким E-mail не найден');
     }
 
-    /**
-     * @param $email
-     * @param $socialKey
-     */
     public function findUserByEmailAndSocialKey($email, $socialKey): User
     {
         /** @var User|null $user */
@@ -77,11 +71,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @param int        $page
-     * @param array|null $order
-     * @param int        $pageItems
-     * @param array|null $serach
-     *
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

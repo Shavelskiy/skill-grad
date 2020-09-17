@@ -23,6 +23,7 @@ Encore
 
   .addEntry('admin', './admin/index.js')
 
+  .addEntry('app.chat', './assets/chat/index.js')
   .addEntry('site.layout', './assets/layout/index.js')
   .addEntry('site.index', './assets/pages/index/index.js')
 

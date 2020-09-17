@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\UserToken;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,9 +17,6 @@ class UserTokenRepository extends ServiceEntityRepository
         parent::__construct($registry, UserToken::class);
     }
 
-    /**
-     * @param $token
-     */
     public function findByTokenAndType($token, string $type): UserToken
     {
         try {
@@ -31,6 +29,29 @@ class UserTokenRepository extends ServiceEntityRepository
                 ->andWhere('u.type = :type')
                 ->setParameters([
                     'token' => $token,
+                    'type' => $type,
+                ])
+                ->getQuery()
+                ->getResult();
+
+            if (empty($token)) {
+                throw new RuntimeException('user not found');
+            }
+
+            return current($token);
+        } catch (Exception $e) {
+            throw new NotFoundHttpException('Пользователь не найден');
+        }
+    }
+
+    public function findByUserAndType(User $user, string $type): UserToken
+    {
+        try {
+            $token = $this->createQueryBuilder('u')
+                ->andWhere('u.user = :user')
+                ->andWhere('u.type = :type')
+                ->setParameters([
+                    'user' => $user,
                     'type' => $type,
                 ])
                 ->getQuery()

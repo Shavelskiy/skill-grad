@@ -14,13 +14,15 @@ use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use RuntimeException;
 use SplObjectStorage;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Chat implements MessageComponentInterface
 {
     protected SplObjectStorage $clients;
-    protected EntityManagerInterface $em;
+    protected EntityManagerInterface $entityManager;
     protected UserRepository $userRepository;
     protected UserTokenRepository $userTokenRepository;
+    protected OutputInterface $output;
 
     protected const MSG_INIT = 'init';
     protected const MSG_FOCUS_IN = 'focusIn';
@@ -28,18 +30,21 @@ class Chat implements MessageComponentInterface
     protected const MSG_SEND_MESSAGE = 'sendMessage';
 
     public function __construct(
-        EntityManagerInterface $em,
+        EntityManagerInterface $entityManager,
         UserRepository $userRepository,
-        UserTokenRepository $userTokenRepository
+        UserTokenRepository $userTokenRepository,
+        OutputInterface $output
     ) {
         $this->clients = new SplObjectStorage();
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->userTokenRepository = $userTokenRepository;
+        $this->output = $output;
     }
 
     public function onOpen(ConnectionInterface $conn): void
     {
+        $this->output->write('<comment>Open connection</comment>', true);
         $this->clients->attach($conn);
     }
 
@@ -48,14 +53,17 @@ class Chat implements MessageComponentInterface
      */
     public function onMessage(ConnectionInterface $from, $msgStr): void
     {
+        $this->output->write(sprintf('<question>Message from: %s, %s</question>', $from->resourceId, $msgStr), true);
+
         $redis = RedisClient::getConnection();
 
-        $msg = json_decode($msgStr, true, 512, JSON_THROW_ON_ERROR);
+        $msg = json_decode($msgStr, true);
 
         switch ($msg['type']) {
             case self::MSG_INIT:
                 try {
-                    $chatToken = $this->userTokenRepository->findByTokenAndType($msg['token'], UserToken::TYPE_CHAT);
+                    $chatToken = $this->userTokenRepository
+                        ->findByTokenAndType($msg['token'], UserToken::TYPE_CHAT);
                     $user = $chatToken->getUser();
 
                     $idKey = $this->getUserIdKey($user->getId());
@@ -78,7 +86,7 @@ class Chat implements MessageComponentInterface
                 $from->send(json_encode([
                     'type' => $msg['type'],
                     'status' => $status,
-                ], JSON_THROW_ON_ERROR, 512));
+                ]));
                 break;
             case self::MSG_FOCUS_IN:
             case self::MSG_FOCUS_OUT:
@@ -98,8 +106,8 @@ class Chat implements MessageComponentInterface
                     ->setRecipient($this->getUserById($msg['to']))
                     ->setMessage($msg['message']);
 
-                $this->em->persist($chatMessage);
-                $this->em->flush();
+                $this->entityManager->persist($chatMessage);
+                $this->entityManager->flush();
 
                 $this->sendToClients($chatMessage->getRecipient()->getId(), [
                     'withId' => $chatMessage->getUser()->getId(),
@@ -121,6 +129,7 @@ class Chat implements MessageComponentInterface
 
     public function onClose(ConnectionInterface $conn): void
     {
+        $this->output->write(sprintf('<error>Close: %s</error>', $conn->resourceId), true);
         $this->deleteUserFromStorage($conn->resourceId);
 
         $this->clients->detach($conn);
@@ -128,14 +137,12 @@ class Chat implements MessageComponentInterface
 
     public function onError(ConnectionInterface $conn, Exception $e): void
     {
+        $this->output->write(sprintf('<error>Error: %s</error>', $e->getMessage()), true);
         $this->deleteUserFromStorage($conn->resourceId);
 
         $conn->close();
     }
 
-    /**
-     * @param $pId
-     */
     protected function deleteUserFromStorage($pId): void
     {
         $redis = RedisClient::getConnection();
