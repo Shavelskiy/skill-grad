@@ -92,7 +92,7 @@ class Chat implements MessageComponentInterface
             case self::MSG_FOCUS_OUT:
                 $userId = $redis->get($this->getUserPIdKey($from->resourceId));
 
-                $this->sendToClients($msg['userId'], [
+                $this->sendToClients($msg['recipient'], [
                     'type' => $msg['type'],
                     'from' => $userId,
                 ]);
@@ -103,7 +103,7 @@ class Chat implements MessageComponentInterface
 
                 $chatMessage = (new ChatMessage())
                     ->setUser($this->getUserById($userId))
-                    ->setRecipient($this->getUserById($msg['to']))
+                    ->setRecipient($this->getUserById($msg['recipient']))
                     ->setMessage($msg['message']);
 
                 $this->entityManager->persist($chatMessage);

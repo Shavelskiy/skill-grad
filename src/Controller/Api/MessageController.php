@@ -39,11 +39,13 @@ class MessageController extends AbstractController
 
         foreach ($this->chatMessageRepository->findMessageGroups($user) as $chatGroup) {
             if ($chatGroup['user_id'] !== $user->getId()) {
-                $userIds[] = $chatGroup['user_id'];
+                $groupUserId = $chatGroup['user_id'];
+            } else {
+                $groupUserId = $chatGroup['recipient_id'];
             }
 
-            if ($chatGroup['recipient_id'] !== $user->getId()) {
-                $userIds[] = $chatGroup['recipient_id'];
+            if (!in_array($groupUserId, $userIds, true)) {
+                $userIds[] = $groupUserId;
             }
         }
 
@@ -55,12 +57,18 @@ class MessageController extends AbstractController
 
             $lastMessage = $this->chatMessageRepository->findLastGroupMessage($user, $recipient);
 
+            $recipient = ($lastMessage->getUser()->getId() !== $user->getId()) ? $lastMessage->getUser() : $lastMessage->getRecipient();
             $result[] = [
+                'user' => [
+                    'id' => $lastMessage->getUser()->getId(),
+                    'name' => $lastMessage->getUser()->getEmail(),
+                ],
                 'recipient' => [
                     'id' => $recipient->getId(),
                     'name' => $recipient->getEmail(),
                 ],
                 'message' => $lastMessage->jsonSerialize(),
+                'new_count' => $this->chatMessageRepository->findNewMessageCount($recipient, $user),
             ];
         }
 

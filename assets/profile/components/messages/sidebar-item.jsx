@@ -6,20 +6,28 @@ import css from './sidebar-item.scss?module'
 import cn from 'classnames'
 
 
-const SidebarItem = ({group, click}) => {
+const SidebarItem = ({group, click, writing}) => {
+  const renderNotification = () => {
+    if (group.new_count < 1) {
+      return <></>
+    }
+
+    return <span className={css.notification}>{group.new_count}</span>
+  }
+
   return (
-    <div className={cn(css.user, css.newMessage)} onClick={click}>
+    <div className={cn(css.user, {[css.newMessage]: group.new_count > 0})} onClick={click}>
       <div className={css.avatar}>
         <img className="rounded" src="../../../img/photo.jpg" alt=""/>
       </div>
       <div className="information w-100">
         <div className="d-flex j-c-space-between">
-          <span className={css.name}>{group.recipient.name}</span>
+          <span className={css.name}>{group.user.name}</span>
           <span className={css.date}>{textDateFormat(new Date(group.message.date))}</span>
         </div>
         <div className={css.lastMessage}>
-          {group.message.message}
-          <span className={css.notification}>10</span>
+          {writing ? 'Печатает...' : group.message.message}
+          {renderNotification()}
         </div>
       </div>
     </div>

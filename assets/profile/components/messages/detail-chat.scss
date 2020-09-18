@@ -1,4 +1,5 @@
 .content {
+  position: relative;
   flex: 1 1 65%;
   padding-bottom: 20px;
 
@@ -57,6 +58,11 @@
   }
 }
 
+.writing {
+  margin-left: 70px;
+  font-size: 13px;
+}
+
 .box {
   max-height: 400px;
   overflow: scroll;
@@ -84,13 +90,43 @@
     }
   }
 
+
   .user {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 25px;
+    cursor: pointer;
     border: none;
     padding-bottom: 10px;
 
+    @media (min-width: 320px) and (max-width: 1023px) {
+      margin: 15px 10px;
+    }
+
     .avatar {
+      margin-right: 15px;
+
       @media (min-width: 320px) and (max-width: 1023px) {
         margin-right: 10px;
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+    }
+
+    .date {
+      color: #999999;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        .day {
+          display: none;
+        }
       }
     }
 
@@ -99,123 +135,52 @@
         color: #f7562e;
       }
     }
+
+    .name {
+      color: #1d71b1;
+    }
+
+    .last-message {
+      position: relative;
+      margin-top: 5px;
+    }
+
+    &.new-message {
+      margin: 0;
+      padding: 15px 25px;
+      background-color: #e9f4fd;
+      border-bottom: 1px solid #fff;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        padding: 15px 10px;
+      }
+    }
+
+    &:last-child {
+      border: none;
+    }
   }
 }
 
 .textarea-box {
-  @media (min-width: 320px) and (max-width: 767px) {
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    margin-right: 10px;
-    margin-left: 10px;
-  }
   display: flex;
-  position: relative;
-  margin-right: 70px;
-  margin-left: 70px;
+  position: absolute;
+  padding: 0 70px;
+  bottom: 0;
+  width: 100%;
   margin-top: 20px;
 
-  .textarea {
-    @media (min-width: 320px) and (max-width: 767px) {
-      height: 50px;
-      margin-bottom: 0;
-    }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      height: 50px;
-      margin-bottom: 0;
-    }
-    width: 95%;
-  }
-
-  a {
-    display: block;
-    position: absolute;
-    right: -50px;
-    bottom: 10px;
-  }
-}
-
-.user {
-  display: flex;
-  align-items: flex-start;
-  margin: 15px 25px;
-  cursor: pointer;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-
   @media (min-width: 320px) and (max-width: 1023px) {
-    margin: 15px 10px;
+    padding: 10px;
   }
 
-
-  .avatar {
-    margin-right: 15px;
+  .textarea {
+    width: 100%;
+    resize: none;
 
     @media (min-width: 320px) and (max-width: 1023px) {
-      margin-right: 5px;
-    }
-
-    img {
-      width: 50px;
       height: 50px;
-      object-fit: cover;
+      margin-bottom: 0;
     }
-  }
-
-  .date {
-    color: #999999;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-
-    @media (min-width: 320px) and (max-width: 1023px) {
-      .day {
-        display: none;
-      }
-    }
-  }
-
-  .name {
-    color: #1d71b1;
-  }
-
-  .last-message {
-    position: relative;
-    margin-top: 5px;
-
-    .notification {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      background-color: #f7562e;
-      border-radius: 100%;
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 700;
-      line-height: 20px;
-      padding-right: 1px;
-    }
-  }
-
-  &.new-message {
-    margin: 0;
-    padding: 15px 25px;
-    background-color: #e9f4fd;
-    border-bottom: 1px solid #fff;
-
-    @media (min-width: 320px) and (max-width: 1023px) {
-      padding: 15px 10px;
-    }
-  }
-
-  &:last-child {
-    border: none;
   }
 }

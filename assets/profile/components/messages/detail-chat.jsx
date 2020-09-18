@@ -1,7 +1,4 @@
-import React, {useEffect, useState} from 'react'
-
-import axios from 'axios'
-import {MESSAGE_DETAIL_URL} from '../../utils/api/endpoints'
+import React, {useState, useEffect, useRef} from 'react'
 
 import DetailChatItem from './detail-chat-item'
 
@@ -9,28 +6,30 @@ import css from './detail-chat.scss?module'
 import cn from 'classnames'
 
 
-const DetailChat = ({recipientId}) => {
-  const [user, setUser] = useState(null)
-  const [recipient, setRecipient] = useState(null)
-  const [messages, setMessages] = useState([])
+const DetailChat = ({messages, user, recipient, setWriting, writing, sendMessage}) => {
+  const ref = useRef()
 
-  useEffect(() => {
-    if (recipientId === null) {
-      setUser(null)
-      setRecipient(null)
-      setMessages([])
+  const [messageText, setMessageText] = useState('')
+
+  const handleKeyPress = (event) => {
+    if (event.which !== 13) {
       return
     }
 
-    axios.get(MESSAGE_DETAIL_URL.replace(':id', recipientId))
-      .then(({data}) => {
-        setUser(data.user)
-        setRecipient(data.recipient)
-        setMessages(data.messages)
-      })
-  }, [recipientId])
+    if (!event.shiftKey) {
+      event.preventDefault()
+      sendMessage(messageText)
+      setMessageText('')
+    }
+  }
 
-  if (recipientId === null || user === null || recipient === null) {
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scroll(0, ref.current.offsetHeight + 999999)
+    }
+  }, [messages, ref])
+
+  if (user === null || recipient === null) {
     return (
       <div className={cn(css.content, css.empty)}>
         <h6>Выберите собеседника...</h6>
@@ -48,12 +47,22 @@ const DetailChat = ({recipientId}) => {
         <div className={css.info}>
           Автор беседы: <a href="#">{recipient.name}</a>
         </div>
+        {writing ? <span className={css.writing}>Печатает...</span> : <></>}
       </div>
-      <div className={css.box}>
+      <div className={css.box} ref={ref}>
         {messages.map((item, key) => <DetailChatItem key={key} message={item} user={user} recipient={recipient}/>)}
       </div>
       <div className={css.textareaBox}>
-        <textarea rows="10" className="textarea" placeholder="Текст сообщения"></textarea>
+        <textarea
+          rows="10"
+          className={cn(css.textarea, 'textarea')}
+          placeholder="Текст сообщения"
+          value={messageText}
+          onChange={(event) => setMessageText(event.target.value)}
+          onKeyDown={handleKeyPress}
+          onFocus={() => setWriting(true)}
+          onBlur={() => setWriting(false)}
+        ></textarea>
       </div>
     </div>
   )

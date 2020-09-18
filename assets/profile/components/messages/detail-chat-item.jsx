@@ -5,6 +5,7 @@ import {textDateFormat, timeFormat} from '../../helpers/date-fromater'
 import css from './detail-chat.scss?module'
 import cn from 'classnames'
 
+
 const DetailChatItem = ({message, user, recipient}) => {
   return (
     <div className={cn(css.user, {[css.my]: message.user === user.id})}>

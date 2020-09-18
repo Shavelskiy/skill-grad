@@ -4,7 +4,7 @@ import SidebarItem from './sidebar-item'
 import css from './sidebar.scss?module';
 
 
-const Sidebar = ({groups, click}) => {
+const Sidebar = ({groups, click, writingUserIds}) => {
   return (
     <div className={css.sidebar}>
       <div className={css.search}>
@@ -15,7 +15,12 @@ const Sidebar = ({groups, click}) => {
       </div>
       <div className={css.users}>
         {groups.map((group, key) => (
-          <SidebarItem key={key} group={group} click={() => click(group.recipient.id)}/>
+          <SidebarItem
+            key={key}
+            group={group}
+            writing={writingUserIds.includes(group.recipient.id)}
+            click={() => click(group.recipient.id)}
+          />
         ))}
       </div>
     </div>

@@ -9,3 +9,5 @@ export const COMPARE_CLEAR = '/ajax/compare/clear'
 
 export const ADD_PROGRAM_REQUEST = '/ajax/program/request'
 export const ADD_PROGRAM_QUESTION = '/ajax/program/question'
+
+export const CHAT_START = '/chat/start'

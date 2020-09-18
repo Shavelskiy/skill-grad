@@ -18,7 +18,7 @@ class ChatMessageRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('c')
-            ->orderBy('c.dateSend', 'desc')
+            ->orderBy('c.dateSend', 'asc')
             ->andWhere('c.recipient = :user')
             ->orWhere('c.user = :user')
             ->setParameter('user', $user)
@@ -46,7 +46,7 @@ class ChatMessageRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('c')
-            ->orderBy('c.dateSend', 'desc')
+            ->orderBy('c.dateSend', 'asc')
             ->andWhere('c.recipient = :recipient AND c.user = :user')
             ->orWhere('c.recipient = :user AND c.user = :recipient')
             ->setParameters([
@@ -71,5 +71,22 @@ class ChatMessageRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findNewMessageCount(User $user, User $recipient): int
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('count(c.id)')
+            ->andWhere('c.user = :user')
+            ->andWhere('c.recipient = :recipient')
+            ->andWhere('c.viewed = :viewed')
+            ->setParameters([
+                'user' => $user,
+                'recipient' => $recipient,
+                'viewed' => false,
+            ])
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }
