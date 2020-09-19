@@ -14,16 +14,18 @@ use Throwable;
 
 class ImportLocationCommand extends Command
 {
-    protected EntityManagerInterface $em;
+    protected EntityManagerInterface $entityManager;
     protected LocationRepository $locationRepository;
 
     protected array $existingCodes = [];
 
-    public function __construct(LocationRepository $locationRepository, EntityManagerInterface $em, string $name = null)
-    {
-        parent::__construct($name);
+    public function __construct(
+        LocationRepository $locationRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        parent::__construct();
         $this->locationRepository = $locationRepository;
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     protected function configure(): void
@@ -67,7 +69,7 @@ class ImportLocationCommand extends Command
             ->setType(Location::TYPE_COUNTRY)
             ->setShowInList(false);
 
-        $this->em->persist($location);
+        $this->entityManager->persist($location);
 
         return $location;
     }
@@ -92,7 +94,7 @@ class ImportLocationCommand extends Command
 
             $output->writeln(sprintf('Add region: %s', $location->getName()));
 
-            $this->em->persist($location);
+            $this->entityManager->persist($location);
 
             $regions[$region['id']] = $location;
         }
@@ -107,10 +109,10 @@ class ImportLocationCommand extends Command
 
             $output->writeln(sprintf('Add city: %s, region name: %s', $location->getName(), $location->getParentLocation()->getName()));
 
-            $this->em->persist($location);
+            $this->entityManager->persist($location);
         }
 
-        $this->em->flush();
+        $this->entityManager->flush();
     }
 
     protected function generateCityCode(Location $location): string

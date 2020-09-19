@@ -95,8 +95,8 @@
               <div class="contact">
                 <h5 class="title">Контакты</h5>
                 {% if provider.user is not null and provider.user.userInfo is not null and provider.user.userInfo.phone is not null %}
-                  <a class="phone" href="tel:{{ provider.user.userInfo.phone|format_phone }}">
-                    {{ provider.user.userInfo.phone|format_phone }}
+                  <a class="phone" href="tel:{{ ('7' ~ provider.user.userInfo.phone)|format_phone }}">
+                    {{ ('7' ~ provider.user.userInfo.phone)|format_phone }}
                   </a>
                 {% endif %}
                 {% if provider.providerRequisites.mailingAddress is not null %}

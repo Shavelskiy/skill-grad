@@ -36,8 +36,6 @@ document.querySelectorAll('.send-email').forEach(item => {
   item.onclick = () => {
     if (!isAuth()) {
       sendMessageModal.classList.add('active')
-    } else {
-      //todo add send email
     }
   }
 })

@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\UserToken;
+use App\Repository\UserTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -17,18 +18,21 @@ class ConfirmRegisterListener implements EventSubscriberInterface
 {
     public const CONFIRM_REGISTRATION_KEY = 'confirm_register';
 
-    protected EntityManagerInterface $em;
+    protected EntityManagerInterface $entityManager;
+    protected UserTokenRepository $userTokenRepository;
     protected GuardAuthenticatorHandler $guardHandler;
     protected FlashBagInterface $flashBag;
     protected SessionInterface $session;
 
     public function __construct(
-        EntityManagerInterface $em,
+        EntityManagerInterface $entityManager,
+        UserTokenRepository $userTokenRepository,
         GuardAuthenticatorHandler $guardHandler,
         FlashBagInterface $flashBag,
         SessionInterface $session
     ) {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
+        $this->userTokenRepository = $userTokenRepository;
         $this->guardHandler = $guardHandler;
         $this->flashBag = $flashBag;
         $this->session = $session;
@@ -52,17 +56,15 @@ class ConfirmRegisterListener implements EventSubscriberInterface
                 throw new RuntimeException('event not available');
             }
 
-            /** @var UserToken $userToken */
-            $userToken = $this->em->getRepository(UserToken::class)
-                ->findByTokenAndType($request->get('token'), UserToken::TYPE_REGISTER);
+            $userToken = $this->userTokenRepository->findByTokenAndType($request->get('token'), UserToken::TYPE_REGISTER);
 
             $user = $userToken->getUser();
 
             $user->setActive(true);
 
-            $this->em->persist($user);
-            $this->em->remove($userToken);
-            $this->em->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->remove($userToken);
+            $this->entityManager->flush();
 
             $token = new PostAuthenticationGuardToken($user, 'main', $user->getRoles());
 

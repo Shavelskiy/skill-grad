@@ -12,12 +12,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadService implements UploadServiceInterface
 {
-    protected EntityManagerInterface $em;
+    protected EntityManagerInterface $entityManager;
     protected string $uploadDir;
 
-    public function __construct(EntityManagerInterface $em, ParameterBagInterface $parameters)
-    {
-        $this->em = $em;
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ParameterBagInterface $parameters
+    ) {
+        $this->entityManager = $entityManager;
         $this->uploadDir = $parameters->get('upload_dir');
     }
 
@@ -57,6 +59,6 @@ class UploadService implements UploadServiceInterface
             unlink($fileName);
         }
 
-        $this->em->remove($upload);
+        $this->entityManager->remove($upload);
     }
 }

@@ -7,7 +7,11 @@
   {% endif %}
   <div class="card__header">
     <div class="card__header-icon">
-      <img src="{{ program.providers[0].image.publicPath }}" alt="" style="max-height: 40px;">
+      {% if program.providers[0].image %}
+        <img src="{{ program.providers[0].image.publicPath }}" alt="" style="max-height: 40px;">
+      {% else %}
+        <img src="/img/provider_no_logo.png" alt="{{ provider.name }}">
+      {% endif %}
     </div>
     <span class="card__header-title">{{ program.providers[0].name }}</span>
   </div>
@@ -54,7 +58,8 @@
         </div>
       {% endif %}
       <div class="card__footer-button">
-        <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }} data-id="{{ program.id }}">
+        <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                data-id="{{ program.id }}">
           Заказать
         </button>
       </div>
