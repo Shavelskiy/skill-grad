@@ -3,7 +3,9 @@
 namespace App\Controller\Api;
 
 use App\Dto\UpdateUserData;
+use App\Entity\Category;
 use App\Entity\User;
+use App\Repository\CategoryRepository;
 use App\Service\UpdateUserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,13 +19,16 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class ProfileSettingsController extends AbstractController
 {
+    protected CategoryRepository $categoryRepository;
     protected UpdateUserInterface $updateUserService;
     protected ValidatorInterface $validator;
 
     public function __construct(
+        CategoryRepository $categoryRepository,
         UpdateUserInterface $updateUserService,
         ValidatorInterface $validator
     ) {
+        $this->categoryRepository = $categoryRepository;
         $this->updateUserService = $updateUserService;
         $this->validator = $validator;
     }
@@ -36,13 +41,52 @@ class ProfileSettingsController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        $userInfo = $user->getUserInfo();
+        if (in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
+            $data = $this->getProviderProfileInfo($user);
+        } else {
+            $data = $this->getUserProfileInfo($user);
+        }
 
-        return new JsonResponse([
-            'fullName' => ($userInfo !== null) ? $userInfo->getFullName() : '',
+        return new JsonResponse($data);
+    }
+
+    protected function getUserProfileInfo(User $user): array
+    {
+        $categories = [];
+
+        /** @var Category $category */
+        foreach ($this->categoryRepository->findRootCategories() as $category) {
+            $categories[] = [
+                'id' => $category->getId(),
+                'title' => $category->getName(),
+            ];
+        }
+
+        if (($userInfo = $user->getUserInfo()) === null) {
+            return [
+                'full_name' => '',
+                'email' => $user->getEmail(),
+                'description' => '',
+                'phone' => '',
+                'category' => null,
+                'categories' => $categories,
+            ];
+        }
+
+        return [
+            'full_name' => $userInfo->getFullName(),
             'email' => $user->getEmail(),
-            'phone' => ($userInfo !== null) ? $userInfo->getPhone() : '',
-        ]);
+            'description' => $userInfo->getDescription(),
+            'phone' => $userInfo->getPhone(),
+            'category' => ($userInfo->getCategory() !== null) ? ['id' => $userInfo->getCategory()->getId()] : null,
+            'categories' => $categories,
+        ];
+    }
+
+    protected function getProviderProfileInfo(User $user): array
+    {
+        return [
+        ];
     }
 
     /**

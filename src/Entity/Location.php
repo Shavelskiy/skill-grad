@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use RuntimeException;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RubricRepository")
+ * @ORM\Entity()
  */
 class Location
 {

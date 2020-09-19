@@ -200,7 +200,6 @@ class Provider
         return $this;
     }
 
-
     public function getLocations(): array
     {
         return $this->locations->toArray();

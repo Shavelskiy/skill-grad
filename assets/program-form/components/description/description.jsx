@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { DESCRIPTION } from '../../utils/titles'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/program/actions'
 
 import { TextInput, Textarea } from '../ui/input'
-import Select from '../ui/select'
+import Select from '../../../components/react-ui/select'
 import Block from '../ui/block'
 import Teachers from './teachers'
 import Duration from './duration'

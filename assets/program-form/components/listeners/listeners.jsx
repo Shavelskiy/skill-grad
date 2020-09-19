@@ -7,7 +7,7 @@ import { setLevel, setPreparations, setTargetAudience } from '../../redux/progra
 
 import Block from '../ui/block'
 import EnumList from '../ui/enum-list'
-import Select from '../ui/select'
+import Select from '../../../components/react-ui/select'
 
 import css from './listeners.scss?module'
 

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ChatMessageRepository")
+ * @ORM\Entity()
  */
 class ChatMessage implements JsonSerializable
 {

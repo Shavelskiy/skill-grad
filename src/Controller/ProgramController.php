@@ -6,7 +6,6 @@ use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramReviewsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;

@@ -6,7 +6,7 @@ use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramFormatRepository")
+ * @ORM\Entity()
  */
 class ProgramFormat
 {

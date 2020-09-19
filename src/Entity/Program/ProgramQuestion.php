@@ -8,7 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramQuestionRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
 class ProgramQuestion

@@ -43,7 +43,6 @@ class ProgramQuestionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException

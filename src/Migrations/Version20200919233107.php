@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200913205626 extends AbstractMigration
+final class Version20200919233107 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,7 +22,9 @@ final class Version20200913205626 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('ALTER TABLE program_review ALTER answer_date DROP NOT NULL');
+        $this->addSql('ALTER TABLE user_info ADD category_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE user_info ADD CONSTRAINT FK_B1087D9E12469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_B1087D9E12469DE2 ON user_info (category_id)');
     }
 
     public function down(Schema $schema): void
@@ -31,6 +33,8 @@ final class Version20200913205626 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE program_review ALTER answer_date SET NOT NULL');
+        $this->addSql('ALTER TABLE user_info DROP CONSTRAINT FK_B1087D9E12469DE2');
+        $this->addSql('DROP INDEX IDX_B1087D9E12469DE2');
+        $this->addSql('ALTER TABLE user_info DROP category_id');
     }
 }

@@ -41,7 +41,6 @@ class UploadService implements UploadServiceInterface
 
         [$path1, $path2, $path3] = explode('-', $uuid->toString());
 
-
         try {
             $uploadedFile->move($this->uploadDir, $fileName);
         } catch (Exception $e) {

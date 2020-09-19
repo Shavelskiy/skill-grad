@@ -27,6 +27,16 @@ class UserInfo
      */
     protected ?string $phone;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected ?string $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="users")
+     */
+    protected ?Category $category;
+
     public function getUser(): User
     {
         return $this->user;
@@ -57,6 +67,28 @@ class UserInfo
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
         return $this;
     }
 }

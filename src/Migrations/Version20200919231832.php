@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200913205626 extends AbstractMigration
+final class Version20200919231832 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,7 +22,8 @@ final class Version20200913205626 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('ALTER TABLE program_review ALTER answer_date DROP NOT NULL');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_1483A5E9E7927C74 ON users (email)');
+        $this->addSql('ALTER TABLE user_info ADD description TEXT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
@@ -31,6 +32,7 @@ final class Version20200913205626 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE program_review ALTER answer_date SET NOT NULL');
+        $this->addSql('ALTER TABLE user_info DROP description');
+        $this->addSql('DROP INDEX UNIQ_1483A5E9E7927C74');
     }
 }

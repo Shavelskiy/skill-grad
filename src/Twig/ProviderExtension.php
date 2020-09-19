@@ -3,11 +3,7 @@
 namespace App\Twig;
 
 use App\Entity\Category;
-use App\Entity\Program\Program;
 use App\Entity\Provider;
-use App\Repository\ProgramAdditionalRepository;
-use App\Repository\ProgramFormatRepository;
-use App\Repository\ProgramIncludeRepository;
 use Doctrine\Common\Collections\Collection;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
