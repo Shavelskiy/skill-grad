@@ -132,9 +132,6 @@ const Messages = () => {
       message: message,
       recipient: selectedRecipientId,
     }))
-
-    loadMessages()
-    loadGroups()
   }
 
   useEffect(() => {

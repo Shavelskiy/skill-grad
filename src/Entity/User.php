@@ -76,6 +76,16 @@ class User implements UserInterface
     protected Collection $programQuestions;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ChatMessage", mappedBy="user")
+     */
+    protected Collection $sentChatMessages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ChatMessage", mappedBy="recipient")
+     */
+    protected Collection $receivedChatMessages;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers")
      */
     protected Collection $favoriteProviders;
@@ -92,6 +102,8 @@ class User implements UserInterface
         $this->programReviews = new ArrayCollection();
         $this->programRequests = new ArrayCollection();
         $this->programQuestions = new ArrayCollection();
+        $this->sentChatMessages = new ArrayCollection();
+        $this->receivedChatMessages = new ArrayCollection();
     }
 
     public function getUsername(): string

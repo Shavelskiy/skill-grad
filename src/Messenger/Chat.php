@@ -118,6 +118,10 @@ class Chat implements MessageComponentInterface
                     'withId' => $chatMessage->getUser()->getId(),
                     'type' => $msg['type'],
                     'message' => $this->getMessageToSend($chatMessage),
+                    'author' => [
+                        'name' => $chatMessage->getUser()->getEmail(),
+                    ],
+                    'text' => $chatMessage->getMessage(),
                     'user' => $this->getUserToSend($chatMessage->getUser()),
                 ]);
 

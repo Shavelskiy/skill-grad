@@ -5,6 +5,7 @@ import {isAuth} from '../helpers/auth'
 
 if (isAuth()) {
   const headerNotificationCount = document.querySelector('.header-notification-count')
+  const newMessageModal = document.querySelector('.new-message-modal')
 
   axios.get('/chat/start')
     .then(response => {
@@ -33,13 +34,23 @@ if (isAuth()) {
 
       socket.onmessage = ({data}) => {
         data = JSON.parse(data)
-        console.log(data)
         switch (data.type) {
           case VIEWED:
             updateNotificationCount()
             break
           case SEND_MESSAGE:
             updateNotificationCount()
+
+            if ('text' in data) {
+              newMessageModal.querySelector('.message-text').innerHTML = data.text
+              newMessageModal.querySelector('.author').innerHTML = data.author.name
+              newMessageModal.classList.add('active')
+
+              setTimeout(() => {
+                newMessageModal.classList.remove('active')
+              }, 5000)
+            }
+
             break
         }
       }

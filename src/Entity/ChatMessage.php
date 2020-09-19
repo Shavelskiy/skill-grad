@@ -16,13 +16,13 @@ class ChatMessage implements JsonSerializable
     use IdTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recipientId")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="sentChatMessages")
      * @ORM\JoinColumn(nullable=false)
      */
     protected User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="chatMessages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="receivedChatMessages")
      * @ORM\JoinColumn(nullable=false)
      */
     protected User $recipient;
