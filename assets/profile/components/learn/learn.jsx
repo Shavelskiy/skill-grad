@@ -2,8 +2,8 @@ import React from 'react'
 
 import {LEARN_URL} from '../../utils/api/endpoints'
 
-import TableTemplate from '../table/table-template';
-import {LEARN} from '../table/item-types';
+import TableTemplate from '../table/table-template'
+import {LEARN} from '../table/item-types'
 
 
 const headers = [

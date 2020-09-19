@@ -1,7 +1,7 @@
 import React from 'react'
 import SidebarItem from './sidebar-item'
 
-import css from './sidebar.scss?module';
+import css from './sidebar.scss?module'
 
 
 const Sidebar = ({groups, click, writingUserIds}) => {

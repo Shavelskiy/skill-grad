@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 
-import axios from 'axios';
-import {ADD_REVIEW_URL} from '../../utils/api/endpoints';
+import axios from 'axios'
+import {ADD_REVIEW_URL} from '../../utils/api/endpoints'
 
 import {dateFormat} from '../../helpers/date-fromater'
-import ReviewModal from './review-modal';
+import ReviewModal from './review-modal'
 
 import css from './item.scss?module'
 

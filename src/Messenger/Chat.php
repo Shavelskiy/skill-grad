@@ -6,6 +6,7 @@ use App\Cache\RedisClient;
 use App\Entity\ChatMessage;
 use App\Entity\User;
 use App\Entity\UserToken;
+use App\Repository\ChatMessageRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,23 +23,27 @@ class Chat implements MessageComponentInterface
     protected EntityManagerInterface $entityManager;
     protected UserRepository $userRepository;
     protected UserTokenRepository $userTokenRepository;
+    protected ChatMessageRepository $chatMessageRepository;
     protected OutputInterface $output;
 
     protected const MSG_INIT = 'init';
     protected const MSG_FOCUS_IN = 'focusIn';
     protected const MSG_FOCUS_OUT = 'focusOut';
     protected const MSG_SEND_MESSAGE = 'sendMessage';
+    protected const MSG_VIEWED = 'viewed';
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UserRepository $userRepository,
         UserTokenRepository $userTokenRepository,
+        ChatMessageRepository $chatMessageRepository,
         OutputInterface $output
     ) {
         $this->clients = new SplObjectStorage();
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->userTokenRepository = $userTokenRepository;
+        $this->chatMessageRepository = $chatMessageRepository;
         $this->output = $output;
     }
 
@@ -121,6 +126,28 @@ class Chat implements MessageComponentInterface
                     'type' => $msg['type'],
                     'message' => $this->getMessageToSend($chatMessage),
                     'user' => $this->getUserToSend($chatMessage->getRecipient()),
+                ]);
+
+                break;
+            case self::MSG_VIEWED:
+                $userId = $redis->get($this->getUserPIdKey($from->resourceId));
+
+                $user = $this->getUserById($userId);
+
+                /** @var User $recipient */
+                $recipient = $this->userRepository->find($msg['recipient']);
+
+                /** @var ChatMessage $chatMessage */
+                foreach ($this->chatMessageRepository->findNewMessages($recipient, $user) as $chatMessage) {
+                    $chatMessage->setViewed(true);
+                    $this->entityManager->persist($chatMessage);
+                }
+
+                $this->entityManager->flush();
+
+                $this->sendToClients($recipient->getId(), [
+                    'type' => $msg['type'],
+                    'recipient' => $user->getId(),
                 ]);
 
                 break;

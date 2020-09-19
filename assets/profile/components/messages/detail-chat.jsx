@@ -6,7 +6,7 @@ import css from './detail-chat.scss?module'
 import cn from 'classnames'
 
 
-const DetailChat = ({messages, user, recipient, setWriting, writing, sendMessage}) => {
+const DetailChat = ({messages, user, recipient, setWriting, writing, sendMessage, viewDialog}) => {
   const ref = useRef()
 
   const [messageText, setMessageText] = useState('')
@@ -38,7 +38,7 @@ const DetailChat = ({messages, user, recipient, setWriting, writing, sendMessage
   }
 
   return (
-    <div className={css.content}>
+    <div className={css.content} onClick={viewDialog}>
       <div className={css.headerContent}>
         <i className={css.iconLeft}></i>
         <div className={css.avatar}>

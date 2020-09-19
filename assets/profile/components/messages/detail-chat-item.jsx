@@ -8,7 +8,7 @@ import cn from 'classnames'
 
 const DetailChatItem = ({message, user, recipient}) => {
   return (
-    <div className={cn(css.user, {[css.my]: message.user === user.id})}>
+    <div className={cn(css.user, {[css.newMessage]: !message.viewed}, {[css.my]: message.user === user.id})}>
       <div className={css.avatar}>
         <img className="rounded" src="../../../img/photo.jpg" alt=""/>
       </div>

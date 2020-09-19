@@ -3,7 +3,8 @@ import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import {MESSAGE_DETAIL_URL, MESSAGE_INDEX_URL} from '../../utils/api/endpoints'
 import {CHAT_START} from '../../../utils/api-routes'
-import {FOCUS_IN, FOCUS_OUT, INIT, SEND_MESSAGE} from '../../../chat/types'
+
+import {FOCUS_IN, FOCUS_OUT, INIT, SEND_MESSAGE, VIEWED} from '../../../chat/types'
 
 import Sidebar from './sidebar'
 import DetailChat from './detail-chat'
@@ -43,12 +44,46 @@ const Messages = () => {
       .then(({data}) => {
         setUser(data.user)
         setRecipient(data.recipient)
-        setMessages(data.messages)
+        setMessages(
+          data.messages.map(message => message.recipient === data.user.id ? {...message, viewed: true} : message)
+        )
       })
+  }
+
+  const openDialog = (recipientId) => {
+    recipientId = selectedRecipientId === recipientId ? null : recipientId
+
+    setSelectedRecipientId(recipientId)
+
+    if (recipientId === null) {
+      return
+    }
+
+    viewMessageGroup(recipientId)
+  }
+
+  const viewMessageGroup = (recipientId) => {
+    if (socket !== null) {
+      socket.send(JSON.stringify({
+        type: VIEWED,
+        recipient: recipientId,
+      }))
+    }
+
+    setGroups(groups =>
+      groups.map(
+        group => group.recipient.id === recipientId ? {
+          ...group,
+          new_count: 0,
+          message: {...group.message, viewed: group.message.viewed || group.recipient.id === group.user.id},
+        } : group
+      )
+    )
   }
 
   const onMessage = ({data}) => {
     data = JSON.parse(data)
+    console.log(data)
     switch (data.type) {
       case FOCUS_IN:
         const userFromInId = Number(data.from)
@@ -63,6 +98,25 @@ const Messages = () => {
       case SEND_MESSAGE:
         loadGroups()
         loadMessages()
+        break
+      case VIEWED:
+        setMessages(
+          messages => messages.map(
+            message => {
+              return {
+                ...message,
+                viewed: (message.viewed || message.recipient === data.recipient),
+              }
+            }
+          )
+        )
+
+        setGroups(groups => groups.map(
+          group => group.recipient.id === data.recipient ? {
+            ...group,
+            message: {...group.message, viewed: group.message.viewed || group.recipient.id !== group.user.id},
+          } : group
+        ))
         break
     }
   }
@@ -102,6 +156,7 @@ const Messages = () => {
       return
     }
 
+    viewMessageGroup(selectedRecipientId)
     loadMessages()
   }, [selectedRecipientId])
 
@@ -137,13 +192,14 @@ const Messages = () => {
         <Sidebar
           groups={groups}
           writingUserIds={writingUserIds}
-          click={(recipientId) => setSelectedRecipientId(selectedRecipientId === recipientId ? null : recipientId)}
+          click={openDialog}
         />
         <DetailChat
           messages={messages}
           user={user}
           recipient={recipient}
           writing={writingUserIds.includes(selectedRecipientId)}
+          viewDialog={() => viewMessageGroup(selectedRecipientId)}
           setWriting={setWriting}
           sendMessage={sendMessage}
         />

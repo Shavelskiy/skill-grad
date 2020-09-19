@@ -15,7 +15,7 @@ import ProgramItem from '../programs/list/program-item'
 import ProgramRequestItem from '../programs/requests/program-request-item'
 import ProgramQuestionItem from '../programs/questions/program-question-item'
 import ProgramReviewItem from '../programs/reviews/program-review-item'
-import LearnItem from '../learn/item';
+import LearnItem from '../learn/item'
 
 
 const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) => {

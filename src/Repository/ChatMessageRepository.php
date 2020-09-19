@@ -73,6 +73,22 @@ class ChatMessageRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findNewMessages(User $user, User $recipient): array
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->andWhere('c.user = :user')
+            ->andWhere('c.recipient = :recipient')
+            ->andWhere('c.viewed = :viewed')
+            ->setParameters([
+                'user' => $user,
+                'recipient' => $recipient,
+                'viewed' => false,
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findNewMessageCount(User $user, User $recipient): int
     {
         return $this
