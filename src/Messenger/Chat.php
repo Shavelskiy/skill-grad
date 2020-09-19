@@ -146,6 +146,13 @@ class Chat implements MessageComponentInterface
                 $this->entityManager->flush();
 
                 $this->sendToClients($recipient->getId(), [
+                    'for_self' => false,
+                    'type' => $msg['type'],
+                    'recipient' => $user->getId(),
+                ]);
+
+                $this->sendToClients($user->getId(), [
+                    'for_self' => true,
                     'type' => $msg['type'],
                     'recipient' => $user->getId(),
                 ]);

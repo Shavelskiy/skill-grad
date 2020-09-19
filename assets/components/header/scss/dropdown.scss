@@ -42,7 +42,7 @@
           }
 
           .notification {
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             position: absolute;
@@ -58,6 +58,10 @@
             border-radius: 100%;
             background-color: #f7562e;
             margin-bottom: 2px;
+
+            &.active {
+              display: flex;
+            }
           }
 
           .header-dropdown-link {

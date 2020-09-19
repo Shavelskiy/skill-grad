@@ -1,6 +1,7 @@
 import { loginModal, registerRoleModal, initModalFormCloseBtn } from '../../components/modal'
 
 import { addProviderToFavorite } from '../../components/common/favorite'
+import {isAuth} from '../../helpers/auth'
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 const sendMessageModal = document.getElementById('send-message-modal')
@@ -33,7 +34,7 @@ initModalFormCloseBtn(sendMessageModal)
 
 document.querySelectorAll('.send-email').forEach(item => {
   item.onclick = () => {
-    if (document.body.dataset.auth === 'false') {
+    if (!isAuth()) {
       sendMessageModal.classList.add('active')
     } else {
       //todo add send email
@@ -43,7 +44,7 @@ document.querySelectorAll('.send-email').forEach(item => {
 
 document.querySelectorAll('.add-provider-favorites').forEach(item => {
   item.onclick = () => {
-    if (document.body.dataset.auth === 'false') {
+    if (!isAuth()) {
       addFavoritesModal.classList.add('active')
     } else {
       addProviderToFavorite(item)

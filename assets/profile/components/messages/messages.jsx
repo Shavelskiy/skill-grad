@@ -83,7 +83,6 @@ const Messages = () => {
 
   const onMessage = ({data}) => {
     data = JSON.parse(data)
-    console.log(data)
     switch (data.type) {
       case FOCUS_IN:
         const userFromInId = Number(data.from)
@@ -100,23 +99,25 @@ const Messages = () => {
         loadMessages()
         break
       case VIEWED:
-        setMessages(
-          messages => messages.map(
-            message => {
-              return {
-                ...message,
-                viewed: (message.viewed || message.recipient === data.recipient),
+        if (!data.for_self) {
+          setMessages(
+            messages => messages.map(
+              message => {
+                return {
+                  ...message,
+                  viewed: (message.viewed || message.recipient === data.recipient),
+                }
               }
-            }
+            )
           )
-        )
 
-        setGroups(groups => groups.map(
-          group => group.recipient.id === data.recipient ? {
-            ...group,
-            message: {...group.message, viewed: group.message.viewed || group.recipient.id !== group.user.id},
-          } : group
-        ))
+          setGroups(groups => groups.map(
+            group => group.recipient.id === data.recipient ? {
+              ...group,
+              message: {...group.message, viewed: group.message.viewed || group.recipient.id !== group.user.id},
+            } : group
+          ))
+        }
         break
     }
   }

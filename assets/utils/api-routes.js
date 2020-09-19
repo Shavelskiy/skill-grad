@@ -11,3 +11,4 @@ export const ADD_PROGRAM_REQUEST = '/ajax/program/request'
 export const ADD_PROGRAM_QUESTION = '/ajax/program/question'
 
 export const CHAT_START = '/chat/start'
+export const GET_NEW_MESSAGES_COUNT = '/ajax/message/new'

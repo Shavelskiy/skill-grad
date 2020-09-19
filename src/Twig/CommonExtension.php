@@ -4,18 +4,28 @@ namespace App\Twig;
 
 use App\Entity\User;
 use App\Helpers\CompareHelper;
+use App\Repository\ChatMessageRepository;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class CommonExtension extends AbstractExtension
 {
+    protected ChatMessageRepository $chatMessageRepository;
+
+    public function __construct(
+        ChatMessageRepository $chatMessageRepository
+    ) {
+        $this->chatMessageRepository = $chatMessageRepository;
+    }
+
     public function getFunctions(): array
     {
         return [
             new TwigFunction('getCompareCount', [$this, 'getCompareCount']),
             new TwigFunction('inCompare', [$this, 'inCompare']),
             new TwigFunction('getUsername', [$this, 'getUsername']),
+            new TwigFunction('getNewMessagesCount', [$this, 'getNewMessagesCount']),
         ];
     }
 
@@ -46,5 +56,10 @@ class CommonExtension extends AbstractExtension
         }
 
         return $user->getEmail();
+    }
+
+    public function getNewMessagesCount(User $user): int
+    {
+        return $this->chatMessageRepository->findNewMessageCount($user);
     }
 }

@@ -1,3 +1,5 @@
+{% set messagesCount =  getNewMessagesCount(app.user) %}
+
 <ul>
   <li>
     <i class="icon-gear"></i>
@@ -5,8 +7,9 @@
   </li>
   <li>
     <i class="icon-email1"></i>
-    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'messages' }) }}">Сообщения</a>
-    <span class="notification">10</span>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'messages' }) }}">
+      Сообщения <span class="header-notification-count notification {{ messagesCount > 0 ? 'active' : '' }}">{{ messagesCount }}</span>
+    </a>
   </li>
   <li>
     <i class="icon-student"></i>

@@ -4,6 +4,7 @@ import {ADD_PROGRAM_QUESTION} from '../../utils/api-routes'
 import {loginModal, registerRoleModal, initModalFormCloseBtn} from '../../components/modal'
 import {addProgramToFavorite} from '../../components/common/favorite'
 import showAlert from '../../components/modal/alert'
+import {isAuth} from '../../helpers/auth'
 
 import './view.scss'
 
@@ -45,7 +46,7 @@ initModalFormCloseBtn(questionModal)
 
 document.querySelectorAll('.add-program-favorites').forEach(item => {
   item.onclick = () => {
-    if (document.body.dataset.auth === 'false') {
+    if (!isAuth()) {
       addFavoritesModal.classList.add('active')
     } else {
       addProgramToFavorite(item)
@@ -55,7 +56,7 @@ document.querySelectorAll('.add-program-favorites').forEach(item => {
 
 document.querySelectorAll('.program-question-button').forEach(item => {
   item.onclick = () => {
-    if (document.body.dataset.auth === 'false') {
+    if (!isAuth()) {
       questionAuthModal.classList.add('active')
     } else {
       questionModal.classList.add('active')

@@ -1,9 +1,10 @@
 import { registerModal, registerRoleModal } from '../modal'
 import showAlert from './alert'
+import {isAuth} from '../../helpers/auth'
 import { ROLE_PROVIDER, ROLE_USER } from '../../utils/user-roles'
 
 const showRegisterForm = (role) => {
-  if (document.body.dataset.auth === 'false') {
+  if (!isAuth()) {
     const registerFormRoleInput = registerModal.querySelector('input[name="role"]')
     registerFormRoleInput.value = role
     registerModal.classList.add('active')

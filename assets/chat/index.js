@@ -1,44 +1,47 @@
-// import axios from 'axios'
-//
-// axios.get('/chat/start')
-//   .then(response => {
-//
-//     const socket = new WebSocket('ws://localhost:8081')
-//     const token = response.data.token
-//
-//     socket.onopen = () => {
-//       socket.send(JSON.stringify({
-//         type: 'init',
-//         token: token
-//       }));
-//     };
-//
-//     socket.onmessage = (e) => {
-//       const data = JSON.parse(e.data)
-//       // console.log(data)
-//       // switch (data.type) {
-//       //   case 'focusIn':
-//       //     const userFromInId = Number(data.from);
-//       //     if (!this.typingUserIds.includes(userFromInId)) {
-//       //       this.typingUserIds.push(userFromInId);
-//       //     }
-//       //     break;
-//       //   case 'focusOut':
-//       //     const userFromOutId = Number(data.from);
-//       //     this.typingUserIds = this.typingUserIds.filter((item) => {
-//       //       return item !== userFromOutId;
-//       //     });
-//       //     break;
-//       //   case 'sendMessage':
-//       //     if (this.allMessages[data.withId] === undefined) {
-//       //       this.allMessages[data.withId] = [];
-//       //     }
-//       //     this.allMessages[data.withId].push(data.message);
-//       //     this.messagesKey++;
-//       //     break;
-//       // }
-//     };
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
+import axios from 'axios'
+import {SEND_MESSAGE, VIEWED} from './types'
+import {GET_NEW_MESSAGES_COUNT} from '../utils/api-routes'
+import {isAuth} from '../helpers/auth'
+
+if (isAuth()) {
+  const headerNotificationCount = document.querySelector('.header-notification-count')
+
+  axios.get('/chat/start')
+    .then(response => {
+      const socket = new WebSocket('ws://localhost:8081')
+      const token = response.data.token
+
+      const updateNotificationCount = () => {
+        axios.get(GET_NEW_MESSAGES_COUNT)
+          .then(({data}) => {
+            headerNotificationCount.innerHTML = data.count
+
+            if (data.count > 0) {
+              headerNotificationCount.classList.add('active')
+            } else {
+              headerNotificationCount.classList.remove('active')
+            }
+          })
+      }
+
+      socket.onopen = () => {
+        socket.send(JSON.stringify({
+          type: 'init',
+          token: token
+        }))
+      }
+
+      socket.onmessage = ({data}) => {
+        data = JSON.parse(data)
+        console.log(data)
+        switch (data.type) {
+          case VIEWED:
+            updateNotificationCount()
+            break
+          case SEND_MESSAGE:
+            updateNotificationCount()
+            break
+        }
+      }
+    })
+}

@@ -68,7 +68,7 @@ class MessageController extends AbstractController
                     'name' => $recipient->getEmail(),
                 ],
                 'message' => $lastMessage->jsonSerialize(),
-                'new_count' => $this->chatMessageRepository->findNewMessageCount($recipient, $user),
+                'new_count' => $this->chatMessageRepository->findNewMessageCount($user, $recipient),
             ];
         }
 
