@@ -10,7 +10,7 @@ import css from './teachers.scss?module'
 import deleteImage from './../../img/delete.svg'
 import addImage from './../../img/teacher-add.svg'
 import noImage from './../../img/teacher-no-img.svg'
-import realoadImg from './../../img/reload.svg'
+import reloadImg from './../../img/reload.svg'
 import deleteTeacherImg from './../../img/delete-image.svg'
 
 
@@ -51,7 +51,7 @@ const Teachers = () => {
     return (
       <div className={css.actions}>
         <label htmlFor={imageId} className={css.reload}>
-          <img src={realoadImg}/>
+          <img src={reloadImg}/>
         </label>
         <img src={deleteTeacherImg} onClick={() => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
           name: item.name,

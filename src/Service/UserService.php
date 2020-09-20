@@ -20,19 +20,22 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     protected UserTokenRepository $userTokenRepository;
     protected EntityManagerInterface $entityManager;
     protected AuthMailerInterface $authMailer;
+    protected UploadServiceInterface $uploadService;
 
     public function __construct(
         UserRepository $userRepository,
         UserTokenRepository $userTokenRepository,
         UserPasswordEncoderInterface $userPasswordEncoder,
         EntityManagerInterface $entityManager,
-        AuthMailerInterface $authMailer
+        AuthMailerInterface $authMailer,
+        UploadServiceInterface $uploadService
     ) {
         $this->userRepository = $userRepository;
         $this->userTokenRepository = $userTokenRepository;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->entityManager = $entityManager;
         $this->authMailer = $authMailer;
+        $this->uploadService = $uploadService;
     }
 
     public function initResetUserPassword(string $email): void
@@ -122,6 +125,17 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             $user->setUserInfo($userInfo);
 
             $this->entityManager->persist($userInfo);
+        }
+
+        if ($userInfo->getImage() !== null && $updateUserData->getOldImage() === null) {
+            $this->uploadService->deleteUpload($userInfo->getImage());
+            $userInfo->setImage(null);
+        }
+
+        if ($updateUserData->getImage() !== null) {
+            $upload = $this->uploadService->createUpload($updateUserData->getImage());
+            $this->entityManager->persist($upload);
+            $userInfo->setImage($upload);
         }
 
         $userInfo

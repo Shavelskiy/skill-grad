@@ -37,12 +37,15 @@ class UploadService implements UploadServiceInterface
     public function createUpload(UploadedFile $uploadedFile): Upload
     {
         $uuid = Uuid::uuid4();
-        $fileName = $uuid->toString() . '-' . time() . '.' . $uploadedFile->guessExtension();
 
-        [$path1, $path2, $path3] = explode('-', $uuid->toString());
+        $fileName = $uuid->toString() . '-' . time() . '.' . $uploadedFile->guessExtension();
+        $filePath = $this->getFilePath($fileName);
 
         try {
-            $uploadedFile->move($this->uploadDir, $fileName);
+            if (!is_dir($filePath)) {
+                mkdir($filePath, 0777, true);
+            }
+            $uploadedFile->move($filePath, $fileName);
         } catch (Exception $e) {
             throw new RuntimeException('Ошибка при сохранении файла');
         }
@@ -52,12 +55,25 @@ class UploadService implements UploadServiceInterface
 
     public function deleteUpload(Upload $upload): void
     {
-        $fileName = $this->uploadDir . '/' . $upload->getName();
+        $filePath = $this->getFilePath($upload->getName());
+        $fileName = $filePath . '/' . $upload->getName();
 
         if (file_exists($fileName)) {
             unlink($fileName);
         }
 
         $this->entityManager->remove($upload);
+    }
+
+    protected function getFilePath(string $fileName): string
+    {
+        [$path1, $path2, $path3] = explode('-', $fileName);
+
+        return sprintf('%s/%s/%s/%s',
+            $this->uploadDir,
+            substr($path1, 0, 3),
+            substr($path2, 0, 3),
+            substr($path3, 0, 3)
+        );
     }
 }

@@ -2,6 +2,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  input[type="file"] {
+    display: none;
+  }
+
   .settings-sidebar {
     flex: 1 1 20%;
 

@@ -3,32 +3,20 @@
 namespace App\Dto;
 
 use App\Entity\Category;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UpdateUserData
 {
-    /**
-     * @Assert\NotBlank()
-     */
     protected string $fullName;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
     protected string $email;
-
-    /**
-     * @Assert\NotBlank()
-     */
     protected string $phone;
-
     protected string $description;
     protected ?Category $category;
-
     protected string $oldPassword;
     protected string $newPassword;
     protected string $confirmNewPassword;
+    protected ?UploadedFile $image;
+    protected ?string $oldImage;
 
     public function getFullName(): string
     {
@@ -115,6 +103,28 @@ class UpdateUserData
     public function setConfirmNewPassword(string $confirmNewPassword): self
     {
         $this->confirmNewPassword = $confirmNewPassword;
+        return $this;
+    }
+
+    public function getImage(): ?UploadedFile
+    {
+        return $this->image;
+    }
+
+    public function setImage(?UploadedFile $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    public function getOldImage(): ?string
+    {
+        return $this->oldImage;
+    }
+
+    public function setOldImage(?string $oldImage): self
+    {
+        $this->oldImage = $oldImage;
         return $this;
     }
 }

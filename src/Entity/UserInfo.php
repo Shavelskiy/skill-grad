@@ -37,6 +37,11 @@ class UserInfo
      */
     protected ?Category $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
+     */
+    protected ?Upload $image;
+
     public function getUser(): User
     {
         return $this->user;
@@ -89,6 +94,17 @@ class UserInfo
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+        return $this;
+    }
+
+    public function getImage(): ?Upload
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Upload $image): self
+    {
+        $this->image = $image;
         return $this;
     }
 }

@@ -67,6 +67,7 @@ class ProfileSettingsController extends AbstractController
                 'phone' => '',
                 'category' => null,
                 'categories' => $categories,
+                'image' => null,
             ];
         }
 
@@ -77,6 +78,7 @@ class ProfileSettingsController extends AbstractController
             'phone' => $userInfo->getPhone(),
             'category' => ($userInfo->getCategory() !== null) ? $userInfo->getCategory()->getId() : null,
             'categories' => $categories,
+            'image' => $userInfo->getImage() ? $userInfo->getImage()->getPublicPath() : null,
         ];
     }
 
@@ -98,7 +100,9 @@ class ProfileSettingsController extends AbstractController
             ->setDescription($request->get('description'))
             ->setOldPassword($request->get('oldPassword'))
             ->setNewPassword($request->get('newPassword'))
-            ->setConfirmNewPassword($request->get('confirmNewPassword'));
+            ->setConfirmNewPassword($request->get('confirmNewPassword'))
+            ->setOldImage($request->get('oldImage'))
+            ->setImage($request->files->get('image'));
 
         if ($request->get('category') !== null) {
             $updateUserData->setCategory(
