@@ -331,6 +331,10 @@ textarea {
 @import "./../components/footer/index";
 @import "./../components/ui/index";
 
+.blue-text {
+  color: #007bff;
+  cursor: pointer;
+}
 
 .show-mobile {
   display: none;

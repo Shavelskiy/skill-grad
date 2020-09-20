@@ -19,6 +19,7 @@
     height: 16px;
     width: 16px;
     background-image: url("./../../img/down-arrow.svg");
+    background-color: #f3f3f3;
     background-size: 100%;
     top: calc(50% - 8px);
     right: 18px;
@@ -32,10 +33,10 @@
     align-items: center;
     min-height: 0;
     height: 100%;
-    padding: 0 18px 0 24px;
+    padding: 0 18px 0 24px !important;
   }
 
-  .options-conainer {
+  .options-container {
     z-index: 99999;
     position: absolute;
     left: 0;
@@ -95,7 +96,7 @@
   }
 
   &.opened {
-    .options-conainer {
+    .options-container {
       opacity: 1;
       pointer-events: auto;
     }

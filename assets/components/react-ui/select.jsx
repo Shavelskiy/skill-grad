@@ -65,7 +65,7 @@ const Select = ({options, value, setValue, placeholder = ''}) => {
         <span> {getTitle()}</span>
         <span className={css.icon}></span>
       </div>
-      <div className={css.optionsConainer}>
+      <div className={css.optionsContainer}>
         <div className={css.options}>
           {
             options.map((item, key) => {

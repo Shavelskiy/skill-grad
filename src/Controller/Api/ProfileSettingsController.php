@@ -137,4 +137,33 @@ class ProfileSettingsController extends AbstractController
 
         return new JsonResponse([]);
     }
+
+    /**
+     * @Route("/categories", name="api.profile.settings.categories", methods={"GET"})
+     */
+    public function categoriesAction(): Response
+    {
+        $categories = [];
+
+        /** @var Category $rootCategory */
+        foreach ($this->categoryRepository->findRootCategories() as $rootCategory) {
+            $childCategories = [];
+
+            /** @var Category $childCategory */
+            foreach ($rootCategory->getChildCategories() as $childCategory) {
+                $childCategories[] = [
+                    'value' => $childCategory->getId(),
+                    'title' => $childCategory->getName(),
+                ];
+            }
+
+            $categories[] = [
+                'value' => $rootCategory->getId(),
+                'title' => $rootCategory->getName(),
+                'child_items' => $childCategories,
+            ];
+        }
+
+        return new JsonResponse(['categories' => $categories]);
+    }
 }
