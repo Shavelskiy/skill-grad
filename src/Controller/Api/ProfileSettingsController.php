@@ -7,12 +7,12 @@ use App\Entity\Category;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Service\UpdateUserInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/api/profile/settings")
@@ -21,20 +21,17 @@ class ProfileSettingsController extends AbstractController
 {
     protected CategoryRepository $categoryRepository;
     protected UpdateUserInterface $updateUserService;
-    protected ValidatorInterface $validator;
 
     public function __construct(
         CategoryRepository $categoryRepository,
-        UpdateUserInterface $updateUserService,
-        ValidatorInterface $validator
+        UpdateUserInterface $updateUserService
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->updateUserService = $updateUserService;
-        $this->validator = $validator;
     }
 
     /**
-     * @Route("/", methods={"GET"}, name="get.profile.settings")
+     * @Route("", methods={"GET"}, name="get.profile.settings")
      */
     public function getProfileSettings(): Response
     {
@@ -57,7 +54,7 @@ class ProfileSettingsController extends AbstractController
         /** @var Category $category */
         foreach ($this->categoryRepository->findRootCategories() as $category) {
             $categories[] = [
-                'id' => $category->getId(),
+                'value' => $category->getId(),
                 'title' => $category->getName(),
             ];
         }
@@ -78,7 +75,7 @@ class ProfileSettingsController extends AbstractController
             'email' => $user->getEmail(),
             'description' => $userInfo->getDescription(),
             'phone' => $userInfo->getPhone(),
-            'category' => ($userInfo->getCategory() !== null) ? ['id' => $userInfo->getCategory()->getId()] : null,
+            'category' => ($userInfo->getCategory() !== null) ? $userInfo->getCategory()->getId() : null,
             'categories' => $categories,
         ];
     }
@@ -90,7 +87,7 @@ class ProfileSettingsController extends AbstractController
     }
 
     /**
-     * @Route("/", methods={"POST"}, name="save.profile.settings")
+     * @Route("", methods={"POST"}, name="save.profile.settings")
      */
     public function saveProfileSettings(Request $request): Response
     {
@@ -98,21 +95,26 @@ class ProfileSettingsController extends AbstractController
             ->setFullName($request->get('fullName'))
             ->setEmail($request->get('email'))
             ->setPhone($request->get('phone'))
+            ->setDescription($request->get('description'))
             ->setOldPassword($request->get('oldPassword'))
             ->setNewPassword($request->get('newPassword'))
             ->setConfirmNewPassword($request->get('confirmNewPassword'));
 
-        $errors = $this->validator->validate($updateUserData);
+        if ($request->get('category') !== null) {
+            $updateUserData->setCategory(
+                $this->categoryRepository->find($request->get('category'))
+            );
+        }
 
         /** @var User $user */
         $user = $this->getUser();
 
-        $this->updateUserService->updateUser($user, $updateUserData);
+        try {
+            $this->updateUserService->updateUser($user, $updateUserData);
+        } catch (Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 400);
+        }
 
-        return new JsonResponse([
-            'fullName' => $user->getFullName(),
-            'email' => $user->getEmail(),
-            'phone' => $user->getPhone(),
-        ]);
+        return new JsonResponse([]);
     }
 }

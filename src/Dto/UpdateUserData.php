@@ -2,6 +2,7 @@
 
 namespace App\Dto;
 
+use App\Entity\Category;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UpdateUserData
@@ -22,6 +23,9 @@ class UpdateUserData
      */
     protected string $phone;
 
+    protected string $description;
+    protected ?Category $category;
+
     protected string $oldPassword;
     protected string $newPassword;
     protected string $confirmNewPassword;
@@ -31,9 +35,6 @@ class UpdateUserData
         return $this->fullName;
     }
 
-    /**
-     * @return UpdateUserData
-     */
     public function setFullName(string $fullName): self
     {
         $this->fullName = $fullName;
@@ -45,9 +46,6 @@ class UpdateUserData
         return $this->email;
     }
 
-    /**
-     * @return UpdateUserData
-     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -59,12 +57,31 @@ class UpdateUserData
         return $this->phone;
     }
 
-    /**
-     * @return UpdateUserData
-     */
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category ?? null;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
         return $this;
     }
 
@@ -73,9 +90,6 @@ class UpdateUserData
         return $this->oldPassword;
     }
 
-    /**
-     * @return UpdateUserData
-     */
     public function setOldPassword(string $oldPassword): self
     {
         $this->oldPassword = $oldPassword;
@@ -87,9 +101,6 @@ class UpdateUserData
         return $this->newPassword;
     }
 
-    /**
-     * @return UpdateUserData
-     */
     public function setNewPassword(string $newPassword): self
     {
         $this->newPassword = $newPassword;
@@ -101,9 +112,6 @@ class UpdateUserData
         return $this->confirmNewPassword;
     }
 
-    /**
-     * @return UpdateUserData
-     */
     public function setConfirmNewPassword(string $confirmNewPassword): self
     {
         $this->confirmNewPassword = $confirmNewPassword;

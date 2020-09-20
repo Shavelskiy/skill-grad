@@ -5,7 +5,7 @@ import {LEARN, MESSAGES, SETTINGS} from '../utils/routes'
 
 import UserMenu from './menu/user-menu'
 
-import Settings from './settings/settings'
+import UserSettings from './settings/user-settings'
 import Messages from './messages/messages'
 import Learn from './learn/learn'
 
@@ -19,7 +19,7 @@ const UserApp = () => {
       <UserMenu/>
 
       <Switch>
-        <Route exact name="profile.settings" path={SETTINGS} component={Settings}/>
+        <Route exact name="profile.settings" path={SETTINGS} component={UserSettings}/>
         <Route exact name="profile.messages" path={MESSAGES} component={Messages}/>
         <Route exact name="profile.learn" path={LEARN} component={Learn}/>
       </Switch>

@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Dto\UpdateUserData;
 use App\Entity\User;
+use App\Entity\UserInfo;
 use App\Entity\UserToken;
 use App\Repository\UserRepository;
 use App\Repository\UserTokenRepository;
@@ -114,10 +115,30 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
 
     public function updateUser(User $user, UpdateUserData $updateUserData)
     {
+        if (($userInfo = $user->getUserInfo()) === null) {
+            $userInfo = (new UserInfo())
+                ->setUser($user);
+
+            $user->setUserInfo($userInfo);
+
+            $this->entityManager->persist($userInfo);
+        }
+
+        $userInfo
+            ->setFullName($updateUserData->getFullName())
+            ->setPhone($updateUserData->getPhone())
+            ->setDescription($updateUserData->getDescription())
+            ->setCategory($updateUserData->getCategory());
+
+        /** @var User $emailUser */
+        $emailUser = $this->userRepository->findOneBy(['email' => $updateUserData->getEmail()]);
+
+        if ($emailUser !== null && $emailUser->getId() !== $user->getId()) {
+            throw  new RuntimeException('Данный email уже занят');
+        }
+
         $user
-//            ->setFullName($updateUserData->getFullName())
-            ->setEmail($updateUserData->getEmail())
-            ->setPhone($updateUserData->getPhone());
+            ->setEmail($updateUserData->getEmail());
 
         if (!empty($updateUserData->getOldPassword())) {
             $this->checkPasswordCorrect($user, $updateUserData->getOldPassword());
