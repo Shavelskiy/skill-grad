@@ -5,7 +5,7 @@ import {LEARN, MESSAGES, SETTINGS} from '../utils/routes'
 
 import UserMenu from './menu/user-menu'
 
-import UserSettings from './settings/user-settings'
+import UserSettings from './settings/user/user-settings'
 import Messages from './messages/messages'
 import Learn from './learn/learn'
 

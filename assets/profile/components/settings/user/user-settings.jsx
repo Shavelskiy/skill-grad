@@ -1,14 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react'
+
 import axios from 'axios'
-import {USER_INFO_URL} from '../../utils/api/endpoints'
+import {USER_INFO_URL} from '../../../utils/api/endpoints'
+
+import {validate, phoneFormat} from '../helpers'
 
 import InputMask from 'react-input-mask'
-import Select from '../../../components/react-ui/select';
-import Input from '../ui/input'
+import Select from '../../../../components/react-ui/select'
+import Input from '../../ui/input'
 
 import css from './user-settings.scss?module'
 
-import noImage from '../../../img/svg/user-no-photo.svg'
+import noImage from '../../../../img/svg/user-no-photo.svg'
 
 
 const UserSettings = () => {
@@ -50,19 +53,10 @@ const UserSettings = () => {
     setError('')
     setShowSuccess(false)
 
-    let resultPhone = phone
-    if (phone.substring(0, 1) === '+') {
-      resultPhone =
-        phone.substring(4, 7) +
-        phone.substring(9, 12) +
-        phone.substring(13, 15) +
-        phone.substring(16, 18)
-    }
-
     const data = {
       fullName: fullName,
       email: email,
-      phone: resultPhone.replace('_', ''),
+      phone: phoneFormat(phone),
       description: description,
       oldPassword: oldPassword,
       newPassword: newPassword,
@@ -71,7 +65,7 @@ const UserSettings = () => {
       oldImage: oldImage,
     }
 
-    if (!validate(data)) {
+    if (!validate(data, setError)) {
       return
     }
 
@@ -88,37 +82,6 @@ const UserSettings = () => {
       .then(() => setShowSuccess(true))
       .catch(({response}) => setError(response.data.error))
       .finally(() => setDisable(false))
-  }
-
-  const validate = (data) => {
-    if (data.phone.length > 0 && data.phone.length !== 10) {
-      setError('Введите корректный телефон')
-      return false
-    }
-
-    if (data.fullName.length < 1) {
-      setError('Введите ФИО')
-      return false
-    }
-
-    if (data.email.length < 1) {
-      setError('Введите email')
-      return false
-    }
-
-    if (data.confirmNewPassword.length > 0 || data.newPassword.length > 0) {
-      if (data.oldPassword.length < 1) {
-        setError('Введите старый пароль')
-        return false
-      }
-
-      if (data.confirmNewPassword !== data.newPassword) {
-        setError('Пароли должны совпадать')
-        return false
-      }
-    }
-
-    return true
   }
 
   const handleImageUpdate = (event) => {

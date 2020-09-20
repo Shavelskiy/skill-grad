@@ -13,7 +13,7 @@ import {
 
 import ProviderMenu from './menu/provider-menu'
 
-import UserSettings from './settings/user-settings'
+import ProviderSettings from './settings/provider/provider-settings'
 import Programs from './programs/list/programs'
 import ProgramRequests from './programs/requests/program-requests'
 import ProgramQuestions from './programs/questions/program-questions'
@@ -32,7 +32,7 @@ const ProviderApp = () => {
       <ProviderMenu/>
 
       <Switch>
-        <Route exact name="profile.settings" path={SETTINGS} component={UserSettings}/>
+        <Route exact name="profile.settings" path={SETTINGS} component={ProviderSettings}/>
         <Route exact name="profile.programs" path={PROGRAMS} component={Programs}/>
         <Route exact name="profile.programs.requests" path={PROGRAM_REQUESTS} component={ProgramRequests}/>
         <Route exact name="profile.programs.questions" path={PROGRAM_QUESTIONS} component={ProgramQuestions}/>

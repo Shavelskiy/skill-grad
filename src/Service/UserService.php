@@ -127,22 +127,26 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             $this->entityManager->persist($userInfo);
         }
 
-        if ($userInfo->getImage() !== null && $updateUserData->getOldImage() === null) {
-            $this->uploadService->deleteUpload($userInfo->getImage());
-            $userInfo->setImage(null);
-        }
+        if (!in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
+            if ($userInfo->getImage() !== null && $updateUserData->getOldImage() === null) {
+                $this->uploadService->deleteUpload($userInfo->getImage());
+                $userInfo->setImage(null);
+            }
 
-        if ($updateUserData->getImage() !== null) {
-            $upload = $this->uploadService->createUpload($updateUserData->getImage());
-            $this->entityManager->persist($upload);
-            $userInfo->setImage($upload);
+            if ($updateUserData->getImage() !== null) {
+                $upload = $this->uploadService->createUpload($updateUserData->getImage());
+                $this->entityManager->persist($upload);
+                $userInfo->setImage($upload);
+            }
+
+            $userInfo
+                ->setDescription($updateUserData->getDescription())
+                ->setCategory($updateUserData->getCategory());
         }
 
         $userInfo
             ->setFullName($updateUserData->getFullName())
-            ->setPhone($updateUserData->getPhone())
-            ->setDescription($updateUserData->getDescription())
-            ->setCategory($updateUserData->getCategory());
+            ->setPhone($updateUserData->getPhone());
 
         /** @var User $emailUser */
         $emailUser = $this->userRepository->findOneBy(['email' => $updateUserData->getEmail()]);

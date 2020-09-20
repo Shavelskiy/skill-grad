@@ -1,0 +1,27 @@
+.general {
+  width: 100%;
+
+  .container-0 {
+    div {
+      padding-right: 0;
+
+      &:first-child {
+        @media (min-width: 1024px) {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  .error, .success {
+    margin-bottom: 10px;
+  }
+
+  .error {
+    color: #f92e25;
+  }
+
+  .success {
+    color: #059e17;
+  }
+}

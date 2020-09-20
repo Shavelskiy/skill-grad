@@ -47,6 +47,23 @@ class ProfileSettingsController extends AbstractController
         return new JsonResponse($data);
     }
 
+    protected function getProviderProfileInfo(User $user): array
+    {
+        if (($userInfo = $user->getUserInfo()) === null) {
+            return [
+                'full_name' => '',
+                'email' => $user->getEmail(),
+                'phone' => '',
+            ];
+        }
+
+        return [
+            'full_name' => $userInfo->getFullName(),
+            'email' => $user->getEmail(),
+            'phone' => $userInfo->getPhone(),
+        ];
+    }
+
     protected function getUserProfileInfo(User $user): array
     {
         $categories = [];
@@ -82,36 +99,35 @@ class ProfileSettingsController extends AbstractController
         ];
     }
 
-    protected function getProviderProfileInfo(User $user): array
-    {
-        return [
-        ];
-    }
-
     /**
      * @Route("", methods={"POST"}, name="save.profile.settings")
      */
     public function saveProfileSettings(Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $updateUserData = (new UpdateUserData())
             ->setFullName($request->get('fullName'))
             ->setEmail($request->get('email'))
             ->setPhone($request->get('phone'))
-            ->setDescription($request->get('description'))
             ->setOldPassword($request->get('oldPassword'))
             ->setNewPassword($request->get('newPassword'))
-            ->setConfirmNewPassword($request->get('confirmNewPassword'))
-            ->setOldImage($request->get('oldImage'))
-            ->setImage($request->files->get('image'));
+            ->setConfirmNewPassword($request->get('confirmNewPassword'));
 
-        if ($request->get('category') !== null) {
-            $updateUserData->setCategory(
-                $this->categoryRepository->find($request->get('category'))
-            );
+        if (!in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
+            $updateUserData = (new UpdateUserData())
+                ->setDescription($request->get('description'))
+                ->setOldImage($request->get('oldImage'))
+                ->setImage($request->files->get('image'));
+
+            if ($request->get('category') !== null) {
+                $updateUserData->setCategory(
+                    $this->categoryRepository->find($request->get('category'))
+                );
+            }
         }
 
-        /** @var User $user */
-        $user = $this->getUser();
 
         try {
             $this->updateUserService->updateUser($user, $updateUserData);
