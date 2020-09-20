@@ -1,0 +1,172 @@
+.service {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background-image: linear-gradient(to top, rgba(#072140, .88), rgba(#1b52a5, .88), rgba(#1684b9, .88)),
+  url("../../img/how-work__bg.png");
+  background-size: cover;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  padding-top: 80px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    .container {
+      width: 100%;
+    }
+  }
+  @media (min-width: 320px) and (max-width: 767px) {
+    padding-top: 40px;
+  }
+
+  .control {
+    display: none;
+  }
+
+  h2 {
+    color: #fff;
+  }
+
+  &-container {
+    display: flex;
+    width: 100%;
+    margin-top: 60px;
+    margin-bottom: 90px;
+
+    @media (min-width: 1024px) {
+      .tab__content-item {
+        display: block;
+      }
+    }
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      margin-top: 40px;
+    }
+    @media (min-width: 320px) and (max-width: 1023px) {
+      flex-direction: column;
+      margin-bottom: 60px;
+      .control {
+        display: flex;
+        margin-bottom: 30px;
+
+        .title-text {
+          font-size: 17px;
+          line-height: 22px;
+          color: rgba(#fff, .5);
+        }
+
+        .left-block, .right-block {
+          width: 50%;
+          padding: 13px 35px;
+          background-color: rgba(#8ac3fe, .15);
+        }
+
+        .left-block.active {
+          background-color: rgba(#8ac3fe, .4);
+
+          .title-text {
+            color: rgba(#fff, 1);
+          }
+        }
+
+        .right-block.active {
+          background-color: rgba(#8ac3fe, .4);
+
+          .title-text {
+            color: rgba(#fff, 1);
+          }
+        }
+      }
+      & .left.active, .right.active {
+        display: block;
+      }
+    }
+
+    .content {
+      .tick {
+        color: #ffffff;
+        line-height: 24px;
+        font-size: 17px;
+      }
+
+      .btn-container {
+        width: 270px;
+
+        @media (max-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+
+    & .left, .right {
+      width: 50%;
+      border-left: 3px dotted rgba(#fff, 0.3);
+      padding-left: 80px;
+      padding-right: 80px;
+
+      @media (max-width: 768px) {
+        display: none;
+        width: 100%;
+        border: none;
+        padding: 0 15px;
+      }
+    }
+
+    & .left {
+      .btn-container {
+        margin-top: 60px;
+
+        @media (max-width: 768px) {
+          margin-top: 0;
+        }
+      }
+    }
+
+    & .right {
+      border-right: 3px dotted rgba(#fff, 0.3);
+    }
+
+    & .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    & .title-text {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 28px;
+      color: #ffffff;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    & .title-icon {
+      display: block;
+      width: 75px;
+      height: 75px;
+      margin-right: 30px;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    & .title-icon.knowledge {
+      background: url("../../img/svg/knowledge.svg");
+      background-size: 100%;
+    }
+
+    & .title-icon.school {
+      background: url("../../img/svg/school.svg");
+      background-size: 100%;
+    }
+  }
+}

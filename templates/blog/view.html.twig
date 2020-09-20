@@ -1,153 +1,214 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('blog.view') }}
+{% endblock %}
+
+{% set title = 'Как зарубежные вузы адаптируются к карантину' %}
+
+{% set additionalBreadcrumb = {
+  link: path('blog.index'),
+  name: 'Блог'
+} %}
+
 {% block body %}
-  <div class="container">
-    <div class="d-f w-100 j-c-center">
-      <div class="breadcrumbs">
-        <ul>
-          <li><a href="#">Главная</a></li>
-          <li><a href="#">Блог</a></li>
-          <li><a class="active" href="#">Как зарубежные вузы адаптируются к карантину</a></li>
-        </ul>
+  <div class="col-lg-12 mobile-no-gutter">
+    <div class="main-blog_single mt-0">
+      <h2 class="title program">Как зарубежные вузы адаптируются к карантину</h2>
+      <div class="container-0">
+        <div class="col-lg-8 col-md-12 col-sm-4 no-gutter">
+          <img class="blog-img" src="/img/photo_big.jpg" alt="">
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-4  no-gutter">
+          <div class="blog-description">
+            <div class="top">
+              <div class="date">
+                <span class="icon calendar"></span>
+                19.02.2019
+              </div>
+              <div id="button-like" class="like">
+                <i class="icon-love"></i>
+              </div>
+            </div>
+            <div class="content">
+              <div class="inform">
+                <p class="text">
+                  <strong>Автор статьи:</strong>
+                  <a href="#">Всероссийская академия внешней торговли Министерства экономического развития Российской
+                    Федерации</a>
+                </p>
+                <p class="text">
+                  <strong>Категория:</strong>
+                  <a href="#">Управление и маркетинг</a>
+                </p>
+                <p class="text d-flex">
+                  <span class="icon read"></span>
+                  Время чтения: 2 минуты
+                </p>
+              </div>
+              <div class="view-block">
+                <div class="views">
+                  <span class="icon view"></span>
+                  253
+                </div>
+                <div class="comments">
+                  <span class="icon comment"></span>
+                  <a href="#">25 комментариев</a>
+                </div>
+              </div>
+            </div>
+            <div class="share">
+              <span>Поделиться:</span>
+              <ul>
+                <li>
+                  <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-lg-12 mobile-no-gutter">
-      <div class="main-blog_single mt-0">
-        <h2 class="title program">Как зарубежные вузы адаптируются к карантину</h2>
-        <div class="container-0">
-          <div class="col-lg-8 col-md-12 col-sm-4 no-gutter">
-            <img class="blog-img" src="/img/photo_big.jpg" alt="">
-          </div>
-          <div class="col-lg-4 col-md-12 col-sm-4  no-gutter">
-            <div class="blog-description">
-              <div class="top">
-                <div class="date">
-                  <span class="icon calendar"></span>
-                  19.02.2019
-                </div>
-                <div id="button-like" class="like">
-                  <i class="icon-love"></i>
-                </div>
+      <div class="container-0 mt-20">
+        <div class="col-lg-8 col-md-12 col-sm-4 mobile-gutter-4 blog-content no-gutter">
+          <h4 class="title">Переход на онлайн-обучение</h4>
+          <p class="text">
+            Для онлайн-обучения вузам нужно создать пространство для общения, настроить специальные программы и
+            объяснить, как ими пользоваться. Гарвардский университет справился с этими задачами за две недели.
+          </p>
+          <p class="text">
+            <strong>Онлайн-платформы.</strong> В Гарварде обучение организовали на платформе онлайн-курсов Canvas,
+            которой университет уже пользовался. Там публикуют расписание и обучающие материалы, работают над
+            совместными проектами и создают форумы обсуждений. Лекции и семинары в прямом эфире проводят в программе
+            видеоконференций Zoom. Для общения используют мессенджер Slack и собственную платформу Socialize Remotely.
+          </p>
+          <p class="text">
+            <strong>Рекомендации и советы.</strong> На сайте университета сделали раздел с часто задаваемыми вопросами,
+            руководствами по настройке программ и ссылками на библиотеки. Школа педагогических наук Гарварда подготовила
+            советы для преподавателей: как эффективно проводить онлайн-занятия, поддерживать интерес к обучению и
+            создавать дружелюбную атмосферу в виртуальной аудитории. Для студентов также есть рекомендации, как вести
+            себя в виртуальном классе, общаться с преподавателем и одногруппниками, организовывать своё время на
+            онлайн-обучении.
+          </p>
+          <p class="text">
+            <strong>Развлечения и поддержка.</strong> На сайте Гарварда собрали подборку сайтов с доступом к
+            онлайн-развлечениям: фильмам, сериалам, книгам, концертам и выставкам. Преподаватели и студенты собираются
+            на онлайн-медитации, тренировки и занятия йогой. Школы богословия и здравоохранения помогают всем, кому
+            нужна духовная и психологическая поддержка.
+          </p>
+          <p class="text">
+            В понедельник 23 марта Гарвард полностью перешёл на онлайн-обучение. В первые два дня в службу поддержки
+            звонили чаще, чем обычно, но уже в среду поток звонков сократился. «Мы продолжаем внимательно следить за
+            ситуацией, чтобы быстро отреагировать, если что-то пойдёт не так», — говорит директор по информационным
+            технологиям Гарварда Энн Маргулис.
+          </p>
+          <h4 class="title">Сессия и экзамены</h4>
+          <p class="text">
+            Пандемия коронавируса пришлась на период сдачи экзаменов, поэтому вузы придумывают новые способы оценки
+            знаний студентов.
+          </p>
+          <p class="text">
+            <strong>Имперский колледж Лондона</strong> впервые провел онлайн-экзамен для выпускников медицинского
+            факультета. Преподаватели ограничили время на экзамен так, чтобы студенты не успевали искать ответы в
+            интернете.
+          </p>
+          <p class="text">
+            <strong>Эдинбургский университет</strong> поставит оценки студентам первого и второго курса на основании их
+            курсовых работ или оценок за текущий семестр. Студенты старших курсов будут сдавать онлайн-экзамены.
+          </p>
+          <p class="text">
+            В Университете Warwick создали специальный сайт для онлайн-экзаменов. На сайте студенты будут выполнять
+            тесты и загружать файлы с ответами на вопросы. Если преподаватели заподозрят, что студент списывал, то они
+            свяжутся с ним для устного обсуждения ответов.
+          </p>
+          <h4 class="title">Выпускная церемония</h4>
+          <p class="text">
+            Из-за пандемии отменили не только очные пары и экзамены, но и выпускные церемонии. Вузы и студенты ищут
+            альтернативные способы провести церемонию, чтобы не пропускать такой радостный день.
+          </p>
+          <p class="text">
+            <strong><a href="#">Японский университет Business Breakthrough.</a></strong> В Японии выпускники получили
+            дипломы из рук ректора с помощью роботов-аватаров. К головам роботов прикрепили планшеты, выпускники
+            подключались к планшетам по видеосвязи и удалённо управляли роботами.
+          </p>
+          <div class="alert">
+            <div class="share">
+              <span>Поделиться:</span>
+              <ul class="social">
+                <li>
+                  <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+                </li>
+              </ul>
+            </div>
+            <div id="rating" class="rating">
+              <div class="minus-block">
+                <span data-type="dislike" class="icon minus"></span>
+                <span data-type="text">0</span>
               </div>
-              <div class="content">
-                <div class="inform">
-                  <p class="text">
-                    <strong>Автор статьи:</strong>
-                    <a href="#">Всероссийская академия внешней торговли Министерства экономического развития Российской Федерации</a>
-                  </p>
-                  <p class="text">
-                    <strong>Категория:</strong>
-                    <a href="#">Управление и маркетинг</a>
-                  </p>
-                  <p class="text d-flex">
-                    <span class="icon read"></span>
-                    Время чтения: 2 минуты
-                  </p>
-                </div>
-                <div class="view-block">
-                  <div class="views">
-                    <span class="icon view"></span>
-                    253
-                  </div>
-                  <div class="comments">
-                    <span class="icon comment"></span>
-                    <a href="#">25 комментариев</a>
-                  </div>
-                </div>
-              </div>
-              <div class="share">
-                <span>Поделиться:</span>
-                <ul>
-                  <li>
-                    <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
-                  </li>
-                  <li>
-                    <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
-                  </li>
-                  <li>
-                    <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
-                  </li>
-                </ul>
+              <div class="plus-block">
+                <span data-type="like" class="icon plus"></span>
+                <span data-type="text">0</span>
               </div>
             </div>
           </div>
-        </div>
-        <div class="container-0 mt-20">
-          <div class="col-lg-8 col-md-12 col-sm-4 mobile-gutter-4 blog-content no-gutter">
-            <h4 class="title">Переход на онлайн-обучение</h4>
-            <p class="text">
-              Для онлайн-обучения вузам нужно создать пространство для общения, настроить специальные программы и объяснить, как ими пользоваться. Гарвардский университет справился с этими задачами за две недели.
-            </p>
-            <p class="text">
-              <strong>Онлайн-платформы.</strong> В Гарварде обучение организовали на платформе онлайн-курсов Canvas, которой университет уже пользовался. Там публикуют расписание и обучающие материалы, работают над совместными проектами и создают форумы обсуждений. Лекции и семинары в прямом эфире проводят в программе видеоконференций Zoom. Для общения используют мессенджер Slack и собственную платформу Socialize Remotely.
-            </p>
-            <p class="text">
-              <strong>Рекомендации и советы.</strong> На сайте университета сделали раздел с часто задаваемыми вопросами, руководствами по настройке программ и ссылками на библиотеки. Школа педагогических наук Гарварда подготовила советы для преподавателей: как эффективно проводить онлайн-занятия, поддерживать интерес к обучению и создавать дружелюбную атмосферу в виртуальной аудитории. Для студентов также есть рекомендации, как вести себя в виртуальном классе, общаться с преподавателем и одногруппниками, организовывать своё время на онлайн-обучении.
-            </p>
-            <p class="text">
-              <strong>Развлечения и поддержка.</strong> На сайте Гарварда собрали подборку сайтов с доступом к онлайн-развлечениям: фильмам, сериалам, книгам, концертам и выставкам. Преподаватели и студенты собираются на онлайн-медитации, тренировки и занятия йогой. Школы богословия и здравоохранения помогают всем, кому нужна духовная и психологическая поддержка.
-            </p>
-            <p class="text">
-              В понедельник 23 марта Гарвард полностью перешёл на онлайн-обучение. В первые два дня в службу поддержки звонили чаще, чем обычно, но уже в среду поток звонков сократился. «Мы продолжаем внимательно следить за ситуацией, чтобы быстро отреагировать, если что-то пойдёт не так», — говорит директор по информационным технологиям Гарварда Энн Маргулис.
-            </p>
-            <h4 class="title">Сессия и экзамены</h4>
-            <p class="text">
-              Пандемия коронавируса пришлась на период сдачи экзаменов, поэтому вузы придумывают новые способы оценки знаний студентов.
-            </p>
-            <p class="text">
-              <strong>Имперский колледж Лондона</strong> впервые провел онлайн-экзамен для выпускников медицинского факультета. Преподаватели ограничили время на экзамен так, чтобы студенты не успевали искать ответы в интернете.
-            </p>
-            <p class="text">
-              <strong>Эдинбургский университет</strong> поставит оценки студентам первого и второго курса на основании их курсовых работ или оценок за текущий семестр. Студенты старших курсов будут сдавать онлайн-экзамены.
-            </p>
-            <p class="text">
-              В Университете Warwick создали специальный сайт для онлайн-экзаменов. На сайте студенты будут выполнять тесты и загружать файлы с ответами на вопросы. Если преподаватели заподозрят, что студент списывал, то они свяжутся с ним для устного обсуждения ответов.
-            </p>
-            <h4 class="title">Выпускная церемония</h4>
-            <p class="text">
-              Из-за пандемии отменили не только очные пары и экзамены, но и выпускные церемонии. Вузы и студенты ищут альтернативные способы провести церемонию, чтобы не пропускать такой радостный день.
-            </p>
-            <p class="text">
-              <strong><a href="#">Японский университет Business Breakthrough.</a></strong> В Японии выпускники получили дипломы из рук ректора с помощью роботов-аватаров. К головам роботов прикрепили планшеты, выпускники подключались к планшетам по видеосвязи и удалённо управляли роботами.
-            </p>
-            <div class="alert">
-              <div class="share">
-                <span>Поделиться:</span>
-                <ul class="social">
-                  <li>
-                    <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
-                  </li>
-                  <li>
-                    <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
-                  </li>
-                  <li>
-                    <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
-                  </li>
+          <div class="comments">
+            <h4>Комментарии к статье (5)</h4>
+            <div class="tab">
+              <div class="tab__nav">
+                <ul class="nav">
+                  <li data-tab-name="tab-1" class="nav-item active">По порядку</li>
+                  <li data-tab-name="tab-2" class="nav-item">Популярные</li>
                 </ul>
               </div>
-              <div id="rating" class="rating">
-                <div class="minus-block">
-                  <span data-type="dislike" class="icon minus"></span>
-                  <span data-type="text">0</span>
-                </div>
-                <div class="plus-block">
-                  <span data-type="like" class="icon plus"></span>
-                  <span data-type="text">0</span>
-                </div>
-              </div>
-            </div>
-            <div class="comments">
-              <h4>Комментарии к статье (5)</h4>
-              <div class="tab">
-                <div class="tab__nav">
-                  <ul class="nav">
-                    <li data-tab-name="tab-1" class="nav-item active">По порядку</li>
-                    <li data-tab-name="tab-2" class="nav-item">Популярные</li>
-                  </ul>
-                </div>
-                <div class="tab__content">
-                  <div class="tab__content-item tab-1 active">
-                    <div class="comments-body">
+              <div class="tab__content">
+                <div class="tab__content-item tab-1 active">
+                  <div class="comments-body">
+                    <div class="information">
+                      <div class="top">
+                        <img class="rounded" src="/img/photo.jpg" alt="">
+                        <div class="d-flex w-100 j-c-space-between mt-10">
+                          <span class="name">Викторов Тимофей</span>
+                          <span class="date">22 авг 2020,  12:35</span>
+                        </div>
+                      </div>
+                      <div class="comment">
+                        <p class="text">
+                          Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
+                          настоящий знаток своего дела. Получил не только знания и навыки,
+                          но и массу впечатлений!
+                        </p>
+                        <div class="rules">
+                          <div class="links">
+                            <a href="#">Редактировать</a>
+                            <a class="delete-comment" href="#">Удалить</a>
+                            <a href="#">Ответить</a>
+                          </div>
+                          <div id="rating-1" class="rating">
+                            <div class="minus-block">
+                              <span data-type="dislike" class="icon minus"></span>
+                              <span data-type="text">0</span>
+                            </div>
+                            <div class="plus-block">
+                              <span data-type="like" class="icon plus"></span>
+                              <span data-type="text">0</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="answer">
                       <div class="information">
                         <div class="top">
                           <img class="rounded" src="/img/photo.jpg" alt="">
@@ -158,67 +219,14 @@
                         </div>
                         <div class="comment">
                           <p class="text">
-                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель - настоящий знаток своего дела. Получил не только знания и навыки,
+                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
+                            настоящий знаток своего дела. Получил не только знания и навыки,
                             но и массу впечатлений!
                           </p>
                           <div class="rules">
-                            <div class="links">
-                              <a href="#">Редактировать</a>
-                              <a class="delete-comment" href="#">Удалить</a>
-                              <a href="#">Ответить</a>
-                            </div>
-                            <div id="rating-1" class="rating">
-                              <div class="minus-block">
-                                <span data-type="dislike" class="icon minus"></span>
-                                <span data-type="text">0</span>
-                              </div>
-                              <div class="plus-block">
-                                <span data-type="like" class="icon plus"></span>
-                                <span data-type="text">0</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="answer">
-                        <div class="information">
-                          <div class="top">
-                            <img class="rounded" src="/img/photo.jpg" alt="">
-                            <div class="d-flex w-100 j-c-space-between mt-10">
-                              <span class="name">Викторов Тимофей</span>
-                              <span class="date">22 авг 2020,  12:35</span>
-                            </div>
-                          </div>
-                          <div class="comment">
-                            <p class="text">
-                              Программа замечательная! Полностью соответствует заявленному описанию, преподаватель - настоящий знаток своего дела. Получил не только знания и навыки,
-                              но и массу впечатлений!
-                            </p>
-                            <div class="rules">
-                              <a href="#">Редактировать</a>
-                              <a class="delete-comment" href="#">Удалить</a>
-                              <a href="#">Ответить</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="information">
-                          <div class="top">
-                            <img class="rounded" src="/img/photo.jpg" alt="">
-                            <div class="d-flex w-100 j-c-space-between mt-10">
-                              <span class="name">Викторов Тимофей</span>
-                              <span class="date">22 авг 2020,  12:35</span>
-                            </div>
-                          </div>
-                          <div class="comment">
-                            <p class="text">
-                              Программа замечательная! Полностью соответствует заявленному описанию, преподаватель - настоящий знаток своего дела. Получил не только знания и навыки,
-                              но и массу впечатлений!
-                            </p>
-                            <div class="rules">
-                              <a href="#">Редактировать</a>
-                              <a class="delete-comment" href="#">Удалить</a>
-                              <a href="#">Ответить</a>
-                            </div>
+                            <a href="#">Редактировать</a>
+                            <a class="delete-comment" href="#">Удалить</a>
+                            <a href="#">Ответить</a>
                           </div>
                         </div>
                       </div>
@@ -232,109 +240,131 @@
                         </div>
                         <div class="comment">
                           <p class="text">
-                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель - настоящий знаток своего дела. Получил не только знания и навыки,
+                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
+                            настоящий знаток своего дела. Получил не только знания и навыки,
                             но и массу впечатлений!
                           </p>
                           <div class="rules">
-                            <div class="links">
-                              <a href="#">Редактировать</a>
-                              <a class="delete-comment" href="#">Удалить</a>
-                              <a href="#">Ответить</a>
+                            <a href="#">Редактировать</a>
+                            <a class="delete-comment" href="#">Удалить</a>
+                            <a href="#">Ответить</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="information">
+                      <div class="top">
+                        <img class="rounded" src="/img/photo.jpg" alt="">
+                        <div class="d-flex w-100 j-c-space-between mt-10">
+                          <span class="name">Викторов Тимофей</span>
+                          <span class="date">22 авг 2020,  12:35</span>
+                        </div>
+                      </div>
+                      <div class="comment">
+                        <p class="text">
+                          Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
+                          настоящий знаток своего дела. Получил не только знания и навыки,
+                          но и массу впечатлений!
+                        </p>
+                        <div class="rules">
+                          <div class="links">
+                            <a href="#">Редактировать</a>
+                            <a class="delete-comment" href="#">Удалить</a>
+                            <a href="#">Ответить</a>
+                          </div>
+                          <div id="rating-2" class="rating">
+                            <div class="minus-block">
+                              <span data-type="dislike" class="icon minus"></span>
+                              <span data-type="text">0</span>
                             </div>
-                            <div id="rating-2" class="rating">
-                              <div class="minus-block">
-                                <span data-type="dislike" class="icon minus"></span>
-                                <span data-type="text">0</span>
-                              </div>
-                              <div class="plus-block">
-                                <span data-type="like" class="icon plus"></span>
-                                <span data-type="text">0</span>
-                              </div>
+                            <div class="plus-block">
+                              <span data-type="like" class="icon plus"></span>
+                              <span data-type="text">0</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="send-comment">
-                        <textarea rows="10" class="textarea" placeholder="Текст сообщения"></textarea>
-                        <button class="button-blue">Отправить</button>
-                      </div>
+                    </div>
+                    <div class="send-comment">
+                      <textarea rows="10" class="textarea" placeholder="Текст сообщения"></textarea>
+                      <button class="button-blue">Отправить</button>
                     </div>
                   </div>
-                  <div class="tab__content-item tab-2"></div>
                 </div>
+                <div class="tab__content-item tab-2"></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="container-0 mobile-gutter-4 pos-relative blog-single mt-40">
-          <h2 class="title">Вам может быть интересно</h2>
-          <div class="col-lg-12 col-sm-4 no-gutter">
-            <div class="article-slider">
-              <div class="article-item">
-                <div class="card-article">
-                  <div class="card-article__header">
-                    <img src="/img/article1.jpg" alt="">
-                    <div class="card-article__header-date">
-                      <span class="day">22</span>
-                      сентября
-                    </div>
+      </div>
+      <div class="container-0 mobile-gutter-4 pos-relative blog-single mt-40">
+        <h2 class="title">Вам может быть интересно</h2>
+        <div class="col-lg-12 col-sm-4 no-gutter">
+          <div class="article-slider">
+            <div class="article-item">
+              <div class="card-article">
+                <div class="card-article__header">
+                  <img src="/img/article1.jpg" alt="">
+                  <div class="card-article__header-date">
+                    <span class="day">22</span>
+                    сентября
                   </div>
-                  <div class="card-article__body">
-                    <a href="/pages/blog-single.html" class="card-article__body-title">Как не сдаться в карантин?<br />
-                      5 советов ученикам, учителям
-                      и родителям
-                    </a>
-                    <span class="hr"></span>
-                    <div class="card-article__body-description">
-                      <p>До 12 апреля (а может, и дольше)
-                        все школы перешли на дистанционное обучение. Некоторые до этого не...  </p>
-                    </div>
+                </div>
+                <div class="card-article__body">
+                  <a href="/pages/blog-single.html" class="card-article__body-title">Как не сдаться в карантин?<br/>
+                    5 советов ученикам, учителям
+                    и родителям
+                  </a>
+                  <span class="hr"></span>
+                  <div class="card-article__body-description">
+                    <p>До 12 апреля (а может, и дольше)
+                      все школы перешли на дистанционное обучение. Некоторые до этого не... </p>
                   </div>
                 </div>
               </div>
-              <div class="article-item">
-                <div class="card-article">
-                  <div class="card-article__header">
-                    <img src="/img/article1.jpg" alt="">
-                    <span class="card-article__header-date">
+            </div>
+            <div class="article-item">
+              <div class="card-article">
+                <div class="card-article__header">
+                  <img src="/img/article1.jpg" alt="">
+                  <span class="card-article__header-date">
 											<span class="day">22</span>
 											сентября
 										</span>
-                  </div>
-                  <div class="card-article__body">
-                    <a href="/pages/blog-single.html" class="card-article__body-title">
-                      Как не сдаться в карантин?
-                      5 советов ученикам, учителям
-                      и родителям
-                    </a>
-                    <span class="hr"></span>
-                    <div class="card-article__body-description">
-                      <p>До 12 апреля (а может, и дольше)
-                        все школы перешли на дистанционное обучение. Некоторые до этого не...  </p>
-                    </div>
+                </div>
+                <div class="card-article__body">
+                  <a href="/pages/blog-single.html" class="card-article__body-title">
+                    Как не сдаться в карантин?
+                    5 советов ученикам, учителям
+                    и родителям
+                  </a>
+                  <span class="hr"></span>
+                  <div class="card-article__body-description">
+                    <p>До 12 апреля (а может, и дольше)
+                      все школы перешли на дистанционное обучение. Некоторые до этого не... </p>
                   </div>
                 </div>
               </div>
-              <div class="article-item">
-                <div class="card-article">
-                  <div class="card-article__header">
-                    <img src="/img/article1.jpg" alt="">
-                    <span class="card-article__header-date">
+            </div>
+            <div class="article-item">
+              <div class="card-article">
+                <div class="card-article__header">
+                  <img src="/img/article1.jpg" alt="">
+                  <span class="card-article__header-date">
 											<span class="day">22</span>
 											сентября
 										</span>
-                  </div>
-                  <div class="card-article__body">
-                    <a href="/pages/blog-single.html" class="card-article__body-title">
-                      Как не сдаться в карантин?
-                      5 советов ученикам, учителям
-                      и родителям
-                    </a>
-                    <span class="hr"></span>
-                    <div class="card-article__body-description">
-                      <p>До 12 апреля (а может, и дольше)
-                        все школы перешли на дистанционное обучение. Некоторые до этого не...  </p>
-                    </div>
+                </div>
+                <div class="card-article__body">
+                  <a href="/pages/blog-single.html" class="card-article__body-title">
+                    Как не сдаться в карантин?
+                    5 советов ученикам, учителям
+                    и родителям
+                  </a>
+                  <span class="hr"></span>
+                  <div class="card-article__body-description">
+                    <p>До 12 апреля (а может, и дольше)
+                      все школы перешли на дистанционное обучение. Некоторые до этого не... </p>
                   </div>
                 </div>
               </div>
@@ -344,4 +374,9 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('blog.view') }}
 {% endblock %}

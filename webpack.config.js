@@ -32,6 +32,9 @@ Encore
   .addEntry('provider.index', './assets/pages/provider/index.js')
   .addEntry('provider.view', './assets/pages/provider/view.js')
 
+  .addEntry('blog.index', './assets/pages/blog/index.js')
+  .addEntry('blog.view', './assets/pages/blog/view.js')
+
   .addEntry('static.favorite', './assets/pages/static/favorite.js')
   .addEntry('static.compare', './assets/pages/static/compare.js')
 
