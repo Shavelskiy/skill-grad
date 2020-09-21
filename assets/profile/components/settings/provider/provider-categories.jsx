@@ -11,7 +11,7 @@ import css from './provider-categories.scss?module'
 import cn from 'classnames'
 
 
-const ProviderCategories = ({selectedCategories, setSelectedCategories, selectedSubcategories, setSelectedSubcategories}) => {
+const ProviderCategories = ({selectedCategories, setSelectedCategories, selectedSubcategories, setSelectedSubcategories, proAccount}) => {
   const [categories, setCategories] = useState([])
   const [openedChildCategory, setOpenedChildCategory] = useState(null)
   const [currentSelectedSubcategories, setCurrentSelectedSubcategories] = useState([])
@@ -24,12 +24,10 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
   useEffect(() => {
     if (openedChildCategory === null) {
       setCurrentSelectedSubcategories([])
+    } else {
+      setCurrentSelectedSubcategories(selectedSubcategories)
     }
   }, [openedChildCategory])
-
-  useEffect(() => {
-    setCurrentSelectedSubcategories(selectedSubcategories)
-  }, openedChildCategory)
 
   const renderCategorySelect = (key) => {
     return (
@@ -68,11 +66,11 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
         <span
           className={'blue-text'}
           onClick={() => setOpenedChildCategory(
-            (openedChildCategory) => openedChildCategory === selectedCategories[key] ? null : selectedCategories[key])
-          }
+            openedChildCategory === selectedCategories[key] ? null : selectedCategories[key]
+          )}
         >
-            Добавить подкатегорию
-          </span>
+          Добавить подкатегорию
+        </span>
 
         <div className={cn(css.blockAddCategory, {[css.active]: openedChildCategory === selectedCategories[key]})}>
           <ScrollBlock container={css.container}>
@@ -149,9 +147,12 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
     ))
   }
 
-  return (
-    <div className={css.categoriesContainer}>
-      {selectedCategories.map((category, key) => renderCategorySelect(key))}
+  const renderAddCategoryButton = () => {
+    if (!proAccount) {
+      return <></>
+    }
+
+    return (
       <button
         className={css.addNewCategory}
         onClick={() => setSelectedCategories((selectedCategories) => [...selectedCategories, null])}
@@ -162,6 +163,13 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
           <span className={cn('path2', css.path2)}></span>
         </i>
       </button>
+    )
+  }
+
+  return (
+    <div className={css.categoriesContainer}>
+      {selectedCategories.map((category, key) => renderCategorySelect(key))}
+      {renderAddCategoryButton()}
     </div>
   )
 }

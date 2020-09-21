@@ -15,6 +15,8 @@ import noImage from '../../../../img/provider-no-photo.png'
 const ProviderSettingsOrganization = () => {
   const ref = useRef()
 
+  const [proAccount, setProAccount] = useState(false)
+
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null)
@@ -41,6 +43,10 @@ const ProviderSettingsOrganization = () => {
     BIC: '',
     bank: '',
   })
+
+  useEffect(() => {
+    console.warn('todo Load data')
+  }, [])
 
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
@@ -69,7 +75,7 @@ const ProviderSettingsOrganization = () => {
     return (
       <label htmlFor={'profile-image'}>
         <img src={noImage}/>
-        <span>Добавьте логотип организацц</span>
+        <span>Добавьте логотип организации</span>
       </label>
     )
   }
@@ -123,14 +129,16 @@ const ProviderSettingsOrganization = () => {
       </div>
 
       <strong>
-        Выберите <span className={'blue-text'}>основные категории</span> программ обучения и подкатегории (без
-        ограничений):
+        Выберите <span className={'blue-text'}>основные категории</span>&nbsp;
+        программ обучения {!proAccount ? '(не более 3-х)' : ''} и подкатегории&nbsp;
+        (без ограничений):
       </strong>
       <ProviderCategories
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
         selectedSubcategories={selectedSubcategories}
         setSelectedSubcategories={setSelectedSubcategories}
+        proAccount={proAccount}
       />
 
       <strong>Выберите регион показа программ обучения:</strong>
