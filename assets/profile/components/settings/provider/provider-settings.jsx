@@ -9,9 +9,10 @@ import cn from 'classnames'
 
 const ProviderSettings = () => {
   return (
-    <div className={cn('container-0', css.container0, css.settings)}>
+    <div>
       <h3 className={cn('w-100', 'result-title', css.resultTitle)}>Настройки пользователя</h3>
       <ProviderSettingsUser/>
+      <h3 className={cn('w-100', 'result-title', css.resultTitle)}>Настройки организации</h3>
       <ProviderSettingsOrganization/>
     </div>
   )

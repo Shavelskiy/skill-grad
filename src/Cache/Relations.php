@@ -4,6 +4,7 @@ namespace App\Cache;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Location;
 use App\Entity\Program\Program;
 
 final class Relations
@@ -17,6 +18,9 @@ final class Relations
         ],
         Program::class => [
             Keys::MAIN_SLIDER,
+        ],
+        Location::class => [
+            Keys::ALL_LOCATIONS,
         ],
     ];
 }

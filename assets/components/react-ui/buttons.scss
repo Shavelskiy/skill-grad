@@ -1,0 +1,64 @@
+.button {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  line-height: 36px;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 25px;
+
+  &:disabled, &:hover {
+    opacity: 0.8;
+    color: #fff;
+  }
+
+  &:focus, &:active {
+    outline: none;
+  }
+
+  &.blue {
+    background: transparent linear-gradient(0deg, #1f81b9 0%, #195da7 100%);
+  }
+
+  &.red {
+    background: transparent linear-gradient(0deg, #fb5519 0%, #f9453f 100%);
+  }
+}
+
+.small-button {
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+
+  &.small-blue {
+    background-color: #6db4fe;
+  }
+
+  &.small-red {
+    background-color: #f7562e;
+  }
+
+  &.small-grey {
+    background-color: #e7e7e7;
+    color: #fff;
+    cursor: default;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -5,9 +5,9 @@ import {USER_INFO_URL} from '../../../utils/api/endpoints'
 
 import {validate, phoneFormat} from '../helpers'
 
-import InputMask from 'react-input-mask'
 import Select from '../../../../components/react-ui/select'
-import Input from '../../ui/input'
+import {Input, MaskInput, Textarea} from '../../../../components/react-ui/input'
+import {Button} from '../../../../components/react-ui/buttons'
 
 import css from './user-settings.scss?module'
 
@@ -140,13 +140,13 @@ const UserSettings = () => {
       <h5 className="result-title">Настройки пользователя</h5>
       <div className={css.userSettings}>
         <div className={css.settingsSidebar}>
-          {renderImage(image)}
           <input
             ref={ref}
             id={'profile-image'}
             type={'file'}
             onChange={(event) => handleImageUpdate(event)}
           />
+          {renderImage(image)}
           {renderImageActions()}
         </div>
         <div className={css.settingsContent}>
@@ -156,64 +156,57 @@ const UserSettings = () => {
             value={fullName}
             setValue={setFullName}
           />
-          <div className="form-inline">
-            <Input
-              type={'email'}
-              placeholder={'E-mail *'}
-              value={email}
-              setValue={setEmail}
-            />
-            <InputMask
-              className="input"
-              mask={'+7 (999)-999-99-99'}
-              value={phone}
-              onChange={({target}) => setPhone(target.value)}
-              alwaysShowMask={true}
-            />
-            <div className="select custom-select-wrapper">
-              <div className="custom-select">
-                <Select
-                  placeholder={'Выбрать специализацию'}
-                  value={category}
-                  setValue={setCategory}
-                  options={categories}
-                />
-              </div>
-            </div>
-          </div>
-          <textarea
-            className="textarea"
-            cols="30"
-            rows="10"
-            placeholder="О себе"
+          <Input
+            type={'email'}
+            placeholder={'E-mail *'}
+            value={email}
+            setValue={setEmail}
+          />
+          <MaskInput
+            mask={'+7 (999)-999-99-99'}
+            value={phone}
+            setValue={setPhone}
+          />
+          <Select
+            placeholder={'Выбрать специализацию'}
+            value={category}
+            setValue={setCategory}
+            options={categories}
+          />
+          <Textarea
+            placeholder={'О себе'}
+            rows={10}
             value={description}
-            onChange={({target}) => setDescription(target.value)}
-          ></textarea>
-          <div className="form-inline">
-            <Input
-              type={'password'}
-              placeholder={'Старый пароль'}
-              value={oldPassword}
-              setValue={setOldPassword}
-            />
-            <Input
-              type={'password'}
-              placeholder={'Новый пароль'}
-              value={newPassword}
-              setValue={setNewPassword}
-            />
-            <Input
-              type={'password'}
-              placeholder={'Повторите новый пароль'}
-              value={confirmNewPassword}
-              setValue={setConfirmNewPassword}
-            />
-          </div>
-          <div className={css.button}>
+            setValue={setDescription}
+          />
+          <Input
+            type={'password'}
+            placeholder={'Старый пароль'}
+            value={oldPassword}
+            setValue={setOldPassword}
+          />
+          <Input
+            type={'password'}
+            placeholder={'Новый пароль'}
+            value={newPassword}
+            setValue={setNewPassword}
+          />
+          <Input
+            type={'password'}
+            placeholder={'Повторите новый пароль'}
+            value={confirmNewPassword}
+            setValue={setConfirmNewPassword}
+          />
+          <div>
             <span className={css.error}>{error}</span>
             <span className={css.success}>{showSuccess ? 'Данные обновлены!' : ''}</span>
-            <button className="button-blue" disabled={disable} onClick={save}>Сохранить настройки</button>
           </div>
+          <Button
+            text={'Сохранить настройки'}
+            blue={true}
+            click={save}
+            disabled={disable}
+          />
         </div>
       </div>
     </>

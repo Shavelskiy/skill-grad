@@ -2,17 +2,23 @@
 
 namespace App\Controller\Api;
 
+use App\Cache\Keys;
+use App\Cache\MemcachedClient;
 use App\Dto\UpdateUserData;
 use App\Entity\Category;
+use App\Entity\Location;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
+use App\Repository\LocationRepository;
 use App\Service\UpdateUserInterface;
 use Exception;
+use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 /**
  * @Route("/api/profile/settings")
@@ -20,13 +26,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileSettingsController extends AbstractController
 {
     protected CategoryRepository $categoryRepository;
+    protected LocationRepository $locationRepository;
     protected UpdateUserInterface $updateUserService;
 
     public function __construct(
         CategoryRepository $categoryRepository,
+        LocationRepository $locationRepository,
         UpdateUserInterface $updateUserService
     ) {
         $this->categoryRepository = $categoryRepository;
+        $this->locationRepository = $locationRepository;
         $this->updateUserService = $updateUserService;
     }
 
@@ -116,7 +125,7 @@ class ProfileSettingsController extends AbstractController
             ->setConfirmNewPassword($request->get('confirmNewPassword'));
 
         if (!in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
-            $updateUserData = (new UpdateUserData())
+            $updateUserData
                 ->setDescription($request->get('description'))
                 ->setOldImage($request->get('oldImage'))
                 ->setImage($request->files->get('image'));
@@ -127,7 +136,6 @@ class ProfileSettingsController extends AbstractController
                 );
             }
         }
-
 
         try {
             $this->updateUserService->updateUser($user, $updateUserData);
@@ -165,5 +173,66 @@ class ProfileSettingsController extends AbstractController
         }
 
         return new JsonResponse(['categories' => $categories]);
+    }
+
+    /**
+     * @Route("/locations", name="api.profile.settings.locations", methods={"GET"})
+     */
+    public function locationsAction(): Response
+    {
+        $result = function () {
+            $locations = [];
+
+            /** @var Location $country */
+            foreach ($this->locationRepository->findAllCountries() as $country) {
+                $regions = [];
+
+                /** @var Location $region */
+                foreach ($country->getChildLocations() as $region) {
+                    $cities = [];
+
+                    /** @var Location $city */
+                    foreach ($region->getChildLocations() as $city) {
+                        $cities[] = [
+                            'value' => $city->getId(),
+                            'title' => $city->getName(),
+                        ];
+                    }
+
+                    $regions[] = [
+                        'value' => $region->getId(),
+                        'title' => $region->getName(),
+                        'cities' => $cities,
+                    ];
+                }
+
+                $locations[] = [
+                    'value' => $country->getId(),
+                    'title' => $country->getName(),
+                    'regions' => $regions,
+                ];
+            }
+
+            return $locations;
+        };
+
+        try {
+            $cache = MemcachedClient::getCache();
+
+            /** @var CacheItemInterface $item */
+            $item = $cache->getItem(Keys::ALL_LOCATIONS);
+
+            if (!$item->isHit()) {
+                $item->set($result());
+                $item->expiresAfter(360000);
+                $cache->save($item);
+            }
+
+            $locations = $item->get();
+        } catch (Throwable $e) {
+            $locations = [];
+        }
+
+        return new JsonResponse(['locations' => $locations]);
     }
 }

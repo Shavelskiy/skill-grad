@@ -9,4 +9,6 @@ final class Keys
     public const MAIN_SLIDER = 'main.slider';
 
     public const PROGRAM_AVERAGE_REVIEW = 'program.average.review';
+
+    public const ALL_LOCATIONS = 'all.locations';
 }

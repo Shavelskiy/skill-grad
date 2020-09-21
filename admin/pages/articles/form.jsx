@@ -40,13 +40,13 @@ const ArticleForm = ({item, setItem, uploadImage, setUploadImage, disable, save}
       />
 
       <BooleanInput
-        checed={item.active}
+        checked={item.active}
         setValue={(value) => setItem({...item, active: value})}
         label="Активность"
       />
 
       <BooleanInput
-        checed={item.showOnMain}
+        checked={item.showOnMain}
         setValue={(value) => setItem({...item, showOnMain: value})}
         label="Показывать на главной"
       />

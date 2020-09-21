@@ -4,6 +4,8 @@ import axios from 'axios'
 import {ALL_CATEGORIES_URL} from '../../../utils/api/endpoints'
 
 import Select from '../../../../components/react-ui/select'
+import {SmallButton} from '../../../../components/react-ui/buttons'
+import {ScrollBlock} from '../../../../components/react-ui/blocks'
 
 import css from './provider-categories.scss?module'
 import cn from 'classnames'
@@ -31,24 +33,22 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
 
   const renderCategorySelect = (key) => {
     return (
-      <div className="col-lg-3 col-md-12 col-sm-4" key={key}>
-        <div className="select custom-select-wrapper">
-          <Select
-            placeholder={'Выбрать категорию'}
-            value={selectedCategories[key]}
-            options={
-              categories.filter(
-                category => selectedCategories.filter(
-                  (selectedCategory, selectedCategoryKey) => (selectedCategoryKey !== key && selectedCategory === category.value)).length < 1
-              )
-            }
-            setValue={(value) => setSelectedCategories(
-              (selectedCategories) => selectedCategories.map(
-                (category, categoryKey) => categoryKey === key ? value : category
-              )
-            )}
-          />
-        </div>
+      <div key={key}>
+        <Select
+          placeholder={'Выбрать категорию'}
+          value={selectedCategories[key]}
+          options={
+            categories.filter(
+              category => selectedCategories.filter(
+                (selectedCategory, selectedCategoryKey) => (selectedCategoryKey !== key && selectedCategory === category.value)).length < 1
+            )
+          }
+          setValue={(value) => setSelectedCategories(
+            (selectedCategories) => selectedCategories.map(
+              (category, categoryKey) => categoryKey === key ? value : category
+            )
+          )}
+        />
         {renderChildCategoriesSelect(key)}
       </div>
     )
@@ -75,33 +75,30 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
           </span>
 
         <div className={cn(css.blockAddCategory, {[css.active]: openedChildCategory === selectedCategories[key]})}>
-          <div className={css.container}>
+          <ScrollBlock container={css.container}>
             {renderChildCategoriesList(category)}
-            <div className="col-lg-12 no-gutter">
-              <button
-                className={css.saveButton}
-                onClick={() => {
-                  setSelectedSubcategories(
-                    (selectedSubcategories) => {
-                      const newCategories = [...selectedSubcategories, ...(currentSelectedSubcategories.filter(
-                        (selectedSubcategory) => !selectedSubcategories.includes(selectedSubcategory)
-                      ))]
+            <SmallButton
+              text={'Сохранить'}
+              blue={true}
+              click={() => {
+                setSelectedSubcategories(
+                  (selectedSubcategories) => {
+                    const newCategories = [...selectedSubcategories, ...(currentSelectedSubcategories.filter(
+                      (selectedSubcategory) => !selectedSubcategories.includes(selectedSubcategory)
+                    ))]
 
-                      return newCategories.filter(
-                        (selectedSubcategory) =>
-                          category.child_items.filter(childItem => childItem.value === selectedSubcategory).length < 1 ||
-                          currentSelectedSubcategories.includes(selectedSubcategory)
-                      )
-                    }
-                  )
+                    return newCategories.filter(
+                      (selectedSubcategory) =>
+                        category.child_items.filter(childItem => childItem.value === selectedSubcategory).length < 1 ||
+                        currentSelectedSubcategories.includes(selectedSubcategory)
+                    )
+                  }
+                )
 
-                  setOpenedChildCategory(null)
-                }}
-              >
-                Сохранить
-              </button>
-            </div>
-          </div>
+                setOpenedChildCategory(null)
+              }}
+            />
+          </ScrollBlock>
         </div>
       </div>
     )
@@ -135,7 +132,7 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
     return category.child_items.map((childItem, key) => (
       <div
         key={key}
-        className={cn('col-lg-12', 'no-gutter', css.childListItem)}
+        className={css.childListItem}
         onClick={() => setCurrentSelectedSubcategories(
           currentSelectedSubcategories => currentSelectedSubcategories.includes(childItem.value) ?
             currentSelectedSubcategories.filter(value => value !== childItem.value) :
@@ -153,26 +150,18 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
   }
 
   return (
-    <div className="container-0">
-      <div className="col-lg-12 col-md-12 col-sm-4">
-        <strong>Выберите <span className={'blue-text'}>основные категории</span> программ обучения и подкатегории
-          (без ограничений): </strong>
-      </div>
-      <div className="container-0 mt-20 mb-20">
-        {selectedCategories.map((category, key) => renderCategorySelect(key))}
-        <div className="col-lg-3 col-md-12 col-sm-4 pl-0">
-          <button
-            className={css.addNewCategory}
-            onClick={() => setSelectedCategories((selectedCategories) => [...selectedCategories, null])}
-          >
-            Добавить категорию
-            <i className="icon-plus">
-              <span className="path1"></span>
-              <span className={cn('path2', css.path2)}></span>
-            </i>
-          </button>
-        </div>
-      </div>
+    <div className={css.categoriesContainer}>
+      {selectedCategories.map((category, key) => renderCategorySelect(key))}
+      <button
+        className={css.addNewCategory}
+        onClick={() => setSelectedCategories((selectedCategories) => [...selectedCategories, null])}
+      >
+        Добавить категорию
+        <i className="icon-plus">
+          <span className="path1"></span>
+          <span className={cn('path2', css.path2)}></span>
+        </i>
+      </button>
     </div>
   )
 }

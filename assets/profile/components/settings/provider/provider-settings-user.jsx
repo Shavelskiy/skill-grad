@@ -5,11 +5,10 @@ import {USER_INFO_URL} from '../../../utils/api/endpoints'
 
 import {validate, phoneFormat} from '../helpers'
 
-import InputMask from 'react-input-mask'
-import Input from '../../ui/input'
+import {Input, MaskInput} from '../../../../components/react-ui/input'
+import {Button} from '../../../../components/react-ui/buttons'
 
 import css from './provider-settings-user.scss?module'
-import cn from 'classnames'
 
 
 const ProviderSettingsUser = () => {
@@ -59,68 +58,55 @@ const ProviderSettingsUser = () => {
   }
 
   return (
-    <div className={css.general}>
-      <div className={cn('container-0', css.container0)}>
+    <>
+      <div className={css.alert}>
         <span className={css.error}>{error}</span>
         <span className={css.success}>{showSuccess ? 'Данные обновлены!' : ''}</span>
       </div>
-      <div className={cn('container-0', css.container0)}>
-        <div className="col-lg-6 col-md-12 col-sm-4">
-          <Input
-            type={'text'}
-            placeholder={'ФИО *'}
-            value={fullName}
-            setValue={setFullName}
-          />
-        </div>
-        <div className="col-lg-3 col-md-12 col-sm-4">
-          <Input
-            type={'email'}
-            placeholder={'E-mail *'}
-            value={email}
-            setValue={setEmail}
-          />
-        </div>
-        <div className="col-lg-3 col-md-12 col-sm-4">
-          <InputMask
-            className="input"
-            mask={'+7 (999)-999-99-99'}
-            value={phone}
-            onChange={({target}) => setPhone(target.value)}
-            alwaysShowMask={true}
-          />
-        </div>
+      <div className={css.inputsContainer}>
+        <Input
+          type={'text'}
+          placeholder={'ФИО *'}
+          value={fullName}
+          setValue={setFullName}
+        />
+        <Input
+          type={'email'}
+          placeholder={'E-mail *'}
+          value={email}
+          setValue={setEmail}
+        />
+        <MaskInput
+          mask={'+7 (999)-999-99-99'}
+          value={phone}
+          setValue={setPhone}
+        />
+        <Input
+          type={'password'}
+          placeholder={'Старый пароль'}
+          value={oldPassword}
+          setValue={setOldPassword}
+        />
+        <Input
+          type={'password'}
+          placeholder={'Новый пароль'}
+          value={newPassword}
+          setValue={setNewPassword}
+        />
+        <Input
+          type={'password'}
+          placeholder={'Повторите новый пароль'}
+          value={confirmNewPassword}
+          setValue={setConfirmNewPassword}
+        />
+        <Button
+          disabled={disable}
+          click={save}
+          blue={true}
+          text={'Сохранить настройки'}
+        />
       </div>
-      <div className={cn('container-0', css.container0)}>
-        <div className="col-lg-3 col-md-12 col-sm-4">
-          <Input
-            type={'password'}
-            placeholder={'Старый пароль'}
-            value={oldPassword}
-            setValue={setOldPassword}
-          />
-        </div>
-        <div className="col-lg-3 col-md-12 col-sm-4">
-          <Input
-            type={'password'}
-            placeholder={'Новый пароль'}
-            value={newPassword}
-            setValue={setNewPassword}
-          />
-        </div>
-        <div className="col-lg-3 col-md-12 col-sm-4">
-          <Input
-            type={'password'}
-            placeholder={'Повторите новый пароль'}
-            value={confirmNewPassword}
-            setValue={setConfirmNewPassword}
-          />
-        </div>
-        <div className="col-lg-3 col-md-12 col-sm-4">
-          <button className="button-blue" disabled={disable} onClick={save}>Сохранить настройки</button>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 

@@ -48,14 +48,14 @@ export function NumberInput({label, value, setValue, step = 100}) {
   )
 }
 
-export function BooleanInput({label, checed = false, setValue}) {
+export function BooleanInput({label, checked = false, setValue}) {
   return (
     <div className={css.input}>
       <span className={css.label}>{label}</span>
       <div className={css.checkboxWrap}>
         <input
           type="checkbox"
-          checked={checed === true}
+          checked={checked === true}
           onChange={(event) => setValue(event.target.checked)}
         />
       </div>

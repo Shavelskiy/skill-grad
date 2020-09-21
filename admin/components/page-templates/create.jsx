@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 
+import axios from 'axios'
+
 import { useDispatch } from 'react-redux'
 import { showAlert } from '../../redux/actions'
 
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
-import NotFound from '../not-found/not-found'
-import { CREATE_PROVIDER_URL } from '../../utils/api/endpoints'
-import { PROVIDER_INDEX } from '../../utils/routes'
 
 
 const CreatePageTemplate = ({children, indexPageUrl, createUrl, item, setDisableButton, needSave = false, setNeedSave, multipart = false, appendExternalData}) => {

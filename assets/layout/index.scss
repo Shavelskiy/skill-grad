@@ -69,6 +69,7 @@ input, textarea {
 
 label {
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 a {
@@ -126,16 +127,24 @@ strong {
 button {
   outline: none;
   border: none;
+
   &:hover {
     outline: none;
-    border: none;  }
+    border: none;
+  }
 
   &:focus {
     outline: 0;
   }
+
   &:active {
     outline: none;
-    border: none;  }
+    border: none;
+  }
+}
+
+input[type="file"] {
+  display: none;
 }
 
 .text {
@@ -233,11 +242,6 @@ th {
   text-align: inherit;
 }
 
-label {
-  display: inline-block;
-  margin-bottom: .5rem;
-}
-
 button {
   border-radius: 0;
 }
@@ -280,13 +284,6 @@ select {
   word-wrap: normal;
 }
 
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
@@ -319,12 +316,6 @@ textarea {
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-
-::-webkit-file-upload-button {
-  font: inherit;
-  -webkit-appearance: button;
-}
-
 
 @import "./../components/modal/index";
 @import "./../components/header/index";

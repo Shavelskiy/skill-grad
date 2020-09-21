@@ -23,18 +23,14 @@ const ProfileMenu = () => {
 
   useEffect(() => {
     const listener = event => {
-      if (!ref.current || ref.current.contains(event.target)) {
-        return
+      if (ref.current && !ref.current.contains(event.target)) {
+        setHideMenu(true)
       }
-
-      setHideMenu(true)
     }
 
     document.addEventListener('mousedown', listener)
 
-    return () => {
-      document.removeEventListener('mousedown', listener)
-    }
+    return () => document.removeEventListener('mousedown', listener)
   }, [ref, setHideMenu])
 
   const logout = () => {

@@ -30,6 +30,17 @@ class LocationRepository extends ServiceEntityRepository
         return $location;
     }
 
+    public function findAllCountries(): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.type = :type')
+            ->setParameter('type', Location::TYPE_COUNTRY)
+            ->orderBy('l.sort', 'asc')
+            ->addOrderBy('l.name', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findAllRegions(): array
     {
         return $this->createQueryBuilder('l')

@@ -1,5 +1,6 @@
 export const USER_INFO_URL = '/api/profile/settings'
 export const ALL_CATEGORIES_URL = '/api/profile/settings/categories'
+export const ALL_LOCATIONS_URL = '/api/profile/settings/locations'
 
 export const LEARN_URL = '/api/learn'
 export const ADD_REVIEW_URL = '/api/learn/review'

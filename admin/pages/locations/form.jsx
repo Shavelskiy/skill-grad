@@ -71,7 +71,7 @@ const LocationForm = ({item, setItem, disable, save}) => {
       />
 
       <BooleanInput
-        checed={item.showInList}
+        checked={item.showInList}
         setValue={(showInList) => setItem({...item, showInList: showInList})}
         label="Показывать в списке"
       />

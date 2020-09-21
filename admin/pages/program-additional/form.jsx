@@ -18,7 +18,7 @@ const ProgramAdditionalForm = ({item, setItem, disable, save}) => {
       />
 
       <BooleanInput
-        checed={item.active}
+        checked={item.active}
         setValue={(value) => setItem({...item, active: value})}
         label="Активность"
       />

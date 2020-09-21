@@ -638,24 +638,6 @@
   }
 }
 
-.form-inline {
-  @media (min-width: 320px) and (max-width: 767px) {
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  display: flex;
-
-  .input {
-    &:not(:last-child) {
-      margin-right: 30px;
-    }
-  }
-}
-
 .button-group {
   margin-top: 10px;
 }

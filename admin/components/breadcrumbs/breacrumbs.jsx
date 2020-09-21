@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import BreadcrumbItem from './item'
 
@@ -14,11 +14,7 @@ const Breadcrumbs = () => {
   return (
     <div className={css.wrap}>
       <ol className={css.breadcrumb}>
-        {
-          breadcrumbs.map((item, key) => {
-            return (<BreadcrumbItem key={key} item={item}/>)
-          })
-        }
+        {breadcrumbs.map((item, key) => <BreadcrumbItem key={key} item={item}/>)}
         <BreadcrumbItem item={{
           title: title,
           link: null,

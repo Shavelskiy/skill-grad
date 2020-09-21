@@ -221,14 +221,6 @@
     }
   }
 
-  .form-inline {
-    & > div {
-      &:not(:last-child) {
-        margin-right: 20px;
-      }
-    }
-  }
-
   .subtitle {
     font-size: 18px;
     font-weight: 700;
@@ -417,19 +409,6 @@
   }
 
   .input-number {
-    .form-inline {
-      @media (min-width: 320px) and (max-width: 767px) {
-        flex-direction: row;
-      }
-      margin-bottom: 20px;
-
-      .input {
-        @media (min-width: 320px) and (max-width: 767px) {
-          margin-right: 0;
-        }
-      }
-    }
-
     .add-input {
       display: flex;
       align-items: center;
