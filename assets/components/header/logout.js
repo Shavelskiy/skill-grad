@@ -1,5 +1,5 @@
-import { LOGOUT_URL } from '../../utils/api-routes'
 import axios from 'axios'
+import { LOGOUT_URL } from '@/utils/api-routes'
 
 const logoutBtn = document.querySelector('.logout-link')
 

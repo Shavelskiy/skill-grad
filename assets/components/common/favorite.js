@@ -1,7 +1,8 @@
 import axios from 'axios'
-import {updateFavoriteCount} from '../../components/header'
-import {ADD_FAVORITE_PROVIDER, ADD_FAVORITE_PROGRAM} from '../../utils/api-routes'
-import showAlert from '../../components/modal/alert'
+import {updateFavoriteCount} from '../header'
+import showAlert from '../modal/alert'
+
+import {ADD_FAVORITE_PROVIDER, ADD_FAVORITE_PROGRAM} from '@/utils/api-routes'
 
 
 let disableProviderFavoriteRequests = false

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import {ADD_PROGRAM_REQUEST} from '../../utils/api-routes'
-import showAlert from "../modal/alert";
+import {ADD_PROGRAM_REQUEST} from '@/utils/api-routes'
+import showAlert from '../modal/alert'
 
 const requestButtons = document.querySelectorAll('.add-program-request')
 

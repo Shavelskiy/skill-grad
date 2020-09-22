@@ -30,6 +30,6 @@ form.onsubmit = function (e) {
         })
     })
   }).catch((e) => {
-    console.log('recapthca error')
+    console.log('recaptcha error')
   })
 }

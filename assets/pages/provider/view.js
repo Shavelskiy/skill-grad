@@ -1,4 +1,4 @@
-import { feedbackModal } from '../../components/modal'
+import { feedbackModal } from '@/components/modal'
 import './view.scss'
 
 document.addEventListener('keydown', function (event) {

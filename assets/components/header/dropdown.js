@@ -10,7 +10,7 @@ if (dropdown) {
   })
 
   window.addEventListener('click', (event) => {
-    let needCheck = true;
+    let needCheck = true
     openDropdownButtons.forEach((button) => {
       if (button.contains(event.target)) {
         needCheck = false

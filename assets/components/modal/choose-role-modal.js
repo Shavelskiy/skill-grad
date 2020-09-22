@@ -1,7 +1,7 @@
 import { registerModal, registerRoleModal } from '../modal'
 import showAlert from './alert'
-import {isAuth} from '../../helpers/auth'
-import { ROLE_PROVIDER, ROLE_USER } from '../../utils/user-roles'
+import {isAuth} from '@/helpers/auth'
+import { ROLE_PROVIDER, ROLE_USER } from '@/utils/user-roles'
 
 const showRegisterForm = (role) => {
   if (!isAuth()) {

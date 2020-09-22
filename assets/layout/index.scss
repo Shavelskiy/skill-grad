@@ -4,12 +4,14 @@
 @import "project/widgets";
 @import "project/layout";
 
-@import "../blocks/modules";
-@import "../components/common/scss/breadcrumbs";
-@import "../components/common/scss/paginator";
-@import "../components/common/scss/blog-card";
-@import "../components/common/scss/program-card";
-@import "../components/common/scss/provider-card";
+@import "project/blocks/modules";
+
+@import "../components/common/scss/index";
+
+@import "./../components/modal/index";
+@import "./../components/header/index";
+@import "./../components/footer/index";
+@import "./../components/ui/index";
 
 *,
 *::before,
@@ -317,11 +319,6 @@ textarea {
   -webkit-appearance: none;
 }
 
-@import "./../components/modal/index";
-@import "./../components/header/index";
-@import "./../components/footer/index";
-@import "./../components/ui/index";
-
 .blue-text {
   color: #007bff;
   cursor: pointer;
@@ -431,20 +428,12 @@ textarea {
   padding-left: 15px !important;
 }
 
-.ml-20 {
-  margin-left: 20px !important;
-}
-
 .pl-0 {
   padding-left: 0;
 }
 
 .pr-0 {
   padding-right: 0;
-}
-
-.pr-40 {
-  padding-right: 40px !important;
 }
 
 .pl-45 {

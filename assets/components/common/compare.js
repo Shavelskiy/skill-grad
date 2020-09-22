@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {COMPARE_ADD, COMPARE_REMOVE, COMPARE_CLEAR} from '../../utils/api-routes'
+import {COMPARE_ADD, COMPARE_REMOVE, COMPARE_CLEAR} from '@/utils/api-routes'
 import showAlert from '../modal/alert'
 import {updateCompareCount} from '../header'
 

@@ -1,7 +1,7 @@
 import initModalForm from './init-form'
 import { loginModal, newPasswordModal, registerModal, resetPasswordModal } from '../modal'
 import showRegisterForm from '../modal/choose-role-modal'
-import { ROLE_PROVIDER, ROLE_USER } from '../../utils/user-roles'
+import { ROLE_PROVIDER, ROLE_USER } from '@/utils/user-roles'
 
 initModalForm(loginModal, false, false, true, 'login')
 initModalForm(resetPasswordModal, false, false, false, 'resetPassword')
