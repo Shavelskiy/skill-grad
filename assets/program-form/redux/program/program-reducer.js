@@ -132,7 +132,7 @@ const initialState = {
   additionalInfo: '',
 }
 
-export const programReduser = (state = initialState, action) => {
+export const programReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_NAME:
       return {...state, name: action.payload}

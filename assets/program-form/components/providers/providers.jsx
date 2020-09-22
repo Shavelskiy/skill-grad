@@ -67,7 +67,7 @@ const Providers = () => {
     }
   }
 
-  const renderPorviderImage = (provider, type) => {
+  const renderProviderImage = (provider, type) => {
     if (provider.image === null) {
       return <img src={noImage}/>
     }
@@ -90,7 +90,7 @@ const Providers = () => {
       return (
         <div key={key} className={css.provider}>
           <div className={css.logo}>
-            {renderPorviderImage(provider, type)}
+            {renderProviderImage(provider, type)}
             {(type === 'new') ? <div className={css.description}>Провайдера нет в базе SillGrad</div> : <></>}
           </div>
           <div className={css.info}>

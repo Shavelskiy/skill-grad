@@ -13,7 +13,7 @@ const initialState = {
   locations: [],
 }
 
-export const dataReduser = (state = initialState, action) => {
+export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_FIELDS:
       return {

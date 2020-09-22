@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { dataReduser } from './redux/data/data-reduser'
-import { programReduser } from './redux/program/program-reduser'
+import { dataReducer } from './redux/data/data-reducer'
+import { programReducer } from './redux/program/program-reducer'
 
 import App from './components/app'
 
@@ -18,8 +18,8 @@ if (process.env.NODE_ENV === `development`) {
 }
 
 const store = compose(applyMiddleware(...middlewares))(createStore)(combineReducers({
-  program: programReduser,
-  data: dataReduser
+  program: programReducer,
+  data: dataReducer
 }))
 
 const app = (
