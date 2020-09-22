@@ -3,7 +3,7 @@ import React from 'react'
 import ProviderSettingsUser from './provider-settings-user'
 import ProviderSettingsOrganization from './provider-settings-organization'
 
-import css from './provider-settings.scss?module'
+import css from './scss/provider-settings.scss?module'
 import cn from 'classnames'
 
 

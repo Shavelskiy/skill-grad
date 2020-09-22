@@ -6,7 +6,7 @@ import {ADD_REVIEW_URL} from '../../utils/api/endpoints'
 import {dateFormat} from '../../helpers/date-fromater'
 import ReviewModal from './review-modal'
 
-import css from './item.scss?module'
+import css from './scss/item.scss?module'
 
 
 const LearnItem = ({program, reload}) => {

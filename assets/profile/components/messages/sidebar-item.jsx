@@ -2,7 +2,7 @@ import React from 'react'
 
 import {textDateFormat} from '../../helpers/date-fromater'
 
-import css from './sidebar-item.scss?module'
+import css from './scss/sidebar-item.scss?module'
 import cn from 'classnames'
 
 

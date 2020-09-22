@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 
 import DetailChatItem from './detail-chat-item'
 
-import css from './detail-chat.scss?module'
+import css from './scss/detail-chat.scss?module'
 import cn from 'classnames'
 
 

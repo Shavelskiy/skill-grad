@@ -8,7 +8,7 @@ import { NumberInput, TextInput } from '../ui/input'
 
 import { DESIGN_SIMPLE, DESIGN_WORK, OTHER } from '../../utils/field-types'
 
-import css from './program-design.scss?module'
+import css from './scss/program-design.scss?module'
 
 
 const ProgramDesign = () => {

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Calendar from '../ui/calendar'
 import RadioButton from '../ui/radio-button'
 
-import css from './training-days.scss?module'
+import css from './scss/training-days.scss?module'
 import {
   TRAINING_DATE_ANYTIME,
   TRAINING_DATE_AS_THE_GROUP_FORM,

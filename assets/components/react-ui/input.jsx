@@ -2,7 +2,7 @@ import React from 'react'
 
 import InputMask from 'react-input-mask'
 
-import css from './input.scss?module'
+import css from './scss/input.scss?module'
 
 
 export const Input = ({type, placeholder, value, setValue}) => {

@@ -14,7 +14,7 @@ import SimpleRadio from '../ui/simple-radio'
 import { Textarea } from '../ui/input'
 import ProgramDesign from './program-design'
 
-import css from './design.scss?module'
+import css from './scss/design.scss?module'
 import SimpleMultiRadio from '../ui/simple-multi-radio'
 
 

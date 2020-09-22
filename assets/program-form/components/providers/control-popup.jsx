@@ -3,7 +3,7 @@ import React from 'react'
 import Modal from '../ui/modal'
 import Button from '../ui/button'
 
-import css from './control-popup.scss?module'
+import css from './scss/control-popup.scss?module'
 
 
 const ControlPopup = ({active, close, showProvidersPopup, showNewProviderPopup}) => {

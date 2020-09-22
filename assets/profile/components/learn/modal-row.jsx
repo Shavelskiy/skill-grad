@@ -1,7 +1,7 @@
 import React from 'react'
 
 import cn from 'classnames'
-import css from './modal-row.scss?module'
+import css from './scss/modal-row.scss?module'
 
 
 const valueDescriptionMap = [

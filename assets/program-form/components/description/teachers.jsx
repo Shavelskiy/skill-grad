@@ -5,13 +5,13 @@ import { setTeachers } from '../../redux/program/actions'
 
 import { Textarea } from '../ui/input'
 
-import css from './teachers.scss?module'
+import css from './scss/teachers.scss?module'
 
-import deleteImage from './../../img/delete.svg'
-import addImage from './../../img/teacher-add.svg'
-import noImage from './../../img/teacher-no-img.svg'
-import reloadImg from './../../img/reload.svg'
-import deleteTeacherImg from './../../img/delete-image.svg'
+import deleteImage from './../../../img/svg/delete.svg'
+import addImage from './../../../img/svg/teacher-add.svg'
+import noImage from './../../../img/svg/teacher-no-img.svg'
+import reloadImg from './../../../img/svg/reload.svg'
+import deleteTeacherImg from './../../../img/svg/delete-image.svg'
 
 
 const Teachers = () => {

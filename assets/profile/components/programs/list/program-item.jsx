@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '../../../utils/routes'
 
 import Request from './request'
 
-import css from './program-item.scss?module'
+import css from './scss/program-item.scss?module'
 import cn from 'classnames'
+
 
 const ProgramItem = ({program}) => {
   return (

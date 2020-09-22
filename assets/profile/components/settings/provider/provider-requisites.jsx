@@ -1,7 +1,8 @@
 import React from 'react'
 
 import {Input} from '../../../../components/react-ui/input'
-import css from './provider-requisites.scss?module'
+
+import css from './scss/provider-requisites.scss?module'
 
 
 const ProviderRequisites = ({requisites, setRequisites}) => {

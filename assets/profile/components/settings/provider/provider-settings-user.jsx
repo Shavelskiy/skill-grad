@@ -8,7 +8,7 @@ import {validate, phoneFormat} from '../helpers'
 import {Input, MaskInput} from '../../../../components/react-ui/input'
 import {Button} from '../../../../components/react-ui/buttons'
 
-import css from './provider-settings-user.scss?module'
+import css from './scss/provider-settings-user.scss?module'
 
 
 const ProviderSettingsUser = () => {

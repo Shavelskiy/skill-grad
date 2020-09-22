@@ -7,7 +7,7 @@ import Select from '../../../../components/react-ui/select'
 import {SmallButton} from '../../../../components/react-ui/buttons'
 import {ScrollBlock} from '../../../../components/react-ui/blocks'
 
-import css from './provider-categories.scss?module'
+import css from './scss/provider-categories.scss?module'
 import cn from 'classnames'
 
 

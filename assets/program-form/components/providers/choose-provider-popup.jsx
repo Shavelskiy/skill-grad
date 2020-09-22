@@ -10,9 +10,10 @@ import { setProviderList } from '../../redux/data/actions'
 import Modal from '../ui/modal'
 import Button from '../ui/button'
 
-import css from './ choose-provider-popup.scss?module'
+import css from './scss/choose-provider-popup.scss?module'
 import cn from 'classnames'
-import noImage from './../../img/provider-image.png'
+
+import noImage from './../../../img/provider-image.png'
 
 
 const ChooseProviderPopup = ({active, close, selectedProvidersIds}) => {
@@ -21,7 +22,7 @@ const ChooseProviderPopup = ({active, close, selectedProvidersIds}) => {
   const providerList = useSelector(state => state.data.providerList)
   const [providersIds, setProvidersIds] = useState(null)
 
-  const [searchQuery, setSerchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     axios.get(FETCH_ALL_PROVIDERS)
@@ -82,7 +83,7 @@ const ChooseProviderPopup = ({active, close, selectedProvidersIds}) => {
           type={'text'}
           placeholder={'Поиск по названию провайдера'}
           value={searchQuery}
-          onChange={(event) => setSerchQuery(event.target.value)}
+          onChange={(event) => setSearchQuery(event.target.value)}
         />
         <button type={'button'}></button>
       </div>

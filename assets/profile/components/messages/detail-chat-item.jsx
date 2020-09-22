@@ -2,7 +2,7 @@ import React from 'react'
 
 import {textDateFormat, timeFormat} from '../../helpers/date-fromater'
 
-import css from './detail-chat.scss?module'
+import css from './scss/detail-chat.scss?module'
 import cn from 'classnames'
 
 

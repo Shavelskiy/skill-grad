@@ -11,7 +11,7 @@ import OccupationMode from './occupation-mode'
 import { Textarea } from '../ui/input'
 import SimpleMultiRadio from '../ui/simple-multi-radio'
 
-import css from './organization.scss?module'
+import css from './scss/organization.scss?module'
 
 
 const Organization = () => {

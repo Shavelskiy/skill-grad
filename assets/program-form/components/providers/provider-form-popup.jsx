@@ -4,13 +4,13 @@ import Modal from '../ui/modal'
 import { Textarea, TextInput } from '../ui/input'
 import Button from '../ui/button'
 
-import css from './new-provider-popup.scss?module'
-import noImage from './../../img/provider-image.png'
-import realoadImg from '../../img/reload.svg'
-import deleteTeacherImg from '../../img/delete.svg'
+import css from './scss/new-provider-popup.scss?module'
+import noImage from './../../../img/provider-image.png'
+import reloadImg from '../../../img/svg/reload.svg'
+import deleteTeacherImg from '../../../img/svg/delete.svg'
 
 
-const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update = false}) => {
+const ProviderFormPopup = ({active, close, provider, setProvider, submit, update = false}) => {
   const imageId = `add-new-provider-${update ? 'update' : 'create'}`
 
   const handleUploadImage = (event) => {
@@ -45,7 +45,7 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update
     return (
       <div className={css.actions}>
         <label htmlFor={imageId} className={css.reload}>
-          <img src={realoadImg}/>
+          <img src={reloadImg}/>
         </label>
         <img src={deleteTeacherImg} onClick={() => setProvider({...provider, image: null})}/>
       </div>
@@ -99,7 +99,7 @@ const ProviderFormPopup = ({active, close, provider, setProvider, sumbit, update
             text={update ? 'Обновить' : 'Добавить'}
             red={!update}
             blue={update}
-            click={sumbit}
+            click={submit}
           />
         </div>
       </div>

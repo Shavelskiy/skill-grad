@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import css from './request.scss?module'
+import css from './scss/request.scss?module'
 import cn from 'classnames'
 
 

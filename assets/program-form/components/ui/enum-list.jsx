@@ -1,9 +1,9 @@
 import React from 'react'
 
-import css from './enum-list.scss?module'
+import css from './scss/enum-list.scss?module'
 import cn from 'classnames'
 
-import deleteImage from './../../img/delete.svg'
+import deleteImage from './../../../img/svg/delete.svg'
 
 
 const EnumList = ({title, values, setValues, wide = false}) => {

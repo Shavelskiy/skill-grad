@@ -11,9 +11,9 @@ import { Textarea, TextInput } from '../ui/input'
 import css from './result.scss?module'
 import cn from 'classnames'
 
-import addImage from './../../img/teacher-no-img.svg'
-import realoadImg from './../../img/reload.svg'
-import deleteImg from './../../img/delete-image.svg'
+import addImage from './../../../img/svg/teacher-no-img.svg'
+import reloadImg from './../../../img/svg/reload.svg'
+import deleteImg from './../../../img/svg/delete-image.svg'
 
 
 const Result = () => {
@@ -52,7 +52,7 @@ const Result = () => {
         <img src={imageUrl}/>
         <div className={css.actions}>
           <label htmlFor={certificateImageId} className={css.reload}>
-            <img src={realoadImg}/>
+            <img src={reloadImg}/>
           </label>
           <img src={deleteImg} onClick={() => dispatch(setCertificate({name: certificate.name, file: null}))}/>
         </div>

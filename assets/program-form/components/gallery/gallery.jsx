@@ -10,7 +10,7 @@ import { Textarea } from '../ui/input'
 
 import css from './gallery.scss?module'
 
-import deleteImage from './../../img/delete.svg'
+import deleteImage from './../../../img/svg/delete.svg'
 
 
 const Gallery = () => {

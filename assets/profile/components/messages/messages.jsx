@@ -9,7 +9,7 @@ import {FOCUS_IN, FOCUS_OUT, INIT, SEND_MESSAGE, VIEWED} from '../../../chat/typ
 import Sidebar from './sidebar'
 import DetailChat from './detail-chat'
 
-import css from './messages.scss?module'
+import css from './scss/messages.scss?module'
 
 
 const Messages = () => {

@@ -8,7 +8,7 @@ import { OCCUPATION_MODE_ANYTIME, OCCUPATION_MODE_TIME, OTHER } from '../../util
 import RadioButton from '../ui/radio-button'
 import { TextInput } from '../ui/input'
 
-import css from './occupation-mode.scss?module'
+import css from './scss/occupation-mode.scss?module'
 import cn from 'classnames'
 
 

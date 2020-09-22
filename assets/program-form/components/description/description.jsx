@@ -10,7 +10,7 @@ import Block from '../ui/block'
 import Teachers from './teachers'
 import Duration from './duration'
 
-import css from './description.scss?module'
+import css from './scss/description.scss?module'
 import cn from 'classnames'
 
 
@@ -42,7 +42,7 @@ const Description = () => {
           dispatch(setName(value))
         }}
       />
-      <div className={cn(css.categroies, css.fieldContainer)}>
+      <div className={cn(css.categories, css.fieldContainer)}>
         {[...Array(3).keys()].map(key => {
           return (
             <div className={css.categorySelect} key={key}>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './navigation.scss?module'
+import css from './scss/navigation.scss?module'
 import cn from 'classnames'
 
 const Navigation = () => {

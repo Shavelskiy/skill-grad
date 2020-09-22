@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import css from './select.scss?module'
+import css from './scss/select.scss?module'
 import cn from 'classnames'
 
 

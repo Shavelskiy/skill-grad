@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './buttons.scss?module'
+import css from './scss/buttons.scss?module'
 import cn from 'classnames'
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import css from './block.scss?module'
-import addButtonImage from './../../img/plus.svg'
+import css from './scss/block.scss?module'
+import addButtonImage from './../../../img/svg/plus.svg'
 
 
 const Block = ({children, title, link = null, linkClick, containerClass}) => {

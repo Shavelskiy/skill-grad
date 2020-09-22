@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import RadioButton from './radio-button'
 import { TextInput } from './input'
 
-import css from './simple-radio.scss?module'
+import css from './scss/simple-radio.scss?module'
 
 
 const SimpleRadio = ({title = '', options, selectedValue, selectValue}) => {

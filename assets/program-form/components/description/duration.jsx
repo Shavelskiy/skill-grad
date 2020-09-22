@@ -7,7 +7,7 @@ import { DURATION_HOURS, DURATION_DAYS, OTHER } from '../../utils/field-types'
 
 import RadioButton from '../ui/radio-button'
 
-import css from './duration.scss?module'
+import css from './scss/duration.scss?module'
 import { TextInput, NumberInput } from '../ui/input'
 
 

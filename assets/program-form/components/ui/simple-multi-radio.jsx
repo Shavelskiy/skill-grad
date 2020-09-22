@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import RadioButton from './radio-button'
 import { TextInput } from './input'
 
-import css from './simple-multi-radio.scss?'
+import css from './scss/simple-multi-radio.scss?'
 
 
 const SimpleMultiRadio = ({title = '', options, selectedValues, setValues}) => {

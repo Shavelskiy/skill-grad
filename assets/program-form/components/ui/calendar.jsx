@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import css from './calendar.scss?module'
+import css from './scss/calendar.scss?module'
 import cn from 'classnames'
 
 const months = [

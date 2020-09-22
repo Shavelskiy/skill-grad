@@ -1,7 +1,8 @@
 import React from 'react'
 
-import css from './blocks.scss?module'
+import css from './scss/blocks.scss?module'
 import cn from 'classnames'
+
 
 export const ScrollBlock = ({children, container}) => {
   return (

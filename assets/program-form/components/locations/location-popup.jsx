@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import css from './locaton-popup.scss?module'
+import css from './scss/locaton-popup.scss?module'
 import cn from 'classnames'
 
 
-const LocatoinPopup = ({active, close, locations, userSelectedLocations, selectLocations}) => {
+const LocationPopup = ({active, close, locations, userSelectedLocations, selectLocations}) => {
   const [selectedLocations, setSelectedLocations] = useState([])
 
   const ref = useRef()
@@ -167,4 +167,4 @@ const LocatoinPopup = ({active, close, locations, userSelectedLocations, selectL
   )
 }
 
-export default LocatoinPopup
+export default LocationPopup

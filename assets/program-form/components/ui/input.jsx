@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './input.scss?module'
+import css from './scss/input.scss?module'
 import cn from 'classnames'
 
 

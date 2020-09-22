@@ -5,7 +5,7 @@ import {ALL_LOCATIONS_URL} from '../../../utils/api/endpoints'
 
 import Select from '../../../../components/react-ui/select'
 
-import css from './provider-locations.scss?module'
+import css from './scss/provider-locations.scss?module'
 
 
 const ProviderLocations = ({selectedLocations, setSelectedLocations}) => {

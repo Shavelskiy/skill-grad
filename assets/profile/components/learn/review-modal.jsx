@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 import Modal from '../modal/modal'
 import ModalRow from './modal-row'
 
-import css from './review-modal.scss?module'
+import css from './scss/review-modal.scss?module'
 
 
 const ReviewModal = ({active, close, review, setReview, submit, isNew}) => {

@@ -162,12 +162,12 @@
 
     &.swiper-button-prev {
       left: 0;
-      background: url(../../img/018-arrow.svg) no-repeat;
+      background: url(../../img/svg/arrow.svg) no-repeat;
     }
 
     &.swiper-button-next {
       right: 0;
-      background: url(../../img/018-arrow.svg) no-repeat;
+      background: url(../../img/svg/arrow.svg) no-repeat;
       transform: rotate(200grad);
     }
   }

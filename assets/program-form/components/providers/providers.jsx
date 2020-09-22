@@ -11,12 +11,12 @@ import ProviderCreate from './create-provider'
 import ChooseProviderPopup from './choose-provider-popup'
 import ProviderUpdate from './provider-update'
 
-import css from './providers.scss?module'
+import css from './scss/providers.scss?module'
 import cn from 'classnames'
 
-import noImage from './../../img/provider-image.png'
-import deleteImage from './../../img/delete.svg'
-import editImage from './../../img/pencil.svg'
+import noImage from './../../../img/provider-image.png'
+import deleteImage from './../../../img/svg/delete.svg'
+import editImage from './../../../img/svg/pencil.svg'
 
 
 const Providers = () => {

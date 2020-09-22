@@ -33,7 +33,7 @@ const ProviderUpdate = ({active, close, providerData = null}) => {
       close={close}
       provider={newProvider}
       setProvider={setNewProvider}
-      sumbit={handleSubmit}
+      submit={handleSubmit}
       update={true}
     />
   )

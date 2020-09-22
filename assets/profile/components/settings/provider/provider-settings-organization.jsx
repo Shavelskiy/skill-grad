@@ -7,7 +7,7 @@ import ProviderCategories from './provider-categories'
 import ProviderRequisites from './provider-requisites'
 import ProviderLocations from './provider-locations'
 
-import css from './provider-settings-organization.scss?module'
+import css from './scss/provider-settings-organization.scss?module'
 
 import noImage from '../../../../img/provider-no-photo.png'
 

@@ -10,12 +10,12 @@ import { selectLocations } from '../../redux/program/actions'
 import { setLocations } from '../../redux/data/actions'
 
 import Block from '../ui/block'
-import LocatoinPopup from './locaton-popup'
+import LocationPopup from './location-popup'
 
-import css from './locations.scss?module'
+import css from './scss/locations.scss?module'
 import cn from 'classnames'
 
-import deleteImage from '../../img/delete.svg'
+import deleteImage from '../../../img/svg/delete.svg'
 
 
 const Locations = () => {
@@ -77,7 +77,7 @@ const Locations = () => {
         <span className={css.addButton}>Добавить город/область/район</span>
       </div>
       <div className={cn(css.popupBackground, {[css.active]: showPopup})}></div>
-      <LocatoinPopup
+      <LocationPopup
         active={showPopup}
         locations={locations}
         userSelectedLocations={selectedLocations}

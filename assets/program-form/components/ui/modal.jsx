@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 
-import css from './modal.scss?module'
+import css from './scss/modal.scss?module'
 import cn from 'classnames'
 
-import closeImg from './../../img/close.svg'
+import closeImg from './../../../img/svg/close.svg'
 
 
 const Modal = ({children, title = null, active, close}) => {

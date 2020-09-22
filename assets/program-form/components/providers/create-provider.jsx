@@ -12,6 +12,7 @@ const emptyProvider = {
   image: null,
 }
 
+
 const ProviderCreate = ({active, close}) => {
   const dispatch = useDispatch()
 
@@ -29,7 +30,7 @@ const ProviderCreate = ({active, close}) => {
       close={close}
       provider={provider}
       setProvider={setProvider}
-      sumbit={handleSubmit}
+      submit={handleSubmit}
     />
   )
 }
