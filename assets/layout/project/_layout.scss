@@ -1,4 +1,3 @@
-// Content
 .content {
   &.program {
     @media (min-width: 320px) and (max-width: 767px) {
@@ -28,7 +27,6 @@
   }
 }
 
-// Content and Sidebar
 .box {
   @media (min-width: 320px) and (max-width: 767px) {
     flex-direction: column;
@@ -97,36 +95,6 @@
       }
       flex: 1 1 35%;
       margin-right: 40px;
-    }
-  }
-}
-
-// Page Learn
-.learn {
-  & > div {
-    @media (min-width: 320px) and (max-width: 767px) {
-      padding-left: inherit;
-      padding-right: inherit;
-    }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    text-align: center;
-    margin-bottom: 40px;
-    padding-left: 40px;
-    padding-right: 40px;
-
-    img {
-      margin-bottom: 20px;
-      height: 80px;
-    }
-
-    &:not(:nth-child(3n)) {
-      @media (min-width: 320px) and (max-width: 767px) {
-        border: none;
-      }
-      border-right: 3px solid rgba(#f2f2f2, .3);
     }
   }
 }

@@ -37,10 +37,15 @@ Encore
   .addEntry('static.favorite', './assets/pages/static/favorite.js')
   .addEntry('static.compare', './assets/pages/static/compare.js')
 
+  .addEntry('static.users-faq', './assets/pages/static/users-faq.js')
+
+  .addEntry('static.faq', './assets/pages/static/faq.js')
+
   .addEntry('site.user.profile', './assets/pages/profile/user-profile.js')
   .addEntry('site.provider.profile', './assets/pages/profile/provider-profile.js')
 
   .addEntry('program.add', './assets/pages/program-form/index.js')
+
 
   .splitEntryChunks()
 

@@ -1,1 +1,1 @@
-import './compare.scss'
+import './scss/compare.scss'

@@ -1,5 +1,4 @@
-import { SET_PROVIDER_LIST, SET_LOCATIONS, SET_FIELDS } from './types'
-import { SET_CURRENT_USER } from '../../../../admin/redux/types'
+import { SET_PROVIDER_LIST, SET_LOCATIONS, SET_FIELDS, SET_CURRENT_USER } from './types'
 
 
 export function setFields(fields) {

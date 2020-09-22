@@ -2,6 +2,11 @@
 
 {% set title = 'Для провайдеров обучения' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('static.users-faq') }}
+{% endblock %}
+
 {% block body %}
   <div class="main_learn mt-0">
     <h2 class="title">{{ title }}</h2>
@@ -81,4 +86,9 @@
       </div>
     {% endif %}
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('static.users-faq') }}
 {% endblock %}

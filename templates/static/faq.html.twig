@@ -2,6 +2,11 @@
 
 {% set title = 'FAQ' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('static.faq') }}
+{% endblock %}
+
 {% block body %}
   <div class="main_faq mt-0">
     <h2 class="title">FAQ</h2>
@@ -124,4 +129,9 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('static.faq') }}
 {% endblock %}
