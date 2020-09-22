@@ -91,6 +91,23 @@
   grid-column-gap: 25px;
   margin-top: 20px;
 
+  .alert {
+    grid-column: 1 / 4;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      grid-column: 1 / -1;
+      margin-bottom: 20px;
+    }
+
+    .error {
+      color: #f92e25;
+    }
+
+    .success {
+      color: #059e17;
+    }
+  }
+
   button {
     grid-column: 10 / 14;
 

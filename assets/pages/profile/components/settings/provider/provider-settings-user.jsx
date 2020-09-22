@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import {USER_INFO_URL} from '@/utils/profile/endpoints'
 
-import {validate, phoneFormat} from '../helpers'
+import {validateUser, phoneFormat} from '../helpers'
 
 import {Input, MaskInput} from '@/components/react-ui/input'
 import {Button} from '@/components/react-ui/buttons'
@@ -46,7 +46,7 @@ const ProviderSettingsUser = () => {
       confirmNewPassword: confirmNewPassword,
     }
 
-    if (!validate(data, setError)) {
+    if (!validateUser(data, setError)) {
       return
     }
 

@@ -1,11 +1,16 @@
 import React, {useState, useEffect, useRef} from 'react'
 
+import axios from 'axios'
+import {PROVIDER_INFO_URL} from '@/utils/profile/endpoints'
+
 import {Input, Textarea} from '@/components/react-ui/input'
 import {Button, SmallButton} from '@/components/react-ui/buttons'
 
 import ProviderCategories from './provider-categories'
 import ProviderRequisites from './provider-requisites'
 import ProviderLocations from './provider-locations'
+
+import {validateProviderOrganization} from '../helpers'
 
 import css from './scss/provider-settings-organization.scss?module'
 
@@ -14,6 +19,10 @@ import noImage from '@/img/provider-no-photo.png'
 
 const ProviderSettingsOrganization = () => {
   const ref = useRef()
+
+  const [error, setError] = useState('')
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [disable, setDisable] = useState(false)
 
   const [proAccount, setProAccount] = useState(false)
 
@@ -45,8 +54,43 @@ const ProviderSettingsOrganization = () => {
   })
 
   useEffect(() => {
-    console.warn('todo Load data')
+    axios.get(PROVIDER_INFO_URL)
+      .then(({data}) => {
+        setProAccount(data.pro_account)
+        setName(data.name)
+        setDescription(data.description)
+        setSelectedCategories(data.categories)
+        setSelectedSubcategories(data.sub_categories)
+        setSelectedLocations(data.locations)
+        setRequisites(data.requisites)
+      })
   }, [])
+
+  const save = () => {
+    setError('')
+    setShowSuccess(false)
+
+    const data = {
+      image: image,
+      oldImage: oldImage,
+      name: name,
+      description: description,
+      categories: selectedCategories,
+      sub_categories: selectedSubcategories,
+      locations: selectedLocations,
+      requisites: requisites,
+    }
+
+    if (!validateProviderOrganization(data, setError)) {
+      return
+    }
+
+    setDisable(true)
+    axios.post(PROVIDER_INFO_URL, data)
+      .then(() => setShowSuccess(true))
+      .catch(({response}) => setError(response.data.error))
+      .finally(() => setDisable(false))
+  }
 
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
@@ -154,10 +198,16 @@ const ProviderSettingsOrganization = () => {
       />
 
       <div className={css.buttonBlock}>
+        <div className={css.alert}>
+          <span className={css.error}>{error}</span>
+          <span className={css.success}>{showSuccess ? 'Данные обновлены!' : ''}</span>
+        </div>
+
         <Button
           text={'Сохранить настройки'}
+          disabled={disable}
           blue={true}
-          click={() => console.log('save')}
+          click={save}
         />
       </div>
     </>

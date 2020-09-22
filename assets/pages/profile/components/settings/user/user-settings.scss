@@ -24,6 +24,14 @@
     }
   }
 
+  .buttons {
+    margin-top: 10px;
+
+    button:nth-child(1) {
+      margin-right: 10px;
+    }
+  }
+
   .settings-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

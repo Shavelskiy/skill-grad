@@ -1,4 +1,4 @@
-export const validate = (data, setError) => {
+export const validateUser = (data, setError) => {
   if (data.phone.length > 0 && data.phone.length !== 10) {
     setError('Введите корректный телефон')
     return false
@@ -28,6 +28,71 @@ export const validate = (data, setError) => {
 
   return true
 }
+
+export const validateProviderOrganization = (data, setError) => {
+  if (data.name < 1) {
+    setError('Введите название организации')
+    return false
+  }
+
+  if (data.categories.filter(category => category !== null).length < 1) {
+    setError('Выберите хотя бы одну категорию')
+    return false
+  }
+
+  if (data.sub_categories.length < 1) {
+    setError('Выберите хотя бы одну подкатегорию')
+    return false
+  }
+
+  if (data.locations.country === null && data.locations.region === null && data.locations.city === null) {
+    setError('Выберите регион')
+    return false
+  }
+
+  if (data.requisites.organizationName < 1) {
+    setError('Введите наименование организации')
+    return false
+  }
+
+  if (data.requisites.legalAddress < 1) {
+    setError('Введите юридический адрес')
+    return false
+  }
+
+  if (data.requisites.ITN < 1) {
+    setError('Введите ИНН')
+    return false
+  }
+
+  if (data.requisites.PSRN < 1) {
+    setError('Введите ОГРН')
+    return false
+  }
+
+  if (data.requisites.checkingAccount < 1) {
+    setError('Введите расчетный счет')
+    return false
+  }
+
+  if (data.requisites.correspondentAccount < 1) {
+    setError('Введите корреспондентский счет')
+    return false
+  }
+
+  if (data.requisites.BIC < 1) {
+    setError('Введите БИК')
+    return false
+  }
+
+  if (data.requisites.bank < 1) {
+    setError('Введите банк')
+    return false
+  }
+
+  return true
+}
+
 
 export const phoneFormat = (phone) => {
   if (phone.substring(0, 1) !== '+') {

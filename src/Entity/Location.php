@@ -51,6 +51,11 @@ class Location
     protected string $type;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Provider", mappedBy="location")
+     */
+    protected Collection $providers;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="childLocations")
      * @ORM\JoinColumn(nullable=true)
      */

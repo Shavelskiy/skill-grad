@@ -1,4 +1,5 @@
 export const USER_INFO_URL = '/api/profile/settings'
+export const PROVIDER_INFO_URL = '/api/profile/settings-provider'
 export const ALL_CATEGORIES_URL = '/api/profile/settings/categories'
 export const ALL_LOCATIONS_URL = '/api/profile/settings/locations'
 

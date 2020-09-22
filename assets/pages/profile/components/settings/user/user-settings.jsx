@@ -3,11 +3,12 @@ import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import {USER_INFO_URL} from '@/utils/profile/endpoints'
 
-import {validate, phoneFormat} from '../helpers'
+import {validateUser, phoneFormat} from '../helpers'
 
 import Select from '@/components/react-ui/select'
 import {Input, MaskInput, Textarea} from '@/components/react-ui/input'
-import {Button} from '@/components/react-ui/buttons'
+import {Button, SmallButton} from '@/components/react-ui/buttons'
+import {ResultTitle} from '@/components/react-ui/blocks';
 
 import css from './user-settings.scss?module'
 
@@ -65,7 +66,7 @@ const UserSettings = () => {
       oldImage: oldImage,
     }
 
-    if (!validate(data, setError)) {
+    if (!validateUser(data, setError)) {
       return
     }
 
@@ -121,23 +122,27 @@ const UserSettings = () => {
     }
 
     return (
-      <div className="button-group">
-        <button className="button__edit" onClick={() => ref.current.click()}>
-          Изменить
-        </button>
-        <button className="button__delete" onClick={() => {
-          setImage(null)
-          setOldImage(null)
-        }}>
-          Удалить
-        </button>
+      <div className={css.buttons}>
+        <SmallButton
+          text={'Изменить'}
+          blue={true}
+          click={() => ref.current.click()}
+        />
+        <SmallButton
+          text={'Удалить'}
+          red={true}
+          click={() => {
+            setImage(null)
+            setOldImage(null)
+          }}
+        />
       </div>
     )
   }
 
   return (
     <>
-      <h5 className="result-title">Настройки пользователя</h5>
+      <ResultTitle title={'Настройки пользователя'}/>
       <div className={css.userSettings}>
         <div className={css.settingsSidebar}>
           <input

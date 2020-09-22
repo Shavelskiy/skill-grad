@@ -2,17 +2,15 @@ import React from 'react'
 
 import ProviderSettingsUser from './provider-settings-user'
 import ProviderSettingsOrganization from './provider-settings-organization'
-
-import css from './scss/provider-settings.scss?module'
-import cn from 'classnames'
+import {ResultTitle} from '@/components/react-ui/blocks'
 
 
 const ProviderSettings = () => {
   return (
     <div>
-      <h3 className={cn('w-100', 'result-title', css.resultTitle)}>Настройки пользователя</h3>
+      <ResultTitle title={'Настройки пользователя'}/>
       <ProviderSettingsUser/>
-      <h3 className={cn('w-100', 'result-title', css.resultTitle)}>Настройки организации</h3>
+      <ResultTitle title={'Настройки организации'}/>
       <ProviderSettingsOrganization/>
     </div>
   )

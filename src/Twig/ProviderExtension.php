@@ -21,7 +21,7 @@ class ProviderExtension extends AbstractExtension
     {
         return [
             'main' => $this->prepareCategoriesArray($provider->getCategories()),
-            'additional' => $this->prepareCategoriesArray($provider->getAdditionalCategories()),
+            'additional' => [],
         ];
     }
 

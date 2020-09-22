@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -18,9 +19,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-class AppAuthenticator extends AbstractFormLoginAuthenticator
+class AppAuthenticator extends AbstractGuardAuthenticator
 {
     protected EntityManagerInterface $entityManager;
     protected UrlGeneratorInterface $urlGenerator;
@@ -92,11 +93,15 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         return new JsonResponse($response, Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getLoginUrl()
+    public function start(Request $request, AuthenticationException $authException = null)
     {
-        // TODO: Implement getLoginUrl() method.
+        return new RedirectResponse(
+            $this->urlGenerator->generate('site.index')
+        );
+    }
+
+    public function supportsRememberMe(): bool
+    {
+        return true;
     }
 }

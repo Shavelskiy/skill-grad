@@ -18,3 +18,17 @@
     border-right: 7px solid white;
   }
 }
+
+.result-title {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    font-size: 20px;
+  }
+}

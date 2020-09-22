@@ -50,15 +50,9 @@ class Provider
     protected Collection $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
-     * @ORM\JoinTable(name="provider_categroy_additions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="providers")
      */
-    protected Collection $additionalCategories;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Location")
-     */
-    protected Collection $locations;
+    protected ?Location $location;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Program\Program", mappedBy="providers")
@@ -77,9 +71,7 @@ class Provider
 
     public function __construct()
     {
-        $this->additionalCategories = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->locations = new ArrayCollection();
     }
 
     public function getUser(): ?User
@@ -139,7 +131,7 @@ class Provider
 
     public function getImage(): ?Upload
     {
-        return $this->image;
+        return $this->image ?? null;
     }
 
     public function setImage(?Upload $image): self
@@ -174,46 +166,14 @@ class Provider
         return $this;
     }
 
-    public function getAdditionalCategories(): Collection
+    public function getLocation(): ?Location
     {
-        return $this->additionalCategories;
+        return $this->location ?? null;
     }
 
-    public function setAdditionalCategories(array $categories): self
+    public function setLocation(?Location $location): self
     {
-        $this->additionalCategories->clear();
-        foreach ($categories as $category) {
-            if (!$this->additionalCategories->contains($category)) {
-                $this->additionalCategories->add($category);
-            }
-        }
-
-        return $this;
-    }
-
-    public function addAdditionalCategory(Category $category): self
-    {
-        if (!$this->additionalCategories->contains($category)) {
-            $this->additionalCategories->add($category);
-        }
-
-        return $this;
-    }
-
-    public function getLocations(): array
-    {
-        return $this->locations->toArray();
-    }
-
-    public function setLocations(array $locations): self
-    {
-        $this->locations->clear();
-        foreach ($locations as $location) {
-            if (!$this->locations->contains($location)) {
-                $this->locations->add($location);
-            }
-        }
-
+        $this->location = $location;
         return $this;
     }
 
@@ -230,7 +190,7 @@ class Provider
 
     public function getProviderRequisites(): ?ProviderRequisites
     {
-        return $this->providerRequisites;
+        return $this->providerRequisites ?? null;
     }
 
     public function setProviderRequisites(?ProviderRequisites $providerRequisites): self

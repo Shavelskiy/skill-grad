@@ -11,3 +11,9 @@ export const ScrollBlock = ({children, container}) => {
     </div>
   )
 }
+
+export const ResultTitle = ({title}) => {
+  return (
+    <h3 className={css.resultTitle}>{title}</h3>
+  )
+}
