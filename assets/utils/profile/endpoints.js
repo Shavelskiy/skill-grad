@@ -19,3 +19,5 @@ export const REVIEW_ANSWER_URL = '/api/profile/program/review/answer/:id'
 
 export const MESSAGE_INDEX_URL = '/api/message'
 export const MESSAGE_DETAIL_URL = '/api/message/detail/:id'
+
+export const ARTICLES_URL = '/api/article'

@@ -38,6 +38,11 @@ class Article
     /**
      * @ORM\Column(type="text")
      */
+    protected string $previewText;
+
+    /**
+     * @ORM\Column(type="text")
+     */
     protected string $detailText;
 
     /**
@@ -96,6 +101,17 @@ class Article
     public function setActive(bool $active): self
     {
         $this->active = $active;
+        return $this;
+    }
+
+    public function getPreviewText(): string
+    {
+        return $this->previewText;
+    }
+
+    public function setPreviewText(string $previewText): self
+    {
+        $this->previewText = $previewText;
         return $this;
     }
 
