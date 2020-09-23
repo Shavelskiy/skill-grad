@@ -21,3 +21,4 @@ export const MESSAGE_INDEX_URL = '/api/message'
 export const MESSAGE_DETAIL_URL = '/api/message/detail/:id'
 
 export const ARTICLES_URL = '/api/article'
+export const ARTICLES_CATEGORIES_URL = '/api/article/categories'

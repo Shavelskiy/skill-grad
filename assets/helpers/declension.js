@@ -1,6 +1,6 @@
 export const declension = (number, variants) => {
   number %= 100
-console.log(number)
+
   if (number >= 5 && number <= 20) {
     return variants[2]
   }

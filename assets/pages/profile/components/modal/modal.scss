@@ -41,8 +41,12 @@
       width: 90%;
     }
 
-    &.width {
-      width: 568px;
+    &.wide {
+      width: 742px;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        width: 90%;
+      }
     }
 
     .content {
@@ -72,7 +76,7 @@
 
   & .close {
     position: absolute;
-    top: -27px;
+    top: -50px;
     right: 0;
     font-size: 48px;
     font-weight: normal;

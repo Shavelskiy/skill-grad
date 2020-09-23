@@ -8,7 +8,6 @@ import cn from 'classnames'
 
 
 const PublicationsItem = ({item}) => {
-  console.log(item)
   return (
     <div className={css.cardBlog}>
       <div className={css.cardContainer}>

@@ -4,11 +4,12 @@ import css from './scss/buttons.scss?module'
 import cn from 'classnames'
 
 
-export const Button = ({text, click, disabled = false, red = false, blue = false}) => {
+export const Button = ({text, click, disabled = false, red = false, blue = false, fullWidth = true}) => {
   return (
     <button
       className={cn(
         css.button,
+        {[css.fullWidth]: fullWidth},
         {[css.blue]: blue},
         {[css.red]: red},
       )}

@@ -11,6 +11,7 @@ use App\Entity\Program\ProgramReview;
 use App\Entity\Provider;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramRequestRepository;
 use App\Repository\ProgramReviewsRepository;
@@ -30,26 +31,20 @@ class ArticlesController extends AbstractController
     protected const PAGE_ITEM_COUNT = 10;
 
     protected RouterInterface $router;
-    protected ArticleRepository $articleRepository;
     protected EntityManagerInterface $entityManger;
-    protected ProgramRepository $programRepository;
-    protected ProgramRequestRepository $programRequestRepository;
-    protected ProgramReviewsRepository $programReviewRepository;
+    protected ArticleRepository $articleRepository;
+    protected CategoryRepository $categoryRepository;
 
     public function __construct(
         RouterInterface $router,
-        ArticleRepository $articleRepository,
         EntityManagerInterface $entityManager,
-        ProgramRepository $programRepository,
-        ProgramRequestRepository $programRequestRepository,
-        ProgramReviewsRepository $programReviewRepository
+        ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository
     ) {
         $this->router = $router;
-        $this->articleRepository = $articleRepository;
         $this->entityManger = $entityManager;
-        $this->programRepository = $programRepository;
-        $this->programRequestRepository = $programRequestRepository;
-        $this->programReviewRepository = $programReviewRepository;
+        $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -94,5 +89,22 @@ class ArticlesController extends AbstractController
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
         ]);
+    }
+
+    /**
+     * @Route("/categories", name="api.articles.categories", methods={"GET"})
+     */
+    public function categoriesAction(): Response
+    {
+        $categories = [];
+
+        foreach ($this->categoryRepository->findRootCategories() as $category) {
+            $categories[] = [
+              'value' => $category->getId(),
+              'title' => $category->getName(),
+            ];
+        }
+
+        return new JsonResponse($categories);
     }
 }

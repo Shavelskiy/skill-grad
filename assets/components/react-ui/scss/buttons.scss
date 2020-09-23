@@ -1,11 +1,10 @@
 .button {
   display: block;
   cursor: pointer;
-  width: 100%;
   background: transparent;
   border: none;
   outline: none;
-  padding: 5px 10px;
+  padding: 5px 40px;
   text-align: center;
   font-family: "Lato", sans-serif;
   font-size: 15px;
@@ -21,6 +20,10 @@
 
   &:focus, &:active {
     outline: none;
+  }
+
+  &.full-width {
+    width: 100%;
   }
 
   &.blue {

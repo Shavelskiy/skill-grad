@@ -5,6 +5,7 @@ import axios from 'axios'
 import {ARTICLES_URL} from '@/utils/profile/endpoints'
 
 import PublicationsItem from './publications-item'
+import NewArticlePopup from './new-article-popup';
 import Paginator from '../paginator/paginator'
 import {Button} from '@/components/react-ui/buttons'
 
@@ -21,10 +22,11 @@ const Publications = () => {
 
   const [paginatorRequest, setPaginatorRequest] = useState(null)
 
+  const [activeNewArticlePopup, seActiveNewArticlePopup] = useState(false)
+
   const [items, setItems] = useState([])
   const [currentPage, setCurrentPage] = useState('page' in queryParams ? queryParams.page : 1)
   const [totalPages, setTotalPages] = useState(1)
-
 
   useEffect(() => {
     reload()
@@ -62,7 +64,7 @@ const Publications = () => {
         <Button
           text={'Разместить статью'}
           blue={true}
-          click={() => console.warn('todo open popup')}
+          click={() => seActiveNewArticlePopup(true)}
         />
       </div>
 
@@ -72,6 +74,11 @@ const Publications = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         click={(page) => setCurrentPage(page)}
+      />
+
+      <NewArticlePopup
+        active={activeNewArticlePopup}
+        close={() => seActiveNewArticlePopup(false)}
       />
     </div>
   )
