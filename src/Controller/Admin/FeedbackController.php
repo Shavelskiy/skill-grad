@@ -66,8 +66,6 @@ class FeedbackController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.feedback.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param Request $request
      */
     public function view(int $id): Response
     {
@@ -75,7 +73,6 @@ class FeedbackController extends AbstractController
             throw new RuntimeException('');
         }
 
-        /** @var Feedback $feedback */
         $feedback = $this->feedbackRepository->find($id);
 
         if ($feedback === null) {
@@ -90,7 +87,6 @@ class FeedbackController extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        /** @var Feedback $feedback */
         $feedback = $this->feedbackRepository->find($request->get('id'));
 
         if ($feedback === null) {

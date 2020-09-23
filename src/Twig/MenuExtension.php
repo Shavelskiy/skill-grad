@@ -57,7 +57,6 @@ class MenuExtension extends AbstractExtension
     {
         $result = [];
 
-        /** @var Category $rootCategory */
         foreach ($this->categoryRepository->findRootCategories() as $rootCategory) {
             $childCategories = [];
 

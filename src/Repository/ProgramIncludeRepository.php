@@ -11,6 +11,12 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @method ProgramInclude|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProgramInclude|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProgramInclude[]    findAll()
+ * @method ProgramInclude[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class ProgramIncludeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

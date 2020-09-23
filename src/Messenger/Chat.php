@@ -138,10 +138,8 @@ class Chat implements MessageComponentInterface
 
                 $user = $this->getUserById($userId);
 
-                /** @var User $recipient */
                 $recipient = $this->userRepository->find($msg['recipient']);
 
-                /** @var ChatMessage $chatMessage */
                 foreach ($this->chatMessageRepository->findNewMessages($recipient, $user) as $chatMessage) {
                     $chatMessage->setViewed(true);
                     $this->entityManager->persist($chatMessage);

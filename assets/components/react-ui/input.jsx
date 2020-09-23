@@ -18,6 +18,22 @@ export const Input = ({type, placeholder, value, setValue}) => {
   )
 }
 
+export const NumberInput = ({placeholder, value, setValue, maxLength = null}) => {
+  return (
+    <input
+      type={'text'}
+      className={css.input}
+      placeholder={placeholder}
+      value={value}
+      onChange={({target}) => {
+        const newValue = target.value.replace(/\D/g, '')
+        setValue(maxLength !== null ? newValue.substring(0, maxLength) : newValue)
+      }}
+      autoComplete={'off'}
+    />
+  )
+}
+
 export const MaskInput = ({mask, value, setValue}) => {
   return (
     <InputMask

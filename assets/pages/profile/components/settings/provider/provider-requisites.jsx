@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Input} from '@/components/react-ui/input'
+import {Input, NumberInput, MaskInput} from '@/components/react-ui/input'
 
 import css from './scss/provider-requisites.scss?module'
 
@@ -26,45 +26,46 @@ const ProviderRequisites = ({requisites, setRequisites}) => {
         value={requisites.mailingAddress}
         setValue={(value) => setRequisites({...requisites, mailingAddress: value})}
       />
-      <Input
-        type={'text'}
+      <NumberInput
         placeholder={'ИНН *'}
+        maxLength={10}
         value={requisites.ITN}
         setValue={(value) => setRequisites({...requisites, ITN: value})}
       />
-      <Input
-        type={'text'}
+      <NumberInput
         placeholder={'КПП'}
+        maxLength={9}
         value={requisites.IEC}
         setValue={(value) => setRequisites({...requisites, IEC: value})}
       />
-      <Input
-        type={'text'}
+      <NumberInput
         placeholder={'ОГРН *'}
+        maxLength={13}
         value={requisites.PSRN}
         setValue={(value) => setRequisites({...requisites, PSRN: value})}
       />
-      <Input
-        type={'text'}
+      <NumberInput
         placeholder={'ОКПО'}
+        maxLength={14}
         value={requisites.OKPO}
         setValue={(value) => setRequisites({...requisites, OKPO: value})}
       />
-      <Input
-        type={'text'}
+      <NumberInput
         placeholder={'Р/с *'}
+        maxLength={20}
         value={requisites.checkingAccount}
         setValue={(value) => setRequisites({...requisites, checkingAccount: value})}
       />
-      <Input
-        type={'text'}
+      <NumberInput
         placeholder={'К/с *'}
+        maxLength={20}
         value={requisites.correspondentAccount}
         setValue={(value) => setRequisites({...requisites, correspondentAccount: value})}
       />
-      <Input
+      <NumberInput
         type={'text'}
         placeholder={'БИК *'}
+        maxLength={9}
         value={requisites.BIC}
         setValue={(value) => setRequisites({...requisites, BIC: value})}
       />

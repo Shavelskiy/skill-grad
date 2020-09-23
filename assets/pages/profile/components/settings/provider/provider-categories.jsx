@@ -107,9 +107,13 @@ const ProviderCategories = ({selectedCategories, setSelectedCategories, selected
       return <></>
     }
 
-    const category = categories.filter(currentCategory => currentCategory.value === categoryId)[0]
+    const currentCategories = categories.filter(currentCategory => currentCategory.value === categoryId)
 
-    return category.child_items.filter(childItem => selectedSubcategories.includes(childItem.value))
+    if (currentCategories.length < 1) {
+      return <></>
+    }
+
+    return currentCategories[0].child_items.filter(childItem => selectedSubcategories.includes(childItem.value))
       .map((childItem, key) => (
           <div className={css.item} key={key}>
             <p className={css.text}>{childItem.title}</p>

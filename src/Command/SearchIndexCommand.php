@@ -49,19 +49,16 @@ class SearchIndexCommand extends Command
     {
         $output->writeln('start index');
 
-        /** @var Article $article */
         foreach ($this->articleRepository->findAll() as $article) {
             $this->searchService->addArticleToIndex($article);
             $output->writeln(sprintf('Add article to index: %s', $article->getName()));
         }
 
-        /** @var Provider $provider */
         foreach ($this->providerRepository->findAll() as $provider) {
             $this->searchService->addProviderToIndex($provider);
             $output->writeln(sprintf('Add provider to index: %s', $provider->getName()));
         }
 
-        /** @var Program $program */
         foreach ($this->programRepository->findAll() as $program) {
             $this->searchService->addProgramToIndex($program);
             $output->writeln(sprintf('Add program to index: %s', $program->getName()));

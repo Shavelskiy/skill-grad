@@ -82,7 +82,6 @@ class ArticleController extends AbstractController
                 throw new RuntimeException('');
             }
 
-            /** @var Article $article */
             $article = $this->articleRepository->find($id);
 
             if ($article === null) {
@@ -141,7 +140,6 @@ class ArticleController extends AbstractController
      */
     public function update(Request $request): Response
     {
-        /** @var Article $article */
         $article = $this->articleRepository->find($request->get('id'));
 
         if ($article === null) {
@@ -190,7 +188,6 @@ class ArticleController extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        /** @var Article $article */
         $article = $this->articleRepository->find($request->get('id'));
 
         if ($article === null) {

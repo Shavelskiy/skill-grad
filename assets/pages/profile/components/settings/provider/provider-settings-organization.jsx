@@ -58,6 +58,7 @@ const ProviderSettingsOrganization = () => {
       .then(({data}) => {
         setProAccount(data.pro_account)
         setName(data.name)
+        setOldImage(data.image)
         setDescription(data.description)
         setSelectedCategories(data.categories)
         setSelectedSubcategories(data.sub_categories)
@@ -71,8 +72,7 @@ const ProviderSettingsOrganization = () => {
     setShowSuccess(false)
 
     const data = {
-      image: image,
-      oldImage: oldImage,
+      old_image: oldImage,
       name: name,
       description: description,
       categories: selectedCategories,
@@ -85,8 +85,16 @@ const ProviderSettingsOrganization = () => {
       return
     }
 
+    let formData = new FormData()
+    formData.append('image', image)
+    formData.append('json_content', JSON.stringify(data))
+
     setDisable(true)
-    axios.post(PROVIDER_INFO_URL, data)
+    axios.post(PROVIDER_INFO_URL, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
       .then(() => setShowSuccess(true))
       .catch(({response}) => setError(response.data.error))
       .finally(() => setDisable(false))

@@ -7,6 +7,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Exception;
 
+/**
+ * @method Rubric|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Rubric|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Rubric[]    findAll()
+ * @method Rubric[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class RubricRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -14,10 +20,7 @@ class RubricRepository extends ServiceEntityRepository
         parent::__construct($registry, Rubric::class);
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function getRubricWithMaxSort()
+    public function getRubricWithMaxSort(): ?Rubric
     {
         try {
             return $this->createQueryBuilder('r')

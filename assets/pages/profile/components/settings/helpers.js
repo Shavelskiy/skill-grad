@@ -50,42 +50,42 @@ export const validateProviderOrganization = (data, setError) => {
     return false
   }
 
-  if (data.requisites.organizationName < 1) {
+  if (data.requisites.organizationName.length < 1) {
     setError('Введите наименование организации')
     return false
   }
 
-  if (data.requisites.legalAddress < 1) {
+  if (data.requisites.legalAddress.length < 1) {
     setError('Введите юридический адрес')
     return false
   }
 
-  if (data.requisites.ITN < 1) {
+  if (data.requisites.ITN.length < 10) {
     setError('Введите ИНН')
     return false
   }
 
-  if (data.requisites.PSRN < 1) {
+  if (data.requisites.PSRN.length < 13) {
     setError('Введите ОГРН')
     return false
   }
 
-  if (data.requisites.checkingAccount < 1) {
+  if (data.requisites.checkingAccount.length < 20) {
     setError('Введите расчетный счет')
     return false
   }
 
-  if (data.requisites.correspondentAccount < 1) {
+  if (data.requisites.correspondentAccount.length < 20) {
     setError('Введите корреспондентский счет')
     return false
   }
 
-  if (data.requisites.BIC < 1) {
+  if (data.requisites.BIC.length < 9) {
     setError('Введите БИК')
     return false
   }
 
-  if (data.requisites.bank < 1) {
+  if (data.requisites.bank.length < 1) {
     setError('Введите банк')
     return false
   }

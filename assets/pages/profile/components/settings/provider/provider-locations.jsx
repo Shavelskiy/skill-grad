@@ -21,7 +21,9 @@ const ProviderLocations = ({selectedLocations, setSelectedLocations}) => {
       return []
     }
 
-    return locations.filter((city) => city.value === selectedLocations.country)[0].regions
+    const countries = locations.filter((city) => city.value === selectedLocations.country)
+
+    return countries.length > 0 ? countries[0].regions : []
   }
 
   const getCitiesValues = () => {
@@ -29,7 +31,9 @@ const ProviderLocations = ({selectedLocations, setSelectedLocations}) => {
       return []
     }
 
-    return getRegionValues().filter((region) => region.value === selectedLocations.region)[0].cities
+    const regions = getRegionValues().filter((region) => region.value === selectedLocations.region)
+
+    return regions.length > 0 ? regions[0].cities : []
   }
 
   return (

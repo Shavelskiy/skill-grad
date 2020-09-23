@@ -86,7 +86,6 @@ class LocationController extends AbstractController
                 throw new RuntimeException('');
             }
 
-            /** @var Location $location */
             $location = $this->locationRepository->find($id);
 
             if ($location === null) {
@@ -140,7 +139,6 @@ class LocationController extends AbstractController
     public function fetchAll(): Response
     {
         $locations = [];
-        /** @var Location $location */
         foreach ($this->locationRepository->findAll() as $location) {
             $locations[] = [
               'value' => $location->getId(),
@@ -165,7 +163,6 @@ class LocationController extends AbstractController
 
         $parentLocationId = (int)($request->get('parentLocation'));
         if ($parentLocationId > 0) {
-            /** @var Location $parentLocation */
             $parentLocation = $this->locationRepository->find($parentLocationId);
 
             if ($parentLocation === null) {
@@ -191,7 +188,6 @@ class LocationController extends AbstractController
      */
     public function update(Request $request): Response
     {
-        /** @var Location $location */
         $location = $this->locationRepository->find($request->get('id'));
 
         if ($location === null) {
@@ -207,7 +203,6 @@ class LocationController extends AbstractController
 
         $parentLocationId = (int)($request->get('parentLocation'));
         if ($parentLocationId > 0) {
-            /** @var Location $parentLocation */
             $parentLocation = $this->locationRepository->find($parentLocationId);
 
             if ($parentLocation === null) {

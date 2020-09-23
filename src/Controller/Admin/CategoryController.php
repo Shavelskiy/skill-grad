@@ -76,7 +76,6 @@ class CategoryController extends AbstractController
                 throw new RuntimeException('');
             }
 
-            /** @var Category $category */
             $category = $this->categoryRepository->find($id);
 
             if ($category === null) {
@@ -139,7 +138,6 @@ class CategoryController extends AbstractController
 
         $parentCategoryId = (int)($request->get('id'));
         if ($parentCategoryId > 0) {
-            /** @var Category $parentCategory */
             $parentCategory = $this->categoryRepository->find($parentCategoryId);
 
             if ($parentCategory === null) {
@@ -165,7 +163,6 @@ class CategoryController extends AbstractController
      */
     public function update(Request $request): Response
     {
-        /** @var Category $category */
         $category = $this->categoryRepository->find($request->get('id'));
 
         if ($category === null) {
@@ -188,7 +185,6 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        /** @var Category $category */
         $category = $this->categoryRepository->find($request->get('id'));
 
         if ($category === null) {
@@ -208,9 +204,8 @@ class CategoryController extends AbstractController
     {
         $categories = [];
 
-        /** @var Category $categroy */
-        foreach ($this->categoryRepository->findAll() as $categroy) {
-            $categories[] = $this->prepareItem($categroy);
+        foreach ($this->categoryRepository->findAll() as $category) {
+            $categories[] = $this->prepareItem($category);
         }
 
         return new JsonResponse(['categories' => $categories]);

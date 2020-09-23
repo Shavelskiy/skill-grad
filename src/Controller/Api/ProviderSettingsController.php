@@ -9,6 +9,7 @@ use App\Entity\ProviderRequisites;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
+use App\Service\UploadServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,15 +25,18 @@ class ProviderSettingsController extends AbstractController
     protected EntityManagerInterface $entityManager;
     protected CategoryRepository $categoryRepository;
     protected LocationRepository $locationRepository;
+    protected UploadServiceInterface $uploadService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         CategoryRepository $categoryRepository,
-        LocationRepository $locationRepository
+        LocationRepository $locationRepository,
+        UploadServiceInterface $uploadService
     ) {
         $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
         $this->locationRepository = $locationRepository;
+        $this->uploadService = $uploadService;
     }
 
     /**
@@ -153,10 +157,6 @@ class ProviderSettingsController extends AbstractController
             $user->setProvider($provider);
         }
 
-        $provider
-            ->setName($request->get('name'))
-            ->setDescription($request->get('description'));
-
         if (($requisites = $provider->getProviderRequisites()) === null) {
             $requisites = (new ProviderRequisites())
                 ->setProvider($provider);
@@ -164,8 +164,73 @@ class ProviderSettingsController extends AbstractController
             $provider->setProviderRequisites($requisites);
         }
 
-        $requestRequisites = $request->get('requisites');
+        $provider
+            ->setName($request->get('name'))
+            ->setDescription($request->get('description'))
+            ->setCategories($this->getSelectedSubcategories($request->get('categories'), $request->get('sub_categories')))
+            ->setLocation($this->getSelectedLocation($request->get('locations')));
 
+        $oldImage = $request->get('old_image');
+        $image = $request->files->get('image');
+
+        if ($oldImage === null && $provider->getImage() !== null) {
+            $this->uploadService->deleteUpload($provider->getImage());
+            $provider->setImage(null);
+        }
+
+        if ($image !== null) {
+            $upload = $this->uploadService->createUpload($image);
+            $this->entityManager->persist($upload);
+            $provider->setImage($upload);
+        }
+
+        $this->fillProviderRequisites($requisites, $request->get('requisites'));
+
+        $this->entityManager->persist($user);
+        $this->entityManager->persist($provider);
+        $this->entityManager->persist($requisites);
+        $this->entityManager->flush();
+
+        return new JsonResponse();
+    }
+
+    protected function getSelectedLocation(array $locations): Location
+    {
+        if ($locations[Location::TYPE_CITY] !== null) {
+            return $this->locationRepository->find($locations[Location::TYPE_CITY]);
+
+        }
+
+        if ($locations[Location::TYPE_REGION] !== null) {
+            return $this->locationRepository->find($locations[Location::TYPE_REGION]);
+        }
+
+        return $this->locationRepository->find($locations[Location::TYPE_COUNTRY]);
+    }
+
+    protected function getSelectedSubcategories(array $selectedCategoryIds, array $selectedSubcategoryIds): array
+    {
+        $result = [];
+
+        $categories = $this->categoryRepository->findBy(['id' => $selectedCategoryIds]);
+
+        foreach ($this->categoryRepository->findBy(['id' => $selectedSubcategoryIds]) as $subcategory) {
+            if ($subcategory->getParentCategory() === null) {
+                continue;
+            }
+
+            foreach ($categories as $category) {
+                if ($category->getId() === $subcategory->getParentCategory()->getId()) {
+                    $result[] = $subcategory;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    protected function fillProviderRequisites(ProviderRequisites $requisites, array $requestRequisites): void
+    {
         $requisites
             ->setOrganizationName($requestRequisites['organizationName'])
             ->setLegalAddress($requestRequisites['legalAddress'])
@@ -178,12 +243,5 @@ class ProviderSettingsController extends AbstractController
             ->setCorrespondentAccount($requestRequisites['correspondentAccount'])
             ->setBIC($requestRequisites['BIC'])
             ->setBank($requestRequisites['bank']);
-
-        $this->entityManager->persist($user);
-        $this->entityManager->persist($provider);
-        $this->entityManager->persist($requisites);
-        $this->entityManager->flush();
-
-        return new JsonResponse();
     }
 }

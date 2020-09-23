@@ -6,7 +6,6 @@ use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity()
@@ -39,7 +38,7 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory")
      * @ORM\OrderBy({"sort" = "ASC"})
      */
-    protected PersistentCollection $childCategories;
+    protected Collection $childCategories;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserInfo", mappedBy="category", fetch="LAZY")
@@ -48,6 +47,7 @@ class Category
 
     public function __construct()
     {
+        $this->childCategories = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -95,12 +95,12 @@ class Category
         return $this;
     }
 
-    public function getChildCategories(): PersistentCollection
+    public function getChildCategories(): Collection
     {
         return $this->childCategories;
     }
 
-    public function setChildCategories(PersistentCollection $childCategories): self
+    public function setChildCategories(Collection $childCategories): self
     {
         $this->childCategories = $childCategories;
         return $this;

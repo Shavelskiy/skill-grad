@@ -40,7 +40,6 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
 
     public function initResetUserPassword(string $email): void
     {
-        /** @var User $user */
         $user = $this->userRepository->findUserByEmail($email);
 
         $token = (new UserToken(UserToken::TYPE_RESET_PASSWORD))->setUser($user);
@@ -148,7 +147,6 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             ->setFullName($updateUserData->getFullName())
             ->setPhone($updateUserData->getPhone());
 
-        /** @var User $emailUser */
         $emailUser = $this->userRepository->findOneBy(['email' => $updateUserData->getEmail()]);
 
         if ($emailUser !== null && $emailUser->getId() !== $user->getId()) {
