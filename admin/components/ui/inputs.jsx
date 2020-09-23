@@ -97,7 +97,7 @@ export function ImageInput({id = 1, label, uploadImage, setUploadImage, imageSrc
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+    if (!file || (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml')) {
       return
     }
 

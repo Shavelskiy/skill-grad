@@ -117,3 +117,11 @@
   height: 100%;
   object-fit: cover;
 }
+
+.social {
+  display: flex;
+
+  li {
+    margin-left: 15px;
+  }
+}

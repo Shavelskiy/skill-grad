@@ -1,9 +1,11 @@
 import React from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setTeachers } from '../../redux/program/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {setTeachers} from '../../redux/program/actions'
 
-import { Textarea } from '@/components/react-ui/program-form/input'
+import {Textarea} from '@/components/react-ui/program-form/input'
+
+import {validateFile} from '@/helpers/file-upload'
 
 import css from './scss/teachers.scss?module'
 
@@ -21,7 +23,7 @@ const Teachers = () => {
   const handleImageUpdate = (key, event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+    if (!validateFile(file)) {
       return
     }
 
@@ -53,10 +55,11 @@ const Teachers = () => {
         <label htmlFor={imageId} className={css.reload}>
           <img src={reloadImg}/>
         </label>
-        <img src={deleteTeacherImg} onClick={() => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
-          name: item.name,
-          image: null,
-        } : item)))}/>
+        <img src={deleteTeacherImg}
+             onClick={() => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
+               name: item.name,
+               image: null,
+             } : item)))}/>
       </div>
     )
   }

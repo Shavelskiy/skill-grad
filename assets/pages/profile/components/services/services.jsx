@@ -1,5 +1,8 @@
 import React from 'react'
 
+import css from './services.scss'
+
+
 const Services = () => {
   return (
     <>

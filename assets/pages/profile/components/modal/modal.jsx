@@ -9,11 +9,9 @@ const Modal = ({children, wide = false, active, title, close, error = ''}) => {
 
   useEffect(() => {
     const listener = event => {
-      if (!ref.current || ref.current !== event.target) {
-        return
+      if (ref.current && ref.current === event.target) {
+        close()
       }
-
-      close()
     }
 
     document.addEventListener('mousedown', listener)

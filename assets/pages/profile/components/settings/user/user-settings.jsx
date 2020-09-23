@@ -10,6 +10,8 @@ import {Input, MaskInput, Textarea} from '@/components/react-ui/input'
 import {Button, SmallButton} from '@/components/react-ui/buttons'
 import {ResultTitle} from '@/components/react-ui/blocks';
 
+import {validateFile} from '@/helpers/file-upload'
+
 import css from './user-settings.scss?module'
 
 import noImage from '@/img/svg/user-no-photo.svg'
@@ -88,7 +90,7 @@ const UserSettings = () => {
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+    if (!validateFile(file)) {
       return
     }
 

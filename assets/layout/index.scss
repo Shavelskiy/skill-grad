@@ -1,11 +1,5 @@
 @import "fonts/index";
 
-@import "project/elements";
-@import "project/widgets";
-@import "project/layout";
-
-@import "project/blocks/modules";
-
 @import "../components/common/scss/index";
 
 @import "./../components/modal/scss/index";
@@ -563,5 +557,282 @@ textarea {
     @media (min-width: 320px) and (max-width: 767px) {
       @include columns-loop(sm, 4, ((20px / 556px) * 100%));
     }
+  }
+}
+
+
+/////// govno layout
+
+.content {
+  &.program {
+    @media (min-width: 320px) and (max-width: 767px) {
+      .container {
+        width: 100%;
+      }
+    }
+  }
+
+  h2.title {
+    text-align: center;
+    margin-bottom: 40px;
+
+    &.program {
+      font-size: 35px;
+      line-height: 28px;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  & [class^="main"] {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+}
+
+.box {
+  display: flex;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    flex-direction: column;
+  }
+
+  & > &-content {
+    flex: 1 1 70%;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      order: 2;
+      &.show {
+        .col-lg-12 {
+          padding-right: 3%;
+          padding-left: 3%;
+        }
+      }
+    }
+
+    &.faq {
+      flex: 1 1 65%;
+    }
+  }
+
+  & > &-sidebar {
+    flex: 1 1 30%;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      display: none;
+
+      &.show {
+        display: flex;
+
+        .col-lg-12 {
+          padding-left: 0;
+        }
+      }
+    }
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      order: 1;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      display: none;
+    }
+
+    &.faq {
+      flex: 1 1 35%;
+      margin-right: 40px;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
+.main_favorites {
+  .tab {
+    &__nav {
+      @media (min-width: 320px) and (max-width: 767px) {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+///////////////////// elements
+
+
+.tick {
+  & > li {
+    padding-left: 2rem;
+    background-image: url("../img/svg/tick.svg");
+    background-position: 0 0;
+    background-size: 1.4rem 1.4rem;
+    background-repeat: no-repeat;
+    margin-bottom: 20px;
+    line-height: 23px;
+  }
+}
+
+.round {
+  margin-bottom: 20px;
+
+  & > li {
+    position: relative;
+
+    &:before {
+      content: "\002B24";
+      font-size: 5px;
+      margin-right: 10px;
+      vertical-align: middle;
+      color: #6db4fe;
+    }
+  }
+}
+
+.type-search {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-shadow {
+  box-shadow: 0 10px 40px rgba(10, 43, 74, 0.07);
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 25px;
+
+  .result-title {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+
+  .provider, .teacher {
+    display: flex;
+
+    margin-bottom: 20px;
+
+    img {
+      width: 40px;
+      height: 40px;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+
+    a {
+      color: #1d71b1;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      text-decoration: underline;
+    }
+  }
+
+  .cert {
+    img {
+      width: 177px;
+      height: 100%;
+      margin-top: 10px;
+    }
+  }
+
+  .text {
+    position: relative;
+    z-index: 1;
+
+    span {
+      display: block;
+    }
+
+    i {
+      position: absolute;
+      z-index: -1;
+      left: -13px;
+      font-size: 22px;
+
+      &:before {
+        color: #dae4ec;
+      }
+    }
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    margin-top: 20px;
+  }
+
+  .minus-block, .plus-block {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .minus-block, .plus-block {
+    margin-left: 15px;
+  }
+
+  .minus-block {
+    color: #f92e25;
+  }
+
+  .plus-block {
+    color: #6db4fe;
+  }
+}
+
+.delete-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  padding-top: 50px !important;
+
+  .buttons-deactivate {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 1;
+    width: 100%;
+
+    button {
+      width: 100px;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+.block-modal {
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .text {
+    text-align: left;
+  }
+}
+
+.modal-review, .modal-pay, .modal-money, .answer-modal {
+  .modal-content {
+    @media (min-width: 320px) and (max-width: 767px) {
+      width: 90%;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      width: 60%;
+    }
+    @media (min-width: 1024px) {
+      width: 370px !important;
+    }
+    padding-bottom: 40px;
   }
 }

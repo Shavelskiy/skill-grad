@@ -5,7 +5,8 @@ import axios from 'axios'
 import {ARTICLES_URL} from '@/utils/profile/endpoints'
 
 import PublicationsItem from './publications-item'
-import NewArticlePopup from './new-article-popup';
+import NewArticlePopup from './new-article-popup'
+import SuccessPopup from './success-popup'
 import Paginator from '../paginator/paginator'
 import {Button} from '@/components/react-ui/buttons'
 
@@ -23,6 +24,7 @@ const Publications = () => {
   const [paginatorRequest, setPaginatorRequest] = useState(null)
 
   const [activeNewArticlePopup, seActiveNewArticlePopup] = useState(false)
+  const [activeSuccessPopup, setActiveSuccessPopup] = useState(false)
 
   const [items, setItems] = useState([])
   const [currentPage, setCurrentPage] = useState('page' in queryParams ? queryParams.page : 1)
@@ -79,6 +81,12 @@ const Publications = () => {
       <NewArticlePopup
         active={activeNewArticlePopup}
         close={() => seActiveNewArticlePopup(false)}
+        onSuccess={() => setActiveSuccessPopup(true)}
+      />
+
+      <SuccessPopup
+        active={activeSuccessPopup}
+        close={() => setActiveSuccessPopup(false)}
       />
     </div>
   )

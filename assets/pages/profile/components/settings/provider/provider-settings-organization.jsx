@@ -12,6 +12,8 @@ import ProviderLocations from './provider-locations'
 
 import {validateProviderOrganization} from '../helpers'
 
+import {validateFile} from '@/helpers/file-upload'
+
 import css from './scss/provider-settings-organization.scss?module'
 
 import noImage from '@/img/provider-no-photo.png'
@@ -103,7 +105,7 @@ const ProviderSettingsOrganization = () => {
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+    if (!validateFile(file)) {
       return
     }
 

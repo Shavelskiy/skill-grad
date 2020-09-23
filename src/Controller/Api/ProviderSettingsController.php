@@ -198,7 +198,6 @@ class ProviderSettingsController extends AbstractController
     {
         if ($locations[Location::TYPE_CITY] !== null) {
             return $this->locationRepository->find($locations[Location::TYPE_CITY]);
-
         }
 
         if ($locations[Location::TYPE_REGION] !== null) {

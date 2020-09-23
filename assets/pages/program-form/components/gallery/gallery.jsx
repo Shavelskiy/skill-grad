@@ -1,12 +1,14 @@
-import React, { useRef } from 'react'
+import React, {useRef} from 'react'
 
-import { GALLERY } from '@/utils/program-form/titles'
+import {GALLERY} from '@/utils/program-form/titles'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setGallery } from '../../redux/program/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {setGallery} from '../../redux/program/actions'
 
 import Block from '@/components/react-ui/program-form/block'
-import { Textarea } from '@/components/react-ui/program-form/input'
+import {Textarea} from '@/components/react-ui/program-form/input'
+
+import {validateFile} from '@/helpers/file-upload'
 
 import css from './gallery.scss?module'
 
@@ -24,7 +26,7 @@ const Gallery = () => {
   const handleImageUpdate = (event) => {
     let newItems = []
     event.target.files.forEach(file => {
-      if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+      if (!validateFile(file)) {
         return
       }
 

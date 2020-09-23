@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { RESULTS } from '@/utils/program-form/titles'
+import {RESULTS} from '@/utils/program-form/titles'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { setCertificate, setGainedKnowledge } from '../../redux/program/actions'
+import {useSelector, useDispatch} from 'react-redux'
+import {setCertificate, setGainedKnowledge} from '../../redux/program/actions'
 
 import Block from '@/components/react-ui/program-form/block'
-import { Textarea, TextInput } from '@/components/react-ui/program-form/input'
+import {Textarea, TextInput} from '@/components/react-ui/program-form/input'
+
+import {validateFile} from '@/helpers/file-upload'
 
 import css from './result.scss?module'
 import cn from 'classnames'
@@ -26,7 +28,7 @@ const Result = () => {
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'application/pdf') {
+    if (!validateFile(file)) {
       return
     }
 

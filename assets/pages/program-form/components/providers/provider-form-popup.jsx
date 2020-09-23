@@ -1,8 +1,10 @@
-import React  from 'react'
+import React from 'react'
 
 import Modal from '@/components/react-ui/program-form/modal'
-import { Textarea, TextInput } from '@/components/react-ui/program-form/input'
+import {Textarea, TextInput} from '@/components/react-ui/program-form/input'
 import Button from '@/components/react-ui/program-form/button'
+
+import {validateFile} from '@/helpers/file-upload'
 
 import css from './scss/new-provider-popup.scss?module'
 
@@ -17,7 +19,7 @@ const ProviderFormPopup = ({active, close, provider, setProvider, submit, update
   const handleUploadImage = (event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+    if (!validateFile(file)) {
       return
     }
 

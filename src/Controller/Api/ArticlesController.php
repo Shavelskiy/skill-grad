@@ -4,17 +4,9 @@ namespace App\Controller\Api;
 
 use App\Dto\SearchQuery;
 use App\Entity\Article;
-use App\Entity\Category;
-use App\Entity\Program\Program;
-use App\Entity\Program\ProgramRequest;
-use App\Entity\Program\ProgramReview;
-use App\Entity\Provider;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\ProgramRepository;
-use App\Repository\ProgramRequestRepository;
-use App\Repository\ProgramReviewsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

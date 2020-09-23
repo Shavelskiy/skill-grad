@@ -1,0 +1,58 @@
+.card-article {
+  background-color: #f5f6f8;
+
+  &__header {
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    &-date {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 70px;
+      background-color: #f7562e;
+      color: #ffffff;
+      text-align: center;
+      font-size: 13px;
+      line-height: 14px;
+      padding: 8px;
+
+      & .day {
+        font-size: 24px;
+      }
+    }
+  }
+
+  &__body {
+    padding: 25px 30px;
+
+    & .hr {
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: #f7562e;
+    }
+
+    &-title {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+      color: #000000;
+      margin-bottom: 15px;
+
+      &:hover {
+        color: #f7562e;
+      }
+    }
+
+    &-description {
+      color: #3c3c3c;
+      line-height: 22px;
+      margin-top: 15px;
+    }
+  }
+}

@@ -2,9 +2,6 @@
 
 namespace App\Command;
 
-use App\Entity\Article;
-use App\Entity\Program\Program;
-use App\Entity\Provider;
 use App\Repository\ArticleRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;

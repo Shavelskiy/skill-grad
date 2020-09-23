@@ -1,0 +1,113 @@
+.form-filter {
+  & .filter-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 16px;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  & .format {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .practice {
+    margin-bottom: 20px;
+
+    .practice-container {
+      display: flex;
+      align-items: center;
+
+      .input {
+        width: 60px;
+        margin-bottom: 0;
+        margin-right: 10px;
+        margin-left: 10px;
+        padding-left: 15px;
+      }
+    }
+  }
+
+  & .city {
+    .current-city {
+      strong {
+        color: #1d71b1;
+      }
+    }
+
+    span {
+      color: #1d71b1;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  & .rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  & .category, .rating, .format, .practice, .price, .city {
+    margin-top: 30px;
+  }
+
+  & .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+    padding-top: 25px;
+    margin-top: 25px;
+
+    .button-red {
+      width: 140px;
+    }
+
+    a {
+      color: #999999;
+      text-decoration: underline;
+    }
+  }
+}
+
+.mobile-filter {
+  display: none;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(10, 43, 74, 0.05);
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    display: block;
+  }
+
+  &-header {
+    background-color: #e9f4fd;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
+    padding-bottom: 10px;
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 20px;
+      font-size: 25px;
+    }
+  }
+
+  &-content {
+    display: none;
+    padding: 15px;
+
+    &.active {
+      display: block;
+    }
+  }
+}

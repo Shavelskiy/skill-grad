@@ -1,0 +1,26 @@
+.price-old {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+  text-decoration: line-through;
+  text-decoration-color: #f92e25;
+}
+
+.price-new, .price-old {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 18px;
+  color: #f92e25;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    font-size: 18px;
+  }
+}
+
+.price-new {
+  color: #f92e25;
+}
+
+.price-text {
+  color: #3c3c3c;
+}

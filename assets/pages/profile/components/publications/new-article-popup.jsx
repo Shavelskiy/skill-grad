@@ -9,6 +9,8 @@ import {Button} from '@/components/react-ui/buttons'
 import Select from '@/components/react-ui/select'
 import ReactQuill from 'react-quill';
 
+import {validateFile} from '@/helpers/file-upload'
+
 import './scss/wysiwig.scss'
 import css from './scss/new-article-popup.scss?module'
 
@@ -22,7 +24,7 @@ const emptyArticle = {
   detailText: '',
 }
 
-const NewArticlePopup = ({active, close}) => {
+const NewArticlePopup = ({active, close, onSuccess}) => {
   const ref = useRef()
 
   const [error, setError] = useState('')
@@ -67,12 +69,13 @@ const NewArticlePopup = ({active, close}) => {
 
     setNewArticle(emptyArticle)
     close()
+    onSuccess()
   }
 
   const handleImageUpdate = (event) => {
     const file = event.target.files[0]
 
-    if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/svg+xml') {
+    if (!validateFile(file)) {
       return
     }
 

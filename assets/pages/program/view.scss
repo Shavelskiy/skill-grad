@@ -164,3 +164,27 @@
     }
   }
 }
+
+.sale {
+  display: flex;
+  align-items: center;
+
+  .percent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #73ba04;
+    border-radius: 100%;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 16px;
+  }
+
+  .text {
+    padding-left: 10px;
+    padding-right: 20px;
+  }
+}
