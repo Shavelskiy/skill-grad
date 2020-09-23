@@ -46,7 +46,6 @@ Encore
 
   .addEntry('program.add', './assets/pages/program-form/index.js')
 
-
   .splitEntryChunks()
 
   .enableSingleRuntimeChunk()
@@ -66,7 +65,6 @@ Encore
   .enableReactPreset()
   .enableSassLoader()
   .enableEslintLoader()
-
 
 let config = Encore.getWebpackConfig()
 
