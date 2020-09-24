@@ -6,7 +6,7 @@ import {
   PROGRAMS,
   PUBLICATIONS,
   MESSAGES,
-  SERVICES,
+  PAYMENTS,
 } from '@/utils/profile/routes'
 
 import css from './menu.scss?module'
@@ -35,9 +35,9 @@ const ProviderMenu = () => {
           <i className="icon-email1"></i>
           <Link to={MESSAGES}>Сообщения</Link>
         </li>
-        <li className={cn({[css.active]: location.pathname === SERVICES})}>
+        <li className={cn({[css.active]: location.pathname === PAYMENTS})}>
           <i className="icon-google"></i>
-          <Link to={SERVICES}>Платные услги, документы</Link>
+          <Link to={PAYMENTS}>Платные услги, документы</Link>
         </li>
       </ul>
 

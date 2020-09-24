@@ -362,6 +362,12 @@ i {
     }
   }
 
+  &.pdf {
+    width: 22px;
+    height: 22px;
+    background: url("../../img/svg/pdf.svg") no-repeat;
+  }
+
   &.mail {
     background: url("../../img/svg/mail.svg") no-repeat;
     background-size: cover;

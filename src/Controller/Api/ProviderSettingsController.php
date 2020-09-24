@@ -42,7 +42,7 @@ class ProviderSettingsController extends AbstractController
     /**
      * @Route("", name="api.provider-settins.index", methods={"GET"})
      */
-    public function indexAction(): Response
+    public function index(): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -145,7 +145,7 @@ class ProviderSettingsController extends AbstractController
     /**
      * @Route("", name="api.provider-settins.save", methods={"POST"})
      */
-    public function saveAction(Request $request): Response
+    public function save(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();

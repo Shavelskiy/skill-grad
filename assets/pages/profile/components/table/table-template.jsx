@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setProgramTitle } from '../../redux/actions'
 
-import {LEARN, PROGRAM, PROGRAM_REQUEST, PROGRAM_QUESTION, PROGRAM_REVIEW} from './item-types'
+import {LEARN, PROGRAM, PROGRAM_REQUEST, PROGRAM_QUESTION, PROGRAM_REVIEW, PAYMENTS} from './item-types'
 
 import Table from './table'
 import Paginator from '../paginator/paginator'
@@ -16,6 +16,7 @@ import ProgramRequestItem from '../programs/requests/program-request-item'
 import ProgramQuestionItem from '../programs/questions/program-question-item'
 import ProgramReviewItem from '../programs/reviews/program-review-item'
 import LearnItem from '../learn/item'
+import PaymentItem from '../payments/payment-item'
 
 
 const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) => {
@@ -77,6 +78,8 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) =>
         return <ProgramQuestionItem key={key} question={item} reload={reload}/>
       case PROGRAM_REVIEW:
         return <ProgramReviewItem key={key} review={item} reload={reload}/>
+      case PAYMENTS:
+        return <PaymentItem key={key} item={item}/>
     }
   }
 

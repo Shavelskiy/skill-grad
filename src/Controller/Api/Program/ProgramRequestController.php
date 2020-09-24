@@ -34,7 +34,7 @@ class ProgramRequestController extends AbstractController
     /**
      * @Route("/{program}", methods={"GET"}, name="api.profile.request.index")
      */
-    public function indexAction(Program $program, Request $request): Response
+    public function index(Program $program, Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
@@ -71,7 +71,7 @@ class ProgramRequestController extends AbstractController
     /**
      * @Route("/agree/{programRequest}", methods={"POST"}, name="api.profile.request.agree")
      */
-    public function agreeAction(ProgramRequest $programRequest): Response
+    public function agree(ProgramRequest $programRequest): Response
     {
         $programRequest->setStatus(ProgramRequest::STATUS_AGREE);
 
@@ -84,7 +84,7 @@ class ProgramRequestController extends AbstractController
     /**
      * @Route("/reject/{programRequest}", methods={"POST"}, name="api.profile.request.reject")
      */
-    public function rejectAction(ProgramRequest $programRequest, Request $request): Response
+    public function reject(ProgramRequest $programRequest, Request $request): Response
     {
         $programRequest
             ->setStatus(ProgramRequest::STATUS_REJECT)

@@ -50,7 +50,7 @@ class LearnController extends AbstractController
     /**
      * @Route("", name="api.learn.index", methods={"GET"})
      */
-    public function indexAction(Request $request): Response
+    public function index(Request $request): Response
     {
         /** @var User $user */
         if (($user = $this->getUser()) === null) {
@@ -120,7 +120,7 @@ class LearnController extends AbstractController
     /**
      * @Route("/review", name="api.learn.review", methods={"POST"})
      */
-    public function reviewAction(Request $request): Response
+    public function review(Request $request): Response
     {
         $programId = $request->get('id');
         $review = $request->get('review');

@@ -24,7 +24,7 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="app.search", methods={"GET"})
      */
-    public function actionIndex(): Response
+    public function index(): Response
     {
         $favoriteProviderIds = [];
 

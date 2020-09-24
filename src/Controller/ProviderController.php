@@ -28,7 +28,7 @@ class ProviderController extends AbstractController
     /**
      * @Route("", name="provider.index", methods={"GET"})
      */
-    public function actionIndex(Request $request): Response
+    public function index(Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
@@ -55,7 +55,7 @@ class ProviderController extends AbstractController
     /**
      * @Route("/{id}", name="provider.view", methods={"GET"})
      */
-    public function actionView(int $id): Response
+    public function aview(int $id): Response
     {
         $provider = $this->providerRepository->find($id);
 

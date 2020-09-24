@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,19 +23,20 @@ class Article
     protected string $name;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
-    protected string $slug;
+    protected User $author;
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected int $sort;
+    protected int $sort = 100;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    protected bool $active;
+    protected bool $active = false;
 
     /**
      * @ORM\Column(type="text")
@@ -51,14 +54,37 @@ class Article
     protected ?Upload $image;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     */
+    protected Category $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ArticleRating", mappedBy="article")
+     */
+    protected Collection $ratings;
+
+    /**
      * @ORM\Column(type="boolean")
      */
-    protected bool $showOnMain;
+    protected bool $showOnMain = false;
 
     /**
      * @ORM\Column(type="integer")
      */
     protected int $views = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $readingTime = 0;
+
+    protected Collection $comments;
+
+    public function __construct()
+    {
+        $this->ratings = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
 
     public function getName(): string
     {
@@ -71,14 +97,14 @@ class Article
         return $this;
     }
 
-    public function getSlug(): string
+    public function getAuthor(): User
     {
-        return $this->slug;
+        return $this->author;
     }
 
-    public function setSlug(string $slug): self
+    public function setAuthor(User $author): self
     {
-        $this->slug = $slug;
+        $this->author = $author;
         return $this;
     }
 
@@ -137,6 +163,17 @@ class Article
         return $this;
     }
 
+    public function getCategory(): Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
+        return $this;
+    }
+
     public function isShowOnMain(): bool
     {
         return $this->showOnMain;
@@ -148,6 +185,39 @@ class Article
         return $this;
     }
 
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function setRatings(Collection $ratings): self
+    {
+        $this->ratings = $ratings;
+        return $this;
+    }
+
+    public function addRating(ArticleRating $articleRating): self
+    {
+        $this->ratings->add($articleRating);
+        return $this;
+    }
+
+    public function getLikesCount(): int
+    {
+        return $this->getRatings()->filter(static function($articleRating) {
+            /** @var ArticleRating $articleRating */
+            return $articleRating->isLike();
+        })->count();
+    }
+
+    public function getDisLikesCount(): int
+    {
+        return $this->getRatings()->filter(static function($articleRating) {
+            /** @var ArticleRating $articleRating */
+            return !$articleRating->isLike();
+        })->count();
+    }
+
     public function getViews(): int
     {
         return $this->views;
@@ -157,5 +227,21 @@ class Article
     {
         $this->views = $views;
         return $this;
+    }
+
+    public function getReadingTime(): int
+    {
+        return $this->readingTime;
+    }
+
+    public function setReadingTime(int $readingTime): self
+    {
+        $this->readingTime = $readingTime;
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments ?? new ArrayCollection();
     }
 }

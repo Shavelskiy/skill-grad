@@ -33,7 +33,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/request", name="ajax.program.request", methods={"POST"})
      */
-    public function requestAction(Request $request): Response
+    public function request(Request $request): Response
     {
         $programId = $request->get('id');
 
@@ -68,7 +68,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/question", name="ajax.program.question", methods={"POST"})
      */
-    public function questionAction(Request $request): Response
+    public function question(Request $request): Response
     {
         $programId = $request->get('id');
 

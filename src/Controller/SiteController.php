@@ -112,7 +112,6 @@ class SiteController extends AbstractController
             foreach ($this->articleRepository->getMainPageArticles() as $article) {
                 $result[] = [
                     'id' => $article->getId(),
-                    'slug' => $article->getSlug(),
                     'imageSrc' => $article->getImage() ? $article->getImage()->getPublicPath() : null,
                     'name' => $article->getName(),
                     'previewText' => substr(strip_tags($article->getDetailText(), '<br>'), 0, 200) . '...',

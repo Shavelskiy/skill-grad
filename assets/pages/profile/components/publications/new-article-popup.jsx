@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 
 import axios from 'axios'
-import {ARTICLES_CATEGORIES_URL} from '@/utils/profile/endpoints'
+import {ARTICLES_CATEGORIES_URL, ARTICLE_SAVE_URL} from '@/utils/profile/endpoints'
 
 import Modal from '../modal/modal'
 import {Input, Textarea} from '@/components/react-ui/input'
@@ -27,6 +27,7 @@ const emptyArticle = {
 const NewArticlePopup = ({active, close, onSuccess}) => {
   const ref = useRef()
 
+  const [disabled, setDisabled] = useState(false)
   const [error, setError] = useState('')
   const [categories, setCategories] = useState([])
 
@@ -67,9 +68,24 @@ const NewArticlePopup = ({active, close, onSuccess}) => {
       return
     }
 
-    setNewArticle(emptyArticle)
-    close()
-    onSuccess()
+    let formData = new FormData()
+    formData.append('image', newArticle.image)
+    formData.append('json_content', JSON.stringify({
+      title: newArticle.title,
+      category: newArticle.category,
+      previewText: newArticle.previewText,
+      detailText: newArticle.detailText,
+    }))
+
+    setDisabled(true)
+    axios.post(ARTICLE_SAVE_URL, formData)
+      .then(() => {
+        setNewArticle(emptyArticle)
+        close()
+        onSuccess()
+      })
+      .catch(({response}) => setError(response.data.error))
+      .finally(() => setDisabled(false))
   }
 
   const handleImageUpdate = (event) => {
@@ -146,6 +162,7 @@ const NewArticlePopup = ({active, close, onSuccess}) => {
         <Button
           blue={true}
           fullWidth={false}
+          disabled={disabled}
           text={'Опубликовать'}
           click={save}
         />

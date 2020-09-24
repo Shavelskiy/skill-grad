@@ -36,7 +36,7 @@ class StaticController extends AbstractController
     /**
      * @Route("/faq", name="faq.index", methods={"GET"})
      */
-    public function actionIndex(): Response
+    public function index(): Response
     {
         return $this->render('static/faq.html.twig');
     }
@@ -44,7 +44,7 @@ class StaticController extends AbstractController
     /**
      * @Route("/faq/student", name="faq.student", methods={"GET"})
      */
-    public function studentAction(): Response
+    public function studentFaq(): Response
     {
         return $this->render('static/student-faq.html.twig');
     }
@@ -52,7 +52,7 @@ class StaticController extends AbstractController
     /**
      * @Route("/faq/provider", name="faq.provider", methods={"GET"})
      */
-    public function providerAction(): Response
+    public function providerFaq(): Response
     {
         return $this->render('static/provider-faq.html.twig');
     }
@@ -60,7 +60,7 @@ class StaticController extends AbstractController
     /**
      * @Route("/compare", name="app.compare", methods={"GET"})
      */
-    public function compareAction(Request $request): Response
+    public function compare(Request $request): Response
     {
         $programIds = CompareHelper::getCompareProgramsFromParameterBag($request->cookies);
 
@@ -75,7 +75,7 @@ class StaticController extends AbstractController
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function favoriteAction(Request $request): Response
+    public function favorite(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();

@@ -28,30 +28,26 @@ class BlogController extends AbstractController
     /**
      * @Route("", name="blog.index", methods={"GET"})
      */
-    public function indexAction(): Response
+    public function index(): Response
     {
         return $this->render('blog/index.html.twig');
     }
 
     /**
-     * @Route("/{id}", name="blog.view", methods={"GET"})
+     * @Route("/{article}", name="blog.view", methods={"GET"})
      */
-    public function viewAction(int $id): Response
+    public function view(Article $article): Response
     {
-        /* @var Article[] $articles */
-//        $articles = $this->articleRepository->findBy(['slug' => $request->get('slug')]);
-//        $article = current($articles);
-//
-//        $userViewsArticle = $this->session->get('article.view', []);
-//
-//        if (!in_array($article->getId(), $userViewsArticle, true)) {
-//            $article->setViews($article->getViews() + 1);
-//            $this->getDoctrine()->getManager()->persist($article);
-//            $this->getDoctrine()->getManager()->flush();
-//
-//            $userViewsArticle[] = $article->getId();
-//            $this->session->set('article.view', $userViewsArticle);
-//        }
+        $userViewsArticle = $this->session->get('article.view', []);
+
+        if (!in_array($article->getId(), $userViewsArticle, true)) {
+            $article->setViews($article->getViews() + 1);
+            $this->getDoctrine()->getManager()->persist($article);
+            $this->getDoctrine()->getManager()->flush();
+
+            $userViewsArticle[] = $article->getId();
+            $this->session->set('article.view', $userViewsArticle);
+        }
 
         return $this->render('blog/view.html.twig', [
 //            'slug' => $request->get('slug'),

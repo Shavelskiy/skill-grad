@@ -3,7 +3,7 @@ export const MESSAGES = '/messages'
 export const LEARN = '/learn'
 export const PROGRAMS  = '/programs'
 export const PUBLICATIONS = '/publications'
-export const SERVICES = '/services'
+export const PAYMENTS = '/payments'
 
 export const PROGRAM_REQUESTS = '/programs/requests/:id'
 export const PROGRAM_QUESTIONS = '/programs/questions/:id'

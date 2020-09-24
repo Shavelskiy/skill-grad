@@ -27,7 +27,7 @@ class FeedbackController extends AbstractController
     /**
      * @Route("", name="ajax.feedback.index", methods={"POST"})
      */
-    public function feedbackAction(Request $request): Response
+    public function feedback(Request $request): Response
     {
         if (!$this->isCsrfTokenValid('feedback', $request->get('_csrf_token'))) {
             return new JsonResponse(['message' => 'Ошбика безопастности'], 400);

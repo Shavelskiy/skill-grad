@@ -149,7 +149,7 @@ class ProfileSettingsController extends AbstractController
     /**
      * @Route("/categories", name="api.profile.settings.categories", methods={"GET"})
      */
-    public function categoriesAction(): Response
+    public function categories(): Response
     {
         $categories = [];
 
@@ -178,7 +178,7 @@ class ProfileSettingsController extends AbstractController
     /**
      * @Route("/locations", name="api.profile.settings.locations", methods={"GET"})
      */
-    public function locationsAction(): Response
+    public function locations(): Response
     {
         $result = function () {
             $locations = [];

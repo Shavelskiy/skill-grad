@@ -22,3 +22,6 @@ export const MESSAGE_DETAIL_URL = '/api/message/detail/:id'
 
 export const ARTICLES_URL = '/api/article'
 export const ARTICLES_CATEGORIES_URL = '/api/article/categories'
+export const ARTICLE_SAVE_URL = '/api/article/save'
+
+export const PAYMENTS_URL = '/api/payments'

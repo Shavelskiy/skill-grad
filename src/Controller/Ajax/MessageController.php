@@ -25,7 +25,7 @@ class MessageController extends AbstractController
     /**
      * @Route("/new", name="ajax.message.new", methods={"GET"})
      */
-    public function newCountAction(): Response
+    public function newCount(): Response
     {
         /** @var User $user */
         if (($user = $this->getUser()) === null) {

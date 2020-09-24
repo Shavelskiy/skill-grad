@@ -7,7 +7,9 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Service\UploadServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,18 +25,21 @@ class ArticlesController extends AbstractController
     protected const PAGE_ITEM_COUNT = 10;
 
     protected RouterInterface $router;
-    protected EntityManagerInterface $entityManger;
+    protected UploadServiceInterface $uploadService;
+    protected EntityManagerInterface $entityManager;
     protected ArticleRepository $articleRepository;
     protected CategoryRepository $categoryRepository;
 
     public function __construct(
         RouterInterface $router,
+        UploadServiceInterface $uploadService,
         EntityManagerInterface $entityManager,
         ArticleRepository $articleRepository,
         CategoryRepository $categoryRepository
     ) {
         $this->router = $router;
-        $this->entityManger = $entityManager;
+        $this->uploadService = $uploadService;
+        $this->entityManager = $entityManager;
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
     }
@@ -42,7 +47,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("", name="api.articles.index", methods={"GET"})
      */
-    public function indexAction(Request $request): Response
+    public function index(Request $request): Response
     {
         /** @var User $user */
         if (($user = $this->getUser()) === null) {
@@ -63,14 +68,15 @@ class ArticlesController extends AbstractController
                 'id' => $article->getId(),
                 'name' => $article->getName(),
                 'preview' => $article->getPreviewText(),
-                'reading_time' => 10,
+                'image' => $article->getImage()->getPublicPath(),
+                'reading_time' => $article->getReadingTime(),
                 'active' => $article->isActive(),
                 'views' => $article->getViews(),
-                'comments' => 3,
-                'link' => $this->router->generate('blog.view', ['id' => $article->getId()]),
+                'comments' => $article->getComments()->count(),
+                'link' => $this->router->generate('blog.view', ['article' => $article->getId()]),
                 'reviews' => [
-                    'likes' => 3,
-                    'dislikes' => 6,
+                    'likes' => $article->getLikesCount(),
+                    'dislikes' => $article->getDisLikesCount(),
                 ],
                 'date' => $article->getCreatedAt()->format('c'),
             ];
@@ -86,17 +92,47 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/categories", name="api.articles.categories", methods={"GET"})
      */
-    public function categoriesAction(): Response
+    public function categories(): Response
     {
         $categories = [];
 
         foreach ($this->categoryRepository->findRootCategories() as $category) {
             $categories[] = [
-              'value' => $category->getId(),
-              'title' => $category->getName(),
+                'value' => $category->getId(),
+                'title' => $category->getName(),
             ];
         }
 
         return new JsonResponse($categories);
+    }
+
+    /**
+     * @Route("/save", name="api.articles.save", methods={"POST"})
+     */
+    public function save(Request $request): Response
+    {
+        try {
+            $image = $request->files->get('image');
+            $upload = $this->uploadService->createUpload($image);
+            $this->entityManager->persist($upload);
+
+            $article = (new Article())
+                ->setAuthor($this->getUser())
+                ->setName($request->get('title'))
+                ->setCategory(
+                    $this->categoryRepository->find($request->get('category'))
+                )
+                ->setPreviewText($request->get('previewText'))
+                ->setDetailText($request->get('detailText'))
+                ->setImage($upload);
+
+
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
+        } catch (Exception $e) {
+            return new JsonResponse(['error' => 'При сохранении статьи произошла ошибка'], 400);
+        }
+
+        return new JsonResponse();
     }
 }

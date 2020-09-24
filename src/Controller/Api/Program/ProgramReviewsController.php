@@ -34,7 +34,7 @@ class ProgramReviewsController extends AbstractController
     /**
      * @Route("/{program}", name="api/program.reviews.index", methods={"GET"})
      */
-    public function indexAction(Program $program, Request $request): Response
+    public function index(Program $program, Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))

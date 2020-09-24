@@ -110,7 +110,7 @@ class AuthController extends AbstractController
     /**
      * @Route("/register", name="ajax.auth.register")
      */
-    public function registerAction(Request $request): JsonResponse
+    public function register(Request $request): JsonResponse
     {
         try {
             if (!$this->isCsrfTokenValid('register', $request->get('_csrf_token'))) {

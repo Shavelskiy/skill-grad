@@ -1,0 +1,31 @@
+.balance {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+
+    button {
+      width: 70%;
+    }
+
+    h4 {
+      font-size: 18px;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  h4 {
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 30px;
+  }
+}

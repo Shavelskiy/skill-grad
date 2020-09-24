@@ -12,7 +12,7 @@ const PublicationsItem = ({item}) => {
     <div className={css.cardBlog}>
       <div className={css.cardContainer}>
         <div className={css.cardImg}>
-          <img src="/img/card-image.jpg" alt=""/>
+          <img src={item.image} alt=""/>
           <div className={css.bottom}>
             <div className={css.views}>
               <span className="icon view"></span>

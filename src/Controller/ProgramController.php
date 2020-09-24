@@ -36,7 +36,7 @@ class ProgramController extends AbstractController
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function indexAction(Request $request): Response
+    public function index(Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
@@ -57,7 +57,7 @@ class ProgramController extends AbstractController
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function viewAction(Program $program, Request $request): Response
+    public function view(Program $program, Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
@@ -86,7 +86,7 @@ class ProgramController extends AbstractController
      * @Route("/program-create", name="program.add", methods={"GET"})
      * @IsGranted("ROLE_PROVIDER")
      */
-    public function createAction(): Response
+    public function create(): Response
     {
         return $this->render('program/add.html.twig');
     }

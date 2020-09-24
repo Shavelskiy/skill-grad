@@ -43,7 +43,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("", methods={"GET"}, name="api.profile.programs.index")
      */
-    public function indexAction(Request $request): Response
+    public function index(Request $request): Response
     {
         /** @var User $user */
         if (($user = $this->getUser()) === null) {

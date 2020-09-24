@@ -30,7 +30,7 @@ class MessageController extends AbstractController
     /**
      * @Route("", name="api.message.index", methods={"GET"})
      */
-    public function indexAction(): Response
+    public function index(): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -80,7 +80,7 @@ class MessageController extends AbstractController
     /**
      * @Route("/detail/{recipient}")
      */
-    public function detailChatAction(User $recipient): Response
+    public function detailChat(User $recipient): Response
     {
         /** @var User $user */
         $user = $this->getUser();

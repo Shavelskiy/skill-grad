@@ -34,7 +34,7 @@ class ProgramQuestionController extends AbstractController
     /**
      * @Route("/{program}", name="api.question.index", methods={"GET"})
      */
-    public function indexAction(Program $program, Request $request): Response
+    public function index(Program $program, Request $request): Response
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
@@ -66,7 +66,7 @@ class ProgramQuestionController extends AbstractController
     /**
      * @Route("/answer/{programQuestion}", name="api.question.answer", methods={"POST"})
      */
-    public function answerAction(ProgramQuestion $programQuestion, Request $request): Response
+    public function answer(ProgramQuestion $programQuestion, Request $request): Response
     {
         $programQuestion
             ->setAnswer($request->get('answer'));

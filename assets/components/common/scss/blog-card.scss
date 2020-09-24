@@ -2,6 +2,7 @@
   border: 1px solid #cccccc;
   padding: 20px 20px 20px 20px;
   margin-bottom: 30px;
+
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -13,10 +14,9 @@
     }
 
     img {
-      width: 280px;
-      height: 140px;
+      width: 100%;
+
       @media (max-width: 768px) {
-        width: 100%;
         height: auto;
       }
     }
@@ -35,8 +35,10 @@
     .bottom {
       display: flex;
       color: #999999;
+      margin-top: 20px;
       font-size: 14px;
       line-height: 22px;
+
       @media (max-width: 768px) {
         display: none;
       }
@@ -55,6 +57,7 @@
         font-size: 14px;
         font-weight: 300;
         line-height: 22px;
+        white-space: nowrap;
         text-decoration: underline;
 
         &.not-comment {

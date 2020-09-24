@@ -18,7 +18,7 @@ class CompareController extends AbstractController
     /**
      * @Route("/add", name="ajax.compare.add")
      */
-    public function addAction(Request $request): Response
+    public function add(Request $request): Response
     {
         $compareProgramIds = $this->getCompareProgramsFromRequest($request);
 
@@ -44,7 +44,7 @@ class CompareController extends AbstractController
     /**
      * @Route("/remove", name="ajax.compare.remove")
      */
-    public function removeAction(Request $request): Response
+    public function remove(Request $request): Response
     {
         $compareProgramIds = $this->getCompareProgramsFromRequest($request);
 
@@ -66,7 +66,7 @@ class CompareController extends AbstractController
     /**
      * @Route("/clear", name="ajax.compare.clear")
      */
-    public function clearAction(Request $request): Response
+    public function clear(): Response
     {
         $response = new JsonResponse();
 

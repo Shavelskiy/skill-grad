@@ -45,10 +45,16 @@ class Category
      */
     protected Collection $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category", fetch="LAZY")
+     */
+    protected Collection $articles;
+
     public function __construct()
     {
         $this->childCategories = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getName(): string

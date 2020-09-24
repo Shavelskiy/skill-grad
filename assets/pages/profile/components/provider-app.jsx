@@ -6,7 +6,7 @@ import {
   PROGRAMS,
   PUBLICATIONS,
   MESSAGES,
-  SERVICES,
+  PAYMENTS,
   PROGRAM_REQUESTS,
   PROGRAM_QUESTIONS, PROGRAM_REVIEWS
 } from '@/utils/profile/routes'
@@ -20,7 +20,7 @@ import ProgramQuestions from './programs/questions/program-questions'
 import ProgramReviews from './programs/reviews/program-reviews'
 import Publications from './publications/publications'
 import Messages from './messages/messages'
-import Services from './services/services'
+import Payments from './payments/payments'
 
 import css from './index.scss?module'
 
@@ -39,7 +39,7 @@ const ProviderApp = () => {
         <Route exact name="profile.programs.reviews" path={PROGRAM_REVIEWS} component={ProgramReviews}/>
         <Route exact name="profile.publications" path={PUBLICATIONS} component={Publications}/>
         <Route exact name="profile.messages" path={MESSAGES} component={Messages}/>
-        <Route exact name="profile.services" path={SERVICES} component={Services}/>
+        <Route exact name="profile.payments" path={PAYMENTS} component={Payments}/>
       </Switch>
     </div>
   )

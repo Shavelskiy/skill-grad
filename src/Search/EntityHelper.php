@@ -36,7 +36,7 @@ class EntityHelper
             'level' => $program->getLevel()->getId(),
             'practice' => 32,
             'format' => $program->getFormat()->getId(),
-            'raiting' => 32,
+            'rating' => 32,
             'categories' => $program->getCategories()->map(fn ($category) => $category->getId()),
         ];
     }

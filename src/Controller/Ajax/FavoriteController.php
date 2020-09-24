@@ -38,7 +38,7 @@ class FavoriteController extends AbstractController
     /**
      * @Route("/provider", name="ajax.provider.favorite", methods={"POST"})
      */
-    public function favoriteProviderAction(Request $request): Response
+    public function favoriteProvider(Request $request): Response
     {
         try {
             /** @var Provider $provider */
@@ -79,7 +79,7 @@ class FavoriteController extends AbstractController
     /**
      * @Route("/program", name="ajax.program.favorite", methods={"POST"})
      */
-    public function favoriteProgramAction(Request $request): Response
+    public function favoriteProgram(Request $request): Response
     {
         try {
             /** @var Program $program */
