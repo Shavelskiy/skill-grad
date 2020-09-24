@@ -14,7 +14,7 @@ const PaymentItem = ({item}) => {
         Продвижение программы: «Базовые уроки флористики»
       </td>
       <td>
-        990.00
+        <strong className={css.price}>990.00</strong>
       </td>
       <td>8546972-6347895/GH-1</td>
       <td>

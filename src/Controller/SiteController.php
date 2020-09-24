@@ -8,6 +8,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
+use App\Messenger\Pdf;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
@@ -42,6 +43,16 @@ class SiteController extends AbstractController
      */
     public function index(): Response
     {
+        $pdf = new Pdf('xvfb-run /usr/bin/wkhtmltopdf');
+
+
+        $input = $this->render('tmp/kek.html.twig')->getContent();
+
+        $fileName = __DIR__ . '/kek.pdf';
+
+        $pdf->generate($input, $fileName);
+        die;
+
         return $this->render('site/index.html.twig', [
             'articles' => $this->getArticles(),
             'sliderItems' => $this->getSliderItems(),

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <base href="https://www.dot-dot.ru/">
+  <title>Title</title>
+  <meta name="description" content="">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=1400">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#000">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#000">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="#000">
+  <style>
+    body {
+      opacity: 0;
+      overflow-x: hidden;
+    }
+
+  </style>
+</head>
+
+<body class="pdf">
+
+<div class="page-content" style="padding: 60px 0; text-align: justify; overflow: hidden; height: 1800px;">
+
+  <div class="container" style="margin: 0 auto;max-width: 100%; ">
+    <img src="{{ asset('/img/doc-logo.jpg') }}" alt="" class="doc-img">
+    <div class="doc-header">
+      <a href="#" class="doc-logo"><img src="{{ asset('/img/doc-header.jpg') }}" alt="" style="width: 306px"></a>
+      <p>Доставка грузов по России<br>119034, г. Москва, Рязанский пр-кт, дом 16, с. 4, 8 800 222 33 57, www.dot-dot.ru</p>
+    </div>
+    <div class="text-center" style="margin-bottom: 50px;">
+      <p>
+        <b>
+          АКТ ПРИЕМА-ПЕРЕДАЧИ ГРУЗА № 4324
+        </b>
+      </p>
+    </div>
+    <div class="pull-left">
+      <p>г.fdsfdf</p>
+    </div>
+    <div class="pull-right">
+    </div>
+    <div class="clearfix"></div>
+    <p><b>Грузоотправитель</b> ООО «ТОЧКА-ТОЧКА ЛОГИСТИКА», Рязанский пр-кт, дом 16, с. 4, тел. {{ '800 222 33 57'}}</p>
+    <p><b>Экспедитор</b>
+    </p>
+
+    <p><b>Экспедиторская расписка №</b>43243</p>
+    <br>
+    <table class="table">
+      <tr>
+        <td class="text-center"><b>№ места</b></td>
+        <td class="text-center"><b>Наименование груза</b></td>
+        <td class="text-center"><b>Упаковка</b></td>
+        <td class="text-center"><b>Вес, кг</b></td>
+      </tr>
+        <tr>
+          <td>324-2344</td>
+          <td>палета</td>
+          <td>стрейч пленка</td>
+          <td>34234</td>
+        </tr>
+    </table>
+    <p><b>Итого</b></p>
+    <p>
+                <span class="pull-left" style="width:28%">
+                    Кол-во мест3232
+                </span>
+      <span class="pull-left" style="width:28%">
+                    Общий объем, м323
+                </span>
+      <span class="pull-left" style="width:28%">
+                    Общий вес, кг32
+                </span>
+
+      <span class="clearfix"></span>
+    </p>
+    <br>
+    <div style="width: 50%; float: left;">
+      <p><b>ГРУЗ ПЕРЕДАЛ</b></p>
+      <p style="margin-bottom: 80px">
+      kekekeke
+      </p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____________________/_______________/<br>
+        М.П.</p>
+      <p>по доверенности № _____ от __________г.               </p>
+    </div>
+    <div style="width: 50%; float: left;">
+      <p><b>ГРУЗ ПРИНЯЛ</b></p>
+      <p style="margin-bottom: 80px">ООО «ТОЧКА-ТОЧКА ЛОГИСТИКА»
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____________________/_______________/<br>
+        М.П.</p>
+      <p>по доверенности № _____ от __________г.               </p>
+    </div>
+    <div class="clearfix"></div>
+
+
+
+
+  </div>
+</div>
+
+
+<style>
+  .container{
+    position: relative;
+  }
+  .doc-img{
+    top: -58px !important;
+    position: absolute;
+    right: 0;
+    width: 115px;
+  }
+  .bg{
+    background-color: #fff;
+    position: relative;
+    top: 6px;
+  }
+  .black-border{
+    border-bottom: 1px solid #000;
+    height: 28px;
+  }
+  .doc-header{
+    margin-bottom: 100px;
+  }
+  .doc-header .doc-logo{
+    display: inline-block;
+    vertical-align: top;
+  }
+  .doc-header p{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 15px;
+    color: #656565;
+    margin-left: 50px;
+  }
+  p.bottom-line{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+  }
+  span.line{
+    width: 100%;
+    border-bottom: 1px solid #000;
+    display: inline-block;
+  }
+  p.bottom-line b{
+    flex: 1 0 auto;
+  }
+</style>
+
+
+</body>
+
+</html>

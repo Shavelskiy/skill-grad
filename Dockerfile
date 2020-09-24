@@ -50,7 +50,11 @@ RUN pecl install xdebug-2.9.2 \
 
 RUN docker-php-source delete
 
-COPY . /application
+RUN apt-get update \
+  && apt-get install -y \
+             xvfb \
+             libfontconfig \
+             wkhtmltopdf
 
 WORKDIR /application
 CMD ["php-fpm"]
