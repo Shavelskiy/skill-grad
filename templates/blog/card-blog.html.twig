@@ -52,14 +52,14 @@
           <span class="icon status {{ not article.active ? 'not' : '' }}"></span>
           {{ article.active ? 'Опубликована' : 'На модерации' }}
         </div>
-        <div class="rating">
+        <div id="rating" class="rating article-like-block" data-id="{{ article.id }}">
           <div class="minus-block">
-            <span class="icon minus"></span>
-            {{ article.dislikesCount }}
+            <span class="add-article-dislike icon minus {{ getArticleDislikeClass(article, app.user) }}"></span>
+            <span class="likes-count">{{ article.dislikesCount }}</span>
           </div>
           <div class="plus-block">
-            <span class="icon plus"></span>
-            {{ article.likesCount }}
+            <span class="add-article-like icon plus {{ getArticleLikeClass(article, app.user) }}"></span>
+            <span class="likes-count">{{ article.likesCount }}</span>
           </div>
         </div>
       </div>

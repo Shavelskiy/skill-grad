@@ -26,7 +26,7 @@ class ArticleRating
     protected Article $article;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="`like`")
      */
     protected bool $like;
 

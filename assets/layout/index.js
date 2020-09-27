@@ -6,5 +6,6 @@ import '@/components/modal/feedback'
 import '@/components/common/compare'
 import '@/components/common/program-request'
 import '@/components/chat'
+import '@/components/common/blog-likes'
 
 import './index.scss'
