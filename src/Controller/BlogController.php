@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Dto\SearchQuery;
 use App\Entity\Article;
+use App\Entity\User;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BlogController extends AbstractController
 {
+    protected const PAGE_ITEM_COUNT = 10;
+
     protected ArticleRepository $articleRepository;
     protected SessionInterface $session;
 
@@ -28,9 +33,27 @@ class BlogController extends AbstractController
     /**
      * @Route("", name="blog.index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return $this->render('blog/index.html.twig');
+        $query = (new SearchQuery())
+            ->setPage((int)($request->get('page', 1)))
+            ->setPageItemCount(self::PAGE_ITEM_COUNT);
+
+        $searchResult = $this->articleRepository->getPaginatorResult($query);
+
+        $userArticles = [];
+
+        /** @var User $user */
+        if (($user = $this->getUser()) && $user->isProvider()) {
+            $userArticles = $this->articleRepository->findUserArticles($user);
+        }
+
+        return $this->render('blog/index.html.twig', [
+            'articles' => $searchResult->getItems(),
+            'page' => $searchResult->getCurrentPage(),
+            'total_pages' => $searchResult->getTotalPageCount(),
+            'user_articles' => $userArticles,
+        ]);
     }
 
     /**
@@ -50,8 +73,8 @@ class BlogController extends AbstractController
         }
 
         return $this->render('blog/view.html.twig', [
-//            'slug' => $request->get('slug'),
-//            'views' => $article->getViews(),
+            'article' => $article,
+            'is_favorite' => $this->getUser() && $this->getUser()->getFavoriteArticles()->contains($article),
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Dto\PaginatorResult;
 use App\Dto\SearchQuery;
 use App\Entity\Article;
+use App\Entity\User;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -24,7 +25,7 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function getMainPageArticles(): array
+    public function findMainPageArticles(): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.active = :active')
@@ -33,6 +34,16 @@ class ArticleRepository extends ServiceEntityRepository
                 'active' => true,
                 'showOnMain' => true,
             ])
+            ->orderBy('a.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findUserArticles(User $user): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.author = :author')
+            ->setParameter('author', $user)
             ->orderBy('a.sort', 'asc')
             ->getQuery()
             ->getResult();
@@ -49,10 +60,6 @@ class ArticleRepository extends ServiceEntityRepository
         if ($searchQuery->getOrderField() !== null) {
             $query->addOrderBy('a.' . $searchQuery->getOrderField(), $searchQuery->getOrderType());
         }
-
-        $query
-            ->addOrderBy('a.id', 'asc')
-            ->addOrderBy('a.sort', 'asc');
 
         foreach ($searchQuery->getSearch() as $field => $value) {
             switch ($field) {
@@ -86,8 +93,18 @@ class ArticleRepository extends ServiceEntityRepository
                         ->andWhere('a.showOnMain = :showOnMain')
                         ->setParameter('showOnMain', $value);
                     break;
+                case 'favoriteUsers':
+                    $query
+                        ->innerJoin('a.favoriteUsers', 'fu')
+                        ->andWhere('fu = :user')
+                        ->setParameter('user', $value);
+                    break;
             }
         }
+
+        $query
+            ->addOrderBy('a.sort', 'asc')
+            ->addOrderBy('a.id', 'asc');
 
         return (new Paginator())
             ->setQuery($query)

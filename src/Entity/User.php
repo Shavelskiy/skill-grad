@@ -84,19 +84,25 @@ class User implements UserInterface
     protected Collection $receivedChatMessages;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="favoriteUsers", fetch="LAZY")
      */
     protected Collection $favoriteProviders;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Program\Program", inversedBy="favoriteUsers")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\Program", inversedBy="favoriteUsers", fetch="LAZY")
      */
     protected Collection $favoritePrograms;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article", inversedBy="favoriteUsers", fetch="LAZY")
+     */
+    protected Collection $favoriteArticles;
 
     public function __construct()
     {
         $this->favoriteProviders = new ArrayCollection();
         $this->favoritePrograms = new ArrayCollection();
+        $this->favoriteArticles = new ArrayCollection();
         $this->programReviews = new ArrayCollection();
         $this->programRequests = new ArrayCollection();
         $this->programQuestions = new ArrayCollection();
@@ -226,7 +232,7 @@ class User implements UserInterface
         return $this->favoritePrograms;
     }
 
-    public function setFavoritePrograms($favoritePrograms): self
+    public function setFavoritePrograms(Collection $favoritePrograms): self
     {
         $this->favoritePrograms = $favoritePrograms;
         return $this;
@@ -238,9 +244,29 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFavoriteArticles()
+    {
+        return $this->favoriteArticles;
+    }
+
+    public function setFavoriteArticles(Collection $favoriteArticles): self
+    {
+        $this->favoriteArticles = $favoriteArticles;
+        return $this;
+    }
+
+    public function addFavoriteArticle(Article $article): self
+    {
+        $this->favoriteArticles->add($article);
+        return $this;
+    }
+
     public function getFavoriteCount(): int
     {
-        return $this->favoriteProviders->count() + $this->favoritePrograms->count();
+        return
+            $this->getFavoriteProviders()->count() +
+            $this->getFavoritePrograms()->count() +
+            $this->getFavoriteArticles()->count();
     }
 
     public function getProgramReviews()
@@ -274,5 +300,10 @@ class User implements UserInterface
     {
         $this->programQuestions = $programQuestions;
         return $this;
+    }
+
+    public function isProvider(): bool
+    {
+        return in_array(self::ROLE_PROVIDER, $this->getRoles(), true);
     }
 }

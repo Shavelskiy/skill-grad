@@ -78,6 +78,11 @@ class Article
      */
     protected int $readingTime = 0;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="favoriteArticles")
+     */
+    protected Collection $favoriteUsers;
+
     protected Collection $comments;
 
     public function __construct()

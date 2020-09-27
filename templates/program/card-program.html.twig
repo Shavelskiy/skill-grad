@@ -40,7 +40,7 @@
         {% if favorite is defined %}
           <div class="favorites">
             <div data-tippy-content="В избранном" class="like">
-              <i class="icon-love-red"></i>
+              <i data-id="{{ program.id }}" class="add-program-favorites icon-love-red"></i>
             </div>
           </div>
         {% endif %}

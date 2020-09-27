@@ -126,7 +126,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             $this->entityManager->persist($userInfo);
         }
 
-        if (!in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
+        if (!$user->isProvider()) {
             if ($userInfo->getImage() !== null && $updateUserData->getOldImage() === null) {
                 $this->uploadService->deleteUpload($userInfo->getImage());
                 $userInfo->setImage(null);

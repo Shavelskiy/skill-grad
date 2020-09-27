@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Dto\SearchQuery;
 use App\Entity\User;
 use App\Helpers\CompareHelper;
+use App\Repository\ArticleRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -24,13 +25,16 @@ class StaticController extends AbstractController
 
     protected ProviderRepository $providerRepository;
     protected ProgramRepository $programRepository;
+    protected ArticleRepository $articleRepository;
 
     public function __construct(
         ProviderRepository $providerRepository,
-        ProgramRepository $programRepository
+        ProgramRepository $programRepository,
+        ArticleRepository $articleRepository
     ) {
         $this->providerRepository = $providerRepository;
         $this->programRepository = $programRepository;
+        $this->articleRepository = $articleRepository;
     }
 
     /**
@@ -90,8 +94,14 @@ class StaticController extends AbstractController
             ->setPage((int)($request->get('program_page', 1)))
             ->setPageItemCount(self::PAGE_ITEM_COUNT);
 
+        $articleQuery = (new SearchQuery())
+            ->setSearch(['favoriteUsers' => $user])
+            ->setPage((int)($request->get('article_page', 1)))
+            ->setPageItemCount(self::PAGE_ITEM_COUNT);
+
         $providerSearchResult = $this->providerRepository->getPaginatorResult($providerQuery);
         $programSearchResult = $this->programRepository->getPaginatorResult($programQuery);
+        $articleSearchResult = $this->articleRepository->getPaginatorResult($articleQuery);
 
         return $this->render('static/favorite.html.twig', [
             'tab' => $this->getFavoriteCurrentTab($request->get('tab', '')),
@@ -106,6 +116,12 @@ class StaticController extends AbstractController
                 'page' => $programSearchResult->getCurrentPage(),
                 'total_pages' => $programSearchResult->getTotalPageCount(),
                 'total_count' => $user->getFavoritePrograms()->count(),
+            ],
+            'articles' => [
+                'items' => $articleSearchResult->getItems(),
+                'page' => $articleSearchResult->getCurrentPage(),
+                'total_pages' => $articleSearchResult->getTotalPageCount(),
+                'total_count' => $user->getFavoriteArticles()->count(),
             ],
         ]);
     }

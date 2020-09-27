@@ -64,18 +64,12 @@ class ProgramController extends AbstractController
             ->setPageItemCount(self::PAGE_REVIEWS_COUNT);
 
         $searchResult = $this->programReviewsRepository->getPaginatorResult($query, $program);
-        $reviews = $searchResult->getItems();
 
-        $isFavorite = false;
-
-        if ($this->getUser()) {
-            $isFavorite = $this->getUser()->getFavoritePrograms()->contains($program);
-        }
         return $this->render('program/view.html.twig', [
             'program' => $program,
-            'is_favorite' => $isFavorite,
+            'is_favorite' => $this->getUser() && $this->getUser()->getFavoritePrograms()->contains($program),
             'reviews' => [
-                'items' => $reviews,
+                'items' => $searchResult->getItems(),
                 'page' => $searchResult->getCurrentPage(),
                 'total_pages' => $searchResult->getTotalPageCount(),
             ],

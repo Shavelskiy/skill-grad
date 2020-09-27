@@ -1,61 +1,60 @@
 .blog-description {
-  position: relative;
-  height: 100%;
-  background-color: #1d71b1;
-  color: #fff;
-  padding-top: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
+  .blog-description-body {
+    position: relative;
+    background-color: #1d71b1;
+    color: #fff;
+    padding: 25px;
 
-  .top {
-    display: flex;
-    justify-content: space-between;
-
-    .date {
+    .top {
       display: flex;
-    }
+      justify-content: space-between;
 
-    i {
-      font-size: 24px;
-      cursor: pointer;
+      .date {
+        display: flex;
+      }
 
-      &.active {
-        &:before {
-          color: #f92e25;
+      i {
+        font-size: 24px;
+        cursor: pointer;
+
+        &.active {
+          &:before {
+            color: #f92e25;
+          }
         }
       }
     }
-  }
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    font-size: 14px;
-    line-height: 18px;
-
-    .view-block {
+    .content {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      margin-top: 20px;
+      margin-bottom: 40px;
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 18px;
 
-      .views, .comments {
+      .view-block {
         display: flex;
-      }
-    }
+        justify-content: space-between;
+        margin-top: 20px;
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+        .views, .comments {
+          display: flex;
+        }
+      }
+
+      a {
+        color: #fff;
+        text-decoration: underline;
+      }
     }
   }
 
   .share {
     display: flex;
     align-items: center;
-    position: absolute;
+    color: #fff;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -64,6 +63,7 @@
 
     ul {
       display: flex;
+      margin-bottom: 0;
 
       li {
         margin-left: 15px;
@@ -120,6 +120,7 @@
 
 .social {
   display: flex;
+  margin-bottom: 0;
 
   li {
     margin-left: 15px;

@@ -43,16 +43,6 @@ class SiteController extends AbstractController
      */
     public function index(): Response
     {
-        $pdf = new Pdf('xvfb-run /usr/bin/wkhtmltopdf');
-
-
-        $input = $this->render('tmp/kek.html.twig')->getContent();
-
-        $fileName = __DIR__ . '/kek.pdf';
-
-        $pdf->generate($input, $fileName);
-        die;
-
         return $this->render('site/index.html.twig', [
             'articles' => $this->getArticles(),
             'sliderItems' => $this->getSliderItems(),
@@ -120,7 +110,7 @@ class SiteController extends AbstractController
             $result = [];
 
             /** @var Article $article */
-            foreach ($this->articleRepository->getMainPageArticles() as $article) {
+            foreach ($this->articleRepository->findMainPageArticles() as $article) {
                 $result[] = [
                     'id' => $article->getId(),
                     'imageSrc' => $article->getImage() ? $article->getImage()->getPublicPath() : null,

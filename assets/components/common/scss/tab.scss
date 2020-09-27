@@ -140,6 +140,7 @@
         padding-right: 65px;
         margin-bottom: -1px;
         z-index: 0;
+        cursor: pointer;
 
         @media (min-width: 320px) and (max-width: 767px) {
           display: none;
@@ -232,6 +233,7 @@
       @media (min-width: 320px) and (max-width: 767px) {
         flex-direction: row;
         justify-content: space-between;
+
         &-item {
           display: flex;
           padding: 0 0 15px;

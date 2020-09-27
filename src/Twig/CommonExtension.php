@@ -7,6 +7,7 @@ use App\Helpers\CompareHelper;
 use App\Repository\ChatMessageRepository;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class CommonExtension extends AbstractExtension
@@ -26,6 +27,13 @@ class CommonExtension extends AbstractExtension
             new TwigFunction('inCompare', [$this, 'inCompare']),
             new TwigFunction('getUsername', [$this, 'getUsername']),
             new TwigFunction('getNewMessagesCount', [$this, 'getNewMessagesCount']),
+        ];
+    }
+
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('declension', [$this, 'declension'])
         ];
     }
 
@@ -61,5 +69,26 @@ class CommonExtension extends AbstractExtension
     public function getNewMessagesCount(User $user): int
     {
         return $this->chatMessageRepository->findNewMessageCount($user);
+    }
+
+    public function declension($number, $variants): string
+    {
+        $number %= 100;
+
+        if ($number >= 5 && $number <= 20) {
+            return $variants[2];
+        }
+
+        $number %= 10;
+
+        if ($number === 1) {
+            return $variants[0];
+        }
+
+        if ($number >= 2 && $number <= 4) {
+            return $variants[1];
+        }
+
+        return $variants[2];
     }
 }

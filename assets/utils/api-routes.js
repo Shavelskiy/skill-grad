@@ -2,6 +2,7 @@ export const LOGOUT_URL = '/ajax/logout'
 
 export const ADD_FAVORITE_PROVIDER = '/ajax/favorite/provider'
 export const ADD_FAVORITE_PROGRAM = '/ajax/favorite/program'
+export const ADD_FAVORITE_ARTICLE = '/ajax/favorite/article'
 
 export const COMPARE_ADD = '/ajax/compare/add'
 export const COMPARE_REMOVE = '/ajax/compare/remove'

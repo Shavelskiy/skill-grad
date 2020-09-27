@@ -47,7 +47,7 @@ class ProfileSettingsController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if (in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
+        if ($user->isProvider()) {
             $data = $this->getProviderProfileInfo($user);
         } else {
             $data = $this->getUserProfileInfo($user);
@@ -124,7 +124,7 @@ class ProfileSettingsController extends AbstractController
             ->setNewPassword($request->get('newPassword'))
             ->setConfirmNewPassword($request->get('confirmNewPassword'));
 
-        if (!in_array(User::ROLE_PROVIDER, $user->getRoles(), true)) {
+        if (!$user->isProvider()) {
             $updateUserData
                 ->setDescription($request->get('description'))
                 ->setOldImage($request->get('oldImage'))

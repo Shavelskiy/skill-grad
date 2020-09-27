@@ -25,7 +25,7 @@
               Программы обучения ({{ programs.total_count }})
             </li>
             <li class="toggle-item nav-item nav-item-articles {{ tab == 'articles' ? 'active' : '' }}">
-              Статьи (72)
+              Статьи ({{ articles.total_count }})
             </li>
           </ul>
           <i class="icon-down-arrow"></i>
@@ -80,88 +80,24 @@
           </div>
 
           <div class="tab__content-item tab-articles {{ tab == 'articles' ? 'active' : '' }}">
-            <div class="card-blog">
-              <div class="card-container">
-                <div class="card-img">
-                  <img src="/img/card-image.jpg" alt="">
-                  <div class="bottom">
-                    <div class="views">
-                      <span class="icon view"></span>
-                      253
-                    </div>
-                    <div class="comments">
-                      <span class="icon comment"></span>
-                      <a href="#">25 комментариев</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-content">
-                  <div class="top">
-                    <div class="date">
-                      <span class="icon calendar"></span>
-                      19.02.2019
-                    </div>
-                    <div class="time-read">
-                      <span class="icon read"></span>
-                      <span class="text">Время чтения:</span> 2 минуты
-                    </div>
-                    <div class="favorites">
-                      <div data-tippy-content="Убрать из избранного" class="like">
-                        <i class="icon-love-red"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <h4 class="title">Семейное образование: с чего начинать родителям обучение ребенка «дома»</h4>
-                  <p class="description">
-                    Для того чтобы составить инструкцию для родителей, решивших перевести ребенка на семейное
-                    обучение и не знающих с чего начать, «Учеба.ру» поговорила с ведущим эксперт...
-                    <a href="/pages/blog-single.html">Читать далее</a>
-                  </p>
-                  <div class="mobile-bottom">
-                    <div class="views">
-                      <span class="icon view"></span>
-                      253
-                    </div>
-                    <div class="comments">
-                      <span class="icon comment not"></span>
-                      <a href="#">Нет комментариев</a>
-                    </div>
-                  </div>
-                  <div class="bottom">
-                    <div class="status-block">
-                      <span class="icon status no"></span>
-                      Опубликована
-                    </div>
-                    <div class="rating">
-                      <div class="minus-block">
-                        <span class="icon minus"></span>
-                        5
-                      </div>
-                      <div class="plus-block">
-                        <span class="icon plus"></span>
-                        26
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% if articles.items|length > 0 %}
+              {% for article in articles.items %}
+                {% include 'blog/card-blog.html.twig' with {
+                  article: article,
+                  favorite: true
+                } %}
+              {% endfor %}
+            {% else %}
+              <h5>В избранном пока нет статей!</h5>
+            {% endif %}
 
             <div class="col-lg-12">
-              <div class="pagination">
-                <a href="#">
-                  <span class="prev"></span>
-                </a>
-                <a href="#">1</a>
-                <a class="active" href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">
-                  <span class="next"></span>
-                </a>
-              </div>
+              {% include 'components/paginator.html.twig' with {
+                page: articles.page,
+                total_pages: articles.total_pages,
+                path_name: 'app.favorite',
+                page_key: 'article_page'
+              } %}
             </div>
           </div>
         </div>
