@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Dto\PaginatorResult;
 use App\Dto\SearchQuery;
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\User;
 use App\Helpers\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -45,6 +46,20 @@ class ArticleRepository extends ServiceEntityRepository
             ->andWhere('a.author = :author')
             ->setParameter('author', $user)
             ->orderBy('a.sort', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Article[]
+     */
+    public function findCategoriesArticles(Category $category, int $limit): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.category = :category')
+            ->setParameter('category', $category)
+            ->orderBy('a.createdAt', 'desc')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

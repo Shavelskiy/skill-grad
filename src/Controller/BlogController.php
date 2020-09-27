@@ -72,9 +72,18 @@ class BlogController extends AbstractController
             $this->session->set('article.view', $userViewsArticle);
         }
 
+        $moreArticles = [];
+
+        foreach ($this->articleRepository->findCategoriesArticles($article->getCategory(), 3) as $moreArticle) {
+            if ($moreArticle->getId() !== $article->getId()) {
+                $moreArticles[] = $moreArticle;
+            }
+        }
+
         return $this->render('blog/view.html.twig', [
             'article' => $article,
             'is_favorite' => $this->getUser() && $this->getUser()->getFavoriteArticles()->contains($article),
+            'more_articles' => $moreArticles,
         ]);
     }
 }

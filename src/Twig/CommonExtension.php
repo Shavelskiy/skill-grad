@@ -26,6 +26,7 @@ class CommonExtension extends AbstractExtension
             new TwigFunction('getCompareCount', [$this, 'getCompareCount']),
             new TwigFunction('inCompare', [$this, 'inCompare']),
             new TwigFunction('getUsername', [$this, 'getUsername']),
+            new TwigFunction('getUserPhoto', [$this, 'getUserPhoto']),
             new TwigFunction('getNewMessagesCount', [$this, 'getNewMessagesCount']),
         ];
     }
@@ -33,7 +34,7 @@ class CommonExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('declension', [$this, 'declension'])
+            new TwigFilter('declension', [$this, 'declension']),
         ];
     }
 
@@ -53,6 +54,10 @@ class CommonExtension extends AbstractExtension
             return '';
         }
 
+        if ($user->isProvider() && $user->getProvider() !== null) {
+            return $user->getProvider()->getName();
+        }
+
         if ($user->getUserInfo() === null) {
             return $user->getEmail();
         }
@@ -64,6 +69,23 @@ class CommonExtension extends AbstractExtension
         }
 
         return $user->getEmail();
+    }
+
+    public function getUserPhoto(?User $user): string
+    {
+        if ($user === null) {
+            return '/upload/img/provider_no_logo.png';
+        }
+
+        if ($user->isProvider() && $user->getProvider() !== null) {
+            return $user->getProvider()->getImage() ? $user->getProvider()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
+        }
+
+        if ($user->getUserInfo() === null) {
+            return '/upload/img/provider_no_logo.png';
+        }
+
+        return $user->getUserInfo()->getImage() ? $user->getUserInfo()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
     }
 
     public function getNewMessagesCount(User $user): int

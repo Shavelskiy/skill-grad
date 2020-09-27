@@ -115,7 +115,7 @@ class SiteController extends AbstractController
                     'id' => $article->getId(),
                     'imageSrc' => $article->getImage() ? $article->getImage()->getPublicPath() : null,
                     'name' => $article->getName(),
-                    'previewText' => substr(strip_tags($article->getDetailText(), '<br>'), 0, 200) . '...',
+                    'previewText' => $article->getPreviewText(),
                     'createdAt' => [
                         'day' => $article->getCreatedAt()->format('d'),
                         'month' => $article->getCreatedAt()->format('m'),

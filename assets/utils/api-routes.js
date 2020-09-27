@@ -13,3 +13,7 @@ export const ADD_PROGRAM_QUESTION = '/ajax/program/question'
 
 export const CHAT_START = '/chat/start'
 export const GET_NEW_MESSAGES_COUNT = '/ajax/message/new'
+
+export const ADD_ARTICLE_COMMENT = '/ajax/blog/comment'
+export const DELETE_ARTICLE_COMMENT = '/ajax/blog/comment/:id'
+export const EDIT_ARTICLE_COMMENT = '/ajax/blog/comment/:id'

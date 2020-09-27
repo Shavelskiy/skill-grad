@@ -113,215 +113,38 @@
               </div>
             </div>
           </div>
-          <div id="article-comments" class="comments">
-            <h4>Комментарии к статье (5)</h4>
-            <div class="tab">
-              <div class="tab__nav">
-                <ul class="nav">
-                  <li data-tab-name="tab-1" class="nav-item active">По порядку</li>
-                  <li data-tab-name="tab-2" class="nav-item">Популярные</li>
-                </ul>
-              </div>
-              <div class="tab__content">
-                <div class="tab__content-item tab-1 active">
-                  <div class="comments-body">
-                    <div class="information">
-                      <div class="top">
-                        <img class="rounded" src="/img/photo.jpg" alt="">
-                        <div class="d-flex w-100 j-c-space-between mt-10">
-                          <span class="name">Викторов Тимофей</span>
-                          <span class="date">22 авг 2020,  12:35</span>
-                        </div>
-                      </div>
-                      <div class="comment">
-                        <p class="text">
-                          Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
-                          настоящий знаток своего дела. Получил не только знания и навыки,
-                          но и массу впечатлений!
-                        </p>
-                        <div class="rules">
-                          <div class="links">
-                            <a href="#">Редактировать</a>
-                            <a class="delete-comment" href="#">Удалить</a>
-                            <a href="#">Ответить</a>
-                          </div>
-                          <div id="rating-1" class="rating">
-                            <div class="minus-block">
-                              <span data-type="dislike" class="icon minus"></span>
-                              <span data-type="text">0</span>
-                            </div>
-                            <div class="plus-block">
-                              <span data-type="like" class="icon plus"></span>
-                              <span data-type="text">0</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="answer">
-                      <div class="information">
-                        <div class="top">
-                          <img class="rounded" src="/img/photo.jpg" alt="">
-                          <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">Викторов Тимофей</span>
-                            <span class="date">22 авг 2020,  12:35</span>
-                          </div>
-                        </div>
-                        <div class="comment">
-                          <p class="text">
-                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
-                            настоящий знаток своего дела. Получил не только знания и навыки,
-                            но и массу впечатлений!
-                          </p>
-                          <div class="rules">
-                            <a href="#">Редактировать</a>
-                            <a class="delete-comment" href="#">Удалить</a>
-                            <a href="#">Ответить</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="information">
-                        <div class="top">
-                          <img class="rounded" src="/img/photo.jpg" alt="">
-                          <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">Викторов Тимофей</span>
-                            <span class="date">22 авг 2020,  12:35</span>
-                          </div>
-                        </div>
-                        <div class="comment">
-                          <p class="text">
-                            Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
-                            настоящий знаток своего дела. Получил не только знания и навыки,
-                            но и массу впечатлений!
-                          </p>
-                          <div class="rules">
-                            <a href="#">Редактировать</a>
-                            <a class="delete-comment" href="#">Удалить</a>
-                            <a href="#">Ответить</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="information">
-                      <div class="top">
-                        <img class="rounded" src="/img/photo.jpg" alt="">
-                        <div class="d-flex w-100 j-c-space-between mt-10">
-                          <span class="name">Викторов Тимофей</span>
-                          <span class="date">22 авг 2020,  12:35</span>
-                        </div>
-                      </div>
-                      <div class="comment">
-                        <p class="text">
-                          Программа замечательная! Полностью соответствует заявленному описанию, преподаватель -
-                          настоящий знаток своего дела. Получил не только знания и навыки,
-                          но и массу впечатлений!
-                        </p>
-                        <div class="rules">
-                          <div class="links">
-                            <a href="#">Редактировать</a>
-                            <a class="delete-comment" href="#">Удалить</a>
-                            <a href="#">Ответить</a>
-                          </div>
-                          <div id="rating-2" class="rating">
-                            <div class="minus-block">
-                              <span data-type="dislike" class="icon minus"></span>
-                              <span data-type="text">0</span>
-                            </div>
-                            <div class="plus-block">
-                              <span data-type="like" class="icon plus"></span>
-                              <span data-type="text">0</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="send-comment">
-                      <textarea rows="10" class="textarea" placeholder="Текст сообщения"></textarea>
-                      <button class="button-blue">Отправить</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab__content-item tab-2"></div>
-              </div>
-            </div>
-          </div>
+          {% include 'blog/blocks/comments.html.twig' with {
+            article: article
+          } %}
         </div>
       </div>
-      <div class="container-0 mobile-gutter-4 pos-relative blog-single mt-40">
-        <h2 class="title">Вам может быть интересно</h2>
-        <div class="col-lg-12 col-sm-4 no-gutter">
-          <div class="article-slider">
-            <div class="article-item">
+      {% if more_articles|length > 0 %}
+        <div class="container-0 mobile-gutter-4 pos-relative blog-single mt-40">
+          <h2 class="title">Вам может быть интересно</h2>
+          <div class="more-articles">
+            {% for more_article in more_articles %}
               <div class="card-article">
                 <div class="card-article__header">
-                  <img src="/img/article1.jpg" alt="">
+                  <img src="{{ more_article.image.publicPath }}" alt="">
                   <div class="card-article__header-date">
-                    <span class="day">22</span>
-                    сентября
+                    <span class="day">{{ more_article.createdAt|date('d') }}</span>
+                    {{ more_article.createdAt|date('m')|month }}
                   </div>
                 </div>
                 <div class="card-article__body">
-                  <a href="/pages/blog-single.html" class="card-article__body-title">Как не сдаться в карантин?<br/>
-                    5 советов ученикам, учителям
-                    и родителям
+                  <a href="{{ path('blog.view', {article: more_article.id}) }}" class="card-article__body-title">
+                    {{ more_article.name }}
                   </a>
                   <span class="hr"></span>
                   <div class="card-article__body-description">
-                    <p>До 12 апреля (а может, и дольше)
-                      все школы перешли на дистанционное обучение. Некоторые до этого не... </p>
+                    <p>{{ more_article.previewText|slice(0, 300) }}{{ more_article.previewText|length > 300 ? '...' : '' }}</p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="article-item">
-              <div class="card-article">
-                <div class="card-article__header">
-                  <img src="/img/article1.jpg" alt="">
-                  <span class="card-article__header-date">
-											<span class="day">22</span>
-											сентября
-										</span>
-                </div>
-                <div class="card-article__body">
-                  <a href="/pages/blog-single.html" class="card-article__body-title">
-                    Как не сдаться в карантин?
-                    5 советов ученикам, учителям
-                    и родителям
-                  </a>
-                  <span class="hr"></span>
-                  <div class="card-article__body-description">
-                    <p>До 12 апреля (а может, и дольше)
-                      все школы перешли на дистанционное обучение. Некоторые до этого не... </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="article-item">
-              <div class="card-article">
-                <div class="card-article__header">
-                  <img src="/img/article1.jpg" alt="">
-                  <span class="card-article__header-date">
-											<span class="day">22</span>
-											сентября
-										</span>
-                </div>
-                <div class="card-article__body">
-                  <a href="/pages/blog-single.html" class="card-article__body-title">
-                    Как не сдаться в карантин?
-                    5 советов ученикам, учителям
-                    и родителям
-                  </a>
-                  <span class="hr"></span>
-                  <div class="card-article__body-description">
-                    <p>До 12 апреля (а может, и дольше)
-                      все школы перешли на дистанционное обучение. Некоторые до этого не... </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
-      </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
@@ -329,6 +152,7 @@
 {% block modals %}
   {{ parent() }}
   {% include 'components/modals/add.favorite.html.twig' %}
+  {% include 'blog/modals.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}

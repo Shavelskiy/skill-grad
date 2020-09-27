@@ -83,6 +83,9 @@ class Article
      */
     protected Collection $favoriteUsers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ArticleComment", mappedBy="article")
+     */
     protected Collection $comments;
 
     public function __construct()
@@ -248,5 +251,12 @@ class Article
     public function getComments(): Collection
     {
         return $this->comments ?? new ArrayCollection();
+    }
+
+    public function getRootComments(): Collection
+    {
+        return $this->getComments()->filter(static function(ArticleComment $comment) {
+           return $comment->getParentComment() === null;
+        });
     }
 }

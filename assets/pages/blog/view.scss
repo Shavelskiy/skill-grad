@@ -1,9 +1,12 @@
 .blog-description {
+  height: 100%;
+
   .blog-description-body {
     position: relative;
     background-color: #1d71b1;
     color: #fff;
     padding: 25px;
+    height: calc(100% - 75px);
 
     .top {
       display: flex;
@@ -58,7 +61,8 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 15px 30px;
+    padding: 0 30px;
+    height: 75px;
     background-color: #1a5ca7;
 
     ul {
@@ -124,5 +128,21 @@
 
   li {
     margin-left: 15px;
+  }
+}
+
+.more-articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+#article-comments {
+  h4 {
+    margin-bottom: 22px;
   }
 }

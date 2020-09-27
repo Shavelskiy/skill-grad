@@ -11,8 +11,8 @@
               <div class="card-article__header">
                 <img src="{{ article.imageSrc }}" alt="">
                 <span class="card-article__header-date">
-                  <span class="day">22</span>
-                  сентября
+                  <span class="day">{{ article.createdAt.day }}</span>
+                  {{ article.createdAt.month|month }}
                 </span>
               </div>
               <div class="card-article__body">
@@ -21,7 +21,7 @@
                 </a>
                 <span class="hr"></span>
                 <div class="card-article__body-description">
-                  <p>{{ article.previewText }}</p>
+                  <p>{{ article.previewText|slice(0, 300) }}{{ article.previewText|length > 300 ? '...' : '' }}</p>
                 </div>
               </div>
             </div>
