@@ -53,7 +53,7 @@ const Select = ({options, value, setValue, placeholder = ''}) => {
   return (
     <div ref={ref} className={
       cn(
-        css.select,
+        css.customSelect,
         {[css.disabled]: options.length < 1},
         {[css.opened]: opened},
       )}

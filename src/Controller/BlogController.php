@@ -6,6 +6,7 @@ use App\Dto\SearchQuery;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,13 +21,16 @@ class BlogController extends AbstractController
     protected const PAGE_ITEM_COUNT = 10;
 
     protected ArticleRepository $articleRepository;
+    protected CategoryRepository $categoryRepository;
     protected SessionInterface $session;
 
     public function __construct(
         ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository,
         SessionInterface $session
     ) {
         $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->session = $session;
     }
 
@@ -38,6 +42,14 @@ class BlogController extends AbstractController
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
             ->setPageItemCount(self::PAGE_ITEM_COUNT);
+
+        if ($request->query->has('category') && (int)($request->get('category')) > 0) {
+            $category = $this->categoryRepository->find((int)($request->get('category')));
+
+            if ($category) {
+                $query->setSearch(['category' => $category]);
+            }
+        }
 
         $searchResult = $this->articleRepository->getPaginatorResult($query);
 

@@ -83,10 +83,10 @@ class ArticleRepository extends ServiceEntityRepository
                         ->andWhere('a.id = :id')
                         ->setParameter('id', (int)$value);
                     break;
-                case 'name':
+                case 'category':
                     $query
-                        ->andWhere('upper(a.name) like :name')
-                        ->setParameter('name', '%' . mb_strtoupper($value) . '%');
+                        ->andWhere('a.category = :category')
+                        ->setParameter('category', $value);
                     break;
                 case 'slug':
                     $query

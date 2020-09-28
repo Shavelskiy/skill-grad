@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use App\Entity\User;
 use App\Helpers\CompareHelper;
+use App\Repository\CategoryRepository;
 use App\Repository\ChatMessageRepository;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Twig\Extension\AbstractExtension;
@@ -13,11 +14,14 @@ use Twig\TwigFunction;
 class CommonExtension extends AbstractExtension
 {
     protected ChatMessageRepository $chatMessageRepository;
+    protected CategoryRepository $categoryRepository;
 
     public function __construct(
-        ChatMessageRepository $chatMessageRepository
+        ChatMessageRepository $chatMessageRepository,
+        CategoryRepository $categoryRepository
     ) {
         $this->chatMessageRepository = $chatMessageRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function getFunctions(): array
@@ -28,6 +32,7 @@ class CommonExtension extends AbstractExtension
             new TwigFunction('getUsername', [$this, 'getUsername']),
             new TwigFunction('getUserPhoto', [$this, 'getUserPhoto']),
             new TwigFunction('getNewMessagesCount', [$this, 'getNewMessagesCount']),
+            new TwigFunction('getRootCategories', [$this, 'getRootCategories']),
         ];
     }
 
@@ -112,5 +117,10 @@ class CommonExtension extends AbstractExtension
         }
 
         return $variants[2];
+    }
+
+    public function getRootCategories(): array
+    {
+        return $this->categoryRepository->findRootCategories();
     }
 }

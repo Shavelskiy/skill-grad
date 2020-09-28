@@ -7,5 +7,6 @@ import '@/components/common/compare'
 import '@/components/common/program-request'
 import '@/components/chat'
 import '@/components/common/blog-likes'
+import '@/components/common/select'
 
 import './index.scss'
