@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Dto\SearchQuery;
 use App\Repository\ProviderRepository;
+use App\Service\SearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +18,14 @@ class ProviderController extends AbstractController
     protected const PAGE_ITEM_COUNT = 10;
 
     protected ProviderRepository $providerRepository;
+    protected SearchService $searchService;
 
     public function __construct(
-        ProviderRepository $providerRepository
+        ProviderRepository $providerRepository,
+        SearchService $searchService
     ) {
         $this->providerRepository = $providerRepository;
+        $this->searchService = $searchService;
     }
 
     /**
@@ -30,11 +33,14 @@ class ProviderController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $query = (new SearchQuery())
-            ->setPage((int)($request->get('page', 1)))
-            ->setPageItemCount(self::PAGE_ITEM_COUNT);
+        $page = (int)($request->get('page', 1));
 
-        $searchResult = $this->providerRepository->getPaginatorResult($query);
+        $searchResult = $this->searchService->findProviders(
+            $page,
+            $request->get('q', '')
+        );
+
+        $providers = $this->providerRepository->findBy(['id' => $searchResult['ids']]);
 
         $favoriteProviderIds = [];
 
@@ -45,9 +51,9 @@ class ProviderController extends AbstractController
         }
 
         return $this->render('provider/index.html.twig', [
-            'providers' => $searchResult->getItems(),
-            'page' => $searchResult->getCurrentPage(),
-            'total_pages' => $searchResult->getTotalPageCount(),
+            'providers' => $providers,
+            'page' => $page,
+            'total_pages' => $searchResult['total_pages'],
             'favorite_provider_ids' => $favoriteProviderIds,
         ]);
     }
@@ -55,7 +61,7 @@ class ProviderController extends AbstractController
     /**
      * @Route("/{id}", name="provider.view", methods={"GET"})
      */
-    public function aview(int $id): Response
+    public function view(int $id): Response
     {
         $provider = $this->providerRepository->find($id);
 

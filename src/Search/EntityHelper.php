@@ -3,6 +3,7 @@
 namespace App\Search;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
 
@@ -13,15 +14,23 @@ class EntityHelper
         return [
             'name' => $article->getName(),
             'detailText' => $article->getDetailText(),
-            'tags' => [],
+            'category' => $article->getCategory()->getId(),
         ];
     }
 
     public static function providerToArray(Provider $provider): array
     {
+        $categories = [];
+
+        /** @var Category $category */
+        foreach ($provider->getCategories() as $category) {
+            $categories[] = $category->getId();
+        }
+
         return [
             'name' => $provider->getName(),
             'description' => $provider->getDescription(),
+            'categories' => $categories,
         ];
     }
 

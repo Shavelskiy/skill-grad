@@ -41,13 +41,17 @@ class BlogController extends AbstractController
     {
         $query = (new SearchQuery())
             ->setPage((int)($request->get('page', 1)))
+            ->setSearch(['active' => true])
             ->setPageItemCount(self::PAGE_ITEM_COUNT);
 
         if ($request->query->has('category') && (int)($request->get('category')) > 0) {
             $category = $this->categoryRepository->find((int)($request->get('category')));
 
             if ($category) {
-                $query->setSearch(['category' => $category]);
+                $query->setSearch(array_merge(
+                    $query->getSearch(),
+                    ['category' => $category]
+                ));
             }
         }
 

@@ -1,0 +1,38 @@
+<form action="" class="form-filter" method="get">
+  <div class="input-search-gray">
+    <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по каталогу">
+    <i class="icon-search"></i>
+  </div>
+  <div class="category">
+    <span class="filter-title">Поиск по категории:</span>
+    <div class="select custom-select-wrapper">
+      <div class="custom-select">
+        <div class="custom-select__trigger"><span>Природопользование и эк...</span>
+          <div class="arrow"></div>
+        </div>
+        <div class="custom-options scrollbar">
+          <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+          <span class="custom-option category-option" data-value="volvo">Volvo</span>
+          <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+        </div>
+      </div>
+    </div>
+    <div class="select custom-select-wrapper">
+      <div class="custom-select">
+        <div class="custom-select__trigger"><span>Выберите подкатегорию</span>
+          <div class="arrow"></div>
+        </div>
+        <div class="custom-options scrollbar">
+          <span class="custom-option category-option selected" data-value="tesla">Tesla</span>
+          <span class="custom-option category-option" data-value="volvo">Volvo</span>
+          <span class="custom-option category-option" data-value="mercedes">Mercedes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="city">
+    <span class="filter-title open-city-selector-modal-btn">Выбор города:</span>
+    <div class="current-city">Ваш город: <strong>Москва</strong></div>
+    <span class="open-city-selector-modal-btn">Изменить город</span>
+  </div>
+</form>

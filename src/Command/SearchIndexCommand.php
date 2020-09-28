@@ -56,10 +56,10 @@ class SearchIndexCommand extends Command
             $output->writeln(sprintf('Add provider to index: %s', $provider->getName()));
         }
 
-        foreach ($this->programRepository->findAll() as $program) {
-            $this->searchService->addProgramToIndex($program);
-            $output->writeln(sprintf('Add program to index: %s', $program->getName()));
-        }
+//        foreach ($this->programRepository->findAll() as $program) {
+//            $this->searchService->addProgramToIndex($program);
+//            $output->writeln(sprintf('Add program to index: %s', $program->getName()));
+//        }
 
         $output->writeln('success');
 

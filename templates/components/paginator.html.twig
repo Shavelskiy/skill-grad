@@ -1,7 +1,9 @@
+{% set cur_page_key = page_key is defined ? page_key : 'page' %}
+{% set cur_request_params = app.request.query.all | filter((item, key) => key != cur_page_key) %}
 {% if total_pages > 1 %}
   <div class="pagination">
     {% if (page != 1) %}
-      <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): page -1 }) }}">
+      <a href="{{ path(path_name, { (cur_page_key): page -1 } | merge(cur_request_params)) }}">
         <span class="prev"></span>
       </a>
     {% endif %}
@@ -30,7 +32,7 @@
       {% endif %}
 
       {% for i in 1 .. offset_start %}
-        <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+        <a href="{{ path(path_name, { (cur_page_key): i } | merge(cur_request_params)) }}"
            class="{{ (page == i) ? 'active' : '' }}">
           {{ i }}
         </a>
@@ -40,7 +42,7 @@
 
       {% if (page >= 5 and page <= (total_pages - 4) ) %}
         {% for i in page - 1 .. page + 1 %}
-          <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+          <a href="{{ path(path_name, { (cur_page_key): i } | merge(cur_request_params)) }}"
              class="{{ (page == i) ? 'active' : '' }}">
             {{ i }}
           </a>
@@ -50,7 +52,7 @@
       <span>..</span>
 
       {% for i in total_pages - offset_end .. total_pages %}
-        <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+        <a href="{{ path(path_name, { (cur_page_key): i } | merge(cur_request_params)) }}"
            class="{{ (page == i) ? 'active' : '' }}">
           {{ i }}
         </a>
@@ -58,7 +60,7 @@
 
     {% else %}
       {% for i in 1 .. total_pages %}
-        <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): i }) }}"
+        <a href="{{ path(path_name, { (cur_page_key): i } | merge(cur_request_params)) }}"
            class="{{ (page == i) ? 'active' : '' }}">
           {{ i }}
         </a>
@@ -66,7 +68,7 @@
     {% endif %}
 
     {% if (page != total_pages) %}
-      <a href="{{ path(path_name, { (page_key is defined ? page_key : 'page'): page + 1 }) }}">
+      <a href="{{ path(path_name, { (cur_page_key): page + 1 } | merge(cur_request_params) ) }}">
         <span class="next"></span>
       </a>
     {% endif %}

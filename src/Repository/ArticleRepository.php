@@ -57,7 +57,11 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.category = :category')
-            ->setParameter('category', $category)
+            ->andWhere('a.active = :active')
+            ->setParameters([
+                'category' => $category,
+                'active' => true,
+            ])
             ->orderBy('a.createdAt', 'desc')
             ->setMaxResults($limit)
             ->getQuery()
