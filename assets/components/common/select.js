@@ -22,7 +22,7 @@ document.querySelectorAll('.custom-select').forEach(item => {
     if (item.classList.contains('disabled')) {
       return
     }
-    
+
     if (item.classList.contains('opened')) {
       item.classList.remove('opened')
     } else {

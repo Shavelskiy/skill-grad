@@ -6,6 +6,8 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ProviderRepository;
 use App\Service\SearchService;
+use Exception;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,22 +45,26 @@ class ProviderController extends AbstractController
         $filterCategories = [];
 
         if (
-            (($subcategoryId = (int)$request->get('subcategory')) > 0) &&
-            ($subcategory = $this->categoryRepository->find($subcategoryId)) !== null
-        ) {
-            $filterCategories[] = $subcategory->getId();
-        }
-
-        if (
-            empty($filterCategories) &&
             (($categoryId = (int)$request->get('category')) > 0) &&
             ($category = $this->categoryRepository->find($categoryId)) !== null
         ) {
             $filterCategories[] = $category->getId();
 
-            /** @var Category $childCategory */
-            foreach ($category->getChildCategories() as $childCategory) {
-                $filterCategories[] = $childCategory->getId();
+            try {
+                if (($subcategoryId = (int)$request->get('subcategory')) < 1) {
+                    throw new RuntimeException('');
+                }
+
+                if (($subcategory = $this->categoryRepository->find($subcategoryId)) === null) {
+                    throw new RuntimeException('');
+                }
+
+                $filterCategories[] = $subcategory->getId();
+            } catch (Exception $e) {
+                /** @var Category $childCategory */
+                foreach ($category->getChildCategories() as $childCategory) {
+                    $filterCategories[] = $childCategory->getId();
+                }
             }
         }
 
