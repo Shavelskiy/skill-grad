@@ -33,11 +33,12 @@ class ProviderController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $page = (int)($request->get('page', 1));
+        $page = (int)$request->get('page', 1);
 
         $searchResult = $this->searchService->findProviders(
             $page,
-            $request->get('q', '')
+            $request->get('q', ''),
+            [56,58]
         );
 
         $providers = $this->providerRepository->findBy(['id' => $searchResult['ids']]);

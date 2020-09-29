@@ -58,15 +58,15 @@ class SearchHelper
 
     protected static function setSearch(Request $request, SearchQuery $tableSearch, array $entityClasses): void
     {
-        $requerySearch = json_decode($request->get('search', ''), true);
+        $requestSearch = json_decode($request->get('search', ''), true);
 
-        if (!is_array($requerySearch) || empty($requerySearch)) {
+        if (!is_array($requestSearch) || empty($requestSearch)) {
             return;
         }
 
         $search = [];
 
-        foreach ($requerySearch as $field => $value) {
+        foreach ($requestSearch as $field => $value) {
             if ($value === null || (!is_bool($value) && empty($value))) {
                 continue;
             }

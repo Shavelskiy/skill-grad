@@ -40,23 +40,46 @@ class SearchService
         $this->exec("/$type/$entityId", 'PUT', $data);
     }
 
-    public function findProviders(int $page, string $query): array
+    public function findProviders(int $page, string $query, array $categories): array
     {
         $filter = [
             'size' => self::PAGE_ITEM_COUNT,
             'from' => ($page - 1) * self::PAGE_ITEM_COUNT,
+            'query' => [
+                'bool' => [
+                    'must' => [],
+                ],
+            ]
         ];
 
         if (!empty($query)) {
-            $filter['query'] = [
-                'multi_match' => [
-                    'query' => $query,
-                    'fields' => ['name', 'description'],
-                ],
+            $filter['query']['bool']['must'][] = [
+                'bool' => [
+                    'should' => [
+                        ['match' => ['name' => $query]],
+                        ['match' => ['description' => $query]],
+                    ],
+                ]
             ];
         }
 
+        if (!empty($categories)) {
+            $categoryQuery = [];
+
+            foreach ($categories as $category) {
+                $categoryQuery[] = ['match' => ['categories' => $category]];
+            }
+
+            $filter['query']['bool']['must'][] = [
+                'bool' => [
+                    'should' => $categoryQuery,
+                ]
+            ];
+        }
+
+
         $data = $this->exec("/" . self::TYPE_PROVIDER . "/_search?_source=id", 'GET', $filter);
+
         $data = $data['hits'];
 
         $ids = [];
