@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Article;
-use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
 use App\Search\EntityHelper;
@@ -41,7 +40,6 @@ class SearchService
 
     public function createEntityIndex(string $type, int $entityId, array $data): void
     {
-
         $this->exec("/$type/$entityId", 'PUT', $data);
     }
 
@@ -54,7 +52,7 @@ class SearchService
                 'bool' => [
                     'must' => [],
                 ],
-            ]
+            ],
         ];
 
         if (!empty($query)) {
@@ -64,7 +62,7 @@ class SearchService
                         ['match' => ['name' => $query]],
                         ['match' => ['description' => $query]],
                     ],
-                ]
+                ],
             ];
         }
 
@@ -78,7 +76,7 @@ class SearchService
             $filter['query']['bool']['must'][] = [
                 'bool' => [
                     'should' => $categoryQuery,
-                ]
+                ],
             ];
         }
 
@@ -94,7 +92,7 @@ class SearchService
                 'bool' => [
                     'must' => [],
                 ],
-            ]
+            ],
         ];
 
         if (!empty($query)) {
@@ -105,7 +103,7 @@ class SearchService
                         ['match' => ['previewText' => $query]],
                         ['match' => ['detailText' => $query]],
                     ],
-                ]
+                ],
             ];
         }
 
@@ -136,7 +134,6 @@ class SearchService
 
     protected function exec(string $url, string $method, ?array $data = null): array
     {
-
         $requestUrl = self::ES_HOST . '/' . self::INDEX_NAME . $url;
 
         $ch = curl_init();

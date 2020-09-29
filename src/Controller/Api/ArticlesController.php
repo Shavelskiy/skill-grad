@@ -126,7 +126,6 @@ class ArticlesController extends AbstractController
                 ->setDetailText($request->get('detailText'))
                 ->setImage($upload);
 
-
             $this->entityManager->persist($article);
             $this->entityManager->flush();
         } catch (Exception $e) {

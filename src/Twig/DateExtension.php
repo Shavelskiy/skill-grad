@@ -43,8 +43,6 @@ class DateExtension extends AbstractExtension
 
     public function month(int $month): string
     {
-
-
         return self::MONTHS[$month - 1];
     }
 }

@@ -212,16 +212,16 @@ class Article
 
     public function getLikesCount(): int
     {
-        return $this->getRatings()->filter(static function($articleRating) {
-            /** @var ArticleRating $articleRating */
+        return $this->getRatings()->filter(static function ($articleRating) {
+            /* @var ArticleRating $articleRating */
             return $articleRating->isLike();
         })->count();
     }
 
     public function getDisLikesCount(): int
     {
-        return $this->getRatings()->filter(static function($articleRating) {
-            /** @var ArticleRating $articleRating */
+        return $this->getRatings()->filter(static function ($articleRating) {
+            /* @var ArticleRating $articleRating */
             return !$articleRating->isLike();
         })->count();
     }
@@ -255,8 +255,8 @@ class Article
 
     public function getRootComments(): Collection
     {
-        return $this->getComments()->filter(static function(ArticleComment $comment) {
-           return $comment->getParentComment() === null;
+        return $this->getComments()->filter(static function (ArticleComment $comment) {
+            return $comment->getParentComment() === null;
         });
     }
 }

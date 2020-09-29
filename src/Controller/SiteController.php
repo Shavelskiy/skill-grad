@@ -8,7 +8,6 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
-use App\Messenger\Pdf;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;

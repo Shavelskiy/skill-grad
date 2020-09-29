@@ -2,7 +2,6 @@
 
 namespace App\Controller\Ajax;
 
-use App\Entity\ArticleComment;
 use App\Entity\ArticleRating;
 use App\Entity\User;
 use App\Repository\ArticleCommentRepository;

@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Dto\SearchQuery;
 use App\Entity\Article;
-use App\Entity\Category;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
@@ -44,7 +42,6 @@ class BlogController extends AbstractController
      */
     public function index(Request $request): Response
     {
-
         $page = (int)$request->get('page', 1);
 
         $category = null;
