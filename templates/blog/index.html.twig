@@ -37,6 +37,9 @@
 
               <div class="tab__content">
                 <div class="tab__content-item all-articles-tab active">
+                  {% if articles|length < 1 %}
+                    По вашему запросу ничего не найдено
+                  {% endif %}
                   {% for article in articles %}
                     {% include 'blog/card-blog.html.twig' with {
                       article: article

@@ -13,6 +13,7 @@ class EntityHelper
     {
         return [
             'name' => $article->getName(),
+            'previewText' => $article->getPreviewText(),
             'detailText' => $article->getDetailText(),
             'category' => $article->getCategory()->getId(),
         ];

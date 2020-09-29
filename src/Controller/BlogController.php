@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Dto\SearchQuery;
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Service\SearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,15 +22,18 @@ class BlogController extends AbstractController
 {
     protected const PAGE_ITEM_COUNT = 10;
 
+    protected SearchService $searchService;
     protected ArticleRepository $articleRepository;
     protected CategoryRepository $categoryRepository;
     protected SessionInterface $session;
 
     public function __construct(
+        SearchService $searchService,
         ArticleRepository $articleRepository,
         CategoryRepository $categoryRepository,
         SessionInterface $session
     ) {
+        $this->searchService = $searchService;
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
         $this->session = $session;
@@ -39,23 +44,16 @@ class BlogController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $query = (new SearchQuery())
-            ->setPage((int)($request->get('page', 1)))
-            ->setSearch(['active' => true])
-            ->setPageItemCount(self::PAGE_ITEM_COUNT);
 
-        if ($request->query->has('category') && (int)($request->get('category')) > 0) {
-            $category = $this->categoryRepository->find((int)($request->get('category')));
+        $page = (int)$request->get('page', 1);
 
-            if ($category) {
-                $query->setSearch(array_merge(
-                    $query->getSearch(),
-                    ['category' => $category]
-                ));
-            }
+        $category = null;
+
+        if (($categoryId = (int)$request->get('category')) > 0) {
+            $category = $this->categoryRepository->find($categoryId);
         }
 
-        $searchResult = $this->articleRepository->getPaginatorResult($query);
+        $searchResult = $this->searchService->findArticles($page, $request->get('q', ''), $category ? $category->getId() : null);
 
         $userArticles = [];
 
@@ -65,9 +63,9 @@ class BlogController extends AbstractController
         }
 
         return $this->render('blog/index.html.twig', [
-            'articles' => $searchResult->getItems(),
-            'page' => $searchResult->getCurrentPage(),
-            'total_pages' => $searchResult->getTotalPageCount(),
+            'articles' => $this->articleRepository->findBy(['id' => $searchResult['ids']]),
+            'page' => $page,
+            'total_pages' => $searchResult['total_pages'],
             'user_articles' => $userArticles,
         ]);
     }

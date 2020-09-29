@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
 use App\Search\EntityHelper;
@@ -21,6 +22,10 @@ class SearchService
 
     public function addArticleToIndex(Article $article): void
     {
+        if (!$article->isActive()) {
+            return;
+        }
+
         $this->createEntityIndex(self::TYPE_ARTICLE, $article->getId(), EntityHelper::articleToArray($article));
     }
 
@@ -77,8 +82,43 @@ class SearchService
             ];
         }
 
+        return $this->execSearchRequest(self::TYPE_PROVIDER, $filter);
+    }
 
-        $data = $this->exec("/" . self::TYPE_PROVIDER . "/_search?_source=id", 'GET', $filter);
+    public function findArticles(int $page, string $query, ?int $categoryId): array
+    {
+        $filter = [
+            'size' => self::PAGE_ITEM_COUNT,
+            'from' => ($page - 1) * self::PAGE_ITEM_COUNT,
+            'query' => [
+                'bool' => [
+                    'must' => [],
+                ],
+            ]
+        ];
+
+        if (!empty($query)) {
+            $filter['query']['bool']['must'][] = [
+                'bool' => [
+                    'should' => [
+                        ['match' => ['name' => $query]],
+                        ['match' => ['previewText' => $query]],
+                        ['match' => ['detailText' => $query]],
+                    ],
+                ]
+            ];
+        }
+
+        if ($categoryId !== null) {
+            $filter['query']['bool']['must'][] = ['match' => ['category' => $categoryId]];
+        }
+
+        return $this->execSearchRequest(self::TYPE_ARTICLE, $filter);
+    }
+
+    protected function execSearchRequest(string $type, array $filter): array
+    {
+        $data = $this->exec("/$type/_search?_source=id", 'GET', $filter);
 
         $data = $data['hits'];
 
