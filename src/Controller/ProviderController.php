@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Repository\CategoryRepository;
 use App\Repository\ProviderRepository;
 use App\Service\SearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,13 +20,16 @@ class ProviderController extends AbstractController
     protected const PAGE_ITEM_COUNT = 10;
 
     protected ProviderRepository $providerRepository;
+    protected CategoryRepository $categoryRepository;
     protected SearchService $searchService;
 
     public function __construct(
         ProviderRepository $providerRepository,
+        CategoryRepository $categoryRepository,
         SearchService $searchService
     ) {
         $this->providerRepository = $providerRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->searchService = $searchService;
     }
 
@@ -35,11 +40,29 @@ class ProviderController extends AbstractController
     {
         $page = (int)$request->get('page', 1);
 
-        $searchResult = $this->searchService->findProviders(
-            $page,
-            $request->get('q', ''),
-            [56,58]
-        );
+        $filterCategories = [];
+
+        if (
+            (($subcategoryId = (int)$request->get('subcategory')) > 0) &&
+            ($subcategory = $this->categoryRepository->find($subcategoryId)) !== null
+        ) {
+            $filterCategories[] = $subcategory->getId();
+        }
+
+        if (
+            empty($filterCategories) &&
+            (($categoryId = (int)$request->get('category')) > 0) &&
+            ($category = $this->categoryRepository->find($categoryId)) !== null
+        ) {
+            $filterCategories[] = $category->getId();
+
+            /** @var Category $childCategory */
+            foreach ($category->getChildCategories() as $childCategory) {
+                $filterCategories[] = $childCategory->getId();
+            }
+        }
+
+        $searchResult = $this->searchService->findProviders($page, $request->get('q', ''), $filterCategories);
 
         $providers = $this->providerRepository->findBy(['id' => $searchResult['ids']]);
 

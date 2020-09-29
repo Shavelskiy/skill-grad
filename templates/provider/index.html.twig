@@ -16,7 +16,7 @@
         <i class="icon-more"></i>
       </div>
       <div id="filter" class="mobile-filter-content">
-        {% include 'provider/blocks/filter.html.twig' %}
+        {% include 'provider/blocks/filter.html.twig' with {id: 'provider-filter-mobile'} %}
       </div>
     </div>
     <div class="box">
@@ -38,7 +38,7 @@
       <div class="box-sidebar">
         <div class="container-0">
           <div class="col-lg-12 pr-0">
-            {% include 'provider/blocks/filter.html.twig' %}
+            {% include 'provider/blocks/filter.html.twig' with {id: 'provider-filter'} %}
           </div>
         </div>
       </div>

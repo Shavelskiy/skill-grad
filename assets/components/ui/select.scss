@@ -18,6 +18,10 @@
     opacity: .5;
   }
 
+  &.not-last {
+    margin-bottom: 25px;
+  }
+
   .icon {
     position: absolute;
     height: 16px;

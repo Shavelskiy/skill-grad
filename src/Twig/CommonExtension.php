@@ -33,6 +33,7 @@ class CommonExtension extends AbstractExtension
             new TwigFunction('getUserPhoto', [$this, 'getUserPhoto']),
             new TwigFunction('getNewMessagesCount', [$this, 'getNewMessagesCount']),
             new TwigFunction('getRootCategories', [$this, 'getRootCategories']),
+            new TwigFunction('getChildCategories', [$this, 'getChildCategories']),
         ];
     }
 
@@ -122,5 +123,18 @@ class CommonExtension extends AbstractExtension
     public function getRootCategories(): array
     {
         return $this->categoryRepository->findRootCategories();
+    }
+
+    public function getChildCategories($categoryId): array
+    {
+        if ((int)$categoryId < 1) {
+            return [];
+        }
+
+        if (($category = $this->categoryRepository->find($categoryId)) === null) {
+            return [];
+        }
+
+        return $category->getChildCategories()->toArray();
     }
 }

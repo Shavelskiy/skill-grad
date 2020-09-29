@@ -19,6 +19,10 @@ document.querySelectorAll('.custom-select').forEach(item => {
   })
 
   selectedOption.onclick = () => {
+    if (item.classList.contains('disabled')) {
+      return
+    }
+    
     if (item.classList.contains('opened')) {
       item.classList.remove('opened')
     } else {
@@ -36,6 +40,7 @@ document.querySelectorAll('.custom-select').forEach(item => {
     })
 
     selectedOptionValue.innerHTML = (selectedOption !== null) ? selectedOption.innerHTML : placeholder
+    input.value = (selectedOption !== null) ? selectedOption.dataset.value : ''
   }
 
   initSelect()
