@@ -62,7 +62,9 @@ document.querySelectorAll('.custom-select').forEach(item => {
 
       item.classList.remove('opened')
 
-      form.submit()
+      if (form) {
+        form.submit()
+      }
     }
   })
 

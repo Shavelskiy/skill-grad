@@ -8,7 +8,7 @@ const maxPriceInput = inputs[1]
 const maxPrice = 200000
 const minPrice = 0
 
-const maxValue = priceBlock.querySelector('.price-range').clientWidth - 10
+const maxValue = priceBlock.querySelector('.price-range').clientWidth - 12
 const minValue = 0
 
 const minThumb = priceBlock.querySelector('.min-price-thumb')
@@ -86,7 +86,7 @@ const getPriceFromEventValue = (event) => {
   return value
 }
 
-const init = () => {
+const initPriceRange = () => {
   moveMinThumb(minValue)
   moveMaxThumb(maxValue)
 
@@ -142,4 +142,4 @@ const init = () => {
   }
 }
 
-init()
+initPriceRange()

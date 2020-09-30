@@ -1,95 +1,118 @@
 {% set filters = getProgramFilters() %}
 
-<form class="form-filter program-filter" action="#">
-  {#  <div class="input-search-gray">#}
-  {#    <input class="input search" type="text" placeholder="Поиск по каталогу">#}
-  {#    <i class="icon-search"></i>#}
-  {#  </div>#}
-  {#  <div class="category">#}
-  {#    <span class="filter-title">По категории:</span>#}
-  {#    <div class="select custom-select-wrapper">#}
-  {#      <div class="custom-select">#}
-  {#        <div class="custom-select__trigger"><span>Выберите категорию</span>#}
-  {#          <div class="arrow"></div>#}
-  {#        </div>#}
-  {#        <div class="custom-options scrollbar">#}
-  {#          <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 2</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 3</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 4</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 5</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 6</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 7</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 8</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 9</span>#}
-  {#        </div>#}
-  {#      </div>#}
-  {#    </div>#}
-  {#    <div class="select custom-select-wrapper">#}
-  {#      <div class="custom-select">#}
-  {#        <div class="custom-select__trigger"><span>Выберите подкатегорию</span>#}
-  {#          <div class="arrow"></div>#}
-  {#        </div>#}
-  {#        <div class="custom-options">#}
-  {#          <span class="custom-option category-option selected" data-value="tesla">Категория 1</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 2</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 3</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 4</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 5</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 6</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 7</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Категория 8</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Категория 9</span>#}
-  {#        </div>#}
-  {#      </div>#}
-  {#    </div>#}
-  {#  </div>#}
-  {#  <div class="rating">#}
-  {#    <span class="filter-title">По рейтингу программы:</span>#}
-  {#    <div class="select custom-select-wrapper">#}
-  {#      <div class="custom-select">#}
-  {#        <div class="custom-select__trigger"><span>Выберите рейтинг</span>#}
-  {#          <div class="arrow"></div>#}
-  {#        </div>#}
-  {#        <div class="custom-options scrollbar">#}
-  {#          <span class="custom-option category-option selected" data-value="tesla">Tesla</span>#}
-  {#          <span class="custom-option category-option" data-value="volvo">Volvo</span>#}
-  {#          <span class="custom-option category-option" data-value="mercedes">Mercedes</span>#}
-  {#        </div>#}
-  {#      </div>#}
-  {#    </div>#}
-  {#  </div>#}
-  {#  <div class="format">#}
-  {#    <span class="filter-title">По формату обучения:</span>#}
-  {#    {% for format in filters.formats %}#}
-  {#      <label class="circle-checkbox">#}
-  {#        {{ format.name }}#}
-  {#        <input type="checkbox">#}
-  {#        <span class="checkmark"></span>#}
-  {#      </label>#}
-  {#    {% endfor %}#}
-  {#  </div>#}
-  {#  <div class="practice">#}
-  {#    <span class="filter-title">Теория и практика:</span>#}
-  {#    <div class="practice-container">#}
-  {#      Практики не менее <input class="input" type="number" min="0" max="100"/> %#}
-  {#    </div>#}
-  {#  </div>#}
-  {#  <div class="level">#}
-  {#    <span class="filter-title">Уровень:</span>#}
-  {#    <div class="select custom-select-wrapper">#}
-  {#      <div class="custom-select">#}
-  {#        <div class="custom-select__trigger"><span>Выберите уровень</span>#}
-  {#          <div class="arrow"></div>#}
-  {#        </div>#}
-  {#        <div class="custom-options scrollbar">#}
-  {#          <span class="custom-option category-option selected" data-value="tesla">Уровень 1</span>#}
-  {#          <span class="custom-option category-option selected" data-value="tesla">Уровень 2</span>#}
-  {#          <span class="custom-option category-option selected" data-value="tesla">Уровень 3</span>#}
-  {#        </div>#}
-  {#      </div>#}
-  {#    </div>#}
-  {#  </div>#}
+<form id="program-filter" class="form-filter program-filter" action="#">
+  <div class="input-search-gray">
+    <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по каталогу">
+    <i class="icon-search"></i>
+  </div>
+  <div class="category">
+    <span class="filter-title">По категории:</span>
+    <div class="custom-select not-last" data-placeholder="Выберите категорию" data-form-id="program-filter">
+      <input name="category" value="">
+      <input type="submit">
+      <div class="selected-option">
+        <span class="selected-option-value"></span>
+        <span class="icon"></span>
+      </div>
+      <div class="options-container">
+        <div class="options">
+          {% for category in getRootCategories() %}
+            <div data-value="{{ category.id }}"
+                 class="option {{ app.request.get('category') == category.id ? 'active' : '' }}">
+              {{ category.name }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    {% set childCategories = getChildCategories(app.request.get('category')) %}
+    <div class="custom-select {{ childCategories|length < 1 ? 'disabled' : '' }}"
+         data-placeholder="Выберите подкатегорию">
+      <input name="subcategory" value="">
+      <input type="submit">
+      <div class="selected-option">
+        <span class="selected-option-value"></span>
+        <span class="icon"></span>
+      </div>
+      <div class="options-container">
+        <div class="options">
+          {% for category in getChildCategories(app.request.get('category')) %}
+            <div data-value="{{ category.id }}"
+                 class="option {{ app.request.get('subcategory') == category.id ? 'active' : '' }}">
+              {{ category.name }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="filter-title">По рейтингу программы:</span>
+    <div class="custom-select" data-placeholder="Выберите рейтинг">
+      <input name="rating" value="">
+      <input type="submit">
+      <div class="selected-option">
+        <span class="selected-option-value"></span>
+        <span class="icon"></span>
+      </div>
+      <div class="options-container">
+        <div class="options">
+          <div data-value="2" class="option">
+            Не меньше 2
+          </div>
+          <div data-value="3" class="option">
+            Не меньше 3
+          </div>
+          <div data-value="4" class="option">
+            Не меньше 4
+          </div>
+          <div data-value="5" class="option">
+            5
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="format">
+    <span class="filter-title">По формату обучения:</span>
+    {% for format in filters.formats %}
+      <label class="circle-checkbox">
+        {{ format.name }}
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+    {% endfor %}
+  </div>
+
+  <div class="practice">
+    <span class="filter-title">Теория и практика:</span>
+    <div class="practice-container">
+      Практики не менее <input class="input" type="number" min="0" max="100"/> %
+    </div>
+  </div>
+
+  <div class="level">
+    <span class="filter-title">Уровень:</span>
+    <div class="custom-select" data-placeholder="Выберите уровень">
+      <input name="level" value="">
+      <div class="selected-option">
+        <span class="selected-option-value"></span>
+        <span class="icon"></span>
+      </div>
+      <div class="options-container">
+        <div class="options">
+          {% for level in filters.levels %}
+            <div data-value="{{ level.id }}" class="option {{ app.request.get('level') == level.id ? 'active' : '' }}">
+              {{ level.title }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="price">
     <span class="filter-title">Стоимость:</span>
@@ -117,7 +140,7 @@
     <span class="open-city-selector-modal-btn change-city">Изменить город</span>
   </div>
   <div class="button-container">
-    <button class="button-red">Сохранить</button>
+    <button type="submit" class="button-red">Сохранить</button>
     <a href="#">Сбросить фильтр</a>
   </div>
 </form>
