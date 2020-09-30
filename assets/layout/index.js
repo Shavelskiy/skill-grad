@@ -8,5 +8,6 @@ import '@/components/common/program-request'
 import '@/components/chat'
 import '@/components/common/blog-likes'
 import '@/components/common/select'
+import '@/components/common/program-filter'
 
 import './index.scss'

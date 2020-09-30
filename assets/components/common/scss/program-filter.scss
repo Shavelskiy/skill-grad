@@ -1,0 +1,44 @@
+.program-filter {
+
+  .price {
+    .range-title {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .price-range {
+      margin: 23px 0;
+
+      .track {
+        width: 100%;
+        background-color: #f3f3f3;
+        height: 4px;
+        position: relative;
+      }
+
+      .thumb {
+        cursor: pointer;
+        position: absolute;
+        top: -8px;
+        width: 10px;
+        height: 20px;
+        border-radius: 5px;
+        background-color: #f92e25;
+      }
+
+      .range-progress {
+        height: 4px;
+        background-color: red;
+      }
+    }
+
+    .price-range-inputs {
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        width: calc(100% / 3);
+      }
+    }
+  }
+}
