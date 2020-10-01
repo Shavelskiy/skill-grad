@@ -59,16 +59,16 @@
       </div>
       <div class="options-container">
         <div class="options">
-          <div data-value="2" class="option">
+          <div data-value="2" class="option {{ app.request.get('rating') == 2 ? 'active' : '' }}">
             Не меньше 2
           </div>
-          <div data-value="3" class="option">
+          <div data-value="3" class="option {{ app.request.get('rating') == 3 ? 'active' : '' }}">
             Не меньше 3
           </div>
-          <div data-value="4" class="option">
+          <div data-value="4" class="option {{ app.request.get('rating') == 4 ? 'active' : '' }}">
             Не меньше 4
           </div>
-          <div data-value="5" class="option">
+          <div data-value="5" class="option {{ app.request.get('rating') == 5 ? 'active' : '' }}">
             5
           </div>
         </div>
@@ -78,10 +78,14 @@
 
   <div class="format">
     <span class="filter-title">По формату обучения:</span>
+    {% set requestFormats = app.request.get('formats') %}
     {% for format in filters.formats %}
       <label class="circle-checkbox">
         {{ format.name }}
-        <input type="checkbox">
+        <input {{ requestFormats[format.id] is defined ? 'checked' : '' }}
+                type="checkbox"
+                name="formats[{{ format.id }}]"
+        >
         <span class="checkmark"></span>
       </label>
     {% endfor %}
@@ -90,7 +94,7 @@
   <div class="practice">
     <span class="filter-title">Теория и практика:</span>
     <div class="practice-container">
-      Практики не менее <input class="input" type="number" min="0" max="100"/> %
+      Практики не менее <input class="input" name="practice" type="number" value="{{ app.request.get('practice') }}"/> %
     </div>
   </div>
 
@@ -128,11 +132,10 @@
       </div>
     </div>
     <div class="price-range-inputs">
-      <input class="input" min="0" type="number">
-      <input class="input" min="0" type="number">
+      <input class="input" type="number" name="min_price" value="{{ app.request.get('min_price') }}">
+      <input class="input" type="number" name="max_price" value="{{ app.request.get('max_price') }}">
     </div>
   </div>
-
 
   <div class="city">
     <strong class="change-city-title open-city-selector-modal-btn">Выбор города:</strong>
@@ -141,6 +144,6 @@
   </div>
   <div class="button-container">
     <button type="submit" class="button-red">Сохранить</button>
-    <a href="#">Сбросить фильтр</a>
+    <a href="{{ path('program.index') }}">Сбросить фильтр</a>
   </div>
 </form>

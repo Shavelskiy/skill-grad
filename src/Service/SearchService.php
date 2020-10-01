@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Entity\Article;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
-use App\Search\EntityHelper;
 
 class SearchService
 {
@@ -19,23 +18,31 @@ class SearchService
 
     protected const PAGE_ITEM_COUNT = 10;
 
+    protected EntityMapper $entityMapper;
+
+    public function __construct(
+        EntityMapper $entityMapper
+    ) {
+        $this->entityMapper = $entityMapper;
+    }
+
     public function addArticleToIndex(Article $article): void
     {
         if (!$article->isActive()) {
             return;
         }
 
-        $this->createEntityIndex(self::TYPE_ARTICLE, $article->getId(), EntityHelper::articleToArray($article));
+        $this->createEntityIndex(self::TYPE_ARTICLE, $article->getId(), $this->entityMapper->articleToArray($article));
     }
 
     public function addProviderToIndex(Provider $provider): void
     {
-        $this->createEntityIndex(self::TYPE_PROVIDER, $provider->getId(), EntityHelper::providerToArray($provider));
+        $this->createEntityIndex(self::TYPE_PROVIDER, $provider->getId(), $this->entityMapper->providerToArray($provider));
     }
 
     public function addProgramToIndex(Program $program): void
     {
-        $this->createEntityIndex(self::TYPE_PROGRAM, $program->getId(), EntityHelper::programToArray($program));
+        $this->createEntityIndex(self::TYPE_PROGRAM, $program->getId(), $this->entityMapper->programToArray($program));
     }
 
     public function createEntityIndex(string $type, int $entityId, array $data): void
@@ -66,19 +73,7 @@ class SearchService
             ];
         }
 
-        if (!empty($categories)) {
-            $categoryQuery = [];
-
-            foreach ($categories as $category) {
-                $categoryQuery[] = ['match' => ['categories' => $category]];
-            }
-
-            $filter['query']['bool']['must'][] = [
-                'bool' => [
-                    'should' => $categoryQuery,
-                ],
-            ];
-        }
+        $filter = $this->applyCategoriesToFilter($filter, $categories);
 
         return $this->execSearchRequest(self::TYPE_PROVIDER, $filter);
     }
@@ -112,6 +107,54 @@ class SearchService
         }
 
         return $this->execSearchRequest(self::TYPE_ARTICLE, $filter);
+    }
+
+    public function findPrograms(int $page, string $query, array $categories): array
+    {
+        $filter = [
+            'size' => self::PAGE_ITEM_COUNT,
+            'from' => ($page - 1) * self::PAGE_ITEM_COUNT,
+            'query' => [
+                'bool' => [
+                    'must' => [],
+                ],
+            ],
+        ];
+
+        if (!empty($query)) {
+            $filter['query']['bool']['must'][] = [
+                'bool' => [
+                    'should' => [
+                        ['match' => ['name' => $query]],
+                        ['match' => ['annotation' => $query]],
+                        ['match' => ['description' => $query]],
+                    ],
+                ],
+            ];
+        }
+
+        $filter = $this->applyCategoriesToFilter($filter, $categories);
+
+        return $this->execSearchRequest(self::TYPE_PROGRAM, $filter);
+    }
+
+    protected function applyCategoriesToFilter(array $filter, array $categories): array
+    {
+        if (!empty($categories)) {
+            $categoryQuery = [];
+
+            foreach ($categories as $category) {
+                $categoryQuery[] = ['match' => ['categories' => $category]];
+            }
+
+            $filter['query']['bool']['must'][] = [
+                'bool' => [
+                    'should' => $categoryQuery,
+                ],
+            ];
+        }
+
+        return $filter;
     }
 
     protected function execSearchRequest(string $type, array $filter): array

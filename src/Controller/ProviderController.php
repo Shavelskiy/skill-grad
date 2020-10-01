@@ -2,13 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ProviderRepository;
 use App\Service\SearchService;
-use Exception;
-use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,13 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/provider")
  */
-class ProviderController extends AbstractController
+class ProviderController extends BaseCatalogRepository
 {
     protected const PAGE_ITEM_COUNT = 10;
 
     protected ProviderRepository $providerRepository;
-    protected CategoryRepository $categoryRepository;
-    protected SearchService $searchService;
 
     public function __construct(
         ProviderRepository $providerRepository,
@@ -40,35 +34,13 @@ class ProviderController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $page = (int)$request->get('page', 1);
+        $page = $this->getPageFromRequest($request);
 
-        $filterCategories = [];
-
-        if (
-            (($categoryId = (int)$request->get('category')) > 0) &&
-            ($category = $this->categoryRepository->find($categoryId)) !== null
-        ) {
-            $filterCategories[] = $category->getId();
-
-            try {
-                if (($subcategoryId = (int)$request->get('subcategory')) < 1) {
-                    throw new RuntimeException('');
-                }
-
-                if (($subcategory = $this->categoryRepository->find($subcategoryId)) === null) {
-                    throw new RuntimeException('');
-                }
-
-                $filterCategories[] = $subcategory->getId();
-            } catch (Exception $e) {
-                /** @var Category $childCategory */
-                foreach ($category->getChildCategories() as $childCategory) {
-                    $filterCategories[] = $childCategory->getId();
-                }
-            }
-        }
-
-        $searchResult = $this->searchService->findProviders($page, $request->get('q', ''), $filterCategories);
+        $searchResult = $this->searchService->findProviders(
+            $page,
+            $this->getQueryFromRequest($request),
+            $this->getCategoriesFromRequest($request)
+        );
 
         $providers = $this->providerRepository->findBy(['id' => $searchResult['ids']]);
 

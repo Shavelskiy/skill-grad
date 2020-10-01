@@ -8,6 +8,9 @@ const maxPriceInput = inputs[1]
 const maxPrice = 200000
 const minPrice = 0
 
+const formatPrice = (value) => Math.round(value * maxPrice / maxValue)
+const formatValue = (value) => Math.round(value * maxValue / maxPrice)
+
 const maxValue = priceBlock.querySelector('.price-range').clientWidth - 12
 const minValue = 0
 
@@ -19,7 +22,7 @@ let minThumbClicked = false
 let minThumbLeft = 0
 
 let maxThumbClicked = false
-let maxThumbLeft = maxValue
+let maxThumbLeft = 0
 
 const moveMinThumb = (offset) => {
   minThumbLeft += offset
@@ -69,9 +72,6 @@ const updateProgress = () => {
   progress.style.width = `${maxThumbLeft - minThumbLeft}px`
 }
 
-const formatPrice = (value) => Math.round(value * maxPrice / maxValue)
-const formatValue = (value) => Math.round(value * maxValue / maxPrice)
-
 const getPriceFromEventValue = (event) => {
   const value = Number(event.target.value)
 
@@ -87,8 +87,14 @@ const getPriceFromEventValue = (event) => {
 }
 
 const initPriceRange = () => {
-  moveMinThumb(minValue)
-  moveMaxThumb(maxValue)
+  minPriceInput.value = String(minPriceInput.value) !== '' ? Number(minPriceInput.value) : minPrice
+  maxPriceInput.value = String(maxPriceInput.value) !== '' ? Number(maxPriceInput.value) : maxPrice
+
+  minThumbLeft = formatValue(minPriceInput.value)
+  moveThumb(minThumb, minThumbLeft)
+
+  maxThumbLeft = formatValue(maxPriceInput.value)
+  moveThumb(maxThumb, maxThumbLeft)
 
   document.addEventListener('mousedown', (event) => {
     if (event.target === minThumb) {

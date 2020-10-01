@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Service\SearchService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -16,13 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/blog")
  */
-class BlogController extends AbstractController
+class BlogController extends BaseCatalogRepository
 {
     protected const PAGE_ITEM_COUNT = 10;
 
-    protected SearchService $searchService;
     protected ArticleRepository $articleRepository;
-    protected CategoryRepository $categoryRepository;
     protected SessionInterface $session;
 
     public function __construct(
@@ -42,7 +39,7 @@ class BlogController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $page = (int)$request->get('page', 1);
+        $page = $this->getPageFromRequest($request);
 
         $category = null;
 
@@ -50,7 +47,11 @@ class BlogController extends AbstractController
             $category = $this->categoryRepository->find($categoryId);
         }
 
-        $searchResult = $this->searchService->findArticles($page, $request->get('q', ''), $category ? $category->getId() : null);
+        $searchResult = $this->searchService->findArticles(
+            $page,
+            $this->getQueryFromRequest($request),
+            $category ? $category->getId() : null
+        );
 
         $userArticles = [];
 
