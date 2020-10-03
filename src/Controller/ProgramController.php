@@ -42,12 +42,7 @@ class ProgramController extends BaseCatalogRepository
     {
         $page = $this->getPageFromRequest($request);
 
-
-        $searchResult = $this->searchService->findPrograms(
-            $page,
-            $this->getQueryFromRequest($request),
-            $this->getCategoriesFromRequest($request)
-        );
+        $searchResult = $this->getProgramSearchResult($request, $page);
 
         return $this->render('program/index.html.twig', [
             'programs' => $this->programRepository->findBy(['id' => $searchResult['ids']]),

@@ -1,12 +1,19 @@
 {% set filters = getProgramFilters() %}
 
+<div class="mobile-filter">
+  <div id="open-mobile-filter" class="mobile-filter-header">
+    Фильтр поиска
+    <i class="icon-more"></i>
+  </div>
+</div>
+
 <form id="program-filter" class="form-filter program-filter" action="#">
   <div class="input-search-gray">
     <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по каталогу">
     <i class="icon-search"></i>
   </div>
   <div class="category">
-    <span class="filter-title">По категории:</span>
+    <span class="filter-title"><strong>По категории:</strong></span>
     <div class="custom-select not-last" data-placeholder="Выберите категорию" data-form-id="program-filter">
       <input name="category" value="">
       <input type="submit">
@@ -49,7 +56,7 @@
   </div>
 
   <div class="rating">
-    <span class="filter-title">По рейтингу программы:</span>
+    <span class="filter-title"><strong>По рейтингу программы:</strong></span>
     <div class="custom-select" data-placeholder="Выберите рейтинг">
       <input name="rating" value="">
       <input type="submit">
@@ -77,7 +84,7 @@
   </div>
 
   <div class="format">
-    <span class="filter-title">По формату обучения:</span>
+    <span class="filter-title"><strong>По формату обучения:</strong></span>
     {% set requestFormats = app.request.get('formats') %}
     {% for format in filters.formats %}
       <label class="circle-checkbox">
@@ -92,14 +99,14 @@
   </div>
 
   <div class="practice">
-    <span class="filter-title">Теория и практика:</span>
+    <span class="filter-title"><strong>Теория и практика:</strong></span>
     <div class="practice-container">
       Практики не менее <input class="input" name="practice" type="number" value="{{ app.request.get('practice') }}"/> %
     </div>
   </div>
 
   <div class="level">
-    <span class="filter-title">Уровень:</span>
+    <span class="filter-title"><strong>Уровень:</strong></span>
     <div class="custom-select" data-placeholder="Выберите уровень">
       <input name="level" value="">
       <div class="selected-option">
@@ -119,7 +126,7 @@
   </div>
 
   <div class="price">
-    <span class="filter-title">Стоимость:</span>
+    <span class="filter-title"><strong>Стоимость:</strong></span>
     <div class="range-title">
       <span>от</span>
       <span>до</span>
@@ -144,6 +151,6 @@
   </div>
   <div class="button-container">
     <button type="submit" class="button-red">Сохранить</button>
-    <a href="{{ path('program.index') }}">Сбросить фильтр</a>
+    <a href="{{ path(resetPath) }}">Сбросить фильтр</a>
   </div>
 </form>

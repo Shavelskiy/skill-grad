@@ -15,14 +15,42 @@ abstract class BaseCatalogRepository extends AbstractController
     protected SearchService $searchService;
     protected CategoryRepository $categoryRepository;
 
-    protected function getPageFromRequest(Request $request): int
+    protected function getPageFromRequest(Request $request, string $pageKey = 'page'): int
     {
-        return (int)$request->get('page', 1);
+        return (int)$request->get($pageKey, 1);
     }
 
     protected function getQueryFromRequest(Request $request): string
     {
         return $request->get('q', '');
+    }
+
+    protected function getProgramSearchResult(Request $request, int $page): array
+    {
+        return $this->searchService->findPrograms(
+            $page,
+            $this->getQueryFromRequest($request),
+            $this->getCategoriesFromRequest($request),
+            array_keys($request->get('formats', []))
+        );
+    }
+
+    protected function getProviderSearchResult(Request $request, int $page): array
+    {
+        return $this->searchService->findProviders(
+            $page,
+            $this->getQueryFromRequest($request),
+            $this->getCategoriesFromRequest($request)
+        );
+    }
+
+    protected function getArticleSearchResult(Request $request, int $page): array
+    {
+        return $this->searchService->findArticles(
+            $page,
+            $this->getQueryFromRequest($request),
+            $this->getCategoryFromRequest($request)
+        );
     }
 
     protected function getCategoriesFromRequest(Request $request): array
@@ -54,5 +82,16 @@ abstract class BaseCatalogRepository extends AbstractController
         }
 
         return $filterCategories;
+    }
+
+    protected function getCategoryFromRequest(Request $request): ?int
+    {
+        $category = null;
+
+        if (($categoryId = (int)$request->get('category')) > 0) {
+            $category = $this->categoryRepository->find($categoryId);
+        }
+
+        return $category ? $category->getId() : null;
     }
 }

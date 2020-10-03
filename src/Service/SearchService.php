@@ -73,7 +73,7 @@ class SearchService
             ];
         }
 
-        $filter = $this->applyCategoriesToFilter($filter, $categories);
+        $filter = $this->applyArrayToFilter('categories', $filter, $categories);
 
         return $this->execSearchRequest(self::TYPE_PROVIDER, $filter);
     }
@@ -109,7 +109,7 @@ class SearchService
         return $this->execSearchRequest(self::TYPE_ARTICLE, $filter);
     }
 
-    public function findPrograms(int $page, string $query, array $categories): array
+    public function findPrograms(int $page, string $query, array $categories, array $formats): array
     {
         $filter = [
             'size' => self::PAGE_ITEM_COUNT,
@@ -133,18 +133,19 @@ class SearchService
             ];
         }
 
-        $filter = $this->applyCategoriesToFilter($filter, $categories);
+        $filter = $this->applyArrayToFilter('categories', $filter, $categories);
+        $filter = $this->applyArrayToFilter('format', $filter, $formats);
 
         return $this->execSearchRequest(self::TYPE_PROGRAM, $filter);
     }
 
-    protected function applyCategoriesToFilter(array $filter, array $categories): array
+    protected function applyArrayToFilter(string $field, array $filter, array $categories): array
     {
         if (!empty($categories)) {
             $categoryQuery = [];
 
             foreach ($categories as $category) {
-                $categoryQuery[] = ['match' => ['categories' => $category]];
+                $categoryQuery[] = ['match' => [$field => $category]];
             }
 
             $filter['query']['bool']['must'][] = [
@@ -170,6 +171,7 @@ class SearchService
         }
 
         return [
+            'total_items' => $data['total'],
             'total_pages' => ceil($data['total'] / self::PAGE_ITEM_COUNT),
             'ids' => $ids,
         ];

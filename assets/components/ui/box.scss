@@ -1,0 +1,54 @@
+.box {
+  display: flex;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    flex-direction: column;
+  }
+
+  .box-content {
+    flex: 1 1 70%;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      order: 2;
+
+      &.show {
+        .col-lg-12 {
+          padding-right: 3%;
+          padding-left: 3%;
+        }
+      }
+    }
+
+    &.faq {
+      flex: 1 1 65%;
+    }
+  }
+
+  .box-sidebar {
+    flex: 1 1 30%;
+    padding-left: 34px;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      &.show {
+        display: flex;
+
+        .col-lg-12 {
+          padding-left: 0;
+        }
+      }
+    }
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      order: 1;
+    }
+
+    &.faq {
+      flex: 1 1 35%;
+      margin-right: 40px;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        margin-right: 0;
+      }
+    }
+  }
+}

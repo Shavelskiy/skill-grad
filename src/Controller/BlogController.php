@@ -41,17 +41,7 @@ class BlogController extends BaseCatalogRepository
     {
         $page = $this->getPageFromRequest($request);
 
-        $category = null;
-
-        if (($categoryId = (int)$request->get('category')) > 0) {
-            $category = $this->categoryRepository->find($categoryId);
-        }
-
-        $searchResult = $this->searchService->findArticles(
-            $page,
-            $this->getQueryFromRequest($request),
-            $category ? $category->getId() : null
-        );
+        $searchResult = $this->getArticleSearchResult($request, $page);
 
         $userArticles = [];
 

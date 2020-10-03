@@ -36,11 +36,7 @@ class ProviderController extends BaseCatalogRepository
     {
         $page = $this->getPageFromRequest($request);
 
-        $searchResult = $this->searchService->findProviders(
-            $page,
-            $this->getQueryFromRequest($request),
-            $this->getCategoriesFromRequest($request)
-        );
+        $searchResult = $this->getProviderSearchResult($request, $page);
 
         $providers = $this->providerRepository->findBy(['id' => $searchResult['ids']]);
 

@@ -429,14 +429,6 @@ textarea {
   width: 30% !important;
 }
 
-.mr-20 {
-  margin-right: 20px !important;
-}
-
-.pl-15 {
-  padding-left: 15px !important;
-}
-
 .pl-0 {
   padding-left: 0;
 }
@@ -467,10 +459,6 @@ textarea {
 
 .mb-20 {
   margin-bottom: 20px !important;
-}
-
-.mb-0 {
-  margin-bottom: 0 !important;
 }
 
 .pb-20 {
@@ -588,65 +576,6 @@ textarea {
   & [class^="main"] {
     margin-top: 60px;
     margin-bottom: 60px;
-  }
-}
-
-.box {
-  display: flex;
-
-  @media (min-width: 320px) and (max-width: 1023px) {
-    flex-direction: column;
-  }
-
-  & > &-content {
-    flex: 1 1 70%;
-
-    @media (min-width: 320px) and (max-width: 1023px) {
-      order: 2;
-      &.show {
-        .col-lg-12 {
-          padding-right: 3%;
-          padding-left: 3%;
-        }
-      }
-    }
-
-    &.faq {
-      flex: 1 1 65%;
-    }
-  }
-
-  & > &-sidebar {
-    flex: 1 1 30%;
-
-    @media (min-width: 320px) and (max-width: 1023px) {
-      display: none;
-
-      &.show {
-        display: flex;
-
-        .col-lg-12 {
-          padding-left: 0;
-        }
-      }
-    }
-
-    @media (min-width: 320px) and (max-width: 767px) {
-      order: 1;
-    }
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      display: none;
-    }
-
-    &.faq {
-      flex: 1 1 35%;
-      margin-right: 40px;
-
-      @media (min-width: 320px) and (max-width: 1023px) {
-        margin-right: 0;
-      }
-    }
   }
 }
 

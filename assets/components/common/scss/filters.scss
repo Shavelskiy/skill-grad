@@ -5,6 +5,10 @@
     line-height: 16px;
     display: block;
     margin-bottom: 20px;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      text-align: center;
+    }
   }
 
   & .format {
@@ -106,15 +110,6 @@
       position: absolute;
       right: 20px;
       font-size: 25px;
-    }
-  }
-
-  &-content {
-    display: none;
-    padding: 15px;
-
-    &.active {
-      display: block;
     }
   }
 }
