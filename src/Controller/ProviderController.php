@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Program\Program;
+use App\Entity\Program\ProgramGallery;
+use App\Entity\Provider;
 use App\Repository\CategoryRepository;
+use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use App\Service\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,13 +21,16 @@ class ProviderController extends BaseCatalogRepository
     protected const PAGE_ITEM_COUNT = 10;
 
     protected ProviderRepository $providerRepository;
+    protected ProgramRepository $programRepository;
 
     public function __construct(
         ProviderRepository $providerRepository,
+        ProgramRepository $programRepository,
         CategoryRepository $categoryRepository,
         SearchService $searchService
     ) {
         $this->providerRepository = $providerRepository;
+        $this->programRepository = $programRepository;
         $this->categoryRepository = $categoryRepository;
         $this->searchService = $searchService;
     }
@@ -57,17 +63,26 @@ class ProviderController extends BaseCatalogRepository
     }
 
     /**
-     * @Route("/{id}", name="provider.view", methods={"GET"})
+     * @Route("/{provider}", name="provider.view", methods={"GET"})
      */
-    public function view(int $id): Response
+    public function view(Provider $provider, Request $request): Response
     {
-        $provider = $this->providerRepository->find($id);
+        $searchResult = $this->getProgramSearchResult($request, 0, [$provider->getId()]);
+        $programs = $this->programRepository->findBy(['id' => $searchResult['ids']]);
 
-        if ($provider === null) {
-            throw  new NotFoundHttpException('');
+        $gallery = [];
+
+        /** @var Program $program */
+        foreach ($programs as $program) {
+            /** @var ProgramGallery $gallery */
+            foreach ($program->getGallery() as $gallery) {
+                $gallery[] = $gallery;
+            }
         }
 
         return $this->render('provider/view.html.twig', [
+            'programs' => $programs,
+            'gallery' => $gallery,
             'provider' => $provider,
         ]);
     }

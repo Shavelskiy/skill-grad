@@ -14,12 +14,16 @@
     <ul class="dropdown__menu">
       {% for menuItem in getMenuItems() %}
         <li class="dropdown__menu-item">
-          <a class="main-category-link" href="#">{{ menuItem.name }}</a>
+          <a class="main-category-link" href="{{ path('app.search', {category: menuItem.id}) }}">
+            {{ menuItem.name }}
+          </a>
           <span class="dropdown__menu-icon"></span>
           <ul class="dropdown__right">
             {% for childMenuItem in menuItem.childCategories %}
               <li>
-                <a href="#">{{ childMenuItem.name }}</a>
+                <a href="{{ path('app.search', {category: menuItem.id ,subcategory: childMenuItem.id}) }}">
+                  {{ childMenuItem.name }}
+                </a>
               </li>
             {% endfor %}
           </ul>

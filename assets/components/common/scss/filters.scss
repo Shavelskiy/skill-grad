@@ -1,4 +1,19 @@
 .form-filter {
+  transition: .8s all ease-out;
+  overflow: hidden;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    max-height: 0;
+  }
+
+  &.active {
+    max-height: 1500px;
+  }
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    margin-bottom: 20px;
+  }
+
   & .filter-title {
     font-size: 18px;
     font-weight: 700;

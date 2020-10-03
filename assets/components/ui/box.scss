@@ -10,13 +10,6 @@
 
     @media (min-width: 320px) and (max-width: 1023px) {
       order: 2;
-
-      &.show {
-        .col-lg-12 {
-          padding-right: 3%;
-          padding-left: 3%;
-        }
-      }
     }
 
     &.faq {
@@ -29,12 +22,10 @@
     padding-left: 34px;
 
     @media (min-width: 320px) and (max-width: 1023px) {
+      padding-left: 0;
+
       &.show {
         display: flex;
-
-        .col-lg-12 {
-          padding-left: 0;
-        }
       }
     }
 

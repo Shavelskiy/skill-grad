@@ -63,6 +63,7 @@ class EntityMapper
             'format' => ($programFormat['type'] !== Program::OTHER) ? $programFormat['value'] : 0,
             'rating' => $this->programService->getAverageRating($program),
             'categories' => $program->getCategories()->map(fn(Category $category) => $category->getId())->toArray(),
+            'providers' => $program->getProviders()->map(fn(Provider $provider) => $provider->getId())->toArray(),
         ];
     }
 }

@@ -63,12 +63,14 @@ class MenuExtension extends AbstractExtension
             /** @var Category $childCategory */
             foreach ($rootCategory->getChildCategories() as $childCategory) {
                 $childCategories[] = [
+                    'id' => $childCategory->getId(),
                     'name' => $childCategory->getName(),
                     'slug' => $childCategory->getSlug(),
                 ];
             }
 
             $result[] = [
+                'id' => $rootCategory->getId(),
                 'name' => $rootCategory->getName(),
                 'childCategories' => $childCategories,
             ];

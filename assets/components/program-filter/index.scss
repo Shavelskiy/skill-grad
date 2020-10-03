@@ -1,16 +1,4 @@
 .program-filter {
-  transition: .8s all ease-out;
-  overflow: hidden;
-
-  @media (min-width: 320px) and (max-width: 1023px) {
-    max-height: 0;
-    margin-bottom: 20px;
-  }
-
-  &.active {
-    max-height: 1500px;
-  }
-
   .price {
     .range-title {
       display: flex;

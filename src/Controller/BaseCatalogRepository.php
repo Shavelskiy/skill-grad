@@ -25,13 +25,14 @@ abstract class BaseCatalogRepository extends AbstractController
         return $request->get('q', '');
     }
 
-    protected function getProgramSearchResult(Request $request, int $page): array
+    protected function getProgramSearchResult(Request $request, int $page, array $providers = []): array
     {
         return $this->searchService->findPrograms(
             $page,
             $this->getQueryFromRequest($request),
             $this->getCategoriesFromRequest($request),
-            array_keys($request->get('formats', []))
+            array_keys($request->get('formats', [])),
+            $providers
         );
     }
 

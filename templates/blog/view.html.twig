@@ -38,7 +38,7 @@
                   <p class="text">
                     <strong>Автор статьи:</strong>
                     {% if  article.author.provider is not null %}
-                      <a href="{{ path('provider.view', {id: article.author.provider.id }) }}">
+                      <a href="{{ path('provider.view', {provider: article.author.provider.id }) }}">
                         {{ article.author.provider.name }}
                       </a>
                     {% else %}

@@ -16,19 +16,4 @@ if (programFilter !== null) {
       practiceInput.value = 0
     }
   }
-
-  const mobileFilterToggle = document.getElementById('open-mobile-filter')
-  const mobileFilterToggleIcon = mobileFilterToggle.querySelector('i')
-
-  mobileFilterToggle.onclick = () => {
-    if (programFilter.classList.contains('active')) {
-      programFilter.classList.remove('active')
-      mobileFilterToggleIcon.classList.remove('icon-no-entry')
-      mobileFilterToggleIcon.classList.add('icon-more')
-    } else {
-      programFilter.classList.add('active')
-      mobileFilterToggleIcon.classList.remove('icon-more')
-      mobileFilterToggleIcon.classList.add('icon-no-entry')
-    }
-  }
 }

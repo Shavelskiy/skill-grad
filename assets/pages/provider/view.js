@@ -1,4 +1,5 @@
 import { feedbackModal } from '@/components/modal'
+import {insertParam} from '@/helpers/location-helper'
 import './view.scss'
 
 document.addEventListener('keydown', function (event) {
@@ -23,6 +24,7 @@ const initNavClick = (nav) => {
 
     switch (nav) {
       case navDescription:
+        insertParam('tab', 'description')
         navProgram.classList.remove('active')
         navGallery.classList.remove('active')
 
@@ -33,6 +35,7 @@ const initNavClick = (nav) => {
 
         break
       case navProgram:
+        insertParam('tab', 'programs')
         navDescription.classList.remove('active')
         navGallery.classList.remove('active')
 
@@ -43,6 +46,7 @@ const initNavClick = (nav) => {
 
         break
       case navGallery:
+        insertParam('tab', 'gallery')
         navDescription.classList.remove('active')
         navProgram.classList.remove('active')
 

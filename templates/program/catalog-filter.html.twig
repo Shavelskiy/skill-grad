@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<form id="program-filter" class="form-filter program-filter" action="#">
+<form id="program-filter" class="form-filter program-filter form-with-mobile" action="">
   <div class="input-search-gray">
     <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по каталогу">
     <i class="icon-search"></i>
@@ -151,6 +151,6 @@
   </div>
   <div class="button-container">
     <button type="submit" class="button-red">Сохранить</button>
-    <a href="{{ path(resetPath) }}">Сбросить фильтр</a>
+    <a href="{{ resetPath }}">Сбросить фильтр</a>
   </div>
 </form>

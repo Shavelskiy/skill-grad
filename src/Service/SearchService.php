@@ -109,7 +109,7 @@ class SearchService
         return $this->execSearchRequest(self::TYPE_ARTICLE, $filter);
     }
 
-    public function findPrograms(int $page, string $query, array $categories, array $formats): array
+    public function findPrograms(int $page, string $query, array $categories, array $formats, array $providers = []): array
     {
         $filter = [
             'size' => self::PAGE_ITEM_COUNT,
@@ -120,6 +120,11 @@ class SearchService
                 ],
             ],
         ];
+
+        if ($page < 1) {
+            $filter['size'] = 9999;
+            $filter['from'] = 0;
+        }
 
         if (!empty($query)) {
             $filter['query']['bool']['must'][] = [
@@ -135,6 +140,7 @@ class SearchService
 
         $filter = $this->applyArrayToFilter('categories', $filter, $categories);
         $filter = $this->applyArrayToFilter('format', $filter, $formats);
+        $filter = $this->applyArrayToFilter('providers', $filter, $providers);
 
         return $this->execSearchRequest(self::TYPE_PROGRAM, $filter);
     }

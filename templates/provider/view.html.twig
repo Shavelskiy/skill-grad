@@ -24,20 +24,20 @@
     <div class="tab">
       <div class="toggle-menu tab__nav">
         <ul class="nav">
-          <li class="toggle-item nav-item nav-item-description active">
+          <li class="toggle-item nav-item nav-item-description {{ (app.request.get('tab') != 'programs' and app.request.get('tab') != 'gallery') ? 'active' : '' }}">
             <i class="icon-gear"></i>Описание провайдера
           </li>
-          <li class="toggle-item nav-item nav-item-programs">
+          <li class="toggle-item nav-item nav-item-programs {{ app.request.get('tab') == 'programs' ? 'active' : '' }}">
             <i class="icon-web-development"></i>Программы обучения
           </li>
-          <li class="toggle-item nav-item nav-item-gallery">
+          <li class="toggle-item nav-item nav-item-gallery {{ app.request.get('tab') == 'gallery' ? 'active' : '' }}">
             <i class="icon-web-development"></i>Фотогалерея
           </li>
         </ul>
         <i class="icon-down-arrow"></i>
       </div>
       <div class="tab__content">
-        <div class="tab__content-item tab-description active">
+        <div class="tab__content-item tab-description {{ (app.request.get('tab') != 'programs' and app.request.get('tab') != 'gallery') ? 'active' : '' }}">
           <div class="container-0">
             <div class="col-lg-2 col-sm-4 no-gutter">
               <div class="logo-company">
@@ -118,107 +118,45 @@
             </div>
           </div>
         </div>
-        <div class="tab__content-item tab-programs">
-          <div class="container-0">
-            <div class="box">
-              <div class="mobile-filter">
-                <div id="open-filter" class="mobile-filter-header">
-                  Фильтр поиска
-                  <i class="icon-more"></i>
-                </div>
-                <div id="filter" class="mobile-filter-content">
-                  {#                    @@include("../../blocks/modules/catalogFilter/catalogFilter.html")#}
-                </div>
-              </div>
-              <div class="box-content">
-                <div class="container-0">
-                  <div class="col-lg-12 pl-0">
-                    {% for program in provider.programs %}
-                      {% include 'program/card-program.html.twig' with {
-                        program: program,
-                      } %}
-                    {% endfor %}
-                  </div>
+        <div class="tab__content-item tab-programs {{ app.request.get('tab') == 'programs' ? 'active' : '' }}">
+          <div class="box">
+            <div class="box-content">
+              <div class="container-0">
+                <div class="col-lg-12 pl-0">
+                  {% if programs|length < 1 %}
+                    У данного провайдера нет программ обучения
+                  {% endif %}
+                  {% for program in programs %}
+                    {% include 'program/card-program.html.twig' with {
+                      program: program,
+                    } %}
+                  {% endfor %}
                 </div>
               </div>
-              <div class="box-sidebar">
-                <div class="container-0">
-                  <div class="col-lg-12 pr-0">
-                    {#                      @@include("../../blocks/modules/catalogFilter/catalogFilter.html")#}
-                  </div>
-                </div>
-              </div>
+            </div>
+            <div class="box-sidebar">
+              {% include 'program/catalog-filter.html.twig' with { resetPath: path('provider.view', {
+                provider: provider.id,
+                tab: 'programs'
+              }) } %}
             </div>
           </div>
         </div>
-        <div class="tab__content-item tab-gallery">
-          <div class="container-0">
-            <div class="box">
+        <div class="tab__content-item tab-gallery {{ app.request.get('tab') == 'gallery' ? 'active' : '' }}">
+          <div class="box">
+            {% if gallery|length < 1 %}
+              Фоторграфии с мероприятий отсутсвтуют
+            {% endif %}
+            {% for galleryItem in gallery %}
               <div class="box-block">
                 <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
+                  <img src="{{ galleryItem.image.publicPath }}" alt="">
                 </div>
                 <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
+                  {{ galleryItem.name }}
                 </p>
               </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-              <div class="box-block">
-                <div class="photo">
-                  <img src="../img/photo.jpg" alt="">
-                </div>
-                <p class="text--center">
-                  Переподаватель на уроке актерского мастерства
-                </p>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>

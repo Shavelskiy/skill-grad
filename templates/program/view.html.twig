@@ -373,7 +373,7 @@
               {% for provider in program.providers %}
                 <div class="provider">
                   <img src="{{ provider.image.publicPath }}" alt="">
-                  <a href="{{ path('provider.view', { id: provider.id }) }}" target="_blank">
+                  <a href="{{ path('provider.view', { provider: provider.id }) }}" target="_blank">
                     {{ provider.name }}
                   </a>
                 </div>
