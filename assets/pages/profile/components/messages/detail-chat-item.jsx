@@ -10,7 +10,7 @@ const DetailChatItem = ({message, user, recipient}) => {
   return (
     <div className={cn(css.user, {[css.newMessage]: !message.viewed}, {[css.my]: message.user === user.id})}>
       <div className={css.avatar}>
-        <img className="rounded" src="../../../../img/photo.jpg" alt=""/>
+        <img className="rounded" src={message.user === user.id ? user.image : recipient.image} alt=""/>
       </div>
       <div className="information w-100">
         <div className="d-flex j-c-space-between">

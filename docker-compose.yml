@@ -40,13 +40,6 @@ services:
     ports:
       - 5432:5432
 
-  redis:
-    image: redis:5-alpine
-    volumes:
-      - redis-data:/data:rw
-    networks:
-      - network_php
-
   front:
     image: node:14.9.0
     tty: true
@@ -75,7 +68,6 @@ services:
 
 volumes:
   db-data: {}
-  redis-data: {}
   elasticsearch-data: {}
 
 networks:

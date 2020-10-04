@@ -18,7 +18,7 @@ const SidebarItem = ({group, click, writing}) => {
   return (
     <div className={cn(css.user, {[css.newMessage]: !group.message.viewed})} onClick={click}>
       <div className={css.avatar}>
-        <img className="rounded" src="../../../../img/photo.jpg" alt=""/>
+        <img className="rounded" src={group.user.image} alt=""/>
       </div>
       <div className="information w-100">
         <div className="d-flex j-c-space-between">

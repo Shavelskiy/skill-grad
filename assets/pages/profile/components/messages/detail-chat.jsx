@@ -42,7 +42,7 @@ const DetailChat = ({messages, user, recipient, setWriting, writing, sendMessage
       <div className={css.headerContent}>
         <i className={css.iconLeft}></i>
         <div className={css.avatar}>
-          <img className="rounded" src="../../../img/photo.jpg" alt=""/>
+          <img className="rounded" src={recipient.image} alt=""/>
         </div>
         <div className={css.info}>
           Автор беседы: <a href="#">{recipient.name}</a>

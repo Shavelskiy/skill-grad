@@ -8,9 +8,9 @@ if (isAuth()) {
   const newMessageModal = document.querySelector('.new-message-modal')
 
   axios.get('/chat/start')
-    .then(initChat)
+    .then(({data}) => initChat(data))
 
-  const initChat = ({data}) => {
+  const initChat = (data) => {
     const socket = new WebSocket('ws://localhost:8081')
     const token = data.token
 
@@ -54,6 +54,9 @@ if (isAuth()) {
           if ('text' in data) {
             newMessageModal.querySelector('.message-text').innerHTML = data.text
             newMessageModal.querySelector('.author').innerHTML = data.author.name
+
+            const authorImage = newMessageModal.querySelector('.rounded')
+            authorImage.src = data.author.image
             newMessageModal.classList.add('active')
 
             setTimeout(() => {

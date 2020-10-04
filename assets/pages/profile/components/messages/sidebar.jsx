@@ -14,6 +14,7 @@ const Sidebar = ({groups, click, writingUserIds}) => {
         </div>
       </div>
       <div className={css.users}>
+        {groups.length < 1 ? <div className={css.emptyGroups}>У вас нет активных чатов</div> : ''}
         {groups.map((group, key) => (
           <SidebarItem
             key={key}

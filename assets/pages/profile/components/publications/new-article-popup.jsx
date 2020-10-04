@@ -41,8 +41,6 @@ const NewArticlePopup = ({active, close, onSuccess}) => {
   const save = () => {
     setError('')
 
-    console.log(newArticle)
-
     if (newArticle.title.length < 1) {
       setError('Введите название статьи')
       return

@@ -6,6 +6,7 @@ use App\Entity\ChatMessage;
 use App\Entity\User;
 use App\Repository\ChatMessageRepository;
 use App\Repository\UserRepository;
+use App\Service\ChatService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +19,16 @@ class MessageController extends AbstractController
 {
     protected ChatMessageRepository $chatMessageRepository;
     protected UserRepository $userRepository;
+    protected ChatService $chatService;
 
     public function __construct(
         ChatMessageRepository $chatMessageRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        ChatService $chatService
     ) {
         $this->chatMessageRepository = $chatMessageRepository;
         $this->userRepository = $userRepository;
+        $this->chatService = $chatService;
     }
 
     /**
@@ -58,14 +62,17 @@ class MessageController extends AbstractController
             $lastMessage = $this->chatMessageRepository->findLastGroupMessage($user, $recipient);
 
             $recipient = ($lastMessage->getUser()->getId() !== $user->getId()) ? $lastMessage->getUser() : $lastMessage->getRecipient();
+
             $result[] = [
                 'user' => [
                     'id' => $lastMessage->getUser()->getId(),
                     'name' => $lastMessage->getUser()->getEmail(),
+                    'image' => $this->chatService->getUserPhoto($lastMessage->getUser()),
                 ],
                 'recipient' => [
                     'id' => $recipient->getId(),
                     'name' => $recipient->getEmail(),
+                    'image' => $this->chatService->getUserPhoto($recipient),
                 ],
                 'message' => $lastMessage->jsonSerialize(),
                 'new_count' => $this->chatMessageRepository->findNewMessageCount($user, $recipient),
@@ -96,10 +103,12 @@ class MessageController extends AbstractController
             'user' => [
                 'id' => $user->getId(),
                 'name' => $user->getEmail(),
+                'image' => $this->chatService->getUserPhoto($user),
             ],
             'recipient' => [
                 'id' => $recipient->getId(),
                 'name' => $recipient->getEmail(),
+                'image' => $this->chatService->getUserPhoto($recipient),
             ],
             'messages' => $messages,
         ]);

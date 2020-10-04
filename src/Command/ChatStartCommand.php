@@ -6,6 +6,7 @@ use App\Messenger\Chat;
 use App\Repository\ChatMessageRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserTokenRepository;
+use App\Service\ChatService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Ratchet\Http\HttpServer;
@@ -23,13 +24,15 @@ class ChatStartCommand extends Command
     protected UserRepository $userRepository;
     protected UserTokenRepository $userTokenRepository;
     protected ChatMessageRepository $chatMessageRepository;
+    protected ChatService $chatService;
 
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         UserRepository $userRepository,
         UserTokenRepository $userTokenRepository,
-        ChatMessageRepository $chatMessageRepository
+        ChatMessageRepository $chatMessageRepository,
+        ChatService $chatService
     ) {
         parent::__construct();
         $this->logger = $logger;
@@ -37,6 +40,7 @@ class ChatStartCommand extends Command
         $this->userRepository = $userRepository;
         $this->userTokenRepository = $userTokenRepository;
         $this->chatMessageRepository = $chatMessageRepository;
+        $this->chatService = $chatService;
     }
 
     protected function configure(): void
@@ -55,7 +59,7 @@ class ChatStartCommand extends Command
             $server = IoServer::factory(
                 new HttpServer(
                     new WsServer(
-                        new Chat($this->entityManager, $this->userRepository, $this->userTokenRepository, $this->chatMessageRepository, $output)
+                        new Chat($this->entityManager, $this->userRepository, $this->userTokenRepository, $this->chatMessageRepository, $this->chatService, $output)
                     )
                 ),
                 8080
