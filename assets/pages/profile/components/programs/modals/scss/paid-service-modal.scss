@@ -1,0 +1,17 @@
+.block-modal {
+  display: flex;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 17px;
+  }
+
+  .text {
+    text-align: left;
+  }
+
+  button {
+    height: 40px;
+  }
+}

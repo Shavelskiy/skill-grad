@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Dto\SearchQuery;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +30,25 @@ class PaymentsController extends AbstractController
             'items' => [[], [], [], [], [], [], [], [], [], []],
             'page' => $query->getPage(),
             'total_pages' => 6,
+        ]);
+    }
+
+    /**
+     * @Route("/balance", name="api.payments.balance", methods={"GET"})
+     */
+    public function balance(): Response
+    {
+        /** @var User $user */
+        if (($user = $this->getUser()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        if (($provider = $user->getProvider()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        return new JsonResponse([
+            'balance' => $provider->getBalance(),
         ]);
     }
 }

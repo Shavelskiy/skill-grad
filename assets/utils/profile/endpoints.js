@@ -11,6 +11,8 @@ export const PROGRAM_REQUESTS_URL = '/api/profile/request/:id'
 export const PROGRAM_QUESTIONS_URL = '/api/profile/program/question/:id'
 export const PROGRAM_REVIEWS_URL = '/api/profile/program/review/:id'
 
+export const PROGRAM_PRICES_URL = '/api/profile/program/prices'
+
 export const AGREE_PROGRAM_URL = '/api/profile/request/agree/:id'
 export const REJECT_PROGRAM_URL = '/api/profile/request/reject/:id'
 
@@ -25,3 +27,4 @@ export const ARTICLES_CATEGORIES_URL = '/api/article/categories'
 export const ARTICLE_SAVE_URL = '/api/article/save'
 
 export const PAYMENTS_URL = '/api/payments'
+export const PAYMENTS_BALANCE__URL = '/api/payments/balance'

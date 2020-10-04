@@ -40,6 +40,11 @@ class Provider
     protected bool $proAccount = false;
 
     /**
+     * @ORM\Column(type="float", options={"default": 0.0})
+     */
+    protected float $balance = 0.0;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Upload")
      */
     protected ?Upload $image;
@@ -126,6 +131,17 @@ class Provider
     public function setProAccount(bool $proAccount): self
     {
         $this->proAccount = $proAccount;
+        return $this;
+    }
+
+    public function getBalance(): float
+    {
+        return $this->balance;
+    }
+
+    public function setBalance(float $balance): self
+    {
+        $this->balance = $balance;
         return $this;
     }
 

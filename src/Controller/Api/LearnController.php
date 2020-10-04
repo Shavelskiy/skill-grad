@@ -105,7 +105,7 @@ class LearnController extends AbstractController
                 'review' => $programReview,
                 'provider' => [
                     'name' => $provider->getName(),
-                    'link' => $this->router->generate('provider.view', ['id' => $provider->getId()]),
+                    'link' => $this->router->generate('provider.view', ['provider' => $provider->getId()]),
                 ],
             ];
         }

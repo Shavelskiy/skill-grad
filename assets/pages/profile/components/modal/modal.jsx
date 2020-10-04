@@ -4,7 +4,7 @@ import cn from 'classnames'
 import css from './modal.scss?module'
 
 
-const Modal = ({children, wide = false, active, title, close, error = ''}) => {
+const Modal = ({children, wide = false, active, title = '', close, error = ''}) => {
   const ref = useRef()
 
   useEffect(() => {

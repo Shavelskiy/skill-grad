@@ -82,8 +82,7 @@ class ProgramController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->getProgramQuestions()->filter(static function ($item) use ($programId) {
-            /* @var ProgramQuestion $item */
+        if ($user->getProgramQuestions()->filter(static function (ProgramQuestion $item) use ($programId) {
             return $item->getProgram()->getId() === $programId;
         })->count() > 5) {
             return new JsonResponse(['message' => 'Вы отправили слишком много вопросов к данной программе!', 400]);

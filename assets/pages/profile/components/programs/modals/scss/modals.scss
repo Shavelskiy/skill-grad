@@ -1,0 +1,14 @@
+.title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.delete-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: 44%;
+    margin-bottom: 0 !important;
+  }
+}

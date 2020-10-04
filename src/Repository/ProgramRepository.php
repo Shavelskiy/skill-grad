@@ -42,6 +42,11 @@ class ProgramRepository extends ServiceEntityRepository
 
         foreach ($searchQuery->getSearch() as $field => $value) {
             switch ($field) {
+                case 'author':
+                    $query
+                        ->andWhere('p.author = :author')
+                        ->setParameter('author', $value);
+                    break;
                 case 'favoriteUsers':
                     $query
                         ->innerJoin('p.favoriteUsers', 'fu')

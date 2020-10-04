@@ -1,13 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '@/utils/profile/routes'
 
 import Request from './request'
+import PaidServiceModal from '../modals/paid-service-modal'
+import MoneyNoAvailableModal from '../modals/money-no-available-modal'
+import DeactivateModal from '../modals/deactivate-modal'
+import DeleteProgramModal from '../modals/delete-program-modal'
 
 import css from './scss/program-item.scss?module'
 import cn from 'classnames'
 
 
 const ProgramItem = ({program}) => {
+  const [paidServiceModalActive, setPaidServiceModalActive] = useState(false)
+  const [moneyNoAvailableModalActive, setMoneyNoAvailableModalActive] = useState(false)
+  const [deactivateModalActive, setDeactivateModalActive] = useState(false)
+  const [deleteProgramModalActive, setDeleteProgramModalActive] = useState(false)
+
   return (
     <tr>
       <td className={css.programFirstColumn}>
@@ -36,69 +45,38 @@ const ProgramItem = ({program}) => {
       />
       <td>
         <div className={css.actions}>
-          <span className={cn('icon', 'goal', css.item)}></span>
-          <span className={cn('icon', 'status', css.item)}></span>
+          <span className={cn('icon', 'goal', css.item)} onClick={() => setPaidServiceModalActive(true)}></span>
+          <span className={cn('icon', 'status', css.item)} onClick={() => setDeactivateModalActive(true)}></span>
           <span className={cn('icon', 'pencil', css.item)}></span>
-          <span className={cn('icon', 'delete', css.item)}></span>
+          <span className={cn('icon', 'delete', css.item)} onClick={() => setDeleteProgramModalActive(true)}></span>
         </div>
+
+        <PaidServiceModal
+          active={paidServiceModalActive}
+          close={() => setPaidServiceModalActive(false)}
+          openNoAvailableModal={() => {
+            setPaidServiceModalActive(false)
+            setMoneyNoAvailableModalActive(true)
+          }}
+        />
+
+        <MoneyNoAvailableModal
+          active={moneyNoAvailableModalActive}
+          close={() => setMoneyNoAvailableModalActive(false)}
+        />
+
+        <DeactivateModal
+          active={deactivateModalActive}
+          close={() => setDeactivateModalActive(false)}
+        />
+
+        <DeleteProgramModal
+          active={deleteProgramModalActive}
+          close={() => setDeleteProgramModalActive(false)}
+        />
       </td>
     </tr>
   )
 }
 
 export default ProgramItem
-
-// <tr>
-// <td>
-// <a className="title-link" href="/pages/card-program.html">
-//   Маркетинг (многопрофильный бакалавриат «Маркетинг и управление продажами»)
-// </a>
-// </td>
-// <td className="mobile-p-b">
-// <a href="#">Маркетинг,</a>
-// <a href="#">Офис, </a>
-// <a href="#">Управление и бизнес</a>
-// </td>
-// <td className="col-sm-1">
-// <strong className="accent mobile">Заявки</strong>
-// <div data-name="applications" className="icon-button">
-// <span className="icon mail"></span>
-// <span className="button-notification">12</span>
-// </div>
-// <p className="text nowrap">
-// Всего: 121
-// </p>
-// </td>
-// <td className="col-sm-1">
-// <strong className="accent mobile">Вопросы</strong>
-// <div data-name="questions" className="icon-button">
-// <span className="icon mail"></span>
-// <span className="button-notification">12</span>
-// </div>
-// <p className="text nowrap">
-// Всего: 121
-// </p>
-// </td>
-// <td className="col-sm-1">
-// <strong className="accent mobile">Оценки</strong>
-// <div data-name="assessment" className="icon-button">
-// <span className="icon email-f"></span>
-// </div>
-// <p className="text nowrap">
-// Всего: 121
-// </p>
-// </td>
-// <td>
-// <div className="rules d-flex">
-// <span className="open-pay-service icon goal"></span>
-// <span data-tippy-content="Опубликовать программу"
-// className="open-deactivate icon not status"></span>
-// <i className="open-no-balance icon-pencil">
-// <span className="path1"></span>
-// <span className="path2"></span>
-// <span className="path3"></span>
-// </i>
-// <span className="delete open-delete"></span>
-// </div>
-// </td>
-// </tr>

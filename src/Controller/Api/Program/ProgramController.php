@@ -5,6 +5,9 @@ namespace App\Controller\Api\Program;
 use App\Dto\SearchQuery;
 use App\Entity\Category;
 use App\Entity\Program\Program;
+use App\Entity\Program\ProgramQuestion;
+use App\Entity\Program\ProgramRequest;
+use App\Entity\Program\ProgramReview;
 use App\Entity\User;
 use App\Repository\ProgramQuestionRepository;
 use App\Repository\ProgramRepository;
@@ -51,6 +54,7 @@ class ProgramController extends AbstractController
         }
 
         $query = (new SearchQuery())
+            ->setSearch(['author' => $user])
             ->setPage((int)($request->get('page', 1)))
             ->setPageItemCount(self::PAGE_ITEM_COUNT);
 
@@ -60,25 +64,30 @@ class ProgramController extends AbstractController
 
         /** @var Program $program */
         foreach ($searchResult->getItems() as $program) {
-            $categories = [];
-
-            /** @var Category $category */
-            foreach ($program->getCategories() as $category) {
-                $categories[] = $category->getName();
-            }
-
             $programs[] = [
                 'id' => $program->getId(),
                 'link' => $this->router->generate('program.view', ['id' => $program->getId()]),
                 'name' => $program->getName(),
-                'categories' => implode(',', $categories),
+                'categories' => implode(',', $program->getCategories()->map(fn(Category $category) => $category->getName())->toArray()),
                 'requests' => [
+                    'new' => $program
+                        ->getRequests()
+                        ->filter(fn(ProgramRequest $request) => $request->getStatus() === ProgramRequest::STATUS_NEW)
+                        ->count(),
                     'total' => $program->getRequests()->count(),
                 ],
                 'questions' => [
+                    'new' => $program
+                        ->getQuestions()
+                        ->filter(fn(ProgramQuestion $question) => $question->getAnswer() === null)
+                        ->count(),
                     'total' => $program->getQuestions()->count(),
                 ],
                 'reviews' => [
+                    'new' => $program
+                        ->getReviews()
+                        ->filter(fn(ProgramReview $review) => $review->getAnswer() === null)
+                        ->count(),
                     'total' => $program->getReviews()->count(),
                 ],
             ];
@@ -88,6 +97,18 @@ class ProgramController extends AbstractController
             'items' => $programs,
             'page' => $searchResult->getCurrentPage(),
             'total_pages' => $searchResult->getTotalPageCount(),
+        ]);
+    }
+
+    /**
+     * @Route("/prices", methods={"GET"}, name="api.profile.programs.prices")
+     */
+    public function prices(): Response
+    {
+        return new JsonResponse([
+            'highlight' => 990,
+            'raise' => 490,
+            'highlight_raise' => 1290,
         ]);
     }
 }
