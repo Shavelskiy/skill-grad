@@ -1,4 +1,4 @@
-import {SET_PROGRAM_TITLE, SET_PROGRAM_PRICES, SET_PROVIDER_BALANCE} from './types'
+import {SET_PROGRAM_TITLE, SET_PROGRAM_PRICES, SET_PROVIDER_BALANCE, SET_PRO_ACCOUNT_PRICE, SET_PRO_ACCOUNT} from './types'
 import {HIGHLIGHT, RAISE, HIGHLIGHT_RAISE} from '@/utils/profile/porgram-service-types'
 
 const initialState = {
@@ -8,7 +8,9 @@ const initialState = {
     [RAISE]: 0,
     [HIGHLIGHT_RAISE]: 0,
   },
+  proAccountPrice: 0,
   balance: 0.0,
+  proAccount: false,
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -27,6 +29,16 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         balance: action.payload,
+      }
+    case SET_PRO_ACCOUNT_PRICE:
+      return {
+        ...state,
+        proAccountPrice: action.payload,
+      }
+    case SET_PRO_ACCOUNT:
+      return {
+        ...state,
+        proAccount: action.payload,
       }
     default:
       return state

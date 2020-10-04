@@ -1,11 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import {AUTHOR, DATE} from '../../table/header-types'
-import {PROGRAM_REVIEWS_URL} from '@/utils/profile/endpoints'
+
+import axios from 'axios'
+import {
+  PAYMENTS_BALANCE_URL,
+  PROGRAM_REVIEWS_URL,
+  PROVIDER_IS_PRO_ACCOUNT,
+  PROVIDER_PRO_ACCOUNT_PRICE
+} from '@/utils/profile/endpoints'
+
+import {useDispatch} from 'react-redux'
+import {setProAccount, setProAccountPrice, setProviderBalance} from '@/pages/profile/redux/actions'
+
 import {PROGRAM_REVIEW} from '../../table/item-types'
 
 import TableTemplate from '../../table/table-template'
 import BackBar from '../back-bar'
+
 
 
 const headers = [
@@ -32,6 +44,23 @@ const headers = [
 ]
 
 const ProgramReviews = ({match}) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    axios.get(PROVIDER_PRO_ACCOUNT_PRICE)
+      .then(({data}) => {
+        dispatch(setProAccountPrice(data.price))
+      })
+
+    axios.get(PAYMENTS_BALANCE_URL)
+      .then(({data}) => {
+        dispatch(setProviderBalance(data.balance))
+      })
+
+    axios.get(PROVIDER_IS_PRO_ACCOUNT)
+      .then(({data}) => dispatch(setProAccount(data.is_pro_account)))
+  }, [])
+
   return (
     <div className="container-0 mt-20">
       <BackBar

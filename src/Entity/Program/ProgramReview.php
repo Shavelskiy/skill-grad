@@ -27,7 +27,7 @@ class ProgramReview
     protected Program $program;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected string $review;
 
@@ -42,7 +42,7 @@ class ProgramReview
     protected User $user;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected ?string $answer;
 

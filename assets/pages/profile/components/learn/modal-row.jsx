@@ -31,25 +31,19 @@ const ModalRow = ({number, description, value, setValue}) => {
   }
 
   return (
-    <>
-      <div className={cn('container', css.item)}>
-        <div className="col-lg-9 col-sm-4">
-          <p className={css.text}>
-            {number}) {description} <span className={css.red}>*</span>
-          </p>
+    <div className={css.item}>
+      <p className={css.text}>
+        {number}) {description} <span className={css.red}>*</span>
+      </p>
+      <div className={css.blockLevel}>
+        <div className={css.level}>
+          {renderValues()}
         </div>
-        <div className="col-lg-3 col-sm-4">
-          <div className={css.blockLevel}>
-            <div className={css.level}>
-              {renderValues()}
-            </div>
-            <p className={cn(css.textSmall, {[css.accent]: value !== 0})}>
-              {valueDescriptionMap[value]}
-            </p>
-          </div>
-        </div>
+        <p className={cn(css.textSmall, {[css.accent]: value !== 0})}>
+          {valueDescriptionMap[value]}
+        </p>
       </div>
-    </>
+    </div>
   )
 }
 

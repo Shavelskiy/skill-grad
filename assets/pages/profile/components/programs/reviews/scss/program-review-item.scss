@@ -4,6 +4,29 @@
   font-size: 18px;
 }
 
+.reviews-text {
+  display: block;
+  position: relative;
+  padding-left: 20px !important;
+
+  &:after {
+    content: "\201D";
+    position: absolute;
+    z-index: 0;
+    top: -40px;
+    left: 0;
+    font-size: 150px;
+    opacity: 0.2;
+    color: #f7562e;
+  }
+}
+
+.show-more-button {
+  color: #1d71b1;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .reviews {
   .value {
     flex: 1 1 40%;

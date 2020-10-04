@@ -22,13 +22,4 @@ class ProgramServicesService
             ->filter(fn(ProgramServiceEntity $programService) => $programService->isActive() && in_array($programService->getType(), [ProgramServiceEntity::RAISE, ProgramServiceEntity::HIGHLIGHT_RISE], true))
             ->isEmpty();
     }
-
-    public function getServicePrices(): array
-    {
-        return [
-            ProgramServiceEntity::HIGHLIGHT => 990,
-            ProgramServiceEntity::RAISE => 490,
-            ProgramServiceEntity::HIGHLIGHT_RISE => 1290,
-        ];
-    }
 }

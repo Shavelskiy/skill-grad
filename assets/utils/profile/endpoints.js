@@ -3,6 +3,9 @@ export const PROVIDER_INFO_URL = '/api/profile/settings-provider'
 export const ALL_CATEGORIES_URL = '/api/profile/settings/categories'
 export const ALL_LOCATIONS_URL = '/api/profile/settings/locations'
 
+export const PROVIDER_IS_PRO_ACCOUNT =  '/api/profile/settings-provider/is-pro-account'
+export const PROVIDER_PRO_ACCOUNT_PRICE =  '/api/profile/settings-provider/pro-account-price'
+
 export const LEARN_URL = '/api/learn'
 export const ADD_REVIEW_URL = '/api/learn/review'
 
@@ -32,4 +35,4 @@ export const ARTICLES_CATEGORIES_URL = '/api/article/categories'
 export const ARTICLE_SAVE_URL = '/api/article/save'
 
 export const PAYMENTS_URL = '/api/payments'
-export const PAYMENTS_BALANCE__URL = '/api/payments/balance'
+export const PAYMENTS_BALANCE_URL = '/api/payments/balance'

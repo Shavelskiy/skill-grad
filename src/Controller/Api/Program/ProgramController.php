@@ -13,6 +13,7 @@ use App\Entity\User;
 use App\Repository\ProgramQuestionRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramRequestRepository;
+use App\Service\PriceService;
 use App\Service\ProgramServicesService;
 use DateInterval;
 use DateTime;
@@ -37,6 +38,7 @@ class ProgramController extends AbstractController
     protected ProgramRequestRepository $programRequestRepository;
     protected ProgramQuestionRepository $programQuestionRepository;
     protected ProgramServicesService $programServicesService;
+    protected PriceService $priceService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -44,7 +46,8 @@ class ProgramController extends AbstractController
         ProgramRepository $programRepository,
         ProgramRequestRepository $programRequestRepository,
         ProgramQuestionRepository $programQuestionRepository,
-        ProgramServicesService $programServicesService
+        ProgramServicesService $programServicesService,
+        PriceService $priceService
     ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
@@ -52,6 +55,7 @@ class ProgramController extends AbstractController
         $this->programRequestRepository = $programRequestRepository;
         $this->programQuestionRepository = $programQuestionRepository;
         $this->programServicesService = $programServicesService;
+        $this->priceService = $priceService;
     }
 
     /**
@@ -125,7 +129,7 @@ class ProgramController extends AbstractController
     public function prices(): Response
     {
         return new JsonResponse(
-            $this->programServicesService->getServicePrices(),
+            $this->priceService->getServicePrices(),
         );
     }
 
@@ -149,7 +153,7 @@ class ProgramController extends AbstractController
             return new JsonResponse(['message' => 'Платная услуга не найдена'], 400);
         }
 
-        $price = $this->programServicesService->getServicePrices()[$type];
+        $price = $this->priceService->getServicePrices()[$type];
 
         if ($provider->getBalance() < $price) {
             return new JsonResponse([], 403);

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import axios from 'axios'
-import {PROGRAM_PRICES_URL, PROVIDER_PROGRAMS_URL, PAYMENTS_BALANCE__URL} from '@/utils/profile/endpoints'
+import {PROGRAM_PRICES_URL, PROVIDER_PROGRAMS_URL, PAYMENTS_BALANCE_URL} from '@/utils/profile/endpoints'
 
 import {useDispatch} from 'react-redux'
 import {setProgramPrices, setProviderBalance} from '../../../redux/actions'
@@ -46,7 +46,7 @@ const Programs = () => {
         dispatch(setProgramPrices(data))
       })
 
-    axios.get(PAYMENTS_BALANCE__URL)
+    axios.get(PAYMENTS_BALANCE_URL)
       .then(({data}) => {
         dispatch(setProviderBalance(data.balance))
       })

@@ -1,7 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react'
 
 import axios from 'axios'
-import {PROVIDER_INFO_URL} from '@/utils/profile/endpoints'
+import {PROVIDER_INFO_URL, PROVIDER_IS_PRO_ACCOUNT} from '@/utils/profile/endpoints'
+
+import {useDispatch, useSelector} from 'react-redux'
 
 import {Input, Textarea} from '@/components/react-ui/input'
 import {Button, SmallButton} from '@/components/react-ui/buttons'
@@ -17,16 +19,18 @@ import {validateFile} from '@/helpers/file-upload'
 import css from './scss/provider-settings-organization.scss?module'
 
 import noImage from '@/img/provider-no-photo.png'
+import {setProAccount} from '@/pages/profile/redux/actions';
 
 
 const ProviderSettingsOrganization = () => {
+  const dispatch = useDispatch()
+  const proAccount = useSelector((state) => state.proAccount)
+
   const ref = useRef()
 
   const [error, setError] = useState('')
   const [showSuccess, setShowSuccess] = useState(false)
   const [disable, setDisable] = useState(false)
-
-  const [proAccount, setProAccount] = useState(false)
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -58,7 +62,6 @@ const ProviderSettingsOrganization = () => {
   useEffect(() => {
     axios.get(PROVIDER_INFO_URL)
       .then(({data}) => {
-        setProAccount(data.pro_account)
         setName(data.name)
         setOldImage(data.image)
         setDescription(data.description)
@@ -67,6 +70,9 @@ const ProviderSettingsOrganization = () => {
         setSelectedLocations(data.locations)
         setRequisites(data.requisites)
       })
+
+    axios.get(PROVIDER_IS_PRO_ACCOUNT)
+      .then(({data}) => dispatch(setProAccount(data.is_pro_account)))
   }, [])
 
   const save = () => {

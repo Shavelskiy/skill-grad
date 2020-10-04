@@ -35,7 +35,7 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false, add
 
   useEffect(() => {
     reload()
-  }, [currentPage, additionalParams])
+  }, [currentPage])
 
   const reload = () => {
     const axiosSource = axios.CancelToken.source()
@@ -90,7 +90,9 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false, add
     }
 
     return (
-      <tr><td>Данные на данный момент отсутсвуют</td></tr>
+      <tr>
+        <td>Данные на данный момент отсутсвуют</td>
+      </tr>
     )
   }
 

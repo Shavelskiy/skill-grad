@@ -9,6 +9,7 @@ use App\Entity\ProviderRequisites;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
+use App\Service\PriceService;
 use App\Service\UploadServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,17 +27,20 @@ class ProviderSettingsController extends AbstractController
     protected CategoryRepository $categoryRepository;
     protected LocationRepository $locationRepository;
     protected UploadServiceInterface $uploadService;
+    protected PriceService $priceService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         CategoryRepository $categoryRepository,
         LocationRepository $locationRepository,
-        UploadServiceInterface $uploadService
+        UploadServiceInterface $uploadService,
+        PriceService $priceService
     ) {
         $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
         $this->locationRepository = $locationRepository;
         $this->uploadService = $uploadService;
+        $this->priceService = $priceService;
     }
 
     /**
@@ -78,7 +82,6 @@ class ProviderSettingsController extends AbstractController
             $data['image'] = $provider->getImage() ? $provider->getImage()->getPublicPath() : null;
             $data['name'] = $provider->getName();
             $data['description'] = $provider->getDescription();
-            $data['pro_account'] = $provider->isProAccount();
 
             $categories = [];
             $subcategories = [];
@@ -242,5 +245,24 @@ class ProviderSettingsController extends AbstractController
             ->setCorrespondentAccount($requestRequisites['correspondentAccount'])
             ->setBIC($requestRequisites['BIC'])
             ->setBank($requestRequisites['bank']);
+    }
+
+    /**
+     * @Route("/is-pro-account", name="api.provider-settings.is-pro-account", methods={"GET"})
+     */
+    public function isProAccount(): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return new JsonResponse(['is_pro_account' => ($user->getProvider() && $user->getProvider()->isProAccount())]);
+    }
+
+    /**
+     * @Route("/pro-account-price", name="api.provider-settings.pro-account-price", methods={"GET"})
+     */
+    public function proAccountPrice(): Response
+    {
+        return new JsonResponse(['price' => $this->priceService->getProAccountPrice()]);
     }
 }

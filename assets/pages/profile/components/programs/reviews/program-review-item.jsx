@@ -1,11 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {dateFormat, timeFormat} from '@/helpers/date-formater'
 
+import {useSelector} from 'react-redux'
+
+import ReviewAnswerModal from './review-answer-modal'
+import ProAccountModal from './pro-account-modal';
+
 import commonCss from './../common.scss?module'
-import css from './program-review-item.scss?module'
+import css from './scss/program-review-item.scss?module'
 import cn from 'classnames'
 
 const ProgramReviewItem = ({review, reload}) => {
+  const proAccount = useSelector((state) => state.proAccount)
+
+  const [showFull, setShowFull] = useState(false)
+
+  const [reviewAnswerModalActive, setReviewAnswerModalActive] = useState(false)
+
   const renderActionButton = () => {
     if (review.answer !== null) {
       return (
@@ -17,7 +28,9 @@ const ProgramReviewItem = ({review, reload}) => {
 
     return (
       <div className={commonCss.buttons}>
-        <button className={commonCss.buttonB}>Ответить</button>
+        <button className={commonCss.buttonB} onClick={() => setReviewAnswerModalActive(true)}>
+          Ответить
+        </button>
       </div>
     )
   }
@@ -29,6 +42,18 @@ const ProgramReviewItem = ({review, reload}) => {
         <span className={css.tooltip}>{tooltip}</span>
       </span>
     )
+  }
+
+  const renderOpenFullReviewButton = () => {
+    if (review.review.length < 200) {
+      return <></>
+    }
+
+    if (showFull) {
+      return <span className={css.showMoreButton} onClick={() => setShowFull(false)}>&nbsp;Скрыть отзыв</span>
+    }
+
+    return <span className={css.showMoreButton} onClick={() => setShowFull(true)}>&nbsp;Показать полностью</span>
   }
 
   return (
@@ -60,13 +85,23 @@ const ProgramReviewItem = ({review, reload}) => {
         <strong className={cn('accent', css.averageText)}>{review.average_rating}</strong>
       </td>
       <td>
-          <span className="reviews-text">
-            {review.review}
-            <a className="hide-desktop" href="#">Скрыть отзыв</a>
+          <span className={css.reviewsText}>
+            {showFull ? review.review : review.review.substring(0, 200)}
+            {renderOpenFullReviewButton()}
           </span>
       </td>
       <td>
         {renderActionButton()}
+
+        <ReviewAnswerModal
+          active={reviewAnswerModalActive && proAccount}
+          close={() => setReviewAnswerModalActive(false)}
+        />
+
+        <ProAccountModal
+          active={reviewAnswerModalActive && !proAccount}
+          close={() => setReviewAnswerModalActive(false)}
+        />
       </td>
     </tr>
   )
