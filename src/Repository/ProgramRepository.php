@@ -42,6 +42,11 @@ class ProgramRepository extends ServiceEntityRepository
 
         foreach ($searchQuery->getSearch() as $field => $value) {
             switch ($field) {
+                case 'active':
+                    $query
+                        ->andWhere('p.active = :active')
+                        ->setParameter('active', $value);
+                    break;
                 case 'author':
                     $query
                         ->andWhere('p.author = :author')

@@ -1,12 +1,12 @@
 .program-first-column {
   width: 399px;
 
-   a {
-     color: #3c3c3c !important;
-     font-size: 16px;
-     font-weight: 700;
-     line-height: 22px;
-   }
+  a {
+    color: #3c3c3c !important;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
 }
 
 .categories {
@@ -17,9 +17,53 @@
 .actions {
   display: flex;
   position: relative;
+  margin-left: 40px;
 
   .item {
+    cursor: pointer;
+    position: relative;
     width: 20px;
     height: 20px;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    &:last-child {
+      margin-right: 25px;
+    }
+
+    &:hover {
+      .notification {
+        display: block;
+      }
+    }
+
+    .notification {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: -70px;
+      width: 160px;
+      background-color: #fff;
+      box-shadow: 0 12px 25px 0 rgba(22, 58, 86, 0.12);
+      padding: 7px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 14px;
+      color: #3c3c3c;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: calc(50% - 10px);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 6px solid #fff;
+      }
+    }
   }
 }

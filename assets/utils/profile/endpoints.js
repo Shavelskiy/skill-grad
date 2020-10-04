@@ -13,6 +13,9 @@ export const PROGRAM_REVIEWS_URL = '/api/profile/program/review/:id'
 
 export const PROGRAM_PRICES_URL = '/api/profile/program/prices'
 
+export const PROGRAM_DEACTIVATE_URL = '/api/profile/program/deactivate/:id'
+export const PROGRAM_ACTIVATE_URL = '/api/profile/program/activate/:id'
+
 export const AGREE_PROGRAM_URL = '/api/profile/request/agree/:id'
 export const REJECT_PROGRAM_URL = '/api/profile/request/reject/:id'
 

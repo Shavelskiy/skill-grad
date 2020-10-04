@@ -12,6 +12,7 @@ use App\Entity\User;
 use App\Repository\ProgramQuestionRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramRequestRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,17 +27,20 @@ class ProgramController extends AbstractController
 {
     protected const PAGE_ITEM_COUNT = 10;
 
+    protected EntityManagerInterface $entityManager;
     protected RouterInterface $router;
     protected ProgramRepository $programRepository;
     protected ProgramRequestRepository $programRequestRepository;
     protected ProgramQuestionRepository $programQuestionRepository;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         RouterInterface $router,
         ProgramRepository $programRepository,
         ProgramRequestRepository $programRequestRepository,
         ProgramQuestionRepository $programQuestionRepository
     ) {
+        $this->entityManager = $entityManager;
         $this->router = $router;
         $this->programRepository = $programRepository;
         $this->programRequestRepository = $programRequestRepository;
@@ -54,7 +58,10 @@ class ProgramController extends AbstractController
         }
 
         $query = (new SearchQuery())
-            ->setSearch(['author' => $user])
+            ->setSearch([
+                'author' => $user,
+                'active' => (bool)$request->get('active'),
+            ])
             ->setPage((int)($request->get('page', 1)))
             ->setPageItemCount(self::PAGE_ITEM_COUNT);
 
@@ -69,6 +76,7 @@ class ProgramController extends AbstractController
                 'link' => $this->router->generate('program.view', ['id' => $program->getId()]),
                 'name' => $program->getName(),
                 'categories' => implode(',', $program->getCategories()->map(fn(Category $category) => $category->getName())->toArray()),
+                'active' => $program->isActive(),
                 'requests' => [
                     'new' => $program
                         ->getRequests()
@@ -101,7 +109,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/prices", methods={"GET"}, name="api.profile.programs.prices")
+     * @Route("/prices", name="api.profile.programs.prices", methods={"GET"})
      */
     public function prices(): Response
     {
@@ -110,5 +118,57 @@ class ProgramController extends AbstractController
             'raise' => 490,
             'highlight_raise' => 1290,
         ]);
+    }
+
+    /**
+     * @Route("/deactivate/{program}", name="api.profile.programs.deactivate", methods={"POST"})
+     */
+    public function deactivate(Program $program): Response
+    {
+        /** @var User $user */
+        if (($user = $this->getUser()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        if ($program->getAuthor()->getId() !== $user->getId()) {
+            return new JsonResponse([], 403);
+        }
+
+        if (!$program->isActive()) {
+            return new JsonResponse([], 400);
+        }
+
+        $program->setActive(false);
+
+        $this->entityManager->persist($program);
+        $this->entityManager->flush();
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/activate/{program}", name="api.profile.programs.activate", methods={"POST"})
+     */
+    public function activate(Program $program): Response
+    {
+        /** @var User $user */
+        if (($user = $this->getUser()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        if ($program->getAuthor()->getId() !== $user->getId()) {
+            return new JsonResponse([], 403);
+        }
+
+        if ($program->isActive()) {
+            return new JsonResponse([], 400);
+        }
+
+        $program->setActive(true);
+
+        $this->entityManager->persist($program);
+        $this->entityManager->flush();
+
+        return new JsonResponse();
     }
 }

@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '@/utils/profile/routes'
 
+import axios from 'axios'
+import {PROGRAM_DEACTIVATE_URL, PROGRAM_ACTIVATE_URL} from '@/utils/profile/endpoints'
+
 import Request from './request'
 import PaidServiceModal from '../modals/paid-service-modal'
 import MoneyNoAvailableModal from '../modals/money-no-available-modal'
@@ -11,11 +14,27 @@ import css from './scss/program-item.scss?module'
 import cn from 'classnames'
 
 
-const ProgramItem = ({program}) => {
+const ProgramItem = ({program, reload}) => {
   const [paidServiceModalActive, setPaidServiceModalActive] = useState(false)
   const [moneyNoAvailableModalActive, setMoneyNoAvailableModalActive] = useState(false)
   const [deactivateModalActive, setDeactivateModalActive] = useState(false)
   const [deleteProgramModalActive, setDeleteProgramModalActive] = useState(false)
+
+  const deactivateProgram = () => {
+    axios.post(PROGRAM_DEACTIVATE_URL.replace(':id', program.id))
+      .then(() => {
+        reload()
+        setDeactivateModalActive(false)
+      })
+  }
+
+  const activateProgram = () => {
+    axios.post(PROGRAM_ACTIVATE_URL.replace(':id', program.id))
+      .then(() => {
+        reload()
+        setDeactivateModalActive(false)
+      })
+  }
 
   return (
     <tr>
@@ -45,10 +64,33 @@ const ProgramItem = ({program}) => {
       />
       <td>
         <div className={css.actions}>
-          <span className={cn('icon', 'goal', css.item)} onClick={() => setPaidServiceModalActive(true)}></span>
-          <span className={cn('icon', 'status', css.item)} onClick={() => setDeactivateModalActive(true)}></span>
-          <span className={cn('icon', 'pencil', css.item)}></span>
-          <span className={cn('icon', 'delete', css.item)} onClick={() => setDeleteProgramModalActive(true)}></span>
+          <div className={css.item} onClick={() => setPaidServiceModalActive(true)}>
+            <span className={cn('icon', 'goal')}></span>
+            <div className={css.notification}>
+              Выбрать платную услугу
+            </div>
+          </div>
+
+          <div className={css.item} onClick={() => setDeactivateModalActive(true)}>
+            <span className={cn('icon', 'status', {'not': !program.active})}></span>
+            <div className={css.notification}>
+              {program.active ? 'Снять программу с публикации' : 'Опубликовать программу'}
+            </div>
+          </div>
+
+          <a className={css.item} href={`/program-create?id=${program.id}`}>
+            <span className={cn('icon', 'pencil')}></span>
+            <div className={css.notification}>
+              Редактировать программу
+            </div>
+          </a>
+
+          <div className={css.item} onClick={() => setDeleteProgramModalActive(true)}>
+            <span className={cn('icon', 'delete')}></span>
+            <div className={css.notification}>
+              Удалить программу
+            </div>
+          </div>
         </div>
 
         <PaidServiceModal
@@ -68,6 +110,9 @@ const ProgramItem = ({program}) => {
         <DeactivateModal
           active={deactivateModalActive}
           close={() => setDeactivateModalActive(false)}
+          deactivate={deactivateProgram}
+          activate={activateProgram}
+          isActive={program.active}
         />
 
         <DeleteProgramModal

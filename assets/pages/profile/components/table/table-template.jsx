@@ -4,8 +4,8 @@ import {useHistory, useLocation} from 'react-router-dom'
 import querystring from 'querystring'
 import axios from 'axios'
 
-import { useDispatch } from 'react-redux'
-import { setProgramTitle } from '../../redux/actions'
+import {useDispatch} from 'react-redux'
+import {setProgramTitle} from '../../redux/actions'
 
 import {LEARN, PROGRAM, PROGRAM_REQUEST, PROGRAM_QUESTION, PROGRAM_REVIEW, PAYMENTS} from './item-types'
 
@@ -19,14 +19,14 @@ import LearnItem from '../learn/item'
 import PaymentItem from '../payments/payment-item'
 
 
-const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) => {
+const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false, additionalParams = {}}) => {
   const history = useHistory()
   const location = useLocation()
   const dispatch = useDispatch()
 
   const queryParams = querystring.parse(location.search.substr(1))
 
-  const [paginatorRequest, setPaginatorRequest] = useState(null)
+  const [paginatorRequest, setPaginatorRequest] = useState(false)
 
   const [items, setItems] = useState([])
   const [currentPage, setCurrentPage] = useState('page' in queryParams ? queryParams.page : 1)
@@ -35,16 +35,16 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) =>
 
   useEffect(() => {
     reload()
-  }, [currentPage])
+  }, [currentPage, additionalParams])
 
   const reload = () => {
     const axiosSource = axios.CancelToken.source()
 
     if (paginatorRequest) {
-      paginatorRequest.cancel()
+      return
     }
 
-    setPaginatorRequest({cancel: axiosSource.cancel})
+    setPaginatorRequest(true)
 
     history.push({
       pathname: history.pathname,
@@ -53,7 +53,7 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) =>
 
     axios.get(fetchUrl, {
       cancelToken: axiosSource.token,
-      params: {page: currentPage}
+      params: {...additionalParams, page: currentPage}
     })
       .then(({data}) => {
         setCurrentPage(data.page)
@@ -64,6 +64,7 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) =>
           dispatch(setProgramTitle(data.program_title))
         }
       })
+      .finally(() => setPaginatorRequest(false))
   }
 
   const renderItem = (item, key) => {
@@ -71,7 +72,7 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) =>
       case LEARN:
         return <LearnItem key={key} program={item} reload={reload}/>
       case PROGRAM:
-        return <ProgramItem key={key} program={item}/>
+        return <ProgramItem key={key} program={item} reload={reload}/>
       case PROGRAM_REQUEST:
         return <ProgramRequestItem key={key} request={item} reload={reload}/>
       case PROGRAM_QUESTION:
@@ -83,9 +84,20 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false}) =>
     }
   }
 
+  const renderEmptyBody = () => {
+    if (items.length > 0) {
+      return <></>
+    }
+
+    return (
+      <tr><td>Данные на данный момент отсутсвуют</td></tr>
+    )
+  }
+
   return (
     <>
       <Table headers={headers} withEmpty={tableEmptyItem}>
+        {renderEmptyBody()}
         {items.map((item, key) => renderItem(item, key))}
       </Table>
 

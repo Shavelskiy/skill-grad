@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import axios from 'axios'
 import {PROGRAM_PRICES_URL, PROVIDER_PROGRAMS_URL, PAYMENTS_BALANCE__URL} from '@/utils/profile/endpoints'
@@ -36,6 +36,8 @@ const headers = [
 ]
 
 const Programs = () => {
+  const [activeTab, setActiveTab] = useState(true)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -50,16 +52,19 @@ const Programs = () => {
       })
   }, [])
 
-
   return (
     <div className="container-0 mt-20">
-      <Navigation/>
+      <Navigation
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
       <TableTemplate
         fetchUrl={PROVIDER_PROGRAMS_URL}
         headers={headers}
         itemType={PROGRAM}
         tableEmptyItem={true}
+        additionalParams={{active: activeTab ? 1 : 0}}
       />
     </div>
   )
