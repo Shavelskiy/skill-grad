@@ -1,11 +1,12 @@
 import {SET_PROGRAM_TITLE, SET_PROGRAM_PRICES, SET_PROVIDER_BALANCE} from './types'
+import {HIGHLIGHT, RAISE, HIGHLIGHT_RAISE} from '@/utils/profile/porgram-service-types'
 
 const initialState = {
   programTitle: '',
   programPrices: {
-    highlight: 0,
-    highlight_raise: 0,
-    raise: 0,
+    [HIGHLIGHT]: 0,
+    [RAISE]: 0,
+    [HIGHLIGHT_RAISE]: 0,
   },
   balance: 0.0,
 }

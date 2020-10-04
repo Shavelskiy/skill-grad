@@ -8,10 +8,14 @@ use App\Entity\Program\Program;
 use App\Entity\Program\ProgramQuestion;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\Program\ProgramReview;
+use App\Entity\Program\ProgramService;
 use App\Entity\User;
 use App\Repository\ProgramQuestionRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramRequestRepository;
+use App\Service\ProgramServicesService;
+use DateInterval;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,19 +36,22 @@ class ProgramController extends AbstractController
     protected ProgramRepository $programRepository;
     protected ProgramRequestRepository $programRequestRepository;
     protected ProgramQuestionRepository $programQuestionRepository;
+    protected ProgramServicesService $programServicesService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         RouterInterface $router,
         ProgramRepository $programRepository,
         ProgramRequestRepository $programRequestRepository,
-        ProgramQuestionRepository $programQuestionRepository
+        ProgramQuestionRepository $programQuestionRepository,
+        ProgramServicesService $programServicesService
     ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->programRepository = $programRepository;
         $this->programRequestRepository = $programRequestRepository;
         $this->programQuestionRepository = $programQuestionRepository;
+        $this->programServicesService = $programServicesService;
     }
 
     /**
@@ -98,6 +105,10 @@ class ProgramController extends AbstractController
                         ->count(),
                     'total' => $program->getReviews()->count(),
                 ],
+                'services' => [
+                    'highlight' => $this->programServicesService->isProgramHighLight($program),
+                    'raise' => $this->programServicesService->isProgramRaise($program),
+                ],
             ];
         }
 
@@ -113,11 +124,51 @@ class ProgramController extends AbstractController
      */
     public function prices(): Response
     {
-        return new JsonResponse([
-            'highlight' => 990,
-            'raise' => 490,
-            'highlight_raise' => 1290,
-        ]);
+        return new JsonResponse(
+            $this->programServicesService->getServicePrices(),
+        );
+    }
+
+    /**
+     * @Route("/services/{program}", name="api.profile.programs.services.add", methods={"POST"})
+     */
+    public function addService(Program $program, Request $request): Response
+    {
+        /** @var User $user */
+        if (($user = $this->getUser()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        if (($provider = $user->getProvider()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        $type = $request->get('type');
+
+        if (!in_array($type, ProgramService::TYPES, true)) {
+            return new JsonResponse(['message' => 'Платная услуга не найдена'], 400);
+        }
+
+        $price = $this->programServicesService->getServicePrices()[$type];
+
+        if ($provider->getBalance() < $price) {
+            return new JsonResponse([], 403);
+        }
+
+        $programService = (new ProgramService())
+            ->setType($type)
+            ->setPrice($price)
+            ->setUser($user)
+            ->setProgram($program)
+            ->setExpireAt((new DateTime())->add(new DateInterval('P1M')));
+
+        $provider->setBalance($provider->getBalance() - $price);
+
+        $this->entityManager->persist($programService);
+        $this->entityManager->persist($provider);
+        $this->entityManager->flush();
+
+        return new JsonResponse();
     }
 
     /**

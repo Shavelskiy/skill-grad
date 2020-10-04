@@ -98,6 +98,11 @@ class User implements UserInterface
      */
     protected Collection $favoriteArticles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramService", mappedBy="user", fetch="LAZY")
+     */
+    protected Collection $programServices;
+
     public function __construct()
     {
         $this->favoriteProviders = new ArrayCollection();
@@ -108,6 +113,7 @@ class User implements UserInterface
         $this->programQuestions = new ArrayCollection();
         $this->sentChatMessages = new ArrayCollection();
         $this->receivedChatMessages = new ArrayCollection();
+        $this->programServices = new ArrayCollection();
     }
 
     public function getUsername(): string

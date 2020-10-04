@@ -21,7 +21,7 @@ export const Button = ({text, click, disabled = false, red = false, blue = false
   )
 }
 
-export const SmallButton = ({text, click, red = false, blue = false, grey = false}) => {
+export const SmallButton = ({text, click, disabled = false, red = false, blue = false, grey = false}) => {
   return (
     <button
       className={cn(
@@ -31,6 +31,7 @@ export const SmallButton = ({text, click, red = false, blue = false, grey = fals
         {[css.smallGrey]: grey},
       )}
       onClick={click}
+      disabled={disabled}
     >
       {text}
     </button>

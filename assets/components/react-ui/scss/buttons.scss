@@ -47,6 +47,11 @@
   text-align: center;
   color: #fff;
 
+  &:disabled, &:hover {
+    opacity: 0.8;
+    color: #fff;
+  }
+
   &.small-blue {
     background-color: #6db4fe;
   }

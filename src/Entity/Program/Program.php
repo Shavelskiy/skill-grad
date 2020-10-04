@@ -105,6 +105,11 @@ class Program
      */
     protected Collection $favoriteUsers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramService", mappedBy="program")
+     */
+    protected Collection $services;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -116,6 +121,7 @@ class Program
         $this->questions = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->favoriteUsers = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getAuthor(): User
@@ -279,6 +285,17 @@ class Program
     public function setReviews($reviews): self
     {
         $this->reviews = $reviews;
+        return $this;
+    }
+
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    public function setServices($services): self
+    {
+        $this->services = $services;
         return $this;
     }
 }

@@ -2,7 +2,10 @@ import React, {useState} from 'react'
 import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '@/utils/profile/routes'
 
 import axios from 'axios'
-import {PROGRAM_DEACTIVATE_URL, PROGRAM_ACTIVATE_URL} from '@/utils/profile/endpoints'
+import {PROGRAM_DEACTIVATE_URL, PROGRAM_ACTIVATE_URL, PROGRAM_SERVICE_ADD_URL} from '@/utils/profile/endpoints'
+
+import {useDispatch, useSelector} from 'react-redux'
+import {setProviderBalance} from '../../../redux/actions'
 
 import Request from './request'
 import PaidServiceModal from '../modals/paid-service-modal'
@@ -15,6 +18,9 @@ import cn from 'classnames'
 
 
 const ProgramItem = ({program, reload}) => {
+  const dispatch = useDispatch()
+  const balance = useSelector((state) => state.balance)
+
   const [paidServiceModalActive, setPaidServiceModalActive] = useState(false)
   const [moneyNoAvailableModalActive, setMoneyNoAvailableModalActive] = useState(false)
   const [deactivateModalActive, setDeactivateModalActive] = useState(false)
@@ -34,6 +40,18 @@ const ProgramItem = ({program, reload}) => {
         reload()
         setDeactivateModalActive(false)
       })
+  }
+
+  const addPaidService = (type, price) => {
+    axios.post(PROGRAM_SERVICE_ADD_URL.replace(':id', program.id), {
+      type: type
+    })
+      .finally(() => {
+        reload()
+        setPaidServiceModalActive(false)
+      })
+
+    dispatch(setProviderBalance(balance - price))
   }
 
   return (
@@ -100,6 +118,8 @@ const ProgramItem = ({program, reload}) => {
             setPaidServiceModalActive(false)
             setMoneyNoAvailableModalActive(true)
           }}
+          addPaidService={addPaidService}
+          services={program.services}
         />
 
         <MoneyNoAvailableModal
