@@ -26,11 +26,6 @@ RUN apt-get update \
              pkg-config \
              libpq-dev
 
-RUN docker-php-source extract \
-  && mkdir -p /usr/src/php/ext/redis \
-  && curl -fsSL https://github.com/phpredis/phpredis/archive/4.3.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
-  && docker-php-ext-configure redis
-
 RUN docker-php-ext-install pgsql \
   && docker-php-ext-install pdo_pgsql \
   && docker-php-ext-install intl \
@@ -38,7 +33,6 @@ RUN docker-php-ext-install pgsql \
   && docker-php-ext-install exif \
   && docker-php-ext-install opcache \
   && docker-php-ext-install sockets \
-  && docker-php-ext-install redis \
   && docker-php-ext-install dom \
   && docker-php-ext-install xml
 
@@ -52,7 +46,6 @@ RUN docker-php-source delete
 
 RUN apt-get update \
   && apt-get install -y \
-             xvfb \
              libfontconfig \
              wkhtmltopdf
 
