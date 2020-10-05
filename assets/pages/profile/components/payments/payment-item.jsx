@@ -1,33 +1,39 @@
 import React from 'react'
 
+import {dateFormat} from '@/helpers/date-formater'
+
 import css from './scss/payment-item.scss?module'
 import cn from 'classnames'
 
 
 const PaymentItem = ({item}) => {
+  const renderDocuments = () => {
+    return item.documents.map((document, key) => {
+      return (
+        <td key={key}>
+          <a className={css.linkIcon} href={document.path} target={'_blank'}>
+            <span className={cn('icon', 'pdf')}></span>
+            {document.name}
+          </a>
+        </td>
+      )
+    })
+  }
   return (
     <tr>
       <td>
-        12.02.2020
+        {dateFormat(new Date(item.date))}
       </td>
       <td>
-        Продвижение программы: «Базовые уроки флористики»
+        {item.name}
       </td>
       <td>
-        <strong className={css.price}>990.00</strong>
+        <strong className={css.price}>{new Intl.NumberFormat('ru-Ru').format(item.price)}</strong>
       </td>
-      <td>8546972-6347895/GH-1</td>
-      <td>
-        <a className={css.linkIcon} href="#">
-          <span className={cn('icon', 'pdf')}></span>
-          Счет-фактура
-        </a>
-      </td>
-      <td>
-        <a className={css.linkIcon} href="#">
-          <span className={cn('icon', 'pdf')}></span>Акт
-        </a>
-      </td>
+      <td>{item.number}</td>
+      {renderDocuments()}
+      {item.documents.length < 1 ? <td></td> : <></>}
+      {item.documents.length < 2 ? <td></td> : <></>}
     </tr>
   )
 }

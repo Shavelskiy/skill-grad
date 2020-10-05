@@ -66,6 +66,8 @@ abstract class AbstractService
         $this->documents = new ArrayCollection();
     }
 
+    abstract public function getTitle(): string;
+
     public function isActive(): bool
     {
         return $this->active;
@@ -123,7 +125,7 @@ abstract class AbstractService
 
     public function getNumber(): string
     {
-        return $this->number;
+        return $this->number ?? '';
     }
 
     public function setNumber(string $number): self

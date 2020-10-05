@@ -4,6 +4,7 @@ namespace App\Entity\Service;
 
 use App\Entity\Provider;
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 
 /**
  * @ORM\Entity()
@@ -22,6 +23,19 @@ class ProviderService extends AbstractService
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="services")
      */
     protected Provider $provider;
+
+    public function getTitle(): string
+    {
+        if ($this->getType() === self::PRO_ACCOUNT) {
+            return 'Приобретение PRO аккаунта на 30 дней';
+        }
+
+        if ($this->getType() === self::REPLENISH) {
+            return 'Пополнение счета';
+        }
+
+        throw new RuntimeException('service type is not available');
+    }
 
     public function getProvider(): Provider
     {

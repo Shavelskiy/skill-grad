@@ -26,20 +26,20 @@ use Twig\Environment;
 class ProviderServiceController extends AbstractController
 {
     protected EntityManagerInterface $entityManager;
-    protected RouterInterface $router;
     protected Environment $twig;
+    protected DocumentService $documentService;
     protected PriceService $priceService;
     protected PdfService $pdfService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        RouterInterface $router,
+        DocumentService $documentService,
         Environment $twig,
         PriceService $priceService,
         PdfService $pdfService
     ) {
         $this->entityManager = $entityManager;
-        $this->router = $router;
+        $this->documentService = $documentService;
         $this->twig = $twig;
         $this->priceService = $priceService;
         $this->pdfService = $pdfService;
@@ -146,7 +146,7 @@ class ProviderServiceController extends AbstractController
         $this->entityManager->flush();
 
         return new JsonResponse([
-            'path' => $this->router->generate(DocumentService::FILE_DOWNLOAD_PATH, ['document' => $document->getId()]),
+            'path' => $this->documentService->generateDownloadPath($document),
         ]);
     }
 }
