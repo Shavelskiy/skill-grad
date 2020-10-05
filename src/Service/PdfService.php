@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Process\Process;
 
@@ -28,18 +29,19 @@ class PdfService
             mkdir($this->pdfTmpDir, 0777);
         }
 
-        $fileName = $this->pdfTmpDir . sprintf('/pdf_tmp_%s.html', time());
+        $tmpFileName = $this->pdfTmpDir . sprintf('/pdf_tmp_%s.html', time());
+        $outputFilePath = sprintf('%s/%s', $this->replenishDir, $output);
 
-        $command = sprintf('%s %s %s', self::PDF_GENERATE_COMMAND, $fileName, escapeshellarg(sprintf('%s/%s', $this->replenishDir, $output)));
+        $command = sprintf('%s %s %s', self::PDF_GENERATE_COMMAND, $tmpFileName, $outputFilePath);
 
         try {
-            file_put_contents($fileName, $input);
+            file_put_contents($tmpFileName, $input);
 
             $process = Process::fromShellCommandline($command);
             $process->run();
 
-            unlink($fileName);
-        } catch (\Exception $e) {
+            unlink($tmpFileName);
+        } catch (Exception $e) {
             throw $e;
         }
     }

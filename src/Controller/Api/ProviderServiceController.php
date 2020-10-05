@@ -2,8 +2,10 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Service\Document;
 use App\Entity\Service\ProviderService;
 use App\Entity\User;
+use App\Service\DocumentService;
 use App\Service\PdfService;
 use App\Service\PriceService;
 use DateInterval;
@@ -15,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 /**
@@ -23,17 +26,20 @@ use Twig\Environment;
 class ProviderServiceController extends AbstractController
 {
     protected EntityManagerInterface $entityManager;
+    protected RouterInterface $router;
     protected Environment $twig;
     protected PriceService $priceService;
     protected PdfService $pdfService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
+        RouterInterface $router,
         Environment $twig,
         PriceService $priceService,
         PdfService $pdfService
     ) {
         $this->entityManager = $entityManager;
+        $this->router = $router;
         $this->twig = $twig;
         $this->priceService = $priceService;
         $this->pdfService = $pdfService;
@@ -102,6 +108,12 @@ class ProviderServiceController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        $amount = (float)$request->get('amount');
+
+        if ($amount < 1) {
+            return new JsonResponse([], 400);
+        }
+
         if (($provider = $user->getProvider()) === null) {
             return new JsonResponse([], 403);
         }
@@ -110,13 +122,31 @@ class ProviderServiceController extends AbstractController
 
         try {
             $this->pdfService->generate(
-                $this->twig->render('pdf/replenish.html.twig'), $fileName
+                $this->twig->render('pdf/replenish.html.twig', ['amount' => $amount]), $fileName
             );
-
         } catch (Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
 
-        return new JsonResponse();
+        $service = (new ProviderService())
+            ->setPrice($amount)
+            ->setUser($user)
+            ->setProvider($provider)
+            ->setActive(false)
+            ->setType(ProviderService::REPLENISH);
+
+        $document = (new Document())
+            ->setPath($fileName)
+            ->setName('Счет фактура')
+            ->setService($service);
+
+        $service->addDocument($document);
+
+        $this->entityManager->persist($document);
+        $this->entityManager->flush();
+
+        return new JsonResponse([
+            'path' => $this->router->generate(DocumentService::FILE_DOWNLOAD_PATH, ['document' => $document->getId()]),
+        ]);
     }
 }

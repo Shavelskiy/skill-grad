@@ -11,9 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 class ProviderService extends AbstractService
 {
     public const PRO_ACCOUNT = 'pro_account';
+    public const REPLENISH = 'replenish';
 
     public const TYPES = [
         self::PRO_ACCOUNT,
+        self::REPLENISH,
     ];
 
     /**

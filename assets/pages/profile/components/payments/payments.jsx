@@ -52,7 +52,10 @@ const Payments = () => {
 
   const replenish = (amount) => {
     axios.post(REPLENISH_URL, {amount: amount})
-      .then(() => {})
+      .then(({data}) => {
+        window.open(data.path, '_blank')
+        setPaymentModalActive(false)
+      })
   }
 
   return (

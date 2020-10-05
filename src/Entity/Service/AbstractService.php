@@ -6,6 +6,8 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
 use App\Entity\User;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,7 +42,7 @@ abstract class AbstractService
     protected User $user;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected DateTime $expireAt;
 
@@ -48,6 +50,21 @@ abstract class AbstractService
      * @ORM\Column(type="string")
      */
     protected string $type;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected string $number;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Service\Document", mappedBy="service", cascade={"persist"})
+     */
+    protected Collection $documents;
+
+    public function __construct()
+    {
+        $this->documents = new ArrayCollection();
+    }
 
     public function isActive(): bool
     {
@@ -101,6 +118,34 @@ abstract class AbstractService
     public function setType(string $type): self
     {
         $this->type = $type;
+        return $this;
+    }
+
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number): self
+    {
+        $this->number = $number;
+        return $this;
+    }
+
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(Collection $documents): self
+    {
+        $this->documents = $documents;
+        return $this;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        $this->documents->add($document);
         return $this;
     }
 }
