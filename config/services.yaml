@@ -2,6 +2,7 @@ parameters:
   site:
     host: '%env(resolve:SITE_HOST)%'
   upload_dir: '%kernel.project_dir%/public/upload'
+  pdf_tmp_dir: '%kernel.project_dir%/var/tmp'
   social.services:
     vk:
       client_id: '%env(resolve:VK_CLIENT_ID)%'
@@ -13,8 +14,8 @@ parameters:
 
 services:
   _defaults:
-    autowire: true      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    autowire: true
+    autoconfigure: true
 
   App\:
     resource: '../src/*'

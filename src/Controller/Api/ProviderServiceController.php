@@ -99,13 +99,24 @@ class ProviderServiceController extends AbstractController
      */
     public function replenish(Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (($provider = $user->getProvider()) === null) {
+            return new JsonResponse([], 403);
+        }
+
+        $fileName = sprintf('%s_%s_%s.pdf', 'replenish', $provider->getId(), time());
+
         try {
             $this->pdfService->generate(
-                'kek.pdf', 'dfjk', $this->twig->render('pdf/replenish.html.twig'),
+                $this->twig->render('pdf/replenish.html.twig'), $fileName
             );
 
         } catch (Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
+
+        return new JsonResponse();
     }
 }
