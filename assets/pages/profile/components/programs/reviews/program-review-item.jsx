@@ -1,14 +1,19 @@
 import React, {useState} from 'react'
-import {dateFormat, timeFormat} from '@/helpers/date-formater'
+
+import axios from 'axios'
+import {REVIEW_ANSWER_URL} from '@/utils/profile/endpoints'
 
 import {useSelector} from 'react-redux'
 
 import ReviewAnswerModal from './review-answer-modal'
 import ProAccountModal from './pro-account-modal';
 
+import {dateFormat, timeFormat} from '@/helpers/date-formater'
+
 import commonCss from './../common.scss?module'
 import css from './scss/program-review-item.scss?module'
 import cn from 'classnames'
+
 
 const ProgramReviewItem = ({review, reload}) => {
   const proAccount = useSelector((state) => state.proAccount)
@@ -56,6 +61,16 @@ const ProgramReviewItem = ({review, reload}) => {
     return <span className={css.showMoreButton} onClick={() => setShowFull(true)}>&nbsp;Показать полностью</span>
   }
 
+  const sendAnswer = (answer) => {
+    axios.post(REVIEW_ANSWER_URL.replace(':id', review.id), {
+      answer: answer
+    })
+      .then(() => {
+        reload()
+        setReviewAnswerModalActive(false)
+      })
+  }
+
   return (
     <tr>
       <td>{dateFormat(new Date(review.date))} <br/> {timeFormat(new Date(review.date))}</td>
@@ -96,6 +111,7 @@ const ProgramReviewItem = ({review, reload}) => {
         <ReviewAnswerModal
           active={reviewAnswerModalActive && proAccount}
           close={() => setReviewAnswerModalActive(false)}
+          sendAnswer={sendAnswer}
         />
 
         <ProAccountModal

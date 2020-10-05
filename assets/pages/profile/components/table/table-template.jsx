@@ -27,15 +27,22 @@ const TableTemplate = ({fetchUrl, headers, itemType, tableEmptyItem = false, add
   const queryParams = querystring.parse(location.search.substr(1))
 
   const [paginatorRequest, setPaginatorRequest] = useState(false)
+  const [oldAdditionalParams, setOldAdditionalParams] = useState(additionalParams)
 
   const [items, setItems] = useState([])
   const [currentPage, setCurrentPage] = useState('page' in queryParams ? queryParams.page : 1)
   const [totalPages, setTotalPages] = useState(1)
 
-
   useEffect(() => {
     reload()
-  }, [currentPage])
+  }, [currentPage, oldAdditionalParams])
+
+  useEffect(() => {
+    if (JSON.stringify(additionalParams) !== JSON.stringify(oldAdditionalParams)) {
+      setOldAdditionalParams(additionalParams)
+      setCurrentPage(1)
+    }
+  }, [additionalParams])
 
   const reload = () => {
     const axiosSource = axios.CancelToken.source()

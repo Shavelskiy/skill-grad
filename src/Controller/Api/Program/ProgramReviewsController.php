@@ -64,4 +64,22 @@ class ProgramReviewsController extends AbstractController
             'total_pages' => $searchResult->getTotalPageCount(),
         ]);
     }
+
+    /**
+     * @Route("/{programReview}", name="api/program.reviews.answer", methods={"POST"})
+     */
+    public function answer(ProgramReview $programReview, Request $request): Response
+    {
+        if ($programReview->getProgram()->getAuthor()->getId() !== $this->getUser()->getId()) {
+            return new JsonResponse([], 403);
+        }
+
+        $programReview
+            ->setAnswer($request->get('answer'));
+
+        $this->entityManager->persist($programReview);
+        $this->entityManager->flush();
+
+        return new JsonResponse();
+    }
 }

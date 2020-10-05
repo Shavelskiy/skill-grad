@@ -230,6 +230,6 @@ class Provider
 
     public function isProAccount(): bool
     {
-        return $this->services->filter(fn(ProviderService $service) => $service->getType() === ProviderService::PRO_ACCOUNT && $service->isActive())->count() > 1;
+        return $this->services->filter(fn(ProviderService $service) => $service->getType() === ProviderService::PRO_ACCOUNT && $service->isActive())->count() > 0;
     }
 }

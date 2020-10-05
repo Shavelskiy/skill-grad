@@ -27,7 +27,7 @@ export const AGREE_PROGRAM_URL = '/api/profile/request/agree/:id'
 export const REJECT_PROGRAM_URL = '/api/profile/request/reject/:id'
 
 export const QUESTION_ANSWER_URL = '/api/profile/program/question/answer/:id'
-export const REVIEW_ANSWER_URL = '/api/profile/program/review/answer/:id'
+export const REVIEW_ANSWER_URL = '/api/profile/program/review/:id'
 
 export const MESSAGE_INDEX_URL = '/api/message'
 export const MESSAGE_DETAIL_URL = '/api/message/detail/:id'
