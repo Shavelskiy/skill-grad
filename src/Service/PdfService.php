@@ -1,23 +1,16 @@
 <?php
 
-namespace App\Messenger;
+namespace App\Service;
 
 use Symfony\Component\Process\Process;
 
-class Pdf
+class PdfService
 {
-    private string $binary;
-
-    public function __construct($binary)
-    {
-        $this->binary = $binary;
-    }
-
-    public function generate($input, $output): void
+    public function generate($input, $output, string $binary): void
     {
         $fileName = __DIR__ . '/../../kek.html';
 
-        $command = $this->binary . ' ' . escapeshellarg($input) . ' ' . escapeshellarg($output);
+        $command = $binary . ' ' . escapeshellarg($input) . ' ' . escapeshellarg($output);
 
         try {
             file_put_contents($fileName, $input);

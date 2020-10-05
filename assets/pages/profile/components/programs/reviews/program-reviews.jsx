@@ -6,8 +6,8 @@ import axios from 'axios'
 import {
   PAYMENTS_BALANCE_URL,
   PROGRAM_REVIEWS_URL,
-  PROVIDER_IS_PRO_ACCOUNT,
-  PROVIDER_PRO_ACCOUNT_PRICE
+  PROVIDER_IS_PRO_ACCOUNT_URL,
+  PROVIDER_PRO_ACCOUNT_PRICE_URL
 } from '@/utils/profile/endpoints'
 
 import {useDispatch} from 'react-redux'
@@ -47,7 +47,7 @@ const ProgramReviews = ({match}) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get(PROVIDER_PRO_ACCOUNT_PRICE)
+    axios.get(PROVIDER_PRO_ACCOUNT_PRICE_URL)
       .then(({data}) => {
         dispatch(setProAccountPrice(data.price))
       })
@@ -57,7 +57,7 @@ const ProgramReviews = ({match}) => {
         dispatch(setProviderBalance(data.balance))
       })
 
-    axios.get(PROVIDER_IS_PRO_ACCOUNT)
+    axios.get(PROVIDER_IS_PRO_ACCOUNT_URL)
       .then(({data}) => dispatch(setProAccount(data.is_pro_account)))
   }, [])
 

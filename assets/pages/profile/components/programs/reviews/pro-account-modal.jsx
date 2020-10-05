@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 import {PAYMENTS} from '@/utils/profile/routes'
 
 import axios from 'axios'
-import {BUY_PRO_ACCOUNT} from '@/utils/profile/endpoints'
+import {BUY_PRO_ACCOUNT_URL} from '@/utils/profile/endpoints'
 
 import {useSelector, useDispatch} from 'react-redux'
 import {setProAccount, setProviderBalance} from '../../../redux/actions'
@@ -30,7 +30,7 @@ const ProAccountModal = ({active, close}) => {
       return
     }
 
-    axios.post(BUY_PRO_ACCOUNT)
+    axios.post(BUY_PRO_ACCOUNT_URL)
       .then(() => {
         dispatch(setProAccount(true))
         dispatch(setProviderBalance(balance - proAccountPrice))

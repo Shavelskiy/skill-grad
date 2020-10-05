@@ -6,14 +6,10 @@ use App\Entity\Category;
 use App\Entity\Location;
 use App\Entity\Provider;
 use App\Entity\ProviderRequisites;
-use App\Entity\Service\ProviderService;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
-use App\Service\PriceService;
 use App\Service\UploadServiceInterface;
-use DateInterval;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,20 +26,17 @@ class ProviderSettingsController extends AbstractController
     protected CategoryRepository $categoryRepository;
     protected LocationRepository $locationRepository;
     protected UploadServiceInterface $uploadService;
-    protected PriceService $priceService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         CategoryRepository $categoryRepository,
         LocationRepository $locationRepository,
-        UploadServiceInterface $uploadService,
-        PriceService $priceService
+        UploadServiceInterface $uploadService
     ) {
         $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
         $this->locationRepository = $locationRepository;
         $this->uploadService = $uploadService;
-        $this->priceService = $priceService;
     }
 
     /**
@@ -248,60 +241,5 @@ class ProviderSettingsController extends AbstractController
             ->setCorrespondentAccount($requestRequisites['correspondentAccount'])
             ->setBIC($requestRequisites['BIC'])
             ->setBank($requestRequisites['bank']);
-    }
-
-    /**
-     * @Route("/is-pro-account", name="api.provider-settings.is-pro-account", methods={"GET"})
-     */
-    public function isProAccount(): Response
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        return new JsonResponse(['is_pro_account' => ($user->getProvider() && $user->getProvider()->isProAccount())]);
-    }
-
-    /**
-     * @Route("/pro-account-price", name="api.provider-settings.pro-account-price", methods={"GET"})
-     */
-    public function proAccountPrice(): Response
-    {
-        return new JsonResponse(['price' => $this->priceService->getProAccountPrice()]);
-    }
-
-    /**
-     * @Route("/buy-pro-account", name="api.provider-settings.byu-pro-account", methods={"POST"})
-     */
-    public function buyProAccount(): Response
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        if ((($provider = $user->getProvider()) !== null) && $provider->isProAccount()) {
-            return new JsonResponse([], 400);
-        }
-
-        $proAccountPrice = $this->priceService->getProAccountPrice();
-
-        if ($provider->getBalance() < $proAccountPrice) {
-            return new JsonResponse([], 400);
-        }
-
-        $providerService = (new ProviderService())
-            ->setUser($user)
-            ->setActive(true)
-            ->setType(ProviderService::PRO_ACCOUNT)
-            ->setPrice($proAccountPrice)
-            ->setProvider($provider)
-            ->setExpireAt((new DateTime())->add(new DateInterval('P1M')));
-
-        $provider
-            ->setBalance($provider->getBalance() - $proAccountPrice);
-
-        $this->entityManager->persist($providerService);
-        $this->entityManager->persist($provider);
-        $this->entityManager->flush();
-
-        return new JsonResponse();
     }
 }

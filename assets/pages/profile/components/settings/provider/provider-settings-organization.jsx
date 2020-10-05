@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 
 import axios from 'axios'
-import {PROVIDER_INFO_URL, PROVIDER_IS_PRO_ACCOUNT} from '@/utils/profile/endpoints'
+import {PROVIDER_INFO_URL, PROVIDER_IS_PRO_ACCOUNT_URL} from '@/utils/profile/endpoints'
 
 import {useDispatch, useSelector} from 'react-redux'
 
@@ -71,7 +71,7 @@ const ProviderSettingsOrganization = () => {
         setRequisites(data.requisites)
       })
 
-    axios.get(PROVIDER_IS_PRO_ACCOUNT)
+    axios.get(PROVIDER_IS_PRO_ACCOUNT_URL)
       .then(({data}) => dispatch(setProAccount(data.is_pro_account)))
   }, [])
 
