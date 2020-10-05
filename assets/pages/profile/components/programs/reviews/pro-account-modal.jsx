@@ -2,7 +2,11 @@ import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {PAYMENTS} from '@/utils/profile/routes'
 
-import {useSelector} from 'react-redux'
+import axios from 'axios'
+import {BUY_PRO_ACCOUNT} from '@/utils/profile/endpoints'
+
+import {useSelector, useDispatch} from 'react-redux'
+import {setProAccount, setProviderBalance} from '../../../redux/actions'
 
 import Modal from '@/pages/profile/components/modal/modal'
 import {Button} from '@/components/react-ui/buttons'
@@ -12,6 +16,7 @@ import css from '@/pages/profile/components/programs/reviews/scss/pro-account-mo
 
 const ProAccountModal = ({active, close}) => {
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const proAccountPrice = useSelector((state) => state.proAccountPrice)
   const balance = useSelector((state) => state.balance)
@@ -22,9 +27,14 @@ const ProAccountModal = ({active, close}) => {
     if (balance < proAccountPrice) {
       close()
       setNoMoneyModalActive(true)
+      return
     }
 
-    console.log('kek')
+    axios.post(BUY_PRO_ACCOUNT)
+      .then(() => {
+        dispatch(setProAccount(true))
+        dispatch(setProviderBalance(balance - proAccountPrice))
+      })
   }
 
   return (

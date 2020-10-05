@@ -8,7 +8,7 @@ use App\Entity\Program\Program;
 use App\Entity\Program\ProgramQuestion;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\Program\ProgramReview;
-use App\Entity\Program\ProgramService;
+use App\Entity\Service\ProgramService;
 use App\Entity\User;
 use App\Repository\ProgramQuestionRepository;
 use App\Repository\ProgramRepository;

@@ -106,7 +106,7 @@ class Program
     protected Collection $favoriteUsers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramService", mappedBy="program")
+     * @ORM\OneToMany(targetEntity="App\Entity\Service\ProgramService", mappedBy="program")
      */
     protected Collection $services;
 

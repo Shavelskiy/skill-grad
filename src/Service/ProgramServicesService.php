@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Program\Program;
-use App\Entity\Program\ProgramService as ProgramServiceEntity;
+use App\Entity\Service\ProgramService as ProgramServiceEntity;
 
 class ProgramServicesService
 {

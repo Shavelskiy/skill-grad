@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Program;
+namespace App\Entity\Service;
 
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
@@ -10,32 +10,19 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ * @ORM\Table(name="service")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorMap({
+ *     "program_service" = "ProgramService",
+ *     "provider_service" = "ProviderService",
+ * })
+ *
  * @ORM\HasLifecycleCallbacks()
  */
-class ProgramService
+abstract class AbstractService
 {
-    public const HIGHLIGHT = 'highlight';
-    public const RAISE = 'raise';
-    public const HIGHLIGHT_RISE = 'highlight_raise';
-
-    public const TYPES = [
-        self::HIGHLIGHT,
-        self::RAISE,
-        self::HIGHLIGHT_RISE,
-    ];
-
     use IdTrait;
     use TimestampTrait;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program\Program", inversedBy="services")
-     */
-    protected Program $program;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected string $type;
 
     /**
      * @ORM\Column(type="boolean")
@@ -48,7 +35,7 @@ class ProgramService
     protected float $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="programServices")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="services")
      */
     protected User $user;
 
@@ -57,27 +44,10 @@ class ProgramService
      */
     protected DateTime $expireAt;
 
-    public function getProgram(): Program
-    {
-        return $this->program;
-    }
-
-    public function setProgram(Program $program): self
-    {
-        $this->program = $program;
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-        return $this;
-    }
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected string $type;
 
     public function isActive(): bool
     {
@@ -120,6 +90,17 @@ class ProgramService
     public function setExpireAt(DateTime $expireAt): self
     {
         $this->expireAt = $expireAt;
+        return $this;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
         return $this;
     }
 }

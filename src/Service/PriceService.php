@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Program\ProgramService;
+use App\Entity\Service\ProgramService;
 
 class PriceService
 {

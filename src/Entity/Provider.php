@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Service\ProviderService;
 use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,11 +34,6 @@ class Provider
      * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $externalLink;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default": false})
-     */
-    protected bool $proAccount = false;
 
     /**
      * @ORM\Column(type="float", options={"default": 0.0})
@@ -74,9 +70,15 @@ class Provider
      */
     protected Collection $favoriteUsers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Service\ProviderService", mappedBy="provider")
+     */
+    protected Collection $services;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getUser(): ?User
@@ -120,17 +122,6 @@ class Provider
     public function setExternalLink(?string $externalLink): self
     {
         $this->externalLink = $externalLink;
-        return $this;
-    }
-
-    public function isProAccount(): bool
-    {
-        return $this->proAccount;
-    }
-
-    public function setProAccount(bool $proAccount): self
-    {
-        $this->proAccount = $proAccount;
         return $this;
     }
 
@@ -224,5 +215,21 @@ class Provider
     {
         $this->favoriteUsers = $favoriteUsers;
         return $this;
+    }
+
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    public function setServices($services): self
+    {
+        $this->services = $services;
+        return $this;
+    }
+
+    public function isProAccount(): bool
+    {
+        return $this->services->filter(fn(ProviderService $service) => $service->getType() === ProviderService::PRO_ACCOUNT && $service->isActive())->count() > 1;
     }
 }

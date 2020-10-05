@@ -6,6 +6,8 @@ export const ALL_LOCATIONS_URL = '/api/profile/settings/locations'
 export const PROVIDER_IS_PRO_ACCOUNT =  '/api/profile/settings-provider/is-pro-account'
 export const PROVIDER_PRO_ACCOUNT_PRICE =  '/api/profile/settings-provider/pro-account-price'
 
+export const BUY_PRO_ACCOUNT = '/api/profile/settings-provider/buy-pro-account'
+
 export const LEARN_URL = '/api/learn'
 export const ADD_REVIEW_URL = '/api/learn/review'
 
