@@ -90,12 +90,12 @@
 
             {% if program.detailText|length > 0 %}
               <h5 class="result-title">Программа обучения</h5>
-              <p class="text">{{ program.detailText }}</p>
+              <p class="text">{{ program.detailText|raw }}</p>
             {% endif %}
 
             {% if program.processDescription|length > 0 %}
               <h5 class="result-title">Описание процесса обучения</h5>
-              <p class="text">{{ program.processDescription }}</p>
+              <p class="text">{{ program.processDescription|raw }}</p>
             {% endif %}
 
             <h5 class="result-title">Дизайн программы обучения</h5>
