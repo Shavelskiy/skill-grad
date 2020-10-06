@@ -28,10 +28,12 @@
       {% endif %}
     </div>
     <div class="send">
-      <div class="open-send-mail send-email" data-it="{{ provider.id }}">
-        <span class="icon email-f"></span>
-        Написать
-      </div>
+      {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+        <div class="open-send-mail send-email" data-it="{{ provider.id }}">
+          <span class="icon email-f"></span>
+          Написать
+        </div>
+      {% endif %}
       <div class="add-provider-favorites {{ provider.id in favorite_provider_ids  ? 'active' : '' }}"
            data-id="{{ provider.id }}">
         <i class="icon-love"></i>

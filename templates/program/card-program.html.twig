@@ -58,10 +58,12 @@
         </div>
       {% endif %}
       <div class="card__footer-button">
-        <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
-                data-id="{{ program.id }}">
-          Заказать
-        </button>
+        {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+          <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                  data-id="{{ program.id }}">
+            Заказать
+          </button>
+        {% endif %}
       </div>
       <div class="card__footer-add compare-program-add" data-id="{{ program.id }}">
         <span class="tooltip">

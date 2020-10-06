@@ -56,7 +56,8 @@
                  data-id="{{ program.id }}"></i>
             </div>
             <div class="button-container">
-              <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }} compare-program-add" data-id="{{ program.id }}"></i>
+              <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }} compare-program-add"
+                 data-id="{{ program.id }}"></i>
             </div>
           </div>
         </div>
@@ -213,77 +214,106 @@
             {% endif %}
 
             <h5 class="result-title">Отзывы и оценки ({{ reviews.items|length }})</h5>
-            <div class="container-0">
-              {% if reviews.items|length == 0 %}
-                У программы пока нет отзывов
-              {% else %}
-                {% for review in reviews.items %}
-                  <div class="reviews">
-                    <div class="container-0">
-                      <div class="information">
-                        <div class="top">
-                          <img class="rounded" src="/img/photo.jpg" alt="">
-                          <div class="d-flex w-100 j-c-space-between mt-10">
-                            <span class="name">{{ getUsername(review.user) }}</span>
-                            <span class="date">{{ review.createdAt|date('d m Y i:g') }}</span>
-                          </div>
-                        </div>
-                        <div class="comment">
-                          <p class="text">{{ review.review }}</p>
-                        </div>
+            {% if reviews.items|length == 0 %}
+              У программы пока нет отзывов
+            {% else %}
+              {% for review in reviews.items %}
+                <div class="review">
+                  <div class="information">
+                    <div class="review-main-info">
+                      <img class="rounded" src="{{ getUserPhoto(review.user) }}" alt="">
+                      <div class="review-author-date">
+                        <span class="review-author-name">{{ getUsername(review.user) }}</span>
+                        <span class="review-date">{{ review.createdAt|blogDate }}</span>
                       </div>
-                      <div class="value">
-                        <p class="text">
-                          <i class="icon-star"></i>
-                          Средняя оценка: <strong class="accent">{{ review.averageRating }}</strong>
-                        </p>
-                        <div class="text">
-                          <span class="title">Программа</span>
-                          <span>{{ review.rating[0][0] }}
-                                <span class="tooltip">
-                                  Полученные знания, навыки будут использованы мною в рабочей практике
-                                </span>
-                              </span>
-                          <span>{{ review.rating[0][1] }}</span>
-                          <span>{{ review.rating[0][2] }}</span>
-                        </div>
-                        <div class="text">
-                          <span class="title">Преподаватель</span>
-                          <span>{{ review.rating[1][0] }}
-                                <span class="tooltip">
-                                  Полученные знания, навыки будут использованы мною в рабочей практике
-                                </span>
-                              </span>
-                        </div>
-                        <div class="text">
-                          <span class="title">Организация обучения</span>
-                          <span>{{ review.rating[2][0] }}</span>
-                          <span>{{ review.rating[2][1] }}</span>
-                        </div>
+                    </div>
+                    <div class="comment">
+                      <p class="text">{{ review.review }}</p>
+                    </div>
+                  </div>
+
+                  <div class="value">
+                    <i class="icon-star"></i>
+
+                    <p class="review-value-title top">
+                      Средняя оценка: <strong class="accent">{{ review.averageRating|number_format(1, ',') }}</strong>
+                    </p>
+
+                    <div class="review-value-row">
+                      <span class="review-value-title">Программа</span>
+                      <div class="review-value-values">
+                        <span class="review-value-rating">
+                          {{ review.rating[0][0] }}
+                          <span class="tooltip first-tooltip">
+                            Программа полностью соответствовала поставленным задачам обучения
+                          </span>
+                        </span>
+                        <span class="review-value-rating">
+                          {{ review.rating[0][1] }}
+                           <span class="tooltip">
+                            Полученные знания, навыки будут использованы мною в рабочей практике
+                          </span>
+                        </span>
+                        <span class="review-value-rating">
+                          {{ review.rating[0][2] }}
+                           <span class="tooltip">
+                            Качество контентного сопровождения до и после обучения очень высокое (ответы на вопросы, консультации, предварительные задания, поддержка после обучения и т.д.)
+                          </span>
+                        </span>
                       </div>
                     </div>
 
-                    {% if review.answer is not null %}
-                      <div class="answer">
-                        <span class="right-arrow"></span>
-                        <div class="information">
-                          <div class="top">
-                            <img class="rounded" src="/img/photo.jpg" alt="">
-                            <div class="d-flex w-100 j-c-space-between mt-10">
-                              <span class="name">{{ program.author.userInfo.fullName }}</span>
-                              <span class="date">{{ review.answerDate|date('d m Y i:g') }}</span>
-                            </div>
-                          </div>
-                          <div class="comment">
-                            <p class="text">Большое спасибо за вашу оценку!</p>
-                          </div>
-                        </div>
+                    <div class="review-value-row">
+                      <span class="review-value-title">Преподаватель</span>
+                      <div class="review-value-values">
+                        <span class="review-value-rating">
+                          {{ review.rating[1][0] }}
+                          <span class="tooltip first-tooltip">
+                            Преподаватель является экспертом в заявленной теме
+                          </span>
+                        </span>
                       </div>
-                    {% endif %}
+                    </div>
+
+                    <div class="review-value-row">
+                      <span class="review-value-title">Организация обучения</span>
+                      <div class="review-value-values">
+                        <span class="review-value-rating">
+                          {{ review.rating[2][0] }}
+                          <span class="tooltip first-tooltip">
+                            Раздаточные материалы программы понятны
+                          </span>
+                        </span>
+                        <span class="review-value-rating">
+                          {{ review.rating[2][1] }}
+                          <span class="tooltip">
+                            Качество технического сопровождения (информирование, регистрация, навигация, аудитория, техническая поддержка) соотвествует высокому уровню
+                          </span>
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                {% endfor %}
-              {% endif %}
-            </div>
+                </div>
+
+                <div class="answer">
+                  {% if review.answer is not null %}
+                    <span class="right-arrow"></span>
+                    <div class="information">
+                      <div class="top">
+                        <img class="rounded" src="{{ getUserPhoto(review.answerUser) }}" alt="">
+                      </div>
+                      <div class="comment">
+                        <div class="review-author-date">
+                          <span class="review-author-name">{{ getUsername(review.answerUser) }}</span>
+                          <span class="review-date">{{ review.answerDate|blogDate }}</span>
+                        </div>
+                        <p class="text">{{ review.answer }}</p>
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% endif %}
           </div>
           <div class="col-lg-12 no-gutter">
             <div class="mt-40">
@@ -294,14 +324,16 @@
               } %}
             </div>
           </div>
-          <div class="container-0 j-c-center mt-40">
-            <div class="col-lg-4 col-sm-4 col-md-6">
-              <button class="button-red">Оставить оценку</button>
+          {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+            <div class="container-0 j-c-center mt-40">
+              <div class="col-lg-4 col-sm-4 col-md-6">
+                <button class="button-red">Оставить оценку</button>
+              </div>
+              <div class="col-lg-4 col-sm-4 col-md-6">
+                <button class="button-blue program-question-button">Задать вопрос</button>
+              </div>
             </div>
-            <div class="col-lg-4 col-sm-4 col-md-6">
-              <button class="button-blue program-question-button">Задать вопрос</button>
-            </div>
-          </div>
+          {% endif %}
         </div>
       </div>
 
@@ -318,11 +350,14 @@
                 {% endif %}
                 <a href="#">Узнать о скидках/акциях</a>
               </div>
-              <div class="button">
-                <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }} data-id="{{ program.id }}">
-                  Подать заявку
-                </button>
-              </div>
+              {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+                <div class="button">
+                  <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                          data-id="{{ program.id }}">
+                    Подать заявку
+                  </button>
+                </div>
+              {% endif %}
             </div>
 
             <div class="card-shadow pl-45">
@@ -337,7 +372,6 @@
                 <span>Формат обучения:</span>
                 <strong class="blue">{{ additional.format }}</strong>
               </p>
-
 
               <p class="text">
                 <i class="icon-student"></i>

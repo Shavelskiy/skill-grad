@@ -34,9 +34,9 @@ class ProgramReviewsRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->addOrderBy('p.createdAt', 'desc');
-//            ->andWhere('p.program = :program')
-//            ->setParameter('program', $program);
+            ->addOrderBy('p.createdAt', 'desc')
+            ->andWhere('p.program = :program')
+            ->setParameter('program', $program);
 
         return (new Paginator())
             ->setQuery($query)

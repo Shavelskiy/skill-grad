@@ -27,19 +27,17 @@
     direction: rtl;
 
     &::-webkit-scrollbar {
-      width: 20px;
+      width: 7px;
     }
 
     &::-webkit-scrollbar-track {
       background: #e9f1f7;
-      border-left: 9px solid white;
-      border-right: 9px solid white;
+      border-left: 2px solid white;
+      border-right: 2px solid white;
     }
 
     &::-webkit-scrollbar-thumb {
       background: #f7562e;
-      border-left: 7px solid white;
-      border-right: 7px solid white;
     }
 
     .list {

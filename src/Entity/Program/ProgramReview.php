@@ -47,6 +47,12 @@ class ProgramReview
     protected ?string $answer;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    private ?User $answerUser;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected ?DateTime $answerDate;
@@ -104,6 +110,17 @@ class ProgramReview
     {
         $this->answer = $answer;
         $this->answerDate = new DateTime();
+        return $this;
+    }
+
+    public function getAnswerUser(): ?User
+    {
+        return $this->answerUser;
+    }
+
+    public function setAnswerUser(?User $answerUser): self
+    {
+        $this->answerUser = $answerUser;
         return $this;
     }
 
