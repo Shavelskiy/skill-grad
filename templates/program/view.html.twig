@@ -15,6 +15,7 @@
 {% set additional = programAdditional(program) %}
 {% set categories = programCategories(program) %}
 {% set inCompare = inCompare(program.id, app.request.cookies) %}
+{% set hasRequest = hasRequest(program.id) %}
 
 {% block body %}
   <div class="main-card__program mt-0">
@@ -327,7 +328,7 @@
           {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
             <div class="container-0 j-c-center mt-40">
               <div class="col-lg-4 col-sm-4 col-md-6">
-                <button class="button-red">Оставить оценку</button>
+                <button class="button-red program-review-button" data-has-request="{{ hasRequest ? '1' : '0' }}">Оставить оценку</button>
               </div>
               <div class="col-lg-4 col-sm-4 col-md-6">
                 <button class="button-blue program-question-button">Задать вопрос</button>
@@ -352,7 +353,7 @@
               </div>
               {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
                 <div class="button">
-                  <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                  <button class="button-blue add-program-request" {{ hasRequest ? 'disabled' : '' }}
                           data-id="{{ program.id }}">
                     Подать заявку
                   </button>

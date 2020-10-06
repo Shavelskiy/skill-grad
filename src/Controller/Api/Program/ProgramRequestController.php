@@ -46,15 +46,16 @@ class ProgramRequestController extends AbstractController
 
         /** @var ProgramRequest $programRequest */
         foreach ($searchResult->getItems() as $programRequest) {
+            $user = $programRequest->getUser();
+
             $requests[] = [
                 'id' => $programRequest->getId(),
-                'user_name' => $programRequest->getUser()->getEmail(),
+                'user_name' => ($user->getUserInfo() !== null && !empty($user->getUserInfo()->getFullName())) ? $user->getUserInfo()->getFullName() : $user->getUsername(),
                 'contacts' => [
-                    'email' => 'v.shaveslkiy@gmail.com',
-                    'phone' => '9685434567',
+                    'email' => $user->getEmail(),
+                    'phone' => ($user->getUserInfo() !== null) ? $user->getUserInfo()->getPhone() : '',
                 ],
-                'comment' => 'Хотелось бы приобрести программу в рассрочку на 5-6
-            месяцев с предоплатой 30% в июне',
+                'comment' => $programRequest->getComment(),
                 'status' => $programRequest->getStatus(),
                 'date' => $programRequest->getCreatedAt()->format('c'),
             ];

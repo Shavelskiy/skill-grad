@@ -125,7 +125,6 @@ class LearnController extends AbstractController
         $programId = $request->get('id');
         $review = $request->get('review');
 
-        /** @var Program $program */
         $program = $this->programRepository->find($programId);
 
         /** @var User $user */

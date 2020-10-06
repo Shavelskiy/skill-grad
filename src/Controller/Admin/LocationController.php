@@ -225,7 +225,6 @@ class LocationController extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        /** @var Location $location */
         $location = $this->locationRepository->find($request->get('id'));
 
         if ($location === null) {

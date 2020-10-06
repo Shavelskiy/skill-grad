@@ -35,9 +35,12 @@ class ProgramController extends AbstractController
      */
     public function request(Request $request): Response
     {
+        if (!$this->isCsrfTokenValid('program-request', $request->get('_csrf_token'))) {
+            return new JsonResponse([], 400);
+        }
+
         $programId = $request->get('id');
 
-        /** @var Program $program */
         $program = $this->programRepository->find((int)$programId);
 
         if ($program === null) {
@@ -47,14 +50,14 @@ class ProgramController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->getProgramRequests()->filter(static function ($item) use ($programId) {
-            /* @var ProgramRequest $item */
-            return $item->getProgram()->getId() === $programId;
+        if ($user->getProgramRequests()->filter(static function (ProgramRequest $programRequest) use ($programId) {
+            return $programRequest->getProgram()->getId() === $programId;
         })->count() > 0) {
             return new JsonResponse(['message' => 'К данной программе уже оставлена заявка!', 400]);
         }
 
         $programRequest = (new ProgramRequest())
+            ->setComment($request->get('comment', ''))
             ->setUser($user)
             ->setProgram($program)
             ->setStatus(ProgramRequest::STATUS_NEW);

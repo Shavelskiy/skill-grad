@@ -75,6 +75,7 @@ class ProgramReviewsController extends AbstractController
         }
 
         $programReview
+            ->setAnswerUser($this->getUser())
             ->setAnswer($request->get('answer'));
 
         $this->entityManager->persist($programReview);

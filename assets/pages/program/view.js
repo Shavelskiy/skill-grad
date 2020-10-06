@@ -11,6 +11,7 @@ import './view.scss'
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 const questionAuthModal = document.getElementById('question-auth-modal')
+const reviewAuthModal = document.getElementById('review-auth-modal')
 const questionModal = document.getElementById('program-question-modal')
 const addProgramQuestionButton = questionModal.querySelector('button')
 
@@ -24,6 +25,9 @@ window.addEventListener('click', (event) => {
       break
     case questionModal:
       questionModal.classList.remove('active')
+      break
+    case reviewAuthModal:
+      reviewAuthModal.classList.remove('active')
       break
   }
 })
@@ -39,9 +43,12 @@ initModals(addFavoritesModal, '.login-btn', loginModal)
 initModals(addFavoritesModal, '.register-btn', registerRoleModal)
 initModals(questionAuthModal, '.login-btn', loginModal)
 initModals(questionAuthModal, '.register-btn', registerRoleModal)
+initModals(reviewAuthModal, '.login-btn', loginModal)
+initModals(reviewAuthModal, '.register-btn', registerRoleModal)
 
 initModalFormCloseBtn(addFavoritesModal)
 initModalFormCloseBtn(questionAuthModal)
+initModalFormCloseBtn(reviewAuthModal)
 initModalFormCloseBtn(questionModal)
 
 document.querySelectorAll('.add-program-favorites').forEach(item => {
@@ -60,6 +67,20 @@ document.querySelectorAll('.program-question-button').forEach(item => {
       questionAuthModal.classList.add('active')
     } else {
       questionModal.classList.add('active')
+    }
+  }
+})
+
+document.querySelectorAll('.program-review-button').forEach(item => {
+  item.onclick = () => {
+    if (!isAuth()) {
+      reviewAuthModal.classList.add('active')
+    } else {
+      if (item.dataset.hasRequest === '0') {
+        showAlert('Для того, чтобы поставить оценку, необходимо подать заявку к программе')
+      } else {
+        window.location.href = '/profile/learn'
+      }
     }
   }
 })
