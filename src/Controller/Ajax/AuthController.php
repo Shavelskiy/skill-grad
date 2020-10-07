@@ -2,8 +2,8 @@
 
 namespace App\Controller\Ajax;
 
-use App\Service\RegisterUserInterface;
-use App\Service\ResetUserPasswordInterface;
+use App\Service\User\RegisterUserInterface;
+use App\Service\User\ResetUserPasswordInterface;
 use Exception;
 use LogicException;
 use RuntimeException;

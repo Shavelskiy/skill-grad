@@ -212,12 +212,12 @@ class Article
 
     public function getLikesCount(): int
     {
-        return $this->getRatings()->filter(fn(ArticleRating $articleRating) => $articleRating->isLike())->count();
+        return $this->getRatings()->filter(fn (ArticleRating $articleRating) => $articleRating->isLike())->count();
     }
 
     public function getDisLikesCount(): int
     {
-        return $this->getRatings()->filter(fn(ArticleRating $articleRating) => !$articleRating->isLike())->count();
+        return $this->getRatings()->filter(fn (ArticleRating $articleRating) => !$articleRating->isLike())->count();
     }
 
     public function getViews(): int
@@ -249,6 +249,6 @@ class Article
 
     public function getRootComments(): Collection
     {
-        return $this->getComments()->filter(fn(ArticleComment $comment) => $comment->getParentComment() === null);
+        return $this->getComments()->filter(fn (ArticleComment $comment) => $comment->getParentComment() === null);
     }
 }

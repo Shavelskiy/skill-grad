@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Dto\UpdateUserData;
 use App\Entity\User;
@@ -8,12 +8,14 @@ use App\Entity\UserInfo;
 use App\Entity\UserToken;
 use App\Repository\UserRepository;
 use App\Repository\UserTokenRepository;
+use App\Service\AuthMailerInterface;
+use App\Service\UploadServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserService implements ResetUserPasswordInterface, RegisterUserInterface, UpdateUserInterface
+class UserService implements ResetUserPasswordInterface, RegisterUserInterface, UpdateUserInterface, UserInfoInterface
 {
     protected UserPasswordEncoderInterface $userPasswordEncoder;
     protected UserRepository $userRepository;
@@ -175,5 +177,45 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
     protected function updateUserPassword(User $user, string $password)
     {
         $user->setPassword($this->userPasswordEncoder->encodePassword($user, $password));
+    }
+
+    public function getUsername(?User $user): string
+    {
+        if ($user === null) {
+            return '';
+        }
+
+        if ($user->isProvider() && $user->getProvider() !== null) {
+            return $user->getProvider()->getName();
+        }
+
+        if ($user->getUserInfo() === null) {
+            return $user->getEmail();
+        }
+
+        $fullName = $user->getUserInfo()->getFullName();
+
+        if ($fullName !== null && !empty($fullName)) {
+            return $fullName;
+        }
+
+        return $user->getEmail();
+    }
+
+    public function getUserPhoto(?User $user): string
+    {
+        if ($user === null) {
+            return '/upload/img/provider_no_logo.png';
+        }
+
+        if ($user->isProvider() && $user->getProvider() !== null) {
+            return $user->getProvider()->getImage() ? $user->getProvider()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
+        }
+
+        if ($user->getUserInfo() === null) {
+            return '/upload/img/provider_no_logo.png';
+        }
+
+        return $user->getUserInfo()->getImage() ? $user->getUserInfo()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
     }
 }

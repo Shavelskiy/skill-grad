@@ -3,7 +3,7 @@ import './view.scss'
 import axios from 'axios'
 import {ADD_ARTICLE_COMMENT, DELETE_ARTICLE_COMMENT, EDIT_ARTICLE_COMMENT} from '@/utils/api-routes'
 
-import {loginModal, registerRoleModal, initModalFormCloseBtn} from '@/components/modal'
+import {loginModal, registerRoleModal, initModal, initRelationModal} from '@/components/modal'
 import {addArticleToFavorite} from '@/components/common/favorite'
 import {isAuth} from '@/helpers/auth'
 
@@ -13,33 +13,12 @@ const sendCommentBlock = document.querySelector('.send-comment')
 const editPopup = document.getElementById('comment-edit-popup')
 const answerPopup = document.getElementById('comment-answer-popup')
 
-window.addEventListener('click', (event) => {
-  switch (event.target) {
-    case addFavoritesModal:
-      addFavoritesModal.classList.remove('active')
-      break
-    case editPopup:
-      editPopup.classList.remove('active')
-      break
-    case answerPopup:
-      answerPopup.classList.remove('active')
-      return
-  }
-})
+initModal(addFavoritesModal)
+initModal(editPopup)
+initModal(answerPopup)
 
-const initModals = (modal, selector, openModal) => {
-  modal.querySelector(selector).onclick = () => {
-    modal.classList.remove('active')
-    openModal.classList.add('active')
-  }
-}
-
-initModals(addFavoritesModal, '.login-btn', loginModal)
-initModals(addFavoritesModal, '.register-btn', registerRoleModal)
-
-initModalFormCloseBtn(addFavoritesModal)
-initModalFormCloseBtn(editPopup)
-initModalFormCloseBtn(answerPopup)
+initRelationModal(addFavoritesModal, '.login-btn', loginModal)
+initRelationModal(addFavoritesModal, '.register-btn', registerRoleModal)
 
 document.querySelectorAll('.add-article-favorites').forEach(item => {
   item.onclick = () => {

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Helpers\CompareHelper;
 use App\Repository\CategoryRepository;
 use App\Repository\ChatMessageRepository;
+use App\Service\User\UserInfoInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -15,13 +16,16 @@ class CommonExtension extends AbstractExtension
 {
     protected ChatMessageRepository $chatMessageRepository;
     protected CategoryRepository $categoryRepository;
+    protected UserInfoInterface $userService;
 
     public function __construct(
         ChatMessageRepository $chatMessageRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        UserInfoInterface $userService
     ) {
         $this->chatMessageRepository = $chatMessageRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->userService = $userService;
     }
 
     public function getFunctions(): array
@@ -56,42 +60,12 @@ class CommonExtension extends AbstractExtension
 
     public function getUsername(?User $user): string
     {
-        if ($user === null) {
-            return '';
-        }
-
-        if ($user->isProvider() && $user->getProvider() !== null) {
-            return $user->getProvider()->getName();
-        }
-
-        if ($user->getUserInfo() === null) {
-            return $user->getEmail();
-        }
-
-        $fullName = $user->getUserInfo()->getFullName();
-
-        if ($fullName !== null && !empty($fullName)) {
-            return $fullName;
-        }
-
-        return $user->getEmail();
+        return $this->userService->getUsername($user);
     }
 
     public function getUserPhoto(?User $user): string
     {
-        if ($user === null) {
-            return '/upload/img/provider_no_logo.png';
-        }
-
-        if ($user->isProvider() && $user->getProvider() !== null) {
-            return $user->getProvider()->getImage() ? $user->getProvider()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
-        }
-
-        if ($user->getUserInfo() === null) {
-            return '/upload/img/provider_no_logo.png';
-        }
-
-        return $user->getUserInfo()->getImage() ? $user->getUserInfo()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
+        return $this->userService->getUserPhoto($user);
     }
 
     public function getNewMessagesCount(User $user): int

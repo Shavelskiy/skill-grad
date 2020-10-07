@@ -11,7 +11,7 @@ class ProgramServicesService
     {
         return !$program
             ->getServices()
-            ->filter(fn(ProgramServiceEntity $programService) => $programService->isActive() && in_array($programService->getType(), [ProgramServiceEntity::HIGHLIGHT, ProgramServiceEntity::HIGHLIGHT_RISE], true))
+            ->filter(fn (ProgramServiceEntity $programService) => $programService->isActive() && in_array($programService->getType(), [ProgramServiceEntity::HIGHLIGHT, ProgramServiceEntity::HIGHLIGHT_RISE], true))
             ->isEmpty();
     }
 
@@ -19,7 +19,7 @@ class ProgramServicesService
     {
         return !$program
             ->getServices()
-            ->filter(fn(ProgramServiceEntity $programService) => $programService->isActive() && in_array($programService->getType(), [ProgramServiceEntity::RAISE, ProgramServiceEntity::HIGHLIGHT_RISE], true))
+            ->filter(fn (ProgramServiceEntity $programService) => $programService->isActive() && in_array($programService->getType(), [ProgramServiceEntity::RAISE, ProgramServiceEntity::HIGHLIGHT_RISE], true))
             ->isEmpty();
     }
 }

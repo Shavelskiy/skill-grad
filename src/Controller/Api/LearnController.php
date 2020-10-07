@@ -4,7 +4,6 @@ namespace App\Controller\Api;
 
 use App\Dto\SearchQuery;
 use App\Entity\Category;
-use App\Entity\Program\Program;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\Program\ProgramReview;
 use App\Entity\Provider;

@@ -63,7 +63,7 @@ class SearchIndexCommand extends Command
         $searchQuery = (new SearchQuery())
             ->setPageItemCount(self::BATCH_SIZE);
 
-        for ($page = 1; $page <= ceil($this->getArticlesCount() / self::BATCH_SIZE); $page++) {
+        for ($page = 1; $page <= ceil($this->getArticlesCount() / self::BATCH_SIZE); ++$page) {
             $searchQuery->setPage($page);
 
             foreach ($this->articleRepository->getPaginatorResult($searchQuery)->getItems() as $article) {
@@ -74,7 +74,7 @@ class SearchIndexCommand extends Command
             $this->entityManager->clear();
         }
 
-        for ($page = 1; $page <= ceil($this->getProvidersCount() / self::BATCH_SIZE); $page++) {
+        for ($page = 1; $page <= ceil($this->getProvidersCount() / self::BATCH_SIZE); ++$page) {
             $searchQuery->setPage($page);
 
             foreach ($this->providerRepository->getPaginatorResult($searchQuery)->getItems() as $provider) {
@@ -85,7 +85,7 @@ class SearchIndexCommand extends Command
             $this->entityManager->clear();
         }
 
-        for ($page = 1; $page <= ceil($this->getProgramsCount() / self::BATCH_SIZE); $page++) {
+        for ($page = 1; $page <= ceil($this->getProgramsCount() / self::BATCH_SIZE); ++$page) {
             $searchQuery->setPage($page);
 
             foreach ($this->programRepository->getPaginatorResult($searchQuery)->getItems() as $program) {

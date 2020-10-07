@@ -10,36 +10,12 @@ export const newPasswordModal = document.getElementById('new-password-modal')
 export const citySelectorModal = document.getElementById('city-selector-modal')
 export const feedbackModal = document.getElementById('feedback-modal')
 
-window.addEventListener('click', (event) => {
-  switch (event.target) {
-    case loginModal:
-      loginModal.classList.remove('active')
-      break
-    case resetPasswordModal:
-      resetPasswordModal.classList.remove('active')
-      break
-    case newPasswordModal:
-      newPasswordModal.classList.remove('active')
-      break
-    case registerRoleModal:
-      registerRoleModal.classList.remove('active')
-      break
-    case registerModal:
-      registerModal.classList.remove('active')
-      break
-    case citySelectorModal:
-      citySelectorModal.classList.remove('active')
-      break
-    case feedbackModal:
-      feedbackModal.classList.remove('active')
-      break
-  }
-})
-
-export const initModalFormCloseBtn = (modal) => {
-  if (modal === null) {
-    return
-  }
+export const initModal = (modal) => {
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.classList.remove('active')
+    }
+  })
 
   const closeButton = modal.querySelector('span.close')
 
@@ -50,10 +26,17 @@ export const initModalFormCloseBtn = (modal) => {
   }
 }
 
-initModalFormCloseBtn(loginModal)
-initModalFormCloseBtn(resetPasswordModal)
-initModalFormCloseBtn(registerRoleModal)
-initModalFormCloseBtn(registerModal)
-initModalFormCloseBtn(newPasswordModal)
-initModalFormCloseBtn(citySelectorModal)
-initModalFormCloseBtn(feedbackModal)
+export const initRelationModal = (modal, selector, openModal) => {
+  modal.querySelector(selector).onclick = () => {
+    modal.classList.remove('active')
+    openModal.classList.add('active')
+  }
+}
+
+initModal(loginModal)
+initModal(resetPasswordModal)
+initModal(registerRoleModal)
+initModal(registerModal)
+initModal(newPasswordModal)
+initModal(citySelectorModal)
+initModal(feedbackModal)

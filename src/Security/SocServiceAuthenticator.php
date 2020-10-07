@@ -4,7 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Service\RegisterUserInterface;
+use App\Service\User\RegisterUserInterface;
 use App\Social\SocialAuthFactory;
 use App\Social\SocialAuthInterface;
 use Doctrine\ORM\EntityManagerInterface;

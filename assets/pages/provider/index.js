@@ -1,4 +1,4 @@
-import { loginModal, registerRoleModal, initModalFormCloseBtn } from '@/components/modal'
+import { loginModal, registerRoleModal, initModal, initRelationModal } from '@/components/modal'
 
 import { addProviderToFavorite } from '@/components/common/favorite'
 import {isAuth} from '@/helpers/auth'
@@ -6,31 +6,13 @@ import {isAuth} from '@/helpers/auth'
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 const sendMessageModal = document.getElementById('send-message-modal')
 
-window.addEventListener('click', (event) => {
-  switch (event.target) {
-    case addFavoritesModal:
-      addFavoritesModal.classList.remove('active')
-      break
-    case sendMessageModal:
-      sendMessageModal.classList.remove('active')
-      break
-  }
-})
+initModal(addFavoritesModal)
+initModal(sendMessageModal)
 
-const initModals = (modal, selector, openModal) => {
-  modal.querySelector(selector).onclick = () => {
-    modal.classList.remove('active')
-    openModal.classList.add('active')
-  }
-}
-
-initModals(addFavoritesModal, '.login-btn', loginModal)
-initModals(addFavoritesModal, '.register-btn', registerRoleModal)
-initModals(sendMessageModal, '.login-btn', loginModal)
-initModals(sendMessageModal, '.register-btn', registerRoleModal)
-
-initModalFormCloseBtn(addFavoritesModal)
-initModalFormCloseBtn(sendMessageModal)
+initRelationModal(addFavoritesModal, '.login-btn', loginModal)
+initRelationModal(addFavoritesModal, '.register-btn', registerRoleModal)
+initRelationModal(sendMessageModal, '.login-btn', loginModal)
+initRelationModal(sendMessageModal, '.register-btn', registerRoleModal)
 
 document.querySelectorAll('.send-email').forEach(item => {
   item.onclick = () => {

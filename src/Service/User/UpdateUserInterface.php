@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Dto\UpdateUserData;
 use App\Entity\User;

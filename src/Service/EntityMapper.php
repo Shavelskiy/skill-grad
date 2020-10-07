@@ -7,7 +7,6 @@ use App\Entity\Category;
 use App\Entity\Location;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
-use App\Service\ProgramService;
 
 class EntityMapper
 {
@@ -55,15 +54,15 @@ class EntityMapper
             'name' => $program->getName(),
             'annotation' => $program->getAnnotation(),
             'description' => $program->getDetailText(),
-            'locations' => $program->getLocations()->map(fn(Location $location) => $location->getId()),
+            'locations' => $program->getLocations()->map(fn (Location $location) => $location->getId()),
             'min_price' => 0,
             'max_price' => 0,
             'level' => $program->getLevel()->getId(),
             'practice' => ($design['type'] === Program::DESIGN_SIMPLE) ? $design['value'][1] : 100,
             'format' => ($programFormat['type'] !== Program::OTHER) ? $programFormat['value'] : 0,
             'rating' => $this->programService->getAverageRating($program),
-            'categories' => $program->getCategories()->map(fn(Category $category) => $category->getId())->toArray(),
-            'providers' => $program->getProviders()->map(fn(Provider $provider) => $provider->getId())->toArray(),
+            'categories' => $program->getCategories()->map(fn (Category $category) => $category->getId())->toArray(),
+            'providers' => $program->getProviders()->map(fn (Provider $provider) => $provider->getId())->toArray(),
         ];
     }
 }

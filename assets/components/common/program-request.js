@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import {load as recaptchaLoad} from 'recaptcha-v3/dist/ReCaptchaLoader'
 
-import {loginModal, registerRoleModal, initModalFormCloseBtn} from '@/components/modal'
+import {loginModal, registerRoleModal, initModal, initRelationModal} from '@/components/modal'
 import {isAuth} from '@/helpers/auth';
 import showAlert from '@/components/modal/alert';
 
@@ -10,34 +10,17 @@ import showAlert from '@/components/modal/alert';
 const requestAuthModal = document.getElementById('program-request-auth-modal')
 const requestModal = document.getElementById('program-request-modal')
 
+initModal(requestAuthModal)
+initModal(requestModal)
+
 const form = requestModal.querySelector('form')
 const formIdInput = form.querySelector('input[name="id"]')
 const formButton = form.querySelector('button[type="submit"]')
 
 let currentRequestButton
 
-window.addEventListener('click', (event) => {
-  switch (event.target) {
-    case requestAuthModal:
-      requestAuthModal.classList.remove('active')
-      break
-    case requestModal:
-      requestModal.classList.remove('active')
-  }
-})
-
-const initModals = (modal, selector, openModal) => {
-  modal.querySelector(selector).onclick = () => {
-    modal.classList.remove('active')
-    openModal.classList.add('active')
-  }
-}
-
-initModals(requestAuthModal, '.login-btn', loginModal)
-initModals(requestAuthModal, '.register-btn', registerRoleModal)
-
-initModalFormCloseBtn(requestAuthModal)
-initModalFormCloseBtn(requestModal)
+initRelationModal(requestAuthModal, '.login-btn', loginModal)
+initRelationModal(requestAuthModal, '.register-btn', registerRoleModal)
 
 document.querySelectorAll('.add-program-request').forEach((item) => {
   item.onclick = () => {

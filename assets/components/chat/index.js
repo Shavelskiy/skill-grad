@@ -2,6 +2,9 @@ import axios from 'axios'
 import {INIT, SEND_MESSAGE, VIEWED} from '@/utils/chat-types'
 import {GET_NEW_MESSAGES_COUNT} from '@/utils/api-routes'
 import {isAuth} from '@/helpers/auth'
+import {initModal} from '@/components/modal'
+import showAlert from '@/components/modal/alert'
+
 
 if (isAuth()) {
   const headerNotificationCount = document.querySelector('.header-notification-count')
@@ -27,12 +30,45 @@ if (isAuth()) {
         })
     }
 
-    const sendMessage = () => {
-      socket.send(JSON.stringify({
-        type: SEND_MESSAGE,
-        message: message,
-        recipient: selectedRecipientId,
-      }))
+    const messageModal = document.getElementById('send-new-message-modal')
+    if (messageModal !== null) {
+      initModal(messageModal)
+
+      const modalError = messageModal.querySelector('.modal-error')
+      let userId, message
+
+      document.querySelectorAll('.send-message-button').forEach(sendMessageButton => {
+        sendMessageButton.onclick = () => {
+          userId = Number(sendMessageButton.dataset.userId)
+          messageModal.classList.add('active')
+        }
+      })
+
+      messageModal.querySelector('button').onclick = () => {
+        modalError.innerHTML = ''
+
+        message = messageModal.querySelector('textarea').value
+
+        if (message.length < 1) {
+          modalError.innerHTML = 'Введите сообщение'
+          return
+        }
+
+        if (userId < 1) {
+          modalError.innerHTML = 'Отправка сообщения невозможна'
+          return
+        }
+
+        socket.send(JSON.stringify({
+          type: SEND_MESSAGE,
+          message: message,
+          recipient: userId,
+        }))
+
+        messageModal.querySelector('textarea').value = ''
+        messageModal.classList.remove('active')
+        showAlert('Сообщение успешно отправлено')
+      }
     }
 
     socket.onopen = () => {
@@ -67,11 +103,5 @@ if (isAuth()) {
           break
       }
     }
-
-    document.querySelectorAll('.send-email').forEach(item => {
-      item.onclick = () => {
-
-      }
-    })
   }
 }

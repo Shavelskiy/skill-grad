@@ -6,7 +6,7 @@ use App\Entity\ChatMessage;
 use App\Entity\User;
 use App\Repository\ChatMessageRepository;
 use App\Repository\UserRepository;
-use App\Service\ChatService;
+use App\Service\User\UserInfoInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,16 +19,16 @@ class MessageController extends AbstractController
 {
     protected ChatMessageRepository $chatMessageRepository;
     protected UserRepository $userRepository;
-    protected ChatService $chatService;
+    protected UserInfoInterface $userService;
 
     public function __construct(
         ChatMessageRepository $chatMessageRepository,
         UserRepository $userRepository,
-        ChatService $chatService
+        UserInfoInterface $userService
     ) {
         $this->chatMessageRepository = $chatMessageRepository;
         $this->userRepository = $userRepository;
-        $this->chatService = $chatService;
+        $this->userService = $userService;
     }
 
     /**
@@ -66,13 +66,13 @@ class MessageController extends AbstractController
             $result[] = [
                 'user' => [
                     'id' => $lastMessage->getUser()->getId(),
-                    'name' => $lastMessage->getUser()->getEmail(),
-                    'image' => $this->chatService->getUserPhoto($lastMessage->getUser()),
+                    'name' => $this->userService->getUsername($lastMessage->getUser()),
+                    'image' => $this->userService->getUserPhoto($lastMessage->getUser()),
                 ],
                 'recipient' => [
                     'id' => $recipient->getId(),
-                    'name' => $recipient->getEmail(),
-                    'image' => $this->chatService->getUserPhoto($recipient),
+                    'name' => $this->userService->getUsername($recipient),
+                    'image' => $this->userService->getUserPhoto($recipient),
                 ],
                 'message' => $lastMessage->jsonSerialize(),
                 'new_count' => $this->chatMessageRepository->findNewMessageCount($user, $recipient),
@@ -102,13 +102,13 @@ class MessageController extends AbstractController
         return new JsonResponse([
             'user' => [
                 'id' => $user->getId(),
-                'name' => $user->getEmail(),
-                'image' => $this->chatService->getUserPhoto($user),
+                'name' => $this->userService->getUsername($user),
+                'image' => $this->userService->getUserPhoto($user),
             ],
             'recipient' => [
                 'id' => $recipient->getId(),
-                'name' => $recipient->getEmail(),
-                'image' => $this->chatService->getUserPhoto($recipient),
+                'name' => $this->userService->getUsername($recipient),
+                'image' => $this->userService->getUserPhoto($recipient),
             ],
             'messages' => $messages,
         ]);

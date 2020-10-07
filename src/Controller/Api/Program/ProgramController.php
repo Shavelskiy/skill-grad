@@ -86,26 +86,26 @@ class ProgramController extends AbstractController
                 'id' => $program->getId(),
                 'link' => $this->router->generate('program.view', ['id' => $program->getId()]),
                 'name' => $program->getName(),
-                'categories' => implode(',', $program->getCategories()->map(fn(Category $category) => $category->getName())->toArray()),
+                'categories' => implode(',', $program->getCategories()->map(fn (Category $category) => $category->getName())->toArray()),
                 'active' => $program->isActive(),
                 'requests' => [
                     'new' => $program
                         ->getRequests()
-                        ->filter(fn(ProgramRequest $request) => $request->getStatus() === ProgramRequest::STATUS_NEW)
+                        ->filter(fn (ProgramRequest $request) => $request->getStatus() === ProgramRequest::STATUS_NEW)
                         ->count(),
                     'total' => $program->getRequests()->count(),
                 ],
                 'questions' => [
                     'new' => $program
                         ->getQuestions()
-                        ->filter(fn(ProgramQuestion $question) => $question->getAnswer() === null)
+                        ->filter(fn (ProgramQuestion $question) => $question->getAnswer() === null)
                         ->count(),
                     'total' => $program->getQuestions()->count(),
                 ],
                 'reviews' => [
                     'new' => $program
                         ->getReviews()
-                        ->filter(fn(ProgramReview $review) => $review->getAnswer() === null)
+                        ->filter(fn (ProgramReview $review) => $review->getAnswer() === null)
                         ->count(),
                     'total' => $program->getReviews()->count(),
                 ],

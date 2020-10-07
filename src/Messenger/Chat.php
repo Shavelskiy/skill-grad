@@ -8,7 +8,7 @@ use App\Entity\UserToken;
 use App\Repository\ChatMessageRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserTokenRepository;
-use App\Service\ChatService;
+use App\Service\User\UserInfoInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Ratchet\ConnectionInterface;
@@ -30,7 +30,7 @@ class Chat implements MessageComponentInterface
     protected UserRepository $userRepository;
     protected UserTokenRepository $userTokenRepository;
     protected ChatMessageRepository $chatMessageRepository;
-    protected ChatService $chatService;
+    protected UserInfoInterface $userService;
     protected OutputInterface $output;
 
     protected array $usersToResourcesMap = [];
@@ -41,7 +41,7 @@ class Chat implements MessageComponentInterface
         UserRepository $userRepository,
         UserTokenRepository $userTokenRepository,
         ChatMessageRepository $chatMessageRepository,
-        ChatService $chatService,
+        UserInfoInterface $userService,
         OutputInterface $output
     ) {
         $this->clients = new SplObjectStorage();
@@ -49,7 +49,7 @@ class Chat implements MessageComponentInterface
         $this->userRepository = $userRepository;
         $this->userTokenRepository = $userTokenRepository;
         $this->chatMessageRepository = $chatMessageRepository;
-        $this->chatService = $chatService;
+        $this->userService = $userService;
         $this->output = $output;
     }
 
@@ -88,7 +88,7 @@ class Chat implements MessageComponentInterface
 
         $userId = $this->resourcesToUsersMap[$conn->resourceId];
         unset($this->resourcesToUsersMap[$conn->resourceId]);
-        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], fn(int $resourceId) => $resourceId !== $conn->resourceId);
+        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], fn (int $resourceId) => $resourceId !== $conn->resourceId);
 
         $this->clients->detach($conn);
     }
@@ -99,7 +99,7 @@ class Chat implements MessageComponentInterface
 
         $userId = $this->resourcesToUsersMap[$conn->resourceId];
         unset($this->resourcesToUsersMap[$conn->resourceId]);
-        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], fn(int $resourceId) => $resourceId !== $conn->resourceId);
+        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], fn (int $resourceId) => $resourceId !== $conn->resourceId);
 
         $conn->close();
     }
@@ -150,8 +150,8 @@ class Chat implements MessageComponentInterface
         $this->sendToClients($chatMessage->getRecipient()->getId(), [
             'type' => $msg['type'],
             'author' => [
-                'name' => $chatMessage->getUser()->getEmail(),
-                'image' => $this->chatService->getUserPhoto($chatMessage->getUser()),
+                'name' => $this->userService->getUsername($chatMessage->getUser()),
+                'image' => $this->userService->getUserPhoto($chatMessage->getUser()),
             ],
             'text' => $chatMessage->getMessage(),
         ]);

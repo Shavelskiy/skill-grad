@@ -30,7 +30,6 @@ class Document
      */
     protected string $name;
 
-
     public function getService(): AbstractService
     {
         return $this->service;

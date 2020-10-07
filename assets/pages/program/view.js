@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {ADD_PROGRAM_QUESTION} from '@/utils/api-routes'
 
-import {loginModal, registerRoleModal, initModalFormCloseBtn} from '@/components/modal'
+import {loginModal, registerRoleModal, initModal, initRelationModal} from '@/components/modal'
 import {addProgramToFavorite} from '@/components/common/favorite'
 import showAlert from '@/components/modal/alert'
 import {isAuth} from '@/helpers/auth'
@@ -15,41 +15,17 @@ const reviewAuthModal = document.getElementById('review-auth-modal')
 const questionModal = document.getElementById('program-question-modal')
 const addProgramQuestionButton = questionModal.querySelector('button')
 
-window.addEventListener('click', (event) => {
-  switch (event.target) {
-    case addFavoritesModal:
-      addFavoritesModal.classList.remove('active')
-      break
-    case questionAuthModal:
-      questionAuthModal.classList.remove('active')
-      break
-    case questionModal:
-      questionModal.classList.remove('active')
-      break
-    case reviewAuthModal:
-      reviewAuthModal.classList.remove('active')
-      break
-  }
-})
+initModal(addFavoritesModal)
+initModal(questionAuthModal)
+initModal(reviewAuthModal)
+initModal(questionModal)
 
-const initModals = (modal, selector, openModal) => {
-  modal.querySelector(selector).onclick = () => {
-    modal.classList.remove('active')
-    openModal.classList.add('active')
-  }
-}
-
-initModals(addFavoritesModal, '.login-btn', loginModal)
-initModals(addFavoritesModal, '.register-btn', registerRoleModal)
-initModals(questionAuthModal, '.login-btn', loginModal)
-initModals(questionAuthModal, '.register-btn', registerRoleModal)
-initModals(reviewAuthModal, '.login-btn', loginModal)
-initModals(reviewAuthModal, '.register-btn', registerRoleModal)
-
-initModalFormCloseBtn(addFavoritesModal)
-initModalFormCloseBtn(questionAuthModal)
-initModalFormCloseBtn(reviewAuthModal)
-initModalFormCloseBtn(questionModal)
+initRelationModal(addFavoritesModal, '.login-btn', loginModal)
+initRelationModal(addFavoritesModal, '.register-btn', registerRoleModal)
+initRelationModal(questionAuthModal, '.login-btn', loginModal)
+initRelationModal(questionAuthModal, '.register-btn', registerRoleModal)
+initRelationModal(reviewAuthModal, '.login-btn', loginModal)
+initRelationModal(reviewAuthModal, '.register-btn', registerRoleModal)
 
 document.querySelectorAll('.add-program-favorites').forEach(item => {
   item.onclick = () => {

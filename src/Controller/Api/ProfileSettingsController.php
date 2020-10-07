@@ -10,7 +10,7 @@ use App\Entity\Location;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
-use App\Service\UpdateUserInterface;
+use App\Service\User\UpdateUserInterface;
 use Exception;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
