@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\ArticleComment;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
@@ -19,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlogController extends BaseCatalogRepository
 {
     protected const PAGE_ITEM_COUNT = 10;
+    protected const POPULAR_COMMENTS_COUNT = 5;
 
     protected ArticleRepository $articleRepository;
     protected UserRepository $userRepository;
@@ -66,7 +68,7 @@ class BlogController extends BaseCatalogRepository
         foreach ($this->userRepository->findBy(['id' => array_keys($popularAuthors)]) as $user) {
             $popularAuthors[$user->getId()]['user'] = $user;
         }
-        
+
         return $this->render('blog/index.html.twig', [
             'articles' => $this->articleRepository->findBy(['id' => $searchResult['ids']]),
             'page' => $page,
@@ -100,10 +102,42 @@ class BlogController extends BaseCatalogRepository
             }
         }
 
+
         return $this->render('blog/view.html.twig', [
             'article' => $article,
             'is_favorite' => $this->getUser() && $this->getUser()->getFavoriteArticles()->contains($article),
             'more_articles' => $moreArticles,
+            'popular_comment_ids' => $this->getPopularCommentIds($article),
         ]);
+    }
+
+    protected function getPopularCommentIds(Article $article): array
+    {
+        $result = [];
+
+        for ($i = 1; $i < self::POPULAR_COMMENTS_COUNT; $i++) {
+            $maxCommentId = null;
+            $maxCommentAnswersCount = null;
+
+            /** @var ArticleComment $comment */
+            foreach ($article->getRootComments() as $comment) {
+                if (in_array($comment->getId(), $result, true)) {
+                    continue;
+                }
+
+                if ($maxCommentAnswersCount === null || $comment->getAnswers()->count() > $maxCommentAnswersCount) {
+                    $maxCommentId = $comment->getId();
+                    $maxCommentAnswersCount = $comment->getAnswers()->count();
+                }
+            }
+
+            if ($maxCommentId === null) {
+                break;
+            }
+
+            $result[] = $maxCommentId;
+        }
+
+        return $result;
     }
 }

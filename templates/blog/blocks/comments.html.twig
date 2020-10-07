@@ -1,87 +1,40 @@
 <div id="article-comments" class="comments">
   <h4>Комментарии к статье ({{ article.comments|length }})</h4>
-  <div class="tab">
-    <div class="tab__nav">
-      <ul class="nav">
-        <li data-tab-name="tab-1" class="nav-item active">По порядку</li>
-        <li data-tab-name="tab-2" class="nav-item">Популярные</li>
-      </ul>
-    </div>
-    <div class="tab__content">
-      <div class="tab__content-item tab-1 active">
-        <div class="comments-body">
+  {% if article.rootComments|length < 1 %}
+    У статьи еще нет комментариев
+  {% else %}
+    <div class="tab">
+      {% if popular_comment_ids|length > 0 %}
+        <div class="tab__nav">
+          <ul class="nav">
+            <li data-tab-name="tab-1" class="nav-item comments-tab-default active">По порядку</li>
+            <li data-tab-name="tab-2" class="nav-item comments-tab-popular">Популярные</li>
+          </ul>
+        </div>
+      {% endif %}
+      <div class="tab__content">
+        <div class="tab__content-item comments-body comments-tab-content-default active">
           {% for comment in article.rootComments %}
-            <div class="information">
-              <div class="top">
-                <img class="rounded" src="{{ getUserPhoto(comment.user) }}" alt="">
-                <div class="d-flex w-100 j-c-space-between mt-10">
-                  <span class="name">{{ getUsername(comment.user) }}</span>
-                  <span class="date">
-                    {{ comment.createdAt|blogDate }}
-                  </span>
-                </div>
-              </div>
-              <div class="comment">
-                <p class="text">
-                  {{ comment.text }}
-                </p>
-                <div class="rules">
-                  <div class="links">
-                    {% if app.user is not null %}
-                      {% if comment.user.id == app.user.id %}
-                        <a data-id="{{ comment.id }}" data-value="{{ comment.text }}" class="edit-article-comment">
-                          Редактировать
-                        </a>
-                        <a data-id="{{ comment.id }}" class="delete-article-comment delete-comment">Удалить</a>
-                      {% endif %}
-                      <a data-id="{{ comment.id }}" class="answer-article-comment" href="#">Ответить</a>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="answer">
-              {% for answer in comment.answers %}
-                <div class="information">
-                  <div class="top">
-                    <img class="rounded" src="{{ getUserPhoto(answer.user) }}" alt="">
-                    <div class="d-flex w-100 j-c-space-between mt-10">
-                      <span class="name">{{ getUsername(answer.user) }}</span>
-                      <span class="date">
-                       {{ answer.createdAt|blogDate }}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <p class="text">
-                      {{ answer.text }}
-                    </p>
-                    {% if app.user is not null and comment.user.id == app.user.id %}
-                      <div class="rules">
-                        <a data-id="{{ answer.id }}" data-value="{{ answer.text }}" class="edit-article-comment">
-                          Редактировать
-                        </a>
-                        <a data-id="{{ answer.id }}" class="delete-article-comment delete-comment" href="#">Удалить</a>
-                      </div>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
+            {% include 'blog/blocks/comment.html.twig' with { comment: comment } %}
           {% endfor %}
-
-          {% if app.user is not null %}
-            <div data-id="{{ article.id }}" class="send-comment">
-              <textarea rows="10" class="textarea" placeholder="Текст сообщения"></textarea>
-              <button class="button-blue">Отправить</button>
-            </div>
-          {% else %}
-            <span>Оставлять комментарии могут только авторизованные пользователи</span>
-          {% endif %}
+        </div>
+        <div class="tab__content-item comments-body comments-tab-content-popular">
+          {% for comment in article.rootComments %}
+            {% if comment.id in popular_comment_ids %}
+              {% include 'blog/blocks/comment.html.twig' with { comment: comment } %}
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
-      <div class="tab__content-item tab-2"></div>
+
+      {% if app.user is not null %}
+        <div data-id="{{ article.id }}" class="send-comment">
+          <textarea rows="10" class="textarea" placeholder="Текст сообщения"></textarea>
+          <button class="button-blue">Отправить</button>
+        </div>
+      {% else %}
+        <span>Оставлять комментарии могут только авторизованные пользователи</span>
+      {% endif %}
     </div>
-  </div>
+  {% endif %}
 </div>

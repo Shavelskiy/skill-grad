@@ -97,3 +97,33 @@ document.querySelectorAll('.answer-article-comment').forEach(item => {
     }
   }
 })
+
+const defaultCommentsTab = document.querySelector('.comments-tab-default')
+const popularCommentTab = document.querySelector('.comments-tab-popular')
+
+if (defaultCommentsTab !== null && popularCommentTab !== null) {
+  const defaultCommentsTabContent = document.querySelector('.comments-tab-content-default')
+  const popularCommentTabContent = document.querySelector('.comments-tab-content-popular')
+
+  defaultCommentsTab.onclick = () => {
+    if (defaultCommentsTab.classList.contains('active')) {
+      return
+    }
+
+    popularCommentTab.classList.remove('active')
+    popularCommentTabContent.classList.remove('active')
+    defaultCommentsTab.classList.add('active')
+    defaultCommentsTabContent.classList.add('active')
+  }
+
+  popularCommentTab.onclick = () => {
+    if (popularCommentTab.classList.contains('active')) {
+      return
+    }
+
+    defaultCommentsTab.classList.remove('active')
+    defaultCommentsTabContent.classList.remove('active')
+    popularCommentTab.classList.add('active')
+    popularCommentTabContent.classList.add('active')
+  }
+}

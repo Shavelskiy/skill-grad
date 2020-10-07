@@ -145,6 +145,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->groupBy('u.id')
             ->orderBy('total_count', 'desc')
             ->andWhere('r.like = true')
+            ->setFirstResult(10)
             ->getQuery()
             ->getResult();
     }

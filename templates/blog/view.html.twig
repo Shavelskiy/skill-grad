@@ -114,7 +114,8 @@
             </div>
           </div>
           {% include 'blog/blocks/comments.html.twig' with {
-            article: article
+            article: article,
+            popular_comment_ids: popular_comment_ids
           } %}
         </div>
       </div>

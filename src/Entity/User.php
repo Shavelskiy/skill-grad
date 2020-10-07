@@ -233,7 +233,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFavoritePrograms()
+    public function getFavoritePrograms(): Collection
     {
         return $this->favoritePrograms;
     }
@@ -250,7 +250,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFavoriteArticles()
+    public function getFavoriteArticles(): Collection
     {
         return $this->favoriteArticles;
     }

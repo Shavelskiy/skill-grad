@@ -161,16 +161,16 @@
       }
     }
 
-    .send-comment {
-      margin-top: 40px;
-
-      .button-blue {
-        width: 120px;
-      }
-    }
-
     & > .answer {
       border-bottom: 1px solid #ccc;
+    }
+  }
+
+  .send-comment {
+    margin-top: 40px;
+
+    .button-blue {
+      width: 120px;
     }
   }
 }
