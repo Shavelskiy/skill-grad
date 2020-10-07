@@ -15,6 +15,7 @@ export const PROGRAM_PRICES_URL = '/api/profile/program/prices'
 
 export const PROGRAM_DEACTIVATE_URL = '/api/profile/program/deactivate/:id'
 export const PROGRAM_ACTIVATE_URL = '/api/profile/program/activate/:id'
+export const DELETE_ACTIVATE_URL = '/api/profile/program/:id'
 
 export const PROGRAM_SERVICE_ADD_URL = '/api/profile/program/services/:id'
 

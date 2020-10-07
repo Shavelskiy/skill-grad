@@ -29,7 +29,5 @@ form.onsubmit = function (e) {
           feedbackModal.classList.remove('active')
         })
     })
-  }).catch((e) => {
-    console.log('recaptcha error')
   })
 }

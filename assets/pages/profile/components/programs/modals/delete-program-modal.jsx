@@ -6,7 +6,7 @@ import {Button} from '@/components/react-ui/buttons'
 import css from './scss/modals.scss?module'
 
 
-const DeleteProgramModal = ({active, close}) => {
+const DeleteProgramModal = ({active, close, deleteProgram}) => {
   return (
     <Modal
       active={active}
@@ -27,7 +27,7 @@ const DeleteProgramModal = ({active, close}) => {
           text={'Да'}
           red={true}
           fullWidth={false}
-          click={() => console.log('kek')}
+          click={() => deleteProgram()}
         />
       </div>
     </Modal>

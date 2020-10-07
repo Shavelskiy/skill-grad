@@ -2,7 +2,12 @@ import React, {useState} from 'react'
 import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '@/utils/profile/routes'
 
 import axios from 'axios'
-import {PROGRAM_DEACTIVATE_URL, PROGRAM_ACTIVATE_URL, PROGRAM_SERVICE_ADD_URL} from '@/utils/profile/endpoints'
+import {
+  PROGRAM_DEACTIVATE_URL,
+  PROGRAM_ACTIVATE_URL,
+  PROGRAM_SERVICE_ADD_URL,
+  DELETE_ACTIVATE_URL
+} from '@/utils/profile/endpoints'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {setProviderBalance} from '../../../redux/actions'
@@ -39,6 +44,14 @@ const ProgramItem = ({program, reload}) => {
       .then(() => {
         reload()
         setDeactivateModalActive(false)
+      })
+  }
+
+  const deleteProgram = () => {
+    axios.delete(DELETE_ACTIVATE_URL.replace(':id', program.id))
+      .then(() =>{
+        reload()
+        setDeleteProgramModalActive(false)
       })
   }
 
@@ -138,6 +151,7 @@ const ProgramItem = ({program, reload}) => {
         <DeleteProgramModal
           active={deleteProgramModalActive}
           close={() => setDeleteProgramModalActive(false)}
+          deleteProgram={deleteProgram}
         />
       </td>
     </tr>

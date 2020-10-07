@@ -226,4 +226,19 @@ class ProgramController extends AbstractController
 
         return new JsonResponse();
     }
+
+    /**
+     * @Route("/{program}", name="api.profile.programs.delete", methods={"DELETE"})
+     */
+    public function delete(Program $program): Response
+    {
+        if ($program->getAuthor()->getUsername() !== $this->getUser()->getUsername()) {
+            return new JsonResponse([], 403);
+        }
+
+        $this->entityManager->remove($program);
+        $this->entityManager->flush();
+
+        return new JsonResponse([]);
+    }
 }

@@ -49,8 +49,6 @@ const initModalForm = (modal, checkPasswords, closeFormIfError, reloadPageIfSucc
             }
           })
       })
-    }).catch((e) => {
-      console.log('recapthca error')
     })
   }
 }
