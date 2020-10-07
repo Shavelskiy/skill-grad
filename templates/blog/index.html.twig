@@ -72,29 +72,25 @@
       <div class="box-sidebar">
         {% include 'blog/blocks/filters.html.twig' %}
 
-        <div class="authors">
-          <h5 class="title">Лучшие авторы</h5>
-          <div class="item">
-            <div class="avatar">
-              <span class="index">1</span>
-              <img src="/img/author.jpg" alt="">
-            </div>
-            <div class="name">
-              <a href="#">Зиновки Алексей Александрович</a>
-            </div>
-            <div class="count">112</div>
+        {% if popular_authors|length > 0 %}
+          <div class="authors">
+            <h5 class="title">Лучшие авторы</h5>
+            {% set position = 0 %}
+            {% for author in popular_authors %}
+              {% set position = position + 1 %}
+              <div class="item">
+                <div class="avatar">
+                  <span class="index">{{ position }}</span>
+                  <img src="{{ getUserPhoto(author.user) }}" alt="">
+                </div>
+                <div class="name">
+                  <a href="#">{{ getUsername(author.user) }}</a>
+                </div>
+                <div class="count">{{ author.total_ratings }}</div>
+              </div>
+            {% endfor %}
           </div>
-          <div class="item">
-            <div class="avatar">
-              <span class="index">1</span>
-              <img src="/img/author.jpg" alt="">
-            </div>
-            <div class="name">
-              <a href="#">Зиновки Алексей Александрович</a>
-            </div>
-            <div class="count">112</div>
-          </div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>

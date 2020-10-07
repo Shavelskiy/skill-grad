@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\UserRepository;
 use App\Service\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +21,19 @@ class BlogController extends BaseCatalogRepository
     protected const PAGE_ITEM_COUNT = 10;
 
     protected ArticleRepository $articleRepository;
+    protected UserRepository $userRepository;
     protected SessionInterface $session;
 
     public function __construct(
         SearchService $searchService,
         ArticleRepository $articleRepository,
+        UserRepository $userRepository,
         CategoryRepository $categoryRepository,
         SessionInterface $session
     ) {
         $this->searchService = $searchService;
         $this->articleRepository = $articleRepository;
+        $this->userRepository = $userRepository;
         $this->categoryRepository = $categoryRepository;
         $this->session = $session;
     }
@@ -50,11 +54,25 @@ class BlogController extends BaseCatalogRepository
             $userArticles = $this->articleRepository->findUserArticles($user);
         }
 
+        $popularAuthors = [];
+
+        foreach ($this->articleRepository->findPopularAuthors() as $data) {
+            $popularAuthors[$data['id']] = [
+                'user' => null,
+                'total_ratings' => $data['total_count'],
+            ];
+        }
+
+        foreach ($this->userRepository->findBy(['id' => array_keys($popularAuthors)]) as $user) {
+            $popularAuthors[$user->getId()]['user'] = $user;
+        }
+        
         return $this->render('blog/index.html.twig', [
             'articles' => $this->articleRepository->findBy(['id' => $searchResult['ids']]),
             'page' => $page,
             'total_pages' => $searchResult['total_pages'],
             'user_articles' => $userArticles,
+            'popular_authors' => $popularAuthors,
         ]);
     }
 

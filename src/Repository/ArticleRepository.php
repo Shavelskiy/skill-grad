@@ -131,4 +131,21 @@ class ArticleRepository extends ServiceEntityRepository
             ->setPage($searchQuery->getPage())
             ->getResult();
     }
+
+    /**
+     * @return int[]
+     */
+    public function findPopularAuthors(): array
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->join('a.ratings', 'r')
+            ->join('a.author', 'u')
+            ->select('u.id, count(u.id) as total_count')
+            ->groupBy('u.id')
+            ->orderBy('total_count', 'desc')
+            ->andWhere('r.like = true')
+            ->getQuery()
+            ->getResult();
+    }
 }
