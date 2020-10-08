@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ARTICLE_LIKE} from '@/utils/api-routes'
+import { ARTICLE_LIKE } from '@/utils/api-routes'
 
 document.querySelectorAll('.article-like-block').forEach(block => {
   let disableRequest = false

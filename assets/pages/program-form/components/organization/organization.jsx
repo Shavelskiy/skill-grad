@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { ORGANIZATION } from '@/utils/program-form/titles'
+import {ORGANIZATION} from '@/utils/program-form/titles'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { selectInclude, setLocation } from '../../redux/program/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectInclude, setLocation} from '../../redux/program/actions'
+import {focusOrganization} from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
-import { Textarea } from '@/components/react-ui/program-form/input'
+import {Textarea} from '@/components/react-ui/program-form/input'
 import SimpleMultiRadio from '@/components/react-ui/program-form/simple-multi-radio'
 
 import TrainingDays from './training-days'
@@ -19,7 +20,7 @@ const Organization = () => {
   const dispatch = useDispatch()
 
   return (
-    <Block title={ORGANIZATION} containerClass={css.container}>
+    <Block title={ORGANIZATION} containerClass={css.container} onFocus={focusOrganization}>
       <div>
         <TrainingDays/>
       </div>

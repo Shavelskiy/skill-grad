@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { LISTENERS } from '@/utils/program-form/titles'
+import {LISTENERS} from '@/utils/program-form/titles'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setLevel, setPreparations, setTargetAudience } from '../../redux/program/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {setLevel, setPreparations, setTargetAudience} from '../../redux/program/actions'
+import {focusListeners} from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import EnumList from '@/components/react-ui/program-form/enum-list'
@@ -16,7 +17,7 @@ const Listeners = () => {
   const dispatch = useDispatch()
 
   return (
-    <Block title={LISTENERS} containerClass={css.container}>
+    <Block title={LISTENERS} containerClass={css.container} onFocus={focusListeners}>
       <div className={css.inputContainer}>
         <EnumList
           title={'Целевая аудитория'}

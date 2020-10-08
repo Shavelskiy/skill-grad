@@ -1,10 +1,14 @@
 import React from 'react'
 
+import {useDispatch} from 'react-redux'
+
 import css from './scss/block.scss?module'
 import addButtonImage from './../../../img/svg/plus.svg'
 
 
-const Block = ({children, title, link = null, linkClick, containerClass}) => {
+const Block = ({children, title, link = null, linkClick, containerClass, onFocus}) => {
+  const dispatch = useDispatch()
+
   const renderLink = () => {
     if (link === null) {
       return <></>
@@ -24,7 +28,7 @@ const Block = ({children, title, link = null, linkClick, containerClass}) => {
         <h2>{title}</h2>
         {renderLink()}
       </div>
-      <div className={containerClass}>
+      <div className={containerClass} onClick={() => dispatch(onFocus())}>
         {children}
       </div>
     </>

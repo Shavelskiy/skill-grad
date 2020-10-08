@@ -4,6 +4,7 @@ import {GALLERY} from '@/utils/program-form/titles'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {setGallery} from '../../redux/program/actions'
+import {focusGallery} from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import {Textarea} from '@/components/react-ui/program-form/input'
@@ -66,6 +67,7 @@ const Gallery = () => {
       containerClass={css.container}
       link={'Добавить фотографии'}
       linkClick={() => ref.current.click()}
+      onFocus={focusGallery}
     >
       <input
         ref={ref}

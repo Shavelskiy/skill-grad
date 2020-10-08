@@ -33,6 +33,7 @@ import {
   SET_GALLERY,
   SELECT_LOCATIONS,
   SET_ADDITIONAL_INFO,
+  RESET_FORM
 } from './types'
 
 
@@ -204,7 +205,7 @@ export function setCertificate(certificate) {
   }
 }
 
-export function setTraingDate(type, extra = null) {
+export function setTrainingDate(type, extra = null) {
   return {
     type: SET_TRAINING_DATE,
     payload: {
@@ -301,5 +302,11 @@ export function setAdditionalInfo(additionalInfo) {
   return {
     type: SET_ADDITIONAL_INFO,
     payload: additionalInfo,
+  }
+}
+
+export function resetProgramForm() {
+  return {
+    type: RESET_FORM,
   }
 }

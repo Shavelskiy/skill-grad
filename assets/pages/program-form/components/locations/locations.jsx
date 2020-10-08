@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { LOCATIONS } from '@/utils/program-form/titles'
+import {LOCATIONS} from '@/utils/program-form/titles'
 
 import axios from 'axios'
-import { FETCH_ALL_LOCATIONS } from '@/utils/program-form/endpoints'
+import {FETCH_ALL_LOCATIONS} from '@/utils/program-form/endpoints'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { selectLocations } from '../../redux/program/actions'
-import { setLocations } from '../../redux/data/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectLocations} from '../../redux/program/actions'
+import {setLocations} from '../../redux/data/actions'
+import {focusLocations} from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import LocationPopup from './location-popup'
@@ -67,7 +68,7 @@ const Locations = () => {
   }
 
   return (
-    <Block title={LOCATIONS} containerClass={css.container}>
+    <Block title={LOCATIONS} containerClass={css.container} onFocus={focusLocations}>
       {renderLocationList()}
       <div
         className={cn(css.item, css.add)}

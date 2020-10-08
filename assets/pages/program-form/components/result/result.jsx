@@ -4,6 +4,7 @@ import {RESULTS} from '@/utils/program-form/titles'
 
 import {useSelector, useDispatch} from 'react-redux'
 import {setCertificate, setGainedKnowledge} from '../../redux/program/actions'
+import {focusResult} from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import {Textarea, TextInput} from '@/components/react-ui/program-form/input'
@@ -63,7 +64,7 @@ const Result = () => {
   }
 
   return (
-    <Block title={RESULTS} containerClass={css.container}>
+    <Block title={RESULTS} containerClass={css.container} onFocus={focusResult}>
       <div>
         <Textarea
           placeholder={'Полученные знания, приобретенные навыки'}

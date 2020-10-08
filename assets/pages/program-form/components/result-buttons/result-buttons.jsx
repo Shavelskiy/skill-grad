@@ -3,13 +3,15 @@ import React from 'react'
 import axios from 'axios'
 import { SAVE_URL } from '@/utils/program-form/endpoints'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import {resetProgramForm} from './../../redux/program/actions';
 
 import css from './result-buttons.scss?module'
 import cn from 'classnames'
 
 
 const ResultButtons = () => {
+  const dispatch = useDispatch()
   const program = useSelector(state => state.program)
 
   const saveProgram = () => {
@@ -62,7 +64,7 @@ const ResultButtons = () => {
 
   return (
     <div className={css.buttonContainer}>
-      <div className={cn(css.button, css.cancel)}>
+      <div className={cn(css.button, css.cancel)} onClick={() => dispatch(resetProgramForm())}>
         Отменить
       </div>
       <div

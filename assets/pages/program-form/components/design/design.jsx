@@ -9,6 +9,8 @@ import {
   setProcessDescription
 } from '../../redux/program/actions'
 
+import {focusDesign} from './../../redux/validation/actions'
+
 import Block from '@/components/react-ui/program-form/block'
 import SimpleRadio from '@/components/react-ui/program-form/simple-radio'
 import { Textarea } from '@/components/react-ui/program-form/input'
@@ -34,7 +36,7 @@ const Design = () => {
   ]
 
   return (
-    <Block title={DESIGN} containerClass={css.container}>
+    <Block title={DESIGN} containerClass={css.container} onFocus={focusDesign}>
       <div>
         <SimpleRadio
           title={'Формат обучения'}

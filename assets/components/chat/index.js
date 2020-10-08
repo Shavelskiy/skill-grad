@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {INIT, SEND_MESSAGE, VIEWED} from '@/utils/chat-types'
-import {GET_NEW_MESSAGES_COUNT} from '@/utils/api-routes'
-import {isAuth} from '@/helpers/auth'
-import {initModal} from '@/components/modal'
+import { INIT, SEND_MESSAGE, VIEWED } from '@/utils/chat-types'
+import { GET_NEW_MESSAGES_COUNT } from '@/utils/api-routes'
+import { isAuth } from '@/helpers/auth'
+import { initModal } from '@/components/modal'
 import showAlert from '@/components/modal/alert'
 
 

@@ -33,7 +33,9 @@ import {
   SET_GALLERY,
   SELECT_LOCATIONS,
   SET_ADDITIONAL_INFO,
+  RESET_FORM
 } from './types'
+
 import { DESIGN_SIMPLE, DURATION_HOURS } from '@/utils/program-form/field-types'
 
 
@@ -75,7 +77,7 @@ const initialState = {
     name: '',
     file: null,
   },
-  traningDate: {
+  trainingDate: {
     type: null,
     extra: null,
   },
@@ -164,9 +166,8 @@ export const programReducer = (state = initialState, action) => {
       return {...state, newProviders: [...state.newProviders, action.payload]}
     case UPDATE_NEW_PROVIDER:
       return {
-        ...state, newProviders: state.newProviders.map((provider, key) => {
-          return key === action.payload.key ? action.payload.provider : provider
-        })
+        ...state,
+        newProviders: state.newProviders.map((provider, key) => key === action.payload.key ? action.payload.provider : provider)
       }
     case DELETE_NEW_PROVIDER:
       return {...state, newProviders: state.newProviders.filter((item, key) => key !== action.payload)}
@@ -183,7 +184,7 @@ export const programReducer = (state = initialState, action) => {
     case SET_CERTIFICATE:
       return {...state, certificate: action.payload}
     case SET_TRAINING_DATE:
-      return {...state, traningDate: action.payload}
+      return {...state, trainingDate: action.payload}
     case SET_OCCUPATION_MODE:
       return {...state, occupationMode: action.payload}
     case SET_LOCATION:
@@ -208,6 +209,8 @@ export const programReducer = (state = initialState, action) => {
       return {...state, locations: action.payload}
     case SET_ADDITIONAL_INFO:
       return {...state, additionalInfo: action.payload}
+    case RESET_FORM:
+      return initialState
     default:
       return state
   }

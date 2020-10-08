@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { DESCRIPTION } from '@/utils/program-form/titles'
+import React, {useState} from 'react'
+import {DESCRIPTION} from '@/utils/program-form/titles'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/program/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {setName, setCategory, setAnnotation, setDetailText} from '../../redux/program/actions'
+import {focusDescription} from './../../redux/validation/actions'
 
-import { TextInput, Textarea } from '@/components/react-ui/program-form/input'
+import {TextInput, Textarea} from '@/components/react-ui/program-form/input'
 import Select from '@/components/react-ui/select'
 import Block from '@/components/react-ui/program-form/block'
 
@@ -33,10 +34,10 @@ const Description = () => {
   }
 
   return (
-    <Block title={DESCRIPTION} containerClass={css.container}>
+    <Block title={DESCRIPTION} containerClass={css.container} onFocus={focusDescription}>
       <TextInput
         value={name}
-        error={showErrors.name && name.length < 10}
+        error={showErrors.name && name.length < 3}
         placeholder={'Название программы обучения'}
         setValue={(value) => {
           setShowErrors({...showErrors, name: true})

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
-import { PROVIDERS } from '@/utils/program-form/titles'
+import {PROVIDERS} from '@/utils/program-form/titles'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { chooseProvidersFromList, deleteNewProvider } from '../../redux/program/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {chooseProvidersFromList, deleteNewProvider} from '../../redux/program/actions'
+import {focusProviders} from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import ControlPopup from './control-popup'
@@ -87,27 +88,27 @@ const Providers = () => {
     return providers
       .filter(provider => provider !== null)
       .map((provider, key) => {
-      return (
-        <div key={key} className={css.provider}>
-          <div className={css.logo}>
-            {renderProviderImage(provider, type)}
-            {(type === 'new') ? <div className={css.description}>Провайдера нет в базе SillGrad</div> : <></>}
-          </div>
-          <div className={css.info}>
-            <div className={cn(css.title, {[css.outside]: type === 'new'})}>
-              <a target='_blank' href={provider.link}>
-                {provider.name}
-                {(type === 'new') ? <div className={css.tooltip}>Ссылка ведет на другой ресурс</div> : <></>}
-              </a>
-              {renderActions(provider, key, type)}
+        return (
+          <div key={key} className={css.provider}>
+            <div className={css.logo}>
+              {renderProviderImage(provider, type)}
+              {(type === 'new') ? <div className={css.description}>Провайдера нет в базе SillGrad</div> : <></>}
             </div>
-            <div className={css.comment}>
-              {provider.comment}
+            <div className={css.info}>
+              <div className={cn(css.title, {[css.outside]: type === 'new'})}>
+                <a target='_blank' href={provider.link}>
+                  {provider.name}
+                  {(type === 'new') ? <div className={css.tooltip}>Ссылка ведет на другой ресурс</div> : <></>}
+                </a>
+                {renderActions(provider, key, type)}
+              </div>
+              <div className={css.comment}>
+                {provider.comment}
+              </div>
             </div>
           </div>
-        </div>
-      )
-    })
+        )
+      })
   }
 
   return (
@@ -116,6 +117,7 @@ const Providers = () => {
       link={'Добавить провайдера'}
       linkClick={() => setControlPopupActive(true)}
       containerClass={css.container}
+      onFocus={focusProviders}
     >
       <ControlPopup
         active={controlPopupActive}

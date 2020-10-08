@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,27 +12,33 @@ import {
   TRAINING_DATE_CALENDAR,
   TRAINING_DATE_REQUEST
 } from '@/utils/program-form/field-types'
-import { setTraingDate } from '../../redux/program/actions'
+import { setTrainingDate } from '../../redux/program/actions'
 
 
 const TrainingDays = () => {
   const dispatch = useDispatch()
 
   const [selectedDays, setSelectedDays] = useState([])
-  const trainingDays = useSelector(state => state.program.traningDate)
+  const trainingDays = useSelector(state => state.program.trainingDate)
+
+  useEffect(() => {
+    if (trainingDays.type === TRAINING_DATE_CALENDAR) {
+      dispatch(setTrainingDate(TRAINING_DATE_CALENDAR, selectedDays))
+    }
+  }, [selectedDays])
 
   return (
     <>
       <h3>Даты обучения:</h3>
 
       <RadioButton
-        click={() => dispatch(setTraingDate(null))}
+        click={() => dispatch(setTrainingDate(null))}
         selected={trainingDays.type === null}
       >
         Не выбрано
       </RadioButton>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_CALENDAR, selectedDays))}
+        click={() => dispatch(setTrainingDate(TRAINING_DATE_CALENDAR, selectedDays))}
         selected={trainingDays.type === TRAINING_DATE_CALENDAR}
       >
         Выбор из календаря (можно выбрать несколько дат)
@@ -44,19 +50,19 @@ const TrainingDays = () => {
         />
       </div>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_ANYTIME))}
+        click={() => dispatch(setTrainingDate(TRAINING_DATE_ANYTIME))}
         selected={trainingDays.type === TRAINING_DATE_ANYTIME}
       >
         В любое время
       </RadioButton>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_AS_THE_GROUP_FORM))}
+        click={() => dispatch(setTrainingDate(TRAINING_DATE_AS_THE_GROUP_FORM))}
         selected={trainingDays.type === TRAINING_DATE_AS_THE_GROUP_FORM}
       >
         По мере формирования группы
       </RadioButton>
       <RadioButton
-        click={() => dispatch(setTraingDate(TRAINING_DATE_REQUEST))}
+        click={() => dispatch(setTrainingDate(TRAINING_DATE_REQUEST))}
         selected={trainingDays.type === TRAINING_DATE_REQUEST}
       >
         Направить запрос

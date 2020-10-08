@@ -39,11 +39,11 @@ const App = () => {
         <ProgressBar/>
       </div>
       <div className={css.form}>
-        <Description/>
-        <Design/>
-        <Providers/>
-        <Listeners/>
-        <Result/>
+        {/*<Description/>*/}
+        {/*<Design/>*/}
+        {/*<Providers/>*/}
+        {/*<Listeners/>*/}
+        {/*<Result/>*/}
         <Organization/>
         <TermOfUse/>
         <Gallery/>
