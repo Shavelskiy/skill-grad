@@ -1,5 +1,5 @@
-import {addProviderToFavorite, addProgramToFavorite, addArticleToFavorite} from '@/components/common/favorite'
-import {insertParam} from '@/helpers/location-helper'
+import { addProviderToFavorite, addProgramToFavorite, addArticleToFavorite } from '@/components/common/favorite'
+import { insertParam } from '@/helpers/location-helper'
 
 const tabProviders = document.querySelector('.tab-providers')
 const tabPrograms = document.querySelector('.tab-programs')

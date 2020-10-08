@@ -1,11 +1,11 @@
 import React from 'react'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setTeachers} from '../../redux/program/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTeachers } from '../../redux/program/actions'
 
-import {Textarea} from '@/components/react-ui/program-form/input'
+import { Textarea } from '@/components/react-ui/program-form/input'
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import css from './scss/teachers.scss?module'
 

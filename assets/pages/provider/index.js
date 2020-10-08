@@ -1,7 +1,7 @@
 import { loginModal, registerRoleModal, initModal, initRelationModal } from '@/components/modal'
 
 import { addProviderToFavorite } from '@/components/common/favorite'
-import {isAuth} from '@/helpers/auth'
+import { isAuth } from '@/helpers/auth'
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')
 const sendMessageModal = document.getElementById('send-message-modal')

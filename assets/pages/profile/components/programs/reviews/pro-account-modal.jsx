@@ -1,15 +1,15 @@
-import React, {useState} from 'react'
-import {useHistory} from 'react-router-dom'
-import {PAYMENTS} from '@/utils/profile/routes'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { PAYMENTS } from '@/utils/profile/routes'
 
 import axios from 'axios'
-import {BUY_PRO_ACCOUNT_URL} from '@/utils/profile/endpoints'
+import { BUY_PRO_ACCOUNT_URL } from '@/utils/profile/endpoints'
 
-import {useSelector, useDispatch} from 'react-redux'
-import {setProAccount, setProviderBalance} from '../../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { setProAccount, setProviderBalance } from '../../../redux/actions'
 
 import Modal from '@/pages/profile/components/modal/modal'
-import {Button} from '@/components/react-ui/buttons'
+import { Button } from '@/components/react-ui/buttons'
 
 import css from '@/pages/profile/components/programs/reviews/scss/pro-account-modal.scss?module'
 

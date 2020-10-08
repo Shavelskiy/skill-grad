@@ -9,7 +9,7 @@ import {
   setProcessDescription
 } from '../../redux/program/actions'
 
-import {focusDesign} from './../../redux/validation/actions'
+import { focusDesign } from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import SimpleRadio from '@/components/react-ui/program-form/simple-radio'

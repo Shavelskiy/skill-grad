@@ -1,11 +1,11 @@
 import './view.scss'
 
 import axios from 'axios'
-import {ADD_ARTICLE_COMMENT, DELETE_ARTICLE_COMMENT, EDIT_ARTICLE_COMMENT} from '@/utils/api-routes'
+import { ADD_ARTICLE_COMMENT, DELETE_ARTICLE_COMMENT, EDIT_ARTICLE_COMMENT } from '@/utils/api-routes'
 
-import {loginModal, registerRoleModal, initModal, initRelationModal} from '@/components/modal'
-import {addArticleToFavorite} from '@/components/common/favorite'
-import {isAuth} from '@/helpers/auth'
+import { loginModal, registerRoleModal, initModal, initRelationModal } from '@/components/modal'
+import { addArticleToFavorite } from '@/components/common/favorite'
+import { isAuth } from '@/helpers/auth'
 
 
 const addFavoritesModal = document.getElementById('add-favorites-modal')

@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import axios from 'axios'
-import {QUESTION_ANSWER_URL} from '@/utils/profile/endpoints'
+import { QUESTION_ANSWER_URL } from '@/utils/profile/endpoints'
 
-import {dateFormat, timeFormat} from '@/helpers/date-formater'
+import { dateFormat, timeFormat } from '@/helpers/date-formater'
 
 import AnswerModal from './answer-modal'
 

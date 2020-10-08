@@ -1,7 +1,7 @@
 export const SETTINGS = '/settings'
 export const MESSAGES = '/messages'
 export const LEARN = '/learn'
-export const PROGRAMS  = '/programs'
+export const PROGRAMS = '/programs'
 export const PUBLICATIONS = '/publications'
 export const PAYMENTS = '/payments'
 

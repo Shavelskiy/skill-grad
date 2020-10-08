@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-import {PROVIDERS} from '@/utils/program-form/titles'
+import { PROVIDERS } from '@/utils/program-form/titles'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {chooseProvidersFromList, deleteNewProvider} from '../../redux/program/actions'
-import {focusProviders} from './../../redux/validation/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { chooseProvidersFromList, deleteNewProvider } from '../../redux/program/actions'
+import { focusProviders } from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import ControlPopup from './control-popup'

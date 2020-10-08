@@ -19,7 +19,7 @@ const EnumList = ({title, values, setValues, wide = false}) => {
           />
           <img
             src={deleteImage}
-            onClick={() =>  setValues(values.filter((item, itemKey) => itemKey !== key))}
+            onClick={() => setValues(values.filter((item, itemKey) => itemKey !== key))}
           />
         </div>
       )

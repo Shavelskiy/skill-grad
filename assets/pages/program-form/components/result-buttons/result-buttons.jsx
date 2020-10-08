@@ -4,7 +4,7 @@ import axios from 'axios'
 import { SAVE_URL } from '@/utils/program-form/endpoints'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {resetProgramForm} from './../../redux/program/actions';
+import { resetProgramForm } from './../../redux/program/actions';
 
 import css from './result-buttons.scss?module'
 import cn from 'classnames'

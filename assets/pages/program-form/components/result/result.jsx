@@ -1,15 +1,15 @@
 import React from 'react'
 
-import {RESULTS} from '@/utils/program-form/titles'
+import { RESULTS } from '@/utils/program-form/titles'
 
-import {useSelector, useDispatch} from 'react-redux'
-import {setCertificate, setGainedKnowledge} from '../../redux/program/actions'
-import {focusResult} from './../../redux/validation/actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCertificate, setGainedKnowledge } from '../../redux/program/actions'
+import { focusResult } from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
-import {Textarea, TextInput} from '@/components/react-ui/program-form/input'
+import { Textarea, TextInput } from '@/components/react-ui/program-form/input'
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import css from './result.scss?module'
 import cn from 'classnames'

@@ -23,7 +23,7 @@ import {
   OTHER
 } from '@/utils/program-form/field-types'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import css from './progress-bar.scss?module'
 import cn from 'classnames'

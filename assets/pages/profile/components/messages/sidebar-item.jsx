@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {textDateFormat} from '@/helpers/date-formater'
+import { textDateFormat } from '@/helpers/date-formater'
 
 import css from './scss/sidebar-item.scss?module'
 import cn from 'classnames'

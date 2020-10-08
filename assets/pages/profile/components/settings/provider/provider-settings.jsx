@@ -2,7 +2,7 @@ import React from 'react'
 
 import ProviderSettingsUser from './provider-settings-user'
 import ProviderSettingsOrganization from './provider-settings-organization'
-import {ResultTitle} from '@/components/react-ui/blocks'
+import { ResultTitle } from '@/components/react-ui/blocks'
 
 
 const ProviderSettings = () => {

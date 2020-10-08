@@ -1,15 +1,15 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 
-import {GALLERY} from '@/utils/program-form/titles'
+import { GALLERY } from '@/utils/program-form/titles'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setGallery} from '../../redux/program/actions'
-import {focusGallery} from './../../redux/validation/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setGallery } from '../../redux/program/actions'
+import { focusGallery } from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
-import {Textarea} from '@/components/react-ui/program-form/input'
+import { Textarea } from '@/components/react-ui/program-form/input'
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import css from './gallery.scss?module'
 

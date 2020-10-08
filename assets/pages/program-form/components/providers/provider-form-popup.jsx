@@ -1,10 +1,10 @@
 import React from 'react'
 
 import Modal from '@/components/react-ui/program-form/modal'
-import {Textarea, TextInput} from '@/components/react-ui/program-form/input'
+import { Textarea, TextInput } from '@/components/react-ui/program-form/input'
 import Button from '@/components/react-ui/program-form/button'
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import css from './scss/new-provider-popup.scss?module'
 

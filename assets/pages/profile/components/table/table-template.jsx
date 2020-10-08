@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import {useHistory, useLocation} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import querystring from 'querystring'
 import axios from 'axios'
 
-import {useDispatch} from 'react-redux'
-import {setProgramTitle} from '../../redux/actions'
+import { useDispatch } from 'react-redux'
+import { setProgramTitle } from '../../redux/actions'
 
-import {LEARN, PROGRAM, PROGRAM_REQUEST, PROGRAM_QUESTION, PROGRAM_REVIEW, PAYMENTS} from './item-types'
+import { LEARN, PROGRAM, PROGRAM_REQUEST, PROGRAM_QUESTION, PROGRAM_REVIEW, PAYMENTS } from './item-types'
 
 import Table from './table'
 import Paginator from '../paginator/paginator'

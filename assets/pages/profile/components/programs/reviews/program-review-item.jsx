@@ -1,14 +1,14 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import axios from 'axios'
-import {REVIEW_ANSWER_URL} from '@/utils/profile/endpoints'
+import { REVIEW_ANSWER_URL } from '@/utils/profile/endpoints'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import ReviewAnswerModal from './review-answer-modal'
 import ProAccountModal from './pro-account-modal';
 
-import {dateFormat, timeFormat} from '@/helpers/date-formater'
+import { dateFormat, timeFormat } from '@/helpers/date-formater'
 
 import commonCss from './../common.scss?module'
 import css from './scss/program-review-item.scss?module'

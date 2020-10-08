@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import axios from 'axios'
-import {ADD_REVIEW_URL} from '@/utils/profile/endpoints'
+import { ADD_REVIEW_URL } from '@/utils/profile/endpoints'
 
-import {dateFormat} from '@/helpers/date-formater'
+import { dateFormat } from '@/helpers/date-formater'
 import ReviewModal from './review-modal'
 
 import css from './scss/item.scss?module'

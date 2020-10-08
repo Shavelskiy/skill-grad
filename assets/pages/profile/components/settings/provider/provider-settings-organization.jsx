@@ -1,25 +1,25 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import axios from 'axios'
-import {PROVIDER_INFO_URL, PROVIDER_IS_PRO_ACCOUNT_URL} from '@/utils/profile/endpoints'
+import { PROVIDER_INFO_URL, PROVIDER_IS_PRO_ACCOUNT_URL } from '@/utils/profile/endpoints'
 
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {Input, Textarea} from '@/components/react-ui/input'
-import {Button, SmallButton} from '@/components/react-ui/buttons'
+import { Input, Textarea } from '@/components/react-ui/input'
+import { Button, SmallButton } from '@/components/react-ui/buttons'
 
 import ProviderCategories from './provider-categories'
 import ProviderRequisites from './provider-requisites'
 import ProviderLocations from './provider-locations'
 
-import {validateProviderOrganization} from '../helpers'
+import { validateProviderOrganization } from '../helpers'
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import css from './scss/provider-settings-organization.scss?module'
 
 import noImage from '@/img/provider-no-photo.png'
-import {setProAccount} from '@/pages/profile/redux/actions';
+import { setProAccount } from '@/pages/profile/redux/actions';
 
 
 const ProviderSettingsOrganization = () => {

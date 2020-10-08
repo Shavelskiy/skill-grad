@@ -1,7 +1,7 @@
 import React from 'react'
 
-import {declension} from '@/helpers/declension'
-import {dateFormat} from '@/helpers/date-formater'
+import { declension } from '@/helpers/declension'
+import { dateFormat } from '@/helpers/date-formater'
 
 import css from './scss/publications-item.scss?module'
 import cn from 'classnames'

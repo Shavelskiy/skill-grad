@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import cn from 'classnames'
 import css from './modal.scss?module'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Input, NumberInput, MaskInput} from '@/components/react-ui/input'
+import { Input, NumberInput } from '@/components/react-ui/input'
 
 import css from './scss/provider-requisites.scss?module'
 

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setTermOfPayment} from '../../redux/program/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTermOfPayment } from '../../redux/program/actions'
 
 import RadioButton from '@/components/react-ui/program-form/radio-button'
-import {Textarea} from '@/components/react-ui/program-form/input'
+import { Textarea } from '@/components/react-ui/program-form/input'
 
 import css from './term-of-use.scss?module'
 import cn from 'classnames'

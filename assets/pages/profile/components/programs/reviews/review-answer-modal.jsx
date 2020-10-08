@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-import {Button} from '@/components/react-ui/buttons'
+import { Button } from '@/components/react-ui/buttons'
 import Modal from '../../../components/modal/modal'
 
-import {Textarea} from '@/components/react-ui/input';
+import { Textarea } from '@/components/react-ui/input';
 
 import css from './scss/review-answer-modal.scss?module'
 

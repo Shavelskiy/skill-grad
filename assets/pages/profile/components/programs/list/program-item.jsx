@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS} from '@/utils/profile/routes'
+import React, { useState } from 'react'
+import { PROGRAM_QUESTIONS, PROGRAM_REQUESTS, PROGRAM_REVIEWS } from '@/utils/profile/routes'
 
 import axios from 'axios'
 import {
@@ -9,8 +9,8 @@ import {
   DELETE_ACTIVATE_URL
 } from '@/utils/profile/endpoints'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setProviderBalance} from '../../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setProviderBalance } from '../../../redux/actions'
 
 import Request from './request'
 import PaidServiceModal from '../modals/paid-service-modal'
@@ -49,7 +49,7 @@ const ProgramItem = ({program, reload}) => {
 
   const deleteProgram = () => {
     axios.delete(DELETE_ACTIVATE_URL.replace(':id', program.id))
-      .then(() =>{
+      .then(() => {
         reload()
         setDeleteProgramModalActive(false)
       })

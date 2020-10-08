@@ -1,15 +1,15 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import axios from 'axios'
-import {ARTICLES_CATEGORIES_URL, ARTICLE_SAVE_URL} from '@/utils/profile/endpoints'
+import { ARTICLES_CATEGORIES_URL, ARTICLE_SAVE_URL } from '@/utils/profile/endpoints'
 
 import Modal from '../modal/modal'
-import {Input, Textarea} from '@/components/react-ui/input'
-import {Button} from '@/components/react-ui/buttons'
+import { Input, Textarea } from '@/components/react-ui/input'
+import { Button } from '@/components/react-ui/buttons'
 import Select from '@/components/react-ui/select'
 import ReactQuill from 'react-quill';
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import './scss/wysiwig.scss'
 import css from './scss/new-article-popup.scss?module'

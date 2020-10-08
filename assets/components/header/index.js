@@ -1,4 +1,4 @@
-import {loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, feedbackModal} from '../modal'
+import { loginModal, resetPasswordModal, registerRoleModal, citySelectorModal, feedbackModal } from '../modal'
 import './logout'
 import './category-menu'
 import './dropdown'

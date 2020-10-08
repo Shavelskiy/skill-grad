@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {dateFormat} from '@/helpers/date-formater'
+import { dateFormat } from '@/helpers/date-formater'
 
 import css from './scss/payment-item.scss?module'
 import cn from 'classnames'

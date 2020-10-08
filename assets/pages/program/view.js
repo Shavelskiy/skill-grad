@@ -1,10 +1,10 @@
 import axios from 'axios'
-import {ADD_PROGRAM_QUESTION} from '@/utils/api-routes'
+import { ADD_PROGRAM_QUESTION } from '@/utils/api-routes'
 
-import {loginModal, registerRoleModal, initModal, initRelationModal} from '@/components/modal'
-import {addProgramToFavorite} from '@/components/common/favorite'
+import { loginModal, registerRoleModal, initModal, initRelationModal } from '@/components/modal'
+import { addProgramToFavorite } from '@/components/common/favorite'
 import showAlert from '@/components/modal/alert'
-import {isAuth} from '@/helpers/auth'
+import { isAuth } from '@/helpers/auth'
 
 import './view.scss'
 

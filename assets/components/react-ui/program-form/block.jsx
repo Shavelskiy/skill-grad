@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import css from './scss/block.scss?module'
 import addButtonImage from './../../../img/svg/plus.svg'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setPrice } from '../../redux/program/actions'
 
 import RadioButton from '@/components/react-ui/program-form/radio-button'

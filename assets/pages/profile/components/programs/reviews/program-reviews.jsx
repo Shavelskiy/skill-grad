@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
-import {AUTHOR, DATE} from '../../table/header-types'
+import { AUTHOR, DATE } from '../../table/header-types'
 
 import axios from 'axios'
 import {
@@ -10,14 +10,13 @@ import {
   PROVIDER_PRO_ACCOUNT_PRICE_URL
 } from '@/utils/profile/endpoints'
 
-import {useDispatch} from 'react-redux'
-import {setProAccount, setProAccountPrice, setProviderBalance} from '@/pages/profile/redux/actions'
+import { useDispatch } from 'react-redux'
+import { setProAccount, setProAccountPrice, setProviderBalance } from '@/pages/profile/redux/actions'
 
-import {PROGRAM_REVIEW} from '../../table/item-types'
+import { PROGRAM_REVIEW } from '../../table/item-types'
 
 import TableTemplate from '../../table/table-template'
 import BackBar from '../back-bar'
-
 
 
 const headers = [

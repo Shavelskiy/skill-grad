@@ -1,5 +1,5 @@
 import { feedbackModal } from '@/components/modal'
-import {insertParam} from '@/helpers/location-helper'
+import { insertParam } from '@/helpers/location-helper'
 import './view.scss'
 
 document.addEventListener('keydown', function (event) {

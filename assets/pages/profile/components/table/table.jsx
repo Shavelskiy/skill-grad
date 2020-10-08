@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {DATE, AUTHOR, CONTACT, ASSESSMENT} from './header-types'
+import { DATE, AUTHOR, CONTACT, ASSESSMENT } from './header-types'
 import css from './table.scss?module'
 
 const Table = ({children, headers, withEmpty = false}) => {

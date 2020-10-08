@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import {useHistory, useLocation} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import axios from 'axios'
-import {ARTICLES_URL} from '@/utils/profile/endpoints'
+import { ARTICLES_URL } from '@/utils/profile/endpoints'
 
 import PublicationsItem from './publications-item'
 import NewArticlePopup from './new-article-popup'
 import SuccessPopup from './success-popup'
 import Paginator from '../paginator/paginator'
-import {Button} from '@/components/react-ui/buttons'
+import { Button } from '@/components/react-ui/buttons'
 
 import querystring from 'querystring'
 

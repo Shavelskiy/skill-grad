@@ -1,11 +1,11 @@
 import React from 'react'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import {HIGHLIGHT, RAISE, HIGHLIGHT_RAISE} from '@/utils/profile/porgram-service-types'
+import { HIGHLIGHT, RAISE, HIGHLIGHT_RAISE } from '@/utils/profile/porgram-service-types'
 
 import Modal from '../../modal/modal'
-import {SmallButton} from '@/components/react-ui/buttons'
+import { SmallButton } from '@/components/react-ui/buttons'
 
 import css from './scss/paid-service-modal.scss?module'
 

@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import Modal from '../modal/modal'
-import {NumberInput} from '@/components/react-ui/input'
-import {Button} from '@/components/react-ui/buttons'
+import { NumberInput } from '@/components/react-ui/input'
+import { Button } from '@/components/react-ui/buttons'
 
 import css from './scss/payment-modal.scss?module'
 

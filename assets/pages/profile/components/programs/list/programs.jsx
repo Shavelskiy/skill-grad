@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
-import {PROGRAM_PRICES_URL, PROVIDER_PROGRAMS_URL, PAYMENTS_BALANCE_URL} from '@/utils/profile/endpoints'
+import { PROGRAM_PRICES_URL, PROVIDER_PROGRAMS_URL, PAYMENTS_BALANCE_URL } from '@/utils/profile/endpoints'
 
-import {useDispatch} from 'react-redux'
-import {setProgramPrices, setProviderBalance} from '../../../redux/actions'
+import { useDispatch } from 'react-redux'
+import { setProgramPrices, setProviderBalance } from '../../../redux/actions'
 
-import {PROGRAM} from '../../table/item-types'
+import { PROGRAM } from '../../table/item-types'
 
 import TableTemplate from '../../table/table-template'
 import Navigation from './navigation'

@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
-import {USER_INFO_URL} from '@/utils/profile/endpoints'
+import { USER_INFO_URL } from '@/utils/profile/endpoints'
 
-import {validateUser, phoneFormat} from '../helpers'
+import { validateUser, phoneFormat } from '../helpers'
 
-import {Input, MaskInput} from '@/components/react-ui/input'
-import {Button} from '@/components/react-ui/buttons'
+import { Input, MaskInput } from '@/components/react-ui/input'
+import { Button } from '@/components/react-ui/buttons'
 
 import css from './scss/provider-settings-user.scss?module'
 

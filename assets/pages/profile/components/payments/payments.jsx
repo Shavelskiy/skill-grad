@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
-import {PAYMENTS_BALANCE_URL, PAYMENTS_URL, REPLENISH_URL} from '@/utils/profile/endpoints'
-import {PAYMENTS} from '../table/item-types'
+import { PAYMENTS_BALANCE_URL, PAYMENTS_URL, REPLENISH_URL } from '@/utils/profile/endpoints'
+import { PAYMENTS } from '../table/item-types'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setProviderBalance} from '@/pages/profile/redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setProviderBalance } from '@/pages/profile/redux/actions'
 
-import {Button} from '@/components/react-ui/buttons'
+import { Button } from '@/components/react-ui/buttons'
 import TableTemplate from '../table/table-template'
 import PaymentModal from './payment-modal'
 

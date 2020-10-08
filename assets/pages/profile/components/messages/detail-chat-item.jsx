@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {textDateFormat, timeFormat} from '@/helpers/date-formater'
+import { textDateFormat, timeFormat } from '@/helpers/date-formater'
 
 import css from './scss/detail-chat.scss?module'
 import cn from 'classnames'

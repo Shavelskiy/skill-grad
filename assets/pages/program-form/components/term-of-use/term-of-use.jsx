@@ -1,10 +1,10 @@
 import React from 'react'
 
-import {TERM_OF_USE} from '@/utils/program-form/titles'
+import { TERM_OF_USE } from '@/utils/program-form/titles'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setActions, setShowPriceReduction} from '../../redux/program/actions'
-import {focusTermOfUse} from './../../redux/validation/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setActions, setShowPriceReduction } from '../../redux/program/actions'
+import { focusTermOfUse } from './../../redux/validation/actions'
 
 import Block from '@/components/react-ui/program-form/block'
 import EnumList from '@/components/react-ui/program-form/enum-list'

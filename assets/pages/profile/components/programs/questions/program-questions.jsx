@@ -1,7 +1,7 @@
 import React from 'react'
-import {AUTHOR, DATE} from '../../table/header-types'
-import {PROGRAM_QUESTIONS_URL} from '@/utils/profile/endpoints'
-import {PROGRAM_QUESTION} from '../../table/item-types'
+import { AUTHOR, DATE } from '../../table/header-types'
+import { PROGRAM_QUESTIONS_URL } from '@/utils/profile/endpoints'
+import { PROGRAM_QUESTION } from '../../table/item-types'
 
 import TableTemplate from '../../table/table-template'
 import BackBar from '../back-bar'

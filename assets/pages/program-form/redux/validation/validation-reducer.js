@@ -11,7 +11,7 @@ import {
   FOCUS_ADDITIONAL_INFO
 } from './types'
 
-import {RESET_FORM} from './../program/types'
+import { RESET_FORM } from './../program/types'
 
 const initialState = {
   description: {

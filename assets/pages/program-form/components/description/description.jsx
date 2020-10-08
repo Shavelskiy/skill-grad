@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import {DESCRIPTION} from '@/utils/program-form/titles'
+import React, { useState } from 'react'
+import { DESCRIPTION } from '@/utils/program-form/titles'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {setName, setCategory, setAnnotation, setDetailText} from '../../redux/program/actions'
-import {focusDescription} from './../../redux/validation/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setName, setCategory, setAnnotation, setDetailText } from '../../redux/program/actions'
+import { focusDescription } from './../../redux/validation/actions'
 
-import {TextInput, Textarea} from '@/components/react-ui/program-form/input'
+import { TextInput, Textarea } from '@/components/react-ui/program-form/input'
 import Select from '@/components/react-ui/select'
 import Block from '@/components/react-ui/program-form/block'
 

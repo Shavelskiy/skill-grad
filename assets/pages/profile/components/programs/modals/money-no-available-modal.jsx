@@ -1,9 +1,9 @@
 import React from 'react'
 
-import {useHistory} from 'react-router-dom'
-import {PAYMENTS} from '@/utils/profile/routes'
+import { useHistory } from 'react-router-dom'
+import { PAYMENTS } from '@/utils/profile/routes'
 
-import {Button} from '@/components/react-ui/buttons'
+import { Button } from '@/components/react-ui/buttons'
 import Modal from '../../../components/modal/modal'
 
 import css from './scss/modals.scss?module'

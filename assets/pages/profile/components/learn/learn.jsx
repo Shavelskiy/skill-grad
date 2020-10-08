@@ -1,9 +1,9 @@
 import React from 'react'
 
-import {LEARN_URL} from '@/utils/profile/endpoints'
+import { LEARN_URL } from '@/utils/profile/endpoints'
 
 import TableTemplate from '../table/table-template'
-import {LEARN} from '../table/item-types'
+import { LEARN } from '../table/item-types'
 
 
 const headers = [

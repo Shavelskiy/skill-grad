@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import axios from 'axios'
-import {MESSAGE_DETAIL_URL, MESSAGE_INDEX_URL} from '@/utils/profile/endpoints'
-import {CHAT_START} from '@/utils/api-routes'
+import { MESSAGE_DETAIL_URL, MESSAGE_INDEX_URL } from '@/utils/profile/endpoints'
+import { CHAT_START } from '@/utils/api-routes'
 
-import {FOCUS_IN, FOCUS_OUT, INIT, SEND_MESSAGE, VIEWED} from '@/utils/chat-types'
+import { FOCUS_IN, FOCUS_OUT, INIT, SEND_MESSAGE, VIEWED } from '@/utils/chat-types'
 
 import Sidebar from './sidebar'
 import DetailChat from './detail-chat'

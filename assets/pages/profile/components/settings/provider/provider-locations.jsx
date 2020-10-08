@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
-import {ALL_LOCATIONS_URL} from '@/utils/profile/endpoints'
+import { ALL_LOCATIONS_URL } from '@/utils/profile/endpoints'
 
 import Select from '@/components/react-ui/select'
 

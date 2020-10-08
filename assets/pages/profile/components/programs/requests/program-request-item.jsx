@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import axios from 'axios'
-import {AGREE_PROGRAM_URL, REJECT_PROGRAM_URL} from '@/utils/profile/endpoints'
+import { AGREE_PROGRAM_URL, REJECT_PROGRAM_URL } from '@/utils/profile/endpoints'
 
-import {dateFormat} from '@/helpers/date-formater'
+import { dateFormat } from '@/helpers/date-formater'
 
 import ProgramRequestRejectModal from './program-request-reject-modal'
 

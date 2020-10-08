@@ -1,7 +1,7 @@
 import React from 'react'
 
-import {Link, useLocation} from 'react-router-dom'
-import {LEARN, MESSAGES, SETTINGS} from '@/utils/profile/routes'
+import { Link, useLocation } from 'react-router-dom'
+import { LEARN, MESSAGES, SETTINGS } from '@/utils/profile/routes'
 
 import cn from 'classnames'
 import css from './menu.scss?module'

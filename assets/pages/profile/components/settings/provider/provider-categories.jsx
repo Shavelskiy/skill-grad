@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 import axios from 'axios'
-import {ALL_CATEGORIES_URL} from '@/utils/profile/endpoints'
+import { ALL_CATEGORIES_URL } from '@/utils/profile/endpoints'
 
 import Select from '@/components/react-ui/select'
-import {SmallButton} from '@/components/react-ui/buttons'
-import {ScrollBlock} from '@/components/react-ui/blocks'
+import { SmallButton } from '@/components/react-ui/buttons'
+import { ScrollBlock } from '@/components/react-ui/blocks'
 
 import css from './scss/provider-categories.scss?module'
 import cn from 'classnames'

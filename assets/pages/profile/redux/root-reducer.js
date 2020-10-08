@@ -1,5 +1,11 @@
-import {SET_PROGRAM_TITLE, SET_PROGRAM_PRICES, SET_PROVIDER_BALANCE, SET_PRO_ACCOUNT_PRICE, SET_PRO_ACCOUNT} from './types'
-import {HIGHLIGHT, RAISE, HIGHLIGHT_RAISE} from '@/utils/profile/porgram-service-types'
+import {
+  SET_PROGRAM_TITLE,
+  SET_PROGRAM_PRICES,
+  SET_PROVIDER_BALANCE,
+  SET_PRO_ACCOUNT_PRICE,
+  SET_PRO_ACCOUNT
+} from './types'
+import { HIGHLIGHT, RAISE, HIGHLIGHT_RAISE } from '@/utils/profile/porgram-service-types'
 
 const initialState = {
   programTitle: '',

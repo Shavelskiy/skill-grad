@@ -1,16 +1,16 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import axios from 'axios'
-import {USER_INFO_URL} from '@/utils/profile/endpoints'
+import { USER_INFO_URL } from '@/utils/profile/endpoints'
 
-import {validateUser, phoneFormat} from '../helpers'
+import { validateUser, phoneFormat } from '../helpers'
 
 import Select from '@/components/react-ui/select'
-import {Input, MaskInput, Textarea} from '@/components/react-ui/input'
-import {Button, SmallButton} from '@/components/react-ui/buttons'
-import {ResultTitle} from '@/components/react-ui/blocks';
+import { Input, MaskInput, Textarea } from '@/components/react-ui/input'
+import { Button, SmallButton } from '@/components/react-ui/buttons'
+import { ResultTitle } from '@/components/react-ui/blocks';
 
-import {validateFile} from '@/helpers/file-upload'
+import { validateFile } from '@/helpers/file-upload'
 
 import css from './user-settings.scss?module'
 

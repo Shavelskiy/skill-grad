@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import {createStore, applyMiddleware} from 'redux'
-import {Provider} from 'react-redux'
-import {rootReducer} from './redux/root-reducer'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { rootReducer } from './redux/root-reducer'
 
 import UserApp from './components/user-app'
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 const middlewares = []
 

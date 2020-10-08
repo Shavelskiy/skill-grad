@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import {load as recaptchaLoad} from 'recaptcha-v3/dist/ReCaptchaLoader'
+import { load as recaptchaLoad } from 'recaptcha-v3/dist/ReCaptchaLoader'
 
-import {loginModal, registerRoleModal, initModal, initRelationModal} from '@/components/modal'
-import {isAuth} from '@/helpers/auth';
+import { loginModal, registerRoleModal, initModal, initRelationModal } from '@/components/modal'
+import { isAuth } from '@/helpers/auth';
 import showAlert from '@/components/modal/alert';
 
 

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import {DATE, AUTHOR, CONTACT} from '../../table/header-types'
-import {PROGRAM_REQUEST} from '../../table/item-types'
-import {PROGRAM_REQUESTS_URL} from '@/utils/profile/endpoints'
+import { DATE, AUTHOR, CONTACT } from '../../table/header-types'
+import { PROGRAM_REQUEST } from '../../table/item-types'
+import { PROGRAM_REQUESTS_URL } from '@/utils/profile/endpoints'
 
 import TableTemplate from '../../table/table-template'
 import BackBar from '../back-bar'

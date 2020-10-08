@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Item, EmptyItem, Arrow} from './items'
+import { Item, EmptyItem, Arrow } from './items'
 
 
 const Paginator = ({currentPage, totalPages, click}) => {
