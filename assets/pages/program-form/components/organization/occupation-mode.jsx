@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setOccupationMode } from '../../redux/program/actions'
@@ -55,6 +55,19 @@ const OccupationMode = () => {
   })
   const [otherValue, setOtherValue] = useState('')
 
+  useEffect(() => {
+    if (occupationMode.type === OTHER) {
+      dispatch(setOccupationMode(OTHER, {text: otherValue}))
+    }
+
+    if (occupationMode.type === OCCUPATION_MODE_TIME) {
+      dispatch(setOccupationMode(OCCUPATION_MODE_TIME, {
+        selectedDays: selectedDays,
+        selectedTime: selectedTime,
+      }))
+    }
+  }, [otherValue, selectedDays, selectedTime])
+
   const renderDays = () => {
     return days.map(day => {
       return (
@@ -82,12 +95,12 @@ const OccupationMode = () => {
 
     if (found !== null) {
       let hours = Number(found[1])
-      let minuts = Number(found[3])
+      let minutes = Number(found[3])
 
       hours = (hours > 24) ? 24 : ((hours < 0) ? 0 : hours)
-      minuts = (minuts > 59) ? 59 : ((minuts < 0) ? 0 : minuts)
+      minutes = (minutes > 59) ? 59 : ((minutes < 0) ? 0 : minutes)
 
-      newValue = `${hours < 10 ? '0' : ''}${hours}:${minuts < 10 ? '0' : ''}${minuts}`
+      newValue = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`
     }
 
     setSelectedTime({
@@ -115,7 +128,7 @@ const OccupationMode = () => {
       </RadioButton>
       <RadioButton
         click={() => dispatch(setOccupationMode(OCCUPATION_MODE_TIME, {
-          selectedDays: setSelectedDays,
+          selectedDays: selectedDays,
           selectedTime: selectedTime,
         }))}
         selected={occupationMode.type === OCCUPATION_MODE_TIME}
@@ -126,7 +139,7 @@ const OccupationMode = () => {
             {renderDays()}
           </div>
         </div>
-        <div className={css.tiemWrap}>
+        <div className={css.timeWrap}>
           , время проведения с
           <div className={css.timeContainer}>
             <TextInput
@@ -146,13 +159,13 @@ const OccupationMode = () => {
         </div>
       </RadioButton>
       <RadioButton
-        click={() => dispatch(setOccupationMode(OTHER))}
+        click={() => dispatch(setOccupationMode(OTHER, {text: otherValue}))}
         selected={occupationMode.type === OTHER}
       >
         <TextInput
           placeholder={'Другой вариант'}
           value={otherValue}
-          setValue={(value) => setOtherValue(value, {text: otherValue})}
+          setValue={(value) => setOtherValue(value)}
         />
       </RadioButton>
     </>

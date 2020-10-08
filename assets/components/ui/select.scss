@@ -1,13 +1,13 @@
 .custom-select {
   width: 100%;
   border-radius: 100px;
-  border: none;
   background-color: #f3f3f3;
   cursor: pointer;
   height: 48px;
   color: #777;
   font-weight: 300;
   position: relative;
+  border: 2px solid #f3f3f3;
 
   input {
     display: none;
@@ -20,6 +20,10 @@
 
   &.not-last {
     margin-bottom: 25px;
+  }
+
+  &.error {
+    border-color: #fc5619;
   }
 
   .icon {

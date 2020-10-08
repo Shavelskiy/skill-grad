@@ -2,10 +2,6 @@
   border: 2px solid #f3f3f3;
   border-radius: 100px;
 
-  &.error {
-    border-color: #fc5619;
-  }
-
   input {
     border-radius: 100px;
     border: none;
@@ -53,13 +49,13 @@
 
 .textarea {
   border-radius: 22px;
-  border: none;
   background-color: #f3f3f3;
   color: #3d3d3d;
   padding: 18px 32px;
   width: 100% !important;
   max-height: 110px;
   min-height: 110px;
+  border: 2px solid #f3f3f3;
 
   &::placeholder {
     color: #3d3d3d;
@@ -113,4 +109,8 @@
     min-height: 220px;
     max-height: 220px;
   }
+}
+
+.error {
+  border-color: #fc5619;
 }

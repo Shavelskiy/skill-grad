@@ -24,13 +24,13 @@
   }
 }
 
-.days-wrap, .tiem-wrap {
+.days-wrap, .time-wrap {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.tiem-wrap {
+.time-wrap {
   @media (max-width: 912px) {
     display: none;
   }

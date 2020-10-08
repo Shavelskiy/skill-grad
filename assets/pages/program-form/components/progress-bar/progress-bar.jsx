@@ -13,15 +13,34 @@ import {
 } from '@/utils/program-form/titles'
 
 import {
-  DESIGN_SIMPLE,
-  DESIGN_WORK,
-  DURATION_HOURS,
-  TRAINING_DATE_CALENDAR,
-  TRAINING_DATE_ANYTIME,
-  TRAINING_DATE_AS_THE_GROUP_FORM,
-  TRAINING_DATE_REQUEST,
-  OTHER
-} from '@/utils/program-form/field-types'
+  validateName,
+  validateCategories,
+  validateAnnotation,
+  validateDetailText,
+  validateTeachers,
+  validateDuration,
+  validateFormat,
+  validateProcessDescription,
+  validateProgramDesign,
+  validateKnowledgeCheck,
+  validateAdditional,
+  validateAdvantages,
+  validateTargetAudience,
+  validateLevel,
+  validatePreparation,
+  validateGainedKnowledge,
+  validateCertificate,
+  validateTrainingDate,
+  validateOccupationMode,
+  validateLocation,
+  validateInclude,
+  validatePrice,
+  validateActions,
+  validateTermOfPayment,
+  validateProgramGallery,
+  validateProgramLocations,
+  validateProgramAdditionalInfo,
+} from '@/helpers/validate-program-form'
 
 import { useSelector } from 'react-redux'
 
@@ -38,7 +57,15 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    if (!validateName(program) || !validateCategories(program) || !validateAnnotation(program) || !validateDuration(program)) {
+      return false
+    }
+
+    if (validateDetailText(program) && validateTeachers(program)) {
+      return true
+    }
+
+    return null
   }
 
   const validateDesign = () => {
@@ -46,7 +73,15 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    if (!validateFormat(program) || !validateProgramDesign(program) || !validateKnowledgeCheck(program)) {
+      return false
+    }
+
+    if (validateProcessDescription(program) && validateAdditional(program) && validateAdvantages(program)) {
+      return true
+    }
+
+    return null
   }
 
   const validateProviders = () => {
@@ -62,7 +97,15 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    if (!validateLevel(program)) {
+      return false
+    }
+
+    if (validateTargetAudience(program) && validatePreparation(program)) {
+      return true
+    }
+
+    return null
   }
 
   const validateResults = () => {
@@ -70,7 +113,11 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    if (validateGainedKnowledge(program) && validateCertificate(program)) {
+      return true
+    }
+
+    return null
   }
 
   const validateOrganization = () => {
@@ -78,7 +125,15 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    if (!validateTrainingDate(program) || !validateOccupationMode(program)) {
+      return false
+    }
+
+    if (validateLocation(program) && validateInclude(program)) {
+      return true
+    }
+
+    return null
   }
 
   const validateTermOfUse = () => {
@@ -86,7 +141,15 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    if (!validatePrice(program)) {
+      return false
+    }
+
+    if (validateActions(program) && validateTermOfPayment(program)) {
+      return true
+    }
+
+    return null
   }
 
   const validateGallery = () => {
@@ -94,7 +157,7 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    return validateProgramGallery(program) ? true : null
   }
 
   const validateLocations = () => {
@@ -102,7 +165,7 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    return validateProgramLocations(program)
   }
 
   const validateAdditionalInfo = () => {
@@ -110,93 +173,119 @@ const ProgressBar = () => {
       return null
     }
 
-    return true
+    return validateProgramAdditionalInfo(program) ? true : null
   }
 
   const getProgressPercent = () => {
     let result = 0
 
-    if (program.name.length > 3) {
-      result += 5
+    if (validateName(program)) {
+      result += 3
     }
 
-    if (program.categories.filter(category => category !== null).length > 0) {
-      result += 5
+    if (validateCategories(program)) {
+      result += 4
     }
 
-    if (program.annotation.length > 0) {
-      result += 5
+    if (validateAnnotation(program)) {
+      result += 4
     }
 
-    if (program.detailText.length > 0) {
-      result += 5
+    if (validateDetailText(program)) {
+      result += 3
     }
 
-    if (program.teachers.filter(teacher => teacher.name.length > 0 && teacher.image !== null).length > 0) {
-      result += 5
+    if (validateTeachers(program)) {
+      result += 4
     }
 
-    if ((program.duration.type !== OTHER && program.duration.value !== 0) || (program.duration.type === OTHER && program.duration.value.length > 0)) {
-      result += 5
+    if (validateDuration(program)) {
+      result += 4
     }
 
-    if (program.format.id > 0 || (program.format.id === null && program.format.otherValue.length > 0)) {
-      result += 5
+    if (validateFormat(program)) {
+      result += 4
     }
 
-    if (program.processDescription.length > 0) {
-      result += 5
+    if (validateProcessDescription(program)) {
+      result += 3
     }
 
-    if (
-      (program.programDesign.type === DESIGN_SIMPLE && (program.programDesign.value[0] > 0 || program.programDesign.value[1] > 0)) ||
-      program.programDesign.type === DESIGN_WORK ||
-      (program.programDesign.type === OTHER && program.programDesign.value.length > 0)
-    ) {
-      result += 5
+    if (validateProgramDesign(program)) {
+      result += 4
     }
 
-    if (program.knowledgeCheck.id === true || program.knowledgeCheck.id === false || (program.knowledgeCheck.id === null && program.knowledgeCheck.otherValue.length > 0)) {
-      result += 5
+    if (validateKnowledgeCheck(program)) {
+      result += 4
     }
 
-    if (program.additional.values.filter(value => value !== 0).length > 0 || program.additional.otherValue.length > 0) {
-      result += 5
+    if (validateAdditional(program)) {
+      result += 4
     }
 
-    if (program.advantages.length > 0) {
-      result += 5
+    if (validateAdvantages(program)) {
+      result += 3
     }
 
-    if (program.targetAudience.filter(item => item.length > 0).length > 0) {
-      result += 5
+    if (validateTargetAudience(program)) {
+      result += 4
     }
 
-    if (program.level !== null) {
-      result += 5
+    if (validateLevel(program)) {
+      result += 3
     }
 
-    if (program.preparations.filter(item => item.length > 0).length > 0) {
-      result += 5
+    if (validatePreparation(program)) {
+      result += 4
     }
 
-    if (program.gainedKnowledge.length > 0) {
-      result += 5
+    if (validateGainedKnowledge(program)) {
+      result += 3
     }
 
-    if (program.certificate.name.length > 0 && program.certificate.file !== null) {
-      result += 5
+    if (validateCertificate(program)) {
+      result += 4
     }
 
-    if (
-      program.trainingDate.type === TRAINING_DATE_ANYTIME ||
-      program.trainingDate.type === TRAINING_DATE_AS_THE_GROUP_FORM ||
-      program.trainingDate.type === TRAINING_DATE_REQUEST ||
-      (program.trainingDate.type === TRAINING_DATE_CALENDAR && program.trainingDate.extra.length > 0)
-    ) {
-      result += 5
+    if (validateTrainingDate(program)) {
+      result += 4
     }
 
+    if (validateOccupationMode(program)) {
+      result += 4
+    }
+
+    if (validateLocation(program)) {
+      result += 3
+    }
+
+    if (validateInclude(program)) {
+      result += 4
+    }
+
+    if (validatePrice(program)) {
+      result += 4
+    }
+
+    if (validateActions(program)) {
+      result += 4
+    }
+
+    if (validateTermOfPayment(program)) {
+      result += 4
+    }
+
+    if (validateProgramGallery(program)) {
+      result += 4
+    }
+
+    if (validateProgramLocations(program)) {
+      result += 4
+    }
+
+    if (validateProgramAdditionalInfo(program)) {
+      result += 3
+    }
 
     return result;
   }

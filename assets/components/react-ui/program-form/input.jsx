@@ -29,7 +29,7 @@ export const TextInput = ({placeholder = '', value, disabled = false, error = fa
 }
 
 export const NumberInput = ({
-                              placeholder = '', value, maxValue = 9999999, disabled = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false
+                              placeholder = '', value, maxValue = 9999999, disabled = false, error = false, setValue, extraSmall = false, small = false, standart = false, medium = false, large = false, extraLarge = false
                             }) => {
   const onChange = (event) => {
     const eventValue = Number(event.target.value.replace(/[^.\d]+/g, ''))
@@ -45,6 +45,7 @@ export const NumberInput = ({
   return (
     <div className={cn(
       css.input,
+      {[css.error]: error},
       {[css.extraSmall]: extraSmall},
       {[css.small]: small},
       {[css.standart]: standart},
@@ -65,11 +66,12 @@ export const NumberInput = ({
   )
 }
 
-export const Textarea = ({placeholder = '', value, setValue, disableResize = true, extraSmall = false, small = false, medium = false, large = false, extraLarge = false, smallText = false}) => {
+export const Textarea = ({placeholder = '', value, setValue, error = false, disableResize = true, extraSmall = false, small = false, medium = false, large = false, extraLarge = false, smallText = false}) => {
   return (
     <textarea
       className={cn(
         css.textarea,
+        {[css.error]: error},
         {[css.resizeDisabled]: disableResize},
         {[css.extraSmall]: extraSmall},
         {[css.small]: small},

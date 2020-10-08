@@ -11,7 +11,7 @@ import { TextInput, NumberInput } from '@/components/react-ui/program-form/input
 import css from './scss/duration.scss?module'
 
 
-const Duration = () => {
+const Duration = ({error}) => {
   const dispatch = useDispatch()
 
   const duration = useSelector(state => state.program.duration)
@@ -44,6 +44,7 @@ const Duration = () => {
         >
           <NumberInput
             standart={true}
+            error={error}
             value={hourValue}
             setValue={setHourValue}
           />
@@ -55,6 +56,7 @@ const Duration = () => {
         >
           <NumberInput
             standart={true}
+            error={error}
             value={dayValue}
             setValue={setDayValue}
           />
@@ -66,6 +68,7 @@ const Duration = () => {
         >
           <TextInput
             placeholder={'Другой варинт'}
+            error={error}
             medium={true}
             value={otherValue}
             setValue={setOtherValue}

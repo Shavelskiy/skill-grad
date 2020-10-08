@@ -4,7 +4,7 @@ import css from './scss/select.scss?module'
 import cn from 'classnames'
 
 
-const Select = ({options, value, setValue, placeholder = ''}) => {
+const Select = ({options, value, setValue, placeholder = '', error = false}) => {
   const ref = useRef()
   const [opened, setOpened] = useState(false)
 
@@ -56,6 +56,7 @@ const Select = ({options, value, setValue, placeholder = ''}) => {
         css.customSelect,
         {[css.disabled]: options.length < 1},
         {[css.opened]: opened},
+        {[css.error]: error},
       )}
     >
       <div
