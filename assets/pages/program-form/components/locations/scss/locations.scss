@@ -64,6 +64,10 @@
       height: 15px;
       color: #68b2fe;
       text-decoration: underline;
+
+      &.error {
+        color: #fc5619;
+      }
     }
   }
 }

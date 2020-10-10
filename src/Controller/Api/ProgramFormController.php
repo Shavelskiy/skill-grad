@@ -220,7 +220,7 @@ class ProgramFormController extends AbstractController
 
         $program = (new Program())
             ->setAuthor($user)
-            ->setActive(true)
+            ->setActive($request->get('active'))
             ->setName($request->get('name'))
             ->setCategories($this->categoryRepository->findBy(['id' => $request->get('categories')]))
             ->setAnnotation($request->get('annotation'))
@@ -239,7 +239,7 @@ class ProgramFormController extends AbstractController
             ->setPreparation($request->get('preparations'))
             ->setGainedKnowledge($request->get('gainedKnowledge'))
             ->setCertificate($this->getCertificateFromRequest($request))
-            ->setTrainingDate($request->get('traningDate'))
+            ->setTrainingDate($request->get('trainingDate'))
             ->setOccupationMode($request->get('occupationMode'))
             ->setLocation($request->get('location'))
             ->setIncludes($request->get('include'))

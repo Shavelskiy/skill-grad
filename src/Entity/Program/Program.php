@@ -24,7 +24,6 @@ class Program
     use Listeners;
     use Result;
     use Organization;
-    use Terms;
 
     public const DURATION_HOURS = 'DURATION_HOURS';
     public const DURATION_DAYS = 'DURATION_DAYS';
@@ -38,9 +37,6 @@ class Program
     public const TRAINING_DATE_ANYTIME = 'TRAINING_DATE_ANYTIME';
     public const TRAINING_DATE_AS_THE_GROUP_FORM = 'TRAINING_DATE_AS_THE_GROUP_FORM';
     public const TRAINING_DATE_REQUEST = 'TRAINING_DATE_REQUEST';
-
-    public const OCCUPATION_MODE_ANYTIME = 'OCCUPATION_MODE_ANYTIME';
-    public const OCCUPATION_MODE_TIME = 'OCCUPATION_MODE_TIME';
 
     public const REAL_PRICE = 'REAL_PRICE';
 
@@ -66,6 +62,16 @@ class Program
     protected Collection $teachers;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\ProgramFormat", inversedBy="programs")
+     */
+    protected ProgramFormat $programFormat;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected string $formatOther;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="programs")
      */
     protected Collection $providers;
@@ -74,6 +80,26 @@ class Program
      * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramGallery", mappedBy="program")
      */
     protected Collection $gallery;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected bool $showPriceReduction;
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    protected array $providerActions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program\ActionFavoriteProvider")
+     */
+    protected ActionFavoriteProvider $actionFavoriteProvider;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramInclude", mappedBy="programs")
+     */
+    protected Collection $programIncludes;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Location")
@@ -110,6 +136,30 @@ class Program
      */
     protected Collection $services;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\ProgramPayment", mappedBy="program")
+     */
+    protected Collection $payments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Program\ProgramOccupationMode", mappedBy="program")
+     */
+    protected ProgramOccupationMode $programOccupationMode;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected string $otherInclude;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramAdditional", mappedBy="programs")
+     */
+    protected Collection $programAdditional;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected string $otherAdditional;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -122,6 +172,9 @@ class Program
         $this->reviews = new ArrayCollection();
         $this->favoriteUsers = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->payments = new ArrayCollection();
+        $this->programIncludes = new ArrayCollection();
+        $this->programAdditional = new ArrayCollection();
     }
 
     public function getAuthor(): User
@@ -187,6 +240,28 @@ class Program
         return $this;
     }
 
+    public function getProgramFormat(): ProgramFormat
+    {
+        return $this->programFormat;
+    }
+
+    public function setProgramFormat(ProgramFormat $programFormat): self
+    {
+        $this->programFormat = $programFormat;
+        return $this;
+    }
+
+    public function getFormatOther(): string
+    {
+        return $this->formatOther;
+    }
+
+    public function setFormatOther(string $formatOther): self
+    {
+        $this->formatOther = $formatOther;
+        return $this;
+    }
+
     public function getProviders()
     {
         return $this->providers;
@@ -244,6 +319,50 @@ class Program
         return $this;
     }
 
+    public function isShowPriceReduction(): bool
+    {
+        return $this->showPriceReduction;
+    }
+
+    public function setShowPriceReduction(bool $showPriceReduction): self
+    {
+        $this->showPriceReduction = $showPriceReduction;
+        return $this;
+    }
+
+    public function getProviderActions(): array
+    {
+        return $this->providerActions;
+    }
+
+    public function setProviderActions(array $providerActions): self
+    {
+        $this->providerActions = $providerActions;
+        return $this;
+    }
+
+    public function getActionFavoriteProvider(): ActionFavoriteProvider
+    {
+        return $this->actionFavoriteProvider;
+    }
+
+    public function setActionFavoriteProvider(ActionFavoriteProvider $actionFavoriteProvider): self
+    {
+        $this->actionFavoriteProvider = $actionFavoriteProvider;
+        return $this;
+    }
+
+    public function getFavoriteUsers()
+    {
+        return $this->favoriteUsers;
+    }
+
+    public function setFavoriteUsers($favoriteUsers): self
+    {
+        $this->favoriteUsers = $favoriteUsers;
+        return $this;
+    }
+
     public function getRequests(): Collection
     {
         return $this->requests;
@@ -298,4 +417,77 @@ class Program
         $this->services = $services;
         return $this;
     }
+
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function setPayments(Collection $payments): self
+    {
+        $this->payments = $payments;
+        return $this;
+    }
+
+    public function addPayment(ProgramPayment $payment): self
+    {
+        $this->payments->add($payment);
+        return $this;
+    }
+
+    public function getProgramOccupationMode(): ProgramOccupationMode
+    {
+        return $this->programOccupationMode;
+    }
+
+    public function setProgramOccupationMode(ProgramOccupationMode $programOccupationMode): self
+    {
+        $this->programOccupationMode = $programOccupationMode;
+        return $this;
+    }
+
+    public function getProgramIncludes(): Collection
+    {
+        return $this->programIncludes;
+    }
+
+    public function setProgramIncludes(Collection $programIncludes): self
+    {
+        $this->programIncludes = $programIncludes;
+        return $this;
+    }
+
+    public function getOtherInclude(): string
+    {
+        return $this->otherInclude;
+    }
+
+    public function setOtherInclude(string $otherInclude): self
+    {
+        $this->otherInclude = $otherInclude;
+        return $this;
+    }
+
+    public function getProgramAdditional()
+    {
+        return $this->programAdditional;
+    }
+
+    public function setProgramAdditional($programAdditional): self
+    {
+        $this->programAdditional = $programAdditional;
+        return $this;
+    }
+
+    public function getOtherAdditional(): string
+    {
+        return $this->otherAdditional;
+    }
+
+    public function setOtherAdditional(string $otherAdditional): self
+    {
+        $this->otherAdditional = $otherAdditional;
+        return $this;
+    }
+
 }

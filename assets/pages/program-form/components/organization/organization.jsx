@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectInclude, setLocation } from '../../redux/program/actions'
 import { focusOrganization } from './../../redux/validation/actions'
 
+import { validateOccupationMode, validateTrainingDate } from '@/helpers/validate-program-form'
+
 import Block from '@/components/react-ui/program-form/block'
 import { Textarea } from '@/components/react-ui/program-form/input'
 import SimpleMultiRadio from '@/components/react-ui/program-form/simple-multi-radio'
@@ -19,14 +21,17 @@ import css from './scss/organization.scss?module'
 const Organization = () => {
   const dispatch = useDispatch()
 
+  const blockActive = useSelector((state) => state.validation.organization.active)
+  const program = useSelector(state => state.program)
+
   return (
     <Block title={ORGANIZATION} containerClass={css.container} onFocus={focusOrganization}>
       <div>
-        <TrainingDays/>
+        <TrainingDays error={blockActive && !validateTrainingDate(program)}/>
       </div>
 
       <div className={css.modeContainer}>
-        <OccupationMode/>
+        <OccupationMode error={blockActive && !validateOccupationMode(program)}/>
       </div>
 
       <div className={css.locationContainer}>

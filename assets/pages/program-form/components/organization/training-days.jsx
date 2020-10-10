@@ -15,7 +15,7 @@ import {
 import { setTrainingDate } from '../../redux/program/actions'
 
 
-const TrainingDays = () => {
+const TrainingDays = ({error = false}) => {
   const dispatch = useDispatch()
 
   const [selectedDays, setSelectedDays] = useState([])
@@ -40,6 +40,7 @@ const TrainingDays = () => {
       <RadioButton
         click={() => dispatch(setTrainingDate(TRAINING_DATE_CALENDAR, selectedDays))}
         selected={trainingDays.type === TRAINING_DATE_CALENDAR}
+        error={error}
       >
         Выбор из календаря (можно выбрать несколько дат)
       </RadioButton>
@@ -52,18 +53,21 @@ const TrainingDays = () => {
       <RadioButton
         click={() => dispatch(setTrainingDate(TRAINING_DATE_ANYTIME))}
         selected={trainingDays.type === TRAINING_DATE_ANYTIME}
+        error={error}
       >
         В любое время
       </RadioButton>
       <RadioButton
         click={() => dispatch(setTrainingDate(TRAINING_DATE_AS_THE_GROUP_FORM))}
         selected={trainingDays.type === TRAINING_DATE_AS_THE_GROUP_FORM}
+        error={error}
       >
         По мере формирования группы
       </RadioButton>
       <RadioButton
         click={() => dispatch(setTrainingDate(TRAINING_DATE_REQUEST))}
         selected={trainingDays.type === TRAINING_DATE_REQUEST}
+        error={error}
       >
         Направить запрос
       </RadioButton>

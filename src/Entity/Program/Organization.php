@@ -7,44 +7,39 @@ use Doctrine\ORM\Mapping as ORM;
 trait Organization
 {
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected array $trainingDate;
+    protected ?string $trainingDateType;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
-    protected array $occupationMode;
+    protected ?array $trainingDateExtra;
 
     /**
      * @ORM\Column(type="json")
      */
     protected string $location;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    protected array $includes;
-
-    public function getTrainingDate(): array
+    public function getTrainingDateType(): ?string
     {
-        return $this->trainingDate;
+        return $this->trainingDateType;
     }
 
-    public function setTrainingDate(array $trainingDate): self
+    public function setTrainingDateType(?string $trainingDateType): self
     {
-        $this->trainingDate = $trainingDate;
+        $this->trainingDateType = $trainingDateType;
         return $this;
     }
 
-    public function getOccupationMode(): array
+    public function getTrainingDateExtra(): ?array
     {
-        return $this->occupationMode;
+        return $this->trainingDateExtra;
     }
 
-    public function setOccupationMode(array $occupationMode): self
+    public function setTrainingDateExtra(?array $trainingDateExtra): self
     {
-        $this->occupationMode = $occupationMode;
+        $this->trainingDateExtra = $trainingDateExtra;
         return $this;
     }
 
@@ -56,17 +51,6 @@ trait Organization
     public function setLocation(string $location): self
     {
         $this->location = $location;
-        return $this;
-    }
-
-    public function getIncludes(): array
-    {
-        return $this->includes;
-    }
-
-    public function setIncludes(array $includes): self
-    {
-        $this->includes = $includes;
         return $this;
     }
 }

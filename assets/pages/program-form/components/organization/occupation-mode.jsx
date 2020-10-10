@@ -43,7 +43,7 @@ const days = [
   },
 ]
 
-const OccupationMode = () => {
+const OccupationMode = ({error = false}) => {
   const dispatch = useDispatch()
 
   const occupationMode = useSelector(state => state.program.occupationMode)
@@ -123,6 +123,7 @@ const OccupationMode = () => {
       <RadioButton
         click={() => dispatch(setOccupationMode(OCCUPATION_MODE_ANYTIME))}
         selected={occupationMode.type === OCCUPATION_MODE_ANYTIME}
+        error={error}
       >
         В любое удобное время
       </RadioButton>
@@ -132,6 +133,7 @@ const OccupationMode = () => {
           selectedTime: selectedTime,
         }))}
         selected={occupationMode.type === OCCUPATION_MODE_TIME}
+        error={error}
       >
         <div className={css.daysWrap}>
           Занятие по:
@@ -161,11 +163,13 @@ const OccupationMode = () => {
       <RadioButton
         click={() => dispatch(setOccupationMode(OTHER, {text: otherValue}))}
         selected={occupationMode.type === OTHER}
+        error={error}
       >
         <TextInput
           placeholder={'Другой вариант'}
           value={otherValue}
           setValue={(value) => setOtherValue(value)}
+          error={error}
         />
       </RadioButton>
     </>

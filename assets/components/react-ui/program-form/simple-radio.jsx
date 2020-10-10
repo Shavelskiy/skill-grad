@@ -7,7 +7,7 @@ import { TextInput } from './input'
 import css from './scss/simple-radio.scss?module'
 
 
-const SimpleRadio = ({title = '', options, selectedValue, selectValue}) => {
+const SimpleRadio = ({title = '', options, selectedValue, selectValue, error = false}) => {
   const dispatch = useDispatch()
 
   const renderOptions = () => {
@@ -17,6 +17,7 @@ const SimpleRadio = ({title = '', options, selectedValue, selectValue}) => {
           key={key}
           click={() => dispatch(selectValue(item.id, selectedValue.otherValue))}
           selected={item.id === selectedValue.id}
+          error={error}
         >
           {item.title}
         </RadioButton>
@@ -38,9 +39,11 @@ const SimpleRadio = ({title = '', options, selectedValue, selectValue}) => {
         <RadioButton
           click={() => dispatch(selectValue(null, selectedValue.otherValue))}
           selected={selectedValue.id === null}
+          error={error}
         >
           <TextInput
             placeholder={'Другой варинт'}
+            error={error}
             medium={true}
             value={selectedValue.otherValue}
             setValue={(value) => dispatch(selectValue(selectedValue.id, value))}

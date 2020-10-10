@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLevel, setPreparations, setTargetAudience } from '../../redux/program/actions'
 import { focusListeners } from './../../redux/validation/actions'
 
+import { validateLevel } from '@/helpers/validate-program-form'
+
 import Block from '@/components/react-ui/program-form/block'
 import EnumList from '@/components/react-ui/program-form/enum-list'
 import Select from '@/components/react-ui/select'
@@ -15,6 +17,9 @@ import css from './listeners.scss?module'
 
 const Listeners = () => {
   const dispatch = useDispatch()
+
+  const blockActive = useSelector((state) => state.validation.listeners.active)
+  const program = useSelector(state => state.program)
 
   return (
     <Block title={LISTENERS} containerClass={css.container} onFocus={focusListeners}>
@@ -33,6 +38,7 @@ const Listeners = () => {
           value={useSelector(state => state.program.level)}
           setValue={(value) => dispatch(setLevel(value))}
           options={useSelector(state => state.data.levels)}
+          error={blockActive && !validateLevel(program)}
         />
       </div>
 

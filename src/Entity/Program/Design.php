@@ -7,45 +7,34 @@ use Doctrine\ORM\Mapping as ORM;
 trait Design
 {
     /**
-     * @ORM\Column(type="json")
-     */
-    protected array $format;
-
-    /**
      * @ORM\Column(type="text")
      */
     protected string $processDescription;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected array $design;
+    protected string $designType;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
-    protected array $knowledgeCheck;
+    protected array $designValue;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    protected array $additional;
+    protected bool $knowledgeCheck;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected ?string $knowledgeCheckOther;
 
     /**
      * @ORM\Column(type="text")
      */
     protected string $advantages;
-
-    public function getFormat(): array
-    {
-        return $this->format;
-    }
-
-    public function setFormat(array $format): self
-    {
-        $this->format = $format;
-        return $this;
-    }
 
     public function getProcessDescription(): string
     {
@@ -58,36 +47,47 @@ trait Design
         return $this;
     }
 
-    public function getDesign(): array
+    public function getDesignType(): string
     {
-        return $this->design;
+        return $this->designType;
     }
 
-    public function setDesign(array $design): self
+    public function setDesignType(string $designType): self
     {
-        $this->design = $design;
+        $this->designType = $designType;
         return $this;
     }
 
-    public function getKnowledgeCheck(): array
+    public function getDesignValue(): array
+    {
+        return $this->designValue;
+    }
+
+    public function setDesignValue(array $designValue): self
+    {
+        $this->designValue = $designValue;
+        return $this;
+    }
+
+    public function isKnowledgeCheck(): bool
     {
         return $this->knowledgeCheck;
     }
 
-    public function setKnowledgeCheck(array $knowledgeCheck): self
+    public function setKnowledgeCheck(bool $knowledgeCheck): self
     {
         $this->knowledgeCheck = $knowledgeCheck;
         return $this;
     }
 
-    public function getAdditional(): array
+    public function getKnowledgeCheckOther(): ?string
     {
-        return $this->additional;
+        return $this->knowledgeCheckOther;
     }
 
-    public function setAdditional(array $additional): self
+    public function setKnowledgeCheckOther(?string $knowledgeCheckOther): self
     {
-        $this->additional = $additional;
+        $this->knowledgeCheckOther = $knowledgeCheckOther;
         return $this;
     }
 

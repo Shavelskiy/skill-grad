@@ -15,17 +15,21 @@ import TermOfPayment from './term-of-payment'
 
 import css from './term-of-use.scss?module'
 import cn from 'classnames'
+import { validatePrice } from '@/helpers/validate-program-form';
 
 
 const TermOfUse = () => {
   const dispatch = useDispatch()
+
+  const blockActive = useSelector((state) => state.validation.termOfUse.active)
+  const program = useSelector(state => state.program)
 
   const showPriceReduction = useSelector(state => state.program.showPriceReduction)
 
   return (
     <Block title={TERM_OF_USE} containerClass={css.container} onFocus={focusTermOfUse}>
       <div>
-        <Price/>
+        <Price error={blockActive && !validatePrice(program)}/>
       </div>
 
       <div className={css.smallMargin}>

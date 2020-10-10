@@ -9,7 +9,7 @@ import { NumberInput } from '@/components/react-ui/program-form/input'
 import css from './term-of-use.scss?module'
 
 
-const Price = () => {
+const Price = ({error = false}) => {
   const dispatch = useDispatch()
 
   const price = useSelector(state => state.program.price)
@@ -24,6 +24,7 @@ const Price = () => {
           legalEntity: {...price.legalEntity, checked: !price.legalEntity.checked}
         }))}
         disabled={price.byRequest}
+        error={error}
       >
         <span className={css.numberInputTitle}>Для юридических лиц</span>
         <div className={css.numberInputContainer}>
@@ -32,6 +33,7 @@ const Price = () => {
             small={true}
             disabled={price.byRequest}
             setValue={(value) => dispatch(setPrice({...price, legalEntity: {...price.legalEntity, price: value}}))}
+            error={error}
           />
         </div>
         руб.
@@ -43,6 +45,7 @@ const Price = () => {
           individual: {...price.individual, checked: !price.individual.checked}
         }))}
         disabled={price.byRequest}
+        error={error}
       >
         <span className={css.numberInputTitle}>Для физических лиц</span>
         <div className={css.numberInputContainer}>
@@ -51,6 +54,7 @@ const Price = () => {
             small={true}
             disabled={price.byRequest}
             setValue={(value) => dispatch(setPrice({...price, individual: {...price.individual, price: value}}))}
+            error={error}
           />
         </div>
         руб.
@@ -59,6 +63,7 @@ const Price = () => {
         checked={price.byRequest}
         click={() => dispatch(setPrice({...price, byRequest: !price.byRequest}))}
         disabled={price.legalEntity.checked || price.individual.checked}
+        error={error}
       >
         По запросу
       </RadioButton>

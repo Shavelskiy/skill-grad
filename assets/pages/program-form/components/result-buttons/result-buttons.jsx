@@ -3,8 +3,24 @@ import React from 'react'
 import axios from 'axios'
 import { SAVE_URL } from '@/utils/program-form/endpoints'
 
+import {
+  validateAnnotation,
+  validateCategories,
+  validateDuration,
+  validateFormat,
+  validateKnowledgeCheck,
+  validateLevel,
+  validateName,
+  validateOccupationMode,
+  validatePrice,
+  validateProgramDesign,
+  validateProgramLocations,
+  validateTrainingDate
+} from '@/helpers/validate-program-form'
+
 import { useSelector, useDispatch } from 'react-redux'
-import { resetProgramForm } from './../../redux/program/actions';
+import { resetProgramForm } from './../../redux/program/actions'
+import { setAllActive } from './../../redux/validation/actions'
 
 import css from './result-buttons.scss?module'
 import cn from 'classnames'
@@ -14,7 +30,26 @@ const ResultButtons = () => {
   const dispatch = useDispatch()
   const program = useSelector(state => state.program)
 
-  const saveProgram = () => {
+  const validateProgram = () => {
+    dispatch(setAllActive())
+
+    return (
+      validateName(program) &&
+      validateCategories(program) &&
+      validateAnnotation(program) &&
+      validateDuration(program) &&
+      validateFormat(program) &&
+      validateProgramDesign(program) &&
+      validateKnowledgeCheck(program) &&
+      validateLevel(program) &&
+      validateTrainingDate(program) &&
+      validateOccupationMode(program) &&
+      validatePrice(program) &&
+      validateProgramLocations(program)
+    );
+  }
+
+  const saveProgram = (setActive = false) => {
     const formData = new FormData()
 
     const data = {
@@ -29,6 +64,7 @@ const ResultButtons = () => {
       }),
       certificateName: program.certificate.name,
       gallery: program.gallery.map(item => item.name),
+      active: setActive,
     }
 
     formData.append('json_content', JSON.stringify(data))
@@ -59,21 +95,34 @@ const ResultButtons = () => {
       }
     })
       .then((response) => console.log(response))
-      .catch((error) => console.log(error))
   }
 
   return (
     <div className={css.buttonContainer}>
-      <div className={cn(css.button, css.cancel)} onClick={() => dispatch(resetProgramForm())}>
+      <div
+        className={cn(css.button, css.cancel)}
+        onClick={() => dispatch(resetProgramForm())}
+      >
         Отменить
       </div>
       <div
         className={cn(css.button, css.save)}
-        onClick={() => saveProgram()}
+        onClick={() => {
+          if (validateProgram()) {
+            saveProgram()
+          }
+        }}
       >
         Сохранить
       </div>
-      <div className={cn(css.button, css.publish)}>
+      <div
+        className={cn(css.button, css.publish)}
+        onClick={() => {
+          if (validateProgram()) {
+            saveProgram(true)
+          }
+        }}
+      >
         Опубликовать
       </div>
     </div>

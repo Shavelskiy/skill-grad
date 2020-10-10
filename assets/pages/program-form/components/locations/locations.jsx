@@ -17,10 +17,14 @@ import css from './scss/locations.scss?module'
 import cn from 'classnames'
 
 import deleteImage from '@/img/svg/delete.svg'
+import { validateProgramLocations } from '@/helpers/validate-program-form';
 
 
 const Locations = () => {
   const dispatch = useDispatch()
+
+  const blockActive = useSelector((state) => state.validation.locations.active)
+  const program = useSelector(state => state.program)
 
   const [showPopup, setShowPopup] = useState(false)
   const locations = useSelector(state => state.data.locations)
@@ -75,7 +79,9 @@ const Locations = () => {
         onClick={() => setShowPopup(true)}
       >
         <span className={cn(css.point, css.plus)}></span>
-        <span className={css.addButton}>Добавить город/область/район</span>
+        <span className={cn(css.addButton, {[css.error]: blockActive && !validateProgramLocations(program)})}>
+          Добавить город/область/район
+        </span>
       </div>
       <div className={cn(css.popupBackground, {[css.active]: showPopup})}></div>
       <LocationPopup

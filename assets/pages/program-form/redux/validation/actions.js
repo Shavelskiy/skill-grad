@@ -8,7 +8,8 @@ import {
   FOCUS_TERM_OF_USE,
   FOCUS_GALLERY,
   FOCUS_LOCATIONS,
-  FOCUS_ADDITIONAL_INFO
+  FOCUS_ADDITIONAL_INFO,
+  SET_ALL_ACTIVE,
 } from './types'
 
 export function focusDescription() {
@@ -68,5 +69,11 @@ export function focusLocations() {
 export function focusAdditional() {
   return {
     type: FOCUS_ADDITIONAL_INFO,
+  }
+}
+
+export function setAllActive() {
+  return {
+    type: SET_ALL_ACTIVE,
   }
 }

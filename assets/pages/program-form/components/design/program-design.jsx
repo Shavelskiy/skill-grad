@@ -11,7 +11,7 @@ import { DESIGN_SIMPLE, DESIGN_WORK, OTHER } from '@/utils/program-form/field-ty
 import css from './scss/program-design.scss?module'
 
 
-const ProgramDesign = () => {
+const ProgramDesign = ({error = false}) => {
   const dispatch = useDispatch()
   const design = useSelector(state => state.program.programDesign)
 
@@ -24,11 +24,13 @@ const ProgramDesign = () => {
       <div>
         <RadioButton
           click={() => dispatch(selectDesign(DESIGN_SIMPLE, percents))}
+          error={error}
           selected={design.type === DESIGN_SIMPLE}
         >
           <div className={css.percentInput}>
             <NumberInput
               extraSmall={true}
+              error={error}
               value={percents[0]}
               maxValue={100 - percents[1]}
               setValue={(value) => setPercents([value, percents[1]])}
@@ -38,6 +40,7 @@ const ProgramDesign = () => {
           <div className={css.percentInput}>
             <NumberInput
               extraSmall={true}
+              error={error}
               value={percents[1]}
               maxValue={100 - percents[0]}
               setValue={(value) => setPercents([percents[0], value])}
@@ -48,15 +51,18 @@ const ProgramDesign = () => {
         <RadioButton
           click={() => dispatch(selectDesign(DESIGN_WORK, null))}
           selected={design.type === DESIGN_WORK}
+          error={error}
         >
           Работа с наставником (тьютором, преподавателем)
         </RadioButton>
         <RadioButton
           click={() => dispatch(selectDesign(OTHER, otherValue))}
           selected={design.type === OTHER}
+          error={error}
         >
           <TextInput
             placeholder={'Другой варинт'}
+            error={error}
             medium={true}
             value={otherValue}
             setValue={(value) => setOtherValue(value)}

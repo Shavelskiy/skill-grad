@@ -23,6 +23,10 @@
     margin-right: 10px;
     position: relative;
 
+    &.error {
+      border-color: #fc5619;
+    }
+
     &.selected:before {
       content: '';
       width: 10px;

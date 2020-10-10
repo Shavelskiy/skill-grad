@@ -22,9 +22,14 @@ trait Description
     protected string $detailText;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected array $duration;
+    protected string $durationType;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected string $durationValue;
 
     public function getName(): string
     {
@@ -59,14 +64,25 @@ trait Description
         return $this;
     }
 
-    public function getDuration(): array
+    public function getDurationType(): string
     {
-        return $this->duration;
+        return $this->durationType;
     }
 
-    public function setDuration(array $duration): self
+    public function setDurationType(string $durationType): self
     {
-        $this->duration = $duration;
+        $this->durationType = $durationType;
+        return $this;
+    }
+
+    public function getDurationValue(): string
+    {
+        return $this->durationValue;
+    }
+
+    public function setDurationValue(string $durationValue): self
+    {
+        $this->durationValue = $durationValue;
         return $this;
     }
 }

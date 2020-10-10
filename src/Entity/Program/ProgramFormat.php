@@ -3,6 +3,8 @@
 namespace App\Entity\Program;
 
 use App\Entity\Traits\IdTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class ProgramFormat
      * @ORM\Column(type="boolean")
      */
     protected bool $active;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program\Program", mappedBy="programFormat")
+     */
+    protected Collection $programs;
+
+    public function __construct()
+    {
+        $this->programs = new ArrayCollection();
+    }
 
     public function getName(): string
     {

@@ -11,6 +11,8 @@ import {
 
 import { focusDesign } from './../../redux/validation/actions'
 
+import { validateFormat, validateKnowledgeCheck, validateProgramDesign } from '@/helpers/validate-program-form'
+
 import Block from '@/components/react-ui/program-form/block'
 import SimpleRadio from '@/components/react-ui/program-form/simple-radio'
 import { Textarea } from '@/components/react-ui/program-form/input'
@@ -35,6 +37,9 @@ const Design = () => {
     },
   ]
 
+  const blockActive = useSelector((state) => state.validation.design.active)
+  const program = useSelector(state => state.program)
+
   return (
     <Block title={DESIGN} containerClass={css.container} onFocus={focusDesign}>
       <div>
@@ -43,6 +48,7 @@ const Design = () => {
           options={useSelector(state => state.data.formats)}
           selectedValue={useSelector(state => state.program.format)}
           selectValue={selectFormat}
+          error={blockActive && !validateFormat(program)}
         />
       </div>
 
@@ -55,7 +61,7 @@ const Design = () => {
       </div>
 
       <div className={css.inputContainer}>
-        <ProgramDesign/>
+        <ProgramDesign error={blockActive && !validateProgramDesign(program)}/>
       </div>
 
       <div className={css.inputContainer}>
@@ -64,6 +70,7 @@ const Design = () => {
           options={knowledgeCheck}
           selectedValue={useSelector(state => state.program.knowledgeCheck)}
           selectValue={selectKnowLedgeCheck}
+          error={blockActive && !validateKnowledgeCheck(program)}
         />
       </div>
 
