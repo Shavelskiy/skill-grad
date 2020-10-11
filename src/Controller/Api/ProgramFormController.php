@@ -12,6 +12,8 @@ use App\Entity\Program\ProgramFormat;
 use App\Entity\Program\ProgramGallery;
 use App\Entity\Program\ProgramInclude;
 use App\Entity\Program\ProgramLevel;
+use App\Entity\Program\ProgramOccupationMode;
+use App\Entity\Program\ProgramPayment;
 use App\Entity\Program\Teacher;
 use App\Entity\Provider;
 use App\Entity\User;
@@ -23,6 +25,7 @@ use App\Repository\ProgramIncludeRepository;
 use App\Repository\ProgramLevelRepository;
 use App\Repository\ProviderRepository;
 use App\Service\UploadServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +37,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProgramFormController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected CategoryRepository $categoryRepository;
     protected ProgramFormatRepository $programFormatRepository;
     protected ProgramAdditionalRepository $programAdditionalRepository;
@@ -44,6 +48,7 @@ class ProgramFormController extends AbstractController
     protected UploadServiceInterface $uploadService;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         CategoryRepository $categoryRepository,
         ProgramFormatRepository $programFormatRepository,
         ProgramAdditionalRepository $programAdditionalRepository,
@@ -53,6 +58,7 @@ class ProgramFormController extends AbstractController
         LocationRepository $locationRepository,
         UploadServiceInterface $uploadService
     ) {
+        $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
         $this->programFormatRepository = $programFormatRepository;
         $this->programAdditionalRepository = $programAdditionalRepository;
@@ -226,12 +232,7 @@ class ProgramFormController extends AbstractController
             ->setAnnotation($request->get('annotation'))
             ->setDetailText($request->get('detailText'))
             ->setTeachers($this->getTeacherFromRequest($request))
-            ->setDuration($request->get('duration'))
-            ->setFormat($request->get('format'))
             ->setProcessDescription($request->get('processDescription'))
-            ->setDesign($request->get('programDesign'))
-            ->setKnowledgeCheck($request->get('knowledgeCheck'))
-            ->setAdditional($request->get('additional'))
             ->setAdvantages($request->get('advantages'))
             ->setProviders($this->getProvidersFromRequest($request))
             ->setTargetAudience($request->get('targetAudience'))
@@ -239,22 +240,28 @@ class ProgramFormController extends AbstractController
             ->setPreparation($request->get('preparations'))
             ->setGainedKnowledge($request->get('gainedKnowledge'))
             ->setCertificate($this->getCertificateFromRequest($request))
-            ->setTrainingDate($request->get('trainingDate'))
-            ->setOccupationMode($request->get('occupationMode'))
             ->setLocation($request->get('location'))
-            ->setIncludes($request->get('include'))
-            ->setPrice($request->get('price'))
             ->setShowPriceReduction($request->get('showPriceReduction'))
-            ->setDiscount($request->get('discounts'))
             ->setProviderActions($request->get('actions'))
             ->setActionFavoriteProvider($this->getFavoriteProviderActionFromRequest($request))
-            ->setTermOfPayment($request->get('termOfPayment'))
             ->setGallery($this->getGalleryFromRequest($request))
             ->setLocations($this->locationRepository->findBy(['id' => $request->get('locations')]))
             ->setAdditionalInfo($request->get('additionalInfo'));
 
-        $this->getDoctrine()->getManager()->persist($program);
-        $this->getDoctrine()->getManager()->flush();
+        $this->setProgramDuration($request->get('duration'), $program);
+        $this->setProgramFormat($request->get('format'), $program);
+        $this->setProgramDesign($request->get('programDesign'), $program);
+        $this->setProgramKnowledgeCheck($request->get('knowledgeCheck'), $program);
+        $this->setProgramAdditional($request->get('additional'), $program);
+        $this->setProgramTrainingDate($request->get('trainingDate'), $program);
+        $this->setOccupationMode($request->get('occupationMode'), $program);
+        $this->setProgramIncludes($request->get('include'), $program);
+        $this->setProgramPrice($request->get('price'), $program);
+        $this->setProgramDiscounts($request->get('discounts'), $program);
+        $this->setTermOfPayment($request->get('termOfPayment'), $program);
+
+        $this->entityManager->persist($program);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -275,15 +282,209 @@ class ProgramFormController extends AbstractController
                 $teacherImage = $this->uploadService->createUpload($teacherFile);
                 $teacher->setPhoto($teacherImage);
 
-                $this->getDoctrine()->getManager()->persist($teacherImage);
+                $this->entityManager->persist($teacherImage);
             }
 
-            $this->getDoctrine()->getManager()->persist($teacher);
+            $this->entityManager->persist($teacher);
 
             $teachers[] = $teacher;
         }
 
         return $teachers;
+    }
+
+    protected function setProgramDuration(array $data, Program $program): void
+    {
+        $program->setDurationType($data['type']);
+        $program->setDurationValue($data['value']);
+    }
+
+    protected function setProgramFormat(array $data, Program $program): void
+    {
+        if ($data['id'] === null) {
+            $program->setFormatOther($data['otherValue']);
+            return;
+        }
+
+        $program->setProgramFormat($this->programFormatRepository->find($data['id']));
+        $program->setFormatOther('');
+    }
+
+    protected function setProgramDesign(array $data, Program $program): void
+    {
+        $program->setDesignType($data['type']);
+
+        if ($program->getDesignType() === Program::DESIGN_WORK) {
+            $program->setDesignValue([]);
+            return;
+        }
+
+        if ($program->getDesignType() === Program::DESIGN_SIMPLE) {
+            $program->setDesignValue($data['value']);
+            return;
+        }
+
+        if ($program->getDesignType() === Program::OTHER) {
+            $program->setDesignValue([$data['value']]);
+            return;
+        }
+    }
+
+    protected function setProgramKnowledgeCheck(array $data, Program $program): void
+    {
+        if ($data['id'] === null) {
+            $program->setKnowledgeCheck(null);
+            $program->setKnowledgeCheckOther($data['otherValue']);
+            return;
+        }
+
+        $program->setKnowledgeCheck($data['id']);
+        $program->setKnowledgeCheckOther('');
+    }
+
+    protected function setProgramAdditional(array $data, Program $program): void
+    {
+        foreach ($data['values'] as $additionalId) {
+            if ($additionalId === 0) {
+                continue;
+            }
+
+            $program->addProgramAdditional(
+                $this->programAdditionalRepository->find($additionalId)
+            );
+        }
+
+        $program->setOtherAdditional($data['otherValue']);
+    }
+
+    protected function setProgramTrainingDate(array $data, Program $program): void
+    {
+        $program->setTrainingDateType($data['type']);
+
+        if ($program->getTrainingDateType() !== Program::TRAINING_DATE_CALENDAR) {
+            $program->setTrainingDateExtra(null);
+            return;
+        }
+
+
+        $program->setTrainingDateExtra($data['extra']);
+    }
+
+    protected function setOccupationMode(array $data, Program $program): void
+    {
+        $occupationMode = $program->getProgramOccupationMode();
+
+        if ($occupationMode === null) {
+            $occupationMode = new ProgramOccupationMode();
+        }
+
+        $occupationMode
+            ->setProgram($program)
+            ->setType($data['type']);
+
+        if (in_array($occupationMode->getType(), [ProgramOccupationMode::OCCUPATION_MODE_ANYTIME, ProgramOccupationMode::OTHER], true)) {
+            $occupationMode
+                ->setDays(null)
+                ->setFromTime(null)
+                ->setToTime(null);
+        }
+
+        if (in_array($occupationMode->getType(), [ProgramOccupationMode::OCCUPATION_MODE_ANYTIME, ProgramOccupationMode::OCCUPATION_MODE_TIME], true)) {
+            $occupationMode->setOtherValue(null);
+        }
+
+        if ($occupationMode->getType() === ProgramOccupationMode::OTHER) {
+            $occupationMode->setOtherValue($data['extra']['text']);
+        }
+
+        if ($occupationMode->getType() === ProgramOccupationMode::OCCUPATION_MODE_TIME) {
+            $occupationMode
+                ->setDays($data['extra']['selectedDays'])
+                ->setFromTime($data['extra']['selectedTime']['start'])
+                ->setToTime($data['extra']['selectedTime']['end']);
+        }
+
+        $this->entityManager->persist($occupationMode);
+
+        $program->setProgramOccupationMode($occupationMode);
+    }
+
+    protected function setProgramIncludes(array $data, Program $program): void
+    {
+        foreach ($data['values'] as $includeId) {
+            if ($includeId === 0) {
+                continue;
+            }
+
+            $program->addProgramInclude(
+                $this->programIncludeRepository->find($includeId)
+            );
+        }
+
+        $program->setOtherInclude($data['otherValue']);
+    }
+
+    protected function setProgramPrice(array $data, Program $program): void
+    {
+        $this->setPersonProgramPrice($data, $program, ProgramPayment::LEGAL_ENTITY_TYPE);
+        $this->setPersonProgramPrice($data, $program, ProgramPayment::INDIVIDUAL_TYPE);
+    }
+
+    protected function setPersonProgramPrice(array $data, Program $program, string $type): void
+    {
+        $paymentItem = $this->getProgramPaymentItem($program, $type);
+
+        $priceData = $data[$type];
+        $paymentItem->setPrice($priceData['checked'] && !$data['byRequest'] ? $priceData['price'] : null);
+
+        $this->entityManager->persist($paymentItem);
+    }
+
+    protected function setProgramDiscounts(array $data, Program $program): void
+    {
+        $this->setPersonProgramDiscount($data, $program, ProgramPayment::LEGAL_ENTITY_TYPE);
+        $this->setPersonProgramDiscount($data, $program, ProgramPayment::INDIVIDUAL_TYPE);
+    }
+
+    protected function setPersonProgramDiscount(array $data, Program $program, string $type): void
+    {
+        $paymentItem = $this->getProgramPaymentItem($program, $type);
+
+        $discountData = $data[$type];
+        $paymentItem->setDiscount($discountData['checked'] && !$data['byRequest'] ? $discountData['value'] : null);
+
+        $this->entityManager->persist($paymentItem);
+    }
+
+    protected function setTermOfPayment(array $data, Program $program): void
+    {
+        $this->setPersonTermOfPayment($data, $program, ProgramPayment::LEGAL_ENTITY_TYPE);
+        $this->setPersonTermOfPayment($data, $program, ProgramPayment::INDIVIDUAL_TYPE);
+    }
+
+    protected function setPersonTermOfPayment(array $data, Program $program, string $type): void
+    {
+        $paymentItem = $this->getProgramPaymentItem($program, $type);
+
+        $termsData = $data[$type];
+        $paymentItem->setTermOfPayment($termsData['checked'] && !$data['byRequest'] ? $termsData['value'] : null);
+
+        $this->entityManager->persist($paymentItem);
+    }
+
+    protected function getProgramPaymentItem(Program $program, string $type): ProgramPayment
+    {
+        $paymentItem = $program->getPayment($type);
+
+        if ($paymentItem === null) {
+            $paymentItem = (new ProgramPayment())
+                ->setType($type)
+                ->setProgram($program);
+
+            $program->addPayment($paymentItem);
+        }
+
+        return $paymentItem;
     }
 
     protected function getProvidersFromRequest(Request $request): array
@@ -308,10 +509,10 @@ class ProgramFormController extends AbstractController
                 $providerImage = $this->uploadService->createUpload($providerFile);
                 $provider->setImage($providerImage);
 
-                $this->getDoctrine()->getManager()->persist($providerImage);
+                $this->entityManager->persist($providerImage);
             }
 
-            $this->getDoctrine()->getManager()->persist($provider);
+            $this->entityManager->persist($provider);
 
             $providers[] = $provider;
         }
@@ -330,10 +531,10 @@ class ProgramFormController extends AbstractController
             $certificateImage = $this->uploadService->createUpload($certificateFile);
             $certificate->setImage($certificateImage);
 
-            $this->getDoctrine()->getManager()->persist($certificateImage);
+            $this->entityManager->persist($certificateImage);
         }
 
-        $this->getDoctrine()->getManager()->persist($certificate);
+        $this->entityManager->persist($certificate);
 
         return $certificate;
     }
@@ -346,7 +547,7 @@ class ProgramFormController extends AbstractController
             ->setFirstDiscount($favoriteProviderAction['firstDiscount'])
             ->setDiscount($favoriteProviderAction['nextDiscount']);
 
-        $this->getDoctrine()->getManager()->persist($actionFavoriteProvider);
+        $this->entityManager->persist($actionFavoriteProvider);
 
         return $actionFavoriteProvider;
     }
@@ -366,8 +567,8 @@ class ProgramFormController extends AbstractController
                 ->setName($name)
                 ->setImage($galleryImage);
 
-            $this->getDoctrine()->getManager()->persist($galleryImage);
-            $this->getDoctrine()->getManager()->persist($item);
+            $this->entityManager->persist($galleryImage);
+            $this->entityManager->persist($item);
 
             $gallery[] = $item;
         }

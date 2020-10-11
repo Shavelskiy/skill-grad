@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramPayment
 {
+    public const LEGAL_ENTITY_TYPE = 'legalEntity';
+    public const INDIVIDUAL_TYPE = 'individual';
+
     use IdTrait;
     use TimestampTrait;
 

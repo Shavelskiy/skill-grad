@@ -24,7 +24,7 @@ trait Design
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    protected bool $knowledgeCheck;
+    protected ?bool $knowledgeCheck;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -69,12 +69,12 @@ trait Design
         return $this;
     }
 
-    public function isKnowledgeCheck(): bool
+    public function isKnowledgeCheck(): ?bool
     {
         return $this->knowledgeCheck;
     }
 
-    public function setKnowledgeCheck(bool $knowledgeCheck): self
+    public function setKnowledgeCheck(?bool $knowledgeCheck): self
     {
         $this->knowledgeCheck = $knowledgeCheck;
         return $this;

@@ -435,9 +435,21 @@ class Program
         return $this;
     }
 
-    public function getProgramOccupationMode(): ProgramOccupationMode
+    public function getPayment(string $type): ?ProgramPayment
     {
-        return $this->programOccupationMode;
+        /** @var ProgramPayment $payment */
+        foreach ($this->getPayments() as $payment) {
+            if ($payment->getType() === $type) {
+                return $payment;
+            }
+        }
+
+        return null;
+    }
+
+    public function getProgramOccupationMode(): ?ProgramOccupationMode
+    {
+        return $this->programOccupationMode ?? null;
     }
 
     public function setProgramOccupationMode(ProgramOccupationMode $programOccupationMode): self
@@ -454,6 +466,15 @@ class Program
     public function setProgramIncludes(Collection $programIncludes): self
     {
         $this->programIncludes = $programIncludes;
+        return $this;
+    }
+
+    public function addProgramInclude(ProgramInclude $include): self
+    {
+        if (!$this->programIncludes->contains($include)) {
+            $this->programIncludes->add($include);
+        }
+
         return $this;
     }
 
@@ -475,7 +496,19 @@ class Program
 
     public function setProgramAdditional($programAdditional): self
     {
-        $this->programAdditional = $programAdditional;
+        if (!$this->programAdditional->contains($programAdditional)) {
+            $this->programAdditional = $programAdditional;
+        }
+
+        return $this;
+    }
+
+    public function addProgramAdditional(ProgramAdditional $additional): self
+    {
+        if (!$this->programAdditional->contains($additional)) {
+            $this->programAdditional->add($additional);
+        }
+
         return $this;
     }
 
