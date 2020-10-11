@@ -27,14 +27,16 @@ const Teachers = () => {
       return
     }
 
-    dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {name: item.name, image: file} : item)))
+    dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {id: item.id, name: item.name, image: file} : item)))
   }
 
   const renderImage = (image, imageId) => {
     if (image !== null) {
-      return (
-        <img src={URL.createObjectURL(image)}/>
-      )
+      try {
+        return <img src={URL.createObjectURL(image)}/>
+      } catch (e) {
+        return <img src={image}/>
+      }
     }
 
     return (
@@ -57,6 +59,7 @@ const Teachers = () => {
         </label>
         <img src={deleteTeacherImg}
              onClick={() => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
+               id: item.id,
                name: item.name,
                image: null,
              } : item)))}/>
@@ -84,6 +87,7 @@ const Teachers = () => {
             placeholder={'ФИО'}
             medium={true}
             setValue={(name) => dispatch(setTeachers(teachers.map((item, itemKey) => key === itemKey ? {
+              id: item.id,
               name: name,
               image: item.image,
             } : item)))}
@@ -105,7 +109,7 @@ const Teachers = () => {
     }
 
     return (
-      <button onClick={() => dispatch(setTeachers([...teachers, {image: null, name: ''}]))} className={css.addButton}>
+      <button onClick={() => dispatch(setTeachers([...teachers, {id: null, image: null, name: ''}]))} className={css.addButton}>
         <img src={addImage}/>
         Добавить преподавателя
       </button>

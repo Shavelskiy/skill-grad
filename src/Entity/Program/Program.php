@@ -64,7 +64,7 @@ class Program
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\ProgramFormat", inversedBy="programs")
      */
-    protected ProgramFormat $programFormat;
+    protected ?ProgramFormat $programFormat;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -94,10 +94,11 @@ class Program
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program\ActionFavoriteProvider")
      */
-    protected ActionFavoriteProvider $actionFavoriteProvider;
+    protected ?ActionFavoriteProvider $actionFavoriteProvider;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramInclude", mappedBy="programs")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramInclude")
+     * @ORM\JoinColumn(name="program_id")
      */
     protected Collection $programIncludes;
 
@@ -151,7 +152,8 @@ class Program
     protected string $otherInclude;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramAdditional", mappedBy="programs")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramAdditional")
+     * @ORM\JoinColumn(name="program_id")
      */
     protected Collection $programAdditional;
 
@@ -240,12 +242,12 @@ class Program
         return $this;
     }
 
-    public function getProgramFormat(): ProgramFormat
+    public function getProgramFormat(): ?ProgramFormat
     {
-        return $this->programFormat;
+        return $this->programFormat ?? null;
     }
 
-    public function setProgramFormat(ProgramFormat $programFormat): self
+    public function setProgramFormat(?ProgramFormat $programFormat): self
     {
         $this->programFormat = $programFormat;
         return $this;
@@ -341,9 +343,9 @@ class Program
         return $this;
     }
 
-    public function getActionFavoriteProvider(): ActionFavoriteProvider
+    public function getActionFavoriteProvider(): ?ActionFavoriteProvider
     {
-        return $this->actionFavoriteProvider;
+        return $this->actionFavoriteProvider ?? null;
     }
 
     public function setActionFavoriteProvider(ActionFavoriteProvider $actionFavoriteProvider): self

@@ -46,6 +46,7 @@ const days = [
 const OccupationMode = ({error = false}) => {
   const dispatch = useDispatch()
 
+  const programId =  useSelector(state => state.program.id)
   const occupationMode = useSelector(state => state.program.occupationMode)
 
   const [selectedDays, setSelectedDays] = useState([])
@@ -54,6 +55,17 @@ const OccupationMode = ({error = false}) => {
     end: '00:00',
   })
   const [otherValue, setOtherValue] = useState('')
+
+  useEffect(() => {
+    if (occupationMode.type === OCCUPATION_MODE_TIME) {
+      setSelectedDays(occupationMode.extra.selectedDays)
+      setSelectedTime(occupationMode.extra.selectedTime)
+    }
+
+    if (occupationMode.type === OTHER) {
+      setOtherValue(occupationMode.extra.text)
+    }
+  }, [programId])
 
   useEffect(() => {
     if (occupationMode.type === OTHER) {

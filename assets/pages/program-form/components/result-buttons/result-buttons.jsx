@@ -54,7 +54,13 @@ const ResultButtons = () => {
 
     const data = {
       ...program,
-      teachers: program.teachers.map(teacher => teacher.name),
+      teachers: program.teachers.map(teacher => {
+        return {
+          id: teacher.id,
+          name: teacher.name,
+          hasImage: teacher.image !== null,
+        }
+      }),
       newProviders: program.newProviders.map(newProvider => {
         return {
           name: newProvider.name,
@@ -62,7 +68,10 @@ const ResultButtons = () => {
           comment: newProvider.comment,
         }
       }),
-      certificateName: program.certificate.name,
+      certificate: {
+        name: program.certificate.name,
+        hasImage: program.certificate.file !== null,
+      },
       gallery: program.gallery.map(item => item.name),
       active: setActive,
     }

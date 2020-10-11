@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { selectDesign } from '../../redux/program/actions'
@@ -14,6 +14,18 @@ import css from './scss/program-design.scss?module'
 const ProgramDesign = ({error = false}) => {
   const dispatch = useDispatch()
   const design = useSelector(state => state.program.programDesign)
+  const programId =  useSelector(state => state.program.id)
+
+  useEffect(() => {
+    if (design.type === DESIGN_SIMPLE) {
+      setPercents(design.value)
+    }
+
+    if (design.type === OTHER) {
+      setOtherValue(design.value)
+    }
+  }, [programId])
+
 
   const [otherValue, setOtherValue] = useState('')
   const [percents, setPercents] = useState([0, 0])

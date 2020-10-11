@@ -33,13 +33,14 @@ import {
   SET_GALLERY,
   SELECT_LOCATIONS,
   SET_ADDITIONAL_INFO,
-  RESET_FORM
+  RESET_FORM, SET_PROGRAM
 } from './types'
 
 import { DESIGN_SIMPLE, DURATION_HOURS } from '@/utils/program-form/field-types'
 
 
 const initialState = {
+  id: null,
   name: '',
   categories: [null, null, null],
   annotation: '',
@@ -209,6 +210,8 @@ export const programReducer = (state = initialState, action) => {
       return {...state, locations: action.payload}
     case SET_ADDITIONAL_INFO:
       return {...state, additionalInfo: action.payload}
+    case SET_PROGRAM:
+      return action.payload
     case RESET_FORM:
       return initialState
     default:

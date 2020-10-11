@@ -18,8 +18,16 @@ import { setTrainingDate } from '../../redux/program/actions'
 const TrainingDays = ({error = false}) => {
   const dispatch = useDispatch()
 
+  const programId =  useSelector(state => state.program.id)
+
   const [selectedDays, setSelectedDays] = useState([])
   const trainingDays = useSelector(state => state.program.trainingDate)
+
+  useEffect(() => {
+    if (trainingDays.type === TRAINING_DATE_CALENDAR) {
+      setSelectedDays(trainingDays.extra.map(item => new Date(item)))
+    }
+  }, [programId])
 
   useEffect(() => {
     if (trainingDays.type === TRAINING_DATE_CALENDAR) {

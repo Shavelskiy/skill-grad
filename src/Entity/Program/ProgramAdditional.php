@@ -29,16 +29,6 @@ class ProgramAdditional
      */
     protected bool $active;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Program\Program", inversedBy="programAdditional")
-     */
-    protected Collection $programs;
-
-    public function __construct()
-    {
-        $this->programs = new ArrayCollection();
-    }
-
     public function getTitle(): string
     {
         return $this->title;

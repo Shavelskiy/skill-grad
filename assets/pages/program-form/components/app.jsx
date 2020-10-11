@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 
 import axios from 'axios'
-import { FETCH_CURRENT_PROVIDER, FETCH_FIELDS } from '@/utils/program-form/endpoints'
+import { FETCH_CURRENT_PROVIDER, FETCH_FIELDS, FETCH_PROGRAM_URL } from '@/utils/program-form/endpoints'
 
 import { useDispatch } from 'react-redux'
 import { setCurrentProvider, setFields } from '../redux/data/actions'
+import { setProgram } from '../redux/program/actions'
 
 import ProgressBar from './progress-bar/progress-bar'
 import Description from './description/description'
@@ -26,6 +27,13 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const programId = (new URLSearchParams(window.location.search)).get('id')
+
+    if (Number(programId) > 0) {
+      axios.get(FETCH_PROGRAM_URL.replace(':id', programId))
+        .then(({data}) => dispatch(setProgram(data.program)))
+    }
+
     axios.get(FETCH_FIELDS)
       .then(({data}) => dispatch(setFields(data)))
 

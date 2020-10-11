@@ -41,7 +41,7 @@ class Teacher
 
     public function getPhoto(): ?Upload
     {
-        return $this->photo;
+        return $this->photo ?? null;
     }
 
     public function setPhoto(?Upload $photo): self

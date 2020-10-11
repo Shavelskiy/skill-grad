@@ -15,10 +15,25 @@ const Duration = ({error}) => {
   const dispatch = useDispatch()
 
   const duration = useSelector(state => state.program.duration)
+  const programId =  useSelector(state => state.program.id)
 
   const [hourValue, setHourValue] = useState(0)
   const [dayValue, setDayValue] = useState(0)
   const [otherValue, setOtherValue] = useState('')
+
+  useEffect(() => {
+    if (duration.type === DURATION_HOURS) {
+      setHourValue(duration.value)
+    }
+
+    if (duration.type === DURATION_DAYS) {
+      setDayValue(duration.value)
+    }
+
+    if (duration.type === OTHER) {
+      setOtherValue(duration.value)
+    }
+  }, [programId])
 
   useEffect(() => {
     switch (duration.type) {

@@ -48,7 +48,12 @@ const Result = () => {
       )
     }
 
-    const imageUrl = certificate.file.type !== 'application/pdf' ? URL.createObjectURL(certificate.file) : addImage
+    let imageUrl
+    try {
+      imageUrl = certificate.file.type !== 'application/pdf' ? URL.createObjectURL(certificate.file) : addImage
+    } catch (e) {
+      imageUrl = certificate.file
+    }
 
     return (
       <>

@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramOccupationMode
 {
-    public const OCCUPATION_MODE_ANYTIME = 'anytime';
-    public const OCCUPATION_MODE_TIME = 'time';
-    public const OTHER = 'other';
+    public const OCCUPATION_MODE_ANYTIME = 'OCCUPATION_MODE_ANYTIME';
+    public const OCCUPATION_MODE_TIME = 'OCCUPATION_MODE_TIME';
+    public const OTHER = 'OTHER';
 
     use IdTrait;
 
@@ -27,7 +27,7 @@ class ProgramOccupationMode
     protected string $type;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     protected ?array $days;
 
@@ -70,7 +70,13 @@ class ProgramOccupationMode
 
     public function getDays(): ?array
     {
-        return $this->days;
+        $result = [];
+
+        foreach ($this->days as $day) {
+            $result[] = (int)$day;
+        }
+
+        return $result;
     }
 
     public function setDays(?array $days): self
@@ -110,5 +116,26 @@ class ProgramOccupationMode
     {
         $this->otherValue = $otherValue;
         return $this;
+    }
+
+    public function getExtra(): ?array
+    {
+        if ($this->getType() === self::OTHER) {
+            return [
+                'text' => $this->getOtherValue(),
+            ];
+        }
+
+        if ($this->getType() === self::OCCUPATION_MODE_TIME) {
+            return [
+                'selectedDays' => $this->getDays() ?? [],
+                'selectedTime' => [
+                    'start' => $this->getFromTime() ?? '00:00',
+                    'end' => $this->getToTime() ?? '00:00',
+                ]
+            ];
+        }
+
+        return null;
     }
 }

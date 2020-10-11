@@ -33,7 +33,7 @@ import {
   SET_GALLERY,
   SELECT_LOCATIONS,
   SET_ADDITIONAL_INFO,
-  RESET_FORM
+  RESET_FORM, SET_PROGRAM
 } from './types'
 
 
@@ -302,6 +302,13 @@ export function setAdditionalInfo(additionalInfo) {
   return {
     type: SET_ADDITIONAL_INFO,
     payload: additionalInfo,
+  }
+}
+
+export function setProgram(program) {
+  return {
+    type: SET_PROGRAM,
+    payload: program,
   }
 }
 
