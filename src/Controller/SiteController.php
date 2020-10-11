@@ -60,7 +60,7 @@ class SiteController extends AbstractController
                 /** @var Program $program */
                 foreach ($this->programRepository->getNewCategoryPrograms($category) as $program) {
                     /** @var Provider $provider */
-                    $provider = $program->getProviders()[0];
+                    $provider = $program->getProviders()->first();
 
                     $programs[] = [
                         'id' => $program->getId(),
@@ -71,8 +71,12 @@ class SiteController extends AbstractController
                         ],
                         'rating' => $this->programService->getAverageRating($program),
                         'annotation' => $program->getAnnotation(),
-                        'oldPrice' => $program->getOldPrice(),
-                        'additional' => $this->programService->programAdditional($program),
+                        'price' => $this->programService->getPrice($program),
+                        'oldPrice' => $this->programService->getOldPrice($program),
+                        'discount' => $this->programService->isDiscount($program),
+                        'showPriceReduction' => $program->isShowPriceReduction(),
+                        'format' => $program->getProgramFormat() !== null ? $program->getProgramFormat()->getName() : $program->getFormatOther(),
+                        'duration' => $this->programService->getDuration($program),
                     ];
                 }
 

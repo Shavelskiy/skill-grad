@@ -1,8 +1,7 @@
-{% set additional = programAdditional(program) %}
 {% set inCompare = inCompare(program.id, app.request.cookies) %}
 
 <div class="card">
-  {% if additional.discount is not null %}
+  {% if isDiscount(program) %}
     <span class="icon discount"></span>
   {% endif %}
   <div class="card__header">
@@ -25,12 +24,12 @@
         <div class="info">
           <i class="icon-book"></i>
           <span class="info-text">
-            {{ additional.format }}
+            {{ program.programFormat is not null ? program.programFormat.name : program.formatOther }}
           </span>
         </div>
         <div class="time">
           <i class="icon-clock"></i>
-          <span class="info-text">{{ additional.duration }}</span>
+          <span class="info-text">{{ getDuration(program) }}</span>
         </div>
         <div class="star">
           <i class="icon-star"></i>
@@ -47,16 +46,20 @@
       </div>
     </div>
     <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">
-      {% if additional.price is not null %}
-        <div class="card__footer-price">
-          {% if program.oldPrice is not null and program.showPriceReduction %}
-            <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
-            <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+      {% set price = getProgramPrice(program) %}
+      {% set oldPrice = getOldProgramPrice(program) %}
+      <div class="card__footer-price">
+        {% if program.showPriceReduction and price is not null and oldPrice is not null and price < oldPrice %}
+          <span class="price-old">{{ oldPrice|number_format(0, ' ', ' ') }}  р.</span>
+          <span class="price-new">{{ price }}</span>
+        {% else %}
+          {% if price is not null %}
+            <span class="price-text">{{ price|number_format(0, ' ', ' ') }}  р.</span>
           {% else %}
-            <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+            <span class="price-text">По запросу</span>
           {% endif %}
-        </div>
-      {% endif %}
+        {% endif %}
+      </div>
       <div class="card__footer-button">
         {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
           <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}

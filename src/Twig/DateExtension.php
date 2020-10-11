@@ -8,7 +8,7 @@ use Twig\TwigFilter;
 
 class DateExtension extends AbstractExtension
 {
-    protected const MONTHS = [
+    public const MONTHS = [
         'января',
         'февраля',
         'марта',
@@ -21,6 +21,16 @@ class DateExtension extends AbstractExtension
         'октября',
         'ноября',
         'декабря',
+    ];
+
+    public const DAY_OF_WEEK = [
+        'понедельние',
+        'вторник',
+        'среда',
+        'четверг',
+        'пятница',
+        'суббота',
+        'воскресение',
     ];
 
     public function getFilters(): array

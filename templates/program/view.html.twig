@@ -12,10 +12,15 @@
   name: 'Каталог программ обучения'
 } %}
 
-{% set additional = programAdditional(program) %}
 {% set categories = programCategories(program) %}
 {% set inCompare = inCompare(program.id, app.request.cookies) %}
 {% set hasRequest = hasRequest(program.id) %}
+
+{% set legalEntityPaymet = program.getPayment('legalEntity') %}
+{% set individualPayment = program.getPayment('individual') %}
+
+{% set price = getProgramPrice(program) %}
+{% set oldPrice = getOldProgramPrice(program) %}
 
 {% block body %}
   <div class="main-card__program mt-0">
@@ -99,17 +104,20 @@
             {% endif %}
 
             <h5 class="result-title">Дизайн программы обучения</h5>
-            <p class="text">{{ additional.design }}</p>
+            <p class="text">{{ getProgramDesign(program) }}</p>
 
             <h5 class="result-title">Проверка знаний</h5>
             <p class="text">Экзамен по итогам обучения</p>
 
-            {% if additional.additional is not empty %}
+            {% if program.programAdditional is not empty or program.otherAdditional|length > 0 %}
               <h5 class="result-title">Дополнительно</h5>
               <ul class="tick">
-                {% for value in additional.additional %}
-                  <li>{{ value }}</li>
+                {% for additional in program.programAdditional %}
+                  <li>{{ additional.title }}</li>
                 {% endfor %}
+                {% if program.otherAdditional|length > 0 %}
+                  <li>{{ program.otherAdditional }}</li>
+                {% endif %}
               </ul>
             {% endif %}
 
@@ -122,7 +130,7 @@
               <h5 class="result-title">Целевая аудитория</h5>
               <ul class="tick">
                 {% for listener in program.targetAudience %}
-                  <li>Дети до 12 лет</li>
+                  <li>{{ listener }}</li>
                 {% endfor %}
               </ul>
             {% endif %}
@@ -141,59 +149,78 @@
               <p class="text">{{ program.gainedKnowledge }}</p>
             {% endif %}
 
-            {% if additional.includes is not empty %}
+            {% if program.programIncludes is not empty or program.otherInclude|length > 0 %}
               <h5 class="result-title">Включено в курс</h5>
               <ul class="tick">
-                {% for include in additional.includes %}
-                  <li>{{ include }}</li>
+                {% for include in program.programIncludes %}
+                  <li>{{ include.title }}</li>
                 {% endfor %}
+                {% if program.otherInclude|length > 0 %}
+                  <li>{{ program.otherInclude }}</li>
+                {% endif %}
               </ul>
             {% endif %}
 
-            <h5 class="result-title">Скидки</h5>
-            <ul class="tick">
-              <li>Для физических лиц - 10% = 1850 руб.</li>
-              <li>Для юридических лиц - 15% = 2300 руб.</li>
-            </ul>
+            {% set legalEntityPaymet = program.getPayment('legalEntity') %}
+            {% set individualPayment = program.getPayment('individual') %}
+
+            {% if (legalEntityPaymet is not null and legalEntityPaymet.discount is not null) or (individualPayment is not null and individualPayment.discount is not null) %}
+              <h5 class="result-title">Скидки</h5>
+              <ul class="tick">
+                {% if legalEntityPaymet is not null and legalEntityPaymet.discount is not null %}
+                  <li>Для физических лиц - {{ legalEntityPaymet.discount }}%
+                    = {{ (price * (1 - legalEntityPaymet.discount / 100))|number_format(0, ' ', ' ') }} руб.
+                  </li>
+                {% endif %}
+                {% if individualPayment is not null and individualPayment.discount is not null %}
+                  <li>Для юридических лиц - {{ individualPayment.discount }}%
+                    = {{ (price * (1 - individualPayment.discount / 100))|number_format(0, ' ', ' ') }} руб.
+                  </li>
+                {% endif %}
+              </ul>
+            {% endif %}
 
             {% if program.providerActions is not empty %}
               <h5 class="result-title">Акции от провайдера</h5>
               <ul class="tick">
-                {% for actioin in program.providerActions %}
+                {% for action in program.providerActions %}
                   <li>{{ action }}</li>
                 {% endfor %}
               </ul>
             {% endif %}
 
-            <h5 class="result-title">Акция «Любимый провайдер»</h5>
-            <div class="container-0">
-              <div class="sale">
-                <span class="percent">20%</span>
-                <span class="text">Скидка при приобретении <br/> первого курса</span>
+            {% set actionFavoriteProvider =  program.actionFavoriteProvider %}
+            {% if actionFavoriteProvider is not null and actionFavoriteProvider.firstDiscount > 0 and actionFavoriteProvider.discount > 0 %}
+              <h5 class="result-title">Акция «Любимый провайдер»</h5>
+              <div class="container-0">
+                {% if actionFavoriteProvider.firstDiscount > 0 %}
+                  <div class="sale">
+                    <span class="percent">{{ actionFavoriteProvider.firstDiscount }}%</span>
+                    <span class="text">Скидка при приобретении <br/> первого курса</span>
+                  </div>
+                {% endif %}
+                {% if actionFavoriteProvider.discount > 0 %}
+                  <div class="sale">
+                    <span class="percent">{{ actionFavoriteProvider.discount }}%</span>
+                    <span class="text">Скидка при приобретении <br/> последующих курсов</span>
+                  </div>
+                {% endif %}
               </div>
-              <div class="sale">
-                <span class="percent">10%</span>
-                <span class="text">Скидка при приобретении <br/> первого курса</span>
-              </div>
-            </div>
+            {% endif %}
 
             <h5 class="result-title">Условия оплаты</h5>
-            {% if additional.term_of_payment is null %}
+            {% if (legalEntityPaymet is null or legalEntityPaymet.termOfPayment is null) and (individualPayment is null or individualPayment.termOfPayment is null) %}
               <p class="text">По запросу</p>
             {% else %}
               <ul class="tick">
-                {% if additional.term_of_payment.legal != false %}
-                  <li>
-                    <strong>Для юридических лиц</strong>
-                    <p class="text mt-10">{{ additional.term_of_payment.legal }}</p>
-                  </li>
-                {% endif %}
-                {% if additional.term_of_payment.individual != false %}
-                  <li>
-                    <strong>Для физических лиц</strong>
-                    <p class="text mt-10">{{ additional.term_of_payment.individual }}</p>
-                  </li>
-                {% endif %}
+                <li>
+                  <strong>Для юридических лиц</strong>
+                  <p class="text mt-10">{{ (legalEntityPaymet is null or legalEntityPaymet.termOfPayment is null) ? 'По запросу' : legalEntityPaymet.termOfPayment }}</p>
+                </li>
+                <li>
+                  <strong>Для физических лиц</strong>
+                  <p class="text mt-10">{{ (legalEntityPaymet is null or individualPayment.termOfPayment is null) ? 'По запросу' : individualPayment.termOfPayment }}</p>
+                </li>
               </ul>
             {% endif %}
 
@@ -328,7 +355,9 @@
           {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
             <div class="container-0 j-c-center mt-40">
               <div class="col-lg-4 col-sm-4 col-md-6">
-                <button class="button-red program-review-button" data-has-request="{{ hasRequest ? '1' : '0' }}">Оставить оценку</button>
+                <button class="button-red program-review-button" data-has-request="{{ hasRequest ? '1' : '0' }}">
+                  Оставить оценку
+                </button>
               </div>
               <div class="col-lg-4 col-sm-4 col-md-6">
                 <button class="button-blue program-question-button">Задать вопрос</button>
@@ -343,14 +372,19 @@
           <div class="col-lg-12 pr-0">
             <div class="price-block">
               <div class="price">
-                {% if program.oldPrice is not null and program.showPriceReduction %}
-                  <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
-                  <span class="price-new">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                {% if program.showPriceReduction and price is not null and oldPrice is not null and price < oldPrice %}
+                  <span class="price-old">{{ oldPrice|number_format(0, ' ', ' ') }}  р.</span>
+                  <span class="price-new">{{ price }}</span>
                 {% else %}
-                  <span class="price-text">{{ additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                  {% if price is not null %}
+                    <span class="price-text">{{ price|number_format(0, ' ', ' ') }}  р.</span>
+                  {% else %}
+                    <span class="price-text">По запросу</span>
+                  {% endif %}
                 {% endif %}
                 <a href="#">Узнать о скидках/акциях</a>
               </div>
+
               {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
                 <div class="button">
                   <button class="button-blue add-program-request" {{ hasRequest ? 'disabled' : '' }}
@@ -365,32 +399,34 @@
               <p class="text">
                 <i class="icon-book"></i>
                 <span>Продолжительность обучения:</span>
-                <strong class="blue">{{ additional.duration }}</strong>
+                <strong class="blue">{{ getDuration(program) }}</strong>
               </p>
 
               <p class="text">
                 <i class="icon-square"></i>
                 <span>Формат обучения:</span>
-                <strong class="blue">{{ additional.format }}</strong>
+                <strong class="blue">
+                  {{ program.programFormat is not null ? program.programFormat.name : program.formatOther }}
+                </strong>
               </p>
 
               <p class="text">
                 <i class="icon-student"></i>
                 <span>Уровень:</span>
-                <strong class="blue">Начальный</strong>
+                <strong class="blue">{{ program.level.title }}</strong>
               </p>
 
               <p class="text">
                 <i class="icon-calendar-2"></i>
                 <span>Даты обучения:</span>
-                <strong class="blue"> 13 апреля - 25 сентября
+                <strong class="blue">{{ getTrainingDate(program) }}
                 </strong>
               </p>
 
               <p class="text">
                 <i class="icon-clock"></i>
                 <span>Режим занятий:</span>
-                <strong class="blue">Будни, с 18:00 до 20:00</strong>
+                <strong class="blue">{{ getOccupationMode(program) }}</strong>
               </p>
 
 
@@ -447,13 +483,13 @@
   </div>
 {% endblock %}
 
-{% block modals %}
-  {{ parent() }}
-  {% include 'components/modals/add.favorite.html.twig' %}
-  {% include 'program/modals.html.twig' with {id: program.id} %}
-{% endblock %}
+  {% block modals %}
+    {{ parent() }}
+    {% include 'components/modals/add.favorite.html.twig' %}
+    {% include 'program/modals.html.twig' with {id: program.id} %}
+  {% endblock %}
 
-{% block javascripts %}
-  {{ parent() }}
-  {{ encore_entry_script_tags('program.view') }}
-{% endblock %}
+  {% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('program.view') }}
+  {% endblock %}

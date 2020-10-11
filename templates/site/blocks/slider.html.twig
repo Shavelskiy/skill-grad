@@ -3,7 +3,7 @@
 <div class="swiper-slide">
   <div class="slider__item">
     <div class="card small">
-      {% if program.additional.discount is not null %}
+      {% if program.discount %}
         <span class="icon discount"></span>
       {% endif %}
       <div class="card__header">
@@ -30,11 +30,11 @@
         <div class="card__body-info col-lg-12 col-sm-4 no-gutter">
           <div class="info">
             <i class="icon-book"></i>
-            <span class="info-text">{{ program.additional.format }}</span>
+            <span class="info-text">{{ program.format }}</span>
           </div>
           <div class="time">
             <i class="icon-clock"></i>
-            <span class="info-text">{{ program.additional.duration }}</span>
+            <span class="info-text">{{ program.duration }}</span>
           </div>
           <div class="star">
             <i class="icon-star"></i>
@@ -43,16 +43,19 @@
         </div>
 
         <div class="col-lg-12 col-md-12 col-sm-4 d-flex j-c-space-between">
-          {% if program.additional.price is not null %}
-            <div class="card__footer-price">
-              {% if program.oldPrice is not null and program.showPriceReduction %}
-                <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }} р.</span>
-                <span class="price-new">{{ program.additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+          <div class="card__footer-price">
+            {% if program.showPriceReduction and program.price is not null and program.oldPrice is not null and program.price < program.oldPrice %}
+              <span class="price-old">{{ program.oldPrice|number_format(0, ' ', ' ') }}  р.</span>
+              <span class="price-new">{{ program.price }}</span>
+            {% else %}
+              {% if program.price is not null %}
+                <span class="price-text">{{ program.price|number_format(0, ' ', ' ') }}  р.</span>
               {% else %}
-                <span class="price-text">{{ program.additional.price.individual|number_format(0, ' ', ' ') }} р.</span>
+                <span class="price-text">По запросу</span>
               {% endif %}
-            </div>
-          {% endif %}
+            {% endif %}
+          </div>
+
           <div class="card__footer-button">
             {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
               <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}

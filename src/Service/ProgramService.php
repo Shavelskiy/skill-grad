@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Cache\Keys;
 use App\Cache\MemcachedClient;
 use App\Entity\Program\Program;
+use App\Entity\Program\ProgramPayment;
 use App\Entity\Program\ProgramReview;
 use App\Repository\ProgramAdditionalRepository;
 use App\Repository\ProgramFormatRepository;
@@ -32,120 +33,66 @@ class ProgramService
         $this->programLevelRepository = $programLevelRepository;
     }
 
-    public function programAdditional(Program $program): array
+    public function isDiscount(Program $program): bool
     {
-        return [
-            'format' => $this->prepareProgramFormat($program->getFormat()),
-            'design' => $this->prepareProgramDesign($program->getDesign()),
-            'duration' => $this->prepareProgramDuration($program->getDuration()),
-            'price' => $this->prepareProgramPrice($program->getPrice()),
-            'discount' => $this->prepareProgramDiscount($program->getDiscount()),
-            'term_of_payment' => $this->prepareTermOfPayment($program->getTermOfPayment()),
-            'includes' => $this->prepareProgramIncludes($program->getIncludes()),
-            'additional' => $this->prepareProgramAdditional($program->getAdditional()),
-        ];
+        /** @var ProgramPayment $payment */
+        foreach ($program->getPayments() as $payment) {
+            if ((int)$payment->getDiscount() > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    protected function prepareProgramFormat(array $data): string
+    public function getDuration(Program $program): string
     {
-        if ($data['type'] === Program::OTHER) {
-            return $data['value'];
-        }
-
-        return $this->programFormatRepository->find($data['value'])->getName();
-    }
-
-    protected function prepareProgramDesign(array $data): string
-    {
-        if ($data['type'] === Program::OTHER) {
-            return $data['value'];
-        }
-
-        if ($data['type'] === Program::DESIGN_SIMPLE) {
-            return sprintf('%s теории, %s практики', $data['value'][0], $data['value'][1]);
-        }
-
-        return 'Работа с наставником (мьютором, преподавателем)';
-    }
-
-    protected function prepareProgramDuration(array $data): string
-    {
-        if ($data['type'] === Program::OTHER) {
-            return $data['value'];
-        }
-
-        if ($data['type'] === Program::DURATION_HOURS) {
-            return sprintf('%s ак. ч.', $data['value']);
-        }
-
-        if ($data['type'] === Program::DURATION_DAYS) {
-            return sprintf('%s дней', $data['value']);
+        switch ($program->getDurationType()) {
+            case Program::DURATION_DAYS:
+                return sprintf('%s дней', $program->getDurationValue());
+            case Program::DURATION_HOURS:
+                return sprintf('%s ак.ч.', $program->getDurationValue());
+            case Program::OTHER:
+                return $program->getDurationValue();
         }
 
         return '';
     }
 
-    protected function prepareProgramPrice(array $data): ?array
+    public function getPrice(Program $program): ?int
     {
-        if ($data['type'] !== Program::REAL_PRICE) {
-            return null;
+        /** @var ProgramPayment $payment */
+        foreach ($program->getPayments() as $payment) {
+            if ($payment->getType() === ProgramPayment::INDIVIDUAL_TYPE && (int)$payment->getPrice() > 0) {
+                return $payment->getPrice();
+            }
         }
 
-        return [
-            'individual' => $data['value'][0],
-            'legal' => $data['value'][1] ?? $data['value'][0],
-        ];
-    }
+        foreach ($program->getPayments() as $payment) {
+            if ($payment->getType() === ProgramPayment::LEGAL_ENTITY_TYPE && (int)$payment->getPrice() > 0) {
+                return $payment->getPrice();
+            }
+        }
 
-    protected function prepareProgramDiscount(array $data): ?array
-    {
         return null;
-
-        return [
-            '',
-        ];
     }
 
-    protected function prepareTermOfPayment(array $data): ?array
+    public function getOldPrice(Program $program): ?int
     {
-        if ($data['type'] === Program::OTHER) {
-            return null;
+        /** @var ProgramPayment $payment */
+        foreach ($program->getPayments() as $payment) {
+            if ($payment->getType() === ProgramPayment::INDIVIDUAL_TYPE && (int)$payment->getOldPrice() > 0) {
+                return $payment->getOldPrice();
+            }
         }
 
-        return [
-            'individual' => $data['individual']['active'] ? $data['individual']['value'] : false,
-            'legal' => $data['legal']['active'] ? $data['legal']['value'] : false,
-        ];
-    }
-
-    protected function prepareProgramIncludes(array $data): array
-    {
-        $result = [];
-
-        foreach ($data['values'] as $value) {
-            $result[] = $this->programIncludeRepository->find($value)->getTitle();
+        foreach ($program->getPayments() as $payment) {
+            if ($payment->getType() === ProgramPayment::LEGAL_ENTITY_TYPE && (int)$payment->getOldPrice() > 0) {
+                return $payment->getOldPrice();
+            }
         }
 
-        if (!empty($data['other_value'])) {
-            $result[] = $data['other_value'];
-        }
-
-        return $result;
-    }
-
-    protected function prepareProgramAdditional(array $data): array
-    {
-        $result = [];
-
-        foreach ($data['values'] as $value) {
-            $result[] = $this->programAdditionalRepository->find($value)->getTitle();
-        }
-
-        if (!empty($data['other_value'])) {
-            $result[] = $data['other_value'];
-        }
-
-        return $result;
+        return null;
     }
 
     public function getAverageRating(Program $program): float
