@@ -42,7 +42,26 @@ class SearchService
 
     public function addProgramToIndex(Program $program): void
     {
+        if (!$program->isActive()) {
+            return;
+        }
+
         $this->createEntityIndex(self::TYPE_PROGRAM, $program->getId(), $this->entityMapper->programToArray($program));
+    }
+
+    public function removeArticleFromIndex(int $programId): void
+    {
+        //todo
+    }
+
+    public function removeProviderFromIndex(int $programId): void
+    {
+        //todo
+    }
+
+    public function removeProgramFromIndex(int $programId): void
+    {
+        //todo
     }
 
     public function createEntityIndex(string $type, int $entityId, array $data): void
