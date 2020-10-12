@@ -28,6 +28,7 @@ use App\Repository\ProviderRepository;
 use App\Service\UploadServiceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -678,7 +679,14 @@ class ProgramFormController extends AbstractController
 
     protected function getProvidersFromRequest(Request $request): array
     {
-        $providers = [];
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (($userProvider = $user->getProvider()) === null) {
+            throw new RuntimeException('user not has provider');
+        }
+
+        $providers = [$userProvider];
 
         if (!empty($request->get('selectedProvidersIds'))) {
             $providers = $this->providerRepository->findBy(['id' => $request->get('selectedProvidersIds')]);

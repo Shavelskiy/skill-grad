@@ -7,32 +7,11 @@ use App\Cache\MemcachedClient;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramPayment;
 use App\Entity\Program\ProgramReview;
-use App\Repository\ProgramAdditionalRepository;
-use App\Repository\ProgramFormatRepository;
-use App\Repository\ProgramIncludeRepository;
-use App\Repository\ProgramLevelRepository;
 use Psr\Cache\CacheItemInterface;
 use Throwable;
 
 class ProgramService
 {
-    protected ProgramFormatRepository $programFormatRepository;
-    protected ProgramIncludeRepository $programIncludeRepository;
-    protected ProgramAdditionalRepository $programAdditionalRepository;
-    protected ProgramLevelRepository $programLevelRepository;
-
-    public function __construct(
-        ProgramFormatRepository $programFormatRepository,
-        ProgramIncludeRepository $programIncludeRepository,
-        ProgramAdditionalRepository $programAdditionalRepository,
-        ProgramLevelRepository $programLevelRepository
-    ) {
-        $this->programFormatRepository = $programFormatRepository;
-        $this->programIncludeRepository = $programIncludeRepository;
-        $this->programAdditionalRepository = $programAdditionalRepository;
-        $this->programLevelRepository = $programLevelRepository;
-    }
-
     public function isDiscount(Program $program): bool
     {
         /** @var ProgramPayment $payment */

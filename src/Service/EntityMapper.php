@@ -46,9 +46,6 @@ class EntityMapper
 
     public function programToArray(Program $program): array
     {
-        $programFormat = $program->getFormat();
-        $design = $program->getDesign();
-
         return [
             'id' => $program->getId(),
             'name' => $program->getName(),
@@ -58,8 +55,8 @@ class EntityMapper
             'min_price' => 0,
             'max_price' => 0,
             'level' => $program->getLevel()->getId(),
-            'practice' => ($design['type'] === Program::DESIGN_SIMPLE) ? $design['value'][1] : 100,
-            'format' => ($programFormat['type'] !== Program::OTHER) ? $programFormat['value'] : 0,
+            'practice' => ($program->getDesignType() === Program::DESIGN_SIMPLE) ? $program->getDesignValue()[1] : 100,
+            'format' => ($program->getProgramFormat() !== null) ? $program->getProgramFormat()->getId() : 0,
             'rating' => $this->programService->getAverageRating($program),
             'categories' => $program->getCategories()->map(fn (Category $category) => $category->getId())->toArray(),
             'providers' => $program->getProviders()->map(fn (Provider $provider) => $provider->getId())->toArray(),

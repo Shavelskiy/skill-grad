@@ -49,24 +49,29 @@ class SearchService
         $this->createEntityIndex(self::TYPE_PROGRAM, $program->getId(), $this->entityMapper->programToArray($program));
     }
 
-    public function removeArticleFromIndex(int $programId): void
+    public function removeArticleFromIndex(int $articleId): void
     {
-        //todo
+        $this->removeEntityFromIndex(self::TYPE_ARTICLE, $articleId);
     }
 
-    public function removeProviderFromIndex(int $programId): void
+    public function removeProviderFromIndex(int $providerId): void
     {
-        //todo
+        $this->removeEntityFromIndex(self::TYPE_PROVIDER, $providerId);
     }
 
     public function removeProgramFromIndex(int $programId): void
     {
-        //todo
+        $this->removeEntityFromIndex(self::TYPE_PROGRAM, $programId);
     }
 
-    public function createEntityIndex(string $type, int $entityId, array $data): void
+    protected function createEntityIndex(string $type, int $entityId, array $data): void
     {
         $this->exec("/$type/$entityId", 'PUT', $data);
+    }
+
+    protected function removeEntityFromIndex(string $type, int $entityId): void
+    {
+        $this->exec("/$type/$entityId", 'DELETE', []);
     }
 
     public function findProviders(int $page, string $query, array $categories): array
