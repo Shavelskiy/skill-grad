@@ -14,10 +14,12 @@
       <div class="box-sidebar card-shadow">
         <div class="head">
           <h4>Вопросы пользователей</h4>
-          <div class="input-search-gray">
-            <input class="input search" type="text" placeholder="Поиск по вопросам">
-            <i class="icon-search"></i>
-          </div>
+          <form>
+            <div class="input-search-gray">
+              <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по вопросам">
+              <i class="icon-search"></i>
+            </div>
+          </form>
         </div>
         <div class="faq-menu">
           <ul>

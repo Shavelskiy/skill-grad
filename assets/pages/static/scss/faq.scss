@@ -16,9 +16,12 @@
     position: relative;
 
     .head {
-      input {
+      .input-search-gray {
         margin-top: 8px;
-        margin-bottom: 0;
+
+        input {
+          margin-bottom: 0;
+        }
       }
 
       i {

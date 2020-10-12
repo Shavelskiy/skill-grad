@@ -13,16 +13,16 @@
           </a>
         </div>
         <ul class="menu">
-          <li><a href="#">Пользовательское соглашение</a></li>
-          <li><a href="#">Соглашение о конфиденциальности</a></li>
-          <li><a href="#">Оферта</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'term-of-use'}) }}">Пользовательское соглашение</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'privacy-agreement'}) }}">Соглашение о конфиденциальности</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'offer'}) }}">Оферта</a></li>
         </ul>
       </div>
       <div class="col-lg-5 col-sm-4 col-md-6 center">
         <ul>
-          <li><a href="#">О проекте</a></li>
-          <li><a href="#">Как добавить программу обучения</a></li>
-          <li><a href="#">Как добавить образовательную организацию</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'about'}) }}">О проекте</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'how-add-program'}) }}">Как добавить программу обучения</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'how-add-provider'}) }}">Как добавить образовательную организацию</a></li>
           <li><a href="{{ path('faq.index') }}">FAQ</a></li>
         </ul>
       </div>

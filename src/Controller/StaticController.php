@@ -46,7 +46,9 @@ class StaticController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $items = $this->faqRepository->findActiveItems();
+        $query = $request->get('q', '');
+
+        $items = $this->faqRepository->findActiveItems($query);
 
         $selectedItemId = null;
 

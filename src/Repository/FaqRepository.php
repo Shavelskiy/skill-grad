@@ -22,13 +22,21 @@ class FaqRepository extends ServiceEntityRepository
     /**
      * @return Faq[]
      */
-    public function findActiveItems(): array
+    public function findActiveItems(string $search): array
     {
-        return $this
+        $query = $this
             ->createQueryBuilder('q')
             ->andWhere('q.active = :active')
             ->setParameter('active', true)
-            ->orderBy('q.sort', 'asc')
+            ->orderBy('q.sort', 'asc');
+
+        if (!empty($search)) {
+            $query
+                ->andWhere('upper(q.title) like :title')
+                ->setParameter('title', '%' . mb_strtoupper($search) . '%');
+        }
+
+        return $query
             ->getQuery()
             ->getResult();
     }
