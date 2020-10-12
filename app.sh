@@ -24,8 +24,8 @@ if [[ $1 == "front" ]]; then
         install)
             docker-compose exec front yarn install
         ;;
-        watch)
-            docker-compose exec front yarn run watch
+        start)
+            docker-compose exec front yarn run start
         ;;
         build)
             docker-compose exec front yarn run build

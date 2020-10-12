@@ -6,6 +6,7 @@ use App\Dto\SearchQuery;
 use App\Entity\User;
 use App\Helpers\CompareHelper;
 use App\Repository\ArticleRepository;
+use App\Repository\FaqRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -24,15 +25,18 @@ class StaticController extends AbstractController
     protected const TAB_ARTICLE = 'articles';
 
     protected ProviderRepository $providerRepository;
+    protected FaqRepository $faqRepository;
     protected ProgramRepository $programRepository;
     protected ArticleRepository $articleRepository;
 
     public function __construct(
         ProviderRepository $providerRepository,
+        FaqRepository $faqRepository,
         ProgramRepository $programRepository,
         ArticleRepository $articleRepository
     ) {
         $this->providerRepository = $providerRepository;
+        $this->faqRepository = $faqRepository;
         $this->programRepository = $programRepository;
         $this->articleRepository = $articleRepository;
     }
@@ -40,9 +44,24 @@ class StaticController extends AbstractController
     /**
      * @Route("/faq", name="faq.index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return $this->render('static/faq.html.twig');
+        $items = $this->faqRepository->findActiveItems();
+
+        $selectedItemId = null;
+
+        if (($id = (int)$request->get('id')) > 0) {
+            foreach ($items as $item) {
+                if ($item->getId() === $id) {
+                    $selectedItemId = $item->getId();
+                }
+            }
+        }
+
+        return $this->render('static/faq.html.twig', [
+            'items' => $items,
+            'selected_item_id' => $selectedItemId,
+        ]);
     }
 
     /**
