@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cache;
+namespace App\Enum\Cache;
 
 use App\Entity\Article;
 use App\Entity\Category;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cache;
+namespace App\Helpers;
 
 use ErrorException;
 use Memcached;

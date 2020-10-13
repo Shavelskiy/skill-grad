@@ -2,12 +2,12 @@
 
 namespace App\Controller\Api;
 
-use App\Cache\Keys;
-use App\Cache\MemcachedClient;
 use App\Dto\UpdateUserData;
 use App\Entity\Category;
 use App\Entity\Location;
 use App\Entity\User;
+use App\Enum\Cache\Keys;
+use App\Helpers\MemcachedClient;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
 use App\Service\User\UpdateUserInterface;

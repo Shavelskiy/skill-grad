@@ -1,36 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="format-detection" content="date=no">
-  <meta name="format-detection" content="address=no">
-  <meta name="format-detection" content="email=no">
-  <title>{% block title %}{% endblock %}</title>
-  <meta name="description" content="">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  {% block stylesheets %}
-    {{ encore_entry_link_tags('site.layout') }}
-  {% endblock %}
-</head>
-<body data-auth="{{ app.user is not null ? 'true' : 'false' }}">
+{% extends 'layouts/template.html.twig' %}
 
-{% include 'components/header/index.html.twig' %}
+{% block conent %}
+  {% include 'components/header/index.html.twig' %}
 
-<main class="content page">
-  {% block body %}
-  {% endblock %}
-</main>
-
-{% include 'components/footer/index.html.twig' %}
-
-{% block modals %}
-  {% include 'components/modals/index.html.twig' %}
+  <main class="content page">
+    {% block body %}
+    {% endblock %}
+  </main>
 {% endblock %}
-
-{% block javascripts %}
-  {{ encore_entry_script_tags('site.layout') }}
-{% endblock %}
-</body>
-</html>

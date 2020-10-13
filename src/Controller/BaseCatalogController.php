@@ -10,7 +10,7 @@ use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class BaseCatalogRepository extends AbstractController
+abstract class BaseCatalogController extends AbstractController
 {
     protected SearchService $searchService;
     protected CategoryRepository $categoryRepository;

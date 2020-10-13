@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Messenger;
+namespace App\Helpers;
 
 use App\Entity\ChatMessage;
 use App\Entity\User;

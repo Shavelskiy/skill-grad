@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Controller\Traits\SeoTrait;
 use App\Dto\SearchQuery;
 use App\Entity\User;
+use App\Enum\PagesKeys;
 use App\Helpers\CompareHelper;
 use App\Repository\ArticleRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\FaqRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
@@ -24,6 +27,8 @@ class StaticController extends AbstractController
     protected const TAB_PROGRAM = 'programs';
     protected const TAB_ARTICLE = 'articles';
 
+    use SeoTrait;
+
     protected ProviderRepository $providerRepository;
     protected FaqRepository $faqRepository;
     protected ProgramRepository $programRepository;
@@ -33,12 +38,15 @@ class StaticController extends AbstractController
         ProviderRepository $providerRepository,
         FaqRepository $faqRepository,
         ProgramRepository $programRepository,
-        ArticleRepository $articleRepository
+        ArticleRepository $articleRepository,
+        DefaultSeoRepository $defaultSeoRepository
     ) {
         $this->providerRepository = $providerRepository;
         $this->faqRepository = $faqRepository;
         $this->programRepository = $programRepository;
         $this->articleRepository = $articleRepository;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -60,10 +68,10 @@ class StaticController extends AbstractController
             }
         }
 
-        return $this->render('static/faq.html.twig', [
+        return $this->render('static/faq.html.twig', $this->applySeoToDefaultPage([
             'items' => $items,
             'selected_item_id' => $selectedItemId,
-        ]);
+        ], PagesKeys::FAQ_PAGE));
     }
 
     /**
@@ -71,7 +79,7 @@ class StaticController extends AbstractController
      */
     public function studentFaq(): Response
     {
-        return $this->render('static/student-faq.html.twig');
+        return $this->render('static/student-faq.html.twig', $this->applySeoToDefaultPage([], PagesKeys::FAQ_STUDENT_PAGE));
     }
 
     /**
@@ -79,7 +87,7 @@ class StaticController extends AbstractController
      */
     public function providerFaq(): Response
     {
-        return $this->render('static/provider-faq.html.twig');
+        return $this->render('static/provider-faq.html.twig', $this->applySeoToDefaultPage([], PagesKeys::FAQ_PROVIDER_PAGE));
     }
 
     /**
@@ -89,9 +97,9 @@ class StaticController extends AbstractController
     {
         $programIds = CompareHelper::getCompareProgramsFromParameterBag($request->cookies);
 
-        return $this->render('static/compare.html.twig', [
+        return $this->render('static/compare.html.twig', $this->applySeoToDefaultPage([
             'programs' => $this->programRepository->findBy(['id' => $programIds]),
-        ]);
+        ], PagesKeys::COMPARE_PAGE));
     }
 
     /**
@@ -124,7 +132,7 @@ class StaticController extends AbstractController
         $programSearchResult = $this->programRepository->getPaginatorResult($programQuery);
         $articleSearchResult = $this->articleRepository->getPaginatorResult($articleQuery);
 
-        return $this->render('static/favorite.html.twig', [
+        return $this->render('static/favorite.html.twig', $this->applySeoToDefaultPage([
             'tab' => $this->getFavoriteCurrentTab($request->get('tab', '')),
             'providers' => [
                 'items' => $providerSearchResult->getItems(),
@@ -144,7 +152,7 @@ class StaticController extends AbstractController
                 'total_pages' => $articleSearchResult->getTotalPageCount(),
                 'total_count' => $user->getFavoriteArticles()->count(),
             ],
-        ]);
+        ], PagesKeys::FAVORITE_PAGE));
     }
 
     protected function getFavoriteCurrentTab(string $tab): string

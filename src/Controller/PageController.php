@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\PageRepository;
+use App\Controller\Traits\SeoTrait;
+use App\Repository\Content\PageRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +13,15 @@ class PageController extends AbstractController
 {
     protected PageRepository $pageRepository;
 
+    use SeoTrait;
+
     public function __construct(
-        PageRepository $pageRepository
+        PageRepository $pageRepository,
+        DefaultSeoRepository $defaultSeoRepository
     ) {
         $this->pageRepository = $pageRepository;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -26,8 +33,8 @@ class PageController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        return $this->render('page/index.html.twig', [
+        return $this->render('page/index.html.twig', $this->applySeoToPage([
             'page' => $page,
-        ]);
+        ], $page));
     }
 }

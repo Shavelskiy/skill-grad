@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
-use App\Cache\Keys;
-use App\Cache\MemcachedClient;
+use App\Controller\Traits\SeoTrait;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
+use App\Enum\Cache\Keys;
+use App\Enum\PagesKeys;
+use App\Helpers\MemcachedClient;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\ProgramRepository;
 use App\Service\ProgramService;
 use Psr\Cache\CacheItemInterface;
@@ -20,6 +23,8 @@ use Throwable;
 
 class SiteController extends AbstractController
 {
+    use SeoTrait;
+
     protected ArticleRepository $articleRepository;
     protected CategoryRepository $categoryRepository;
     protected ProgramRepository $programRepository;
@@ -29,12 +34,15 @@ class SiteController extends AbstractController
         ArticleRepository $articleRepository,
         CategoryRepository $categoryRepository,
         ProgramRepository $programRepository,
-        ProgramService $programService
+        ProgramService $programService,
+        DefaultSeoRepository $defaultSeoRepository
     ) {
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
         $this->programRepository = $programRepository;
         $this->programService = $programService;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -42,10 +50,10 @@ class SiteController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('site/index.html.twig', [
+        return $this->render('site/index.html.twig', $this->applySeoToDefaultPage([
             'articles' => $this->getArticles(),
             'sliderItems' => $this->getSliderItems(),
-        ]);
+        ], PagesKeys::INDEX_PAGE));
     }
 
     protected function getSliderItems(): array

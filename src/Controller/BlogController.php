@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Controller\Traits\SeoTrait;
 use App\Entity\Article;
 use App\Entity\ArticleComment;
 use App\Entity\User;
+use App\Enum\PagesKeys;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\UserRepository;
 use App\Service\SearchService;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/blog")
  */
-class BlogController extends BaseCatalogRepository
+class BlogController extends BaseCatalogController
 {
     protected const PAGE_ITEM_COUNT = 10;
     protected const POPULAR_COMMENTS_COUNT = 5;
+
+    use SeoTrait;
 
     protected ArticleRepository $articleRepository;
     protected UserRepository $userRepository;
@@ -31,6 +36,7 @@ class BlogController extends BaseCatalogRepository
         ArticleRepository $articleRepository,
         UserRepository $userRepository,
         CategoryRepository $categoryRepository,
+        DefaultSeoRepository $defaultSeoRepository,
         SessionInterface $session
     ) {
         $this->searchService = $searchService;
@@ -38,6 +44,8 @@ class BlogController extends BaseCatalogRepository
         $this->userRepository = $userRepository;
         $this->categoryRepository = $categoryRepository;
         $this->session = $session;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -69,13 +77,13 @@ class BlogController extends BaseCatalogRepository
             $popularAuthors[$user->getId()]['user'] = $user;
         }
 
-        return $this->render('blog/index.html.twig', [
+        return $this->render('blog/index.html.twig', $this->applySeoToDefaultPage([
             'articles' => $this->articleRepository->findBy(['id' => $searchResult['ids']]),
             'page' => $page,
             'total_pages' => $searchResult['total_pages'],
             'user_articles' => $userArticles,
             'popular_authors' => $popularAuthors,
-        ]);
+        ], PagesKeys::BLOG_INDEX_PAGE_SLUG));
     }
 
     /**
@@ -102,20 +110,19 @@ class BlogController extends BaseCatalogRepository
             }
         }
 
-
-        return $this->render('blog/view.html.twig', [
+        return $this->render('blog/view.html.twig', $this->applySeoToArticle([
             'article' => $article,
             'is_favorite' => $this->getUser() && $this->getUser()->getFavoriteArticles()->contains($article),
             'more_articles' => $moreArticles,
             'popular_comment_ids' => $this->getPopularCommentIds($article),
-        ]);
+        ], $article));
     }
 
     protected function getPopularCommentIds(Article $article): array
     {
         $result = [];
 
-        for ($i = 1; $i < self::POPULAR_COMMENTS_COUNT; $i++) {
+        for ($i = 1; $i < self::POPULAR_COMMENTS_COUNT; ++$i) {
             $maxCommentId = null;
             $maxCommentAnswersCount = null;
 

@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Controller\Traits\SeoTrait;
+use App\Enum\PagesKeys;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use App\Service\SearchService;
@@ -14,8 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/search")
  */
-class SearchController extends BaseCatalogRepository
+class SearchController extends BaseCatalogController
 {
+    use SeoTrait;
+
     protected ProgramRepository $programRepository;
     protected ProviderRepository $providerRepository;
     protected ArticleRepository $articleRepository;
@@ -25,13 +30,16 @@ class SearchController extends BaseCatalogRepository
         CategoryRepository $categoryRepository,
         ProgramRepository $programRepository,
         ProviderRepository $providerRepository,
-        ArticleRepository $articleRepository
+        ArticleRepository $articleRepository,
+        DefaultSeoRepository $defaultSeoRepository
     ) {
         $this->searchService = $searchService;
         $this->categoryRepository = $categoryRepository;
         $this->programRepository = $programRepository;
         $this->providerRepository = $providerRepository;
         $this->articleRepository = $articleRepository;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -47,7 +55,7 @@ class SearchController extends BaseCatalogRepository
         $providerSearchResult = $this->getProviderSearchResult($request, $providerPage);
         $articleSearchResult = $this->getArticleSearchResult($request, $blogPage);
 
-        return $this->render('search/index.html.twig', [
+        return $this->render('search/index.html.twig', $this->applySeoToDefaultPage([
             'programs' => [
                 'page' => $programPage,
                 'total_count' => $programSearchResult['total_items'],
@@ -67,7 +75,7 @@ class SearchController extends BaseCatalogRepository
                 'items' => $this->articleRepository->findBy(['id' => $articleSearchResult['ids']]),
             ],
             'favorite_provider_ids' => $this->getFavoriteProviderIds(),
-        ]);
+        ], PagesKeys::SEARCH_PAGE_SLUG));
     }
 
     protected function getFavoriteProviderIds(): array

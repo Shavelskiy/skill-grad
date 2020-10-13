@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Messenger\Chat;
+use App\Helpers\Chat;
 use App\Repository\ChatMessageRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserTokenRepository;

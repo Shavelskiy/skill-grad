@@ -2,11 +2,11 @@
 
 namespace App\Service;
 
-use App\Cache\Keys;
-use App\Cache\MemcachedClient;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramPayment;
 use App\Entity\Program\ProgramReview;
+use App\Enum\Cache\Keys;
+use App\Helpers\MemcachedClient;
 use Psr\Cache\CacheItemInterface;
 use Throwable;
 

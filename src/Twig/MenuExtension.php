@@ -2,9 +2,9 @@
 
 namespace App\Twig;
 
-use App\Cache\Keys;
-use App\Cache\MemcachedClient;
 use App\Entity\Category;
+use App\Enum\Cache\Keys;
+use App\Helpers\MemcachedClient;
 use App\Repository\CategoryRepository;
 use ErrorException;
 use Psr\Cache\CacheItemInterface;

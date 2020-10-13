@@ -132,7 +132,7 @@ class ProgramOccupationMode
                 'selectedTime' => [
                     'start' => $this->getFromTime() ?? '00:00',
                     'end' => $this->getToTime() ?? '00:00',
-                ]
+                ],
             ];
         }
 

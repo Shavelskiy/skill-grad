@@ -2,9 +2,9 @@
 
 namespace App\EventSubscriber;
 
-use App\Cache\Keys;
-use App\Cache\MemcachedClient;
 use App\Entity\Program\ProgramReview;
+use App\Enum\Cache\Keys;
+use App\Helpers\MemcachedClient;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;

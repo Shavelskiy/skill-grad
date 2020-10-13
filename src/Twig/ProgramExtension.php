@@ -5,7 +5,6 @@ namespace App\Twig;
 use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramOccupationMode;
-use App\Entity\Program\ProgramPayment;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\User;
 use App\Repository\ProgramFormatRepository;

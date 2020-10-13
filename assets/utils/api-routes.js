@@ -10,7 +10,7 @@ export const COMPARE_CLEAR = '/ajax/compare/clear'
 
 export const ADD_PROGRAM_QUESTION = '/ajax/program/question'
 
-export const CHAT_START = '/chat/start'
+export const CHAT_START = '/ajax/message/start'
 export const GET_NEW_MESSAGES_COUNT = '/ajax/message/new'
 
 export const ADD_ARTICLE_COMMENT = '/ajax/blog/comment'

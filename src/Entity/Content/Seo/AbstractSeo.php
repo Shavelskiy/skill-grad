@@ -42,7 +42,7 @@ abstract class AbstractSeo
 
     public function getMetaTitle(): string
     {
-        return $this->metaTitle;
+        return $this->metaTitle ?? '';
     }
 
     public function setMetaTitle(string $metaTitle): self
@@ -53,7 +53,7 @@ abstract class AbstractSeo
 
     public function getMetaKeywords(): string
     {
-        return $this->metaKeywords;
+        return $this->metaKeywords ?? '';
     }
 
     public function setMetaKeywords(string $metaKeywords): self
@@ -64,7 +64,7 @@ abstract class AbstractSeo
 
     public function getMetaDescription(): string
     {
-        return $this->metaDescription;
+        return $this->metaDescription ?? '';
     }
 
     public function setMetaDescription(string $metaDescription): self

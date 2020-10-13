@@ -247,7 +247,7 @@ class ProgramFormController extends AbstractController
             'categories' => $categories,
             'annotation' => $program->getAnnotation(),
             'detailText' => $program->getDetailText(),
-            'teachers' => $program->getTeachers()->map(fn(Teacher $teacher) => [
+            'teachers' => $program->getTeachers()->map(fn (Teacher $teacher) => [
                 'id' => $teacher->getId(),
                 'name' => $teacher->getName(),
                 'image' => $teacher->getPhoto() ? $teacher->getPhoto()->getPublicPath() : null,
@@ -270,7 +270,7 @@ class ProgramFormController extends AbstractController
                 'otherValue' => $program->getKnowledgeCheckOther(),
             ],
             'additional' => [
-                'values' => $program->getProgramAdditional()->map(fn(ProgramAdditional $programAdditional) => $programAdditional->getId())->toArray(),
+                'values' => $program->getProgramAdditional()->map(fn (ProgramAdditional $programAdditional) => $programAdditional->getId())->toArray(),
                 'otherValue' => $program->getOtherAdditional(),
             ],
             'advantages' => $program->getAdvantages(),
@@ -294,8 +294,8 @@ class ProgramFormController extends AbstractController
             ],
             'location' => $program->getLocation(),
             'include' => [
-                'values' => $program->getProgramIncludes()->map(fn(ProgramInclude $programInclude) => $programInclude->getId())->toArray(),
-                'otherValue' => $program->getOtherInclude()
+                'values' => $program->getProgramIncludes()->map(fn (ProgramInclude $programInclude) => $programInclude->getId())->toArray(),
+                'otherValue' => $program->getOtherInclude(),
             ],
             'price' => [
                 'legalEntity' => [
@@ -336,12 +336,12 @@ class ProgramFormController extends AbstractController
                 ],
                 'byRequest' => ($legalEntityPayment === null || $individualPayment === null) || ($legalEntityPayment->getTermOfPayment() === null && $individualPayment->getTermOfPayment() === null),
             ],
-            'gallery' => $program->getGallery()->map(fn(ProgramGallery $programGallery) => [
+            'gallery' => $program->getGallery()->map(fn (ProgramGallery $programGallery) => [
                 'id' => $programGallery->getId(),
                 'name' => $programGallery->getName(),
                 'image' => $programGallery->getImage() ? $programGallery->getImage()->getPublicPath() : null,
             ])->toArray(),
-            'locations' => $program->getLocations()->map(fn(Location $location) => $location->getId())->toArray(),
+            'locations' => $program->getLocations()->map(fn (Location $location) => $location->getId())->toArray(),
             'additionalInfo' => $program->getAdditionalInfo(),
         ];
 
@@ -553,7 +553,6 @@ class ProgramFormController extends AbstractController
             $program->setTrainingDateExtra(null);
             return;
         }
-
 
         $program->setTrainingDateExtra($data['extra']);
     }

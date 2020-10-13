@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cache;
+namespace App\Enum\Cache;
 
 final class Keys
 {

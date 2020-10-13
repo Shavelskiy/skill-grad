@@ -2,8 +2,8 @@
 
 namespace App\EventListener;
 
-use App\Cache\MemcachedClient;
-use App\Cache\Relations;
+use App\Enum\Cache\Relations;
+use App\Helpers\MemcachedClient;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use ErrorException;
 use Psr\Cache\InvalidArgumentException;

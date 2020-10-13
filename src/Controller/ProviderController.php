@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Controller\Traits\SeoTrait;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramGallery;
 use App\Entity\Provider;
+use App\Enum\PagesKeys;
 use App\Repository\CategoryRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use App\Service\SearchService;
@@ -16,9 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/provider")
  */
-class ProviderController extends BaseCatalogRepository
+class ProviderController extends BaseCatalogController
 {
     protected const PAGE_ITEM_COUNT = 10;
+
+    use SeoTrait;
 
     protected ProviderRepository $providerRepository;
     protected ProgramRepository $programRepository;
@@ -27,12 +32,15 @@ class ProviderController extends BaseCatalogRepository
         ProviderRepository $providerRepository,
         ProgramRepository $programRepository,
         CategoryRepository $categoryRepository,
+        DefaultSeoRepository $defaultSeoRepository,
         SearchService $searchService
     ) {
         $this->providerRepository = $providerRepository;
         $this->programRepository = $programRepository;
         $this->categoryRepository = $categoryRepository;
         $this->searchService = $searchService;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -54,12 +62,12 @@ class ProviderController extends BaseCatalogRepository
             }
         }
 
-        return $this->render('provider/index.html.twig', [
+        return $this->render('provider/index.html.twig', $this->applySeoToDefaultPage([
             'providers' => $providers,
             'page' => $page,
             'total_pages' => $searchResult['total_pages'],
             'favorite_provider_ids' => $favoriteProviderIds,
-        ]);
+        ], PagesKeys::PROVIDER_INDEX_PAGE_SLUG));
     }
 
     /**
@@ -80,10 +88,10 @@ class ProviderController extends BaseCatalogRepository
             }
         }
 
-        return $this->render('provider/view.html.twig', [
+        return $this->render('provider/view.html.twig', $this->applySeoToProvider([
             'programs' => $programs,
             'gallery' => $gallery,
             'provider' => $provider,
-        ]);
+        ], $provider));
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Controller\Traits\SeoTrait;
 use App\Dto\SearchQuery;
 use App\Entity\Program\Program;
+use App\Enum\PagesKeys;
 use App\Repository\CategoryRepository;
+use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProgramReviewsRepository;
 use App\Service\SearchService;
@@ -15,10 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProgramController extends BaseCatalogRepository
+class ProgramController extends BaseCatalogController
 {
     protected const PAGE_ITEM_COUNT = 15;
     protected const PAGE_REVIEWS_COUNT = 5;
+
+    use SeoTrait;
 
     protected ProgramRepository $programRepository;
     protected ProgramReviewsRepository $programReviewsRepository;
@@ -27,12 +32,15 @@ class ProgramController extends BaseCatalogRepository
         SearchService $searchService,
         ProgramRepository $programRepository,
         ProgramReviewsRepository $programReviewsRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        DefaultSeoRepository $defaultSeoRepository
     ) {
         $this->searchService = $searchService;
         $this->programRepository = $programRepository;
         $this->programReviewsRepository = $programReviewsRepository;
         $this->categoryRepository = $categoryRepository;
+
+        $this->setDefaultSeoRepository($defaultSeoRepository);
     }
 
     /**
@@ -44,11 +52,11 @@ class ProgramController extends BaseCatalogRepository
 
         $searchResult = $this->getProgramSearchResult($request, $page);
 
-        return $this->render('program/index.html.twig', [
+        return $this->render('program/index.html.twig', $this->applySeoToDefaultPage([
             'programs' => $this->programRepository->findBy(['id' => $searchResult['ids']]),
             'page' => $page,
             'total_pages' => $searchResult['total_pages'],
-        ]);
+        ], PagesKeys::PROGRAM_INDEX_PAGE_SLUG));
     }
 
     /**
@@ -65,7 +73,7 @@ class ProgramController extends BaseCatalogRepository
 
         $searchResult = $this->programReviewsRepository->getPaginatorResult($query, $program);
 
-        return $this->render('program/view.html.twig', [
+        return $this->render('program/view.html.twig', $this->applySeoToProgram([
             'program' => $program,
             'is_favorite' => $this->getUser() && $this->getUser()->getFavoritePrograms()->contains($program),
             'reviews' => [
@@ -73,7 +81,7 @@ class ProgramController extends BaseCatalogRepository
                 'page' => $searchResult->getCurrentPage(),
                 'total_pages' => $searchResult->getTotalPageCount(),
             ],
-        ]);
+        ], $program));
     }
 
     /**
