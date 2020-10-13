@@ -49,5 +49,15 @@ RUN apt-get update \
              libfontconfig \
              wkhtmltopdf
 
+RUN apt-get update && apt-get -y install cron
+
+COPY docker/php/skill-grad-cron /etc/cron.d/skill-grad-cron
+RUN chmod 0644 /etc/cron.d/skill-grad-cron
+RUN crontab /etc/cron.d/skill-grad-cron
+
+COPY docker/php/entypoint.sh /scripts/entypoint.sh
+RUN chmod 755 /scripts/*.sh
+
 WORKDIR /application
-CMD ["php-fpm"]
+
+ENTRYPOINT ["/scripts/entypoint.sh"]
