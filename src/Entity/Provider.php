@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Content\Seo\ProviderSeo;
 use App\Entity\Service\ProviderService;
 use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -74,6 +75,11 @@ class Provider
      * @ORM\OneToMany(targetEntity="App\Entity\Service\ProviderService", mappedBy="provider")
      */
     protected Collection $services;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Content\Seo\ProviderSeo", mappedBy="provider")
+     */
+    protected ?ProviderSeo $seo;
 
     public function __construct()
     {
@@ -231,5 +237,16 @@ class Provider
     public function isProAccount(): bool
     {
         return $this->services->filter(fn (ProviderService $service) => $service->getType() === ProviderService::PRO_ACCOUNT && $service->isActive())->count() > 0;
+    }
+
+    public function getSeo(): ?ProviderSeo
+    {
+        return $this->seo ?? null;
+    }
+
+    public function setSeo(ProviderSeo $seo): self
+    {
+        $this->seo = $seo;
+        return $this;
     }
 }

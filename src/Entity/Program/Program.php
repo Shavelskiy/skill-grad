@@ -3,6 +3,7 @@
 namespace App\Entity\Program;
 
 use App\Entity\Category;
+use App\Entity\Content\Seo\ProgramSeo;
 use App\Entity\Provider;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
@@ -161,6 +162,11 @@ class Program
      * @ORM\Column(type="string", nullable=true)
      */
     protected string $otherAdditional;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Content\Seo\ProgramSeo", mappedBy="program")
+     */
+    protected ?ProgramSeo $seo;
 
     public function __construct()
     {
@@ -525,4 +531,14 @@ class Program
         return $this;
     }
 
+    public function getSeo(): ?ProgramSeo
+    {
+        return $this->seo ?? null;
+    }
+
+    public function setSeo(ProgramSeo $seo): self
+    {
+        $this->seo = $seo;
+        return $this;
+    }
 }

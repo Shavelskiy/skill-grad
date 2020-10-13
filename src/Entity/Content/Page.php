@@ -2,6 +2,7 @@
 
 namespace App\Entity\Content;
 
+use App\Entity\Content\Seo\PageSeo;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,6 +30,11 @@ class Page
      * @ORM\Column(type="text")
      */
     protected string $content;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Content\Seo\PageSeo", mappedBy="page")
+     */
+    protected ?PageSeo $seo;
 
     public function getTitle(): string
     {
@@ -63,5 +69,14 @@ class Page
         return $this;
     }
 
+    public function getSeo(): ?PageSeo
+    {
+        return $this->seo ?? null;
+    }
 
+    public function setSeo(PageSeo $seo): self
+    {
+        $this->seo = $seo;
+        return $this;
+    }
 }

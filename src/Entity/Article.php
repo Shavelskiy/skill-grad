@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Content\Seo\ArticleSeo;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -87,6 +88,11 @@ class Article
      * @ORM\OneToMany(targetEntity="App\Entity\ArticleComment", mappedBy="article")
      */
     protected Collection $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Content\Seo\ArticleSeo", mappedBy="article")
+     */
+    protected ?ArticleSeo $seo;
 
     public function __construct()
     {
@@ -250,5 +256,16 @@ class Article
     public function getRootComments(): Collection
     {
         return $this->getComments()->filter(fn (ArticleComment $comment) => $comment->getParentComment() === null);
+    }
+
+    public function getSeo(): ?ArticleSeo
+    {
+        return $this->seo ?? null;
+    }
+
+    public function setSeo(ArticleSeo $seo): self
+    {
+        $this->seo = $seo;
+        return $this;
     }
 }
