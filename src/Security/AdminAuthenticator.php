@@ -61,23 +61,16 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
         try {
             $user = $this->userRepository->findUserByEmail($credentials['email']);
 
-            if ($user === null || !$user->isActive()) {
+            if ($user === null || !$user->isActive() || !in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
                 return null;
             }
 
-//            if (in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
             return $user;
-//            }
-
-            throw new AccessDeniedException('');
         } catch (Exception $e) {
             return null;
         }
     }
 
-    /**
-     * @param mixed $credentials
-     */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);

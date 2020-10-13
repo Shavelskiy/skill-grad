@@ -57,11 +57,6 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         return $this->socialAuthService->getCredentials($request);
     }
 
-    /**
-     * @param mixed $credentials
-     *
-     * @return User|UserInterface|null
-     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
@@ -79,19 +74,11 @@ class SocServiceAuthenticator extends AbstractFormLoginAuthenticator
         return $user;
     }
 
-    /**
-     * @param mixed $credentials
-     */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         return true;
     }
 
-    /**
-     * @param string $providerKey
-     *
-     * @return RedirectResponse|Response|null
-     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         return new RedirectResponse($this->urlGenerator->generate('site.index'));
