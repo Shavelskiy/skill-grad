@@ -9,10 +9,6 @@ import {
   CATEGORY_INDEX,
   CATEGORY_VIEW,
   CATEGORY_UPDATE,
-  TAG_CREATE,
-  TAG_INDEX,
-  TAG_UPDATE,
-  TAG_VIEW,
   ARTICLE_INDEX,
   ARTICLE_CREATE,
   ARTICLE_VIEW,
@@ -40,6 +36,8 @@ import {
   PROGRAM_LEVEL_UPDATE,
   PROGRAM_LEVEL_CREATE,
   FEEDBACK_INDEX, FEEDBACK_VIEW,
+  PRICES_INDEX,
+  PRICES_UPDATE,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -56,10 +54,6 @@ import ProviderIndex from './provider'
 import ProviderCreate from './provider/create'
 import ProviderView from './provider/view'
 import ProviderUpdate from './provider/update'
-import TagsIndex from '../pages/tags'
-import TagView from '../pages/tags/view'
-import TagCreate from '../pages/tags/create'
-import TagUpdate from './tags/update'
 import ArticleIndex from './articles'
 import ArticleCreate from './articles/create'
 import ArticleView from './articles/view'
@@ -80,7 +74,8 @@ import ProgramLevelCreate from './program-level/create'
 import ProgramLevelUpdate from './program-level/update'
 import FeedbackIndex from './feedback'
 import FeedbackView from './feedback/view'
-
+import PriceIndex from './price'
+import PriceUpdate from './price/update'
 
 const PageSwitcher = ({active}) => {
   return (
@@ -115,11 +110,6 @@ const PageSwitcher = ({active}) => {
           <Route exact name="provider.view" path={PROVIDER_VIEW} component={ProviderView}/>
           <Route exact name="provider.update" path={PROVIDER_UPDATE} component={ProviderUpdate}/>
 
-          <Route exact name="tag.index" path={TAG_INDEX} component={TagsIndex}/>
-          <Route exact name="tag.create" path={TAG_CREATE} component={TagCreate}/>
-          <Route exact name="tag.view" path={TAG_VIEW} component={TagView}/>
-          <Route exact name="tag.update" path={TAG_UPDATE} component={TagUpdate}/>
-
           <Route exact name="article.index" path={ARTICLE_INDEX} component={ArticleIndex}/>
           <Route exact name="article.create" path={ARTICLE_CREATE} component={ArticleCreate}/>
           <Route exact name="article.view" path={ARTICLE_VIEW} component={ArticleView}/>
@@ -135,6 +125,8 @@ const PageSwitcher = ({active}) => {
           <Route exact name="feedback.index" path={FEEDBACK_INDEX} component={FeedbackIndex}/>
           <Route exact name="feedback.view" path={FEEDBACK_VIEW} component={FeedbackView}/>
 
+          <Route exact name="price.index" path={PRICES_INDEX} component={PriceIndex}/>
+          <Route exact name="price.update" path={PRICES_UPDATE} component={PriceUpdate}/>
 
           <Route exact name="index" path={INDEX} component={IndexPage}/>
           <Route path="/" component={NotFoundPage}/>

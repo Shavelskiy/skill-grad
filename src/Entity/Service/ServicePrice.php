@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ServicePrice
 {
+    public const TRANSLATE_DOMAIN = 'price-service';
+
     public const PROGRAM_HIGHLIGHT = 'highlight';
     public const PROGRAM_RAISE = 'raise';
     public const PROGRAM_HIGHLIGHT_RISE = 'highlight_raise';

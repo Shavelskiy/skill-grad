@@ -1,7 +1,6 @@
 import {
   CATEGORY_INDEX,
   LOCATION_INDEX,
-  TAG_INDEX,
   ARTICLE_INDEX,
   USER_INDEX,
   PROGRAM_FORMAT_INDEX,
@@ -9,7 +8,8 @@ import {
   PROGRAM_INCLUDE_INDEX,
   PROGRAM_ADDITIONAL_INDEX,
   PROGRAM_LEVEL_INDEX,
-  FEEDBACK_INDEX
+  FEEDBACK_INDEX,
+  PRICES_INDEX,
 } from '../../utils/routes'
 
 export const menuItems = [
@@ -57,14 +57,6 @@ export const menuItems = [
         title: 'Статьи',
         link: ARTICLE_INDEX,
       },
-      {
-        title: 'Теги',
-        link: TAG_INDEX,
-      },
-      {
-        title: 'Рубрики',
-        link: '/rubric',
-      },
     ],
   },
   {
@@ -96,5 +88,15 @@ export const menuItems = [
         link: FEEDBACK_INDEX,
       },
     ],
-  }
+  },
+  {
+    title: 'Платные услуги',
+    icon: 'fa fa-ruble-sign',
+    items: [
+      {
+        title: 'Цены на платные услуги',
+        link: PRICES_INDEX,
+      },
+    ],
+  },
 ]

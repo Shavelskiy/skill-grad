@@ -1,5 +1,4 @@
 import React from 'react'
-import { TAG_CREATE } from '../../utils/routes'
 
 import { FETCH_USERS_URL } from '../../utils/api/endpoints'
 
@@ -16,7 +15,6 @@ const UsersIndex = () => {
       actions={actions}
       fetchUrl={FETCH_USERS_URL}
       canCreate={true}
-      createLink={TAG_CREATE}
     />
   )
 }

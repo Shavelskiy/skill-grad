@@ -27,11 +27,6 @@ export const PROVIDER_VIEW = '/provider/:id'
 export const PROVIDER_CREATE = '/provider/create'
 export const PROVIDER_UPDATE = '/provider/update/:id'
 
-export const TAG_INDEX = '/tag'
-export const TAG_CREATE = '/tag/create'
-export const TAG_VIEW = '/tag/:id'
-export const TAG_UPDATE = '/tag/update/:id'
-
 export const ARTICLE_INDEX = '/article'
 export const ARTICLE_CREATE = '/article/create'
 export const ARTICLE_VIEW = '/article/:id'
@@ -46,3 +41,6 @@ export const LOCATION_UPDATE = '/location/update/:id'
 
 export const FEEDBACK_INDEX = '/feedback'
 export const FEEDBACK_VIEW = '/feedback/:id'
+
+export const PRICES_INDEX = '/prices'
+export const PRICES_UPDATE = '/prices/:id'

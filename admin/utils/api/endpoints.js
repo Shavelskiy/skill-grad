@@ -45,9 +45,6 @@ export const CREATE_ARTICLE_URL = '/api/admin/article'
 export const UPDATE_ARTICLE_URL = '/api/admin/article'
 export const DELETE_ARTICLE_URL = '/api/admin/article'
 
-export const FETCH_TAGS_URL = '/api/admin/tag'
-export const FETCH_TAG_URL = '/api/admin/tag/:id'
-
 export const FETCH_USERS_URL = '/api/admin/user'
 
 export const FETCH_LOCATIONS_URL = '/api/admin/location'
@@ -60,3 +57,7 @@ export const FETCH_ALL_LOCATIONS = '/api/admin/location/all'
 export const FETCH_FEEDBACK_LIST_URL = '/api/admin/feedback'
 export const FETCH_FEEDBACK_ITEM_URL = '/api/admin/feedback/:id'
 export const DELETE_FEEDBACK_ITEM_URL = '/api/admin/feedback'
+
+export const FETCH_PRICES_URL = '/api/admin/price'
+export const FETCH_PRICE_URL = '/api/admin/price/:id'
+export const UPDATE_PRICE_URL = '/api/admin/price'

@@ -55,13 +55,11 @@ class LocationController extends AbstractController
             $items[] = $this->prepareItem($item);
         }
 
-        $data = [
+        return new JsonResponse([
             'total_pages' => $paginator->getTotalPageCount(),
             'current_page' => $paginator->getCurrentPage(),
             'items' => $items,
-        ];
-
-        return new JsonResponse($data);
+        ]);
     }
 
     protected function prepareItem(Location $location): array
