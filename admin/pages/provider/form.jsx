@@ -5,7 +5,7 @@ import { hideLoader, showLoader } from '../../redux/actions'
 import axios from 'axios'
 import { FETCH_ALL_CATEGORIES, FETCH_ALL_LOCATIONS } from '../../utils/api/endpoints'
 
-import { SaveButton, TextInput, TextAreaInput, ImageInput } from '../../components/ui/inputs'
+import { SaveButton, TextInput, TextAreaInput, ImageInput, SelectInput } from '../../components/ui/inputs'
 import MultipleSelect from '../../components/ui/multiple-select'
 
 
@@ -34,15 +34,6 @@ const ProviderForm = ({item, setItem, uploadImage, setUploadImage, disable, save
         dispatch(hideLoader())
       })
   }, [])
-
-  const getMainCategories = () => {
-    return categories.filter(item => item.is_parent).map(item => {
-      return {
-        value: item.id,
-        title: item.name,
-      }
-    })
-  }
 
   const getCategories = () => {
     return categories.filter(item => !item.is_parent).map(item => {
@@ -76,14 +67,6 @@ const ProviderForm = ({item, setItem, uploadImage, setUploadImage, disable, save
       />
 
       <MultipleSelect
-        options={getMainCategories()}
-        values={item.mainCategories}
-        setValue={(mainCategories) => setItem({...item, mainCategories: mainCategories})}
-        high={false}
-        label="Основные категории"
-      />
-
-      <MultipleSelect
         options={getCategories()}
         values={item.categories}
         setValue={(categories) => setItem({...item, categories: categories})}
@@ -91,12 +74,11 @@ const ProviderForm = ({item, setItem, uploadImage, setUploadImage, disable, save
         label="Подкатегории"
       />
 
-      <MultipleSelect
+      <SelectInput
         options={locations}
-        values={item.locations}
-        setValue={(locations) => setItem({...item, locations: locations})}
-        high={false}
-        label="Метоположения"
+        value={item.location}
+        setValue={(location) => setItem({...item, location: location})}
+        label="Метоположение"
       />
 
       <SaveButton handler={save} disable={disable}/>

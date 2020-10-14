@@ -64,7 +64,7 @@ class ProgramLevelController extends AbstractController
     }
 
     /**
-     * @Route("/{programLevel}", name="admin.program-level.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{programLevel}", name="admin.program-level.view", methods={"GET"}, requirements={"programLevel"="[0-9]+"})
      */
     public function view(ProgramLevel $programLevel): Response
     {

@@ -65,7 +65,7 @@ class ProgramFormatController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.program-format.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{programFormat}", name="admin.program-format.view", methods={"GET"}, requirements={"programFormat"="[0-9]+"})
      */
     public function view(ProgramFormat $programFormat): Response
     {

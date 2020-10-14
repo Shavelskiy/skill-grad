@@ -19,9 +19,8 @@ const ProviderView = ({match}) => {
     id: match.params.id,
     name: '',
     description: '',
-    mainCategories: [],
     categories: [],
-    locations: [],
+    location: null,
     organizationName: '',
     legalAddress: '',
     mailingAddress: '',
@@ -54,9 +53,8 @@ const ProviderView = ({match}) => {
       name: data.name,
       description: data.description,
       image: data.image,
-      mainCategories: data.mainCategories,
       categories: data.categories,
-      locations: data.locations,
+      location: data.location,
       organizationName: data.organizationName,
       legalAddress: data.legalAddress,
       mailingAddress: data.mailingAddress,
@@ -102,27 +100,6 @@ const ProviderView = ({match}) => {
           </tr>
           </tbody>
         </table>
-        <h5>Основные категории</h5>
-        <table>
-          <thead>
-          <tr>
-            <td>ID</td>
-            <td>Название</td>
-            <td>Тип</td>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            item.mainCategories.map((item, key) => (
-              <tr key={key}>
-                <td>{item.id}</td>
-                <td><Link to={CATEGORY_VIEW.replace(':id', item.id)}>{item.name}</Link></td>
-                <td>{item.sort}</td>
-              </tr>
-            ))
-          }
-          </tbody>
-        </table>
         <h5>Категории</h5>
         <table>
           <thead>
@@ -144,7 +121,7 @@ const ProviderView = ({match}) => {
           }
           </tbody>
         </table>
-        <h5>Местоположения</h5>
+        <h5>Местоположение</h5>
         <table>
           <thead>
           <tr>
@@ -154,12 +131,11 @@ const ProviderView = ({match}) => {
           </thead>
           <tbody>
           {
-            item.locations.map((item, key) => (
+            item.location !== null ?
               <tr key={key}>
-                <td>{item.id}</td>
-                <td><Link to={LOCATION_VIEW.replace(':id', item.id)}>{item.title}</Link></td>
-              </tr>
-            ))
+                <td>{item.location.id}</td>
+                <td><Link to={LOCATION_VIEW.replace(':id', item.location.id)}>{item.location.title}</Link></td>
+              </tr> : <></>
           }
           </tbody>
         </table>

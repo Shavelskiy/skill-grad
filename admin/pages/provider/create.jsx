@@ -19,9 +19,8 @@ const ProviderCreate = () => {
   const [item, setItem] = useState({
     name: '',
     description: '',
-    mainCategories: [],
     categories: [],
-    locations: [],
+    location: null,
     organizationName: '',
     legalAddress: '',
     mailingAddress: '',

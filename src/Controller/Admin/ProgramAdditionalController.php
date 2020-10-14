@@ -67,7 +67,7 @@ class ProgramAdditionalController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.program-additional.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{programAdditional}", name="admin.program-additional.view", methods={"GET"}, requirements={"programAdditional"="[0-9]+"})
      */
     public function view(ProgramAdditional $programAdditional): Response
     {

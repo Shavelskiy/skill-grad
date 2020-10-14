@@ -10,13 +10,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -78,34 +76,13 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.article.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{article}", name="admin.article.view", methods={"GET"}, requirements={"article"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(Article $article): Response
     {
-        try {
-            if ($id < 1) {
-                throw new RuntimeException('');
-            }
-
-            $article = $this->articleRepository->find($id);
-
-            if ($article === null) {
-                throw new RuntimeException('');
-            }
-
-            return new JsonResponse([
-                'id' => $article->getId(),
-                'name' => $article->getName(),
-                'sort' => $article->getSort(),
-                'active' => $article->isActive(),
-                'image' => ($article->getImage() !== null) ? $article->getImage()->getPublicPath() : null,
-                'detail_text' => $article->getDetailText(),
-                'showOnMain' => $article->isShowOnMain(),
-                'created_at' => $article->getCreatedAt()->format('d.m.Y'),
-            ]);
-        } catch (Exception $e) {
-            throw new NotFoundHttpException('');
-        }
+        return new JsonResponse(
+            $this->prepareItem($article)
+        );
     }
 
     /**

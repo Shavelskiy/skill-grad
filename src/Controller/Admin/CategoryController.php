@@ -69,7 +69,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{category}", name="admin.category.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{category}", name="admin.category.view", methods={"GET"}, requirements={"category"="[0-9]+"})
      */
     public function view(Category $category): Response
     {

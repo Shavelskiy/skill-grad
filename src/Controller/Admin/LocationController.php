@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,21 +78,11 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.location.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{location}", name="admin.location.view", methods={"GET"}, requirements={"location"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(Location $location): Response
     {
         try {
-            if ($id < 1) {
-                throw new RuntimeException('');
-            }
-
-            $location = $this->locationRepository->find($id);
-
-            if ($location === null) {
-                throw new RuntimeException('');
-            }
-
             $parentLocations = [];
             $parentLocation = (clone $location)->getParentLocation();
 

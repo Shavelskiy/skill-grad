@@ -20,9 +20,8 @@ const ProviderUpdate = ({match}) => {
     id: match.params.id,
     name: '',
     description: '',
-    mainCategories: [],
     categories: [],
-    locations: [],
+    location: null,
     organizationName: '',
     legalAddress: '',
     mailingAddress: '',
@@ -55,19 +54,9 @@ const ProviderUpdate = ({match}) => {
   }, [item])
 
   const setItemFromResponse = (data) => {
-    let mainCategories = []
-    data.mainCategories.forEach(item => {
-      mainCategories.push(item.id)
-    })
-
     let categories = []
     data.categories.forEach(item => {
       categories.push(item.id)
-    })
-
-    let locations = []
-    data.locations.forEach(item => {
-      locations.push(item.id)
     })
 
     setItem({
@@ -75,9 +64,8 @@ const ProviderUpdate = ({match}) => {
       name: data.name,
       description: data.description,
       image: data.image,
-      mainCategories: mainCategories,
       categories: categories,
-      locations: locations,
+      location: data.location,
       organizationName: data.organizationName,
       legalAddress: data.legalAddress,
       mailingAddress: data.mailingAddress,

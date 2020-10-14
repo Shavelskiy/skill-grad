@@ -68,7 +68,7 @@ class FeedbackController extends AbstractController
     }
 
     /**
-     * @Route("/{feedback}", name="admin.feedback.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{feedback}", name="admin.feedback.view", methods={"GET"}, requirements={"feedback"="[0-9]+"})
      */
     public function view(Feedback $feedback): Response
     {

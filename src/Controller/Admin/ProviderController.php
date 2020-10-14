@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use App\Entity\Location;
 use App\Entity\Provider;
 use App\Entity\ProviderRequisites;
 use App\Helpers\SearchHelper;
@@ -11,7 +10,6 @@ use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
 use App\Repository\ProviderRepository;
 use App\Repository\ProviderRequisitesRepository;
-use App\Service\LocationService;
 use App\Service\UploadServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -35,7 +33,6 @@ class ProviderController extends AbstractController
     protected ProviderRequisitesRepository $providerRequisitesRepository;
     protected LocationRepository $locationRepository;
     protected UploadServiceInterface $uploadService;
-    protected LocationService $locationService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -43,8 +40,7 @@ class ProviderController extends AbstractController
         ProviderRepository $providerRepository,
         ProviderRequisitesRepository $providerRequisitesRepository,
         LocationRepository $locationRepository,
-        UploadServiceInterface $uploadService,
-        LocationService $locationService
+        UploadServiceInterface $uploadService
     ) {
         $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
@@ -52,7 +48,6 @@ class ProviderController extends AbstractController
         $this->providerRequisitesRepository = $providerRequisitesRepository;
         $this->locationRepository = $locationRepository;
         $this->uploadService = $uploadService;
-        $this->locationService = $locationService;
     }
 
     /**
@@ -89,7 +84,7 @@ class ProviderController extends AbstractController
     }
 
     /**
-     * @Route("/{provider}", name="admin.provider.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{provider}", name="admin.provider.view", methods={"GET"}, requirements={"provider"="[0-9]+"})
      */
     public function view(Provider $provider): Response
     {
@@ -105,39 +100,28 @@ class ProviderController extends AbstractController
                 ];
             }
 
-            $locations = [];
-
-            /** @var Location $location */
-            foreach ($provider->getLocations() as $location) {
-                $locations[] = [
-                    'id' => $location->getId(),
-                    'title' => $this->locationService->getLocationPath($location),
-                    'sort' => $location->getSort(),
-                ];
-            }
-
             $data = [
                 'id' => $provider->getId(),
                 'name' => $provider->getName(),
                 'description' => $provider->getDescription(),
                 'image' => $provider->getImage() ? $provider->getImage()->getPublicPath() : null,
                 'categories' => $categories,
-                'locations' => $locations,
+                'location' => $provider->getLocation() ? $provider->getLocation()->getId() : null,
             ];
 
             if ($providerRequisites = $this->providerRequisitesRepository->findProviderRequisitesByProvider($provider)) {
                 $data = array_merge($data, [
-                    'organizationName' => $providerRequisites->getOrganizationName(),
-                    'legalAddress' => $providerRequisites->getLegalAddress(),
-                    'mailingAddress' => $providerRequisites->getMailingAddress(),
-                    'ITN' => $providerRequisites->getITN(),
-                    'IEC' => $providerRequisites->getIEC(),
-                    'PSRN' => $providerRequisites->getPSRN(),
-                    'OKPO' => $providerRequisites->getOKPO(),
-                    'checkingAccount' => $providerRequisites->getCheckingAccount(),
-                    'correspondentAccount' => $providerRequisites->getCorrespondentAccount(),
-                    'BIC' => $providerRequisites->getBIC(),
-                    'bank' => $providerRequisites->getBank(),
+                    'organizationName' => $providerRequisites->getOrganizationName() ?: '',
+                    'legalAddress' => $providerRequisites->getLegalAddress() ?: '',
+                    'mailingAddress' => $providerRequisites->getMailingAddress() ?: '',
+                    'ITN' => $providerRequisites->getITN() ?: '',
+                    'IEC' => $providerRequisites->getIEC() ?: '',
+                    'PSRN' => $providerRequisites->getPSRN() ?: '',
+                    'OKPO' => $providerRequisites->getOKPO() ?: '',
+                    'checkingAccount' => $providerRequisites->getCheckingAccount() ?: '',
+                    'correspondentAccount' => $providerRequisites->getCorrespondentAccount() ?: '',
+                    'BIC' => $providerRequisites->getBIC() ?: '',
+                    'bank' => $providerRequisites->getBank() ?: '',
                 ]);
             }
 
@@ -236,7 +220,7 @@ class ProviderController extends AbstractController
             ->setName($request->get('name'))
             ->setDescription($request->get('description'))
             ->setCategories($this->categoryRepository->findBy(['id' => $request->get('categories')]))
-            ->setLocations($this->locationRepository->findBy(['id' => $request->get('locations')]));
+            ->setLocation($this->locationRepository->findOneBy(['id' => $request->get('location')]));
     }
 
     protected function setProviderRequisitesFieldsFromRequest(ProviderRequisites $providerRequisites, Request $request): void

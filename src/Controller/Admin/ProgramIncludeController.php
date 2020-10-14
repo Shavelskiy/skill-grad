@@ -65,7 +65,7 @@ class ProgramIncludeController extends AbstractController
     }
 
     /**
-     * @Route("/{programInclude}", name="admin.program-include.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{programInclude}", name="admin.program-include.view", methods={"GET"}, requirements={"programInclude"="[0-9]+"})
      */
     public function view(ProgramInclude $programInclude): Response
     {
