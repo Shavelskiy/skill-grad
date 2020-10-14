@@ -42,7 +42,7 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route("/", name="admin.location.index", methods={"GET"})
+     * @Route("", name="admin.location.index", methods={"GET"})
      *
      * @throws NoResultException
      * @throws NonUniqueResultException

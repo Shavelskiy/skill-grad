@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InfoController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="admin.info")
+     * @Route("", methods={"GET"}, name="admin.info")
      */
     public function start(): Response
     {

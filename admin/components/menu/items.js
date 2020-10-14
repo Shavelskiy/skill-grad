@@ -10,6 +10,8 @@ import {
   PROGRAM_LEVEL_INDEX,
   FEEDBACK_INDEX,
   PRICES_INDEX,
+  FAQ_INDEX,
+  PAGE_INDEX,
 } from '../../utils/routes'
 
 export const menuItems = [
@@ -96,6 +98,20 @@ export const menuItems = [
       {
         title: 'Цены на платные услуги',
         link: PRICES_INDEX,
+      },
+    ],
+  },
+  {
+    title: 'Контент',
+    icon: 'fa fa-sticky-note',
+    items: [
+      {
+        title: 'FAQ',
+        link: FAQ_INDEX,
+      },
+      {
+        title: 'Отдельные страницы',
+        link: PAGE_INDEX,
       },
     ],
   },

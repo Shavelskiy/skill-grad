@@ -44,3 +44,13 @@ export const FEEDBACK_VIEW = '/feedback/:id'
 
 export const PRICES_INDEX = '/prices'
 export const PRICES_UPDATE = '/prices/:id'
+
+export const FAQ_INDEX = '/faq'
+export const FAQ_VIEW = '/faq/:id'
+export const FAQ_CREATE = '/faq/create'
+export const FAQ_UPDATE = '/faq/create/:id'
+
+export const PAGE_INDEX = '/page'
+export const PAGE_VIEW = '/page/:id'
+export const PAGE_CREATE = '/page/create'
+export const PAGE_UPDATE = '/page/update/:id'

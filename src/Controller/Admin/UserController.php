@@ -32,7 +32,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/", name="admin.user.index", methods={"GET"})
+     * @Route("", name="admin.user.index", methods={"GET"})
      *
      * @throws NoResultException
      * @throws NonUniqueResultException

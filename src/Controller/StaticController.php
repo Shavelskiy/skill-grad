@@ -9,7 +9,7 @@ use App\Enum\PagesKeys;
 use App\Helpers\CompareHelper;
 use App\Repository\ArticleRepository;
 use App\Repository\Content\Seo\DefaultSeoRepository;
-use App\Repository\FaqRepository;
+use App\Repository\Content\FaqRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\ProviderRepository;
 use Doctrine\ORM\NonUniqueResultException;

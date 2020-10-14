@@ -107,6 +107,7 @@ class ProviderController extends AbstractController
                 'image' => $provider->getImage() ? $provider->getImage()->getPublicPath() : null,
                 'categories' => $categories,
                 'location' => $provider->getLocation() ? $provider->getLocation()->getId() : null,
+                'balance' => $provider->getBalance(),
             ];
 
             if ($providerRequisites = $this->providerRequisitesRepository->findProviderRequisitesByProvider($provider)) {
@@ -219,6 +220,7 @@ class ProviderController extends AbstractController
         $provider
             ->setName($request->get('name'))
             ->setDescription($request->get('description'))
+            ->setBalance($request->get('balance'))
             ->setCategories($this->categoryRepository->findBy(['id' => $request->get('categories')]))
             ->setLocation($this->locationRepository->findOneBy(['id' => $request->get('location')]));
     }

@@ -38,6 +38,14 @@ import {
   FEEDBACK_INDEX, FEEDBACK_VIEW,
   PRICES_INDEX,
   PRICES_UPDATE,
+  FAQ_INDEX,
+  FAQ_CREATE,
+  FAQ_VIEW,
+  FAQ_UPDATE,
+  PAGE_INDEX,
+  PAGE_CREATE,
+  PAGE_VIEW,
+  PAGE_UPDATE,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -76,6 +84,15 @@ import FeedbackIndex from './feedback'
 import FeedbackView from './feedback/view'
 import PriceIndex from './price'
 import PriceUpdate from './price/update'
+import FaqIndex from './faq'
+import FaqCreate from './faq/create'
+import FaqView from './faq/view'
+import FaqUpdate from './faq/update'
+import PageIndex from './page'
+import PageCreate from './page/create'
+import PageView from './page/view'
+import PageUpdate from './page/update'
+
 
 const PageSwitcher = ({active}) => {
   return (
@@ -127,6 +144,16 @@ const PageSwitcher = ({active}) => {
 
           <Route exact name="price.index" path={PRICES_INDEX} component={PriceIndex}/>
           <Route exact name="price.update" path={PRICES_UPDATE} component={PriceUpdate}/>
+
+          <Route exact name="faq.index" path={FAQ_INDEX} component={FaqIndex}/>
+          <Route exact name="faq.create" path={FAQ_CREATE} component={FaqCreate}/>
+          <Route exact name="faq.view" path={FAQ_VIEW} component={FaqView}/>
+          <Route exact name="faq.update" path={FAQ_UPDATE} component={FaqUpdate}/>
+
+          <Route exact name="page.index" path={PAGE_INDEX} component={PageIndex}/>
+          <Route exact name="page.create" path={PAGE_CREATE} component={PageCreate}/>
+          <Route exact name="page.view" path={PAGE_VIEW} component={PageView}/>
+          <Route exact name="page.update" path={PAGE_UPDATE} component={PageUpdate}/>
 
           <Route exact name="index" path={INDEX} component={IndexPage}/>
           <Route path="/" component={NotFoundPage}/>

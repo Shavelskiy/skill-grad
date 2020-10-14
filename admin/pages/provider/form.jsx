@@ -5,7 +5,7 @@ import { hideLoader, showLoader } from '../../redux/actions'
 import axios from 'axios'
 import { FETCH_ALL_CATEGORIES, FETCH_ALL_LOCATIONS } from '../../utils/api/endpoints'
 
-import { SaveButton, TextInput, TextAreaInput, ImageInput, SelectInput } from '../../components/ui/inputs'
+import { SaveButton, TextInput, TextAreaInput, ImageInput, SelectInput, NumberInput } from '../../components/ui/inputs'
 import MultipleSelect from '../../components/ui/multiple-select'
 
 
@@ -64,6 +64,12 @@ const ProviderForm = ({item, setItem, uploadImage, setUploadImage, disable, save
         imageSrc={item.image}
         deleteImageSrc={() => setItem({...item, image: null})}
         setUploadImage={setUploadImage}
+      />
+
+      <NumberInput
+        label={'Баланс'}
+        value={item.balance}
+        setValue={(balance) => setItem({...item, balance: balance})}
       />
 
       <MultipleSelect

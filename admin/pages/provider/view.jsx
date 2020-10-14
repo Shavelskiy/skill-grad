@@ -24,6 +24,7 @@ const ProviderView = ({match}) => {
     organizationName: '',
     legalAddress: '',
     mailingAddress: '',
+    balance: 0.0,
     ITN: '',
     IEC: '',
     PSRN: '',
@@ -58,6 +59,7 @@ const ProviderView = ({match}) => {
       organizationName: data.organizationName,
       legalAddress: data.legalAddress,
       mailingAddress: data.mailingAddress,
+      balance: data.balance,
       ITN: data.ITN,
       IEC: data.IEC,
       PSRN: data.PSRN,
@@ -97,6 +99,10 @@ const ProviderView = ({match}) => {
           <tr>
             <td>Изображение</td>
             <td><img src={item.image}/></td>
+          </tr>
+          <tr>
+            <td>Баланс</td>
+            <td>{item.balance}</td>
           </tr>
           </tbody>
         </table>
