@@ -6,10 +6,10 @@ use App\Entity\Category;
 use App\Helpers\SearchHelper;
 use App\Repository\CategoryRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +22,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected CategoryRepository $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        CategoryRepository $categoryRepository
+    ) {
+        $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -46,13 +50,11 @@ class CategoryController extends AbstractController
             $items[] = $this->prepareItem($item);
         }
 
-        $data = [
+        return new JsonResponse([
             'total_pages' => $paginator->getTotalPageCount(),
             'current_page' => $paginator->getCurrentPage(),
             'items' => $items,
-        ];
-
-        return new JsonResponse($data);
+        ]);
     }
 
     protected function prepareItem(Category $item): array
@@ -67,27 +69,17 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.category.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{category}", name="admin.category.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(Category $category): Response
     {
         try {
-            if ($id < 1) {
-                throw new RuntimeException('');
-            }
-
-            $category = $this->categoryRepository->find($id);
-
-            if ($category === null) {
-                throw new RuntimeException('');
-            }
-
             return new JsonResponse([
                 'id' => $category->getId(),
                 'name' => $category->getName(),
                 'slug' => $category->getSlug(),
                 'sort' => $category->getSort(),
-                'parent_category' => $this->prepareParentCateroy($category),
+                'parent_category' => $this->prepareParentCategory($category),
                 'child_categories' => $this->prepareChildCategories($category),
             ]);
         } catch (Exception $e) {
@@ -95,7 +87,7 @@ class CategoryController extends AbstractController
         }
     }
 
-    protected function prepareParentCateroy(Category $category): ?array
+    protected function prepareParentCategory(Category $category): ?array
     {
         if (($parentCategory = $category->getParentCategory()) === null) {
             return null;
@@ -147,10 +139,10 @@ class CategoryController extends AbstractController
             $category->setParentCategory($parentCategory);
         }
 
-        $this->getDoctrine()->getManager()->persist($category);
+        $this->entityManager->persist($category);
 
         try {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
         } catch (UniqueConstraintViolationException $e) {
             return new JsonResponse(['message' => 'Элемент с таким slug уже существует'], 400);
         }
@@ -174,8 +166,8 @@ class CategoryController extends AbstractController
             ->setSlug($request->get('slug'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($category);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -191,8 +183,8 @@ class CategoryController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($category);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($category);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

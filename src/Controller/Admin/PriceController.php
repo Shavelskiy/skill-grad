@@ -86,5 +86,4 @@ class PriceController extends AbstractController
 
         return new JsonResponse();
     }
-
 }

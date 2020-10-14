@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Program\ProgramLevel;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramLevelRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProgramLevelController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected ProgramLevelRepository $programLevelRepository;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         ProgramLevelRepository $programLevelRepository
     ) {
+        $this->entityManager = $entityManager;
         $this->programLevelRepository = $programLevelRepository;
     }
 
@@ -44,13 +47,11 @@ class ProgramLevelController extends AbstractController
             $items[] = $this->prepareItem($item);
         }
 
-        $data = [
+        return new JsonResponse([
             'total_pages' => $paginator->getTotalPageCount(),
             'current_page' => $paginator->getCurrentPage(),
             'items' => $items,
-        ];
-
-        return new JsonResponse($data);
+        ]);
     }
 
     protected function prepareItem(ProgramLevel $item): array
@@ -63,28 +64,13 @@ class ProgramLevelController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.program-level.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param Request $request
+     * @Route("/{programLevel}", name="admin.program-level.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(ProgramLevel $programLevel): Response
     {
-        if ($id < 1) {
-            throw new RuntimeException('');
-        }
-
-        /** @var ProgramLevel $programLevel */
-        $programLevel = $this->programLevelRepository->find($id);
-
-        if ($programLevel === null) {
-            throw new RuntimeException('');
-        }
-
-        return new JsonResponse([
-            'id' => $programLevel->getId(),
-            'name' => $programLevel->getTitle(),
-            'sort' => $programLevel->getSort(),
-        ]);
+        return new JsonResponse(
+            $this->prepareItem($programLevel)
+        );
     }
 
     /**
@@ -96,8 +82,8 @@ class ProgramLevelController extends AbstractController
             ->setTitle($request->get('name'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programLevel);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programLevel);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -118,8 +104,8 @@ class ProgramLevelController extends AbstractController
             ->setTitle($request->get('name'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programLevel);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programLevel);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -136,8 +122,8 @@ class ProgramLevelController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($programLevel);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($programLevel);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

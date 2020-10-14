@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Program\ProgramInclude;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramIncludeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProgramIncludeController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected ProgramIncludeRepository $programIncludeRepository;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         ProgramIncludeRepository $programIncludeRepository
     ) {
+        $this->entityManager = $entityManager;
         $this->programIncludeRepository = $programIncludeRepository;
     }
 
@@ -44,13 +47,11 @@ class ProgramIncludeController extends AbstractController
             $items[] = $this->prepareItem($item);
         }
 
-        $data = [
+        return new JsonResponse([
             'total_pages' => $paginator->getTotalPageCount(),
             'current_page' => $paginator->getCurrentPage(),
             'items' => $items,
-        ];
-
-        return new JsonResponse($data);
+        ]);
     }
 
     protected function prepareItem(ProgramInclude $item): array
@@ -64,29 +65,13 @@ class ProgramIncludeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.program-include.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param Request $request
+     * @Route("/{programInclude}", name="admin.program-include.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(ProgramInclude $programInclude): Response
     {
-        if ($id < 1) {
-            throw new RuntimeException('');
-        }
-
-        /** @var ProgramInclude $programInclude */
-        $programInclude = $this->programIncludeRepository->find($id);
-
-        if ($programInclude === null) {
-            throw new RuntimeException('');
-        }
-
-        return new JsonResponse([
-            'id' => $programInclude->getId(),
-            'name' => $programInclude->getTitle(),
-            'active' => $programInclude->isActive(),
-            'sort' => $programInclude->getSort(),
-        ]);
+        return new JsonResponse(
+            $this->prepareItem($programInclude)
+        );
     }
 
     /**
@@ -99,8 +84,8 @@ class ProgramIncludeController extends AbstractController
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programInclude);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programInclude);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -122,8 +107,8 @@ class ProgramIncludeController extends AbstractController
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programInclude);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programInclude);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -140,8 +125,8 @@ class ProgramIncludeController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($programInclude);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($programInclude);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

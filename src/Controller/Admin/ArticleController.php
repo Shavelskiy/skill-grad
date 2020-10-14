@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Helpers\SearchHelper;
 use App\Repository\ArticleRepository;
 use App\Service\UploadServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
@@ -23,11 +24,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ArticleController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected ArticleRepository $articleRepository;
     protected UploadServiceInterface $uploadService;
 
-    public function __construct(ArticleRepository $articleRepository, UploadServiceInterface $uploadService)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ArticleRepository $articleRepository,
+        UploadServiceInterface $uploadService
+    ) {
+        $this->entityManager = $entityManager;
         $this->articleRepository = $articleRepository;
         $this->uploadService = $uploadService;
     }
@@ -63,7 +69,6 @@ class ArticleController extends AbstractController
         return [
             'id' => $item->getId(),
             'name' => $item->getName(),
-            'slug' => $item->getSlug(),
             'sort' => $item->getSort(),
             'active' => $item->isActive(),
             'image' => ($item->getImage() !== null) ? $item->getImage()->getPublicPath() : null,
@@ -91,7 +96,6 @@ class ArticleController extends AbstractController
             return new JsonResponse([
                 'id' => $article->getId(),
                 'name' => $article->getName(),
-                'slug' => $article->getSlug(),
                 'sort' => $article->getSort(),
                 'active' => $article->isActive(),
                 'image' => ($article->getImage() !== null) ? $article->getImage()->getPublicPath() : null,
@@ -111,7 +115,6 @@ class ArticleController extends AbstractController
     {
         $article = (new Article())
             ->setName($request->get('name'))
-            ->setSlug($request->get('slug'))
             ->setSort($request->get('sort'))
             ->setActive($request->get('active'))
             ->setDetailText($request->get('detailText'))
@@ -123,11 +126,11 @@ class ArticleController extends AbstractController
                 $articleImage = $this->uploadService->createUpload($uploadImage);
                 $article->setImage($articleImage);
 
-                $this->getDoctrine()->getManager()->persist($articleImage);
+                $this->entityManager->persist($articleImage);
             }
 
-            $this->getDoctrine()->getManager()->persist($article);
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
 
             return new JsonResponse();
         } catch (Exception $e) {
@@ -148,7 +151,6 @@ class ArticleController extends AbstractController
 
         $article
             ->setName($request->get('name'))
-            ->setSlug($request->get('slug'))
             ->setSort($request->get('sort'))
             ->setActive($request->get('active'))
             ->setDetailText($request->get('detailText'))
@@ -171,11 +173,11 @@ class ArticleController extends AbstractController
                 $articleImage = $this->uploadService->createUpload($uploadImage);
                 $article->setImage($articleImage);
 
-                $this->getDoctrine()->getManager()->persist($articleImage);
+                $this->entityManager->persist($articleImage);
             }
 
-            $this->getDoctrine()->getManager()->persist($article);
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
 
             return new JsonResponse();
         } catch (Exception $e) {
@@ -194,8 +196,8 @@ class ArticleController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($article);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($article);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

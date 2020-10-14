@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Location;
 use App\Entity\User;
 use App\Entity\UserInfo;
 use App\Helpers\SearchHelper;
@@ -58,9 +57,6 @@ class UserController extends AbstractController
         return new JsonResponse($data);
     }
 
-    /**
-     * @param Location $location
-     */
     protected function prepareItem(User $user): array
     {
         $userInfo = $user->getUserInfo();

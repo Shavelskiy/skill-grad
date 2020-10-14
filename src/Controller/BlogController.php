@@ -12,6 +12,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\Content\Seo\DefaultSeoRepository;
 use App\Repository\UserRepository;
 use App\Service\SearchService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -27,11 +28,13 @@ class BlogController extends BaseCatalogController
 
     use SeoTrait;
 
+    protected EntityManagerInterface $entityManager;
     protected ArticleRepository $articleRepository;
     protected UserRepository $userRepository;
     protected SessionInterface $session;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         SearchService $searchService,
         ArticleRepository $articleRepository,
         UserRepository $userRepository,
@@ -39,6 +42,7 @@ class BlogController extends BaseCatalogController
         DefaultSeoRepository $defaultSeoRepository,
         SessionInterface $session
     ) {
+        $this->entityManager = $entityManager;
         $this->searchService = $searchService;
         $this->articleRepository = $articleRepository;
         $this->userRepository = $userRepository;
@@ -95,8 +99,8 @@ class BlogController extends BaseCatalogController
 
         if (!in_array($article->getId(), $userViewsArticle, true)) {
             $article->setViews($article->getViews() + 1);
-            $this->getDoctrine()->getManager()->persist($article);
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
 
             $userViewsArticle[] = $article->getId();
             $this->session->set('article.view', $userViewsArticle);

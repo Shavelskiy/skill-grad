@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Program\ProgramFormat;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramFormatRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProgramFormatController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected ProgramFormatRepository $programFormatRepository;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         ProgramFormatRepository $programFormatRepository
     ) {
+        $this->entityManager = $entityManager;
         $this->programFormatRepository = $programFormatRepository;
     }
 
@@ -44,13 +47,11 @@ class ProgramFormatController extends AbstractController
             $items[] = $this->prepareItem($item);
         }
 
-        $data = [
+        return new JsonResponse([
             'total_pages' => $paginator->getTotalPageCount(),
             'current_page' => $paginator->getCurrentPage(),
             'items' => $items,
-        ];
-
-        return new JsonResponse($data);
+        ]);
     }
 
     protected function prepareItem(ProgramFormat $item): array
@@ -65,28 +66,12 @@ class ProgramFormatController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.program-format.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param Request $request
      */
-    public function view(int $id): Response
+    public function view(ProgramFormat $programFormat): Response
     {
-        if ($id < 1) {
-            throw new RuntimeException('');
-        }
-
-        /** @var ProgramFormat $programFormat */
-        $programFormat = $this->programFormatRepository->find($id);
-
-        if ($programFormat === null) {
-            throw new RuntimeException('');
-        }
-
-        return new JsonResponse([
-            'id' => $programFormat->getId(),
-            'name' => $programFormat->getName(),
-            'active' => $programFormat->isActive(),
-            'sort' => $programFormat->getSort(),
-        ]);
+        return new JsonResponse(
+            $this->prepareItem($programFormat)
+        );
     }
 
     /**
@@ -99,8 +84,8 @@ class ProgramFormatController extends AbstractController
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programFormat);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programFormat);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -122,8 +107,8 @@ class ProgramFormatController extends AbstractController
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programFormat);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programFormat);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -140,8 +125,8 @@ class ProgramFormatController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($programFormat);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($programFormat);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

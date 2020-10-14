@@ -7,6 +7,7 @@ use App\Helpers\SearchHelper;
 use App\Repository\LocationRepository;
 use App\Service\LocationService;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
@@ -24,15 +25,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class LocationController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected LocationRepository $locationRepository;
     protected TranslatorInterface $translator;
     protected LocationService $locationService;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         LocationRepository $locationRepository,
         TranslatorInterface $translator,
         LocationService $locationService
     ) {
+        $this->entityManager = $entityManager;
         $this->locationRepository = $locationRepository;
         $this->translator = $translator;
         $this->locationService = $locationService;
@@ -139,8 +143,8 @@ class LocationController extends AbstractController
         $locations = [];
         foreach ($this->locationRepository->findAll() as $location) {
             $locations[] = [
-              'value' => $location->getId(),
-              'title' => $this->locationService->getLocationPath($location),
+                'value' => $location->getId(),
+                'title' => $this->locationService->getLocationPath($location),
             ];
         }
 
@@ -170,10 +174,10 @@ class LocationController extends AbstractController
             $location->setParentLocation($parentLocation);
         }
 
-        $this->getDoctrine()->getManager()->persist($location);
+        $this->entityManager->persist($location);
 
         try {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
         } catch (UniqueConstraintViolationException $e) {
             return new JsonResponse(['message' => 'Элемент с таким code уже существует'], 400);
         }
@@ -212,8 +216,8 @@ class LocationController extends AbstractController
             $location->setParentLocation(null);
         }
 
-        $this->getDoctrine()->getManager()->persist($location);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($location);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -232,11 +236,11 @@ class LocationController extends AbstractController
         /** @var Location $childLocation */
         foreach ($location->getChildLocations() as $childLocation) {
             $childLocation->setParentLocation(null);
-            $this->getDoctrine()->getManager()->persist($childLocation);
+            $this->entityManager->persist($childLocation);
         }
 
-        $this->getDoctrine()->getManager()->remove($location);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($location);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

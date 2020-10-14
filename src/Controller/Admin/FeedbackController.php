@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Feedback;
 use App\Helpers\SearchHelper;
 use App\Repository\FeedbackRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FeedbackController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected FeedbackRepository $feedbackRepository;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         FeedbackRepository $feedbackRepository
     ) {
+        $this->entityManager = $entityManager;
         $this->feedbackRepository = $feedbackRepository;
     }
 
@@ -65,20 +68,10 @@ class FeedbackController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.feedback.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{feedback}", name="admin.feedback.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(Feedback $feedback): Response
     {
-        if ($id < 1) {
-            throw new RuntimeException('');
-        }
-
-        $feedback = $this->feedbackRepository->find($id);
-
-        if ($feedback === null) {
-            throw new RuntimeException('');
-        }
-
         return new JsonResponse($this->prepareItem($feedback));
     }
 
@@ -93,8 +86,8 @@ class FeedbackController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($feedback);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($feedback);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

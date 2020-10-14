@@ -13,10 +13,10 @@ use App\Repository\ProviderRepository;
 use App\Repository\ProviderRequisitesRepository;
 use App\Service\LocationService;
 use App\Service\UploadServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,6 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProviderController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected CategoryRepository $categoryRepository;
     protected ProviderRepository $providerRepository;
     protected ProviderRequisitesRepository $providerRequisitesRepository;
@@ -37,6 +38,7 @@ class ProviderController extends AbstractController
     protected LocationService $locationService;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         CategoryRepository $categoryRepository,
         ProviderRepository $providerRepository,
         ProviderRequisitesRepository $providerRequisitesRepository,
@@ -44,6 +46,7 @@ class ProviderController extends AbstractController
         UploadServiceInterface $uploadService,
         LocationService $locationService
     ) {
+        $this->entityManager = $entityManager;
         $this->categoryRepository = $categoryRepository;
         $this->providerRepository = $providerRepository;
         $this->providerRequisitesRepository = $providerRequisitesRepository;
@@ -69,13 +72,11 @@ class ProviderController extends AbstractController
             $items[] = $this->prepareItem($item);
         }
 
-        $data = [
+        return new JsonResponse([
             'total_pages' => $paginator->getTotalPageCount(),
             'current_page' => $paginator->getCurrentPage(),
             'items' => $items,
-        ];
-
-        return new JsonResponse($data);
+        ]);
     }
 
     public function prepareItem(Provider $item): array
@@ -88,33 +89,11 @@ class ProviderController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin.provider.view", methods={"GET"}, requirements={"id"="[0-9]+"})
+     * @Route("/{provider}", name="admin.provider.view", methods={"GET"}, requirements={"id"="[0-9]+"})
      */
-    public function view(int $id): Response
+    public function view(Provider $provider): Response
     {
         try {
-            if ($id < 1) {
-                throw new RuntimeException('');
-            }
-
-            /** @var Provider $provider */
-            $provider = $this->providerRepository->find($id);
-
-            if ($provider === null) {
-                throw new RuntimeException('');
-            }
-
-            $mainCategories = [];
-
-            /** @var Category $mainCategory */
-            foreach ($provider->getCategoryGroups() as $mainCategory) {
-                $mainCategories[] = [
-                    'id' => $mainCategory->getId(),
-                    'name' => $mainCategory->getName(),
-                    'sort' => $mainCategory->getSort(),
-                ];
-            }
-
             $categories = [];
 
             /** @var Category $category */
@@ -142,7 +121,6 @@ class ProviderController extends AbstractController
                 'name' => $provider->getName(),
                 'description' => $provider->getDescription(),
                 'image' => $provider->getImage() ? $provider->getImage()->getPublicPath() : null,
-                'mainCategories' => $mainCategories,
                 'categories' => $categories,
                 'locations' => $locations,
             ];
@@ -184,15 +162,15 @@ class ProviderController extends AbstractController
 
                 $provider->setImage($providerImage);
 
-                $this->getDoctrine()->getManager()->persist($providerImage);
+                $this->entityManager->persist($providerImage);
             }
 
             $providerRequisites = (new ProviderRequisites())->setProvider($provider);
             $this->setProviderRequisitesFieldsFromRequest($providerRequisites, $request);
 
-            $this->getDoctrine()->getManager()->persist($providerRequisites);
-            $this->getDoctrine()->getManager()->persist($provider);
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->persist($providerRequisites);
+            $this->entityManager->persist($provider);
+            $this->entityManager->flush();
 
             return new JsonResponse([]);
         } catch (Exception $e) {
@@ -239,12 +217,12 @@ class ProviderController extends AbstractController
                 $providerImage = $this->uploadService->createUpload($uploadImage);
                 $provider->setImage($providerImage);
 
-                $this->getDoctrine()->getManager()->persist($providerImage);
+                $this->entityManager->persist($providerImage);
             }
 
-            $this->getDoctrine()->getManager()->persist($provider);
-            $this->getDoctrine()->getManager()->persist($providerRequisites);
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->persist($provider);
+            $this->entityManager->persist($providerRequisites);
+            $this->entityManager->flush();
 
             return new JsonResponse();
         } catch (Exception $e) {
@@ -257,7 +235,6 @@ class ProviderController extends AbstractController
         $provider
             ->setName($request->get('name'))
             ->setDescription($request->get('description'))
-            ->setCategoryGroups($this->categoryRepository->findBy(['id' => $request->get('mainCategories')]))
             ->setCategories($this->categoryRepository->findBy(['id' => $request->get('categories')]))
             ->setLocations($this->locationRepository->findBy(['id' => $request->get('locations')]));
     }
@@ -295,11 +272,11 @@ class ProviderController extends AbstractController
         }
 
         if ($providerRequisites = $this->providerRequisitesRepository->findProviderRequisitesByProvider($provider)) {
-            $this->getDoctrine()->getManager()->remove($providerRequisites);
+            $this->entityManager->remove($providerRequisites);
         }
 
-        $this->getDoctrine()->getManager()->remove($provider);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($provider);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }

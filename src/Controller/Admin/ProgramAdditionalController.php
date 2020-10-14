@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Program\ProgramAdditional;
 use App\Helpers\SearchHelper;
 use App\Repository\ProgramAdditionalRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProgramAdditionalController extends AbstractController
 {
+    protected EntityManagerInterface $entityManager;
     protected ProgramAdditionalRepository $programAdditionalRepository;
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         ProgramAdditionalRepository $programAdditionalRepository
     ) {
+        $this->entityManager = $entityManager;
         $this->programAdditionalRepository = $programAdditionalRepository;
     }
 
@@ -65,28 +68,12 @@ class ProgramAdditionalController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin.program-additional.view", methods={"GET"}, requirements={"id"="[0-9]+"})
-     *
-     * @param Request $request
      */
-    public function view(int $id): Response
+    public function view(ProgramAdditional $programAdditional): Response
     {
-        if ($id < 1) {
-            throw new RuntimeException('');
-        }
-
-        /** @var ProgramAdditional $programAdditional */
-        $programAdditional = $this->programAdditionalRepository->find($id);
-
-        if ($programAdditional === null) {
-            throw new RuntimeException('');
-        }
-
-        return new JsonResponse([
-            'id' => $programAdditional->getId(),
-            'name' => $programAdditional->getTitle(),
-            'active' => $programAdditional->isActive(),
-            'sort' => $programAdditional->getSort(),
-        ]);
+        return new JsonResponse(
+            $this->prepareItem($programAdditional)
+        );
     }
 
     /**
@@ -99,8 +86,8 @@ class ProgramAdditionalController extends AbstractController
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programAdditional);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programAdditional);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -122,8 +109,8 @@ class ProgramAdditionalController extends AbstractController
             ->setActive($request->get('active'))
             ->setSort($request->get('sort'));
 
-        $this->getDoctrine()->getManager()->persist($programAdditional);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($programAdditional);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
@@ -140,8 +127,8 @@ class ProgramAdditionalController extends AbstractController
             return new JsonResponse([], 404);
         }
 
-        $this->getDoctrine()->getManager()->remove($programAdditional);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->remove($programAdditional);
+        $this->entityManager->flush();
 
         return new JsonResponse();
     }
