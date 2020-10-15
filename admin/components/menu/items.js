@@ -12,6 +12,11 @@ import {
   PRICES_INDEX,
   FAQ_INDEX,
   PAGE_INDEX,
+  SEO_INDEX,
+  SEO_ARTICLE_INDEX,
+  SEO_PROVIDER_INDEX,
+  SEO_PROGRAM_INDEX,
+  SEO_PAGE_INDEX,
 } from '../../utils/routes'
 
 export const menuItems = [
@@ -112,6 +117,32 @@ export const menuItems = [
       {
         title: 'Отдельные страницы',
         link: PAGE_INDEX,
+      },
+    ],
+  },
+  {
+    title: 'Сео',
+    icon: 'fa fa-search',
+    items: [
+      {
+        title: 'Сео сайта',
+        link: SEO_INDEX,
+      },
+      {
+        title: 'Сео блога',
+        link: SEO_ARTICLE_INDEX,
+      },
+      {
+        title: 'Сео провайдеров',
+        link: SEO_PROVIDER_INDEX,
+      },
+      {
+        title: 'Сео программ обучения',
+        link: SEO_PROGRAM_INDEX,
+      },
+      {
+        title: 'Сео страниц',
+        link: SEO_PAGE_INDEX,
       },
     ],
   },

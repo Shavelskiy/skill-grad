@@ -54,3 +54,18 @@ export const PAGE_INDEX = '/page'
 export const PAGE_VIEW = '/page/:id'
 export const PAGE_CREATE = '/page/create'
 export const PAGE_UPDATE = '/page/update/:id'
+
+export const SEO_INDEX = '/seo'
+export const SEO_UPDATE = '/seo/update/:id'
+
+export const SEO_ARTICLE_INDEX = '/seo/article'
+export const SEO_ARTICLE_UPDATE = '/seo/article/update/:id'
+
+export const SEO_PROVIDER_INDEX = '/seo/provider'
+export const SEO_PROVIDER_UPDATE = '/seo/provider/update/:id'
+
+export const SEO_PROGRAM_INDEX = '/seo/program'
+export const SEO_PROGRAM_UPDATE = '/seo/program/update/:id'
+
+export const SEO_PAGE_INDEX = '/seo/page'
+export const SEO_PAGE_UPDATE = '/seo/page/update/:id'

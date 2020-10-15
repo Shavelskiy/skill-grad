@@ -46,6 +46,11 @@ import {
   PAGE_CREATE,
   PAGE_VIEW,
   PAGE_UPDATE,
+  SEO_INDEX,
+  SEO_ARTICLE_INDEX,
+  SEO_PROVIDER_INDEX,
+  SEO_PROGRAM_INDEX,
+  SEO_PAGE_INDEX,
 } from './../utils/routes'
 
 import Breadcrumbs from '../components/breadcrumbs/breacrumbs'
@@ -92,6 +97,16 @@ import PageIndex from './page'
 import PageCreate from './page/create'
 import PageView from './page/view'
 import PageUpdate from './page/update'
+import SeoIndex from './seo/seo-index'
+// todo
+import SeoArticleIndex from './seo/seo-article-index'
+// todo
+import SeoProviderIndex from './seo/seo-provider-index'
+// todo
+import SeoProgramIndex from './seo/seo-program-index'
+// todo
+import SeoPageIndex from './seo/seo-page-index'
+// todo
 
 
 const PageSwitcher = ({active}) => {
@@ -110,9 +125,12 @@ const PageSwitcher = ({active}) => {
           <Route exact name="program-format.create" path={PROGRAM_FORMAT_CREATE} component={ProgramFormatCreate}/>
           <Route exact name="program-format.update" path={PROGRAM_FORMAT_UPDATE} component={ProgramFormatUpdate}/>
 
-          <Route exact name="program-additional.index" path={PROGRAM_ADDITIONAL_INDEX} component={ProgramAdditionalIndex}/>
-          <Route exact name="program-additional.create" path={PROGRAM_ADDITIONAL_CREATE} component={ProgramAdditionalCreate}/>
-          <Route exact name="program-additional.update" path={PROGRAM_ADDITIONAL_UPDATE} component={ProgramAdditionalUpdate}/>
+          <Route exact name="program-additional.index" path={PROGRAM_ADDITIONAL_INDEX}
+                 component={ProgramAdditionalIndex}/>
+          <Route exact name="program-additional.create" path={PROGRAM_ADDITIONAL_CREATE}
+                 component={ProgramAdditionalCreate}/>
+          <Route exact name="program-additional.update" path={PROGRAM_ADDITIONAL_UPDATE}
+                 component={ProgramAdditionalUpdate}/>
 
           <Route exact name="program-include.index" path={PROGRAM_INCLUDE_INDEX} component={ProgramIncludeIndex}/>
           <Route exact name="program-include.create" path={PROGRAM_INCLUDE_CREATE} component={ProgramIncludeCreate}/>
@@ -154,6 +172,21 @@ const PageSwitcher = ({active}) => {
           <Route exact name="page.create" path={PAGE_CREATE} component={PageCreate}/>
           <Route exact name="page.view" path={PAGE_VIEW} component={PageView}/>
           <Route exact name="page.update" path={PAGE_UPDATE} component={PageUpdate}/>
+
+          <Route exact name="seo.index" path={SEO_INDEX} component={PriceIndex}/>
+          {/*<Route exact name="seo.update" path={PRICES_UPDATE} component={PriceUpdate}/>*/}
+
+          <Route exact name="seo-article.index" path={SEO_ARTICLE_INDEX} component={SeoArticleIndex}/>
+          {/*<Route exact name="price.update" path={PRICES_UPDATE} component={PriceUpdate}/>*/}
+
+          <Route exact name="seo-provider.index" path={SEO_PROVIDER_INDEX} component={SeoProviderIndex}/>
+          {/*<Route exact name="price.update" path={PRICES_UPDATE} component={PriceUpdate}/>*/}
+
+          <Route exact name="seo-program.index" path={SEO_PROGRAM_INDEX} component={SeoProgramIndex}/>
+          {/*<Route exact name="price.update" path={PRICES_UPDATE} component={PriceUpdate}/>*/}
+
+          <Route exact name="seo-page.index" path={SEO_PAGE_INDEX} component={SeoPageIndex}/>
+          {/*<Route exact name="price.update" path={PRICES_UPDATE} component={PriceUpdate}/>*/}
 
           <Route exact name="index" path={INDEX} component={IndexPage}/>
           <Route path="/" component={NotFoundPage}/>
