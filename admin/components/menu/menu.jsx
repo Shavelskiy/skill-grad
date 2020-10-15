@@ -16,7 +16,7 @@ const Menu = ({closed}) => {
 
   return (
     <div className={css.menuContainer}>
-      <ul>{items}</ul>
+      <ul className={css.list}>{items}</ul>
     </div>
   )
 }

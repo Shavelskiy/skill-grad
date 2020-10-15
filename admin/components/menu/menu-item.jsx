@@ -34,8 +34,8 @@ const MenuItem = ({rootItem, closed}) => {
   })
 
   return (
-    <li onClick={() => setCollapse(!collapse)} className={cn({[css.closed]: closed})}>
-      <div className={cn(css.item, {[css.active]: collapse})}>
+    <li className={cn({[css.closed]: closed})}>
+      <div className={cn(css.item, {[css.active]: collapse})} onClick={() => setCollapse(!collapse)}>
         <i className={rootItem.icon}></i>
         <div className={css.text}>
           {rootItem.title}
