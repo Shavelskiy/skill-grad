@@ -17,7 +17,6 @@ const ArticleView = ({match}) => {
   const [item, setItem] = useState({
     id: match.params.id,
     name: '',
-    slug: '',
     sort: 0,
     active: false,
     detailText: '',
@@ -43,7 +42,6 @@ const ArticleView = ({match}) => {
     setItem({
       id: data.id,
       name: data.name,
-      slug: data.slug,
       sort: data.sort,
       active: data.active,
       detailText: data.detail_text,
@@ -73,10 +71,6 @@ const ArticleView = ({match}) => {
           <tr>
             <td>Название</td>
             <td>{item.name}</td>
-          </tr>
-          <tr>
-            <td>Символьный код</td>
-            <td>{item.slug}</td>
           </tr>
           <tr>
             <td>Сортировка</td>

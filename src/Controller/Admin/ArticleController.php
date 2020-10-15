@@ -62,9 +62,9 @@ class ArticleController extends AbstractController
         return new JsonResponse($data);
     }
 
-    public function prepareItem(Article $item): array
+    public function prepareItem(Article $item, bool $full = false): array
     {
-        return [
+        $data = [
             'id' => $item->getId(),
             'name' => $item->getName(),
             'sort' => $item->getSort(),
@@ -73,6 +73,14 @@ class ArticleController extends AbstractController
             'showOnMain' => $item->isShowOnMain(),
             'created_at' => $item->getCreatedAt()->format('d.m.Y'),
         ];
+
+        if (!$full) {
+            return $data;
+        }
+
+        return array_merge([
+            'detailText' => $item->getDetailText(),
+        ], $data);
     }
 
     /**
@@ -81,7 +89,7 @@ class ArticleController extends AbstractController
     public function view(Article $article): Response
     {
         return new JsonResponse(
-            $this->prepareItem($article)
+            $this->prepareItem($article, true)
         );
     }
 

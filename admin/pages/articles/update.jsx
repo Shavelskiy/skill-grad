@@ -18,7 +18,6 @@ const ArticleUpdate = ({match}) => {
   const [item, setItem] = useState({
     id: match.params.id,
     name: '',
-    slug: '',
     sort: 0,
     active: true,
     detailText: '',

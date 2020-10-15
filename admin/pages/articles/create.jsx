@@ -17,7 +17,6 @@ const ArticleCreate = () => {
 
   const [item, setItem] = useState({
     name: '',
-    slug: '',
     sort: 0,
     active: true,
     detailText: '',

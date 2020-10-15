@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { INIT, SEND_MESSAGE, VIEWED } from '@/utils/chat-types'
-import { GET_NEW_MESSAGES_COUNT } from '@/utils/api-routes'
+import { GET_NEW_MESSAGES_COUNT, CHAT_START } from '@/utils/api-routes'
 import { isAuth } from '@/helpers/auth'
 import { initModal } from '@/components/modal'
 import showAlert from '@/components/modal/alert'
@@ -10,7 +10,7 @@ if (isAuth()) {
   const headerNotificationCount = document.querySelector('.header-notification-count')
   const newMessageModal = document.querySelector('.new-message-modal')
 
-  axios.get('/chat/start')
+  axios.get(CHAT_START)
     .then(({data}) => initChat(data))
 
   const initChat = (data) => {

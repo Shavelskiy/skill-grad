@@ -5,7 +5,6 @@
 {% block body %}
   <div class="mt-0">
     <h2 class="title">{{ title }}</h2>
-    {{ page.content }}
-    </div>
+    {{ page.content|raw }}
   </div>
 {% endblock %}

@@ -25,15 +25,6 @@ export const table = [
     },
   },
   {
-    title: 'Символьный код',
-    name: 'slug',
-    width: 2,
-    search: {
-      enable: true,
-      type: STRING,
-    },
-  },
-  {
     title: 'Сортировка',
     name: 'sort',
     width: 1,

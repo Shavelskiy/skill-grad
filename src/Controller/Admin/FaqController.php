@@ -6,6 +6,7 @@ use App\Entity\Content\Faq;
 use App\Helpers\SearchHelper;
 use App\Repository\Content\FaqRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,7 +83,7 @@ class FaqController extends AbstractController
      */
     public function create(Request $request): Response
     {
-
+        return $this->handleSaveItem(new Faq(), $request);
     }
 
     /**
@@ -90,7 +91,29 @@ class FaqController extends AbstractController
      */
     public function update(Request $request): Response
     {
+        if (($faq = $this->faqRepository->find($request->get('id'))) === null) {
+            return new JsonResponse([], 404);
+        }
 
+        return $this->handleSaveItem($faq, $request);
+    }
+
+    protected function handleSaveItem(Faq $item, Request $request): Response
+    {
+        try {
+            $item
+                ->setTitle($request->get('title'))
+                ->setSort($request->get('sort'))
+                ->setContent($request->get('content'))
+                ->setActive($request->get('active'));
+
+            $this->entityManager->persist($item);
+            $this->entityManager->flush();
+        } catch (Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 400);
+        }
+
+        return new JsonResponse();
     }
 
     /**
@@ -98,6 +121,13 @@ class FaqController extends AbstractController
      */
     public function delete(Request $request): Response
     {
+        if (($faq = $this->faqRepository->find($request->get('id'))) === null) {
+            return new JsonResponse([], 404);
+        }
 
+        $this->entityManager->remove($faq);
+        $this->entityManager->flush();
+
+        return new JsonResponse();
     }
 }
