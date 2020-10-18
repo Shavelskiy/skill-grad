@@ -6,6 +6,10 @@ import css from './paginator.scss?module'
 
 
 const Paginator = ({currentPage, totalPages, click}) => {
+  if (totalPages < 2) {
+    return <></>
+  }
+
   const renderItem = (page) => {
     return (
       <Item

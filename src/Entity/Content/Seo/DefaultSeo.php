@@ -21,7 +21,7 @@ class DefaultSeo extends AbstractSeo
 
     public function getPageSlug(): string
     {
-        return $this->pageSlug;
+        return $this->pageSlug ?? '';
     }
 
     public function setPageSlug(string $pageSlug): self
@@ -32,7 +32,7 @@ class DefaultSeo extends AbstractSeo
 
     public function getPageDescription(): string
     {
-        return $this->pageDescription;
+        return $this->pageDescription ?? '';
     }
 
     public function setPageDescription(string $pageDescription): self

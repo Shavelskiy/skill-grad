@@ -547,8 +547,6 @@ textarea {
 }
 
 
-/////// govno layout
-
 .content {
   &.program {
     @media (min-width: 320px) and (max-width: 767px) {
@@ -715,30 +713,6 @@ textarea {
   }
 }
 
-.delete-modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 50px;
-  padding-top: 50px !important;
-
-  .buttons-deactivate {
-    width: 100%;
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: space-evenly;
-    z-index: 1;
-    width: 100%;
-
-    button {
-      width: 100px;
-      margin-bottom: 0 !important;
-    }
-  }
-}
 
 .block-modal {
   justify-content: space-between;
@@ -749,7 +723,7 @@ textarea {
   }
 }
 
-.modal-review, .modal-pay, .modal-money, .answer-modal {
+.answer-modal {
   .modal-content {
     @media (min-width: 320px) and (max-width: 767px) {
       width: 90%;

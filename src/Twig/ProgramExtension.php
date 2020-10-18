@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use App\Entity\Category;
 use App\Entity\Program\Program;
+use App\Entity\Program\ProgramAdditional;
 use App\Entity\Program\ProgramOccupationMode;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\User;
@@ -49,6 +50,7 @@ class ProgramExtension extends AbstractExtension
             new TwigFunction('getProgramDesign', [$this, 'getProgramDesign']),
             new TwigFunction('getTrainingDate', [$this, 'getTrainingDate']),
             new TwigFunction('getOccupationMode', [$this, 'getOccupationMode']),
+            new TwigFunction('getAllAdditional', [$this, 'getAllAdditional']),
         ];
     }
 
@@ -190,5 +192,16 @@ class ProgramExtension extends AbstractExtension
     public function getAverageRating(Program $program): float
     {
         return $this->programService->getAverageRating($program);
+    }
+
+    public function getAllAdditional(Program $program): string
+    {
+        $additional = $program->getProgramAdditional()->map(fn(ProgramAdditional $programAdditional) => $programAdditional->getTitle())->toArray();
+
+        if (!empty($program->getOtherAdditional())) {
+            $additional[] = $program->getOtherAdditional();
+        }
+
+        return implode(', ', $additional);
     }
 }

@@ -1,101 +1,125 @@
+{% set categories = programCategories(program) %}
+
+{% set price = getProgramPrice(program) %}
+{% set oldPrice = getOldProgramPrice(program) %}
+
+{% set legalEntityPaymet = program.getPayment('legalEntity') %}
+{% set individualPayment = program.getPayment('individual') %}
+
 <div class="compare__table-column">
   <div class="compare__table-header">
     <span class="close compare-program-remove" data-id="{{ program.id }}"></span>
     <a href="{{ path('program.view', {id: program.id}) }}">{{ program.name }}</a>
     <div class="description">
       <div class="price">
-        <div class="old">148 000 р.</div>
-        <div class="correct">124 000 р.</div>
+        {% if program.showPriceReduction and price is not null and oldPrice is not null and price < oldPrice %}
+          <span class="price-old">{{ oldPrice|number_format(0, ' ', ' ') }}  р.</span>
+          <span class="price-new">{{ price }}</span>
+        {% else %}
+          {% if price is not null %}
+            <span class="price-text">{{ price|number_format(0, ' ', ' ') }}  р.</span>
+          {% else %}
+            <span class="price-text">По запросу</span>
+          {% endif %}
+        {% endif %}
       </div>
-      <div class="button-container">
-        <button class="button-blue">Заказать</button>
-      </div>
+      {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+        <div class="button-container">
+          <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                  data-id="{{ program.id }}">
+            Заказать
+          </button>
+        </div>
+      {% endif %}
     </div>
   </div>
   <div class="compare__table-category">
     <div class="category-link">
-      <span>Маркетинг</span>
-      <span>Офис, делопроизводство</span>
-      <span>Управление и бизнес</span>
+      {% for category in categories %}
+        <span>{{ category.item.name }}</span>
+      {% endfor %}
     </div>
   </div>
   <div class="compare__table-annotation">
-    <button>Подробнее</button>
-    <p class="annotation-text">
-      Менеджмент — направление, объединившее в себе несколько старых специальностей, которые стали соответствующими
-      профилями. Будущие менеджеры изучают экономические, управленческие, социальные и гуманитарные дисциплины.
-    </p>
+    <p class="annotation-text">{{ program.annotation }}</p>
   </div>
   <div class="compare__table-program">
-    <p>Институт пути, строительства и сооружений образован в 1998 году путем слияния трех факультетов МИИТ строительного
-      профиля.</p>
-    <div class="hidden">
-      <p>- Это факультеты «Строительство железных дорог»,</p>
-      <p>- «Мосты и тоннели», на которых с момента образования МИИТ велась подготовка инженеров-путейцев и мостовиков, и
-        факультет «Промышленное и гражданское строительство»,</p>
-      <p>- Созданный в 50-е годы прошлого века в связи с бурным ростом жилищного строительства.</p>
-    </div>
-    <button>Подробнее</button>
+    <p>{{ program.detailText }}</p>
   </div>
   <div class="compare__table-users">
-    <div class="photo-row">
-      <img src="/img/photo.jpg" alt="">
-      <span>Ермакова Елизавета Васильевна</span>
-    </div>
-    <div class="photo-row">
-      <img src="/img/photo.jpg" alt="">
-      <span>Ермакова Елизавета Васильевна</span>
-    </div>
+    {% for teacher in program.teachers %}
+      <div class="photo-row">
+        <img src="{{ teacher.photo ? teacher.photo.publicPath : '' }}" alt="">
+        <span>{{ teacher.name }}</span>
+      </div>
+    {% endfor %}
   </div>
   <div class="compare__table-duration">
-    <p>170 ак.ч.</p>
+    <p>{{ getDuration(program) }}</p>
   </div>
   <div class="compare__table-design">
     <p>20% теории, 80% практики</p>
   </div>
   <div class="compare__table-provider">
-    <div class="photo-row">
-      <img src="/img/orig_(1).jpg" alt="">
-      <a href="#">Институт системного анализа и управления Государственного университета «Дубна»</a>
-    </div>
-    <div class="photo-row">
-      <img src="/img/orig_(1).jpg" alt="">
-      <a href="#">Колледж Архитектуры, Дизайна и Реинжиниринга № 26</a>
-    </div>
+    {% for provider in program.providers %}
+      <div class="photo-row">
+        <img src="{{ provider.image ? provider.image.publicPath : '' }}" alt="">
+        <a href="{{ path('provider.view', {provider: provider.id}) }}" target="_blank">{{ provider.name }}</a>
+      </div>
+    {% endfor %}
   </div>
   <div class="compare__table-audience">
-    <p>1. Дети до 16 лет.</p>
+    {% set i = 0 %}
+    {% for item in program.targetAudience %}
+      {% set i = i + 1 %}
+      <p>{{ i }}. {{ item }}</p>
+    {% endfor %}
   </div>
   <div class="compare__table-document">
-    <div class="photo-row cert">
-      <img src="/img/cert.jpg" alt="">
-      <span>Сертификат</span>
-    </div>
+    {% if program.certificate %}
+      <div class="photo-row cert">
+        <img src="{{ program.certificate.image ? program.certificate.image.publicPath : '' }}" alt="">
+        <span>{{ program.certificate.name }}</span>
+      </div>
+    {% endif %}
   </div>
   <div class="compare__table-date">
-    <p>В любое время</p>
+    <p>{{ getTrainingDate(program) }}</p>
   </div>
   <div class="compare__table-mode">
-    <p>Занятия по: ВТ, ЧТ, СБ,
-      <br/>время проведения: с 11:00 до 15:00
-    </p>
+    <p>{{ getOccupationMode(program) }}</p>
   </div>
   <div class="compare__table-course">
-    <p>Книги, методические материалы, обеды</p>
+    <p>{{ getAllAdditional(program) }}</p>
   </div>
+
   <div class="compare__table-sales">
-    <p>Для юридических лиц - 10%
-      (18 700 руб.)</p>
+    {% if legalEntityPaymet is not null and legalEntityPaymet.discount is not null %}
+      <p>Для физических лиц - {{ legalEntityPaymet.discount }}%
+        = {{ (price * (1 - legalEntityPaymet.discount / 100))|number_format(0, ' ', ' ') }} руб.
+      </p>
+    {% endif %}
+    {% if individualPayment is not null and individualPayment.discount is not null %}
+      <p>Для юридических лиц - {{ individualPayment.discount }}%
+        = {{ (price * (1 - individualPayment.discount / 100))|number_format(0, ' ', ' ') }} руб.
+      </p>
+    {% endif %}
   </div>
   <div class="compare__table-photo">
     <div class="photo">
-      <img src="/img/photo.jpg" alt="">
-      <img src="/img/photo.jpg" alt="">
+      {% set i = 0 %}
+      {% for gallery in program.gallery %}
+        {% set i = i + 1 %}
+        {% if i < 3 %}
+          <img src="{{ gallery.image.publicPath }}" alt="">
+        {% endif %}
+      {% endfor %}
     </div>
-    <a href="#" class="more">Смотреть все в карточке программы</a>
+    {% if program.gallery|length > 2 %}
+      <a href="{{ path('program.view', {program: program.id}) }}" class="more">Смотреть все в карточке программы</a>
+    {% endif %}
   </div>
   <div class="compare__table-information">
-    <p>Программа обучения представляет из себя синтез математических, естественно-научных и профессиональных
-      дисциплин. </p>
+    <p>{{ program.additionalInfo }}</p>
   </div>
 </div>

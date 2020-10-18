@@ -173,7 +173,7 @@ const PageSwitcher = ({active}) => {
           <Route exact name="page.view" path={PAGE_VIEW} component={PageView}/>
           <Route exact name="page.update" path={PAGE_UPDATE} component={PageUpdate}/>
 
-          <Route exact name="seo.index" path={SEO_INDEX} component={PriceIndex}/>
+          <Route exact name="seo.index" path={SEO_INDEX} component={SeoIndex}/>
           {/*<Route exact name="seo.update" path={PRICES_UPDATE} component={PriceUpdate}/>*/}
 
           <Route exact name="seo-article.index" path={SEO_ARTICLE_INDEX} component={SeoArticleIndex}/>

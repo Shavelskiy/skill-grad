@@ -44,6 +44,8 @@ class PriceController extends AbstractController
 
         return new JsonResponse([
             'items' => $prices,
+            'total_pages' => 1,
+            'current_page' => 1,
         ]);
     }
 

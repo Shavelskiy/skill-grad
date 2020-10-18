@@ -39,8 +39,6 @@ class Program
     public const TRAINING_DATE_AS_THE_GROUP_FORM = 'TRAINING_DATE_AS_THE_GROUP_FORM';
     public const TRAINING_DATE_REQUEST = 'TRAINING_DATE_REQUEST';
 
-    public const REAL_PRICE = 'REAL_PRICE';
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=true)
@@ -522,7 +520,7 @@ class Program
 
     public function getOtherAdditional(): string
     {
-        return $this->otherAdditional;
+        return $this->otherAdditional ?? '';
     }
 
     public function setOtherAdditional(string $otherAdditional): self
