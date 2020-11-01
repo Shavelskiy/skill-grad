@@ -486,7 +486,7 @@ class Program
 
     public function getOtherInclude(): string
     {
-        return $this->otherInclude;
+        return $this->otherInclude ?? '';
     }
 
     public function setOtherInclude(string $otherInclude): self
