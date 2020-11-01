@@ -15,7 +15,10 @@
     <span class="card__header-title">{{ program.providers[0].name }}</span>
   </div>
   <div class="card__body">
-    <a href="{{ path('program.view', { id: program.id }) }}" class="card__body-title">{{ program.name }}</a>
+    <a href="{{ path('program.view', { id: program.id }) }}"
+       class="card__body-title {{ isHighlight(program) ? 'bold' : '' }}">
+      {{ program.name }}
+    </a>
     <div class="card__body-description">{{ program.annotation }}</div>
   </div>
   <div class="card__footer">

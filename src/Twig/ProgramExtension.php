@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramAdditional;
 use App\Entity\Program\ProgramOccupationMode;
+use App\Entity\Service\ProgramService as ProgramServiceEntity;
 use App\Entity\Program\ProgramRequest;
 use App\Entity\User;
 use App\Repository\ProgramFormatRepository;
@@ -51,6 +52,7 @@ class ProgramExtension extends AbstractExtension
             new TwigFunction('getTrainingDate', [$this, 'getTrainingDate']),
             new TwigFunction('getOccupationMode', [$this, 'getOccupationMode']),
             new TwigFunction('getAllAdditional', [$this, 'getAllAdditional']),
+            new TwigFunction('isHighlight', [$this, 'isHighlight']),
         ];
     }
 
@@ -203,5 +205,20 @@ class ProgramExtension extends AbstractExtension
         }
 
         return implode(', ', $additional);
+    }
+
+    public function isHighlight(Program $program): bool
+    {
+        /** @var ProgramServiceEntity $service */
+        foreach ($program->getServices() as $service) {
+            if ($service->isActive() && in_array($service->getType(), [
+                    ProgramServiceEntity::HIGHLIGHT,
+                    ProgramServiceEntity::RAISE,
+                ], true)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
