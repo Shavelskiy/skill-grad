@@ -54,7 +54,6 @@ class SeoController extends AbstractController
      */
     public function articleIndex(): Response
     {
-
     }
 
     /**
@@ -62,7 +61,6 @@ class SeoController extends AbstractController
      */
     public function providerIndex(): Response
     {
-
     }
 
     /**
@@ -70,7 +68,6 @@ class SeoController extends AbstractController
      */
     public function programIndex(): Response
     {
-
     }
 
     /**
@@ -78,7 +75,6 @@ class SeoController extends AbstractController
      */
     public function pageIndex(): Response
     {
-
     }
 
     protected function prepareSeoData(AbstractSeo $seo): array

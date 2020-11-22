@@ -35,6 +35,7 @@ services:
       - .env
     volumes:
       - db-data:/var/lib/postgresql/data:rw
+      - ./var/backups:/backups
     networks:
       - network_php
     ports:

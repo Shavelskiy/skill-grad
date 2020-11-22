@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Controller\Traits\SeoTrait;
 use App\Entity\Article;
-use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
 use App\Enum\Cache\Keys;

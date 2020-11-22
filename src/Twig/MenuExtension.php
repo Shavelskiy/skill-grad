@@ -7,10 +7,7 @@ use App\Enum\Cache\Keys;
 use App\Helpers\MemcachedClient;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
-use ErrorException;
 use Psr\Cache\CacheItemInterface;
-use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Cache\Exception\CacheException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

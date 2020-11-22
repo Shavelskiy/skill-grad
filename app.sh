@@ -41,13 +41,13 @@ fi
 # команды для работы с бэкапами
 if [[ $1 == "backup" ]]; then
     if [[ $2 == "create" ]]; then
-        docker-compose exec -T db mysqldump -uroot -proot wwf > docker/db/$3.sql
+        docker-compose exec -T db pg_dump skill_grad > backups -U skill_grad --clean
+        mv backups var/backups/skill_grad.sql
         log "Бэкап успешно создан!" "info"
         exit
     fi
-    docker-compose exec db mysql -uroot -proot -e 'drop database if exists wwf'
-    docker-compose exec db mysql -uroot -proot -e 'create database wwf'
-    docker-compose exec -T db mysql -uroot -proot wwf < docker/db/$2.sql
+
+    docker-compose exec -T db psql -U skill_grad -W skill_grad -P skill_grad -f backups/skill_grad.sql
     log "Бэкап успешно установлен!" "info"
     exit
 fi

@@ -6,8 +6,8 @@ use App\Entity\Category;
 use App\Entity\Program\Program;
 use App\Entity\Program\ProgramAdditional;
 use App\Entity\Program\ProgramOccupationMode;
-use App\Entity\Service\ProgramService as ProgramServiceEntity;
 use App\Entity\Program\ProgramRequest;
+use App\Entity\Service\ProgramService as ProgramServiceEntity;
 use App\Entity\User;
 use App\Repository\ProgramFormatRepository;
 use App\Repository\ProgramLevelRepository;
@@ -198,7 +198,7 @@ class ProgramExtension extends AbstractExtension
 
     public function getAllAdditional(Program $program): string
     {
-        $additional = $program->getProgramAdditional()->map(fn(ProgramAdditional $programAdditional) => $programAdditional->getTitle())->toArray();
+        $additional = $program->getProgramAdditional()->map(fn (ProgramAdditional $programAdditional) => $programAdditional->getTitle())->toArray();
 
         if (!empty($program->getOtherAdditional())) {
             $additional[] = $program->getOtherAdditional();

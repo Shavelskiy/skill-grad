@@ -3,7 +3,7 @@ parameters:
     host: '%env(resolve:SITE_HOST)%'
   upload_dir: '%kernel.project_dir%/public/upload'
   pdf_tmp_dir: '%kernel.project_dir%/var/tmp'
-  replenish_dir: '%kernel.project_dir%/files/replenish'
+  files_dir: '%kernel.project_dir%/var/files'
   social.services:
     vk:
       client_id: '%env(resolve:VK_CLIENT_ID)%'
