@@ -12,7 +12,11 @@ items.forEach(item => {
 
 itemsHeight += 51
 
-cityList.style.maxHeight = `${Math.ceil(itemsHeight / 28 / 4) * 28}px`
+if (window.innerWidth > 768) {
+  cityList.style.maxHeight = `${Math.ceil(itemsHeight / 28 / 4) * 28}px`
+} else {
+  cityList.style.maxHeight = `${Math.ceil(itemsHeight)}px`
+}
 
 const suggestionsSelectorContainer = document.querySelector('.city-selector-suggestions')
 const suggestionsContainer = suggestionsSelectorContainer.querySelector('.suggestions-content')
