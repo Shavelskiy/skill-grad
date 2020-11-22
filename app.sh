@@ -47,7 +47,7 @@ if [[ $1 == "backup" ]]; then
         exit
     fi
 
-    docker-compose exec -T db psql -U skill_grad -W skill_grad -P skill_grad -f backups/skill_grad.sql
+    docker-compose exec -T db psql -U skill_grad -W skill_grad -f backups/skill_grad.sql
     log "Бэкап успешно установлен!" "info"
     exit
 fi
