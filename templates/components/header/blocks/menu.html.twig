@@ -27,8 +27,9 @@
         {% endif %}
       </ul>
     </div>
+
     <ul class="menu-mobile">
-      <li class="menu-mobile__item">
+      <li class="menu-mobile__item {{ app.user is not null and is_granted('ROLE_PROVIDER') ? '' : 'wide' }}">
         <i class="icon-square"></i>
         <a href="#" class="menu-mobile__item-link">
           Меню
@@ -51,12 +52,14 @@
           </li>
         </ul>
       </li>
-      <li class="menu-mobile__item">
-        <i class="icon-add-folder"></i>
-        <a href="{{ path('program.add') }}" class="menu-mobile__item-link">
-          Добавить программу
-        </a>
-      </li>
+      {% if app.user is not null and is_granted('ROLE_PROVIDER') %}
+        <li class="menu-mobile__item">
+          <i class="icon-add-folder"></i>
+          <a href="{{ path('program.add') }}" class="menu-mobile__item-link">
+            Добавить программу
+          </a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </div>

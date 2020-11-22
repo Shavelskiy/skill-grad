@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Enum\Cache\Keys;
 use App\Helpers\MemcachedClient;
 use App\Repository\CategoryRepository;
+use App\Repository\LocationRepository;
 use ErrorException;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -16,24 +17,24 @@ use Twig\TwigFunction;
 class MenuExtension extends AbstractExtension
 {
     protected CategoryRepository $categoryRepository;
+    protected LocationRepository $locationRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
-    {
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        LocationRepository $locationRepository
+    ) {
         $this->categoryRepository = $categoryRepository;
+        $this->locationRepository = $locationRepository;
     }
 
     public function getFunctions(): array
     {
         return [
             new TwigFunction('getMenuItems', [$this, 'getMenuItemsCached']),
+            new TwigFunction('getListLocations', [$this, 'getListLocationsCached']),
         ];
     }
 
-    /**
-     * @throws CacheException
-     * @throws ErrorException
-     * @throws InvalidArgumentException
-     */
     public function getMenuItemsCached(): array
     {
         $cache = MemcachedClient::getCache();
@@ -50,9 +51,6 @@ class MenuExtension extends AbstractExtension
         return $item->get();
     }
 
-    /**
-     * @throws CacheException
-     */
     protected function getMenuItems(): array
     {
         $result = [];
@@ -73,6 +71,37 @@ class MenuExtension extends AbstractExtension
                 'id' => $rootCategory->getId(),
                 'name' => $rootCategory->getName(),
                 'childCategories' => $childCategories,
+            ];
+        }
+
+        return $result;
+    }
+
+    public function getListLocationsCached(): array
+    {
+        $cache = MemcachedClient::getCache();
+
+        /** @var CacheItemInterface $item */
+        $item = $cache->getItem(Keys::HEADER_LOCATIONS);
+
+        if (!$item->isHit()) {
+            $item->set($this->getListLocations());
+            $item->expiresAfter(360000);
+            $cache->save($item);
+        }
+
+        return $item->get();
+    }
+
+    public function getListLocations(): array
+    {
+        $result = [];
+
+        foreach ($this->locationRepository->findCityForList() as $location) {
+            $result[] = [
+                'id' => $location->getId(),
+                'name' => $location->getName(),
+                'highlight' => $location->getId() < 10,
             ];
         }
 

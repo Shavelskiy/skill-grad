@@ -21,6 +21,7 @@ final class Relations
         ],
         Location::class => [
             Keys::ALL_LOCATIONS,
+            Keys::HEADER_LOCATIONS,
         ],
     ];
 }

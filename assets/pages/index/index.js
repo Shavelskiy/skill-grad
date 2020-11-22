@@ -1,7 +1,5 @@
 import 'swiper/swiper.scss'
 import Swiper from 'swiper'
-import showRegisterForm from '../../components/modal/choose-role-modal'
-import { ROLE_PROVIDER, ROLE_USER } from '../../utils/user-roles'
 import './index.scss'
 
 const initTabs = (navSelector, contentSelector) => {
@@ -30,8 +28,6 @@ const selectTabContent = (tabName, tabContent) => {
 }
 
 initTabs('.study-tabs-nav .nav-item', '.study-content-items .tab__content-item')
-// initTabs('.study-content__item-circle', '.study-tab-content')
-// // initTabs('.how-work__info-mobile .how-work__info-title', '.how-work__info')
 
 const sliders = document.querySelectorAll('.study-slider')
 
@@ -42,10 +38,10 @@ sliders.forEach((item) => {
     observeParents: true,
     slidesPerView: 1,
     breakpoints: {
-      575: {
+      600: {
         slidesPerView: 2,
       },
-      767: {
+      1000: {
         slidesPerView: 3,
       },
     },
@@ -56,3 +52,24 @@ sliders.forEach((item) => {
   })
 })
 
+const howWorkStudentButton = document.querySelector('.tab-service__nav.left-block')
+const howWorkProviderButton = document.querySelector('.tab-service__nav.right-block')
+
+const howWorkStudentContent = document.querySelector('.tab-service__content.left')
+const howWorkProviderContent = document.querySelector('.tab-service__content.right')
+
+howWorkStudentButton.onclick = () => {
+  howWorkStudentButton.classList.add('active')
+  howWorkProviderButton.classList.remove('active')
+
+  howWorkStudentContent.classList.add('active')
+  howWorkProviderContent.classList.remove('active')
+}
+
+howWorkProviderButton.onclick = () => {
+  howWorkProviderButton.classList.add('active')
+  howWorkStudentButton.classList.remove('active')
+
+  howWorkProviderContent.classList.add('active')
+  howWorkStudentContent.classList.remove('active')
+}

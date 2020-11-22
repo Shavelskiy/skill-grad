@@ -70,7 +70,7 @@ class PriceController extends AbstractController
     }
 
     /**
-     * @Route("", name="admin.location.update", methods={"PUT"})
+     * @Route("", name="admin.price.update", methods={"PUT"})
      */
     public function update(Request $request): Response
     {

@@ -62,6 +62,10 @@
         padding-right: 15px;
         padding-left: 25px;
 
+        &.wide {
+          width: 100%;
+        }
+
         &:hover {
           .sub-menu {
             display: block;

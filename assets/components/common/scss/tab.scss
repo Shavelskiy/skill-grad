@@ -122,14 +122,11 @@
     & .nav {
       display: flex;
       justify-content: space-between;
-      padding-left: 65px;
-      padding-right: 65px;
+      padding: 0 65px;
       margin-bottom: -1px;
       z-index: 0;
 
       @media (min-width: 320px) and (max-width: 767px) {
-        flex-direction: column;
-        width: 100%;
         padding: 0;
       }
 
@@ -141,10 +138,6 @@
         margin-bottom: -1px;
         z-index: 0;
         cursor: pointer;
-
-        @media (min-width: 320px) and (max-width: 767px) {
-          display: none;
-        }
       }
 
       &-item.active {
