@@ -103,14 +103,4 @@
   .heart {
     display: flex !important;
   }
-
-  .button__menu {
-    @media (min-width: 320px) and (max-width: 767px) {
-      width: 50px;
-
-      &-text {
-        display: none;
-      }
-    }
-  }
 }

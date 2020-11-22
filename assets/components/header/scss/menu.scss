@@ -21,7 +21,7 @@
 
   .menu-container {
     overflow-y: scroll;
-    height: 600px;
+    max-height: 600px;
 
     &::-webkit-scrollbar {
       width: 7px;
@@ -196,16 +196,6 @@
       background-color: #eaf1f7;
       padding: 15px 0 15px 50px;
       margin-bottom: -20px;
-
-      //&:after {
-      //  content: "";
-      //  position: absolute;
-      //  top: 5%;
-      //  left: 50%;
-      //  width: 2px;
-      //  height: 90%;
-      //  background-color: #fff;
-      //}
 
       li {
         display: block;

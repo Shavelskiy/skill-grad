@@ -1,0 +1,33 @@
+<div id="mobile-categories" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <span class="arrow-back"></span>
+    <div class="content">
+      <h4>Категроии</h4>
+    </div>
+
+    <div class="header__menu_mobile">
+      <div class="mobile-menu_container mobile-main-container active">
+        {% for menuItem in getMenuItems() %}
+          <div class="menu-mobile_item">
+            <span class="open-mobile-subcategory" data-subscategory-id="{{ menuItem.id }}">
+              {{ menuItem.name }}
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% for menuItem in getMenuItems() %}
+        <div class="mobile-menu_container mobile-menu-subcategory" data-subscategory-id="{{ menuItem.id }}">
+          {% for childMenuItem in menuItem.childCategories %}
+            <div class="menu-mobile_item">
+              <a href="{{ path('app.search', {category: menuItem.id ,subcategory: childMenuItem.id}) }}">
+                {{ childMenuItem.name }}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

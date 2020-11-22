@@ -270,6 +270,20 @@
       cursor: pointer;
     }
   }
+
+  & .arrow-back {
+    background-image: url("./../../../img/svg/arrow-white.svg");
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: -40px;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
 }
 
 .auth-modal {

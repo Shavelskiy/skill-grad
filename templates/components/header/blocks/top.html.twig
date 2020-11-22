@@ -1,80 +1,50 @@
 <div class="header__top">
-  <div class="container w-sm-100 w-md-100">
-    <div class="col-sm-4">
-      <div class="logo-mobile">
-        <a href="/">
-          <img src="/img/logo_mobile.png" alt="">
+  <div class="container header__top_container">
+    <div class="logo-mobile">
+      <a href="{{ path('site.index') }}">
+        <img src="/img/logo_mobile.png" alt="">
+      </a>
+    </div>
+
+    <div class="header__top-left">
+      <div class="logo-container">
+        <a href="{{ path('site.index') }}">
+          <img class="logo-img" src="/img/svg/logo.svg" alt="logo">
         </a>
       </div>
-    </div>
-    <div class="col-lg-8 col-sm-2 col-md-10">
-      <div class="header__top-left">
-        <div class="logo-container">
-          <a href="/">
-            <img class="logo-img" src="/img/svg/logo.svg" alt="logo">
-          </a>
-        </div>
-        <div class="button__menu categories-menu-btn">
-          <div class="open-drop d-flex">
+
+      <div class="button__menu categories-menu-btn">
+        <div class="open-drop d-flex">
             <span class="button__menu-icon">
               <i class="icon-menu"></i>
             </span>
-            <span class="button__menu-text">Категории</span>
-          </div>
-          {% include 'components/header/blocks/categories.html.twig' %}
+          <span class="button__menu-text">Категории</span>
         </div>
+        {% include 'components/header/blocks/categories.html.twig' %}
+      </div>
 
-        <div class="open-change-city button-container">
-          <div class="button-icon open-city-selector-modal-btn">
-            <i class="icon-place"></i>
-          </div>
-          <div class="button-info">
-            <span class="button-text">Ваш город:</span>
-            <span class="button-link open-city-selector-modal-btn">Москва</span>
-          </div>
+      <div class="open-change-city button-container">
+        <div class="button-icon open-city-selector-modal-btn">
+          <i class="icon-place"></i>
+        </div>
+        <div class="button-info">
+          <span class="button-text">Ваш город:</span>
+          <span class="button-link open-city-selector-modal-btn">Москва</span>
         </div>
       </div>
     </div>
 
-    <div class="col-lg-4 col-sm-2 col-md-2">
-
-      <div class="header__top-right">
-        {% if app.user is not null %}
-          <div class="header__top-right">
-            <div class="button-container heart">
-              <a href="{{ path('app.favorite') }}">
-                <div class="button-icon">
-                  <i class="icon-heart"></i>
-                  <span class="button-notification user-favorite-count">{{ app.user.favoriteCount }}</span>
-                </div>
-              </a>
-            </div>
-            <div class="button-container">
-              <a href="{{ path('app.compare') }}">
-                <div class="button-icon">
-                  <i class="icon-add-file"></i>
-                  <span class="button-notification compare-count">{{ getCompareCount(app.request.cookies) }}</span>
-                </div>
-              </a>
-            </div>
-            <div class="button-container auth">
-              <div class="button-icon open-header-dropdown-btn">
-                <i class="icon-login"></i>
+    <div class="header__top-right">
+      {% if app.user is not null %}
+        <div class="header__top-right">
+          <div class="button-container heart">
+            <a href="{{ path('app.favorite') }}">
+              <div class="button-icon">
+                <i class="icon-heart"></i>
+                <span class="button-notification user-favorite-count">{{ app.user.favoriteCount }}</span>
               </div>
-              <div class="button-info auth-text open-header-dropdown-btn">
-                <span class="button-text">Добро пожаловать,</span>
-                <span class="button-text">{{ getUsername(app.user) }}</span>
-              </div>
-              <div class="dropdown header-dropdown">
-                {% if is_granted('ROLE_PROVIDER') %}
-                  {% include 'components/header/blocks/provider.dropdown.html.twig' %}
-                {% else %}
-                  {% include 'components/header/blocks/user.dropdown.html.twig' %}
-                {% endif %}
-              </div>
-            </div>
+            </a>
           </div>
-        {% else %}
           <div class="button-container">
             <a href="{{ path('app.compare') }}">
               <div class="button-icon">
@@ -83,17 +53,42 @@
               </div>
             </a>
           </div>
-          <div class="button-container">
-            <div class="open-auth button-icon open-login-modal-btn">
-              <i class="icon-arrow"></i>
+          <div class="button-container auth">
+            <div class="button-icon open-header-dropdown-btn">
+              <i class="icon-login"></i>
             </div>
-            <div class="button-info auth">
-              <span class="open-auth button-text open-login-modal-btn">Вход</span>
-              <span class="open-type-account button-text open-register-modal-btn">Регистрация</span>
+            <div class="button-info auth-text open-header-dropdown-btn">
+              <span class="button-text">Добро пожаловать,</span>
+              <span class="button-text">{{ getUsername(app.user) }}</span>
+            </div>
+            <div class="dropdown header-dropdown">
+              {% if is_granted('ROLE_PROVIDER') %}
+                {% include 'components/header/blocks/provider.dropdown.html.twig' %}
+              {% else %}
+                {% include 'components/header/blocks/user.dropdown.html.twig' %}
+              {% endif %}
             </div>
           </div>
-        {% endif %}
-      </div>
+        </div>
+      {% else %}
+        <div class="button-container">
+          <a href="{{ path('app.compare') }}">
+            <div class="button-icon">
+              <i class="icon-add-file"></i>
+              <span class="button-notification compare-count">{{ getCompareCount(app.request.cookies) }}</span>
+            </div>
+          </a>
+        </div>
+        <div class="button-container">
+          <div class="open-auth button-icon open-login-modal-btn">
+            <i class="icon-arrow"></i>
+          </div>
+          <div class="button-info auth">
+            <span class="open-auth button-text open-login-modal-btn">Вход</span>
+            <span class="open-type-account button-text open-register-modal-btn">Регистрация</span>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -61,7 +61,6 @@ class SiteController extends AbstractController
         $result = function () {
             $result = [];
 
-            /** @var Category $category */
             foreach ($this->categoryRepository->findRootCategories() as $category) {
                 $programs = [];
 
