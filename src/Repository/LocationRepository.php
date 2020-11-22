@@ -88,6 +88,19 @@ class LocationRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Location[]
+     */
+    public function findSuggestions(string $query): array
+    {
+        return $this
+            ->createQueryBuilder('l')
+            ->andWhere('upper(l.name) like :name')
+            ->setParameter('name', '%' . mb_strtoupper($query) . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

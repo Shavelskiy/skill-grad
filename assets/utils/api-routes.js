@@ -17,3 +17,5 @@ export const ADD_ARTICLE_COMMENT = '/ajax/blog/comment'
 export const DELETE_ARTICLE_COMMENT = '/ajax/blog/comment/:id'
 export const EDIT_ARTICLE_COMMENT = '/ajax/blog/comment/:id'
 export const ARTICLE_LIKE = '/ajax/blog/like'
+
+export const LOCATION_SUGGEST_URL = '/ajax/location/suggest'

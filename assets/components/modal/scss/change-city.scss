@@ -40,7 +40,6 @@
       background: #f7562e;
     }
 
-
     @media (min-width: 320px) and (max-width: 767px) {
       flex-wrap: nowrap;
       flex-direction: column;
@@ -117,6 +116,48 @@
         &:hover {
           color: #f7562e;
         }
+      }
+    }
+  }
+
+  .city-selector-suggestions {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 7px 20px 0 rgba(22, 58, 86, 0.1);
+    padding: 10px 20px;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    .suggestions-content {
+      display: flex;
+      flex-direction: column;
+      max-height: 400px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #e9f1f7;
+        border-left: 2px solid white;
+        border-right: 2px solid white;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #f7562e;
+      }
+
+      a {
+        color: #3d3d3d;
+        text-align: left;
+        padding: 10px 20px;
+        text-decoration: none;
       }
     }
   }
