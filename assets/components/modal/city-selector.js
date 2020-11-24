@@ -47,7 +47,7 @@ document.querySelector('.city-modal-search').oninput = (event) => {
       suggestionsContainer.innerHTML = ''
 
       data.suggestions.forEach(suggestion => {
-        suggestionsContainer.innerHTML += `<a href="/">${suggestion.name}</a>`
+        suggestionsContainer.innerHTML += `<a href="${suggestion.link}">${suggestion.name}</a>`
       })
 
       suggestionsSelectorContainer.classList.add('active')

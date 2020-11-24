@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Helpers\CompareHelper;
 use App\Repository\CategoryRepository;
 use App\Repository\ChatMessageRepository;
-use App\Service\LocationService;
 use App\Service\User\UserInfoInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Twig\Extension\AbstractExtension;
@@ -18,18 +17,15 @@ class CommonExtension extends AbstractExtension
     protected ChatMessageRepository $chatMessageRepository;
     protected CategoryRepository $categoryRepository;
     protected UserInfoInterface $userService;
-    protected LocationService $locationService;
 
     public function __construct(
         ChatMessageRepository $chatMessageRepository,
         CategoryRepository $categoryRepository,
-        UserInfoInterface $userService,
-        LocationService $locationService
+        UserInfoInterface $userService
     ) {
         $this->chatMessageRepository = $chatMessageRepository;
         $this->categoryRepository = $categoryRepository;
         $this->userService = $userService;
-        $this->locationService = $locationService;
     }
 
     public function getFunctions(): array
@@ -42,7 +38,6 @@ class CommonExtension extends AbstractExtension
             new TwigFunction('getNewMessagesCount', [$this, 'getNewMessagesCount']),
             new TwigFunction('getRootCategories', [$this, 'getRootCategories']),
             new TwigFunction('getChildCategories', [$this, 'getChildCategories']),
-            new TwigFunction('getCurrentLocation', [$this, 'getCurrentLocation']),
         ];
     }
 
@@ -115,10 +110,5 @@ class CommonExtension extends AbstractExtension
         }
 
         return $category->getChildCategories()->toArray();
-    }
-
-    public function getCurrentLocation(): string
-    {
-        return $this->locationService->getCurrentLocation()->getName();
     }
 }

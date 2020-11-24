@@ -4,6 +4,7 @@ namespace App\Controller\Ajax;
 
 use App\Entity\Location;
 use App\Repository\LocationRepository;
+use App\Service\LocationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class LocationController extends AbstractController
 {
     protected LocationRepository $locationRepository;
+    protected LocationService $locationService;
 
     public function __construct(
-        LocationRepository $locationRepository
+        LocationRepository $locationRepository,
+        LocationService $locationService
     ) {
         $this->locationRepository = $locationRepository;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -36,6 +40,7 @@ class LocationController extends AbstractController
                 'name' => ($location->getType() === Location::TYPE_CITY && $location->getParentLocation() !== null) ?
                     sprintf('%s (%s)', $location->getName(), $location->getParentLocation()->getName()) :
                     $location->getName(),
+                'link' => $this->locationService->generateLocationLink($location),
             ];
         }
 

@@ -7,8 +7,8 @@ use App\Enum\Cache\Keys;
 use App\Helpers\MemcachedClient;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
+use App\Service\LocationService;
 use Psr\Cache\CacheItemInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,20 +16,16 @@ class MenuExtension extends AbstractExtension
 {
     protected CategoryRepository $categoryRepository;
     protected LocationRepository $locationRepository;
-
-    protected string $scheme;
-    protected string $host;
+    protected LocationService $locationService;
 
     public function __construct(
         CategoryRepository $categoryRepository,
         LocationRepository $locationRepository,
-        ParameterBagInterface $parameterBag
+        LocationService $locationService
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->locationRepository = $locationRepository;
-
-        $this->scheme = $parameterBag->get('app_scheme');
-        $this->host = $parameterBag->get('app_host');
+        $this->locationService = $locationService;
     }
 
     public function getFunctions(): array
@@ -37,6 +33,7 @@ class MenuExtension extends AbstractExtension
         return [
             new TwigFunction('getMenuItems', [$this, 'getMenuItemsCached']),
             new TwigFunction('getListLocations', [$this, 'getListLocationsCached']),
+            new TwigFunction('getCurrentLocation', [$this, 'getCurrentLocation']),
         ];
     }
 
@@ -106,10 +103,15 @@ class MenuExtension extends AbstractExtension
             $result[] = [
                 'id' => $location->getId(),
                 'name' => $location->getName(),
-                'link' => sprintf('%s://%s.%s', $this->scheme, $location->getCode(), $this->host),
+                'link' => $this->locationService->generateLocationLink($location),
             ];
         }
 
         return $result;
+    }
+
+    public function getCurrentLocation(): string
+    {
+        return $this->locationService->getCurrentLocation()->getName();
     }
 }
