@@ -10,7 +10,7 @@ class DocumentService
 {
     protected const FILE_DOWNLOAD_PATH = 'api.document.download';
 
-    protected const REPLENISH_DIR_PARAM_KEY = 'replenish_dir';
+    protected const FILES_DIR_PARAM_KEY = 'files_dir';
 
     protected RouterInterface $router;
     protected string $replenishDir;
@@ -20,7 +20,7 @@ class DocumentService
         RouterInterface $router
     ) {
         $this->router = $router;
-        $this->replenishDir = $params->get(self::REPLENISH_DIR_PARAM_KEY);
+        $this->replenishDir = $params->get(self::FILES_DIR_PARAM_KEY). '/replenish';
     }
 
     public function generateDownloadPath(Document $document): string

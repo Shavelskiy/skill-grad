@@ -32,11 +32,11 @@ class PdfService
 
         $tmpFileName = $this->pdfTmpDir . sprintf('/pdf_tmp_%s.html', time());
 
-        $fileDirection = sprintf('%s/replenish/%s', $this->documentRootDir, $output);
+        $fileDirection = sprintf('%s/replenish', $this->documentRootDir);
 
         $this->createDir($fileDirection);
 
-        $outputFilePath = sprintf('%s/%s', $this->documentRootDir, $output);
+        $outputFilePath = sprintf('%s/%s', $fileDirection, $output);
 
         $command = sprintf('%s %s %s', self::PDF_GENERATE_COMMAND, $tmpFileName, $outputFilePath);
 

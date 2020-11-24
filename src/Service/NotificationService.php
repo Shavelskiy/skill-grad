@@ -42,7 +42,7 @@ class NotificationService implements AuthMailerInterface
     {
         try {
             $email = (new Email())
-                ->from('v.shavelskiy@yandex.ru')
+                ->from('d.uzhikov@mail.ru')
                 ->to($toEmail)
                 ->subject('Восстановление пароля')
                 ->html($this->templating->render('emails/forgot.password.html.twig', [
@@ -62,7 +62,7 @@ class NotificationService implements AuthMailerInterface
     {
         try {
             $email = (new Email())
-                ->from('v.shavelskiy@yandex.ru')
+                ->from('d.uzhikov@mail.ru')
                 ->to($toEmail)
                 ->subject('Потверждение регистрации')
                 ->html($this->templating->render('emails/confirm.register.html.twig', [
