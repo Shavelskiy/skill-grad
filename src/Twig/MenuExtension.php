@@ -8,6 +8,7 @@ use App\Helpers\MemcachedClient;
 use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
 use Psr\Cache\CacheItemInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,12 +17,19 @@ class MenuExtension extends AbstractExtension
     protected CategoryRepository $categoryRepository;
     protected LocationRepository $locationRepository;
 
+    protected string $scheme;
+    protected string $host;
+
     public function __construct(
         CategoryRepository $categoryRepository,
-        LocationRepository $locationRepository
+        LocationRepository $locationRepository,
+        ParameterBagInterface $parameterBag
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->locationRepository = $locationRepository;
+
+        $this->scheme = $parameterBag->get('app_scheme');
+        $this->host = $parameterBag->get('app_host');
     }
 
     public function getFunctions(): array
@@ -98,7 +106,7 @@ class MenuExtension extends AbstractExtension
             $result[] = [
                 'id' => $location->getId(),
                 'name' => $location->getName(),
-                'highlight' => $location->getId() < 10,
+                'link' => sprintf('%s://%s.%s', $this->scheme, $location->getCode(), $this->host),
             ];
         }
 

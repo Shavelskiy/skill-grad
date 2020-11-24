@@ -28,15 +28,19 @@ class OkAuth implements SocialAuthInterface
 
     protected string $siteHost;
 
-    public function __construct(ParameterBagInterface $params)
-    {
-        $okParams = ($params->get('social.services'))['ok'];
+    public function __construct(
+        ParameterBagInterface $parameterBag
+    ) {
+        $okParams = ($parameterBag->get('social.services'))['ok'];
 
         $this->clientId = $okParams['client_id'];
         $this->secretKey = $okParams['secret_key'];
         $this->publicKey = $okParams['public_key'];
 
-        $this->siteHost = ($params->get('site'))['host'];
+        $this->siteHost = sprintf('%s://%s',
+            $parameterBag->get('app_scheme'),
+            $parameterBag->get('app_host'),
+        );
     }
 
     public function getAuthLink(): string

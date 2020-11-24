@@ -14,7 +14,7 @@
       <div class="cities">
         <div class="column">
           {% for location in getListLocations() %}
-            <span><a href="#">{{ location.name }}</a></span>
+            <span><a href="{{ location.link }}">{{ location.name }}</a></span>
           {% endfor %}
         </div>
       </div>

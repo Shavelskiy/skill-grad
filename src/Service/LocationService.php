@@ -6,6 +6,10 @@ use App\Entity\Location;
 
 class LocationService
 {
+    public const DEFAULT_LOCATION_CODE = 'moskva';
+
+    protected Location $currentLocation;
+
     public function getLocationPath(Location $location): string
     {
         $path = [];
@@ -17,5 +21,16 @@ class LocationService
         }
 
         return implode(', ', $path);
+    }
+
+    public function getCurrentLocation(): Location
+    {
+        return $this->currentLocation;
+    }
+
+    public function setCurrentLocation(Location $currentLocation): self
+    {
+        $this->currentLocation = $currentLocation;
+        return $this;
     }
 }

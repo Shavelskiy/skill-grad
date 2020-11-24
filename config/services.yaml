@@ -1,6 +1,6 @@
 parameters:
-  site:
-    host: '%env(resolve:SITE_HOST)%'
+  app_scheme: '%env(resolve:APP_SCHEME)%'
+  app_host: '%env(resolve:APP_HOST)%'
   upload_dir: '%kernel.project_dir%/public/upload'
   pdf_tmp_dir: '%kernel.project_dir%/var/tmp'
   files_dir: '%kernel.project_dir%/var/files'

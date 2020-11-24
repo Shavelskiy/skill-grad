@@ -28,7 +28,10 @@ class NotificationService implements AuthMailerInterface
         $this->urlGenerator = $urlGenerator;
         $this->templating = $templating;
 
-        $this->host = ($params->get('site'))['host'];
+        $this->host = sprintf('%s://%s',
+            $params->get('app_scheme'),
+            $params->get('app_host'),
+        );
     }
 
     /**

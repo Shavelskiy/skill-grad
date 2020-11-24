@@ -23,14 +23,18 @@ class VkAuth implements SocialAuthInterface
 
     protected string $siteHost;
 
-    public function __construct(ParameterBagInterface $params)
-    {
-        $vkParams = ($params->get('social.services'))['vk'];
+    public function __construct(
+        ParameterBagInterface $parameterBag
+    ) {
+        $vkParams = ($parameterBag->get('social.services'))['vk'];
 
         $this->clientId = $vkParams['client_id'];
         $this->secretKey = $vkParams['secret_key'];
 
-        $this->siteHost = ($params->get('site'))['host'];
+        $this->siteHost = sprintf('%s://%s',
+            $parameterBag->get('app_scheme'),
+            $parameterBag->get('app_host'),
+        );
     }
 
     public function getAuthLink(): string
