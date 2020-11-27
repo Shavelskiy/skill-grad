@@ -26,6 +26,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (max-width: 1200px) {
+  font-size: 15px;
+}
+
 a {
   text-decoration: none;
 }
