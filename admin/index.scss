@@ -27,7 +27,9 @@ body {
 }
 
 @media (max-width: 1200px) {
-  font-size: 15px;
+  body {
+    font-size: 15px;
+  }
 }
 
 a {
