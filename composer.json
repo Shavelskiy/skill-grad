@@ -7,7 +7,6 @@
     "ext-iconv": "*",
     "ext-json": "*",
     "ext-memcached": "*",
-    "ext-redis": "*",
     "ext-sockets": "*",
     "ext-simplexml": "*",
     "ext-curl": "*",
@@ -34,7 +33,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.16",
     "symfony/maker-bundle": "^1.14",
-    "symfony/profiler-pack": "^1.0"
+    "symfony/profiler-pack": "^1.0",
+    "vimeo/psalm": "^4.2"
   },
   "config": {
     "preferred-install": {
