@@ -1,5 +1,13 @@
 <header class="header user">
   {% include 'components/header/blocks/top.html.twig' %}
-  {% include 'components/header/blocks/menu.html.twig' %}
-  {% include 'components/header/content/index.html.twig' %}
+
+  <div class="main-header-content">
+    {% include 'components/header/blocks/menu.html.twig' %}
+
+    <video autoplay muted loop>
+      <source src="/img/main_video.mp4" type="video/mp4">
+    </video>
+
+    {% include 'components/header/content/index.html.twig' %}
+  </div>
 </header>

@@ -493,13 +493,11 @@ textarea {
   outline: 0 !important;
 }
 
-@mixin columns-loop($name, $columns, $gutter) {
+@mixin columns-loop($name, $columns) {
   @for $i from 0 through $columns {
     &-#{$name}-#{$i} {
       box-sizing: border-box;
       width: 100% / $columns * $i;
-      padding-left: $gutter / 2;
-      padding-right: $gutter / 2;
     }
 
     &-#{$name}-shift-#{$i} {
@@ -536,12 +534,14 @@ textarea {
   }
 
   .col {
-    @include columns-loop(lg, 12, ((40px / 1050px) * 100%));
+    @include columns-loop(lg, 12);
+
     @media (min-width: 768px) and (max-width: 1023px) {
-      @include columns-loop(md, 12, ((30px / 924px) * 100%));
+      @include columns-loop(md, 12);
     }
+
     @media (min-width: 320px) and (max-width: 767px) {
-      @include columns-loop(sm, 4, ((20px / 556px) * 100%));
+      @include columns-loop(sm, 4);
     }
   }
 }

@@ -10,10 +10,10 @@
 {% block body %}
   <div class="main_favorites mt-0">
     <h2 class="title">{{ title }}</h2>
-    {#          <div class="alert red">#}
-    {#            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>#}
-    {#            Некоторые избранные вами программы были удалены провайдером#}
-    {#          </div>#}
+    {# <div class="alert red"> #}
+    {# <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> #}
+    {# Некоторые избранные вами программы были удалены провайдером #}
+    {# </div> #}
     <div class="container">
       <div class="tab">
         <div class="toggle-menu tab__nav">
@@ -56,27 +56,23 @@
           </div>
 
           <div class="tab__content-item tab-programs {{ tab == 'programs' ? 'active' : '' }}">
-            <div class="col-lg-12 col-sm-4">
-              {% if programs.items|length > 0 %}
-                {% for program in programs.items %}
-                  {% include 'program/card-program.html.twig' with {
-                    program: program,
-                    favorite: true
-                  } %}
-                {% endfor %}
-              {% else %}
-                <h5>В избранном пока нет программ!</h5>
-              {% endif %}
-            </div>
+            {% if programs.items|length > 0 %}
+              {% for program in programs.items %}
+                {% include 'program/card-program.html.twig' with {
+                  program: program,
+                  favorite: true
+                } %}
+              {% endfor %}
+            {% else %}
+              <h5>В избранном пока нет программ!</h5>
+            {% endif %}
 
-            <div class="col-lg-12">
-              {% include 'components/paginator.html.twig' with {
-                page: programs.page,
-                total_pages: programs.total_pages,
-                path_name: 'app.favorite',
-                page_key: 'program_page'
-              } %}
-            </div>
+            {% include 'components/paginator.html.twig' with {
+              page: programs.page,
+              total_pages: programs.total_pages,
+              path_name: 'app.favorite',
+              page_key: 'program_page'
+            } %}
           </div>
 
           <div class="tab__content-item tab-articles {{ tab == 'articles' ? 'active' : '' }}">

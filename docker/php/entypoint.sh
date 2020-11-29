@@ -4,4 +4,4 @@ set -m
 
 service cron start
 
- php-fpm
+/usr/local/bin/php /application/bin/console app:chat:start & php-fpm
