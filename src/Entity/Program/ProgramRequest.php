@@ -34,7 +34,7 @@ class ProgramRequest
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    protected string $comment;
+    protected ?string $comment = null;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -70,7 +70,7 @@ class ProgramRequest
 
     public function getComment(): string
     {
-        return $this->comment ?? '';
+        return $this->comment ?: '';
     }
 
     public function setComment(string $comment): self

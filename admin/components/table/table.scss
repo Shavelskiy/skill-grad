@@ -22,7 +22,6 @@
       cursor: pointer;
 
       &::before, &::after {
-        bottom: .75rem;
         content: "\2191";
         position: absolute;
         display: block;
@@ -102,7 +101,7 @@
     }
 
     &.actions {
-      flex: 2;
+      flex: 3;
     }
 
     &.boolean {

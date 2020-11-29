@@ -34,17 +34,17 @@ class ProgramOccupationMode
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected ?string $fromTime;
+    protected ?string $fromTime = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected ?string $toTime;
+    protected ?string $toTime = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected ?string $otherValue;
+    protected ?string $otherValue = null;
 
     public function getProgram(): Program
     {
@@ -68,7 +68,7 @@ class ProgramOccupationMode
         return $this;
     }
 
-    public function getDays(): ?array
+    public function getDays(): array
     {
         $result = [];
 
@@ -85,9 +85,9 @@ class ProgramOccupationMode
         return $this;
     }
 
-    public function getFromTime(): ?string
+    public function getFromTime(): string
     {
-        return $this->fromTime;
+        return $this->fromTime ?: '';
     }
 
     public function setFromTime(?string $fromTime): self
@@ -96,9 +96,9 @@ class ProgramOccupationMode
         return $this;
     }
 
-    public function getToTime(): ?string
+    public function getToTime(): string
     {
-        return $this->toTime;
+        return $this->toTime ?: '';
     }
 
     public function setToTime(?string $toTime): self
@@ -107,9 +107,9 @@ class ProgramOccupationMode
         return $this;
     }
 
-    public function getOtherValue(): ?string
+    public function getOtherValue(): string
     {
-        return $this->otherValue;
+        return $this->otherValue ?: '';
     }
 
     public function setOtherValue(?string $otherValue): self
@@ -128,10 +128,10 @@ class ProgramOccupationMode
 
         if ($this->getType() === self::OCCUPATION_MODE_TIME) {
             return [
-                'selectedDays' => $this->getDays() ?? [],
+                'selectedDays' => $this->getDays(),
                 'selectedTime' => [
-                    'start' => $this->getFromTime() ?? '00:00',
-                    'end' => $this->getToTime() ?? '00:00',
+                    'start' => !empty($this->getFromTime()) ? $this->getFromTime() : '00:00',
+                    'end' => !empty($this->getToTime()) ? $this->getToTime() : '00:00',
                 ],
             ];
         }

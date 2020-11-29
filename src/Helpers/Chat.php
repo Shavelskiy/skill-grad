@@ -12,13 +12,11 @@ use App\Service\User\UserInfoInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Ratchet\ConnectionInterface;
-use Ratchet\MessageComponentInterface;
 use RuntimeException;
 use SplObjectStorage;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Chat implements MessageComponentInterface
-{
+class Chat {
     protected const MSG_INIT = 'init';
     protected const MSG_FOCUS_IN = 'focusIn';
     protected const MSG_FOCUS_OUT = 'focusOut';
@@ -59,25 +57,25 @@ class Chat implements MessageComponentInterface
         $this->clients->attach($conn);
     }
 
-    public function onMessage(ConnectionInterface $from, $msgStr): void
+    public function onMessage(ConnectionInterface $from, $msg): void
     {
-        $this->output->write(sprintf('<question>Message from: %s, %s</question>', $from->resourceId, $msgStr), true);
+        $this->output->write(sprintf('<question>Message from: %s, %s</question>', $from->resourceId, $msg), true);
 
-        $msg = json_decode($msgStr, true);
+        $message = json_decode($msg, true);
 
-        switch ($msg['type']) {
+        switch ($message['type']) {
             case self::MSG_INIT:
-                $this->onInit($msg, $from);
+                $this->onInit($message, $from);
                 break;
             case self::MSG_FOCUS_IN:
             case self::MSG_FOCUS_OUT:
-                $this->onFocusChange($msg, $from);
+                $this->onFocusChange($message, $from);
                 break;
             case self::MSG_SEND_MESSAGE:
-                $this->onChatMessage($msg, $from);
+                $this->onChatMessage($message, $from);
                 break;
             case self::MSG_VIEWED:
-                $this->onViewed($msg, $from);
+                $this->onViewed($message, $from);
                 break;
         }
     }
@@ -88,7 +86,7 @@ class Chat implements MessageComponentInterface
 
         $userId = $this->resourcesToUsersMap[$conn->resourceId];
         unset($this->resourcesToUsersMap[$conn->resourceId]);
-        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], fn (int $resourceId) => $resourceId !== $conn->resourceId);
+        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], static fn (int $resourceId) => $resourceId !== $conn->resourceId);
 
         $this->clients->detach($conn);
     }
@@ -99,7 +97,7 @@ class Chat implements MessageComponentInterface
 
         $userId = $this->resourcesToUsersMap[$conn->resourceId];
         unset($this->resourcesToUsersMap[$conn->resourceId]);
-        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], fn (int $resourceId) => $resourceId !== $conn->resourceId);
+        $this->usersToResourcesMap[$userId] = array_filter($this->usersToResourcesMap[$userId], static fn (int $resourceId) => $resourceId !== $conn->resourceId);
 
         $conn->close();
     }

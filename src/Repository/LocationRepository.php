@@ -25,7 +25,7 @@ class LocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Location::class);
     }
 
-    public function findById($id): object
+    public function findById(int $id): Location
     {
         $location = $this->findOneBy(['id' => $id]);
 

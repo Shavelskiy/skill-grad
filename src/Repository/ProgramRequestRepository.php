@@ -80,22 +80,4 @@ class ProgramRequestRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-
-    /**
-     * @return Paginator
-     *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     */
-    public function getPaginatorProgramItems(Program $program, int $page = 1, int $pageItems = 10): PaginatorResult
-    {
-        $query = $this->createQueryBuilder('pr')
-            ->andWhere('pr.program = :program')
-            ->setParameter('program', $program);
-
-        return (new Paginator())
-            ->setQuery($query)
-            ->setPage($page)
-            ->getResult();
-    }
 }

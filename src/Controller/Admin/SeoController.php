@@ -54,6 +54,7 @@ class SeoController extends AbstractController
      */
     public function articleIndex(): Response
     {
+        return new JsonResponse([], 404);
     }
 
     /**
@@ -61,6 +62,7 @@ class SeoController extends AbstractController
      */
     public function providerIndex(): Response
     {
+        return new JsonResponse([], 404);
     }
 
     /**
@@ -68,6 +70,7 @@ class SeoController extends AbstractController
      */
     public function programIndex(): Response
     {
+        return new JsonResponse([], 404);
     }
 
     /**
@@ -75,6 +78,7 @@ class SeoController extends AbstractController
      */
     public function pageIndex(): Response
     {
+        return new JsonResponse([], 404);
     }
 
     protected function prepareSeoData(AbstractSeo $seo): array

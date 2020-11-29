@@ -144,11 +144,11 @@ class Program
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Program\ProgramOccupationMode", mappedBy="program")
      */
-    protected ProgramOccupationMode $programOccupationMode;
+    protected ?ProgramOccupationMode $programOccupationMode = null;
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected string $otherInclude;
+    protected ?string $otherInclude = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Program\ProgramAdditional")
@@ -159,7 +159,7 @@ class Program
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected string $otherAdditional;
+    protected ?string $otherAdditional = null;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Content\Seo\ProgramSeo", mappedBy="program")
@@ -455,7 +455,7 @@ class Program
 
     public function getProgramOccupationMode(): ?ProgramOccupationMode
     {
-        return $this->programOccupationMode ?? null;
+        return $this->programOccupationMode;
     }
 
     public function setProgramOccupationMode(ProgramOccupationMode $programOccupationMode): self
@@ -486,7 +486,7 @@ class Program
 
     public function getOtherInclude(): string
     {
-        return $this->otherInclude ?? '';
+        return $this->otherInclude ?: '';
     }
 
     public function setOtherInclude(string $otherInclude): self

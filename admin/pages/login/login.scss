@@ -12,6 +12,10 @@
     box-shadow: 0 0 3.12vw 0 rgba(77, 84, 124, 0.09);
     border-radius: 0.6rem;
 
+    @media (max-width: 1921px) {
+      max-width: 486px;
+    }
+
     &.lock {
       opacity: 0.8;
     }

@@ -11,6 +11,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\LocationRepository;
 use App\Service\UploadServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -196,14 +197,14 @@ class ProviderSettingsController extends AbstractController
     protected function getSelectedLocation(array $locations): Location
     {
         if ($locations[Location::TYPE_CITY] !== null) {
-            return $this->locationRepository->find($locations[Location::TYPE_CITY]);
+            return $this->locationRepository->findById($locations[Location::TYPE_CITY]);
         }
 
         if ($locations[Location::TYPE_REGION] !== null) {
-            return $this->locationRepository->find($locations[Location::TYPE_REGION]);
+            return $this->locationRepository->findById($locations[Location::TYPE_REGION]);
         }
 
-        return $this->locationRepository->find($locations[Location::TYPE_COUNTRY]);
+        return $this->locationRepository->findById($locations[Location::TYPE_COUNTRY]);
     }
 
     protected function getSelectedSubcategories(array $selectedCategoryIds, array $selectedSubcategoryIds): array

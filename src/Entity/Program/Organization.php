@@ -14,7 +14,7 @@ trait Organization
     /**
      * @ORM\Column(type="simple_array", nullable=true)
      */
-    protected ?array $trainingDateExtra;
+    protected ?array $trainingDateExtra = null;
 
     /**
      * @ORM\Column(type="json")
@@ -32,9 +32,9 @@ trait Organization
         return $this;
     }
 
-    public function getTrainingDateExtra(): ?array
+    public function getTrainingDateExtra(): array
     {
-        return $this->trainingDateExtra;
+        return $this->trainingDateExtra ?: [];
     }
 
     public function setTrainingDateExtra(?array $trainingDateExtra): self

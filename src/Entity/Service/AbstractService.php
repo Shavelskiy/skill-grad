@@ -54,7 +54,7 @@ abstract class AbstractService
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected string $number;
+    protected ?string $number = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service\Document", mappedBy="service", cascade={"persist"})
@@ -125,7 +125,7 @@ abstract class AbstractService
 
     public function getNumber(): string
     {
-        return $this->number ?? '';
+        return $this->number ?: '';
     }
 
     public function setNumber(string $number): self

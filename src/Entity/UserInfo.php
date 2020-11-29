@@ -53,9 +53,9 @@ class UserInfo
         return $this;
     }
 
-    public function getFullName(): ?string
+    public function getFullName(): string
     {
-        return $this->fullName;
+        return $this->fullName ?? '';
     }
 
     public function setFullName(?string $fullName): self

@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Article;
 use App\Entity\Program\Program;
 use App\Entity\Provider;
+use RuntimeException;
 
 class SearchService
 {
@@ -225,6 +226,10 @@ class SearchService
         $response = curl_exec($ch);
         curl_close($ch);
 
-        return json_decode($response, JSON_OBJECT_AS_ARRAY);
+        if (is_bool($response)) {
+            throw new RuntimeException('search server error');
+        }
+
+        return json_decode($response, true);
     }
 }

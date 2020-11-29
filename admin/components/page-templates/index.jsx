@@ -30,10 +30,10 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
   const [disabledTable, setDisabledTable] = useState(false)
 
   const [totalPages, setTotalPages] = useState(0)
-  const [currentPage, setCurrentPage] = useState(initState.page)
 
   const [query, setQuery] = useState({
     pageItemCount: initState.pageItemCount,
+    currentPage: initState.page,
     order: initState.order,
     search: initState.search
   })
@@ -59,8 +59,8 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
 
       const params = {}
 
-      if (currentPage !== 1) {
-        params.page = currentPage
+      if (query.currentPage !== 1) {
+        params.page = query.currentPage
       }
 
       if (JSON.stringify(query.order) !== JSON.stringify({})) {
@@ -91,14 +91,13 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
 
           setBody(data.items)
           setTotalPages(data.total_pages)
-          setCurrentPage(data.current_page)
           setDisabledTable(false)
         })
     }
     loadItems()
 
     return () => mounted = false
-  }, [query, currentPage, reloadTable])
+  }, [query, reloadTable])
 
   const clearSearch = () => {
     if (JSON.stringify(query.search) === JSON.stringify({})) {
@@ -119,8 +118,7 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
         <PageCountSelect
           value={query.pageItemCount}
           setValue={(pageItemCount) => {
-            setQuery({...query, pageItemCount: pageItemCount})
-            setCurrentPage(1)
+            setQuery({...query, pageItemCount: pageItemCount, currentPage: 1})
           }}
         />
         <Button
@@ -136,14 +134,14 @@ const IndexPageTemplate = ({title, icon, table, actions, fetchUrl, canCreate, cr
         query={query}
         actions={actions}
         reload={() => setReloadTable(!reloadTable)}
-        changeSearch={(search) => setQuery({...query, search: search})}
+        changeSearch={(search) => setQuery({...query, search: search, currentPage: 1})}
         changeOrder={(order) => setQuery({...query, order: order})}
       />
       <Paginator
         totalPages={totalPages}
-        currentPage={currentPage}
+        currentPage={query.currentPage}
         click={(page) => {
-          (page !== currentPage) ? setCurrentPage(page) : {}
+          (page !== query.currentPage) ? setQuery({...query, currentPage: page}) : {}
         }}
       />
     </Portlet>

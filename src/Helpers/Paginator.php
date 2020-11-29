@@ -13,7 +13,7 @@ class Paginator
     protected QueryBuilder $countQuery;
     protected int $page = 1;
     protected int $pageItems;
-    protected PaginatorResult $result;
+    protected ?PaginatorResult $result = null;
 
     public function setQuery(QueryBuilder $query): self
     {
@@ -55,7 +55,7 @@ class Paginator
      */
     public function getResult(): PaginatorResult
     {
-        if (!isset($this->result)) {
+        if ($this->result === null) {
             $items = (clone $this->query)
                 ->setFirstResult(($this->page - 1) * $this->pageItems)
                 ->setMaxResults($this->pageItems)
@@ -71,7 +71,7 @@ class Paginator
             return (new PaginatorResult())
                 ->setItems($items)
                 ->setCurrentPage($this->page)
-                ->setTotalPageCount(ceil($totalCount / $this->pageItems));
+                ->setTotalPageCount((int)ceil($totalCount / $this->pageItems));
         }
 
         return $this->result;

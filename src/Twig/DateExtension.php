@@ -45,7 +45,7 @@ class DateExtension extends AbstractExtension
     {
         return sprintf('%s %s %s, %s',
             $date->format('d'),
-            mb_substr(self::MONTHS[$date->format('m') - 1], 0, 3),
+            mb_substr(self::MONTHS[(int)$date->format('m') - 1], 0, 3),
             $date->format('Y'),
             $date->format('h:i')
         );

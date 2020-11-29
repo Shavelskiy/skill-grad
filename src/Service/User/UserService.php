@@ -129,7 +129,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         }
 
         if (!$user->isProvider()) {
-            if ($userInfo->getImage() !== null && $updateUserData->getOldImage() === null) {
+            if ($updateUserData->getOldImage() === null && $userInfo->getImage() !== null) {
                 $this->uploadService->deleteUpload($userInfo->getImage());
                 $userInfo->setImage(null);
             }
@@ -174,7 +174,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
         }
     }
 
-    protected function updateUserPassword(User $user, string $password)
+    protected function updateUserPassword(User $user, string $password): void
     {
         $user->setPassword($this->userPasswordEncoder->encodePassword($user, $password));
     }
@@ -195,7 +195,7 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
 
         $fullName = $user->getUserInfo()->getFullName();
 
-        if ($fullName !== null && !empty($fullName)) {
+        if (!empty($fullName)) {
             return $fullName;
         }
 
@@ -212,10 +212,10 @@ class UserService implements ResetUserPasswordInterface, RegisterUserInterface, 
             return $user->getProvider()->getImage() ? $user->getProvider()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
         }
 
-        if ($user->getUserInfo() === null) {
+        if ($user->getUserInfo() === null || $user->getUserInfo()->getImage() === null) {
             return '/upload/img/provider_no_logo.png';
         }
 
-        return $user->getUserInfo()->getImage() ? $user->getUserInfo()->getImage()->getPublicPath() : '/upload/img/provider_no_logo.png';
+        return $user->getUserInfo()->getImage()->getPublicPath();
     }
 }

@@ -26,7 +26,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    protected ?string $email;
+    protected string $email;
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
@@ -51,7 +51,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserInfo", mappedBy="user", cascade={"persist", "remove"})
      */
-    protected UserInfo $userInfo;
+    protected ?UserInfo $userInfo = null;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Provider", mappedBy="user", cascade={"persist", "remove"})
@@ -118,7 +118,7 @@ class User implements UserInterface
 
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->email;
     }
 
     public function setUsername(string $username): self
@@ -127,12 +127,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
@@ -196,7 +196,7 @@ class User implements UserInterface
 
     public function getUserInfo(): ?UserInfo
     {
-        return $this->userInfo ?? null;
+        return $this->userInfo;
     }
 
     public function setUserInfo(UserInfo $userInfo): self

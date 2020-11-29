@@ -82,12 +82,13 @@ class ProviderServiceController extends AbstractController
         }
 
         $providerService = (new ProviderService())
-            ->setUser($user)
-            ->setActive(true)
-            ->setType(ProviderService::PRO_ACCOUNT)
-            ->setPrice($proAccountPrice)
-            ->setProvider($provider)
-            ->setExpireAt((new DateTime())->add(new DateInterval('P1M')));
+            ->setProvider($provider);
+
+        $providerService->setUser($user);
+        $providerService->setActive(true);
+        $providerService->setType(ProviderService::PRO_ACCOUNT);
+        $providerService->setPrice($proAccountPrice);
+        $providerService->setExpireAt((new DateTime())->add(new DateInterval('P1M')));
 
         $provider
             ->setBalance($provider->getBalance() - $proAccountPrice);
@@ -128,11 +129,12 @@ class ProviderServiceController extends AbstractController
         }
 
         $service = (new ProviderService())
-            ->setPrice($amount)
-            ->setUser($user)
-            ->setProvider($provider)
-            ->setActive(false)
-            ->setType(ProviderService::REPLENISH);
+            ->setProvider($provider);
+
+        $service->setPrice($amount);
+        $service->setUser($user);
+        $service->setActive(false);
+        $service->setType(ProviderService::REPLENISH);
 
         $document = (new Document())
             ->setPath($fileName)

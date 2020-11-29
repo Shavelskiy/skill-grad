@@ -12,7 +12,7 @@ use RuntimeException;
 
 trait SeoTrait
 {
-    protected DefaultSeoRepository $defaultSeoRepository;
+    protected ?DefaultSeoRepository $defaultSeoRepository = null;
 
     protected function setDefaultSeoRepository(DefaultSeoRepository $defaultSeoRepository): void
     {
@@ -57,7 +57,7 @@ trait SeoTrait
 
     protected function applySeoToDefaultPage(array $data, string $pageSlug): array
     {
-        if (!isset($this->defaultSeoRepository)) {
+        if ($this->defaultSeoRepository === null) {
             throw new RuntimeException('Default seo repository not defined in seo trait');
         }
 

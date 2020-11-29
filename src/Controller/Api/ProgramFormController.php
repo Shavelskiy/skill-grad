@@ -550,7 +550,7 @@ class ProgramFormController extends AbstractController
         $program->setTrainingDateType($data['type']);
 
         if ($program->getTrainingDateType() !== Program::TRAINING_DATE_CALENDAR) {
-            $program->setTrainingDateExtra(null);
+            $program->setTrainingDateExtra([]);
             return;
         }
 

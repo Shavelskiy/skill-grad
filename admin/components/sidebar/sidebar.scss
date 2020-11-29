@@ -5,10 +5,15 @@
   bottom: 0;
   left: 0;
   z-index: 98;
-  width: 11vw;
   max-width: 11vw;
+  width: 11vw;
   transition: max-width 0.2s ease-out;
   overflow: hidden;
+
+  @media (max-width: 1921px) {
+    max-width: 267px;
+    width: 267px;
+  }
 
   .logo img {
     height: 50%;
@@ -16,6 +21,10 @@
 
   &.closed {
     max-width: 3vw;
+
+    @media (max-width: 1921px) {
+      max-width: 60px;
+    }
 
     .logo {
       display: none;

@@ -96,7 +96,7 @@ class ProgramExtension extends AbstractExtension
 
                 foreach ($program->getTrainingDateExtra() as $date) {
                     $dateObject = new DateTime($date);
-                    $dates[] = sprintf('%s %s', $dateObject->format('d'), DateExtension::MONTHS[$dateObject->format('m') - 1]);
+                    $dates[] = sprintf('%s %s', $dateObject->format('d'), DateExtension::MONTHS[(int)$dateObject->format('m') - 1]);
                 }
 
                 return implode(', ', $dates);
@@ -176,8 +176,8 @@ class ProgramExtension extends AbstractExtension
             return false;
         }
 
-        /** @var User $user */
-        if (!is_object($user = $token->getUser())) {
+        $user = $token->getUser();
+        if (!$user instanceof User) {
             return false;
         }
 

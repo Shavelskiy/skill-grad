@@ -6,7 +6,9 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -16,9 +18,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-class AdminAuthenticator extends AbstractFormLoginAuthenticator
+class AdminAuthenticator extends AbstractGuardAuthenticator
 {
     protected EntityManagerInterface $entityManager;
     protected UrlGeneratorInterface $urlGenerator;
@@ -60,7 +62,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
         try {
             $user = $this->userRepository->findUserByEmail($credentials['email']);
 
-            if ($user === null || !$user->isActive() || !in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
+            if (!$user->isActive() || !in_array(User::ROLE_ADMIN, $user->getRoles(), true)) {
                 return null;
             }
 
@@ -77,8 +79,11 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        /** @var User $user */
         $user = $token->getUser();
+
+        if (!$user instanceof User) {
+            throw new RuntimeException('user is not object of user class');
+        }
 
         return new JsonResponse(['current_user' => [
             'id' => $user->getId(),
@@ -89,20 +94,25 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
     protected function getUserUsername(User $user): string
     {
         $userInfo = $user->getUserInfo();
-        if ($userInfo !== null && $userInfo->getFullName() !== null && !empty($userInfo->getFullName())) {
+        if ($userInfo !== null && !empty($userInfo->getFullName())) {
             return $userInfo->getFullName();
         }
 
         return $user->getUsername();
     }
 
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    public function supportsRememberMe(): bool
     {
-        return new JsonResponse(['message' => 'Неверный логин или пароль'], Response::HTTP_UNAUTHORIZED);
+        return true;
     }
 
-    protected function getLoginUrl(): string
+    public function start(Request $request, AuthenticationException $authException = null): Response
     {
-        return $this->urlGenerator->generate('admin.login');
+        return new RedirectResponse($this->urlGenerator->generate('admin.login'));
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
+    {
+        return new JsonResponse(['message' => 'Неверный логин или пароль'], Response::HTTP_UNAUTHORIZED);
     }
 }

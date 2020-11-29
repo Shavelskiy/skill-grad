@@ -132,9 +132,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
-     * @return int[]
-     */
     public function findPopularAuthors(): array
     {
         return $this

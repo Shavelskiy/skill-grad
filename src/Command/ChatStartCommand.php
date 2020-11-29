@@ -19,6 +19,8 @@ use Throwable;
 
 class ChatStartCommand extends Command
 {
+    protected static $defaultName = 'app:chat:start';
+
     protected LoggerInterface $logger;
     protected EntityManagerInterface $entityManager;
     protected UserRepository $userRepository;
@@ -45,9 +47,7 @@ class ChatStartCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setName('app:chat:start')
-            ->setDescription('Start chat websocket server');
+        $this->setDescription('Start chat websocket server');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -18,6 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SearchIndexCommand extends Command
 {
+    protected static $defaultName = 'app:index:reindex';
+
     protected const BATCH_SIZE = 500;
 
     protected LoggerInterface $logger;
@@ -47,9 +49,7 @@ class SearchIndexCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setName('app:index:reindex')
-            ->setDescription('Index all system entities');
+        $this->setDescription('Index all system entities');
     }
 
     /**

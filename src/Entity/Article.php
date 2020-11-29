@@ -250,7 +250,7 @@ class Article
 
     public function getComments(): Collection
     {
-        return $this->comments ?? new ArrayCollection();
+        return $this->comments;
     }
 
     public function getRootComments(): Collection

@@ -71,7 +71,7 @@ class Location
         $this->childLocations = new ArrayCollection();
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

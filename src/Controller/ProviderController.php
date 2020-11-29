@@ -80,11 +80,10 @@ class ProviderController extends BaseCatalogController
 
         $gallery = [];
 
-        /** @var Program $program */
         foreach ($programs as $program) {
-            /** @var ProgramGallery $gallery */
-            foreach ($program->getGallery() as $gallery) {
-                $gallery[] = $gallery;
+            /** @var ProgramGallery $programGallery */
+            foreach ($program->getGallery() as $programGallery) {
+                $gallery[] = $programGallery;
             }
         }
 

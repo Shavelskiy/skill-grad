@@ -9,11 +9,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AppCacheClear extends Command
 {
+    protected static $defaultName = 'app:cache:clear';
+
     public function configure(): void
     {
-        $this
-            ->setName('app:cache:clear')
-            ->setDescription('clear memcached');
+        $this->setDescription('clear memcached');
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
