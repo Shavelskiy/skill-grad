@@ -1,0 +1,14 @@
+.percent-input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .theory {
+    margin-left: 10px;
+    margin-right: 16px;
+  }
+
+  .practice {
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,495 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('program.view') }}
+{% endblock %}
+
+{% set title = program.name %}
+
+{% set additionalBreadcrumb = {
+  link: path('program.index'),
+  name: 'Каталог программ обучения'
+} %}
+
+{% set categories = programCategories(program) %}
+{% set inCompare = inCompare(program.id, app.request.cookies) %}
+{% set hasRequest = hasRequest(program.id) %}
+
+{% set legalEntityPaymet = program.getPayment('legalEntity') %}
+{% set individualPayment = program.getPayment('individual') %}
+
+{% set price = getProgramPrice(program) %}
+{% set oldPrice = getOldProgramPrice(program) %}
+
+{% block body %}
+  <div class="main-card__program mt-0">
+    <h2 class="title program">{{ title }}</h2>
+    <div class="alert">
+      <div class="container-0 j-c-space-between">
+        <div class="information">
+          <div class="date">
+            <span class="icon calendar"></span>
+            <span class="text">Добавлена: </span><strong>{{ program.createdAt|date('d.m.Y') }}</strong>
+          </div>
+          <div class="proposal">
+            <span class="icon mail"></span>
+            <span class="text">Получено заявок:</span> <strong>{{ program.requests.count }}</strong>
+          </div>
+          <div class="rating">
+            <span class="icon goal"></span>
+            <span class="text">Средняя оценка: </span> <strong class="accent">{{ getAverageRating(program) }}</strong>
+          </div>
+        </div>
+        <div class="share">
+          <div class="contact-block">
+            <span class="text">Поделиться:</span>
+            <ul>
+              <li>
+                <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+              </li>
+              <li>
+                <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+              </li>
+              <li>
+                <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+              </li>
+            </ul>
+          </div>
+          <div class="buttons">
+            <div class="button-container">
+              <i class="{{ is_favorite ? 'icon-love-red' : 'icon-heart' }} add-program-favorites"
+                 data-id="{{ program.id }}"></i>
+            </div>
+            <div class="button-container">
+              <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }} compare-program-add"
+                 data-id="{{ program.id }}"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="box-content show">
+        <div class="container-0">
+          <div class="col-lg-12 pl-0">
+
+            {% if categories|length > 0 %}
+              <h5 class="result-title mt-0">Категории программы обучения</h5>
+
+              {% set i = 0 %}
+              {% for category in categories %}
+                {% set i = i + 1 %}
+                <p class="text">
+                      <span class="blue">
+                        {{ i }}. {{ category.item.name }}:
+                      </span>
+                  {{ category.childItems|map(item => item.name)|join(', ') }}
+                </p>
+              {% endfor %}
+            {% endif %}
+
+            <h5 class="result-title">Аннотация программы</h5>
+            <p class="text">{{ program.annotation }}</p>
+
+            {% if program.detailText|length > 0 %}
+              <h5 class="result-title">Программа обучения</h5>
+              <p class="text">{{ program.detailText|raw }}</p>
+            {% endif %}
+
+            {% if program.processDescription|length > 0 %}
+              <h5 class="result-title">Описание процесса обучения</h5>
+              <p class="text">{{ program.processDescription|raw }}</p>
+            {% endif %}
+
+            <h5 class="result-title">Дизайн программы обучения</h5>
+            <p class="text">{{ getProgramDesign(program) }}</p>
+
+            <h5 class="result-title">Проверка знаний</h5>
+            <p class="text">Экзамен по итогам обучения</p>
+
+            {% if program.programAdditional is not empty or program.otherAdditional|length > 0 %}
+              <h5 class="result-title">Дополнительно</h5>
+              <ul class="tick">
+                {% for additional in program.programAdditional %}
+                  <li>{{ additional.title }}</li>
+                {% endfor %}
+                {% if program.otherAdditional|length > 0 %}
+                  <li>{{ program.otherAdditional }}</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+            {% if program.advantages|length > 0 %}
+              <h5 class="result-title">Преимущества программы обучения</h5>
+              <p class="text">{{ program.advantages }}</p>
+            {% endif %}
+
+            {% if program.targetAudience is not empty %}
+              <h5 class="result-title">Целевая аудитория</h5>
+              <ul class="tick">
+                {% for listener in program.targetAudience %}
+                  <li>{{ listener }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if program.preparation is not empty %}
+              <h5 class="result-title">Предварительная подготовка</h5>
+              <ul class="tick">
+                {% for preparation in program.preparation %}
+                  <li>{{ preparation }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if program.gainedKnowledge|length > 0 %}
+              <h5 class="result-title">Полученные знания, приобретенные навыки</h5>
+              <p class="text">{{ program.gainedKnowledge }}</p>
+            {% endif %}
+
+            {% if program.programIncludes is not empty or program.otherInclude|length > 0 %}
+              <h5 class="result-title">Включено в курс</h5>
+              <ul class="tick">
+                {% for include in program.programIncludes %}
+                  <li>{{ include.title }}</li>
+                {% endfor %}
+                {% if program.otherInclude|length > 0 %}
+                  <li>{{ program.otherInclude }}</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+            {% set legalEntityPaymet = program.getPayment('legalEntity') %}
+            {% set individualPayment = program.getPayment('individual') %}
+
+            {% if (legalEntityPaymet is not null and legalEntityPaymet.discount is not null) or (individualPayment is not null and individualPayment.discount is not null) %}
+              <h5 class="result-title">Скидки</h5>
+              <ul class="tick">
+                {% if legalEntityPaymet is not null and legalEntityPaymet.discount is not null %}
+                  <li>Для физических лиц - {{ legalEntityPaymet.discount }}%
+                    = {{ (price * (1 - legalEntityPaymet.discount / 100))|number_format(0, ' ', ' ') }} руб.
+                  </li>
+                {% endif %}
+                {% if individualPayment is not null and individualPayment.discount is not null %}
+                  <li>Для юридических лиц - {{ individualPayment.discount }}%
+                    = {{ (price * (1 - individualPayment.discount / 100))|number_format(0, ' ', ' ') }} руб.
+                  </li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+            {% if program.providerActions is not empty %}
+              <h5 class="result-title">Акции от провайдера</h5>
+              <ul class="tick">
+                {% for action in program.providerActions %}
+                  <li>{{ action }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% set actionFavoriteProvider =  program.actionFavoriteProvider %}
+            {% if actionFavoriteProvider is not null and actionFavoriteProvider.firstDiscount > 0 and actionFavoriteProvider.discount > 0 %}
+              <h5 class="result-title">Акция «Любимый провайдер»</h5>
+              <div class="container-0">
+                {% if actionFavoriteProvider.firstDiscount > 0 %}
+                  <div class="sale">
+                    <span class="percent">{{ actionFavoriteProvider.firstDiscount }}%</span>
+                    <span class="text">Скидка при приобретении <br/> первого курса</span>
+                  </div>
+                {% endif %}
+                {% if actionFavoriteProvider.discount > 0 %}
+                  <div class="sale">
+                    <span class="percent">{{ actionFavoriteProvider.discount }}%</span>
+                    <span class="text">Скидка при приобретении <br/> последующих курсов</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <h5 class="result-title">Условия оплаты</h5>
+            {% if (legalEntityPaymet is null or legalEntityPaymet.termOfPayment is null) and (individualPayment is null or individualPayment.termOfPayment is null) %}
+              <p class="text">По запросу</p>
+            {% else %}
+              <ul class="tick">
+                <li>
+                  <strong>Для юридических лиц</strong>
+                  <p class="text mt-10">{{ (legalEntityPaymet is null or legalEntityPaymet.termOfPayment is null) ? 'По запросу' : legalEntityPaymet.termOfPayment }}</p>
+                </li>
+                <li>
+                  <strong>Для физических лиц</strong>
+                  <p class="text mt-10">{{ (legalEntityPaymet is null or individualPayment.termOfPayment is null) ? 'По запросу' : individualPayment.termOfPayment }}</p>
+                </li>
+              </ul>
+            {% endif %}
+
+            {% if program.gallery.count > 0 %}
+              <h5 class="result-title">Фотографии с мероприятия</h5>
+              <div class="photo-container">
+                {% for galleryItem in program.gallery %}
+                  <div class="photo-block">
+                    <img src="{{ galleryItem.image.publicPath }}" alt="">
+                    <span>{{ galleryItem.name }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if  program.additionalInfo is not null %}
+              <h5 class="result-title">Дополнительная информация</h5>
+              <p class="text">{{ program.additionalInfo }}</p>
+            {% endif %}
+
+            <h5 class="result-title">Отзывы и оценки ({{ reviews.items|length }})</h5>
+            {% if reviews.items|length == 0 %}
+              У программы пока нет отзывов
+            {% else %}
+              {% for review in reviews.items %}
+                <div class="review">
+                  <div class="information">
+                    <div class="review-main-info">
+                      <img class="rounded" src="{{ getUserPhoto(review.user) }}" alt="">
+                      <div class="review-author-date">
+                        <span class="review-author-name">{{ getUsername(review.user) }}</span>
+                        <span class="review-date">{{ review.createdAt|blogDate }}</span>
+                      </div>
+                    </div>
+                    <div class="comment">
+                      <p class="text">{{ review.review }}</p>
+                    </div>
+                  </div>
+
+                  <div class="value">
+                    <i class="icon-star"></i>
+
+                    <p class="review-value-title top">
+                      Средняя оценка: <strong class="accent">{{ review.averageRating|number_format(1, ',') }}</strong>
+                    </p>
+
+                    <div class="review-value-row">
+                      <span class="review-value-title">Программа</span>
+                      <div class="review-value-values">
+                        <span class="review-value-rating">
+                          {{ review.rating[0][0] }}
+                          <span class="tooltip first-tooltip">
+                            Программа полностью соответствовала поставленным задачам обучения
+                          </span>
+                        </span>
+                        <span class="review-value-rating">
+                          {{ review.rating[0][1] }}
+                           <span class="tooltip">
+                            Полученные знания, навыки будут использованы мною в рабочей практике
+                          </span>
+                        </span>
+                        <span class="review-value-rating">
+                          {{ review.rating[0][2] }}
+                           <span class="tooltip">
+                            Качество контентного сопровождения до и после обучения очень высокое (ответы на вопросы, консультации, предварительные задания, поддержка после обучения и т.д.)
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="review-value-row">
+                      <span class="review-value-title">Преподаватель</span>
+                      <div class="review-value-values">
+                        <span class="review-value-rating">
+                          {{ review.rating[1][0] }}
+                          <span class="tooltip first-tooltip">
+                            Преподаватель является экспертом в заявленной теме
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="review-value-row">
+                      <span class="review-value-title">Организация обучения</span>
+                      <div class="review-value-values">
+                        <span class="review-value-rating">
+                          {{ review.rating[2][0] }}
+                          <span class="tooltip first-tooltip">
+                            Раздаточные материалы программы понятны
+                          </span>
+                        </span>
+                        <span class="review-value-rating">
+                          {{ review.rating[2][1] }}
+                          <span class="tooltip">
+                            Качество технического сопровождения (информирование, регистрация, навигация, аудитория, техническая поддержка) соотвествует высокому уровню
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="answer">
+                  {% if review.answer is not null %}
+                    <span class="right-arrow"></span>
+                    <div class="information">
+                      <div class="top">
+                        <img class="rounded" src="{{ getUserPhoto(review.answerUser) }}" alt="">
+                      </div>
+                      <div class="comment">
+                        <div class="review-author-date">
+                          <span class="review-author-name">{{ getUsername(review.answerUser) }}</span>
+                          <span class="review-date">{{ review.answerDate|blogDate }}</span>
+                        </div>
+                        <p class="text">{{ review.answer }}</p>
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="col-lg-12 no-gutter">
+            <div class="mt-40">
+              {% include 'components/paginator.html.twig' with {
+                page: reviews.page,
+                total_pages: reviews.total_pages,
+                path_name: 'program.view'
+              } %}
+            </div>
+          </div>
+          {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+            <div class="container-0 j-c-center mt-40">
+              <div class="col-lg-4 col-sm-4 col-md-6">
+                <button class="button-red program-review-button" data-has-request="{{ hasRequest ? '1' : '0' }}">
+                  Оставить оценку
+                </button>
+              </div>
+              <div class="col-lg-4 col-sm-4 col-md-6">
+                <button class="button-blue program-question-button">Задать вопрос</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="box-sidebar show">
+        <div class="container-0">
+          <div class="col-lg-12 pr-0">
+            <div class="price-block">
+              <div class="price">
+                {% if program.showPriceReduction and price is not null and oldPrice is not null and price < oldPrice %}
+                  <span class="price-old">{{ oldPrice|number_format(0, ' ', ' ') }}  р.</span>
+                  <span class="price-new">{{ price }}</span>
+                {% else %}
+                  {% if price is not null %}
+                    <span class="price-text">{{ price|number_format(0, ' ', ' ') }}  р.</span>
+                  {% else %}
+                    <span class="price-text">По запросу</span>
+                  {% endif %}
+                {% endif %}
+                <a href="#">Узнать о скидках/акциях</a>
+              </div>
+
+              {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+                <div class="button">
+                  <button class="button-blue add-program-request" {{ hasRequest ? 'disabled' : '' }}
+                          data-id="{{ program.id }}">
+                    Подать заявку
+                  </button>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="card-shadow pl-45">
+              <p class="text">
+                <i class="icon-book"></i>
+                <span>Продолжительность обучения:</span>
+                <strong class="blue">{{ getDuration(program) }}</strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-square"></i>
+                <span>Формат обучения:</span>
+                <strong class="blue">
+                  {{ program.programFormat is not null ? program.programFormat.name : program.formatOther }}
+                </strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-student"></i>
+                <span>Уровень:</span>
+                <strong class="blue">{{ program.level.title }}</strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-calendar-2"></i>
+                <span>Даты обучения:</span>
+                <strong class="blue">{{ getTrainingDate(program) }}
+                </strong>
+              </p>
+
+              <p class="text">
+                <i class="icon-clock"></i>
+                <span>Режим занятий:</span>
+                <strong class="blue">{{ getOccupationMode(program) }}</strong>
+              </p>
+
+
+              {% if program.location|length > 0 %}
+                <p class="text">
+                  <i class="icon-place"></i>
+                  <span>Место проведения:</span>
+                  <strong class="blue">{{ program.location }}</strong>
+                </p>
+              {% endif %}
+            </div>
+
+            <div class="card-shadow">
+              <h5 class="result-title">Провайдеры обучения</h5>
+              {% for provider in program.providers %}
+                <div class="provider">
+                  <img src="{{ provider.image.publicPath }}" alt="">
+                  <a href="{{ path('provider.view', { provider: provider.id }) }}" target="_blank">
+                    {{ provider.name }}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+
+            {% if program.teachers.count > 0 %}
+              <div class="card-shadow">
+                <h5 class="result-title">Преподаватели</h5>
+                {% for teacher in program.teachers %}
+                  <div class="teacher">
+                    {% if teacher.photo is not null %}
+                      <img src="{{ teacher.photo.publicPath }}" alt="">
+                    {% endif %}
+                    <span>{{ teacher.name }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if program.certificate is not null %}
+              <div class="card-shadow">
+                <h5 class="result-title">Выдаваемый документ</h5>
+                <div class="cert">
+                  <span>{{ program.certificate.name }}</span>
+                  {% if program.certificate.image is not null %}
+                    <img src="{{ program.certificate.image.publicPath }}" alt="">
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+  {% block modals %}
+    {{ parent() }}
+    {% include 'components/modals/add.favorite.html.twig' %}
+    {% include 'program/modals.html.twig' with {id: program.id} %}
+  {% endblock %}
+
+  {% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('program.view') }}
+  {% endblock %}

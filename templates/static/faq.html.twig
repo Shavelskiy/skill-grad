@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% set title = 'FAQ' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('static.faq') }}
+{% endblock %}
+
+{% block body %}
+  <div class="main_faq faq mt-0">
+    <h2 class="title">FAQ</h2>
+    <div class="box">
+      <div class="box-sidebar card-shadow">
+        <div class="head">
+          <h4>Вопросы пользователей</h4>
+          <form>
+            <div class="input-search-gray">
+              <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по вопросам">
+              <i class="icon-search"></i>
+            </div>
+          </form>
+        </div>
+        <div class="faq-menu">
+          <ul>
+            {% for key, faqItem in items %}
+              <li
+                      class="faq-menu-item {{ (selected_item_id is not null and faqItem.id == selected_item_id) or (selected_item_id is null and key == 0) ? 'active' : '' }}"
+                      data-id="{{ faqItem.id }}"
+              >
+                {{ faqItem.title }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="box-content">
+        {% for key, faqItem in items %}
+          <div
+                  class="faq-content-item {{ (selected_item_id is not null and faqItem.id == selected_item_id) or (selected_item_id is null and key == 0) ? 'active' : '' }}"
+                  data-id="{{ faqItem.id }}"
+          >
+            <h5 class="result-title">Какие данные я могу увидеть в личном кабинете?</h5>
+            {{ faqItem.content|raw }}
+            <hr/>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('static.faq') }}
+{% endblock %}

@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  color: #646c9a;
+  font-size: .56vw;
+  font-weight: 300;
+  line-height: 1.15;
+  text-align: left;
+  font-family: Poppins, Helvetica, sans-serif;
+  overflow: hidden;
+
+  @media (max-width: 1921px) {
+    font-size: 13px;
+  }
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #f2f3f8;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+form {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+
+  & th, & td {
+    padding: .75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+  }
+
+  a {
+    color: #5d78ff;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";

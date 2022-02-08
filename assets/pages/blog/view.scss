@@ -1,0 +1,148 @@
+.blog-description {
+  height: 100%;
+
+  .blog-description-body {
+    position: relative;
+    background-color: #1d71b1;
+    color: #fff;
+    padding: 25px;
+    height: calc(100% - 75px);
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+
+      .date {
+        display: flex;
+      }
+
+      i {
+        font-size: 24px;
+        cursor: pointer;
+
+        &.active {
+          &:before {
+            color: #f92e25;
+          }
+        }
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 18px;
+
+      .view-block {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        .views, .comments {
+          display: flex;
+        }
+      }
+
+      a {
+        color: #fff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .share {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 30px;
+    height: 75px;
+    background-color: #1a5ca7;
+
+    ul {
+      display: flex;
+      margin-bottom: 0;
+
+      li {
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+.blog-content {
+  .alert {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      flex-direction: column;
+    }
+  }
+
+  .text {
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  .share {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}
+
+.blog-single {
+  .tns-controls {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      width: 100%;
+    }
+    bottom: 0;
+    width: 89%;
+  }
+}
+
+.blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social {
+  display: flex;
+  margin-bottom: 0;
+
+  li {
+    margin-left: 15px;
+  }
+}
+
+.more-articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+#article-comments {
+  h4 {
+    margin-bottom: 22px;
+  }
+}

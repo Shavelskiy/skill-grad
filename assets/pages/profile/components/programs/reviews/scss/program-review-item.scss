@@ -1,0 +1,124 @@
+.average-text {
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.reviews-text {
+  display: block;
+  position: relative;
+  padding-left: 20px !important;
+
+  &:after {
+    content: "\201D";
+    position: absolute;
+    z-index: 0;
+    top: -40px;
+    left: 0;
+    font-size: 150px;
+    opacity: 0.2;
+    color: #f7562e;
+  }
+}
+
+.show-more-button {
+  color: #1d71b1;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.reviews {
+  .value {
+    flex: 1 1 40%;
+    background-color: transparent;
+    margin-left: 0;
+    padding: 0;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      margin-left: 0;
+    }
+
+    .text {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 1;
+      font-size: 15px;
+      margin-bottom: 10px;
+
+      .title {
+        width: 132px;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 300;
+
+        &:after {
+          content: "...................................";
+          margin-left: 2px;
+          color: #cccccc;
+        }
+      }
+
+      .tooltip {
+        bottom: 30px;
+        left: -50px;
+        box-shadow: 0 10px 40px rgba(10, 43, 74, 0.3);
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        padding: 9px;
+        width: 300px;
+        font-size: 13px;
+        border-radius: 12px;
+
+        &:after {
+          top: auto;
+          bottom: -20px;
+        }
+      }
+
+      i {
+        position: absolute;
+        z-index: -1;
+        bottom: 2px;
+        left: -10px;
+        font-size: 22px;
+
+        &:before {
+          color: #fff;
+        }
+      }
+
+      span {
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          & > .tooltip {
+            visibility: visible;
+          }
+        }
+
+        &:not(.title) {
+          margin-left: 10px;
+
+          &:hover .tooltip {
+            display: block;
+          }
+
+          &:not(:last-child) {
+            margin-right: 10px;
+
+            &:after {
+              content: "/";
+              position: absolute;
+              left: 15px;
+              color: #cccccc;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('blog.index') }}
+{% endblock %}
+
+{% set title = 'Блог' %}
+
+{% block body %}
+  <div class="main_blog mt-0">
+    <h2 class="title">{{ title }} </h2>
+    {% if app.user is not null and is_granted('ROLE_PROVIDER') %}
+      <div class="alert">
+        Бесплатно разместите новость или статью о вашей организации или программе
+        <a href="{{ path('site.profile', { path: 'publications' }) }}">
+          <button class="button-blue">Разместить статью</button>
+        </a>
+      </div>
+    {% endif %}
+    <div class="box">
+      <div class="box-content">
+        <div class="tab blog">
+          {% if app.user is not null and is_granted('ROLE_PROVIDER') %}
+            <div class="tab__nav articles-nav">
+              <ul class="nav">
+                <li class="nav-item active all-articles">Все статьи</li>
+                <li class="nav-item self-articles">Мои статьи</li>
+                <li class="nav-item moderation-articles">Модерация</li>
+              </ul>
+            </div>
+          {% endif %}
+
+          <div class="tab__content">
+            <div class="tab__content-item all-articles-tab active">
+              {% if articles|length < 1 %}
+                По вашему запросу ничего не найдено
+              {% endif %}
+              {% for article in articles %}
+                {% include 'blog/card-blog.html.twig' with {
+                  article: article
+                } %}
+              {% endfor %}
+
+              {% include 'components/paginator.html.twig' with {
+                page: page,
+                total_pages: total_pages,
+                path_name: 'blog.index'
+              } %}
+            </div>
+
+            {% if app.user is not null and is_granted('ROLE_PROVIDER') %}
+              <div class="tab__content-item self-articles-tab">
+                {% for article in user_articles %}
+                  {% include 'blog/card-blog.html.twig' with {
+                    article: article
+                  } %}
+                {% endfor %}
+              </div>
+
+              <div class="tab__content-item moderation-articles-tab">
+                {% for article in user_articles|filter(article => not article.active) %}
+                  {% include 'blog/card-blog.html.twig' with {
+                    article: article
+                  } %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="box-sidebar">
+        {% include 'blog/blocks/filters.html.twig' %}
+
+        {% if popular_authors|length > 0 %}
+          <div class="authors">
+            <h5 class="title">Лучшие авторы</h5>
+            {% set position = 0 %}
+            {% for author in popular_authors %}
+              {% set position = position + 1 %}
+              <div class="item">
+                <div class="avatar">
+                  <span class="index">{{ position }}</span>
+                  <img src="{{ getUserPhoto(author.user) }}" alt="">
+                </div>
+                <div class="name">
+                  <a href="#">{{ getUsername(author.user) }}</a>
+                </div>
+                <div class="count">{{ author.total_ratings }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('blog.index') }}
+{% endblock %}

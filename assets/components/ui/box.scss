@@ -1,0 +1,32 @@
+.box {
+  display: flex;
+
+  @media (min-width: 320px) and (max-width: 1023px) {
+    flex-direction: column;
+  }
+
+  .box-content {
+    flex: 1 1 70%;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      order: 2;
+    }
+  }
+
+  .box-sidebar {
+    flex: 1 1 30%;
+    padding-left: 34px;
+
+    @media (min-width: 320px) and (max-width: 1023px) {
+      padding-left: 0;
+
+      &.show {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      order: 1;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+.user {
+  .auth {
+    & > .dropdown {
+      direction: ltr;
+      top: 50px;
+      max-width: 170px;
+      max-height: 220px;
+      padding: 0;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        left: -130px;
+
+        &:after {
+          right: 10px;
+          left: auto !important;
+        }
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: 10px;
+        border: 10px solid transparent;
+        transform: rotate(180deg);
+        border-top: 10px solid #fff;
+      }
+
+      ul {
+        padding: 14px;
+        margin-bottom: 0;
+
+        li {
+          display: flex;
+          align-items: flex-start;
+          position: relative;
+          margin-bottom: 10px;
+          cursor: pointer;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .notification {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 20px;
+            bottom: -4px;
+            width: 20px;
+            height: 20px;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 15px;
+            margin-left: 10px;
+            border-radius: 100%;
+            background-color: #f7562e;
+            margin-bottom: 2px;
+
+            &.active {
+              display: flex;
+            }
+          }
+
+          .header-dropdown-link {
+            text-decoration: none;
+            font-size: 12px;
+            line-height: 15px;
+            color: #3c3c3c;
+
+            &:hover {
+              color: #1d71b1;
+            }
+          }
+
+          i {
+            margin-right: 10px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .auth-text {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      display: none !important;
+    }
+
+    span {
+      &:first-child {
+        text-decoration: none;
+      }
+
+      &:last-child {
+        color: #1d71b1;
+      }
+    }
+  }
+
+  .heart {
+    display: flex !important;
+  }
+}

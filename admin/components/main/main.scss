@@ -1,0 +1,18 @@
+.main {
+  .container {
+    padding-left: 11vw;
+    transition: padding-left 0.2s ease-out;
+
+    @media (max-width: 1921px) {
+      padding-left: 267px;
+    }
+
+    &.active {
+      padding-left: 3vw;
+
+      @media (max-width: 1921px) {
+        padding-left: 60px;
+      }
+    }
+  }
+}

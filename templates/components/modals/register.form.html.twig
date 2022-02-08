@@ -1,0 +1,32 @@
+<div id="register-role-modal" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content type">
+      <h4>Выберите тип аккаунта</h4>
+      <button class="open-reg button-blue" id="register-user-button">Обучающийся</button>
+      <button class="open-reg button-red" id="register-provider-button">Образовательное учреждение</button>
+    </div>
+  </div>
+</div>
+
+<div id="register-modal" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Регистрация на сайте</h4>
+      <form class="form-auth reg" action="{{ path('ajax.auth.register') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+        <span class="modal-error"></span>
+        <input type="hidden" name="role">
+        <input class="input" type="email" placeholder="E-mail" name="email">
+        <input class="input" type="password" placeholder="Пароль" name="password">
+        <input class="input" type="password" placeholder="Повторите пароль" name="confirm-password">
+        <button class="button-red" type="submit">Зарегистрироваться</button>
+        <span class="reg-info">Нажимая на кнопку "Зарегистрироваться"
+Вы соглашаетесь с «<a href="#">Пользовательским соглашением</a>», «<a href="#">Политикой платных услуг</a>»
+и обработкой персональных данных в соответствии с «<a href="#">Политикой конфиденциальности</a>»</span>
+      </form>
+    </div>
+    {% include 'components/modals/social.auth.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
+  </div>
+</div>

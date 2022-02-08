@@ -1,0 +1,140 @@
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  border-right: none;
+
+  &.disabled {
+    opacity: 0.5;
+  }
+
+  .header {
+    border-bottom: 1px solid #ebedf2;
+    position: relative;
+    height: 1.5vw;
+    display: flex;
+    justify-content: space-between;
+
+    .orderable {
+      cursor: pointer;
+
+      &::before, &::after {
+        content: "\2191";
+        position: absolute;
+        display: block;
+        opacity: 0.3;
+      }
+
+      &::before {
+        right: 1em;
+        content: "\2191";
+      }
+
+      &::after {
+        right: 0.5em;
+        content: "\2193";
+      }
+
+      &.asc::before {
+        opacity: 1;
+      }
+
+      &.desc::after {
+        opacity: 1;
+      }
+    }
+
+    .col .content {
+      overflow: scroll;
+      white-space: nowrap;
+      font-weight: 600;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .search {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ebedf2;
+
+    .col {
+      padding: 0;
+    }
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    min-height: 1.5vw;
+    border-bottom: 1px solid #dee2e6;
+
+    &:hover {
+      color: #212529;
+      background-color: #fafbfc;
+    }
+  }
+
+  .col {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    border-right: 1px solid #dee2e6;
+
+    .content {
+      width: 100%;
+      padding: .2vw .5vw;
+    }
+
+    &.numbering {
+      color: #212529;
+      background-color: rgba(0, 0, 0, 0.075);
+      font-size: .429vw;
+      opacity: 0.6;
+      flex: 1;
+    }
+
+    &.actions {
+      flex: 3;
+    }
+
+    &.boolean {
+      .content {
+        display: flex;
+        justify-content: center;
+
+        span {
+          padding: .195vw .585vw;
+          border-radius: 3.9vw;
+          color: #fafbfc;
+          font-weight: 400;
+          display: block;
+          text-align: center;
+
+          &.true {
+            background-color: #1dc9b7;
+          }
+
+          &.false {
+            background-color: #fd397a;
+          }
+        }
+      }
+    }
+
+    &.img {
+      justify-content: center;
+
+      img {
+        max-height: 3.51vw;
+      }
+    }
+
+  }
+}

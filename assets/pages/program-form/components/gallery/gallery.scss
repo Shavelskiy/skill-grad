@@ -1,0 +1,42 @@
+.container {
+  padding: 16px 0 45px 0;
+
+  .gallery {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 27px -20px 0 -20px;
+
+    .item {
+      width: 20%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0 20px 30px 20px;
+
+      @media (max-width: 768px) {
+        width: 50%;
+      }
+
+      .image {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .delete-image {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        bottom: calc(100% - 9px);
+        left: calc(100% - 29px);
+        z-index: 999999;
+        cursor: pointer;
+
+        &:hover {
+          opacity: .8;
+        }
+      }
+    }
+  }
+}

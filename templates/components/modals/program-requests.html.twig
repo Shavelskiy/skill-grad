@@ -1,0 +1,26 @@
+<div id="program-request-auth-modal" class="add-favorites modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content pb-20">
+      <p>Оставлять заявки авторизованные пользователи</p>
+      <p>Войдите или зарегистрируйтесь</p>
+      <button class="button-blue login-btn">Войти</button>
+      <button class="button-red register-btn">Зарегистрироваться</button>
+    </div>
+  </div>
+</div>
+
+<div id="program-request-modal" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content restore-pass">
+      <h4>Подать заявку к программе</h4>
+      <form class="form-auth" action="{{ path('ajax.program.request') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('program-request') }}">
+        <input type="hidden" name="id">
+        <textarea class="textarea" placeholder="Текст к заявки" cols="30" rows="5" name="comment"></textarea>
+        <button class="button-blue" type="submit">Отправить</button>
+      </form>
+    </div>
+  </div>
+</div>

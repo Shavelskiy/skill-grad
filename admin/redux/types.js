@@ -1,0 +1,7 @@
+export const SHOW_LOADER = 'SHOW_LOADER'
+export const HIDE_LOADER = 'HIDE_LOADER'
+export const SHOW_ALERT = 'SHOW_ALERT'
+export const SET_TITLE = 'SET_TITLE'
+export const SET_BREADCRUMBS = 'SET_BREADCRUMBS'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+export const SET_REDIRECT_LINK = 'SET_REDIRECT_LINK'

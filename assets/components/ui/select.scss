@@ -1,0 +1,119 @@
+.custom-select {
+  width: 100%;
+  border-radius: 100px;
+  background-color: #f3f3f3;
+  cursor: pointer;
+  height: 48px;
+  color: #777;
+  font-weight: 300;
+  position: relative;
+  border: 2px solid #f3f3f3;
+
+  input {
+    display: none;
+  }
+
+  &.disabled {
+    cursor: default;
+    opacity: .5;
+  }
+
+  &.not-last {
+    margin-bottom: 25px;
+  }
+
+  &.error {
+    border-color: #fc5619;
+  }
+
+  .icon {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background-image: url("./../../img/svg/down-arrow.svg");
+    background-color: #f3f3f3;
+    background-size: 100%;
+    top: calc(50% - 8px);
+    right: 18px;
+    transition: all 275ms;
+  }
+
+  .selected-option {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 0;
+    height: 100%;
+    padding: 0 18px 0 24px !important;
+  }
+
+  .options-container {
+    z-index: 99999;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 10px);
+    width: 100%;
+    background-color: #fff;
+    border: none;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 0;
+    transition: all .2s ease-in-out;
+    box-shadow: 0 0 15px 0 rgba(82, 63, 105, .1);
+    padding: 20px;
+
+
+    .options {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: 100%;
+      max-height: 400px;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #e9f1f7;
+        border-left: 2px solid white;
+        border-right: 2px solid white;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #f7562e;
+      }
+
+      .option {
+        position: relative;
+        width: 100%;
+        padding: 10px 0;
+        cursor: pointer;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+
+        &:hover, &.active {
+          color: rgb(47, 119, 181);
+        }
+      }
+    }
+  }
+
+  &.opened {
+    .options-container {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .icon {
+      transform: rotate(180deg);
+    }
+  }
+}

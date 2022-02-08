@@ -1,0 +1,28 @@
+.menu-container {
+  margin-top: 1.17vw;
+  padding: 0;
+  color: #989eb3;
+
+  .list {
+    height: 90%;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      display: none;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+}

@@ -1,0 +1,86 @@
+li {
+  .item {
+    display: flex;
+    justify-content: flex-start;
+    padding: .195vw .78vw;
+    align-items: center;
+    min-height: 2.028vw;
+    position: relative;
+
+    .point {
+      margin: 0 .39vw 0 1.17vw;
+
+      span {
+        width: .156vw;
+        height: .156vw;
+        border-radius: 100%;
+        vertical-align: middle;
+        display: inline-block;
+        background-color: #687393;
+      }
+    }
+
+    .text {
+      font-weight: 400;
+      font-size: 12px;
+      color: #989eb3;
+      display: block;
+      padding: .75em 1em;
+    }
+
+    .arrow {
+      height: .273vw;
+      width: .273vw;
+      position: absolute;
+      right: .546vw;
+      transition: all .15s ease-out;
+      background: url('./../../images/menu-arrow.svg');
+      background-size: 100%;
+    }
+
+    &.active {
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    &:hover, &.active {
+      background: #1f2433;
+      color: #5d78ff;
+
+      .point span {
+        background-color: #5d78ff;
+      }
+
+      .text {
+        color: #fff;
+      }
+
+      .arrow {
+        background: url('./../../images/menu-arrow-hover.svg');
+        background-size: 100%;
+      }
+    }
+  }
+
+  .child-items {
+    max-height: 0;
+    transition: max-height .2s ease-out;
+    overflow: hidden;
+
+    &.active {
+      max-height: 50vh;
+      overflow: scroll;
+    }
+  }
+
+  &.closed {
+    .text, .arrow {
+      display: none;
+    }
+
+    i, .point {
+      margin: auto;
+    }
+  }
+}

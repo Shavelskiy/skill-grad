@@ -1,0 +1,18 @@
+location:
+  type:
+    country: Страна
+    region: Регион
+    city: Город
+date:
+  month.01: Января
+  month.02: Февраля
+  month.03: Марта
+  month.04: Апреля
+  month.05: Мая
+  month.06: Июня
+  month.07: Июля
+  month.08: Августа
+  month.09: Сентября
+  month.10: Октября
+  month.11: Ноября
+  month.12: Декабря

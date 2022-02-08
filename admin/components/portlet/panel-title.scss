@@ -1,0 +1,22 @@
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1vw;
+  border-bottom: 1px solid #ebedf2;
+
+  h3 {
+    width: 50%;
+    font-weight: 300;
+
+    i {
+      margin-right: .39vw;
+    }
+  }
+
+  .button-wrap {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

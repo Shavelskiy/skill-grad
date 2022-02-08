@@ -1,0 +1,40 @@
+<div id="article-comments" class="comments">
+  <h4>Комментарии к статье ({{ article.comments|length }})</h4>
+  {% if article.rootComments|length < 1 %}
+    У статьи еще нет комментариев
+  {% else %}
+    <div class="tab">
+      {% if popular_comment_ids|length > 0 %}
+        <div class="tab__nav">
+          <ul class="nav">
+            <li data-tab-name="tab-1" class="nav-item comments-tab-default active">По порядку</li>
+            <li data-tab-name="tab-2" class="nav-item comments-tab-popular">Популярные</li>
+          </ul>
+        </div>
+      {% endif %}
+      <div class="tab__content">
+        <div class="tab__content-item comments-body comments-tab-content-default active">
+          {% for comment in article.rootComments %}
+            {% include 'blog/blocks/comment.html.twig' with { comment: comment } %}
+          {% endfor %}
+        </div>
+        <div class="tab__content-item comments-body comments-tab-content-popular">
+          {% for comment in article.rootComments %}
+            {% if comment.id in popular_comment_ids %}
+              {% include 'blog/blocks/comment.html.twig' with { comment: comment } %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if app.user is not null %}
+        <div data-id="{{ article.id }}" class="send-comment">
+          <textarea rows="10" class="textarea" placeholder="Текст сообщения"></textarea>
+          <button class="button-blue">Отправить</button>
+        </div>
+      {% else %}
+        <span>Оставлять комментарии могут только авторизованные пользователи</span>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,11 @@
+.page {
+  padding: 0 1vw;
+
+  &.hidden {
+    display: none;
+  }
+
+  .content {
+    display: flex;
+  }
+}

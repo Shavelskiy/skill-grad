@@ -1,0 +1,114 @@
+.pagination {
+  display: flex;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    justify-content: center;
+  }
+
+  .prev {
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 2px;
+    background-color: #c4c6ca;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: -1px;
+      width: 10px;
+      height: 2px;
+      transform: rotate(-45deg);
+      background-color: #c4c6ca;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: -1px;
+      width: 10px;
+      height: 2px;
+      transform: rotate(45deg);
+      background-color: #c4c6ca;
+    }
+
+    &:hover {
+      background-color: #3c3c3c;
+
+      &:after {
+        background-color: #3c3c3c;
+      }
+
+      &:before {
+        background-color: #3c3c3c;
+      }
+    }
+  }
+
+  .next {
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 2px;
+    background-color: #c4c6ca;
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      bottom: -4px;
+      width: 10px;
+      height: 2px;
+      transform: rotate(-45deg);
+      background-color: #c4c6ca;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      right: -1px;
+      width: 10px;
+      height: 2px;
+      transform: rotate(45deg);
+      background-color: #c4c6ca;
+    }
+
+    &:hover {
+      background-color: #3c3c3c;
+
+      &:after {
+        background-color: #3c3c3c;
+      }
+
+      &:before {
+        background-color: #3c3c3c;
+      }
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    transition: background-color .3s;
+    color: #3c3c3c;
+    font-size: 16px;
+    line-height: 22px;
+    text-decoration: none;
+
+    &.active {
+      background-color: #f5f6f8;
+      border-radius: 100%;
+      color: #f7562e;
+    }
+
+    &:hover:not(.active) {
+      color: #f7562e;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<div class="information">
+  <div class="top">
+    <img class="rounded" src="{{ getUserPhoto(comment.user) }}" alt="">
+    <div class="d-flex w-100 j-c-space-between mt-10">
+      <span class="name">{{ getUsername(comment.user) }}</span>
+      <span class="date">
+                    {{ comment.createdAt|blogDate }}
+                  </span>
+    </div>
+  </div>
+  <div class="comment">
+    <p class="text">
+      {{ comment.text }}
+    </p>
+    <div class="rules">
+      <div class="links">
+        {% if app.user is not null %}
+          {% if comment.user.id == app.user.id %}
+            <a data-id="{{ comment.id }}" data-value="{{ comment.text }}" class="edit-article-comment">
+              Редактировать
+            </a>
+            <a data-id="{{ comment.id }}" class="delete-article-comment delete-comment">Удалить</a>
+          {% endif %}
+          <a data-id="{{ comment.id }}" class="answer-article-comment" href="#">Ответить</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="answer">
+  {% for answer in comment.answers %}
+    <div class="information">
+      <div class="top">
+        <img class="rounded" src="{{ getUserPhoto(answer.user) }}" alt="">
+        <div class="d-flex w-100 j-c-space-between mt-10">
+          <span class="name">{{ getUsername(answer.user) }}</span>
+          <span class="date">
+            {{ answer.createdAt|blogDate }}
+          </span>
+        </div>
+      </div>
+      <div class="comment">
+        <p class="text">
+          {{ answer.text }}
+        </p>
+        {% if app.user is not null and comment.user.id == app.user.id %}
+          <div class="rules">
+            <a data-id="{{ answer.id }}" data-value="{{ answer.text }}" class="edit-article-comment">
+              Редактировать
+            </a>
+            <a data-id="{{ answer.id }}" class="delete-article-comment delete-comment" href="#">Удалить</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,55 @@
+<div class="main__service service">
+  <div class="container">
+    <div class="col-lg-12">
+      <h2 class="title">Как работает сервис?</h2>
+    </div>
+    <div class="service-container">
+      <div class="control">
+        <div class="nav-item tab-service__nav left-block active">
+          <span class="title-text">Для желающих <br/>обучиться</span>
+        </div>
+        <div class="nav-item tab-service__nav right-block">
+          <span class="title-text">Для провайдеров <br/>обучения</span>
+        </div>
+      </div>
+      <div class="col-lg-6 tab-service__content tab__content-item left active">
+        <div class="title">
+          <span class="title-icon knowledge"></span>
+          <span class="title-text">Для желающих <br/>обучиться</span>
+        </div>
+        <div class="content">
+          <ul class="tick">
+            <li>Подберите программу обучения, используя поиск, фильтры, сравнение</li>
+            <li>Направьте заявку провайдеру обучения</li>
+            <li>Зарегистрируйтесь. Вы сможете писать отзывы, задавать вопросы</li>
+          </ul>
+          {% if app.user is null %}
+            <div class="btn-container">
+              <button class="button-red register-user-btn">Регистрация обучающегося</button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6 tab-service__content tab__content-item right">
+        <div class="title">
+          <span class="title-icon school"></span>
+          <span class="title-text">Для провайдеров <br/>обучения</span>
+        </div>
+        <div class="content">
+          <ul class="tick">
+            <li>Зарегистрируйтесь</li>
+            <li>Добавьте описание вашей организации</li>
+            <li>Добавьте программы обучения</li>
+            <li>Отвечайте на отзывы</li>
+            <li>Получайте заявки</li>
+          </ul>
+          {% if app.user is null %}
+            <div class="btn-container">
+              <button class="button-red register-provider-btn">Регистрация провайдера</button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

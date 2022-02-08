@@ -1,0 +1,170 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('provider.view') }}
+{% endblock %}
+
+{% set title = provider.name %}
+
+{% set additionalBreadcrumb = {
+  link: path('provider.index'),
+  name: 'Каталог провайдеров обучения'
+} %}
+
+{% set categories = providerCategories(provider) %}
+
+{% block body %}
+  <div class="main_provider mt-0">
+    <div class="container-0 j-c-center">
+      <div class="col-lg-10">
+        <h2 class="title">{{ title }}</h2>
+      </div>
+    </div>
+    <div class="tab">
+      <div class="toggle-menu tab__nav">
+        <ul class="nav">
+          <li class="toggle-item nav-item nav-item-description {{ (app.request.get('tab') != 'programs' and app.request.get('tab') != 'gallery') ? 'active' : '' }}">
+            <i class="icon-gear"></i>Описание провайдера
+          </li>
+          <li class="toggle-item nav-item nav-item-programs {{ app.request.get('tab') == 'programs' ? 'active' : '' }}">
+            <i class="icon-web-development"></i>Программы обучения
+          </li>
+          <li class="toggle-item nav-item nav-item-gallery {{ app.request.get('tab') == 'gallery' ? 'active' : '' }}">
+            <i class="icon-web-development"></i>Фотогалерея
+          </li>
+        </ul>
+        <i class="icon-down-arrow"></i>
+      </div>
+      <div class="tab__content">
+        <div class="tab__content-item tab-description {{ (app.request.get('tab') != 'programs' and app.request.get('tab') != 'gallery') ? 'active' : '' }}">
+          <div class="container-0">
+            <div class="col-lg-2 col-sm-4 no-gutter">
+              <div class="logo-company">
+                {% if provider.image is not null %}
+                  <img src="{{ provider.image.publicPath }}" alt="{{ provider.name }}">
+                {% else %}
+                  <img src="/img/provider_no_logo.png" alt="{{ provider.name }}">
+                {% endif %}              </div>
+              <div class="description">
+                Вы владелец или увидели ошибку?
+                <span class="feedback-form-modal-btn">
+                    Сообщите нам,
+                    нажав Ctrl+Enter
+                  </span>
+              </div>
+            </div>
+            <div class="col-lg-7 col-sm-4">
+              <div class="content">
+                <h4 class="result-title">Об учебном заведении</h4>
+                <p>{{ provider.description }}</p>
+
+                {% if categories.main|length > 0 %}
+                  <h4 class="result-title">Основные категории</h4>
+                  {% set i = 0 %}
+                  {% for category in categories.main %}
+                    {% set i = i + 1 %}
+                    <p class="blue">
+                      <strong>{{ i }}. {{ category.item.name }}</strong>
+                    </p>
+                    <span class="text">
+                           {{ category.childItems|map(item => item.name)|join(' / ') }}
+                      </span>
+                  {% endfor %}
+                {% endif %}
+
+                {% if categories.additional|length > 0 %}
+                  <h4 class="result-title">Дополнительные категории</h4>
+                  <p class="blue">
+                    <strong>1. Архитектура и строительство архитектура</strong>
+                  </p>
+                  <span class="text">архитектура   /   реставрация   /   строительство   /   урбанистика</span>
+                  <p class="blue">
+                    <strong>2. Информационные технологииИТ-менеджмент</strong>
+                  </p>
+                  <span class="text">информационная безопасность   /   программирование   /    системное администрирование   /    телекоммуникации и связь</span>
+                  <p class="blue">
+                    <strong>3. Природопользование и экологиягеология и разведка полезных ископаемых </strong>
+                  </p>
+                  <span class="text">гидрометеорология   /   сельское, лесное и водное хозяйство   /   экология и защита окружающей среды</span>
+                {% endif %}
+
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-4 no-gutter">
+              <div class="contact">
+                <h5 class="title">Контакты</h5>
+                {% if provider.user is not null and provider.user.userInfo is not null and provider.user.userInfo.phone is not null %}
+                  <a class="phone" href="tel:{{ ('7' ~ provider.user.userInfo.phone)|format_phone }}">
+                    {{ ('7' ~ provider.user.userInfo.phone)|format_phone }}
+                  </a>
+                {% endif %}
+                {% if provider.providerRequisites.mailingAddress is not null %}
+                  <a class="email" href="mailto:{{ provider.providerRequisites.mailingAddress }}">
+                    <i class="icon-email1"></i>
+                    {{ provider.providerRequisites.mailingAddress }}
+                  </a>
+                {% endif %}
+                {% if provider.providerRequisites.legalAddress is not null %}
+                  <a class="address"
+                     href="https://yandex.ru/maps?{{ {text:provider.providerRequisites.legalAddress }|url_encode }}"
+                     target="_blank"
+                  >
+                    <i class="icon-place"></i>
+                    {{ provider.providerRequisites.legalAddress }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab__content-item tab-programs {{ app.request.get('tab') == 'programs' ? 'active' : '' }}">
+          <div class="box">
+            <div class="box-content">
+              <div class="container-0">
+                <div class="col-lg-12 pl-0">
+                  {% if programs|length < 1 %}
+                    У данного провайдера нет программ обучения
+                  {% endif %}
+                  {% for program in programs %}
+                    {% include 'program/card-program.html.twig' with {
+                      program: program,
+                    } %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="box-sidebar">
+              {% include 'program/catalog-filter.html.twig' with { resetPath: path('provider.view', {
+                provider: provider.id,
+                tab: 'programs'
+              }) } %}
+            </div>
+          </div>
+        </div>
+        <div class="tab__content-item tab-gallery {{ app.request.get('tab') == 'gallery' ? 'active' : '' }}">
+          <div class="box">
+            {% if gallery|length < 1 %}
+              Фоторграфии с мероприятий отсутсвтуют
+            {% endif %}
+            {% for galleryItem in gallery %}
+              <div class="box-block">
+                <div class="photo">
+                  <img src="{{ galleryItem.image.publicPath }}" alt="">
+                </div>
+                <p class="text--center">
+                  {{ galleryItem.name }}
+                </p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('provider.view') }}
+{% endblock %}

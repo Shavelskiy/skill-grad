@@ -1,0 +1,11 @@
+.alert {
+  &-body {
+    background-color: #fff;
+    padding: 1vw 2vw;
+
+    .message {
+      font-size: 17px;
+      margin: 0;
+    }
+  }
+}

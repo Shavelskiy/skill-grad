@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% set title = 'Результаты поиска' %}
+
+{% block body %}
+  <div class="main_search-result mt-0">
+    <h2 class="title">{{ title }}</h2>
+    <div class="box">
+      <div class="box-content">
+        {% include 'search/block.html.twig' with {
+          title: 'Программы обучения',
+          items: programs,
+          card_template: 'program/card-program.html.twig',
+          item_key: 'program',
+          page_key: 'program_page',
+        } %}
+
+        {% include 'search/block.html.twig' with {
+          title: 'Провайдеры обучения',
+          items: providers,
+          card_template: 'provider/card-provider.html.twig',
+          item_key: 'provider',
+          page_key: 'provider_page',
+        } %}
+
+        {% include 'search/block.html.twig' with {
+          title: 'Блог',
+          items: articles,
+          card_template: 'blog/card-blog.html.twig',
+          item_key: 'article',
+          page_key: 'blog_page',
+        } %}
+      </div>
+      <div class="box-sidebar">
+        {% include 'program/catalog-filter.html.twig' with {resetPath: path('app.search')} %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

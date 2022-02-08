@@ -1,0 +1,20 @@
+.item {
+  a {
+    color: #5d78ff;
+  }
+}
+
+.item.active {
+  color: #6c757d;
+}
+
+.item + .item {
+  padding-left: .5rem;
+}
+
+.item + .item:before {
+  display: inline-block;
+  padding-right: .5rem;
+  color: #6c757d;
+  content: "/";
+}

@@ -1,0 +1,90 @@
+.table-programs {
+  @media (min-width: 320px) and (max-width: 1023px) {
+    .table {
+      .contact {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        a {
+          margin-right: 20px;
+        }
+      }
+
+      tr {
+        &:not(:first-child) {
+          padding-top: 20px;
+        }
+      }
+
+      .supported, .rejected {
+        min-height: auto;
+      }
+
+      .reviews-text {
+        display: block;
+        position: relative;
+        padding-left: 20px !important;
+
+        &:after {
+          content: "\201D";
+          position: absolute;
+          z-index: 0;
+          top: -40px;
+          left: 0;
+          font-size: 150px;
+          opacity: 0.2;
+          color: #f7562e;
+        }
+      }
+
+      td {
+        line-height: 1.29;
+      }
+
+      .buttons {
+        button {
+          margin-left: 0;
+
+          &:not(:first-child) {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .table {
+        .support-block {
+          display: flex;
+          justify-content: flex-end;
+          width: 100%;
+        }
+      }
+    }
+    .result-title {
+      font-size: 15px;
+      line-height: 1.38;
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .table {
+      .support-block {
+        display: flex;
+        justify-content: flex-end;
+        width: 95%;
+      }
+    }
+  }
+
+
+  .hide-desktop {
+    visibility: hidden;
+  }
+
+  .table {
+    .average-text {
+      display: none;
+    }
+  }
+}

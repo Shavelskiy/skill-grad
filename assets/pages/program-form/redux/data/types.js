@@ -1,0 +1,4 @@
+export const SET_FIELDS = 'SET_FIELDS'
+export const SET_PROVIDER_LIST = 'SET_PROVIDER_LIST'
+export const SET_LOCATIONS = 'SET_LOCATIONS'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'

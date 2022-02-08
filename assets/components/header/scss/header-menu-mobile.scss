@@ -1,0 +1,38 @@
+.header__menu_mobile {
+  background-color: #f9f9f9;
+  padding: 20px;
+
+  .mobile-menu_container {
+    overflow-y: scroll;
+    height: 50vh;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #e9f1f7;
+      border-left: 2px solid white;
+      border-right: 2px solid white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #f7562e;
+    }
+
+    .menu-mobile_item {
+      text-align: left;
+      padding: 10px 20px;
+
+      a, span {
+        color: #777;
+        text-decoration: none;
+      }
+    }
+  }
+}

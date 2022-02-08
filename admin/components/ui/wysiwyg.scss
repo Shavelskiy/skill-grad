@@ -1,0 +1,23 @@
+@import "~react-quill/dist/quill.snow.css";
+
+.ql-tooltip {
+  z-index: 9999999;
+}
+
+.ql-editor {
+  color: #495057;
+  font-weight: 400;
+}
+
+.ql-toolbar {
+  border: 1px solid #e2e5ec !important;
+  border-top-left-radius: .156vw;
+  border-top-right-radius: .156vw;
+}
+
+.ql-container {
+  border: 1px solid #e2e5ec !important;
+  border-top: none !important;
+  border-bottom-left-radius: .156vw;
+  border-bottom-right-radius: .156vw;
+}

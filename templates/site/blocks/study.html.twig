@@ -1,0 +1,56 @@
+<div class="main__program">
+  <div class="container">
+    <div class="col-lg-12">
+      <h2 class="title">Новые программы обучения</h2>
+    </div>
+    <div class="col-lg-12">
+      <div class="tab doted">
+        <div class="tab__nav slider-tab">
+          <ul class="nav study-tabs-nav">
+            {% set i  = 0 %}
+            {% for sliderItem in sliderItems %}
+              {% set i = i + 1 %}
+              <li data-tab-name="tab-{{ i }}" class="nav-item {{ i == 1 ? 'active' : '' }}">
+                {{ sliderItem.category }}
+              </li>
+            {% endfor %}
+          </ul>
+          <ul class="nav-doted">
+            {% set i  = 0 %}
+            {% for sliderItem in sliderItems %}
+              {% set i = i + 1 %}
+              <li data-tab-name="tab-{{ i }}" class="nav-doted-item{{ i == 1 ? 'active' : '' }}">
+                {{ sliderItem.category }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="tab__content study-content-items">
+          {% set i  = 0 %}
+          {% for sliderItem in sliderItems %}
+            {% set i = i + 1 %}
+            <div class="tab__content-item tab-{{ i }} {{ i == 1 ? 'active' : '' }}">
+              <div class="slider swiper-container study-slider" id="slider-{{ i }}">
+                <div class="swiper-wrapper">
+                  {% for program in sliderItem.programs %}
+                    {% include 'site/blocks/slider.html.twig' with { program: program } %}
+                  {% endfor %}
+                </div>
+
+                <div class="swiper-button swiper-button-prev"></div>
+                <div class="swiper-button swiper-button-next"></div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="row j-c-center">
+      <div class="col-lg-4 col-sm-4">
+        <div class="button-more">
+          <a href="{{ path('program.index') }}" class="button-red">Перейти в каталог</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

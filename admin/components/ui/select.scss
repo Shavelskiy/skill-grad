@@ -1,0 +1,146 @@
+.select {
+  width: 100%;
+  color: #777;
+  font-weight: 300;
+  background-color: #fff;
+  border: 1px solid #e2e5ec;
+  border-radius: .117vw;
+  position: relative;
+
+  &.small {
+    width: 2.379vw;
+  }
+
+  &.medium {
+    width: 7.8vw;
+  }
+
+  &.large {
+    width: 11.7vw;
+  }
+
+  &.high {
+    height: calc(1.5em + 1.3rem + 2px);
+  }
+
+  &.low {
+    height: 1.17vw;
+  }
+
+  &.multiple {
+    .selected-option {
+      min-height: calc(1rem + 1vw);
+      padding: 0 1.3vw .2vw .39vw;
+      height: auto;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    height: .6vw;
+    top: calc(50% - .3vw);
+    right: .2vw;
+    transition: all 275ms;
+  }
+
+  .selected-option {
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 0;
+    height: 100%;
+    padding: 0 1.3vw 0 .39vw;
+  }
+
+  .selected-multi-option {
+    display: flex;
+    height: calc(1rem + .5vw);
+    align-items: center;
+    border: 1px solid #e2e5ec;
+    border-radius: .156vw;
+    padding: 0 .2vw;
+    margin-right: .3vw;
+    margin-top: .2vw;
+    cursor: default;
+
+    &:hover {
+      border-color: #5d78ff;
+    }
+
+    .close {
+      cursor: pointer;
+      height: .7rem;
+      margin-left: .4vw;
+    }
+  }
+
+  .option-container {
+    position: relative;
+    display: block;
+    z-index: 99999;
+  }
+
+  ul {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    margin: 1px 0 0 -1px;
+    width: calc(100% + 2px);
+    background-color: #fff;
+    border: none;
+    overflow: scroll;
+    max-height: 0;
+    border-radius: 0 0 .117vw .117vw;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 0 1.5vw 1.5vw 0 rgba(82, 63, 105, 0.15);
+
+    li {
+      position: relative;
+      text-align: left;
+      width: 100%;
+      border-bottom: 1px solid #fafbfc;
+      padding: .39vw .39vw;
+      cursor: pointer;
+
+      &:last-child {
+        border-radius: .117vw;
+        border-bottom: 0;
+      }
+
+      &:hover, &.active {
+        background-color: #f7f8fa;
+      }
+    }
+  }
+
+  &.opened {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: #5d78ff;
+    z-index: 9999999;
+
+    ul {
+      max-height: 10vw;
+      border: 1px solid #e2e5ec;
+      border-top: none;
+    }
+
+    .icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.input {
+  margin-bottom: .39vw;
+
+  .label {
+    font-size: 1rem;
+    font-weight: 400;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+}

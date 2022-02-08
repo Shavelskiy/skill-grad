@@ -1,0 +1,162 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('blog.view') }}
+{% endblock %}
+
+{% set title = article.name %}
+
+{% set additionalBreadcrumb = {
+  link: path('blog.index'),
+  name: 'Блог'
+} %}
+
+{% block body %}
+  <div class="col-lg-12 mobile-no-gutter">
+    <div class="main-blog_single mt-0">
+      <h2 class="title program">{{ article.name }}</h2>
+      <div class="container-0">
+        <div class="col-lg-8 col-md-12 col-sm-4 no-gutter">
+          <img class="blog-img" src="{{ article.image.publicPath }}" alt="">
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-4 no-gutter">
+          <div class="blog-description">
+            <div class="blog-description-body">
+              <div class="top">
+                <div class="date">
+                  <span class="icon calendar"></span>
+                  {{ article.createdAt|date('d.m.Y') }}
+                </div>
+                <div id="button-like" class="like">
+                  <i data-id="{{ article.id }}"
+                     class="add-article-favorites {{ is_favorite ? 'icon-love-red' : 'icon-love' }}"></i>
+                </div>
+              </div>
+              <div class="content">
+                <div class="inform">
+                  <p class="text">
+                    <strong>Автор статьи:</strong>
+                    {% if  article.author.provider is not null %}
+                      <a href="{{ path('provider.view', {provider: article.author.provider.id }) }}">
+                        {{ article.author.provider.name }}
+                      </a>
+                    {% else %}
+                      {{ article.author.email }}
+                    {% endif %}
+                  </p>
+                  <p class="text">
+                    <strong>Категория:</strong>
+                    <a href="#">{{ article.category.name }}</a>
+                  </p>
+                  <p class="text d-flex">
+                    <span class="icon read"></span>
+                    Время
+                    чтения: {{ article.readingTime }} {{ article.readingTime|declension(['минута', 'минуты', 'минут']) }}
+                  </p>
+                </div>
+                <div class="view-block">
+                  <div class="views">
+                    <span class="icon view"></span>
+                    {{ article.views }}
+                  </div>
+                  <div class="comments">
+                    <span class="icon comment"></span>
+                    <a href="#article-comments">{{ article.comments|length }} {{ article.comments|length|declension(['комментарий', 'комментария', 'комментариев']) }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="share">
+              <span>Поделиться:</span>
+              <ul>
+                <li>
+                  <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-0 mt-20">
+        <div class="col-lg-8 col-md-12 col-sm-4 mobile-gutter-4 blog-content no-gutter">
+          {{ article.detailText|raw }}
+          <div class="alert">
+            <div class="share">
+              <span>Поделиться:</span>
+              <ul class="social">
+                <li>
+                  <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+                </li>
+              </ul>
+            </div>
+            <div id="rating" class="rating article-like-block" data-id="{{ article.id }}">
+              <div class="minus-block">
+                <span class="add-article-dislike icon minus {{ getArticleDislikeClass(article, app.user) }}"></span>
+                <span class="likes-count">{{ article.dislikesCount }}</span>
+              </div>
+              <div class="plus-block">
+                <span class="add-article-like icon plus {{ getArticleLikeClass(article, app.user) }}"></span>
+                <span class="likes-count">{{ article.likesCount }}</span>
+              </div>
+            </div>
+          </div>
+          {% include 'blog/blocks/comments.html.twig' with {
+            article: article,
+            popular_comment_ids: popular_comment_ids
+          } %}
+        </div>
+      </div>
+      {% if more_articles|length > 0 %}
+        <div class="container-0 mobile-gutter-4 pos-relative blog-single mt-40">
+          <h2 class="title">Вам может быть интересно</h2>
+          <div class="more-articles">
+            {% for more_article in more_articles %}
+              <div class="card-article">
+                <div class="card-article__header">
+                  <img src="{{ more_article.image.publicPath }}" alt="">
+                  <div class="card-article__header-date">
+                    <span class="day">{{ more_article.createdAt|date('d') }}</span>
+                    {{ more_article.createdAt|date('m')|month }}
+                  </div>
+                </div>
+                <div class="card-article__body">
+                  <a href="{{ path('blog.view', {article: more_article.id}) }}" class="card-article__body-title">
+                    {{ more_article.name }}
+                  </a>
+                  <span class="hr"></span>
+                  <div class="card-article__body-description">
+                    <p>{{ more_article.previewText|slice(0, 300) }}{{ more_article.previewText|length > 300 ? '...' : '' }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block modals %}
+  {{ parent() }}
+  {% include 'components/modals/add.favorite.html.twig' %}
+  {% include 'blog/modals.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('blog.view') }}
+{% endblock %}

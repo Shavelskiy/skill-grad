@@ -1,0 +1,68 @@
+<div class="card-blog">
+  <div class="card-container">
+    <div class="card-img">
+      <img src="{{ article.image.publicPath }}" alt="">
+      <div class="bottom">
+        <div class="views">
+          <span class="icon view"></span>
+          {{ article.views }}
+        </div>
+        <div class="comments">
+          <span class="icon comment {{ article.comments|length < 1 ? 'not' : '' }}"></span>
+          <a href="{{ path('blog.view', {article: article.id}) }}">{{ article.comments|length }} {{ article.comments|length|declension(['комментарий', 'комментария', 'комментариев']) }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-content">
+      <div class="top">
+        <div class="date">
+          <span class="icon calendar"></span>
+          {{ article.createdAt|date('d.m.Y') }}
+        </div>
+        <div class="time-read">
+          <span class="icon read"></span>
+          <span class="text">Время чтения:&nbsp;</span>{{ article.readingTime }} {{ article.readingTime|declension(['минута', 'минуты', 'минут']) }}
+        </div>
+        {% if favorite is defined %}
+          <div class="favorites">
+            <div class="like">
+              <i data-id="{{ article.id }}"
+                 class="add-article-favorites icon-love-red"></i>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <h4 class="title">{{ article.name }}</h4>
+      <p class="description">
+        {{ article.previewText|slice(0, 300) }}{{ article.previewText|length > 300 ? '...' : '' }}
+        <a href="{{ path('blog.view', {article: article.id}) }}">Читать далее</a>
+      </p>
+      <div class="mobile-bottom">
+        <div class="views">
+          <span class="icon view"></span>
+          {{ article.views }}
+        </div>
+        <div class="comments">
+          <span class="icon comment  {{ article.comments|length < 1 ? 'not' : '' }}"></span>
+          <a href="{{ path('blog.view', {article: article.id}) }}">Нет комментариев</a>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="status-block">
+          <span class="icon status {{ not article.active ? 'not' : '' }}"></span>
+          {{ article.active ? 'Опубликована' : 'На модерации' }}
+        </div>
+        <div id="rating" class="rating article-like-block" data-id="{{ article.id }}">
+          <div class="minus-block">
+            <span class="add-article-dislike icon minus {{ getArticleDislikeClass(article, app.user) }}"></span>
+            <span class="likes-count">{{ article.dislikesCount }}</span>
+          </div>
+          <div class="plus-block">
+            <span class="add-article-like icon plus {{ getArticleLikeClass(article, app.user) }}"></span>
+            <span class="likes-count">{{ article.likesCount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

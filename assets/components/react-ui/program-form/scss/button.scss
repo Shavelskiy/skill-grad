@@ -1,0 +1,31 @@
+.button {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 100px;
+  padding: 7px 32px;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  span {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 36px;
+  }
+
+  &.red {
+    background-color: #f7562e;
+    background-image: linear-gradient(to top, #fc5619 0%, #fa463f 100%);
+  }
+
+  &.blue {
+    background-color: #f7562e;
+    background-image: linear-gradient(to top, #1f82b9 0%, #1a5da7 100%);
+  }
+}

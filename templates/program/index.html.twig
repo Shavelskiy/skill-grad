@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% set title = 'Каталог программ обучения' %}
+
+{% block body %}
+  <div class="main-catalog mt-0">
+    <h2 class="title">{{ title }}</h2>
+    <div class="box">
+      <div class="box-content">
+        {% if programs|length < 1 %}
+          По вашему запросу ничего не найдено
+        {% endif %}
+        {% for program in programs %}
+          {% include 'program/card-program.html.twig' with {
+            program: program,
+          } %}
+        {% endfor %}
+      </div>
+      <div class="box-sidebar">
+        {% include 'program/catalog-filter.html.twig' with { resetPath: path('program.index') } %}
+      </div>
+    </div>
+
+    {% include 'components/paginator.html.twig' with {
+      page: page,
+      total_pages: total_pages,
+      path_name: 'program.index'
+    } %}
+  </div>
+{% endblock %}

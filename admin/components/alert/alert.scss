@@ -1,0 +1,21 @@
+.alert {
+  position: absolute;
+  display: flex;
+  background-color: #fff;
+  padding: .897vw 3.51vw;
+  left: 50%;
+  bottom: 100%;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  box-shadow: 0 0 1.56vw 0 rgba(82, 63, 105, 0.1);
+
+  &.active {
+    opacity: 1;
+    bottom: 80%;
+  }
+
+  span {
+    max-width: 19.5vw;
+    text-align: center;
+  }
+}

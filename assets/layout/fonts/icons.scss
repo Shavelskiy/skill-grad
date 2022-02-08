@@ -1,0 +1,477 @@
+@font-face {
+  font-family: "skillgrad-icon";
+  src: url("../fonts/skillgrad-icon.eot?8opc7o");
+  src: url("../fonts/skillgrad-icon.eot?8opc7o#iefix") format("embedded-opentype"),
+  url("../fonts/skillgrad-icon.ttf?8opc7o") format("truetype"),
+  url("../fonts/skillgrad-icon.woff?8opc7o") format("woff"),
+  url("../fonts/skillgrad-icon.svg?8opc7o#skillgrad-icon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  font-family: "skillgrad-icon", sans-serif !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil .path1:before {
+  content: "\ea4c";
+  color: rgb(26, 92, 167);
+}
+
+.icon-pencil .path2:before {
+  content: "\ea4d";
+  margin-left: -1.5em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-pencil .path3:before {
+  content: "\ea4e";
+  margin-left: -1.5em;
+  color: rgb(26, 92, 167);
+}
+
+.icon-outside .path1:before {
+  content: "\ea3e";
+  color: rgb(26, 92, 167);
+}
+
+.icon-outside .path2:before {
+  content: "\ea3f";
+  margin-left: -1em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-outside .path3:before {
+  content: "\ea40";
+  margin-left: -1em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-outside .path4:before {
+  content: "\ea41";
+  margin-left: -1em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-plus .path1:before {
+  content: "\ea55";
+  color: rgb(109, 180, 254);
+}
+
+.icon-plus .path2:before {
+  content: "\ea56";
+  margin-left: -1.5em;
+  color: rgb(255, 255, 255);
+}
+
+.icon-reload .path1:before {
+  content: "\ea57";
+  color: rgb(26, 92, 167);
+}
+
+.icon-reload .path2:before {
+  content: "\ea58";
+  margin-left: -1.5em;
+  color: rgb(32, 138, 189);
+}
+
+.icon-menu {
+  &:before {
+    content: "\e940";
+  }
+}
+
+.icon-place {
+  &:before {
+    content: "\e941";
+    color: #fff;
+  }
+}
+
+.icon-heart {
+  &:before {
+    content: "\e942";
+    color: #bababa;
+  }
+}
+
+.icon-add-file {
+  &:before {
+    content: "\e943";
+    color: #fff;
+  }
+}
+
+.icon-arrow {
+  &:before {
+    content: "\e944";
+    color: #fff;
+  }
+}
+
+.icon-login {
+  &:before {
+    content: "\e945";
+    color: #fff;
+  }
+}
+
+.icon-add-folder {
+  &:before {
+    content: "\e946";
+    color: #fff;
+  }
+}
+
+.icon-search {
+  &:before {
+    content: "\e947";
+    color: #1d71b1;
+  }
+}
+
+.icon-book {
+  &:before {
+    content: "\e94c";
+    color: #1d71b1;
+  }
+}
+
+.icon-insurance {
+  &:before {
+    content: "\e94d";
+    color: #1d71b1 !important;
+  }
+}
+
+.icon-clock {
+  &:before {
+    content: "\e94e";
+    color: #1d71b1;
+  }
+}
+
+.icon-star {
+  &:before {
+    content: "\e94f";
+    color: #1d71b1;
+  }
+}
+
+.icon-right {
+  &:before {
+    content: "\e950";
+    color: #767676;
+  }
+}
+
+.icon-left {
+  &:before {
+    content: "\e951";
+    color: #767676;
+  }
+}
+
+.icon-cancel {
+  &:before {
+    content: "\e98c";
+    color: #f7562e;
+  }
+}
+
+.icon-next {
+  &:before {
+    content: "\e98d";
+    color: #ccc;
+  }
+}
+
+.icon-down-arrow {
+  &:before {
+    content: "\e98e";
+    color: #c3cbd1;
+  }
+}
+
+.icon-gear {
+  &:before {
+    content: "\e98f";
+    color: #1d71b1;
+  }
+}
+
+.icon-web-development {
+  &:before {
+    content: "\e990";
+    color: #1d71b1;
+  }
+}
+
+.icon-contract {
+  &:before {
+    content: "\e991";
+    color: #1d71b1;
+  }
+}
+
+.icon-email1 {
+  &:before {
+    content: "\e992";
+    color: #1d71b1;
+  }
+}
+
+.icon-google {
+  &:before {
+    content: "\e993";
+    color: #1d71b1;
+  }
+}
+
+.icon-out {
+  &:before {
+    content: "\e994";
+    color: #1d71b1;
+  }
+}
+
+.icon-student {
+  &:before {
+    content: "\e995";
+    color: #1d71b1;
+  }
+}
+
+.icon-square {
+  &:before {
+    content: "\e996";
+    color: #fff;
+  }
+}
+
+.icon-calendar-2 {
+  &:before {
+    content: "\e9ae";
+  }
+}
+
+.icon-camera {
+  &:before {
+    content: "\e9b8";
+  }
+}
+
+.icon-check {
+  &:before {
+    content: "\e9d2";
+    color: #208abd;
+  }
+}
+
+.icon-close {
+  &:before {
+    content: "\e9e6";
+    color: #f92e25;
+  }
+}
+
+.icon-correct {
+  &:before {
+    content: "\ea01";
+    color: #6db4fe;
+  }
+}
+
+.icon-love {
+  &:before {
+    content: "\ea31";
+    color: #eceff1;
+  }
+}
+
+.icon-love-red {
+  &:before {
+    content: "\ea32";
+    color: #f92e25 !important;
+  }
+}
+
+.icon-more {
+  &:before {
+    content: "\ea3c";
+  }
+}
+
+.icon-no-entry {
+  &:before {
+    content: "\ea3d";
+  }
+}
+
+
+.icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+
+  &.send-message {
+    background: url("../../img/svg/send.svg") no-repeat;
+    background-size: cover;
+    width: 70px;
+    height: 70px;
+  }
+
+  &.discount {
+    background: url("../../img/svg/discount.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.group {
+    width: 40px;
+    height: 35px;
+    background: url("../../img/svg/group.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.picture {
+    width: 56px;
+    height: 44px;
+    background: url("../../img/svg/picture.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.email-f {
+    width: 24px;
+    height: 24px;
+    background: url("../../img/svg/email.svg") no-repeat;
+    background-size: cover;
+
+    &.small {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &.pdf {
+    width: 22px;
+    height: 22px;
+    background: url("../../img/svg/pdf.svg") no-repeat;
+  }
+
+  &.mail {
+    background: url("../../img/svg/mail.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.goal {
+    background: url("../../img/svg/goal.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.pencil {
+    background: url("../../img/svg/pencil.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.calendar {
+    background: url("../../img/svg/calendar.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.delete {
+    background: url("../../img/svg/remove.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.read {
+    background: url("../../img/svg/book.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.status {
+    background: url("../../img/svg/paper.svg") no-repeat;
+    background-size: cover;
+
+    &.not {
+      background: url("../../img/svg/paper-no.svg") no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &.view {
+    background: url("../../img/svg/eye.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.comment {
+    background: url("../../img/svg/comments.svg") no-repeat;
+    background-size: cover;
+
+    &.not {
+      background: url("../../img/svg/comments-no.svg") no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &.open, &.close {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #999999;
+    border-radius: 100%;
+
+    &:after {
+      position: absolute;
+      top: -6px;
+      left: 4px;
+      color: #999999;
+      font-size: 22px;
+    }
+  }
+
+  &.open {
+    &:after {
+      content: "\002B";
+    }
+  }
+
+  &.close {
+    &:after {
+      content: "\2212";
+    }
+  }
+
+  &.minus, &.plus {
+    width: 25px;
+    height: 25px;
+    opacity: 0.5;
+
+    &.disabled {
+      cursor: default;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  &.plus {
+    background: url("../../img/svg/blog-plus.svg") no-repeat;
+    background-size: cover;
+  }
+
+  &.minus {
+    background: url("../../img/svg/minus.svg") no-repeat;
+    background-size: cover;
+  }
+}

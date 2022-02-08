@@ -1,0 +1,30 @@
+{% set messagesCount =  getNewMessagesCount(app.user) %}
+
+<ul>
+  <li>
+    <i class="icon-gear"></i>
+    <a  class="header-dropdown-link" href="{{ path('site.profile', { path: 'settings' }) }}">Настройки профиля</a>
+  </li>
+  <li>
+    <i class="icon-web-development"></i>
+    <a  class="header-dropdown-link" href="{{ path('site.profile', { path: 'programs' }) }}">Программы обучения</a>
+  </li>
+  <li>
+    <i class="icon-contract"></i>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'publications' }) }}">Публикации</a>
+  </li>
+  <li>
+    <i class="icon-email1"></i>
+    <a  class="header-dropdown-link" href="{{ path('site.profile', { path: 'messages' }) }}">
+      Сообщения <span class="header-notification-count notification {{ messagesCount > 0 ? 'active' : '' }}">{{ messagesCount }}</span>
+    </a>
+  </li>
+  <li>
+    <i class="icon-google"></i>
+    <a class="header-dropdown-link" href="{{ path('site.profile', { path: 'payments' }) }}">Платные услуги, документы</a>
+  </li>
+  <li>
+    <i class="icon-out"></i>
+    <div class="header-dropdown-link logout-link">Выйти</div>
+  </li>
+</ul>

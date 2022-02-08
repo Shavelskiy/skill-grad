@@ -1,0 +1,1 @@
+* 12 * * * /application/bin/console app:index:reindex /dev/null 2>&1

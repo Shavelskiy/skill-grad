@@ -1,0 +1,52 @@
+.circle-checkbox {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  user-select: none;
+  margin-bottom: 20px;
+
+  .checkmark:after {
+    content: url("data:image/svg+xml,%3C%3Fxml version='1.0'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' height='18px' viewBox='0 -46 417.81333 417' width='18px'%3E%3Cg%3E%3Cpath d='m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0' data-original='%23000000' class='active-path' data-old_color='%23000000' fill='%23208ABD'/%3E%3C/g%3E%3C/svg%3E%0A");
+    display: none;
+    position: absolute;
+  }
+
+  & input[type="checkbox"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  & .checkmark {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    border-radius: 100%;
+  }
+
+  &:hover input ~ .checkmark {
+    border-color: #ccc;
+  }
+
+  & input:checked ~ .checkmark {
+    border-color: #ccc;
+  }
+
+  & input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  & .checkmark:after {
+    bottom: -3px;
+    left: 3px;
+  }
+}

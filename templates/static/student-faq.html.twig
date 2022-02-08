@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% set title = 'Для желающих обучаться' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('static.users-faq') }}
+{% endblock %}
+
+{% block body %}
+  <div class="main_learn mt-0">
+    <h2 class="title">{{ title }}</h2>
+    <div class="container-0 learn">
+      <div class="col-lg-4 col-sm-4">
+        <div class="learn-icon">
+          <img src="/img/svg/form.svg" alt="">
+        </div>
+        <p class="learn-text">
+          Возможность подать заявку на обучение с сайта
+        </p>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="learn-icon">
+          <img src="/img/svg/statistics.svg" alt="">
+        </div>
+        <p class="learn-text">Большое количество образовательных программ в одном месте
+        </p>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="learn-icon">
+          <img src="/img/svg/003-case-study.svg" alt="">
+        </div>
+        <p class="learn-text">Быстрый и удобный поиск необходимой программы обучения
+        </p>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="learn-icon">
+          <img src="/img/svg/stats.svg" alt="">
+        </div>
+        <p class="learn-text">Возможность сравнивать программы обучения по параметрам, в том числе по отзывам,
+          репутации учебного заведения и рейтингу программ
+        </p>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="learn-icon">
+          <img src="/img/svg/smartphone.svg" alt="">
+        </div>
+        <p class="learn-text">Возможность задавать вопросы по учебному заведению, программам обучения, писать
+          отзывы, ставить оценки
+        </p>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="learn-icon">
+          <img src="/img/svg/feedback.svg" alt="">
+        </div>
+        <p class="learn-text">Вы сможете быстро найти и выбрать программу обучения максимально соответствующую
+          вашим целям обучения и ожиданиям!
+        </p>
+      </div>
+    </div>
+    {% if app.user is null %}
+      <div class="container-0 j-c-center mt-20">
+        <div class="col-lg-4 col-sm-4 col-md-6">
+          <span class="register-user-btn button-red">Регистрация обучающегося</span>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('static.users-faq') }}
+{% endblock %}

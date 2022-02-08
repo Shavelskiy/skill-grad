@@ -1,0 +1,14 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .item {
+    cursor: pointer;
+
+    i {
+      color: #5d78ff;
+      float: right;
+    }
+  }
+}

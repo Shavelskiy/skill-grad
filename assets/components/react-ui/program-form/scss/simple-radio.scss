@@ -1,0 +1,11 @@
+.simple-radio {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  max-height: 160px;
+
+  @media (max-width: 768px) {
+    max-height: 500px;
+  }
+}

@@ -1,0 +1,68 @@
+.main_profile .tab__nav .button-blue {
+  @media (min-width: 320px) and (max-width: 767px) {
+    width: 90%;
+    margin: 20px auto 0;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+.main_profile {
+  .result-title {
+    @media (min-width: 320px) and (max-width: 767px) {
+      margin-left: 10px;
+      margin-right: 10px;
+      text-align: center;
+    }
+  }
+
+  .profile-search {
+    justify-content: space-between;
+    width: 60%;
+
+    .input-search-gray {
+      width: 100%;
+      margin-right: 20px;
+    }
+  }
+
+  .nowrap {
+    white-space: nowrap;
+    margin-top: 10px;
+  }
+
+  .rules {
+    position: relative;
+
+    .goal, .status {
+      width: 20px;
+      height: 20px;
+    }
+
+    .delete {
+      position: relative;
+      line-height: 1.7;
+      right: 0;
+      margin-left: 10px;
+      width: 20px;
+      height: 20px;
+
+      &:after {
+        left: 5px;
+        font-size: 12px;
+      }
+    }
+
+    .status:hover {
+      cursor: pointer;
+    }
+
+    i {
+      font-size: 20px;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<div id="login-modal" class="auth-modal modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Вход на сайт</h4>
+      <form class="form-auth" action="{{ path('ajax.auth.login') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}">
+        <span class="modal-error"></span>
+        <input class="input" type="email" placeholder="E-mail" name="email">
+        <input class="input" type="password" placeholder="Пароль" name="password">
+        <label class="checkbox-container">
+          Запомнить пароль
+          <input type="checkbox" value="on" checked="checked" name="remember" id="remember"/>
+          <span class="checkmark"></span>
+        </label>
+        <button class="button-red mt-10 mb-10" type="submit">Войти</button>
+        <span class="link-reg">или <span class="login-register-link">Зарегистрироваться</span></span>
+        <span class="restore-pass">
+          Если вы забыли пароль, то можете<br/>
+          <span class="login-forgot-password-link">восстановить его</span>
+        </span>
+      </form>
+    </div>
+    {% include 'components/modals/social.auth.html.twig' with { 'socialLinks': getSocialAuthLinks() } %}
+  </div>
+</div>

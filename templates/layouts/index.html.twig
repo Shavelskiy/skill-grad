@@ -1,0 +1,10 @@
+{% extends 'layouts/template.html.twig' %}
+
+{% block conent %}
+  {% include 'components/header/index.html.twig' %}
+
+  <main class="content page">
+    {% block body %}
+    {% endblock %}
+  </main>
+{% endblock %}

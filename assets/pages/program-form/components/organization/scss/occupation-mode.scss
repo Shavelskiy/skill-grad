@@ -1,0 +1,41 @@
+.days {
+  width: 273px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 9px;
+
+  .day {
+    width: 30px;
+    height: 27px;
+    box-shadow: 0 0 8px rgba(5, 26, 47, 0.15);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover, &.selected {
+      color: #1d71b1;
+    }
+
+    &.selected {
+      background-color: #e9f4fd;
+    }
+  }
+}
+
+.days-wrap, .time-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.time-wrap {
+  @media (max-width: 912px) {
+    display: none;
+  }
+}
+
+.time-container {
+  padding: 0 9px;
+}

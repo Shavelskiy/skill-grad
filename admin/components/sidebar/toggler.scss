@@ -1,0 +1,70 @@
+.toggler {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  text-indent: -9999px;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  background: none;
+  outline: none !important;
+  width: 1.014vw;
+  height: 1.014vw;
+  transition: all 0.4s ease;
+
+  span {
+    top: calc(50% - 1px);
+    width: 100%;
+
+    &, &::before, &::after {
+      display: block;
+      position: absolute;
+      height: 2px;
+      min-height: 2px;
+      transition: all 0.4s ease;
+      background: #4e4c5f;
+      border-radius: 3.9vw;
+    }
+
+    &::before, &::after {
+      content: "";
+      right: 0;
+    }
+
+    &::before {
+      bottom: .312vw;
+      width: 50%;
+    }
+
+    &::after {
+      top: .312vw;
+      width: 75%;
+    }
+  }
+
+  &:hover, &.active {
+    span {
+      background: #5d78ff;
+
+      &::before, &::after {
+        background: #5d78ff;
+      }
+    }
+  }
+
+  &:hover span {
+    &::before, &::after {
+      width: 100%;
+    }
+  }
+
+  &.active span {
+    &::before, &::after {
+      left: 0;
+    }
+  }
+}

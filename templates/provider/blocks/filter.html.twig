@@ -1,0 +1,64 @@
+<div class="mobile-filter">
+  <div id="open-mobile-filter" class="mobile-filter-header">
+    Фильтр поиска
+    <i class="icon-more"></i>
+  </div>
+</div>
+
+<form id="provider-filter" action="" class="form-filter form-with-mobile" method="get">
+  <div class="input-search-gray">
+    <input class="input search" type="text" name="q" value="{{ app.request.get('q') }}" placeholder="Поиск по каталогу">
+    <i class="icon-search"></i>
+  </div>
+
+  <div class="category">
+    <span class="filter-title">Поиск по категории:</span>
+    <div class="custom-select not-last" data-placeholder="Выберите категорию" data-form-id="provider-filter">
+      <input name="category" value="">
+      <input type="submit">
+      <div class="selected-option">
+        <span class="selected-option-value"></span>
+        <span class="icon"></span>
+      </div>
+      <div class="options-container">
+        <div class="options">
+          {% for category in getRootCategories() %}
+            <div data-value="{{ category.id }}"
+                 class="option {{ app.request.get('category') == category.id ? 'active' : '' }}">
+              {{ category.name }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    {% set childCategories = getChildCategories(app.request.get('category')) %}
+    <div
+            class="custom-select {{ childCategories|length < 1 ? 'disabled' : '' }}"
+            data-placeholder="Выберите подкатегорию"
+            data-form-id="provider-filter"
+    >
+      <input name="subcategory" value="">
+      <input type="submit">
+      <div class="selected-option">
+        <span class="selected-option-value"></span>
+        <span class="icon"></span>
+      </div>
+      <div class="options-container">
+        <div class="options">
+          {% for category in getChildCategories(app.request.get('category')) %}
+            <div data-value="{{ category.id }}"
+                 class="option {{ app.request.get('subcategory') == category.id ? 'active' : '' }}">
+              {{ category.name }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="city">
+    <strong class="change-city-title open-city-selector-modal-btn">Выбор города:</strong>
+    <div class="current-city">Ваш город: <strong>{{ getCurrentLocation() }}</strong></div>
+    <span class="open-city-selector-modal-btn change-city">Изменить город</span>
+  </div>
+</form>

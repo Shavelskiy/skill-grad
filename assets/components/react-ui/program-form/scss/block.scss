@@ -1,0 +1,43 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-bottom: 16px;
+
+  &:after {
+    content: '';
+    border-bottom: 1px solid rgb(207, 207, 207);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #f63500;
+    font-weight: 700;
+    line-height: 32px;
+  }
+
+  .link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    span {
+      color: #68b2fe;
+      text-decoration: underline;
+    }
+
+    &:hover span {
+      color: #148aff;
+    }
+
+    img {
+      max-height: 19px;
+      margin-left: 10px;
+    }
+  }
+}

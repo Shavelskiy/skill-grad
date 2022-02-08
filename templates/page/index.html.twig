@@ -1,0 +1,10 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% set title = page.title %}
+
+{% block body %}
+  <div class="mt-0">
+    <h2 class="title">{{ title }}</h2>
+    {{ page.content|raw }}
+  </div>
+{% endblock %}

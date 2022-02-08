@@ -1,0 +1,242 @@
+.tab {
+  width: 100%;
+
+  .toggle-menu {
+    background-color: transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      background-color: #f5f6f8;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
+    .icon-down-arrow {
+      display: none;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        font-size: 20px;
+      }
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        top: 20px;
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        top: 13px;
+      }
+    }
+
+    ul {
+      display: flex;
+      justify-content: center;
+
+      @media (min-width: 320px) and (max-width: 1023px) {
+        flex-direction: column;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        padding: 2px 40px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 32px;
+
+        @media (min-width: 320px) and (max-width: 1023px) {
+          display: none;
+          padding-right: 10px;
+          padding-left: 20px;
+        }
+
+        &.show {
+          display: flex;
+        }
+
+        &:not(:first-child) {
+          border-left: none;
+
+          @media (min-width: 320px) and (max-width: 1023px) {
+            border: none;
+            padding-left: 20px;
+          }
+        }
+
+        &.active {
+          background-color: transparent;
+
+          @media (min-width: 320px) and (max-width: 1023px) {
+            display: flex;
+            background-color: transparent;
+            border-color: transparent;
+          }
+
+          i {
+            font-size: 20px;
+
+            &:before {
+              color: #fff;
+
+              @media (min-width: 320px) and (max-width: 1023px) {
+                color: #f7562e;
+              }
+            }
+          }
+
+          a {
+            color: #fff;
+
+            @media (min-width: 320px) and (max-width: 1023px) {
+              color: #f7562e;
+            }
+          }
+        }
+
+        i {
+          margin-right: 10px;
+
+          &:before {
+            color: #3c3c3c;
+          }
+        }
+
+        a {
+          color: #3c3c3c;
+        }
+      }
+    }
+  }
+
+  &__nav {
+    border-bottom: 1px solid #838383;
+    margin-bottom: 40px;
+    position: relative;
+
+    & .nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 65px;
+      margin-bottom: -1px;
+      z-index: 0;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        padding: 0;
+      }
+
+      &-item {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 65px;
+        padding-right: 65px;
+        margin-bottom: -1px;
+        z-index: 0;
+        cursor: pointer;
+      }
+
+      &-item.active {
+        color: #f7562e;
+        border-bottom: 3px solid #f7562e;
+
+        @media (min-width: 320px) and (max-width: 767px) {
+          display: block;
+          width: 100%;
+          text-align: center;
+          border: none;
+        }
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+
+    .tns-ovh {
+      overflow: visible;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        overflow: hidden;
+      }
+    }
+
+    .tns-item {
+      opacity: 0;
+    }
+
+    .tns-slide-active {
+      opacity: 1;
+    }
+
+    &-item {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  &.doted {
+    & .nav-doted {
+      display: none;
+      justify-content: center;
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      width: 120px;
+      list-style-type: none;
+      background-color: #fff;
+      margin-left: -60px;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        display: flex;
+      }
+
+      &-item {
+        width: 10px;
+        height: 10px;
+        border: 1px solid #838383;
+        border-radius: 100%;
+
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+
+      &-item.active {
+        border: 1px solid #f7562e;
+        background-color: #f7562e;
+      }
+    }
+  }
+
+  &.blog {
+    & .nav {
+      padding-left: 0;
+      padding-right: 0;
+      justify-content: flex-start;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        flex-direction: row;
+        justify-content: space-between;
+
+        &-item {
+          display: flex;
+          padding: 0 0 15px;
+
+          &.active {
+            text-align: left;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+.provider-list-container {
+  position: relative;
+  height: 400px;
+  overflow-y: scroll;
+  width: 700px;
+  margin: 30px 0;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e9f1f7;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #f7562e;
+  }
+
+  .provider-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    .item-wrap {
+      width: 50%;
+      margin-bottom: 17px;
+
+      &:nth-child(2n + 1) {
+        padding-right: 17px;
+      }
+
+      &:nth-child(2n) {
+        padding-left: 17px;
+      }
+
+      .item {
+        height: 100%;
+        padding: 7px 7px 15px 7px;
+        border-bottom: 2px solid #eaf1f7;
+        border-top: 3px solid transparent;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        margin-bottom: 1px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        cursor: pointer;
+
+        &.selected {
+          border-color: #6db4fe;
+          border-bottom: 3px solid #6db4fe;
+          margin-bottom: 0;
+        }
+
+
+        &:hover, &.selected {
+          color: #1d71b1;
+        }
+
+        .image {
+          width: 23%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .description {
+          width: 70%;
+        }
+      }
+    }
+  }
+}
+
+.input-wrap {
+  width: 100%;
+  position: relative;
+
+  input {
+    width: 100%;
+    border: none;
+    border-radius: 100px;
+    background-color: #f3f3f3;
+    padding: 18px 30px;
+    font-size: 15px;
+
+    &::placeholder {
+      color: #208abd;
+    }
+  }
+
+  button {
+    background-image: url("./../../../../../img/svg/search.svg");
+    background-size: 100%;
+    width: 1.5em;
+    height: 1.5em;
+    top: calc(50% - 0.75em);
+    right: 28px;
+    position: absolute;
+  }
+}
+
+.button-container {
+  min-width: 289px;
+}

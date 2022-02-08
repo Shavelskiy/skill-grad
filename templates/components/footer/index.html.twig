@@ -1,0 +1,65 @@
+<footer class="footer">
+  <div class="footer__content">
+    <div class="container">
+      <div class="col-lg-4 col-sm-4 col-md-6 left">
+        <div class="logo-container">
+          <a href="{{ path('site.index') }}">
+            <img class="logo-img" src="/img/svg/logo.svg" alt="logo">
+          </a>
+        </div>
+        <div class="logo-mobile">
+          <a href="{{ path('site.index') }}">
+            <img src="/img/logo_mobile.png" alt="logo">
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="{{ path('app.page.index', {slug: 'term-of-use'}) }}">Пользовательское соглашение</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'privacy-agreement'}) }}">Соглашение о конфиденциальности</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'offer'}) }}">Оферта</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-5 col-sm-4 col-md-6 center">
+        <ul>
+          <li><a href="{{ path('app.page.index', {slug: 'about'}) }}">О проекте</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'how-add-program'}) }}">Как добавить программу обучения</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'how-add-provider'}) }}">Как добавить образовательную организацию</a></li>
+          <li><a href="{{ path('faq.index') }}">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-4 col-md-12 right">
+        <div class="contact-block">
+          <button class="feedback-form-modal-btn button-blue">Написать нам</button>
+          <span class="contact-block__title">Мы в соцсетях</span>
+          <ul>
+            <li>
+              <a href="#"><img src="/img/svg/vk.svg" alt=""></a>
+            </li>
+            <li>
+              <a href="#"><img src="/img/svg/ok.svg" alt=""></a>
+            </li>
+            <li>
+              <a href="#"><img src="/img/svg/facebook.svg" alt=""></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4 offer-links">
+        <ul class="left-menu">
+          <li><a href="{{ path('app.page.index', {slug: 'term-of-use'}) }}">Пользовательское соглашение</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'privacy-agreement'}) }}">Соглашение о конфиденциальности</a></li>
+          <li><a href="{{ path('app.page.index', {slug: 'offer'}) }}">Оферта</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="col-lg-12">
+        <div class="text">
+          ООО «Эмили Консалтинг». Все права защищены. 2015-2020<br/>
+          115191, Россия, город Москва, улица Рощинская 2я, дом 4, офис 503 ОГРН 1137746126540. ИНН 7725783023.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,32 @@
+@import "how-work";
+@import "study";
+
+.blog {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -30px;
+
+  .blog-item {
+    width: calc(100% / 3);
+    padding: 0 30px;
+    margin-bottom: 40px;
+  }
+}
+
+.swiper-slide {
+  padding: 20px;
+}
+
+.slider-tab {
+  margin-bottom: 20px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  li {
+    white-space: nowrap;
+  }
+}

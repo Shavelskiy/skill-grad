@@ -1,0 +1,27 @@
+<div id="city-selector-modal" class="modal">
+  <div class="modal-content change-city-modal">
+    <span class="close">&times;</span>
+    <div class="content">
+      <h4>Выбор города</h4>
+      <div class="input-search-gray">
+        <input class="input search city-modal-search" type="text" placeholder="Поиск">
+        <i class="icon-search"></i>
+
+        <div class="city-selector-suggestions">
+          <div class="suggestions-content"></div>
+        </div>
+      </div>
+      <div class="cities">
+        <div class="column">
+          {% for location in getListLocations() %}
+            <span><a href="{{ location.link }}">{{ location.name }}</a></span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span class="social-title">Если Вы не нашли Вашего города, свяжитесь с нами с
+        помощью <span class="open-feedback-modal-btn">формы обратной связи</span></span>
+    </div>
+  </div>
+</div>

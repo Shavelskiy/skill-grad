@@ -1,0 +1,47 @@
+.container {
+  background-color: #242939;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 98;
+  max-width: 11vw;
+  width: 11vw;
+  transition: max-width 0.2s ease-out;
+  overflow: hidden;
+
+  @media (max-width: 1921px) {
+    max-width: 267px;
+    width: 267px;
+  }
+
+  .logo img {
+    height: 50%;
+  }
+
+  &.closed {
+    max-width: 3vw;
+
+    @media (max-width: 1921px) {
+      max-width: 60px;
+    }
+
+    .logo {
+      display: none;
+    }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 .79vw;
+    height: 2.93vw;
+  }
+
+  .tools-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('program.add') }}
+{% endblock %}
+
+{% set title = 'Создание новой программы обучения' %}
+
+{% block body %}
+  <div id="program-form-app"></div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('program.add') }}
+{% endblock %}

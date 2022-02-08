@@ -1,0 +1,82 @@
+{% set inCompare = inCompare(program.id, app.request.cookies) %}
+
+<div class="card">
+  {% if isDiscount(program) %}
+    <span class="icon discount"></span>
+  {% endif %}
+  <div class="card__header">
+    <div class="card__header-icon">
+      {% if program.providers[0].image %}
+        <img src="{{ program.providers[0].image.publicPath }}" alt="" style="max-height: 40px;">
+      {% else %}
+        <img src="/img/provider_no_logo.png" alt="{{ provider.name }}">
+      {% endif %}
+    </div>
+    <span class="card__header-title">{{ program.providers[0].name }}</span>
+  </div>
+  <div class="card__body">
+    <a href="{{ path('program.view', { id: program.id }) }}"
+       class="card__body-title {{ isHighlight(program) ? 'bold' : '' }}">
+      {{ program.name }}
+    </a>
+    <div class="card__body-description">{{ program.annotation }}</div>
+  </div>
+  <div class="card__footer">
+    <div class="col-lg-7 col-md-6 col-sm-4 no-gutter">
+      <div class="card__footer-info">
+        <div class="info">
+          <i class="icon-book"></i>
+          <span class="info-text">
+            {{ program.programFormat is not null ? program.programFormat.name : program.formatOther }}
+          </span>
+        </div>
+        <div class="time">
+          <i class="icon-clock"></i>
+          <span class="info-text">{{ getDuration(program) }}</span>
+        </div>
+        <div class="star">
+          <i class="icon-star"></i>
+          <span class="info-text">{{ getAverageRating(program) }}</span>
+        </div>
+
+        {% if favorite is defined %}
+          <div class="favorites">
+            <div data-tippy-content="В избранном" class="like">
+              <i data-id="{{ program.id }}" class="add-program-favorites icon-love-red"></i>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-6 col-sm-4 d-flex j-c-space-between no-gutter">
+      {% set price = getProgramPrice(program) %}
+      {% set oldPrice = getOldProgramPrice(program) %}
+      <div class="card__footer-price">
+        {% if program.showPriceReduction and price is not null and oldPrice is not null and price < oldPrice %}
+          <span class="price-old">{{ oldPrice|number_format(0, ' ', ' ') }}  р.</span>
+          <span class="price-new">{{ price }}</span>
+        {% else %}
+          {% if price is not null %}
+            <span class="price-text">{{ price|number_format(0, ' ', ' ') }}  р.</span>
+          {% else %}
+            <span class="price-text">По запросу</span>
+          {% endif %}
+        {% endif %}
+      </div>
+      <div class="card__footer-button">
+        {% if app.user is null or not is_granted('ROLE_PROVIDER') %}
+          <button class="button-blue add-program-request" {{ hasRequest(program.id) ? 'disabled' : '' }}
+                  data-id="{{ program.id }}">
+            Заказать
+          </button>
+        {% endif %}
+      </div>
+      <div class="card__footer-add compare-program-add" data-id="{{ program.id }}">
+        <span class="tooltip">
+          {{ inCompare ? 'Находится в сравнении' : 'Добавить в сравнение' }}
+        </span>
+        <i class="{{ inCompare ? 'icon-insurance' : 'icon-add-file' }}"></i>
+      </div>
+    </div>
+  </div>
+</div>

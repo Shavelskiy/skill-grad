@@ -1,0 +1,88 @@
+.faq {
+  .box-sidebar {
+    flex: 1 1 40%;
+    padding: 0;
+    margin-right: 40px;
+  }
+
+  .box-content {
+    flex: 1 1 60%;
+  }
+
+  .card-shadow {
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 25px;
+    position: relative;
+
+    .head {
+      .input-search-gray {
+        margin-top: 8px;
+
+        input {
+          margin-bottom: 0;
+        }
+      }
+
+      i {
+        top: calc(50% - 10px);
+        margin-top: 0;
+      }
+    }
+  }
+
+  .faq-menu {
+    overflow-y: scroll;
+    max-height: 500px;
+    margin-top: 22px;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #e9f1f7;
+      border-left: 2px solid white;
+      border-right: 2px solid white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #f7562e;
+    }
+
+    ul {
+      li {
+        position: relative;
+        padding: 10px 10px 10px 0;
+        cursor: pointer;
+
+        &:hover {
+          color: #1d71b1;
+        }
+
+        &.active {
+          color: #1d71b1;
+
+          &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -25px;
+            width: 20%;
+            height: 100%;
+            background-color: rgba(#6db4fe, .3);
+            //background-color: #e9f4fd;
+          }
+        }
+      }
+    }
+  }
+
+  .faq-content-item {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}

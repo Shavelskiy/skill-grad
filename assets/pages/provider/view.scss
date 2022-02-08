@@ -1,0 +1,168 @@
+.main_provider {
+  .tab {
+    &__nav {
+      border-bottom: none;
+    }
+  }
+
+  .result-title {
+    margin-top: 0;
+  }
+
+  .mobile-hidden {
+    @media (min-width: 320px) and (max-width: 767px) {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  .more {
+    display: none;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      text-decoration: underline;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+  .logo-company {
+    @media (min-width: 320px) and (max-width: 767px) {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 100%;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        width: 50%;
+      }
+    }
+  }
+
+  .description {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    border-radius: 40px;
+    background-color: #f5f6f8;
+    padding: 30px;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      display: none;
+    }
+
+    span {
+      cursor: pointer;
+      color: #007bff;
+      display: block;
+      margin-top: 10px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .contact {
+    background-color: #e9f4fd;
+    padding: 25px;
+
+    .title {
+      padding-bottom: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.33;
+      letter-spacing: normal;
+      text-align: left;
+      color: #3c3c3c;
+      border-bottom: 1px solid #ccc;
+
+      @media (min-width: 320px) and (max-width: 767px) {
+        text-align: center;
+      }
+    }
+
+    .phone {
+      font-size: 22px;
+      line-height: 1.27;
+      font-weight: 700;
+      text-align: left;
+      color: #1d71b1;
+    }
+
+    .email, .address {
+      display: block;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.22;
+      letter-spacing: normal;
+      text-align: left;
+      color: #3c3c3c;
+      position: relative;
+      padding-left: 15px;
+      z-index: 21;
+
+      .icon-place, .icon-email1 {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        font-size: 30px;
+
+        &:before {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .box {
+    flex-wrap: wrap;
+    width: 100%;
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      flex-wrap: nowrap;
+      flex-direction: column;
+
+      .box-block {
+        margin-right: 0 !important;
+      }
+    }
+
+    .box-block {
+      flex: 1 1 20%;
+      margin-top: 20px;
+
+      &:not(:nth-child(4n)) {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .photo {
+    img {
+      width: 100%;
+    }
+  }
+
+  p {
+    &.blue {
+      margin-bottom: 5px;
+    }
+  }
+
+  span {
+    &.text {
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{% extends 'layouts/index.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('site.index') }}
+{% endblock %}
+
+{% block title %}Главная{% endblock %}
+
+{% block body %}
+  {% include 'site/blocks/study.html.twig' %}
+  {% include 'site/blocks/how-work.html.twig' %}
+  {% include 'site/blocks/blog.html.twig' with {articles: articles} %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('site.index') }}
+{% endblock %}

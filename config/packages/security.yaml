@@ -1,0 +1,32 @@
+security:
+  providers:
+    users_in_memory: { memory: null }
+    users:
+      entity:
+        class: App\Entity\User
+        property: username
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      pattern: ^/
+      anonymous: lazy
+      provider: users_in_memory
+      guard:
+        authenticators:
+          - App\Security\AppAuthenticator
+          - App\Security\SocServiceAuthenticator
+          - App\Security\AdminAuthenticator
+        entry_point: App\Security\AppAuthenticator
+      logout:
+        path: ajax.auth.logout
+        success_handler: App\Security\LogoutSuccessHandler
+
+  access_control:
+    - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
+#    - { path: ^/api/admin/info, roles: [IS_AUTHENTICATED_FULLY, IS_ANONYMOUS] }
+#    - { path: ^/api/admin, roles: ROLE_ADMIN }
+  encoders:
+    App\Entity\User:
+      algorithm: bcrypt
